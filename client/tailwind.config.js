@@ -5,7 +5,13 @@ export default {
     fontFamily: {
       sans: ["Inter", "sans-serif"],
     },
-    extend: {},
+    extend: {
+      colors: {
+        primary: "#FFFFFF",
+        secondary: "#000133",
+        tertiary: "#1E3A8A",
+      },
+    },
   },
   plugins: [],
 }
