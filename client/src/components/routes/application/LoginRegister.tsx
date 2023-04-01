@@ -1,6 +1,6 @@
-import Card from "../ui/Card"
-import Overview from "../ui/Overview"
-import RouterLink from "../ui/RouterLink"
+import Card from "../../ui/Card"
+import Overview from "../../ui/Overview"
+import RouterLink from "../../ui/RouterLink"
 
 const LoginRegister = () => {
   return (
