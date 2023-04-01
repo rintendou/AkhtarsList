@@ -4,6 +4,8 @@ import Error from "../../ui/Error"
 import StyledButton from "../../ui/StyledButton"
 import StyledInputRef from "../../ui/StyledInputRef"
 import Success from "../../ui/Success"
+import useAuth from "../../../lib/hooks/useAuth"
+import { useNavigate } from "react-router-dom"
 
 type Props = {
   didRegisterSuccessfully: boolean
@@ -11,6 +13,9 @@ type Props = {
 }
 
 const LoginForm = ({ didRegisterSuccessfully, successMessage }: Props) => {
+  const { setAuth } = useAuth()
+  const navigate = useNavigate()
+
   // I opted to use the useRef hook instead of useState to prevent
   // unnecessary re-renders of this component per each character typed
   const emailAddressRef = useRef<HTMLInputElement>(null)
@@ -54,6 +59,8 @@ const LoginForm = ({ didRegisterSuccessfully, successMessage }: Props) => {
 
       setIsError(false)
       setScsMessage(data.message)
+      setAuth(data.data)
+      navigate("/", { replace: true })
       console.log(data)
     }
     loginUser()
