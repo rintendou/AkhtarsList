@@ -26,7 +26,7 @@ const RegisterForm = () => {
   }, [])
 
   // send post request to api endpoint /api/auth/register by calling the
-  // the endpoint and backend_server_port number: 5000. Payload is passed
+  // the endpoint and backend_server_port number: 5178. Payload is passed
   // by attaching data to the body object.
   const registerUserHandler = () => {
     const registerUser = async () => {
@@ -34,7 +34,7 @@ const RegisterForm = () => {
       const emailAddress = emailAddressRef.current!.value
       const password = passwordRef.current!.value
 
-      const response = await fetch(`http://localhost:5000/api/auth/register`, {
+      const response = await fetch(`http://localhost:5178/api/auth/register`, {
         method: "POST",
         body: JSON.stringify({
           username: fullName,

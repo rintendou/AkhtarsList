@@ -28,14 +28,14 @@ const LoginForm = ({ didRegisterSuccessfully, successMessage }: Props) => {
   const [scsMessage, setScsMessage] = useState(successMessage)
 
   // send post request to api endpoint /api/auth/login by calling the
-  // the endpoint and backend_server_port number: 5000. Payload is passed
+  // the endpoint and backend_server_port number: 5178. Payload is passed
   // by attaching data to the body object.
   const loginUserHandler = () => {
     const emailAddress = emailAddressRef.current!.value
     const password = passwordRef.current!.value
 
     const loginUser = async () => {
-      const response = await fetch(`http://localhost:5000/api/auth/login`, {
+      const response = await fetch(`http://localhost:5178/api/auth/login`, {
         method: "POST",
         body: JSON.stringify({
           email: emailAddress,
