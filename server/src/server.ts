@@ -1,4 +1,4 @@
-require("dotenv").config({ path: "../.env" })
+require("dotenv").config()
 
 import express, { Request, Response } from "express"
 import mongoose from "mongoose"
@@ -20,6 +20,7 @@ const app = express()
 
 // Environment Variables
 const PORT = process.env.BACKEND_SERVER_PORT
+const MONGODB_URL = process.env.MONGODB_URL
 
 // Middleware
 app.use(express.json()) // This allows for requests to be accessed, turns req -> JSON object (body can be accessed &)
@@ -45,7 +46,7 @@ app.use((req: Request, res: Response, next: Function) => {
 // app.use("/api/messages", MessageRoute)
 // app.use("/api/friends", FriendRoute)
 
-mongoose.connect(process.env.MONGO_URL!).then(() => {
+mongoose.connect(MONGODB_URL!).then(() => {
   console.log("Connected to MongoDB")
   app.listen(PORT, () => {
     console.log(`Listening on port ${PORT}`)
