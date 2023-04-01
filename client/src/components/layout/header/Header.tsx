@@ -6,7 +6,7 @@ const Header = () => {
       <h1 className="text-2xl font-bold">Synapse</h1>
       <nav className="hidden md:flex flex-row gap-4">
         <RouterLink to="/home" routerLinkText="Home" />
-        <RouterLink to="/" routerLinkText="App" />
+        <RouterLink to="/login-register" routerLinkText="Start" />
         <RouterLink to="/dev" routerLinkText="Dev" />
       </nav>
     </header>
