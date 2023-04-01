@@ -12,6 +12,7 @@ import Register from "./components/routes/register/Register"
 import Body from "./components/layout/body/Body"
 import Footer from "./components/layout/footer/Footer"
 import Header from "./components/layout/header/Header"
+import RequireAuth from "./components/routes/protected/RequireAuth"
 
 function App() {
   return (
@@ -20,13 +21,16 @@ function App() {
       <Body>
         <Routes>
           {/*  Unprotected Routes */}
-          <Route path="/" element={<LandingPage />} />
+          <Route path="/home" element={<LandingPage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/dev" element={<Dev />} />
 
           {/* Protected Routes */}
-          <Route path="/app" element={<Application />} />
+
+          <Route element={<RequireAuth />}>
+            <Route path="/" element={<Application />} />
+          </Route>
 
           {/* Catch-All Route */}
           <Route path="*" element={<PageNotFound />} />
