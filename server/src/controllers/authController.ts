@@ -30,7 +30,7 @@ export const registerUser = async (req: Request, res: Response) => {
     })
   }
 
-  // Check if password and password matches
+  // Check if password and confirmPassword matches
   if (password !== confirmPassword) {
     return res.status(400).json({
       message: "Password does not match!",
@@ -207,6 +207,50 @@ export const verifySecurityQA = async (req: Request, res: Response) => {
       message: "Security question answered successfully!",
       data: {
         question: existingUser.username,
+      },
+      ok: true,
+    })
+  } catch (error) {
+    res.status(500).json({ message: error, data: null, ok: false })
+  }
+}
+
+export const changePassword = async (req: Request, res: Response) => {
+  // destructure the payload attached to the body
+  const { username, password, confirmPassword } = req.body
+
+  // Check if appropriate payload is attached to the body
+  if (!username || !password || !confirmPassword) {
+    return res.status(400).json({
+      message: "username and password properties are required!",
+      data: null,
+      ok: false,
+    })
+  }
+
+  // Check if password and confirmPassword matches
+  if (password !== confirmPassword) {
+    return res.status(400).json({
+      message: "Password does not match!",
+      data: null,
+      ok: false,
+    })
+  }
+
+  try {
+    // Hashing new password
+    const salt = await bcrypt.genSalt(10)
+    const newHashedPassword = await bcrypt.hash(password, salt)
+
+    // Update user password
+    const user = await UserModel.findOne({ username })
+    user!.password = newHashedPassword
+    await user!.save()
+
+    res.status(200).json({
+      message: "Password Changed Successfully!",
+      data: {
+        question: username,
       },
       ok: true,
     })
