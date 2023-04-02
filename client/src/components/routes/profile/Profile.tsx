@@ -1,21 +1,14 @@
-import { useNavigate } from "react-router-dom"
 import useAuth from "../../../lib/hooks/useAuth"
 
-import StyledButton from "../../ui/StyledButton"
 import Card from "../../ui/Card"
 import { useEffect, useState } from "react"
+import ProfileActions from "./profile-actions/ProfileActions"
 
 const Profile = () => {
   const { auth, logout } = useAuth()
-  const navigate = useNavigate()
 
   const [address, setAddress] = useState("")
   const [balance, setBalance] = useState(0)
-
-  const logoutHandler = () => {
-    logout()
-    navigate("/", { replace: true })
-  }
 
   useEffect(() => {
     const fetchUserDetails = async () => {
@@ -41,26 +34,7 @@ const Profile = () => {
             <h2 className="text-lg">Balance: ${balance}</h2>
           </div>
         </div>
-        <div className="flex flex-col gap-5">
-          <div className="flex gap-5">
-            <StyledButton
-              buttonText="Deposit"
-              onClick={() => {}}
-              twClasses="w-32 hover:bg-black"
-            />
-            <StyledButton
-              buttonText="Withdraw"
-              onClick={() => {}}
-              twClasses="w-32"
-              intent="secondary"
-            />
-          </div>
-          <StyledButton
-            buttonText="Logout"
-            onClick={logoutHandler}
-            twClasses="w-32 hover:bg-black w-full"
-          />
-        </div>
+        <ProfileActions logout={logout} />
       </Card>
     </div>
   )
