@@ -29,19 +29,19 @@ const UserSchema = new Schema(
     },
     biddedItems: {
       type: [ObjectId],
-      ref: "Item",
+      ref: "Listing",
     },
     listedItems: {
       type: [ObjectId],
-      ref: "Item",
+      ref: "Listing",
     },
     wonItems: {
       type: [ObjectId],
-      ref: "Item",
+      ref: "Listing",
     },
     disputedItems: {
       type: [ObjectId],
-      ref: "Item",
+      ref: "Listing",
     },
   },
   { timestamps: true }
