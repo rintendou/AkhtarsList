@@ -1,11 +1,14 @@
 import { useEffect, useRef, useState } from "react"
+import { useNavigate } from "react-router-dom"
+import useAuth from "../../../lib/hooks/useAuth"
 
 import Card from "../../ui/Card"
 import Error from "../../ui/Error"
 import StyledInputRef from "../../ui/StyledInputRef"
-import { useNavigate } from "react-router-dom"
 
 const ForgotPasswordForm = () => {
+  const { auth, setAuth } = useAuth()
+
   // I opted to use the useRef hook instead of useState to prevent
   // unnecessary re-renders of this component per each character typed
   const usernameRef = useRef<HTMLInputElement>(null)
@@ -53,7 +56,10 @@ const ForgotPasswordForm = () => {
 
       setIsError(false)
       setDidSubmit(true)
-      setSecurityQuestion(data.data)
+      setSecurityQuestion(data.data.securityQuestion)
+      setAuth((prev) => {
+        return { ...prev, username: data.data.username }
+      })
       console.log(data)
     }
     getSecurityQuestions()
@@ -64,7 +70,8 @@ const ForgotPasswordForm = () => {
     e.preventDefault()
 
     const verifySecurityQA = async () => {
-      const username = securityQuestionAnswerRef.current!.value
+      const { username } = auth
+      const securityQuestionAnswer = securityQuestionAnswerRef.current!.value
 
       const response = await fetch(
         `http://localhost:5178/api/auth/verify-security-qa`,
@@ -72,6 +79,7 @@ const ForgotPasswordForm = () => {
           method: "POST",
           body: JSON.stringify({
             username,
+            securityQuestionAnswer,
           }),
           headers: { "Content-Type": "application/json" },
         }
@@ -91,8 +99,8 @@ const ForgotPasswordForm = () => {
       }
 
       setIsError(false)
-      navigate("/login", {
-        state: { didRegisterSuccessfully: true, successMessage: data.message },
+      navigate("/reset-password", {
+        state: { successMessage: data.message },
       })
       console.log(data)
     }

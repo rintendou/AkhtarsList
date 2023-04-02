@@ -158,7 +158,10 @@ export const getSecurityQuestion = async (req: Request, res: Response) => {
     res.status(200).json({
       message: "Security questions successfully fetched!",
       data: {
-        question: existingUser.securityQuestion,
+        question: {
+          username: existingUser.username,
+          securityQuestion: existingUser.securityQuestion,
+        },
       },
       ok: true,
     })
