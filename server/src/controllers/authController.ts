@@ -205,9 +205,7 @@ export const verifySecurityQA = async (req: Request, res: Response) => {
 
     res.status(200).json({
       message: "Security question answered successfully!",
-      data: {
-        question: existingUser.username,
-      },
+      data: { _id: existingUser._id, username: existingUser.username },
       ok: true,
     })
   } catch (error) {
