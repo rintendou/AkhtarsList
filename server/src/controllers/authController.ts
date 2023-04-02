@@ -44,6 +44,12 @@ export const registerUser = async (req: Request, res: Response) => {
     const salt = await bcrypt.genSalt()
     const hashedPassword = await bcrypt.hash(password, salt)
 
+    // Hashing securityQuestionAnswer
+    const hashedSecurityQuestionAnswer = await bcrypt.hash(
+      securityQuestionAnswer,
+      salt
+    )
+
     // Clean the username by removing whitespaces
     const cleanedUsername = username.replace(/\s+/g, "") // '  hello world ' -> 'helloworld'
 
@@ -64,7 +70,7 @@ export const registerUser = async (req: Request, res: Response) => {
       address,
       balance: 0,
       securityQuestion,
-      securityQuestionAnswer,
+      securityQuestionAnswer: hashedSecurityQuestionAnswer,
     })
 
     // Saving new User
