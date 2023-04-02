@@ -44,7 +44,7 @@ const ProfileContextProvider = ({
     }
 
     fetchUserDetails()
-  }, [balance, address])
+  }, [auth._id])
 
   // Deposit funds
   const depositFunds = (amount: number) => {
