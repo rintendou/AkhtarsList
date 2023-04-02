@@ -83,14 +83,14 @@ export const withdrawFunds = async (req: Request, res: Response) => {
     }
 
     // Check if balance is sufficient
-    if (Number(withdrawAmount) > user.balance) {
+    if (withdrawAmount > user.balance) {
       return res
         .status(404)
         .json({ message: "Insufficient Funds!", data: null, ok: false })
     }
 
     // Update user balance
-    user.balance = user.balance - Number(withdrawAmount)
+    user.balance = user.balance - withdrawAmount
     await user.save()
 
     res.status(200).json({
@@ -133,7 +133,7 @@ export const depositFunds = async (req: Request, res: Response) => {
     }
 
     // Update user balance
-    user.balance = user.balance + Number(depositAmount)
+    user.balance = user.balance + depositAmount
     await user.save()
 
     res.status(200).json({
