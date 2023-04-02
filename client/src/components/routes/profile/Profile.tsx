@@ -2,7 +2,7 @@ import useAuth from "../../../lib/hooks/useAuth"
 
 import Card from "../../ui/Card"
 import { useEffect, useState } from "react"
-import ProfileActions from "./ProfileActions"
+import ProfileActions from "./profile-actions/ProfileActions"
 
 const Profile = () => {
   const { auth, logout } = useAuth()
