@@ -1,4 +1,4 @@
-import RouterLink from "../../../ui/RouterLink"
+import RouterLink from "../../ui/RouterLink"
 
 const CategoryHeader = () => {
   return (
