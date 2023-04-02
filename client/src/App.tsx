@@ -12,7 +12,7 @@ import ForgotPassword from "./components/routes/forgot-password/ForgotPassword"
 import Deposit from "./components/routes/protected/profile/deposit/Deposit"
 import Withdraw from "./components/routes/protected/profile/withdraw/Withdraw"
 import ChangePassword from "./components/routes/forgot-password/ResetPassword"
-import Category from "./components/routes/protected/application/categories/Category"
+import Category from "./components/routes/categories/Category"
 
 // Components
 import Body from "./components/layout/body/Body"
