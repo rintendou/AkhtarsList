@@ -54,7 +54,7 @@ export const getBidders = async (req: Request, res: Response) => {
 }
 
 export const withdrawFunds = async (req: Request, res: Response) => {
-  // Extract username from body
+  // Extract userId and withdrawAmount from body
   const { userId, withdrawAmount } = req.body
 
   // Check if appropriate payload is attached to the body
@@ -83,14 +83,14 @@ export const withdrawFunds = async (req: Request, res: Response) => {
     }
 
     // Check if balance is sufficient
-    if (withdrawAmount > user.balance) {
+    if (Number(withdrawAmount) > user.balance) {
       return res
         .status(404)
         .json({ message: "Insufficient Funds!", data: null, ok: false })
     }
 
     // Update user balance
-    user.balance = user.balance - withdrawAmount
+    user.balance = user.balance - Number(withdrawAmount)
     await user.save()
 
     res.status(200).json({
@@ -104,7 +104,7 @@ export const withdrawFunds = async (req: Request, res: Response) => {
 }
 
 export const depositFunds = async (req: Request, res: Response) => {
-  // Extract username from body
+  // Extract username and depositAmount from body
   const { userId, depositAmount } = req.body
 
   // Check if appropriate payload is attached to the body
@@ -133,7 +133,7 @@ export const depositFunds = async (req: Request, res: Response) => {
     }
 
     // Update user balance
-    user.balance = user.balance + depositAmount
+    user.balance = user.balance + Number(depositAmount)
     await user.save()
 
     res.status(200).json({
