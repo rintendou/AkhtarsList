@@ -33,7 +33,7 @@ const Profile = () => {
 
   return (
     <div className="min-h-screen flex flex-col justify-center items-center">
-      <Card twClasses="h-96 p-10 w-full flex flex-col md:flex-row justify-between items-center">
+      <Card twClasses="h-96 p-10 w-full flex flex-col md:flex-row justify-around items-center">
         <div className="space-y-10">
           <h1 className="text-4xl font-bold">{auth.username}</h1>
           <div>
