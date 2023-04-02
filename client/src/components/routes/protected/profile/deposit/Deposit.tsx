@@ -10,7 +10,8 @@ const Deposit = () => {
 
   return (
     <div className="min-h-screen flex flex-col justify-center items-center">
-      <Card twClasses="p-20 m-10 shadow-lg">
+      <Card twClasses="p-20 m-10 shadow-lg space-y-5">
+        <h1 className="text-3xl text-center font-bold">Card Payment</h1>
         <form className="flex flex-col gap-5">
           <StyledInputRef
             ref={cardHolderRef}
@@ -42,6 +43,7 @@ const Deposit = () => {
               twClasses="rounded-lg shadow-lg"
             />
           </div>
+          <DepositNowButton />
         </form>
       </Card>
     </div>
@@ -49,3 +51,14 @@ const Deposit = () => {
 }
 
 export default Deposit
+
+const DepositNowButton = () => {
+  return (
+    <button
+      className={`p-4 py-3 rounded-lg duration-200 hover:bg-black ease-in-out bg-secondary text-primary font-bold text-lg`}
+      type="submit"
+    >
+      Deposit Now
+    </button>
+  )
+}
