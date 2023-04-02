@@ -8,10 +8,7 @@ import cors from "cors"
 
 // Import all routes
 // import UserRoute from "./routes/users"
-// import AuthRoute from "./routes/auth"
-// import FriendRoute from "./routes/friends"
-// import ChatRoute from "./routes/chat"
-// import MessageRoute from "./routes/messages"
+import AuthRoute from "./routes/auth"
 
 mongoose.set("strictQuery", false)
 
@@ -41,10 +38,7 @@ app.use((req: Request, res: Response, next: Function) => {
 
 // Declare Routes
 // app.use("/api/users", UserRoute)
-// app.use("/api/auth", AuthRoute)
-// app.use("/api/chat", ChatRoute)
-// app.use("/api/messages", MessageRoute)
-// app.use("/api/friends", FriendRoute)
+app.use("/api/auth", AuthRoute)
 
 mongoose.connect(MONGODB_URL!).then(() => {
   console.log("Connected to MongoDB")
