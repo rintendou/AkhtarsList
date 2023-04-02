@@ -5,6 +5,7 @@ import Card from "../../ui/Card"
 import Error from "../../ui/Error"
 import StyledButton from "../../ui/StyledButton"
 import StyledInputRef from "../../ui/StyledInputRef"
+import RouterLink from "../../ui/RouterLink"
 
 const RegisterForm = () => {
   // I opted to use the useRef hook instead of useState to prevent
@@ -87,6 +88,10 @@ const RegisterForm = () => {
         />
         <RegisterButton />
       </form>
+      <h1>
+        Already have an account?{" "}
+        <RouterLink routerLinkText="Register here" to="/register" />
+      </h1>
       {isError && <Error errorMessage={errorMessage} />}
     </Card>
   )

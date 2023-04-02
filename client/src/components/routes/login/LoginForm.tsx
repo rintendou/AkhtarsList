@@ -6,6 +6,7 @@ import StyledInputRef from "../../ui/StyledInputRef"
 import Success from "../../ui/Success"
 import useAuth from "../../../lib/hooks/useAuth"
 import { useNavigate } from "react-router-dom"
+import RouterLink from "../../ui/RouterLink"
 
 type Props = {
   didRegisterSuccessfully: boolean
@@ -62,7 +63,7 @@ const LoginForm = ({ didRegisterSuccessfully, successMessage }: Props) => {
       setIsError(false)
       setScsMessage(data.message)
       setAuth(data.data)
-      navigate("/", { replace: true })
+      navigate("/app", { replace: true })
       console.log(data)
     }
     loginUser()
@@ -86,6 +87,10 @@ const LoginForm = ({ didRegisterSuccessfully, successMessage }: Props) => {
         />
         <LoginButton />
       </form>
+      <h1>
+        Don't have an account yet?{" "}
+        <RouterLink routerLinkText="Register here" to="/register" />
+      </h1>
       {!isError && didRegisterSuccessfully && (
         <Success successMessage={scsMessage} />
       )}
