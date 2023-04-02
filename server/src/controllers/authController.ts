@@ -131,7 +131,7 @@ export const loginUser = async (req: Request, res: Response) => {
   }
 }
 
-export const forgotPassword = async (req: Request, res: Response) => {
+export const getSecurityQuestion = async (req: Request, res: Response) => {
   // destructure the payload attached to the body
   const { username } = req.body
 
@@ -159,6 +159,53 @@ export const forgotPassword = async (req: Request, res: Response) => {
       message: "Security questions successfully fetched!",
       data: {
         question: existingUser.securityQuestion,
+      },
+      ok: true,
+    })
+  } catch (error) {
+    res.status(500).json({ message: error, data: null, ok: false })
+  }
+}
+
+export const verifySecurityQA = async (req: Request, res: Response) => {
+  // destructure the payload attached to the body
+  const { username, securityQuestionAnswer } = req.body
+
+  // Check if appropriate payload is attached to the body
+  if (!username || !securityQuestionAnswer) {
+    return res.status(400).json({
+      message: "username and securityQuestionAnswer property is required!",
+      data: null,
+      ok: false,
+    })
+  }
+
+  try {
+    // Check if the username already exists in the db
+    const existingUser = await UserModel.findOne({
+      username,
+    })
+    if (!existingUser) {
+      return res
+        .status(400)
+        .json({ message: "Invalid auth!", data: null, ok: false })
+    }
+
+    const isMatch = await bcrypt.compare(
+      securityQuestionAnswer,
+      existingUser.securityQuestionAnswer
+    )
+    // Check if the security question answer matches existing user's answer
+    if (!isMatch) {
+      return res
+        .status(400)
+        .json({ message: "Invalid auth!", data: null, ok: false })
+    }
+
+    res.status(200).json({
+      message: "Security question answered successfully!",
+      data: {
+        question: existingUser.username,
       },
       ok: true,
     })

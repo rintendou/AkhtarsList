@@ -5,6 +5,7 @@ import {
   registerUser,
   loginUser,
   getSecurityQuestion,
+  verifySecurityQA,
 } from "../controllers/authController"
 
 const AuthRoute = express.Router()
@@ -15,7 +16,10 @@ AuthRoute.post("/register", registerUser)
 // LOGIN
 AuthRoute.post("/login", loginUser)
 
-// FORGOT PASSWORD
+// GET SECURITY QUESTION
 AuthRoute.post("/get-security-question", getSecurityQuestion)
+
+// VERIFY SECURITY QA
+AuthRoute.post("/verify-security-qa", verifySecurityQA)
 
 export default AuthRoute

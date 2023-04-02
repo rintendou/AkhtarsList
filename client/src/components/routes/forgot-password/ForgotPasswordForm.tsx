@@ -67,7 +67,7 @@ const ForgotPasswordForm = () => {
       const username = securityQuestionAnswerRef.current!.value
 
       const response = await fetch(
-        `http://localhost:5178/api/auth/forgot-password`,
+        `http://localhost:5178/api/auth/verify-security-qa`,
         {
           method: "POST",
           body: JSON.stringify({
