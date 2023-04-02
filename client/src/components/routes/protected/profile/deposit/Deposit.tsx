@@ -1,8 +1,13 @@
 import { useEffect, useRef } from "react"
+import { useNavigate } from "react-router-dom"
+
 import Card from "../../../../ui/Card"
 import StyledInputRef from "../../../../ui/StyledInputRef"
+import useProfile from "../../../../../lib/hooks/useProfile"
 
 const Deposit = () => {
+  const { depositFunds } = useProfile()
+
   const cardHolderRef = useRef<HTMLInputElement>(null)
   const cardNumberRef = useRef<HTMLInputElement>(null)
   const expirationRef = useRef<HTMLInputElement>(null)
@@ -14,11 +19,17 @@ const Deposit = () => {
     cardHolderRef.current!.focus()
   }, [])
 
+  const depositFundsHandler = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    const depositAmount = Number(depositAmountRef.current!.value)
+    depositFunds(depositAmount)
+  }
+
   return (
     <div className="min-h-screen flex flex-col justify-center items-center">
       <Card twClasses="p-20 md:p-10 m-0 md:m-10 shadow-lg space-y-5 w-[35rem]">
         <h1 className="text-3xl text-center font-bold">Card Payment</h1>
-        <form className="flex flex-col gap-5">
+        <form className="flex flex-col gap-5" onSubmit={depositFundsHandler}>
           <StyledInputRef
             ref={cardHolderRef}
             name="Card Holder"

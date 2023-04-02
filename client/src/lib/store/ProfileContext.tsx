@@ -47,6 +47,7 @@ const ProfileContextProvider = ({
 
   // Deposit funds
   const depositFunds = (amount: number) => {
+    console.log(amount)
     const deposit = async () => {
       const response = await fetch("http://localhost:5178/api/user/deposit", {
         method: "POST",
