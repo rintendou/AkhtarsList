@@ -157,7 +157,9 @@ export const forgotPassword = async (req: Request, res: Response) => {
 
     res.status(200).json({
       message: "Security questions successfully fetched!",
-      data: existingUser.securityQuestion,
+      data: {
+        question: existingUser.securityQuestion,
+      },
       ok: true,
     })
   } catch (error) {
