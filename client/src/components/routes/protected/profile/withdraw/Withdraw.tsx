@@ -1,9 +1,22 @@
+import { useRef } from "react"
 import useProfile from "../../../../../lib/hooks/useProfile"
 import Card from "../../../../ui/Card"
 import StyledInputRef from "../../../../ui/StyledInputRef"
+import { useNavigate } from "react-router-dom"
 
 const Withdraw = () => {
   const { balance, withdrawFunds } = useProfile()
+
+  const withdrawFundsRef = useRef<HTMLInputElement>(null)
+
+  const navigate = useNavigate()
+
+  const withdrawFundsHandler = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    const depositAmount = Number(withdrawFundsRef.current!.value)
+    withdrawFunds(depositAmount)
+    navigate("/profile", { replace: true })
+  }
 
   return (
     <div className="min-h-screen flex flex-col justify-center items-center">
@@ -14,6 +27,7 @@ const Withdraw = () => {
         <h1 className="text-3xl text-center font-bold">Card Payment</h1>
         <form className="flex gap-5 justify-between">
           <StyledInputRef
+            ref={withdrawFundsRef}
             name="Deposit Amount"
             type="text"
             placeholder="Deposit Amount"
