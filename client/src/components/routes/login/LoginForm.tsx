@@ -35,7 +35,9 @@ const LoginForm = ({ didRegisterSuccessfully, successMessage }: Props) => {
   // send post request to api endpoint /api/auth/login by calling the
   // the endpoint and backend_server_port number: 5178. Payload is passed
   // by attaching data to the body object.
-  const loginUserHandler = () => {
+  const loginUserHandler = (e: React.FormEvent<HTMLFormElement>) => {
+    // Prevent default behavior of reloading page on form submission
+    e.preventDefault()
     const username = usernameRef.current!.value
     const password = passwordRef.current!.value
 
@@ -67,9 +69,9 @@ const LoginForm = ({ didRegisterSuccessfully, successMessage }: Props) => {
   }
 
   return (
-    <Card twClasses="w-[45rem] mx-auto p-20 border-4 border-secondary space-y-16">
+    <Card twClasses="w-[45rem] mx-auto p-20 border-4 border-secondary space-y-16 flex flex-col justify-center">
       <h1 className="text-4xl font-bold text-center">Login</h1>
-      <div className="flex flex-col">
+      <form className="flex flex-col" onSubmit={loginUserHandler}>
         <StyledInputRef
           name="Username"
           type="text"
@@ -82,12 +84,8 @@ const LoginForm = ({ didRegisterSuccessfully, successMessage }: Props) => {
           placeholder="Password"
           ref={passwordRef}
         />
-      </div>
-      <StyledButton
-        buttonText="Login"
-        twClasses="w-full py-3"
-        onClick={loginUserHandler}
-      />
+        <LoginButton />
+      </form>
       {!isError && didRegisterSuccessfully && (
         <Success successMessage={scsMessage} />
       )}
@@ -97,3 +95,14 @@ const LoginForm = ({ didRegisterSuccessfully, successMessage }: Props) => {
 }
 
 export default LoginForm
+
+const LoginButton = () => {
+  return (
+    <button
+      className={`px-4 py-2 rounded-lg hover:scale-105 duration-200 ease-in-out bg-secondary text-primary font-bold text-xl`}
+      type="submit"
+    >
+      Login
+    </button>
+  )
+}
