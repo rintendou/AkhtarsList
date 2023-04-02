@@ -58,6 +58,18 @@ export const loginUser = async (req: Request, res: Response) => {
 	Compare the password in the req to encrypted password in the DB.
 	*/
 
+  // destructure the payload attached to the body
+  const { username, password } = req.body
+
+  // Check if appropriate payload is attached to the body
+  if (!username || !password) {
+    return res.status(400).json({
+      message: "username and password properties are required!",
+      data: null,
+      ok: false,
+    })
+  }
+
   try {
     const user = await UserModel.findOne({
       username: req.body.username,
