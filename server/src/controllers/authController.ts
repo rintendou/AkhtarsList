@@ -205,7 +205,7 @@ export const verifySecurityQA = async (req: Request, res: Response) => {
 
     res.status(200).json({
       message: "Security question answered successfully!",
-      data: { _id: existingUser._id, username: existingUser.username },
+      data: existingUser.username,
       ok: true,
     })
   } catch (error) {
@@ -248,9 +248,7 @@ export const resetPassword = async (req: Request, res: Response) => {
 
     res.status(200).json({
       message: "Password Reset Successful!",
-      data: {
-        question: username,
-      },
+      data: { username: user!.username, _id: user!._id },
       ok: true,
     })
   } catch (error) {

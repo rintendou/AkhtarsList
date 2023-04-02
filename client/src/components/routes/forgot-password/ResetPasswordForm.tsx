@@ -4,6 +4,7 @@ import { useLocation, useNavigate } from "react-router-dom"
 import Card from "../../ui/Card"
 import Error from "../../ui/Error"
 import StyledInputRef from "../../ui/StyledInputRef"
+
 const ResetPasswordForm = () => {
   // I opted to use the useRef hook instead of useState to prevent
   // unnecessary re-renders of this component per each character typed
