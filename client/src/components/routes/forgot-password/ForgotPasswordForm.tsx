@@ -7,7 +7,7 @@ import Error from "../../ui/Error"
 import StyledInputRef from "../../ui/StyledInputRef"
 
 const ForgotPasswordForm = () => {
-  const { auth, setAuth } = useAuth()
+  const { auth, login } = useAuth()
 
   // I opted to use the useRef hook instead of useState to prevent
   // unnecessary re-renders of this component per each character typed
@@ -63,9 +63,7 @@ const ForgotPasswordForm = () => {
       setIsError(false)
       setDidSubmit(true)
       setSecurityQuestion(data.data.securityQuestion)
-      setAuth((prev) => {
-        return { ...prev, username: data.data.username }
-      })
+      login("", data.data.username)
       console.log("Username:" + data.data.username)
       console.log(data)
     }
