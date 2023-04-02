@@ -5,32 +5,32 @@ const CategoryHeader = () => {
     <div className="bg-gray-200 flex justify-center gap-8 p-4">
       <RouterLink
         routerLinkText="Sneakers"
-        to="/categories/sneakers"
+        to="/category/sneakers"
         twClasses="text-xl"
       />
       <RouterLink
         routerLinkText="Antiques"
-        to="/categories/antiques"
+        to="/category/antiques"
         twClasses="text-xl"
       />
       <RouterLink
         routerLinkText="Tech"
-        to="/categories/tech"
+        to="/category/tech"
         twClasses="text-xl"
       />
       <RouterLink
         routerLinkText="Accessories"
-        to="/categories/accessories"
+        to="/category/accessories"
         twClasses="text-xl"
       />
       <RouterLink
         routerLinkText="Collectibles"
-        to="/categories/collectibles"
+        to="/category/collectibles"
         twClasses="text-xl"
       />
       <RouterLink
         routerLinkText="Trending"
-        to="/categories/trending"
+        to="/category/trending"
         twClasses="text-xl"
       />
     </div>
