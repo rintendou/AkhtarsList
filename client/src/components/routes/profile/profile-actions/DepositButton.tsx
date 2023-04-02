@@ -1,7 +1,13 @@
-import React from "react"
+import StyledButton from "../../../ui/StyledButton"
 
 const DepositButton = () => {
-  return <div>DepositButton</div>
+  return (
+    <StyledButton
+      buttonText="Deposit"
+      onClick={() => {}}
+      twClasses="w-32 hover:bg-black"
+    />
+  )
 }
 
 export default DepositButton
