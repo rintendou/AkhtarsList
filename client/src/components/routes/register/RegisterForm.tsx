@@ -13,6 +13,8 @@ const RegisterForm = () => {
   const passwordRef = useRef<HTMLInputElement>(null)
   const confirmPasswordRef = useRef<HTMLInputElement>(null)
   const addressRef = useRef<HTMLInputElement>(null)
+  const securityQuestionRef = useRef<HTMLInputElement>(null)
+  const securityQuestionAnswerRef = useRef<HTMLInputElement>(null)
 
   const [isError, setIsError] = useState(false)
   const [errorMessage, setErrorMessage] = useState("")
@@ -38,6 +40,8 @@ const RegisterForm = () => {
       const password = passwordRef.current!.value
       const confirmPassword = confirmPasswordRef.current!.value
       const address = addressRef.current!.value
+      const securityQuestion = securityQuestionRef.current!.value
+      const securityQuestionAnswer = securityQuestionAnswerRef.current!.value
 
       const response = await fetch(`http://localhost:5178/api/auth/register`, {
         method: "POST",
@@ -46,6 +50,8 @@ const RegisterForm = () => {
           password,
           confirmPassword,
           address,
+          securityQuestion,
+          securityQuestionAnswer,
         }),
         headers: { "Content-Type": "application/json" },
       })
@@ -93,6 +99,18 @@ const RegisterForm = () => {
           type="text"
           placeholder="Address"
           ref={addressRef}
+        />
+        <StyledInputRef
+          name="Security Question"
+          type="text"
+          placeholder="Security Question"
+          ref={securityQuestionRef}
+        />
+        <StyledInputRef
+          name="Security Question Answer"
+          type="text"
+          placeholder="Security Question Answer"
+          ref={securityQuestionAnswerRef}
         />
         <RegisterButton />
       </form>

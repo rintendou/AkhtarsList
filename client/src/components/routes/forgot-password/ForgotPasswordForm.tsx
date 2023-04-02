@@ -52,9 +52,6 @@ const ForgotPasswordForm = () => {
       }
 
       setIsError(false)
-      navigate("/login", {
-        state: { didRegisterSuccessfully: true, successMessage: data.message },
-      })
       console.log(data)
     }
     getSecurityQuestions()
