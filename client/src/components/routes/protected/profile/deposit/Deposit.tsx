@@ -1,11 +1,14 @@
-import { useEffect, useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 import { useNavigate } from "react-router-dom"
+import useProfile from "../../../../../lib/hooks/useProfile"
 
 import Card from "../../../../ui/Card"
 import StyledInputRef from "../../../../ui/StyledInputRef"
-import useProfile from "../../../../../lib/hooks/useProfile"
+import Error from "../../../../ui/Error"
 
 const Deposit = () => {
+  const [error, setError] = useState("")
+
   const { depositFunds } = useProfile()
   const navigate = useNavigate()
 
@@ -22,8 +25,14 @@ const Deposit = () => {
 
   const depositFundsHandler = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    const depositAmount = Number(depositAmountRef.current!.value)
-    depositFunds(depositAmount)
+    const depositAmount = depositAmountRef.current!.value
+
+    if (isNaN(Number(depositAmount))) {
+      setError("Invalid Input!")
+      return
+    }
+
+    depositFunds(Number(depositAmount))
     navigate("/profile", { replace: true })
   }
 
@@ -71,6 +80,7 @@ const Deposit = () => {
           </div>
           <DepositNowButton />
         </form>
+        {error && <Error errorMessage={error} />}
       </Card>
     </div>
   )
