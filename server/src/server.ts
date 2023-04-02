@@ -9,6 +9,7 @@ import cors from "cors"
 // Import all routes
 // import UserRoute from "./routes/users"
 import AuthRoute from "./routes/auth"
+import ListingRoute from "./routes/listing"
 
 mongoose.set("strictQuery", false)
 
@@ -39,6 +40,7 @@ app.use((req: Request, res: Response, next: Function) => {
 // Declare Routes
 // app.use("/api/users", UserRoute)
 app.use("/api/auth", AuthRoute)
+app.use("/api/listing", ListingRoute)
 
 mongoose.connect(MONGODB_URL!).then(() => {
   console.log("Connected to MongoDB")
