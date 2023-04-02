@@ -88,9 +88,9 @@ const RegisterForm = () => {
         />
         <RegisterButton />
       </form>
-      <h1>
+      <h1 className="text-center">
         Already have an account?{" "}
-        <RouterLink routerLinkText="Register here" to="/register" />
+        <RouterLink routerLinkText="Login here" to="/login" />
       </h1>
       {isError && <Error errorMessage={errorMessage} />}
     </Card>
