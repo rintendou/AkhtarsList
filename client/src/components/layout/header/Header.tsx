@@ -10,8 +10,8 @@ const Header = () => {
       <nav className="hidden md:flex flex-row gap-4">
         {auth._id ? (
           <>
-            <RouterLink to="/" routerLinkText="Home" />
             <RouterLink to="/app" routerLinkText="Application" />
+            <RouterLink to="/profile" routerLinkText="Profile" />
           </>
         ) : (
           <>
