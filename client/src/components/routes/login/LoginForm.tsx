@@ -87,7 +87,7 @@ const LoginForm = ({ didRegisterSuccessfully, successMessage }: Props) => {
         />
         <LoginButton />
       </form>
-      <h1>
+      <h1 className="text-center">
         Don't have an account yet?{" "}
         <RouterLink routerLinkText="Register here" to="/register" />
       </h1>
