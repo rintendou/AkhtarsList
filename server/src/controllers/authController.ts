@@ -215,14 +215,15 @@ export const verifySecurityQA = async (req: Request, res: Response) => {
   }
 }
 
-export const changePassword = async (req: Request, res: Response) => {
+export const resetPassword = async (req: Request, res: Response) => {
   // destructure the payload attached to the body
   const { username, password, confirmPassword } = req.body
 
   // Check if appropriate payload is attached to the body
   if (!username || !password || !confirmPassword) {
     return res.status(400).json({
-      message: "username and password properties are required!",
+      message:
+        "username, password, and confirmPassword properties are required!",
       data: null,
       ok: false,
     })
@@ -248,7 +249,7 @@ export const changePassword = async (req: Request, res: Response) => {
     await user!.save()
 
     res.status(200).json({
-      message: "Password Changed Successfully!",
+      message: "Password Reset Successful!",
       data: {
         question: username,
       },

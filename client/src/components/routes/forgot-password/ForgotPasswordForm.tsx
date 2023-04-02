@@ -112,7 +112,7 @@ const ForgotPasswordForm = () => {
 
       setIsError(false)
       navigate("/reset-password", {
-        state: { successMessage: data.message },
+        state: { successMessage: data.message, username: username },
       })
       console.log(data)
     }

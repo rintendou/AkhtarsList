@@ -6,7 +6,7 @@ import {
   loginUser,
   getSecurityQuestion,
   verifySecurityQA,
-  changePassword,
+  resetPassword,
 } from "../controllers/authController"
 
 const AuthRoute = express.Router()
@@ -24,6 +24,6 @@ AuthRoute.post("/get-security-question", getSecurityQuestion)
 AuthRoute.post("/verify-security-qa", verifySecurityQA)
 
 // CHANGE PASSWORD
-AuthRoute.post("/change-password", changePassword)
+AuthRoute.post("/reset-password", resetPassword)
 
 export default AuthRoute
