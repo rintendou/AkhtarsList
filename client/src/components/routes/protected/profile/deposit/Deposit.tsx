@@ -1,4 +1,4 @@
-import { useRef } from "react"
+import { useEffect, useRef } from "react"
 import Card from "../../../../ui/Card"
 import StyledInputRef from "../../../../ui/StyledInputRef"
 
@@ -7,6 +7,12 @@ const Deposit = () => {
   const cardNumberRef = useRef<HTMLInputElement>(null)
   const expirationRef = useRef<HTMLInputElement>(null)
   const cvvRef = useRef<HTMLInputElement>(null)
+  const depositAmountRef = useRef<HTMLInputElement>(null)
+
+  // Focus on first input on component amount
+  useEffect(() => {
+    cardHolderRef.current!.focus()
+  }, [])
 
   return (
     <div className="min-h-screen flex flex-col justify-center items-center">
@@ -27,7 +33,7 @@ const Deposit = () => {
             placeholder="Card Number"
             twClasses="rounded-lg shadow-lg"
           />
-          <div className="flex gap-5">
+          <div className="flex flex-col md:flex-row gap-5">
             <StyledInputRef
               ref={expirationRef}
               name="Expiration"
@@ -40,6 +46,13 @@ const Deposit = () => {
               name="CVV"
               type="text"
               placeholder="CVV"
+              twClasses="rounded-lg shadow-lg w-24"
+            />
+            <StyledInputRef
+              ref={depositAmountRef}
+              name="Deposit Amount"
+              type="text"
+              placeholder="Deposit Amount"
               twClasses="rounded-lg shadow-lg"
             />
           </div>
@@ -55,7 +68,7 @@ export default Deposit
 const DepositNowButton = () => {
   return (
     <button
-      className={`p-4 py-3 rounded-lg duration-200 hover:bg-black ease-in-out bg-secondary text-primary font-bold text-lg`}
+      className={`p-4 py-3 rounded-lg duration-200 hover:bg-black ease-in-out bg-secondary text-primary font-bold text-lg shadow-lg`}
       type="submit"
     >
       Deposit Now
