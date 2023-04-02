@@ -27,6 +27,7 @@ const ProfileContextProvider = ({
   children: React.ReactNode
 }) => {
   const { auth } = useAuth()
+  const { _id } = auth
 
   const [balance, setBalance] = useState(initialContext.balance)
   const [address, setAddress] = useState("")
@@ -34,8 +35,6 @@ const ProfileContextProvider = ({
   // Fetch user details
   useEffect(() => {
     const fetchUserDetails = async () => {
-      const { _id } = auth
-
       const response = await fetch(`http://localhost:5178/api/user/${_id}`)
       const data = await response.json()
 
@@ -44,7 +43,7 @@ const ProfileContextProvider = ({
     }
 
     fetchUserDetails()
-  }, [auth._id])
+  }, [_id])
 
   // Deposit funds
   const depositFunds = (amount: number) => {
@@ -52,6 +51,7 @@ const ProfileContextProvider = ({
       const response = await fetch("http://localhost:5178/api/user/deposit", {
         method: "POST",
         body: JSON.stringify({
+          userId: _id,
           depositAmount: amount,
         }),
         headers: { "Content-Type": "application/json" },
@@ -70,9 +70,10 @@ const ProfileContextProvider = ({
   // Withdraw funds
   const withdrawFunds = (amount: number) => {
     const withdraw = async () => {
-      const response = await fetch("http://localhost:5178/api/user/deposit", {
+      const response = await fetch("http://localhost:5178/api/user/withdraw", {
         method: "POST",
         body: JSON.stringify({
+          userId: _id,
           withdrawAmount: amount,
         }),
         headers: { "Content-Type": "application/json" },
