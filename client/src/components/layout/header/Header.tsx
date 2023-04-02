@@ -7,7 +7,11 @@ const Header = () => {
 
   return (
     <header className="p-8 flex flex-row justify-between items-center bg-secondary text-primary sticky top-0 gap-8">
-      <h1 className="text-2xl font-bold">AkhtarsList</h1>
+      <RouterLink
+        twClasses="text-2xl font-bold"
+        routerLinkText="AkhtarsList"
+        to="/"
+      />
       {auth._id && <SearchBar />}
       <nav className="hidden md:flex flex-row gap-4">
         {auth._id ? (

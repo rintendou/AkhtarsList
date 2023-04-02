@@ -45,7 +45,11 @@ const Footer = () => {
           </>
         )}
       </nav>
-      <h1 className="text-2xl font-bold">Synapse</h1>
+      <RouterLink
+        twClasses="text-2xl font-bold"
+        routerLinkText="AkhtarsList"
+        to="/"
+      />
     </footer>
   )
 }
