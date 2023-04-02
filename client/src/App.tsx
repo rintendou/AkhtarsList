@@ -7,6 +7,7 @@ import LandingPage from "./components/routes/landing-page/LandingPage"
 import PageNotFound from "./components/routes/page-not-found/PageNotFound"
 import Login from "./components/routes/login/Login"
 import Register from "./components/routes/register/Register"
+import Profile from "./components/routes/profile/Profile"
 
 // Components
 import Body from "./components/layout/body/Body"
@@ -29,6 +30,7 @@ function App() {
           {/* Protected Routes */}
           <Route element={<RequireAuth />}>
             <Route path="/app" element={<Application />} />
+            <Route path="/profile" element={<Profile />} />
           </Route>
 
           {/* Catch-All Route */}
