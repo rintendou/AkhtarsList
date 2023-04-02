@@ -1,0 +1,3 @@
+type InitialContextProps = {
+  balance: number
+}

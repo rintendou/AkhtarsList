@@ -35,19 +35,19 @@ const UserSchema = new Schema(
       type: String,
       required: true,
     },
-    biddedItems: {
+    biddedListings: {
       type: [ObjectId],
       ref: "Item",
     },
-    listedItems: {
+    listedListings: {
       type: [ObjectId],
       ref: "Item",
     },
-    wonItems: {
+    wonListings: {
       type: [ObjectId],
       ref: "Item",
     },
-    disputedItems: {
+    disputedListings: {
       type: [ObjectId],
       ref: "Item",
     },
