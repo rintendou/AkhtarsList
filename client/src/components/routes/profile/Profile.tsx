@@ -6,14 +6,14 @@ import Card from "../../ui/Card"
 import { useEffect, useState } from "react"
 
 const Profile = () => {
-  const { auth, setAuth } = useAuth()
+  const { auth, logout } = useAuth()
   const navigate = useNavigate()
 
   const [address, setAddress] = useState("")
   const [balance, setBalance] = useState(0)
 
   const logoutHandler = () => {
-    setAuth({ _id: "", username: "" })
+    logout()
     navigate("/", { replace: true })
   }
 

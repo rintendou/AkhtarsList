@@ -14,7 +14,7 @@ type Props = {
 }
 
 const LoginForm = ({ didRegisterSuccessfully, successMessage }: Props) => {
-  const { setAuth } = useAuth()
+  const { login } = useAuth()
   const navigate = useNavigate()
 
   // I opted to use the useRef hook instead of useState to prevent
@@ -62,7 +62,7 @@ const LoginForm = ({ didRegisterSuccessfully, successMessage }: Props) => {
 
       setIsError(false)
       setScsMessage(data.message)
-      setAuth(data.data)
+      login(data.data._id, data.data.username)
       navigate("/app", { replace: true })
       console.log(data)
     }
