@@ -10,11 +10,6 @@ const Profile = () => {
   const [address, setAddress] = useState("")
   const [balance, setBalance] = useState(0)
 
-  // const logoutHandler = () => {
-  //   logout()
-  //   navigate("/", { replace: true })
-  // }
-
   useEffect(() => {
     const fetchUserDetails = async () => {
       const { _id } = auth
