@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom"
 
-import StyledButton from "../../../ui/StyledButton"
-import useProfile from "../../../../lib/hooks/useProfile"
+import StyledButton from "../../../../ui/StyledButton"
+import useProfile from "../../../../../lib/hooks/useProfile"
 
 type Props = {
   logout: () => void

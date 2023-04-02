@@ -1,7 +1,7 @@
-import useAuth from "../../../lib/hooks/useAuth"
-import useProfile from "../../../lib/hooks/useProfile"
+import useAuth from "../../../../lib/hooks/useAuth"
+import useProfile from "../../../../lib/hooks/useProfile"
 
-import Card from "../../ui/Card"
+import Card from "../../../ui/Card"
 import ProfileActions from "./profile-actions/ProfileActions"
 
 const Profile = () => {

@@ -7,7 +7,7 @@ import LandingPage from "./components/routes/landing-page/LandingPage"
 import PageNotFound from "./components/routes/page-not-found/PageNotFound"
 import Login from "./components/routes/login/Login"
 import Register from "./components/routes/register/Register"
-import Profile from "./components/routes/profile/Profile"
+import Profile from "./components/routes/protected/profile/Profile"
 import ForgotPassword from "./components/routes/forgot-password/ForgotPassword"
 import ChangePassword from "./components/routes/forgot-password/ResetPassword"
 
