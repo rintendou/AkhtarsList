@@ -1,28 +1,12 @@
 import useAuth from "../../../lib/hooks/useAuth"
+import useProfile from "../../../lib/hooks/useProfile"
 
 import Card from "../../ui/Card"
-import { useEffect, useState } from "react"
 import ProfileActions from "./profile-actions/ProfileActions"
 
 const Profile = () => {
   const { auth, logout } = useAuth()
-
-  const [address, setAddress] = useState("")
-  const [balance, setBalance] = useState(0)
-
-  useEffect(() => {
-    const fetchUserDetails = async () => {
-      const { _id } = auth
-
-      const response = await fetch(`http://localhost:5178/api/user/${_id}`)
-      const data = await response.json()
-
-      setAddress(data.data.address)
-      setBalance(data.data.balance)
-    }
-
-    fetchUserDetails()
-  }, [])
+  const { balance, address } = useProfile()
 
   return (
     <div className="min-h-screen flex flex-col justify-center items-center">

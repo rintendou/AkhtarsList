@@ -9,7 +9,7 @@ import {
 
 const UserRoute = express.Router()
 
-// REGISTRATION
+// GET USER
 UserRoute.get("/:userId", getUser)
 
 // DEPOSIT FUNDS
