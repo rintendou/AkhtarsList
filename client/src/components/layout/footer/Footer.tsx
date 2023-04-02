@@ -9,15 +9,39 @@ const Footer = () => {
       <nav className="hidden md:flex flex-row gap-4">
         {auth._id ? (
           <>
-            <RouterLink to="/app" routerLinkText="Application" />
-            <RouterLink to="/profile" routerLinkText="Profile" />
+            <RouterLink
+              to="/app"
+              routerLinkText="Browse"
+              twClasses="border p-2 border-main w-20 text-center"
+            />
+            <RouterLink
+              to="/profile"
+              routerLinkText="Profile"
+              twClasses="border p-2 border-main w-20 text-center"
+            />
           </>
         ) : (
           <>
-            <RouterLink to="/" routerLinkText="Home" />
-            <RouterLink to="/login" routerLinkText="Login" />
-            <RouterLink to="/register" routerLinkText="Register" />
-            <RouterLink to="/dev" routerLinkText="Dev" />
+            <RouterLink
+              to="/"
+              routerLinkText="Home"
+              twClasses="border p-2 border-main w-20 text-center"
+            />
+            <RouterLink
+              to="/login"
+              routerLinkText="Login"
+              twClasses="border p-2 border-main w-20 text-center"
+            />
+            <RouterLink
+              to="/register"
+              routerLinkText="Register"
+              twClasses="border p-2 border-main w-20 text-center"
+            />
+            <RouterLink
+              to="/dev"
+              routerLinkText="Dev"
+              twClasses="border p-2 border-main w-20 text-center"
+            />
           </>
         )}
       </nav>
