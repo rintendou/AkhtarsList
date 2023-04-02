@@ -27,18 +27,41 @@ const ProfileContextProvider = ({
 
   const depositFunds = (amount: number) => {
     const deposit = async () => {
-      const response = await fetch("http://localhost:5178/api/user/deposit")
+      const response = await fetch("http://localhost:5178/api/user/deposit", {
+        method: "POST",
+        body: JSON.stringify({
+          depositAmount: amount,
+        }),
+        headers: { "Content-Type": "application/json" },
+      })
       const data = await response.json()
 
       if (!data.ok) {
         return
       }
+
+      setBalance(data.data)
     }
     deposit()
   }
 
   const withdrawFunds = (amount: number) => {
-    const withdraw = async () => {}
+    const withdraw = async () => {
+      const response = await fetch("http://localhost:5178/api/user/deposit", {
+        method: "POST",
+        body: JSON.stringify({
+          withdrawAmount: amount,
+        }),
+        headers: { "Content-Type": "application/json" },
+      })
+      const data = await response.json()
+
+      if (!data.ok) {
+        return
+      }
+
+      setBalance(data.data)
+    }
     withdraw()
   }
 
