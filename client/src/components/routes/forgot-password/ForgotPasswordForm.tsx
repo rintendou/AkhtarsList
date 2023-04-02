@@ -26,7 +26,7 @@ const ForgotPasswordForm = () => {
     usernameRef.current!.focus()
   }, [])
 
-  // send post request to api endpoint /api/auth/register by calling the
+  // send post request to api endpoint /api/auth/get-security-question by calling the
   // the endpoint and backend_server_port number: 5178. Payload is passed
   // by attaching data to the body object.
   const getSecurityQuestionsHandler = (e: React.FormEvent<HTMLFormElement>) => {
@@ -51,6 +51,12 @@ const ForgotPasswordForm = () => {
       if (!data.ok) {
         setIsError(true)
         setErrorMessage(data.message)
+        navigate("/login", {
+          state: {
+            didRegisterSuccessfully: false,
+            errorMessage: data.message,
+          },
+        })
         return
       }
 
@@ -60,17 +66,22 @@ const ForgotPasswordForm = () => {
       setAuth((prev) => {
         return { ...prev, username: data.data.username }
       })
+      console.log("Username:" + data.data.username)
       console.log(data)
     }
     getSecurityQuestions()
   }
 
+  // send post request to api endpoint /api/auth/verify-security-qa by calling the
+  // the endpoint and backend_server_port number: 5178. Payload is passed
+  // by attaching data to the body object.
   const verifySecurityQAHandler = (e: React.FormEvent<HTMLFormElement>) => {
     // Prevent default behavior of reloading page on form submission
     e.preventDefault()
 
     const verifySecurityQA = async () => {
       const { username } = auth
+      console.log(username)
       const securityQuestionAnswer = securityQuestionAnswerRef.current!.value
 
       const response = await fetch(
@@ -86,6 +97,7 @@ const ForgotPasswordForm = () => {
       )
       const data = await response.json()
 
+      console.log(data)
       if (!data.ok) {
         setIsError(true)
         setErrorMessage(data.message)
@@ -104,6 +116,7 @@ const ForgotPasswordForm = () => {
       })
       console.log(data)
     }
+
     verifySecurityQA()
   }
 

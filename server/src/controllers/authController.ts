@@ -158,10 +158,8 @@ export const getSecurityQuestion = async (req: Request, res: Response) => {
     res.status(200).json({
       message: "Security questions successfully fetched!",
       data: {
-        question: {
-          username: existingUser.username,
-          securityQuestion: existingUser.securityQuestion,
-        },
+        username: existingUser.username,
+        securityQuestion: existingUser.securityQuestion,
       },
       ok: true,
     })
@@ -177,7 +175,7 @@ export const verifySecurityQA = async (req: Request, res: Response) => {
   // Check if appropriate payload is attached to the body
   if (!username || !securityQuestionAnswer) {
     return res.status(400).json({
-      message: "username and securityQuestionAnswer property is required!",
+      message: "username and securityQuestionAnswer properties are required!",
       data: null,
       ok: false,
     })
