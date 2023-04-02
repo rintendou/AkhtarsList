@@ -1,6 +1,5 @@
 import { useParams } from "react-router-dom"
 
-import RouterLink from "../../ui/RouterLink"
 import SideNavLinks from "./SideNavLinks"
 
 const Category = () => {

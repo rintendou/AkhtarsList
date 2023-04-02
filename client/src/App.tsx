@@ -1,7 +1,7 @@
 import { Routes, Route } from "react-router-dom"
 
 // Routes
-import Application from "./components/routes/protected/application/Application"
+import Application from "./components/routes/application/Application"
 import Dev from "./components/routes/dev/Dev"
 import LandingPage from "./components/routes/landing-page/LandingPage"
 import PageNotFound from "./components/routes/page-not-found/PageNotFound"
