@@ -1,9 +1,9 @@
 import { useParams } from "react-router-dom"
 
 const Category = () => {
-  const { category } = useParams()
-  console.log(category)
-  return <div>Category</div>
+  const { categoryName } = useParams()
+
+  return <div className="min-h-screen flex flex-col">{categoryName}</div>
 }
 
 export default Category
