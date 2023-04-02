@@ -22,10 +22,11 @@ const Profile = () => {
         <ProfileActions logout={logout} />
       </Card>
       <ListingCard
+        _id="someId"
         img="test"
         title="Dummy Title"
         price={100}
-        timeRemaining={new Date()}
+        timeRemaining="10 days"
         views={69}
       />
     </div>
