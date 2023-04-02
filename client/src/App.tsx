@@ -19,7 +19,7 @@ import RequireAuth from "./components/routes/protected/RequireAuth"
 
 function App() {
   return (
-    <div className="bg-primary text-secondary">
+    <div className="bg-primary text-black">
       <Header />
       <Body>
         <Routes>
