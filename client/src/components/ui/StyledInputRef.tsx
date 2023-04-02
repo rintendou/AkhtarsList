@@ -9,7 +9,7 @@ type Props = {
 const StyledInputRef = React.forwardRef<HTMLInputElement, Props>(
   ({ name, type = "text", placeholder, ...rest }, ref) => {
     return (
-      <div className="relative z-0 mb-8">
+      <div className="relative z-0">
         <input
           {...rest}
           id={name}
