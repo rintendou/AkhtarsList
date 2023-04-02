@@ -19,12 +19,12 @@ const ProfileActions = ({ logout }: Props) => {
       <div className="flex gap-5">
         <StyledButton
           buttonText="Deposit"
-          onClick={() => navigate("/deposit")}
+          onClick={() => navigate("/payments/deposit")}
           twClasses="w-32 hover:bg-black"
         />
         <StyledButton
           buttonText="Withdraw"
-          onClick={() => navigate("/withdraw")}
+          onClick={() => navigate("/payments/withdraw")}
           twClasses="w-32"
           intent="secondary"
         />
