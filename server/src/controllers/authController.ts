@@ -7,7 +7,7 @@ export const registerUser = async (req: Request, res: Response) => {
   const { username, password, address } = req.body
 
   // Check if appropriate payload is attached to the body
-  if (!username || password || !address) {
+  if (!username || !password || !address) {
     return res.status(400).json({
       message: "username, password, and address properties are required!",
       data: null,
@@ -38,6 +38,7 @@ export const registerUser = async (req: Request, res: Response) => {
       username: cleanedUsername,
       password: hashedPassword,
       address: address,
+      balance: 0,
     })
 
     // Saving new User
