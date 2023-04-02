@@ -4,12 +4,22 @@ import bcrypt from "bcrypt"
 
 export const registerUser = async (req: Request, res: Response) => {
   // destructure the payload attached to the body
-  const { username, password, address } = req.body
+  const { username, password, confirmPassword, address } = req.body
 
   // Check if appropriate payload is attached to the body
-  if (!username || !password || !address) {
+  if (!username || !password || !confirmPassword || !address) {
     return res.status(400).json({
-      message: "username, password, and address properties are required!",
+      message:
+        "username, password, confirmPassword, and address properties are required!",
+      data: null,
+      ok: false,
+    })
+  }
+
+  // Check if password and password matches
+  if (password !== confirmPassword) {
+    return res.status(400).json({
+      message: "Password does not match!",
       data: null,
       ok: false,
     })
