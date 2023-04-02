@@ -9,15 +9,18 @@ import Login from "./components/routes/login/Login"
 import Register from "./components/routes/register/Register"
 import Profile from "./components/routes/protected/profile/Profile"
 import ForgotPassword from "./components/routes/forgot-password/ForgotPassword"
+import Deposit from "./components/routes/protected/profile/deposit/Deposit"
+import Withdraw from "./components/routes/protected/profile/withdraw/Withdraw"
 import ChangePassword from "./components/routes/forgot-password/ResetPassword"
+import Category from "./components/routes/protected/application/categories/Category"
 
 // Components
 import Body from "./components/layout/body/Body"
 import Footer from "./components/layout/footer/Footer"
 import Header from "./components/layout/header/Header"
+
+// Navguard
 import RequireAuth from "./components/routes/protected/RequireAuth"
-import Deposit from "./components/routes/protected/profile/deposit/Deposit"
-import Withdraw from "./components/routes/protected/profile/withdraw/Withdraw"
 
 function App() {
   return (
@@ -31,6 +34,7 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/reset-password" element={<ChangePassword />} />
+          <Route path="/category/:categoryName" element={<Category />} />
           <Route path="/dev" element={<Dev />} />
 
           {/* Protected Routes */}
