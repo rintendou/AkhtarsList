@@ -16,7 +16,7 @@ const Deposit = () => {
 
   return (
     <div className="min-h-screen flex flex-col justify-center items-center">
-      <Card twClasses="p-20 m-10 shadow-lg space-y-5">
+      <Card twClasses="p-20 md:p-10 m-0 md:m-10 shadow-lg space-y-5 w-[35rem]">
         <h1 className="text-3xl text-center font-bold">Card Payment</h1>
         <form className="flex flex-col gap-5">
           <StyledInputRef
@@ -46,7 +46,7 @@ const Deposit = () => {
               name="CVV"
               type="text"
               placeholder="CVV"
-              twClasses="rounded-lg shadow-lg w-24"
+              twClasses="rounded-lg shadow-lg md:w-24"
             />
             <StyledInputRef
               ref={depositAmountRef}
