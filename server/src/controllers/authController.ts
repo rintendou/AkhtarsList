@@ -23,7 +23,7 @@ export const registerUser = async (req: Request, res: Response) => {
     // Clean the username by removing whitespaces
     const cleanedUsername = username.replace(/\s+/g, "") // '  hello world ' -> 'helloworld'
 
-    // Check if the username or the email already exists in the db
+    // Check if the username already exists in the db
     const existingUser = await UserModel.findOne({
       username: cleanedUsername,
     })
