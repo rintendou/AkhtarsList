@@ -1,4 +1,4 @@
-import StyledButton from "../../../ui/StyledButton"
+import StyledButton from "../../../../ui/StyledButton"
 
 const DepositButton = () => {
   return (
