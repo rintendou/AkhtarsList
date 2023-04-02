@@ -7,6 +7,7 @@ import useProfile from "../../../../../lib/hooks/useProfile"
 
 const Deposit = () => {
   const { depositFunds } = useProfile()
+  const navigate = useNavigate()
 
   const cardHolderRef = useRef<HTMLInputElement>(null)
   const cardNumberRef = useRef<HTMLInputElement>(null)
@@ -23,6 +24,7 @@ const Deposit = () => {
     event.preventDefault()
     const depositAmount = Number(depositAmountRef.current!.value)
     depositFunds(depositAmount)
+    navigate("/profile", { replace: true })
   }
 
   return (
