@@ -1,40 +1,40 @@
-import RouterLink from "../../../ui/RouterLink"
+import RouterLink from "../../ui/RouterLink"
 
-const CategoryHeader = () => {
+const SideNavLinks = () => {
   return (
-    <div className="bg-gray-200 flex justify-center gap-8 p-4">
+    <div className="p-5 flex flex-col gap-2 uppercase w-min">
       <RouterLink
         routerLinkText="Sneakers"
         to="/category/sneakers"
-        twClasses="text-xl"
+        twClasses="text-lg"
       />
       <RouterLink
         routerLinkText="Antiques"
         to="/category/antiques"
-        twClasses="text-xl"
+        twClasses="text-lg"
       />
       <RouterLink
         routerLinkText="Tech"
         to="/category/tech"
-        twClasses="text-xl"
+        twClasses="text-lg"
       />
       <RouterLink
         routerLinkText="Accessories"
         to="/category/accessories"
-        twClasses="text-xl"
+        twClasses="text-lg"
       />
       <RouterLink
         routerLinkText="Collectibles"
         to="/category/collectibles"
-        twClasses="text-xl"
+        twClasses="text-lg"
       />
       <RouterLink
         routerLinkText="Trending"
         to="/category/trending"
-        twClasses="text-xl"
+        twClasses="text-lg"
       />
     </div>
   )
 }
 
-export default CategoryHeader
+export default SideNavLinks
