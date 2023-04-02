@@ -2,7 +2,7 @@ import React from "react"
 
 type Props = {
   name: string
-  type: "text" | "email" | "password"
+  type: "text" | "email" | "password" | "number"
   placeholder: string
 }
 
