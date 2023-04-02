@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom"
 
 import Card from "../../ui/Card"
 import Error from "../../ui/Error"
-import StyledButton from "../../ui/StyledButton"
 import StyledInputRef from "../../ui/StyledInputRef"
 import RouterLink from "../../ui/RouterLink"
 
@@ -12,6 +11,7 @@ const RegisterForm = () => {
   // unnecessary re-renders of this component per each character typed
   const usernameRef = useRef<HTMLInputElement>(null)
   const passwordRef = useRef<HTMLInputElement>(null)
+  const confirmPasswordRef = useRef<HTMLInputElement>(null)
   const addressRef = useRef<HTMLInputElement>(null)
 
   const [isError, setIsError] = useState(false)
@@ -36,6 +36,7 @@ const RegisterForm = () => {
     const registerUser = async () => {
       const username = usernameRef.current!.value
       const password = passwordRef.current!.value
+      const confirmPassword = confirmPasswordRef.current!.value
       const address = addressRef.current!.value
 
       const response = await fetch(`http://localhost:5178/api/auth/register`, {
@@ -43,6 +44,7 @@ const RegisterForm = () => {
         body: JSON.stringify({
           username,
           password,
+          confirmPassword,
           address,
         }),
         headers: { "Content-Type": "application/json" },
@@ -79,6 +81,12 @@ const RegisterForm = () => {
           type="password"
           placeholder="Password"
           ref={passwordRef}
+        />
+        <StyledInputRef
+          name="Confirm Password"
+          type="password"
+          placeholder="Confirm Password"
+          ref={confirmPasswordRef}
         />
         <StyledInputRef
           name="Address"
