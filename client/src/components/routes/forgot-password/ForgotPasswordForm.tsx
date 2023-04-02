@@ -30,16 +30,19 @@ const ForgotPasswordForm = () => {
     // Prevent default behavior of reloading page on form submission
     e.preventDefault()
 
-    const registerUser = async () => {
+    const getSecurityQuestions = async () => {
       const username = usernameRef.current!.value
 
-      const response = await fetch(`http://localhost:5178/api/auth/register`, {
-        method: "POST",
-        body: JSON.stringify({
-          username,
-        }),
-        headers: { "Content-Type": "application/json" },
-      })
+      const response = await fetch(
+        `http://localhost:5178/api/auth/forgot-password`,
+        {
+          method: "POST",
+          body: JSON.stringify({
+            username,
+          }),
+          headers: { "Content-Type": "application/json" },
+        }
+      )
       const data = await response.json()
 
       if (!data.ok) {
@@ -54,7 +57,7 @@ const ForgotPasswordForm = () => {
       })
       console.log(data)
     }
-    registerUser()
+    getSecurityQuestions()
   }
 
   return (
