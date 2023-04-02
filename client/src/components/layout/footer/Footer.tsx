@@ -11,7 +11,7 @@ const Footer = () => {
           <>
             <RouterLink
               to="/app"
-              routerLinkText="App"
+              routerLinkText="Browse"
               twClasses="border p-2 border-main w-20 text-center"
             />
             <RouterLink
