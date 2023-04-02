@@ -1,6 +1,8 @@
-import { createContext, useState } from "react"
+import { createContext, useEffect, useState } from "react"
+import useAuth from "../hooks/useAuth"
 
 type initialContextType = {
+  address: string
   balance: number
   depositFunds: (amount: number) => void
   withdrawFunds: (amount: number) => void
@@ -11,6 +13,7 @@ type initialContextType = {
 }
 
 const initialContext = {
+  address: "",
   balance: 0,
   depositFunds: () => {},
   withdrawFunds: () => {},
@@ -23,8 +26,27 @@ const ProfileContextProvider = ({
 }: {
   children: React.ReactNode
 }) => {
-  const [balance, setBalance] = useState(initialContext.balance)
+  const { auth } = useAuth()
 
+  const [balance, setBalance] = useState(initialContext.balance)
+  const [address, setAddress] = useState("")
+
+  // Fetch user details
+  useEffect(() => {
+    const fetchUserDetails = async () => {
+      const { _id } = auth
+
+      const response = await fetch(`http://localhost:5178/api/user/${_id}`)
+      const data = await response.json()
+
+      setAddress(data.data.address)
+      setBalance(data.data.balance)
+    }
+
+    fetchUserDetails()
+  }, [balance, address])
+
+  // Deposit funds
   const depositFunds = (amount: number) => {
     const deposit = async () => {
       const response = await fetch("http://localhost:5178/api/user/deposit", {
@@ -45,6 +67,7 @@ const ProfileContextProvider = ({
     deposit()
   }
 
+  // Withdraw funds
   const withdrawFunds = (amount: number) => {
     const withdraw = async () => {
       const response = await fetch("http://localhost:5178/api/user/deposit", {
@@ -66,6 +89,7 @@ const ProfileContextProvider = ({
   }
 
   const contextValue = {
+    address,
     balance,
     depositFunds,
     withdrawFunds,
