@@ -57,14 +57,14 @@ export const createListing = async (req: Request, res: Response) => {
 }
 
 export const deleteListing = async (req: Request, res: Response) => {
-
+    
 }
 
 export const updateListing = async (req: Request, res: Response) => {
 
 }
 
-export const fetchListing = async (req: Request, res: Response) => {
+export const fetchListings = async (req: Request, res: Response) => {
 
 }    
 
