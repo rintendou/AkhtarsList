@@ -44,7 +44,7 @@ const Profile = () => {
         <StyledButton
           buttonText="Logout"
           onClick={logoutHandler}
-          twClasses="w-32"
+          twClasses="w-32 hover:bg-black"
         />
       </Card>
     </div>
