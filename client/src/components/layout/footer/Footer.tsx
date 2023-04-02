@@ -12,12 +12,12 @@ const Footer = () => {
             <RouterLink
               to="/app"
               routerLinkText="Browse"
-              twClasses="border p-2 border-main w-20 text-center"
+              twClasses="border p-2 border-main rounded-md w-20 text-center"
             />
             <RouterLink
               to="/profile"
               routerLinkText="Profile"
-              twClasses="border p-2 border-main w-20 text-center"
+              twClasses="border p-2 border-main rounded-md w-20 text-center"
             />
           </>
         ) : (
@@ -25,22 +25,22 @@ const Footer = () => {
             <RouterLink
               to="/"
               routerLinkText="Home"
-              twClasses="border p-2 border-main w-20 text-center"
+              twClasses="border p-2 border-main rounded-md w-20 text-center"
             />
             <RouterLink
               to="/login"
               routerLinkText="Login"
-              twClasses="border p-2 border-main w-20 text-center"
+              twClasses="border p-2 border-main rounded-md w-20 text-center"
             />
             <RouterLink
               to="/register"
               routerLinkText="Register"
-              twClasses="border p-2 border-main w-20 text-center"
+              twClasses="border p-2 border-main rounded-md w-20 text-center"
             />
             <RouterLink
               to="/dev"
               routerLinkText="Dev"
-              twClasses="border p-2 border-main w-20 text-center"
+              twClasses="border p-2 border-main rounded-md w-20 text-center"
             />
           </>
         )}
