@@ -1,6 +1,10 @@
+import CategoryHeader from "./CategoryHeader"
+
 const Application = () => {
   return (
-    <div className="min-h-screen flex flex-col justify-center">Main App</div>
+    <div className="min-h-screen flex flex-col">
+      <CategoryHeader />
+    </div>
   )
 }
 
