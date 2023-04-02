@@ -121,7 +121,7 @@ const ForgotPasswordForm = () => {
   }
 
   return (
-    <Card twClasses="w-[45rem] mx-auto p-20 border-4 border-secondary space-y-16">
+    <Card twClasses="w-[45rem] mx-auto p-20 border border-secondary space-y-16">
       <h1 className="text-4xl font-bold text-center">Reset Password</h1>
       {!didSubmit ? (
         <form className="flex flex-col" onSubmit={getSecurityQuestionsHandler}>
