@@ -1,0 +1,70 @@
+import { Request, Response } from "express"
+import ListingModel from "../models/Listing"
+
+export const createListing = async (req: Request, res: Response) => {
+    const {title, lister, desc, image, startPrice, expireAt, category, weight, dimensions} = req.body
+    
+    // Check if the required fields are filled in
+    if (!title || !lister || !desc || !startPrice || !expireAt || !weight || !dimensions) {
+        return res.status(400).json({
+            message: "Insufficent details.",
+            data: null,
+            ok: false
+        })
+    }
+
+    try {
+        const finalPrice = startPrice // Set final price to start price because that is technically the highest bid
+
+        /* 
+        WIP: Duplication Detection System, suggestions:
+        - string-similarity: This package provides various algorithms for comparing the similarity of two strings, such as the Jaro-Winkler distance or the Levenshtein distance. These algorithms can be useful for detecting duplicate listings based on their name, description, or other attributes.
+        - fuzzyset.js: This package provides a fuzzy string matching algorithm that can match similar strings even if they are not an exact match. It uses a technique called trigram matching, which compares substrings of three characters from the target string with those of the input string.
+        - node-cache: This package provides an in-memory cache for storing the results of previous duplicate detection checks. By caching the results, you can avoid performing the same check multiple times and improve the performance of your system.
+        - lodash: This package provides various utility functions for working with arrays, objects, and strings, which can be useful for implementing duplicate detection algorithms.
+        */
+
+        // Create listing object
+        const listing = new ListingModel({
+            title: title,
+            lister: lister,
+            desc: desc,
+            image: "",
+            bidders: [],
+            startPrice: startPrice,
+            expireAt: expireAt,
+            category: category,
+            weight: weight,
+            dimensions: dimensions
+        })
+
+        // Saving to DB
+        await listing.save()
+
+        // Return res
+        return res.status(200).json({
+            message: "Listing successfully created!",
+            data: listing,
+            ok: true
+        })
+    } catch (error) {
+        return res.status(500).json({
+            message: "Listing unsucessfully created!",
+            data: null,
+            ok: false
+        })   
+    }
+}
+
+export const deleteListing = async (req: Request, res: Response) => {
+
+}
+
+export const updateListing = async (req: Request, res: Response) => {
+
+}
+
+export const fetchListing = async (req: Request, res: Response) => {
+
+}    
+
