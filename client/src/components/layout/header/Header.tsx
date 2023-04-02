@@ -6,7 +6,7 @@ const Header = () => {
   const { auth } = useAuth()
 
   return (
-    <header className="p-8 flex flex-row justify-between items-center bg-secondary text-primary sticky top-0 gap-8">
+    <header className="p-8 flex flex-row justify-between items-center bg-secondary text-primary sticky top-0 gap-8 z-10">
       <RouterLink
         twClasses="text-2xl font-bold"
         routerLinkText="AkhtarsList"
@@ -19,12 +19,12 @@ const Header = () => {
             <RouterLink
               to="/app"
               routerLinkText="Browse"
-              twClasses="border p-2 border-main w-20 text-center"
+              twClasses="border p-2 border-main rounded-md w-20 text-center"
             />
             <RouterLink
               to="/profile"
               routerLinkText="Profile"
-              twClasses="border p-2 border-main w-20 text-center"
+              twClasses="border p-2 border-main rounded-md w-20 text-center"
             />
           </>
         ) : (
@@ -32,22 +32,22 @@ const Header = () => {
             <RouterLink
               to="/"
               routerLinkText="Home"
-              twClasses="border p-2 border-main w-20 text-center"
+              twClasses="border p-2 border-main rounded-md w-20 text-center"
             />
             <RouterLink
               to="/login"
               routerLinkText="Login"
-              twClasses="border p-2 border-main w-20 text-center"
+              twClasses="border p-2 border-main rounded-md w-20 text-center"
             />
             <RouterLink
               to="/register"
               routerLinkText="Register"
-              twClasses="border p-2 border-main w-20 text-center"
+              twClasses="border p-2 border-main rounded-md w-20 text-center"
             />
             <RouterLink
               to="/dev"
               routerLinkText="Dev"
-              twClasses="border p-2 border-main w-20 text-center"
+              twClasses="border p-2 border-main rounded-md w-20 text-center"
             />
           </>
         )}
