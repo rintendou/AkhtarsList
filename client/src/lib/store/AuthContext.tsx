@@ -7,15 +7,13 @@ type User = {
 
 type initialContextType = {
   auth: User
-  setAuth: React.Dispatch<React.SetStateAction<User>>
-  login: (username: string, _id: string) => void
+  login: (_id: string, username: string) => void
   logout: () => void
 }
 
 const initialContext = {
   auth: { username: "", _id: "" },
-  setAuth: () => {},
-  login: (username: string, _id: string) => {},
+  login: (_id: string, username: string) => {},
   logout: () => {},
 }
 
@@ -36,7 +34,7 @@ const AuthContextProvider = ({ children }: { children: ReactNode }) => {
     }
   }, [])
 
-  const login = (username: string, _id: string) => {
+  const login = (_id: string, username: string) => {
     setAuth({ username, _id })
     localStorage.setItem("_id", _id)
     localStorage.setItem("username", username)
@@ -49,7 +47,7 @@ const AuthContextProvider = ({ children }: { children: ReactNode }) => {
   }
 
   return (
-    <AuthContext.Provider value={{ auth, setAuth, login, logout }}>
+    <AuthContext.Provider value={{ auth, login, logout }}>
       {children}
     </AuthContext.Provider>
   )
