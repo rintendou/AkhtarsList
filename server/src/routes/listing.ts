@@ -1,7 +1,7 @@
 import express from 'express'
 
 // auth controller
-import { createListing, deleteListing, updateListing, fetchListing } from '../controllers/listingController'
+import { createListing, deleteListing, updateListing, fetchListings } from '../controllers/listingController'
 
 const ListingRoute = express.Router()
 
@@ -15,6 +15,6 @@ ListingRoute.delete('/delete', deleteListing)
 ListingRoute.put('/edit', updateListing)
 
 // Fetch all listings
-ListingRoute.get('/fetch', fetchListing)
+ListingRoute.get('/fetch', fetchListings)
 
 export default ListingRoute
