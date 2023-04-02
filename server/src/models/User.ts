@@ -32,7 +32,7 @@ const UserSchema = new Schema(
       required: true,
     },
     balance: {
-      type: String,
+      type: Number,
       required: true,
     },
     biddedListings: {

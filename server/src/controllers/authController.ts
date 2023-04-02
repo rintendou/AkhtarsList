@@ -105,7 +105,7 @@ export const loginUser = async (req: Request, res: Response) => {
 
   try {
     const user = await UserModel.findOne({
-      username: req.body.username,
+      username,
     })
 
     if (!user)
