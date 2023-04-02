@@ -108,3 +108,37 @@ export const loginUser = async (req: Request, res: Response) => {
     return res.status(500).json({ message: error, data: null, ok: false })
   }
 }
+
+export const forgotPassword = async (req: Request, res: Response) => {
+  // destructure the payload attached to the body
+  const { username } = req.body
+
+  // Check if appropriate payload is attached to the body
+  if (!username) {
+    return res.status(400).json({
+      message: "username property is required!",
+      data: null,
+      ok: false,
+    })
+  }
+
+  try {
+    // Check if the username already exists in the db
+    const existingUser = await UserModel.findOne({
+      username: username,
+    })
+    if (!existingUser) {
+      return res
+        .status(400)
+        .json({ message: "User does not exist!", data: null, ok: false })
+    }
+
+    res.status(200).json({
+      message: "Security questions successfully fetched!",
+      data: existingUser.securityQuestion,
+      ok: true,
+    })
+  } catch (error) {
+    res.status(500).json({ message: error, data: null, ok: false })
+  }
+}

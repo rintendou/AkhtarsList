@@ -19,6 +19,14 @@ const UserSchema = new Schema(
       required: true,
       min: 6,
     },
+    securityQuestion: {
+      type: String,
+      required: true,
+    },
+    securityQuestionAnswer: {
+      type: String,
+      required: true,
+    },
     address: {
       type: String,
       required: true,
