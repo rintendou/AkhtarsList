@@ -2,6 +2,7 @@ import useAuth from "../../../../lib/hooks/useAuth"
 import useProfile from "../../../../lib/hooks/useProfile"
 
 import Card from "../../../ui/Card"
+import ListingCard from "../../../ui/ListingCard"
 import ProfileActions from "./profile-actions/ProfileActions"
 
 const Profile = () => {
@@ -20,6 +21,13 @@ const Profile = () => {
         </div>
         <ProfileActions logout={logout} />
       </Card>
+      <ListingCard
+        img="test"
+        title="Dummy Title"
+        price={100}
+        timeRemaining={new Date()}
+        views={69}
+      />
     </div>
   )
 }
