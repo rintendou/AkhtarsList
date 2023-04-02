@@ -4,9 +4,9 @@
 
 input:focus-within ~ label,
 input:not(:placeholder-shown) ~ label {
-  @apply transform scale-75 -translate-y-6;
+  @apply transform scale-75 -translate-y-4;
 }
 
 input:focus-within ~ label {
-  @apply text-blue-900;
+  @apply text-gray-900;
 }

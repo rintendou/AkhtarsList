@@ -71,8 +71,8 @@ const LoginForm = ({ didRegisterSuccessfully, successMessage }: Props) => {
 
   return (
     <Card twClasses="w-[45rem] mx-auto p-20 border-4 border-secondary space-y-16 flex flex-col justify-center">
-      <h1 className="text-4xl font-bold text-center">Login</h1>
-      <form className="flex flex-col" onSubmit={loginUserHandler}>
+      <h1 className="text-4xl font-bold text-center">Log In</h1>
+      <form className="flex flex-col gap-5" onSubmit={loginUserHandler}>
         <StyledInputRef
           name="Username"
           type="text"
@@ -84,6 +84,11 @@ const LoginForm = ({ didRegisterSuccessfully, successMessage }: Props) => {
           type="password"
           placeholder="Password"
           ref={passwordRef}
+        />
+        <RouterLink
+          routerLinkText="Forgot Password?"
+          twClasses="text-xs ml-auto"
+          to="/forgot-password"
         />
         <LoginButton />
       </form>
@@ -104,10 +109,10 @@ export default LoginForm
 const LoginButton = () => {
   return (
     <button
-      className={`px-4 py-2 rounded-lg hover:scale-105 duration-200 ease-in-out bg-secondary text-primary font-bold text-xl`}
+      className={`p-4 rounded-lg duration-200 hover:bg-black ease-in-out bg-secondary text-primary font-bold text-sm`}
       type="submit"
     >
-      Login
+      Log In
     </button>
   )
 }

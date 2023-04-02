@@ -8,6 +8,7 @@ import PageNotFound from "./components/routes/page-not-found/PageNotFound"
 import Login from "./components/routes/login/Login"
 import Register from "./components/routes/register/Register"
 import Profile from "./components/routes/profile/Profile"
+import ForgotPassword from "./components/routes/forgot-password/ForgotPassword"
 
 // Components
 import Body from "./components/layout/body/Body"
@@ -25,6 +26,7 @@ function App() {
           <Route path="/" element={<LandingPage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/dev" element={<Dev />} />
 
           {/* Protected Routes */}
