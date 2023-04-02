@@ -70,7 +70,7 @@ const LoginForm = ({ didRegisterSuccessfully, successMessage }: Props) => {
   }
 
   return (
-    <Card twClasses="w-[45rem] mx-auto p-20 border-4 border-secondary space-y-16 flex flex-col justify-center">
+    <Card twClasses="w-[45rem] mx-auto p-20 border border-secondary space-y-16 flex flex-col justify-center">
       <h1 className="text-4xl font-bold text-center">Log In</h1>
       <form className="flex flex-col gap-5" onSubmit={loginUserHandler}>
         <StyledInputRef

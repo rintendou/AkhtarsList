@@ -33,7 +33,7 @@ const Profile = () => {
 
   return (
     <div className="min-h-screen flex flex-col justify-center items-center">
-      <Card twClasses="h-96 p-10 w-full flex flex-col justify-between items-center">
+      <Card twClasses="h-96 p-10 w-full flex flex-col md:flex-row justify-between items-center">
         <div className="space-y-10">
           <h1 className="text-4xl font-bold">{auth.username}</h1>
           <div>
@@ -41,11 +41,26 @@ const Profile = () => {
             <h2 className="text-lg">Balance: ${balance}</h2>
           </div>
         </div>
-        <StyledButton
-          buttonText="Logout"
-          onClick={logoutHandler}
-          twClasses="w-32"
-        />
+        <div className="flex flex-col gap-5">
+          <div className="flex gap-5">
+            <StyledButton
+              buttonText="Deposit"
+              onClick={() => {}}
+              twClasses="w-32 hover:bg-black"
+            />
+            <StyledButton
+              buttonText="Withdraw"
+              onClick={() => {}}
+              twClasses="w-32"
+              intent="secondary"
+            />
+          </div>
+          <StyledButton
+            buttonText="Logout"
+            onClick={logoutHandler}
+            twClasses="w-32 hover:bg-black w-full"
+          />
+        </div>
       </Card>
     </div>
   )
