@@ -8,5 +8,5 @@ input:not(:placeholder-shown) ~ label {
 }
 
 input:focus-within ~ label {
-  @apply text-blue-900;
+  @apply text-gray-900;
 }
