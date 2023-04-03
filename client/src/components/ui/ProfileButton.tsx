@@ -1,19 +1,16 @@
 type Props = {
   children: React.ReactNode
   onClick: () => void
-  buttonText: String
   twClasses?: string
-  type?: "button" | "submit"
 }
 
-const ProfileButton = ({
-  children,
-  onClick,
-  twClasses,
-  type = "button",
-}: Props) => {
+const ProfileButton = ({ children, onClick, twClasses }: Props) => {
   return (
-    <button onClick={onClick} className={`${twClasses} px-4 py-2`} type={type}>
+    <button
+      onClick={onClick}
+      className={`${twClasses} px-4 py-2`}
+      type="button"
+    >
       {children}
     </button>
   )
