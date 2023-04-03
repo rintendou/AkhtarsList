@@ -18,10 +18,8 @@ const ProfileActions = ({ logout }: Props) => {
 
   return (
     <div className="flex flex-col gap-5 border-2 p-5 rounded-md">
-      <div className="flex gap-5">
-        <DepositButton />
-        <WithdrawButton />
-      </div>
+      <DepositButton />
+      <WithdrawButton />
       <StyledButton
         buttonText="Logout"
         onClick={logoutHandler}
