@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom"
 
 import StyledButton from "../../../../ui/StyledButton"
-import ProfileButton from "../../../../ui/ProfileButton"
+import ProfileButton from "./ProfileButton"
 
 type Props = {
   logout: () => void
@@ -17,8 +17,10 @@ const ProfileActions = ({ logout }: Props) => {
 
   return (
     <div className="hidden md:flex flex-col gap-5 border-2 p-5 rounded-md">
-      <StyledButton buttonText="Logout" onClick={logoutHandler} twClasses="" />
-      <ProfileButton>
+      <ProfileButton onClick={logoutHandler}>
+        <h1 className="font-bold text-lg">Logout</h1>
+      </ProfileButton>
+      <ProfileButton onClick={() => navigate("")}>
         <svg
           stroke="currentColor"
           fill="currentColor"
