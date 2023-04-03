@@ -11,7 +11,7 @@ const Profile = () => {
   const { balance, address } = useProfile()
 
   return (
-    <div className="min-h-screen flex flex-col items-center">
+    <div className="flex flex-col items-center">
       <div className="space-y-10">
         <h1 className="text-4xl font-bold">{auth.username}</h1>
         <div>

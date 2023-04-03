@@ -21,6 +21,7 @@ import Header from "./components/layout/header/Header"
 
 // Navguard
 import RequireAuth from "./components/routes/protected/RequireAuth"
+import ProfileLayout from "./components/routes/protected/ProfileLayout"
 
 function App() {
   return (
@@ -40,9 +41,12 @@ function App() {
           {/* Protected Routes */}
           <Route element={<RequireAuth />}>
             <Route path="/app" element={<Application />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/deposit" element={<Deposit />} />
-            <Route path="/withdraw" element={<Withdraw />} />
+
+            <Route element={<ProfileLayout />}>
+              <Route path="/profile" element={<Profile />} />
+              <Route path="/deposit" element={<Deposit />} />
+              <Route path="/withdraw" element={<Withdraw />} />
+            </Route>
           </Route>
 
           {/* Catch-All Route */}

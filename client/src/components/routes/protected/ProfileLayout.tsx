@@ -7,7 +7,7 @@ const ProfileLayout = () => {
   const { logout } = useAuth()
   return (
     <div className="flex">
-      <div className="bg-blue-100 h-full w-full flex flex-col md:flex-row justify-around items-center">
+      <div className="min-h-screen bg-gray-200 flex flex-col mr-5 py-5">
         <ProfileActions logout={logout} />
       </div>
       <Outlet />
