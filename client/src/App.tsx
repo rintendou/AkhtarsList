@@ -41,8 +41,8 @@ function App() {
           <Route element={<RequireAuth />}>
             <Route path="/app" element={<Application />} />
             <Route path="/profile" element={<Profile />} />
-            <Route path="/payments/deposit" element={<Deposit />} />
-            <Route path="/payments/withdraw" element={<Withdraw />} />
+            <Route path="/deposit" element={<Deposit />} />
+            <Route path="/withdraw" element={<Withdraw />} />
           </Route>
 
           {/* Catch-All Route */}
