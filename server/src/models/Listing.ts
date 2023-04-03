@@ -7,17 +7,52 @@ const ObjectId = mongoose.Types.ObjectId
 // Setting up Schema of Lsting
 const ListingSchema = new Schema(
     {
-        bidders: {},
-        lister: {},
-        title: {},
-        desc: {},
-        startPrice: {},
-        currPrice: {},
-        endDateAndTime: {},
-        views: {},
-        category: {},
-        weight: {},
-        dimensions: {},
+        title: {
+            type: String,
+            required: true,
+        },
+        lister: {
+            type: ObjectId,
+            ref: "User",
+            required: true,
+        },
+        desc: {
+            type: String,
+            required: true,
+        },
+        image: {
+
+        },
+        bidders: {
+            type: [ObjectId],
+            ref: "User"
+        },
+        startPrice: {
+            type: Number,
+            required: true,
+        },
+        currPrice: {
+            type: Number,
+            required: true,
+        },
+        expireAt: {
+            type: Date,
+            required: true,
+        },
+        views: {
+            type: Number,
+        },
+        category: {
+            type: String,
+        },
+        weight: {
+            type: Number,
+            required: true
+        },
+        dimensions: {
+            type: [Number],
+            required: true
+        },
     },
     { timestamps: true }
 )
