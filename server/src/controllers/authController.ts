@@ -55,7 +55,7 @@ export const registerUser = async (req: Request, res: Response) => {
 
     // Check if the username already exists in the db
     const existingUser = await UserModel.findOne({
-      username: cleanedUsername,
+      username: cleanedUsername.toLowerCase(),
     })
     if (existingUser) {
       return res
@@ -65,7 +65,7 @@ export const registerUser = async (req: Request, res: Response) => {
 
     // Creating new User
     const user = new UserModel({
-      username: cleanedUsername,
+      username: cleanedUsername.toLowerCase(),
       password: hashedPassword,
       address,
       balance: 0,
