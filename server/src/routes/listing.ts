@@ -9,10 +9,10 @@ const ListingRoute = express.Router()
 ListingRoute.post('/post', createListing)
 
 // Delete listing
-ListingRoute.delete('/delete', deleteListing)
+ListingRoute.delete('/delete/:listingId', deleteListing)
 
 // Update listing
-ListingRoute.put('/edit', updateListing)
+ListingRoute.put('/edit/:listingId', updateListing)
 
 // Fetch all listings
 ListingRoute.get('/fetch', fetchListings)
