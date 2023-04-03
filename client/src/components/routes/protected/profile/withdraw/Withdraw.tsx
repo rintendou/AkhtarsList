@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from "react"
-import { useNavigate } from "react-router-dom"
 import useProfile from "../../../../../lib/hooks/useProfile"
 
 import Card from "../../../../ui/Card"
@@ -12,8 +11,6 @@ const Withdraw = () => {
   const { balance, withdrawFunds } = useProfile()
 
   const withdrawFundsRef = useRef<HTMLInputElement>(null)
-
-  const navigate = useNavigate()
 
   // Focus on input element on component mount
   useEffect(() => {
@@ -35,7 +32,8 @@ const Withdraw = () => {
     }
 
     withdrawFunds(Number(depositAmount))
-    navigate("/profile", { replace: true })
+    withdrawFundsRef.current!.value = ""
+    withdrawFundsRef.current!.focus()
   }
 
   return (
