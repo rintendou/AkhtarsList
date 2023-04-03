@@ -1,15 +1,17 @@
-import { Request, Response } from "express"
-import ListingModel from "../models/Listing"
+import { Request, Response } from 'express'
+import ListingModel from '../models/Listing'
+import mongoose from 'mongoose'
+import UserModel from '../models/User'
 
 export const createListing = async (req: Request, res: Response) => {
-    const {title, lister, desc, image, startPrice, expireAt, category, weight, dimensions} = req.body
-    
+    const { title, lister, desc, image, startPrice, expireAt, category, weight, dimensions } = req.body
+
     // Check if the required fields are filled in
     if (!title || !lister || !desc || !startPrice || !expireAt || !weight || !dimensions) {
         return res.status(400).json({
-            message: "Insufficent details.",
+            message: 'Insufficent details.',
             data: null,
-            ok: false
+            ok: false,
         })
     }
 
@@ -29,13 +31,13 @@ export const createListing = async (req: Request, res: Response) => {
             title: title,
             lister: lister,
             desc: desc,
-            image: "",
+            image: '',
             bidders: [],
             startPrice: startPrice,
             expireAt: expireAt,
             category: category,
             weight: weight,
-            dimensions: dimensions
+            dimensions: dimensions,
         })
 
         // Saving to DB
@@ -43,28 +45,55 @@ export const createListing = async (req: Request, res: Response) => {
 
         // Return res
         return res.status(200).json({
-            message: "Listing successfully created!",
+            message: 'Listing successfully created!',
             data: listing,
-            ok: true
+            ok: true,
         })
     } catch (error) {
         return res.status(500).json({
-            message: "Listing unsucessfully created!",
+            message: 'Listing unsucessfully created!',
             data: null,
-            ok: false
-        })   
+            ok: false,
+        })
     }
 }
 
 export const deleteListing = async (req: Request, res: Response) => {
-    
+    // param == _id of listing
+    // Check if User is the owner of the listing || admin
+    // TRUE -> Delete
+    // FALSE -> Throw error
+
+    const listingId = req.params.listingId
+    const lister = req.body.userId
+
+    const listing = await ListingModel.findById(listingId)
+
+    // If the listing's lister does not match with the userId, then user is trying to manipulate a listing that is not theirs
+    if (!listing?.lister == lister) {
+        return res.status(400).json({
+            message: "You can't delete a listing that is not yours!",
+            data: null,
+            ok: false,
+        })
+    }
+
+    try {
+        await ListingModel.findByIdAndDelete(listingId)
+        return res.status(200).json({
+            message: `Sucessfully deleted listing ${listingId}`,
+            data: listing,
+            ok: true,
+        })
+    } catch (error) {
+        return res.status(500).json({
+            message: error,
+            data: null,
+            ok: false,
+        })
+    }
 }
 
-export const updateListing = async (req: Request, res: Response) => {
+export const updateListing = async (req: Request, res: Response) => {}
 
-}
-
-export const fetchListings = async (req: Request, res: Response) => {
-
-}    
-
+export const fetchListings = async (req: Request, res: Response) => {}
