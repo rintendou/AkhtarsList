@@ -4,9 +4,11 @@ import useProfile from "../../../../../lib/hooks/useProfile"
 import Card from "../../../../ui/Card"
 import StyledInputRef from "../../../../ui/StyledInputRef"
 import Error from "../../../../ui/Error"
+import Success from "../../../../ui/Success"
 
 const Deposit = () => {
   const [error, setError] = useState("")
+  const [success, setSuccess] = useState("")
 
   const { depositFunds } = useProfile()
 
@@ -33,6 +35,8 @@ const Deposit = () => {
     depositFunds(Number(depositAmount))
     depositAmountRef.current!.value = ""
     cardHolderRef.current!.focus()
+    setError("")
+    setSuccess("Funds Deposited Successfully!")
   }
 
   return (
@@ -79,6 +83,7 @@ const Deposit = () => {
           </div>
           <DepositNowButton />
         </form>
+        {!error && success && <Success successMessage={success} />}
         {error && <Error errorMessage={error} />}
       </Card>
     </div>
