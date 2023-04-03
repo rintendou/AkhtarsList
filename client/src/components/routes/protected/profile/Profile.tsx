@@ -1,8 +1,8 @@
 import useAuth from "../../../../lib/hooks/useAuth"
 import useProfile from "../../../../lib/hooks/useProfile"
 
-import Card from "../../../ui/Card"
 import ListingCard from "../../../ui/ListingCard"
+import ListingCardSkeleton from "../../../ui/ListingCardSkeleton"
 import Biddings from "./biddings/Biddings"
 import Listings from "./listings/Listings"
 import ProfileActions from "./profile-actions/ProfileActions"
@@ -23,7 +23,6 @@ const Profile = () => {
         </div>
         <ProfileActions logout={logout} />
       </div>
-
       <Listings />
       <Biddings />
 
@@ -35,6 +34,8 @@ const Profile = () => {
         timeRemaining="10 days"
         views={69}
       />
+
+      <ListingCardSkeleton />
     </div>
   )
 }
