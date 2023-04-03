@@ -1,22 +1,43 @@
 import { createContext, useEffect, useState } from "react"
 import useAuth from "../hooks/useAuth"
 
+type UserType = {
+  username: string
+}
+
+type ListingType = {
+  image: string
+  bidders: UserType[]
+  lister: UserType
+  title: string
+  desc: string
+  startPrice: number
+  finalPrice: number
+  expireAt: number
+  views: number
+  category: string
+  weight: number
+  dimensions: number[]
+}
+
 type initialContextType = {
   address: string
   balance: number
   depositFunds: (amount: number) => void
   withdrawFunds: (amount: number) => void
-  //   listings: []
-  //   biddings: []
+  listings: ListingType[]
+  biddings: ListingType[]
   //   wonListings: []
   //   disputedListings: []
 }
 
-const initialContext = {
+const initialContext: initialContextType = {
   address: "",
   balance: 0,
   depositFunds: () => {},
   withdrawFunds: () => {},
+  listings: [],
+  biddings: [],
 }
 
 const ProfileContext = createContext<initialContextType>(initialContext)
@@ -31,6 +52,9 @@ const ProfileContextProvider = ({
 
   const [balance, setBalance] = useState(initialContext.balance)
   const [address, setAddress] = useState("")
+
+  const [biddings, setBiddings] = useState<ListingType[]>([])
+  const [listings, setListings] = useState<ListingType[]>([])
 
   // Fetch user details
   useEffect(() => {
@@ -94,6 +118,8 @@ const ProfileContextProvider = ({
     balance,
     depositFunds,
     withdrawFunds,
+    biddings,
+    listings,
   }
 
   return (
