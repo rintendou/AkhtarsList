@@ -1,8 +1,8 @@
 import useAuth from "../../../../lib/hooks/useAuth"
 import useProfile from "../../../../lib/hooks/useProfile"
 
-import Card from "../../../ui/Card"
 import ListingCard from "../../../ui/ListingCard"
+import ListingCardSkeleton from "../../../ui/ListingCardSkeleton"
 import Biddings from "./biddings/Biddings"
 import Listings from "./listings/Listings"
 import ProfileActions from "./profile-actions/ProfileActions"
@@ -13,15 +13,16 @@ const Profile = () => {
 
   return (
     <div className="min-h-screen flex flex-col items-center">
-      <div className="h-96 p-10 w-full flex flex-col md:flex-row justify-around items-center">
-        <div className="space-y-10">
-          <h1 className="text-4xl font-bold">{auth.username}</h1>
-          <div>
-            <h2 className="text-lg">Address: {address}</h2>
-            <h2 className="text-lg">Balance: ${balance}</h2>
-          </div>
-        </div>
+      <div className="bg-blue-100 h-96 p-10 w-full flex flex-col md:flex-row justify-around items-center">
         <ProfileActions logout={logout} />
+      </div>
+
+      <div className="space-y-10">
+        <h1 className="text-4xl font-bold">{auth.username}</h1>
+        <div>
+          <h2 className="text-lg">Address: {address}</h2>
+          <h2 className="text-lg">Balance: ${balance}</h2>
+        </div>
       </div>
 
       <Listings />
@@ -35,6 +36,8 @@ const Profile = () => {
         timeRemaining="10 days"
         views={69}
       />
+
+      <ListingCardSkeleton />
     </div>
   )
 }
