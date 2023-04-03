@@ -2,6 +2,7 @@ import Card from "../../ui/Card"
 import Error from "../../ui/Error"
 import ListingCard from "../../ui/ListingCard"
 import ListingCardSkeleton from "../../ui/ListingCardSkeleton"
+import LoadingSpinner from "../../ui/LoadingSpinner"
 import Overview from "../../ui/Overview"
 import RouterLink from "../../ui/RouterLink"
 import StyledButton from "../../ui/StyledButton"
@@ -10,7 +11,7 @@ import Success from "../../ui/Success"
 
 const Dev = () => {
   return (
-    <div className="space-y-20 max-w-xl mx-auto">
+    <div className="space-y-20 max-w-xl mx-auto p-10">
       <Overview>
         <h1 className="text-3xl font-bold">
           This route is for dev purposes only. This route shows the ui elements
@@ -59,6 +60,8 @@ const Dev = () => {
 
         <ListingCardSkeleton />
       </div>
+
+      <LoadingSpinner />
     </div>
   )
 }

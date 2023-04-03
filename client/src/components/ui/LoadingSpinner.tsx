@@ -1,7 +1,7 @@
-const Loading = () => {
+const LoadingSpinner = () => {
   return (
     <svg
-      className="animate-spin"
+      className="animate-spin text-tertiary"
       stroke="currentColor"
       fill="currentColor"
       strokeWidth="0"
@@ -16,4 +16,4 @@ const Loading = () => {
   )
 }
 
-export default Loading
+export default LoadingSpinner
