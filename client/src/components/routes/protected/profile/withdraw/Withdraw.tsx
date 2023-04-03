@@ -23,7 +23,7 @@ const Withdraw = () => {
     event.preventDefault()
     const depositAmount = withdrawFundsRef.current!.value
 
-    if (isNaN(Number(depositAmount))) {
+    if (isNaN(Number(depositAmount)) || depositAmount.length === 0) {
       setError("Invalid Input!")
       return
     }
@@ -42,7 +42,7 @@ const Withdraw = () => {
 
   return (
     <div className="w-full flex flex-col justify-center items-center">
-      <Card twClasses="p-20 md:p-10 m-0 md:m-10 shadow-lg space-y-5 w-[45rem]">
+      <Card twClasses="p-20 md:p-10 m-0 md:m-10 shadow-lg space-y-5 w-[35rem]">
         <h1 className="text-3xl text-center font-bold">Current Balance:</h1>
         <p className="text-center text-3xl">${balance}</p>
         <form
@@ -54,7 +54,7 @@ const Withdraw = () => {
             name="Withdraw Amount"
             type="text"
             placeholder="Withdraw Amount"
-            twClasses="rounded-lg shadow-lg flex-grow"
+            twClasses="rounded-lg shadow-lg"
           />
           <WithdrawNowButton />
         </form>{" "}
@@ -70,7 +70,7 @@ export default Withdraw
 const WithdrawNowButton = () => {
   return (
     <button
-      className={`p-4 py-2 rounded-lg duration-200 hover:bg-black ease-in-out bg-secondary text-primary font-bold text-lg shadow-xl flex-grow`}
+      className={`p-4 py-2 rounded-lg duration-200 hover:bg-black ease-in-out bg-secondary text-primary font-bold text-lg shadow-xl w-[50%]`}
       type="submit"
     >
       Withdraw Now
