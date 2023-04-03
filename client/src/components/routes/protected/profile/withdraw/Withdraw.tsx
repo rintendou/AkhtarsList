@@ -36,10 +36,8 @@ const Withdraw = () => {
   return (
     <div className="w-full flex flex-col justify-center items-center">
       <Card twClasses="p-20 md:p-10 m-0 md:m-10 shadow-lg space-y-5 w-[45rem]">
-        <h1 className="text-6xl text-center font-bold">
-          Current Balance: ${`${balance}`}
-        </h1>
-        <h1 className="text-3xl text-center font-bold">Funds Withdraw</h1>
+        <h1 className="text-6xl text-center font-bold">Current Balance:</h1>
+        <p className="text-center text-3xl">${balance}</p>
         <form
           className="flex gap-5 justify-between"
           onSubmit={withdrawFundsHandler}
