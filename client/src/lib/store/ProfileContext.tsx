@@ -64,6 +64,8 @@ const ProfileContextProvider = ({
 
       setAddress(data.data.address)
       setBalance(data.data.balance)
+      setBiddings(data.data.biddings)
+      setListings(data.data.listings)
     }
 
     fetchUserDetails()
