@@ -1,6 +1,5 @@
 import { useNavigate } from "react-router-dom"
 
-import StyledButton from "../../../../ui/StyledButton"
 import ProfileButton from "./ProfileButton"
 import ProfileRouterLink from "./ProfileRouterLink"
 
@@ -40,7 +39,7 @@ const ProfileActions = ({ logout }: Props) => {
         </div>
       </ProfileRouterLink>
 
-      <ProfileRouterLink to="/deposits">
+      <ProfileRouterLink to="/deposit">
         <svg
           className="mr-4"
           stroke="currentColor"
@@ -59,7 +58,7 @@ const ProfileActions = ({ logout }: Props) => {
         </div>
       </ProfileRouterLink>
 
-      <ProfileRouterLink to="/deposits">
+      <ProfileRouterLink to="/withdraw">
         <svg
           className="mr-4"
           stroke="currentColor"
