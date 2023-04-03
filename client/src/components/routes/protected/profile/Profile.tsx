@@ -13,7 +13,7 @@ const Profile = () => {
 
   return (
     <div className="min-h-screen flex flex-col items-center">
-      <div className="bg-gray-200 h-96 p-10 w-full flex flex-col md:flex-row justify-around items-center">
+      <div className="bg-blue-100 h-96 p-10 w-full flex flex-col md:flex-row justify-around items-center">
         <ProfileActions logout={logout} />
       </div>
 
