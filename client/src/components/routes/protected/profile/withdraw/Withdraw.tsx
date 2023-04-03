@@ -4,9 +4,11 @@ import useProfile from "../../../../../lib/hooks/useProfile"
 import Card from "../../../../ui/Card"
 import StyledInputRef from "../../../../ui/StyledInputRef"
 import Error from "../../../../ui/Error"
+import Success from "../../../../ui/Success"
 
 const Withdraw = () => {
   const [error, setError] = useState("")
+  const [success, setSuccess] = useState("")
 
   const { balance, withdrawFunds } = useProfile()
 
@@ -34,6 +36,8 @@ const Withdraw = () => {
     withdrawFunds(Number(depositAmount))
     withdrawFundsRef.current!.value = ""
     withdrawFundsRef.current!.focus()
+    setError("")
+    setSuccess("Funds Withdrawn Successfully!")
   }
 
   return (
@@ -53,7 +57,8 @@ const Withdraw = () => {
             twClasses="rounded-lg shadow-lg flex-grow"
           />
           <WithdrawNowButton />
-        </form>
+        </form>{" "}
+        {!error && success && <Success successMessage={success} />}
         {error && <Error errorMessage={error} />}
       </Card>
     </div>
