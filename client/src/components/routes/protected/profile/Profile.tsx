@@ -5,24 +5,28 @@ import ListingCard from "../../../ui/ListingCard"
 import ListingCardSkeleton from "../../../ui/ListingCardSkeleton"
 import Biddings from "./biddings/Biddings"
 import Listings from "./listings/Listings"
-import ProfileActions from "./profile-actions/ProfileActions"
 
 const Profile = () => {
-  const { auth, logout } = useAuth()
+  const { auth } = useAuth()
   const { balance, address } = useProfile()
 
   return (
-    <div className="min-h-screen flex flex-col items-center">
-      <div className="bg-blue-100 h-96 p-10 w-full flex flex-col md:flex-row justify-around items-center">
-        <ProfileActions logout={logout} />
+    <div className="flex flex-col w-full p-5 space-y-10 text-xl">
+      <h1 className="text-4xl font-bold pb-5 border-b-2 w-full">Profile</h1>
+
+      <div>
+        <h1 className="font-bold">Username</h1>
+        <p>{auth.username}</p>
       </div>
 
-      <div className="space-y-10">
-        <h1 className="text-4xl font-bold">{auth.username}</h1>
-        <div>
-          <h2 className="text-lg">Address: {address}</h2>
-          <h2 className="text-lg">Balance: ${balance}</h2>
-        </div>
+      <div>
+        <h1 className="font-bold">Address</h1>
+        <p>{address}</p>
+      </div>
+
+      <div>
+        <h1 className="font-bold">Balance</h1>
+        <p>${balance}</p>
       </div>
 
       <Listings />

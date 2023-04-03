@@ -16,7 +16,7 @@ const ProfileActions = ({ logout }: Props) => {
   }
 
   return (
-    <div className="hidden md:flex flex-col p-5 rounded-md">
+    <div className="hidden md:flex flex-col rounded-md">
       <ProfileRouterLink to="/profile">
         <svg
           className="mr-4"
