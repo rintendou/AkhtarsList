@@ -2,7 +2,7 @@ import Card from "./Card"
 
 const ListingCardSkeleton = () => {
   return (
-    <Card twClasses="p-2 w-56 text-sm h-76 flex flex-col justify-between cursor-not-allowed opacity-50">
+    <Card twClasses="p-2 w-56 h-76 flex flex-col justify-between cursor-not-allowed opacity-50">
       <div className="h-36 w-auto rounded-md bg-gray-400 animate-pulse mb-2"></div>
       <div className="space-y-2">
         <div className="h-4 bg-gray-400 rounded w-3/4 animate-pulse"></div>
