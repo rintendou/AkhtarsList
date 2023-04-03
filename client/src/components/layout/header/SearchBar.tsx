@@ -43,7 +43,7 @@ const SearchBar = () => {
       <input
         type="text"
         placeholder="Search..."
-        className="border bg-primary h-10 pl-8 pr-10 text-sm focus:outline-none focus:border-gray-500 text-black w-full max-w-lg"
+        className="border bg-primary h-10 pl-8 pr-10 text-sm focus:outline-none focus:border-gray-500 text-black w-full max-w-lg rounded-lg"
         value={query}
         onChange={handleInputChange}
       />
