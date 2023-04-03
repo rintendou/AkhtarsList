@@ -5,18 +5,13 @@ import ListingCard from "../../../ui/ListingCard"
 import ListingCardSkeleton from "../../../ui/ListingCardSkeleton"
 import Biddings from "./biddings/Biddings"
 import Listings from "./listings/Listings"
-import ProfileActions from "./profile-actions/ProfileActions"
 
 const Profile = () => {
-  const { auth, logout } = useAuth()
+  const { auth } = useAuth()
   const { balance, address } = useProfile()
 
   return (
     <div className="min-h-screen flex flex-col items-center">
-      <div className="bg-blue-100 h-96 p-10 w-full flex flex-col md:flex-row justify-around items-center">
-        <ProfileActions logout={logout} />
-      </div>
-
       <div className="space-y-10">
         <h1 className="text-4xl font-bold">{auth.username}</h1>
         <div>
