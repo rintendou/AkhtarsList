@@ -27,7 +27,7 @@ const Deposit = () => {
     event.preventDefault()
     const depositAmount = depositAmountRef.current!.value
 
-    if (isNaN(Number(depositAmount))) {
+    if (isNaN(Number(depositAmount)) || depositAmount.length === 0) {
       setError("Invalid Input!")
       return
     }

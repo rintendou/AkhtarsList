@@ -23,7 +23,7 @@ const Withdraw = () => {
     event.preventDefault()
     const depositAmount = withdrawFundsRef.current!.value
 
-    if (isNaN(Number(depositAmount))) {
+    if (isNaN(Number(depositAmount)) || depositAmount.length === 0) {
       setError("Invalid Input!")
       return
     }
