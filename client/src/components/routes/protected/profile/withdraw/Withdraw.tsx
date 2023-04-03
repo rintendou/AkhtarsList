@@ -35,7 +35,6 @@ const Withdraw = () => {
     }
 
     withdrawFunds(Number(depositAmount))
-    navigate("/profile", { replace: true })
   }
 
   return (

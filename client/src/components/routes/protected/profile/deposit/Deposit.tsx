@@ -33,7 +33,6 @@ const Deposit = () => {
     }
 
     depositFunds(Number(depositAmount))
-    navigate("/profile", { replace: true })
   }
 
   return (
