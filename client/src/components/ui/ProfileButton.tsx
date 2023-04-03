@@ -6,7 +6,7 @@ type Props = {
   type?: "button" | "submit"
 }
 
-const StyledButton = ({
+const ProfileButton = ({
   children,
   onClick,
   twClasses,
@@ -19,4 +19,4 @@ const StyledButton = ({
   )
 }
 
-export default StyledButton
+export default ProfileButton
