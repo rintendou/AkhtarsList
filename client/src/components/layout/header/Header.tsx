@@ -16,15 +16,11 @@ const Header = () => {
       <nav className="hidden md:flex flex-row gap-4">
         {auth._id ? (
           <>
-            <RouterLink
-              to="/app"
-              routerLinkText="Browse"
-              twClasses="border p-2 border-main rounded-md w-20 text-center"
-            />
+            <RouterLink to="/app" routerLinkText="Browse" twClasses="p-2" />
             <RouterLink
               to="/profile"
               routerLinkText="Profile"
-              twClasses="border p-2 border-main rounded-md w-20 text-center"
+              twClasses="p-2"
             />
           </>
         ) : (
