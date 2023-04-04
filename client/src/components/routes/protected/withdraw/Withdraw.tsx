@@ -29,11 +29,13 @@ const Withdraw = () => {
       Number(withdrawAmount) < 0
     ) {
       setError("Invalid Input!")
+      withdrawFundsRef.current!.focus()
       return
     }
 
     if (Number(withdrawAmount) > balance) {
       setError("Insufficient Funds!")
+      withdrawFundsRef.current!.focus()
       return
     }
 
