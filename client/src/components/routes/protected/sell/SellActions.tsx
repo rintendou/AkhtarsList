@@ -14,7 +14,7 @@ const SellActions = () => {
   const lengthRef = useRef<HTMLInputElement>(null)
 
   return (
-    <div className="flex-auto bg-gray-200 bg-opacity-50 p-10">
+    <div className="flex-auto bg-gray-200 bg-opacity-50 p-10 max-w-none md:max-w-[50%] max-h-[50%] md:max-h-none">
       <form>
         <StyledInputRef
           name="Title"

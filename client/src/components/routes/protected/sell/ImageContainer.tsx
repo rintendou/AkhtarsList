@@ -1,6 +1,6 @@
 const ImageContainer = () => {
   return (
-    <div className="flex-auto p-10 text-center capitalize text-2xl">
+    <div className="flex-auto p-10 text-center capitalize text-2xl  max-w-none md:max-w-[50%] max-h-[50%] md:max-h-none">
       Upload your item image here
     </div>
   )
