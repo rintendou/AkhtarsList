@@ -62,7 +62,7 @@ const LoginForm = ({ didRegisterSuccessfully, successMessage }: Props) => {
 
       setIsError(false)
       setScsMessage(data.data.message)
-      login(data.data.user._id, data.data.user.username)
+      login(data.data.user._id, data.data.user.username, data.data.user.token)
       navigate("/app", { replace: true })
     }
     loginUser()

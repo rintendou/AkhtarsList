@@ -21,7 +21,7 @@ const Preview = () => {
       <PreviewImageContainer img={image} title={title} />
       <div className="bg-purple-100 p-10 md:p-20 md:pt-10">
         <div className="flex flex-col gap-10">
-          <h1 className="text-2xl font-semibold text-center w-full tracking-wide">
+          <h1 className="text-2xl font-semibold text-center w-full">
             Listing Preview
           </h1>
           <div className="pb-10 border-b border-gray-300">
