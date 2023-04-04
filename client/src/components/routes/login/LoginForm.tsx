@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from "react"
 import Card from "../../ui/Card"
 import Error from "../../ui/Error"
-import StyledButton from "../../ui/StyledButton"
 import StyledInputRef from "../../ui/StyledInputRef"
 import Success from "../../ui/Success"
 import useAuth from "../../../lib/hooks/useAuth"
@@ -44,14 +43,17 @@ const LoginForm = ({ didRegisterSuccessfully, successMessage }: Props) => {
     const password = passwordRef.current!.value
 
     const loginUser = async () => {
-      const response = await fetch(`http://localhost:${settings.BACKEND_SERVER_PORT}/api/auth/login`, {
-        method: "POST",
-        body: JSON.stringify({
-          username,
-          password,
-        }),
-        headers: { "Content-Type": "application/json" },
-      })
+      const response = await fetch(
+        `http://localhost:${settings.BACKEND_SERVER_PORT}/api/auth/login`,
+        {
+          method: "POST",
+          body: JSON.stringify({
+            username,
+            password,
+          }),
+          headers: { "Content-Type": "application/json" },
+        }
+      )
 
       const data = await response.json()
 
