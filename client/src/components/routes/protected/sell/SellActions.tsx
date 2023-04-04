@@ -62,6 +62,7 @@ const SellActions = () => {
       dimension: [height, width, length],
     }
     console.log(payload)
+    navigate("/preview", { replace: true })
 
     const createListing = async () => {
       const response = await fetch("http://localhost:5178/api/createListing", {
