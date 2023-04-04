@@ -69,8 +69,8 @@ const SellActions = () => {
           </div>
 
           <StyledInputRef
-            name="Expiration"
-            placeholder="Expiration"
+            name="Expiration (MM/DD/YYYY HH:MM:SS)"
+            placeholder="Expiration (MM/DD/YYYY HH:MM:SS)"
             type="text"
             ref={expireAtRef}
           />
