@@ -2,7 +2,7 @@ import mongoose from "mongoose"
 mongoose.set("strictQuery", false)
 
 const Schema = mongoose.Schema
-const ObjectId = mongoose.Types.ObjectId
+const ObjectId = Schema.Types.ObjectId
 
 // Setting up Schema of Lsting
 const ListingSchema = new Schema(
@@ -20,7 +20,10 @@ const ListingSchema = new Schema(
       type: String,
       required: true,
     },
-    image: {},
+    image: {
+      type: String,
+      required: true,
+    },
     bidders: [
       {
         type: ObjectId,

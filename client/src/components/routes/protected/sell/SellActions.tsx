@@ -1,6 +1,9 @@
 import { useEffect, useRef, useState } from "react"
 import useAuth from "../../../../lib/hooks/useAuth"
 
+import numberInputIsValid from "../../../../lib/util/numberInputValidator"
+import stringInputIsValid from "../../../../lib/util/stringInputValidator"
+
 const CATEGORIES = [
   "Sneakers",
   "Antiques",
@@ -30,7 +33,7 @@ const SellActions = () => {
   const lengthRef = useRef<HTMLInputElement>(null)
 
   const [expireAt, setExpireAt] = useState<Date | null>(null)
-  const [isError, setIsError] = useState(false)
+  const [error, setError] = useState(false)
   const [errorMessage, setErrorMessage] = useState("")
   const [image] = useState("fakesubway.jpg")
 
@@ -59,30 +62,84 @@ const SellActions = () => {
       expireAt,
       category,
       weight,
-      dimension: [height, width, length],
+      dimensions: [height, width, length],
     }
-    console.log(payload)
 
-    navigate("/preview", { replace: true, state: payload })
+    if (!stringInputIsValid(title)) {
+      setError(true)
+      setErrorMessage("Title is a required field!")
+      titleRef.current!.focus()
+      return
+    }
+
+    if (!stringInputIsValid(desc)) {
+      setError(true)
+      setErrorMessage("Description is a required field!")
+      descriptionRef.current!.focus()
+      return
+    }
+
+    if (!stringInputIsValid(category)) {
+      setError(true)
+      setErrorMessage("Category is a required field!")
+      categoryRef.current!.focus()
+      return
+    }
+
+    if (!numberInputIsValid(startPrice)) {
+      setError(true)
+      setErrorMessage("Invalid Starting Price!")
+      startPriceRef.current!.focus()
+      return
+    }
+
+    if (!numberInputIsValid(weight)) {
+      setError(true)
+      setErrorMessage("Invalid Weight!")
+      weightRef.current!.focus()
+      return
+    }
+
+    if (!numberInputIsValid(height)) {
+      setError(true)
+      setErrorMessage("Invalid Height!")
+      heightRef.current!.focus()
+      return
+    }
+
+    if (!numberInputIsValid(width)) {
+      setError(true)
+      setErrorMessage("Invalid Width!")
+      widthRef.current!.focus()
+      return
+    }
+
+    if (!numberInputIsValid(length)) {
+      setError(true)
+      setErrorMessage("Invalid Length!")
+      lengthRef.current!.focus()
+      return
+    }
 
     const createListing = async () => {
-      const response = await fetch("http://localhost:5178/api/createListing", {
+      const response = await fetch("http://localhost:5178/api/listing/post", {
         method: "POST",
         body: JSON.stringify(payload),
         headers: { "Content-Type": "application/json" },
       })
 
       const data = await response.json()
+      console.log(data)
 
       if (!data.ok) {
-        setIsError(true)
+        setError(true)
         setErrorMessage(data.message)
         return
       }
 
-      setIsError(false)
+      setError(false)
       setErrorMessage("")
-      navigate("/preview", { replace: true })
+      navigate("/preview", { replace: true, state: payload })
     }
 
     createListing()
@@ -100,8 +157,7 @@ const SellActions = () => {
   }, [])
 
   return (
-    <div className="flex-auto bg-purple-100 bg-opacity-50 p-10 max-w-none md:max-w-[50%] max-h-[50%] md:max-h-none">
-      {isError && <Error errorMessage={errorMessage} />}
+    <div className="flex-auto bg-purple-100 bg-opacity-50 p-10 max-w-none md:max-w-[50%] max-h-[50%] md:max-h-none space-y-10">
       <form className="space-y-10" onSubmit={createListingHandler}>
         <div className="flex flex-col gap-5 pb-10 border-b border-b-gray-500">
           <StyledInputRef
@@ -172,6 +228,7 @@ const SellActions = () => {
 
         <SubmitListingButton />
       </form>
+      {error && <Error errorMessage={errorMessage} />}
     </div>
   )
 }

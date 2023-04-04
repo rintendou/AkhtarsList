@@ -1,6 +1,7 @@
 import { Request, Response } from "express"
 import ListingModel from "../models/Listing"
 import UserModel from "../models/User"
+import mongoose from "mongoose"
 
 export const createListing = async (req: Request, res: Response) => {
   const {
@@ -51,8 +52,9 @@ export const createListing = async (req: Request, res: Response) => {
 
     // Create listing object
     const listing = new ListingModel({
+      _id: new mongoose.Types.ObjectId(),
       title: title,
-      lister: existingUser,
+      lister: existingUser._id,
       desc: desc,
       image: image,
       bidders: [],
@@ -69,6 +71,8 @@ export const createListing = async (req: Request, res: Response) => {
     await listing.save()
 
     // Saving Listing to User
+    existingUser.listedListings.push(listing._id)
+    await existingUser.save()
 
     // Return res
     return res.status(200).json({
