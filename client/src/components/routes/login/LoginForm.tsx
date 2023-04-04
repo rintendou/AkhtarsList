@@ -7,6 +7,7 @@ import Success from "../../ui/Success"
 import useAuth from "../../../lib/hooks/useAuth"
 import { useNavigate } from "react-router-dom"
 import RouterLink from "../../ui/RouterLink"
+import { settings } from "../../../settings"
 
 type Props = {
   didRegisterSuccessfully: boolean
@@ -43,7 +44,7 @@ const LoginForm = ({ didRegisterSuccessfully, successMessage }: Props) => {
     const password = passwordRef.current!.value
 
     const loginUser = async () => {
-      const response = await fetch(`http://localhost:5178/api/auth/login`, {
+      const response = await fetch(`http://localhost:${settings.BACKEND_SERVER_PORT}/api/auth/login`, {
         method: "POST",
         body: JSON.stringify({
           username,

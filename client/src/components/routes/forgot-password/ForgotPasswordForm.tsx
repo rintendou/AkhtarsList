@@ -6,6 +6,8 @@ import Card from "../../ui/Card"
 import Error from "../../ui/Error"
 import StyledInputRef from "../../ui/StyledInputRef"
 
+import { settings } from "../../../settings"
+
 const ForgotPasswordForm = () => {
   const { auth, login } = useAuth()
 
@@ -37,7 +39,7 @@ const ForgotPasswordForm = () => {
       const username = usernameRef.current!.value
 
       const response = await fetch(
-        `http://localhost:5178/api/auth/get-security-question`,
+        `http://localhost:${settings.BACKEND_SERVER_PORT}/api/auth/get-security-question`,
         {
           method: "POST",
           body: JSON.stringify({
