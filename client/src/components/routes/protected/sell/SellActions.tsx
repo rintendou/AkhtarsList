@@ -100,7 +100,7 @@ const SellActions = () => {
   }, [])
 
   return (
-    <div className="flex-auto bg-gray-200 bg-opacity-50 p-10 max-w-none md:max-w-[50%] max-h-[50%] md:max-h-none">
+    <div className="flex-auto bg-purple-100 bg-opacity-50 p-10 max-w-none md:max-w-[50%] max-h-[50%] md:max-h-none">
       {" "}
       {isError && <Error errorMessage={errorMessage} />}
       <form className="space-y-10" onSubmit={createListingHandler}>
@@ -185,7 +185,7 @@ const SubmitListingButton = () => {
       className={`p-4 rounded-lg duration-200 ease-in-out bg-secondary text-primary font-bold text-2xl py-6 w-full hover:scale-100 hover:bg-black hover:text-tertiary focus:outline-tertiary outline-4 focus:text-tertiary focus:bg-black`}
       type="submit"
     >
-      Log In
+      Place Listing Now
     </button>
   )
 }

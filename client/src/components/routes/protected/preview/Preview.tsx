@@ -14,30 +14,33 @@ const Preview = () => {
   const dimension = location.state!.dimension
 
   return (
-    <div className="min-h-screen flex flex-col md:flex-row">
+    <div className="min-h-screen flex flex-col justify-between">
+      <h1 className="text-4xl font-bold text-center w-full tracking-wide py-10">
+        Listing Successfully Posted!
+      </h1>
       <PreviewImageContainer img={image} title={title} />
-      <div className="max-w-none md:max-w-[50%] max-h-[50%] md:max-h-none">
-        <h1 className="text-4xl font-bold text-center w-full py-10 tracking-wide">
-          Listing Successfully Posted!
-        </h1>
-        <div className="flex flex-col space-y-10">
-          <div>
+      <div className="bg-purple-100 p-10 md:p-20 md:pt-10">
+        <div className="flex flex-col gap-10">
+          <h1 className="text-2xl font-semibold text-center w-full tracking-wide">
+            Listing Preview
+          </h1>
+          <div className="pb-10 border-b border-gray-300">
             <h1 className="text-lg font-semibold">Listing Overview</h1>
             <p>Description: {desc}</p>
             <p>Category: {category || "General"}</p>
-            <p>Starting Price: {startPrice}</p>
+            <p>Starting Price: ${startPrice}</p>
           </div>
-          <div>
+          <div className="pb-10 border-b border-gray-300">
             <h1 className="text-lg font-semibold">Listing Expiration</h1>
             <p>Expiration Date and Time: {expireAt.toString()}</p>
           </div>
-          <div>
+          <div className="pb-10 border-b border-gray-300">
             <h1 className="text-lg font-semibold">Listing Dimensions</h1>
             <p>Weight: {weight} kg</p>
             <div>
-              <p>Height: {dimension[0]}</p>
-              <p>Width: {dimension[1]}</p>
-              <p>Length: {dimension[2]}</p>
+              <p>Height: {dimension[0]} cm</p>
+              <p>Width: {dimension[1]} cm</p>
+              <p>Length: {dimension[2]} cm</p>
             </div>
           </div>
         </div>
