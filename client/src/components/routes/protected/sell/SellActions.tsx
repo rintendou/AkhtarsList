@@ -17,6 +17,7 @@ import StyledInputAreaRef from "../../../ui/StyledInputAreaRef"
 import StyledDropdownRef from "../../../ui/StyledDropdown"
 import StyledDateTimePicker from "./StyledDateTimePicker"
 import Error from "../../../ui/Error"
+import { useNavigate } from "react-router-dom"
 
 const SellActions = () => {
   const titleRef = useRef<HTMLInputElement>(null)
@@ -34,6 +35,8 @@ const SellActions = () => {
   const [image] = useState("fakesubway.jpg")
 
   const { auth } = useAuth()
+
+  const navigate = useNavigate()
 
   const createListingHandler = (e: React.FormEvent<HTMLFormElement>) => {
     // Prevent default behavior of reloading page on form submission
@@ -74,6 +77,10 @@ const SellActions = () => {
         setErrorMessage(data.message)
         return
       }
+
+      setIsError(false)
+      setErrorMessage("")
+      navigate("/preview", { replace: true })
     }
 
     createListing()
