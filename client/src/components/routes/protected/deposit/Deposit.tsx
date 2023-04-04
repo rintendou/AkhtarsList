@@ -10,7 +10,7 @@ const Deposit = () => {
   const [error, setError] = useState("")
   const [success, setSuccess] = useState("")
 
-  const { depositFunds } = useProfile()
+  const { balance, depositFunds } = useProfile()
 
   const cardHolderRef = useRef<HTMLInputElement>(null)
   const cardNumberRef = useRef<HTMLInputElement>(null)
@@ -42,7 +42,8 @@ const Deposit = () => {
   return (
     <div className="w-full flex flex-col justify-center items-center">
       <Card twClasses="p-20 md:p-10 m-0 md:m-10 shadow-lg space-y-5 w-[35rem]">
-        <h1 className="text-3xl text-center font-bold">Card Payment</h1>
+        <h1 className="text-3xl text-center font-semibold">Current Balance:</h1>
+        <p className="text-center text-3xl">${balance}</p>
         <form className="flex flex-col gap-5" onSubmit={depositFundsHandler}>
           <StyledInputRef
             ref={cardHolderRef}
@@ -95,7 +96,7 @@ export default Deposit
 const DepositNowButton = () => {
   return (
     <button
-      className={`p-4 py-3 rounded-lg duration-200 hover:bg-black ease-in-out bg-secondary text-primary font-bold text-lg shadow-lg`}
+      className={`p-4 py-3 rounded-lg duration-200 hover:bg-black ease-in-out bg-secondary text-primary font-semibold text-lg shadow-lg`}
       type="submit"
     >
       Deposit Now
