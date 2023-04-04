@@ -13,7 +13,6 @@ const CATEGORIES = [
 
 // Components
 import StyledInputRef from "../../../ui/StyledInputRef"
-import StyledButton from "../../../ui/StyledButton"
 import StyledInputAreaRef from "../../../ui/StyledInputAreaRef"
 import StyledDropdownRef from "../../../ui/StyledDropdown"
 import StyledDateTimePicker from "./StyledDateTimePicker"
@@ -48,20 +47,23 @@ const SellActions = () => {
     const width = widthRef.current!.value
     const length = lengthRef.current!.value
 
+    const payload = {
+      title,
+      lister: auth.username,
+      desc,
+      image,
+      startPrice,
+      expireAt,
+      category,
+      weight,
+      dimension: [height, width, length],
+    }
+    console.log(payload)
+
     const createListing = async () => {
       const response = await fetch("http://localhost:5178/api/createListing", {
         method: "POST",
-        body: JSON.stringify({
-          title,
-          lister: auth.username,
-          desc,
-          image,
-          startPrice,
-          expireAt,
-          category,
-          weight,
-          dimension: [height, width, length],
-        }),
+        body: JSON.stringify(payload),
         headers: { "Content-Type": "application/json" },
       })
 
