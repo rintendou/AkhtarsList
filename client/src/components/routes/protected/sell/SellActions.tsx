@@ -39,8 +39,8 @@ const SellActions = () => {
               ref={categoryRef}
             />
             <StyledInputRef
-              name="Starting Price"
-              placeholder="Starting Price"
+              name="Starting Price (in $)"
+              placeholder="Starting Price (in $)"
               type="text"
               ref={startPriceRef}
             />
