@@ -10,6 +10,7 @@ import StyledDropdown from "../../ui/StyledDropdown"
 import StyledInput from "../../ui/StyledInput"
 import StyledInputAreaRef from "../../ui/StyledInputAreaRef"
 import Success from "../../ui/Success"
+import StyledDateTimePicker from "../protected/sell/StyledDateTimePicker"
 
 const Dev = () => {
   return (
@@ -75,6 +76,8 @@ const Dev = () => {
         placeholder="Styled Dropdown"
         options={["test1", "test2"]}
       />
+
+      <StyledDateTimePicker />
     </div>
   )
 }

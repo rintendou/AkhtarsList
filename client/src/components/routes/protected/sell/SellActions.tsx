@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 
 const CATEGORIES = [
   "Sneakers",
@@ -14,17 +14,24 @@ import StyledInputRef from "../../../ui/StyledInputRef"
 import StyledButton from "../../../ui/StyledButton"
 import StyledInputAreaRef from "../../../ui/StyledInputAreaRef"
 import StyledDropdownRef from "../../../ui/StyledDropdown"
+import StyledDateTimePicker from "./StyledDateTimePicker"
 
 const SellActions = () => {
   const titleRef = useRef<HTMLInputElement>(null)
   const descriptionRef = useRef<HTMLTextAreaElement>(null)
   const categoryRef = useRef<HTMLSelectElement>(null)
   const startPriceRef = useRef<HTMLInputElement>(null)
-  const expireAtRef = useRef<HTMLInputElement>(null)
   const weightRef = useRef<HTMLInputElement>(null)
   const heightRef = useRef<HTMLInputElement>(null)
   const widthRef = useRef<HTMLInputElement>(null)
   const lengthRef = useRef<HTMLInputElement>(null)
+
+  const [expiration, setExpiration] = useState<Date | null>(null)
+
+  const handleDateTimeChange = (value: Date | null) => {
+    setExpiration(value)
+    console.log(expiration)
+  }
 
   // Focus on component mount
   useEffect(() => {
@@ -60,20 +67,15 @@ const SellActions = () => {
 
             <div className="flex-1">
               <StyledInputRef
-                name="Starting Price ($)"
-                placeholder="Starting Price ($)"
+                name="Start Price ($)"
+                placeholder="Start Price ($)"
                 type="text"
                 ref={startPriceRef}
               />
             </div>
           </div>
 
-          <StyledInputRef
-            name="Expiration (MM/DD/YYYY HH:MM:SS)"
-            placeholder="Expiration (MM/DD/YYYY HH:MM:SS)"
-            type="text"
-            ref={expireAtRef}
-          />
+          <StyledDateTimePicker onChange={handleDateTimeChange} />
         </div>
 
         <div className="flex flex-col gap-5 pb-10 border-b border-b-gray-500">
