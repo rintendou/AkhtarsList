@@ -7,6 +7,7 @@ import Overview from "../../ui/Overview"
 import RouterLink from "../../ui/RouterLink"
 import StyledButton from "../../ui/StyledButton"
 import StyledInput from "../../ui/StyledInput"
+import StyledInputAreaRef from "../../ui/StyledInputAreaRef"
 import Success from "../../ui/Success"
 
 const Dev = () => {
@@ -62,6 +63,8 @@ const Dev = () => {
       </div>
 
       <LoadingSpinner />
+
+      <StyledInputAreaRef />
     </div>
   )
 }

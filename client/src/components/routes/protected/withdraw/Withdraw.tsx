@@ -21,19 +21,23 @@ const Withdraw = () => {
 
   const withdrawFundsHandler = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    const depositAmount = withdrawFundsRef.current!.value
+    const withdrawAmount = withdrawFundsRef.current!.value
 
-    if (isNaN(Number(depositAmount)) || depositAmount.length === 0) {
+    if (
+      isNaN(Number(withdrawAmount)) ||
+      withdrawAmount.length === 0 ||
+      Number(withdrawAmount) < 0
+    ) {
       setError("Invalid Input!")
       return
     }
 
-    if (Number(depositAmount) > balance) {
+    if (Number(withdrawAmount) > balance) {
       setError("Insufficient Funds!")
       return
     }
 
-    withdrawFunds(Number(depositAmount))
+    withdrawFunds(Number(withdrawAmount))
     withdrawFundsRef.current!.value = ""
     withdrawFundsRef.current!.focus()
     setError("")
@@ -54,7 +58,7 @@ const Withdraw = () => {
             name="Withdraw Amount"
             type="text"
             placeholder="Withdraw Amount"
-            twClasses="rounded-lg shadow-lg"
+            twClasses="rounded-lg shadow-lg flex-auto"
           />
           <WithdrawNowButton />
         </form>{" "}
@@ -70,7 +74,7 @@ export default Withdraw
 const WithdrawNowButton = () => {
   return (
     <button
-      className={`p-4 py-2 rounded-lg duration-200 hover:bg-black ease-in-out bg-secondary text-primary font-bold text-lg shadow-xl w-[50%]`}
+      className={`p-4 py-2 rounded-lg duration-200 hover:bg-black ease-in-out bg-secondary text-primary font-bold text-lg shadow-xl w-[50%] flex-auto`}
       type="submit"
     >
       Withdraw Now

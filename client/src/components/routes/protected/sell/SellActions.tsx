@@ -3,6 +3,7 @@ import { useEffect, useRef } from "react"
 // Components
 import StyledInputRef from "../../../ui/StyledInputRef"
 import StyledButton from "../../../ui/StyledButton"
+import StyledInputAreaRef from "../../../ui/StyledInputAreaRef"
 
 const SellActions = () => {
   const titleRef = useRef<HTMLInputElement>(null)
@@ -30,26 +31,28 @@ const SellActions = () => {
             type="text"
             ref={titleRef}
           />
-          <StyledInputRef
-            name="Description"
-            placeholder="Description"
-            type="text"
-            ref={descriptionRef}
-          />
-          <div className="flex space-x-5">
-            <StyledInputRef
-              name="Category"
-              placeholder="Category"
-              type="text"
-              ref={categoryRef}
-            />
-            <StyledInputRef
-              name="Starting Price (in $)"
-              placeholder="Starting Price (in $)"
-              type="text"
-              ref={startPriceRef}
-            />
+          <StyledInputAreaRef name="Description" placeholder="Description" />
+          <div className="flex gap-5">
+            <div className="flex-1">
+              <StyledInputRef
+                name="Category"
+                placeholder="Category"
+                type="text"
+                ref={categoryRef}
+                twClasses="w-full"
+              />
+            </div>
+            <div className="flex-1">
+              <StyledInputRef
+                name="Starting Price (in $)"
+                placeholder="Starting Price (in $)"
+                type="text"
+                ref={startPriceRef}
+                twClasses="w-full"
+              />
+            </div>
           </div>
+
           <StyledInputRef
             name="Expiration"
             placeholder="Expiration"
