@@ -1,6 +1,8 @@
 import { useRef } from "react"
 
+// Components
 import StyledInputRef from "../../../ui/StyledInputRef"
+import StyledButton from "../../../ui/StyledButton"
 
 const SellActions = () => {
   const titleRef = useRef<HTMLInputElement>(null)
@@ -50,7 +52,7 @@ const SellActions = () => {
             ref={expireAtRef}
           />
         </div>
-        <div className="flex flex-col gap-5">
+        <div className="flex flex-col gap-5 pb-10 border-b border-b-gray-500">
           <StyledInputRef
             name="Weight (in kg)"
             placeholder="Weight (in kg)"
@@ -76,6 +78,12 @@ const SellActions = () => {
             ref={lengthRef}
           />
         </div>
+
+        <StyledButton
+          buttonText="Place Listing Now"
+          twClasses="text-2xl py-6 w-full hover:scale-100 hover:bg-black hover:text-tertiary"
+          onClick={() => {}}
+        />
       </form>
     </div>
   )
