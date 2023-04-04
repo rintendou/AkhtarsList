@@ -21,22 +21,22 @@ const Header = () => {
             <RouterLink
               to="/"
               routerLinkText="Home"
-              twClasses="border p-2 border-main rounded-md w-20 text-center"
+              twClasses="border p-2 border-main rounded-md w-20 text-center text-lg"
             />
             <RouterLink
               to="/login"
               routerLinkText="Login"
-              twClasses="border p-2 border-main rounded-md w-20 text-center"
+              twClasses="border p-2 border-main rounded-md w-20 text-center text-lg"
             />
             <RouterLink
               to="/register"
               routerLinkText="Register"
-              twClasses="border p-2 border-main rounded-md w-20 text-center"
+              twClasses="border p-2 border-main rounded-md w-20 text-center text-lg"
             />
             <RouterLink
               to="/dev"
               routerLinkText="Dev"
-              twClasses="border p-2 border-main rounded-md w-20 text-center"
+              twClasses="border p-2 border-main rounded-md w-20 text-center text-lg"
             />
           </>
         )}
@@ -50,10 +50,14 @@ export default Header
 const LoggedInNavbar = () => {
   return (
     <>
-      <RouterLink to="/app" routerLinkText="Browse" twClasses="p-2" />
+      <RouterLink to="/app" routerLinkText="Browse" twClasses="p-2 text-lg" />
 
-      <RouterLink to="/sell" routerLinkText="Sell" twClasses="p-2" />
-      <RouterLink to="/profile" routerLinkText="Profile" twClasses="p-2" />
+      <RouterLink to="/sell" routerLinkText="Sell" twClasses="p-2 text-lg" />
+      <RouterLink
+        to="/profile"
+        routerLinkText="Profile"
+        twClasses="p-2 text-lg"
+      />
     </>
   )
 }

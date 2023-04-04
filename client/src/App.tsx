@@ -28,7 +28,7 @@ import ProfileLayout from "./components/routes/protected/ProfileLayout"
 
 function App() {
   return (
-    <div className="bg-primary text-black">
+    <div className="bg-primary text-black tracking-tight">
       <Header />
       <Body>
         <Routes>
