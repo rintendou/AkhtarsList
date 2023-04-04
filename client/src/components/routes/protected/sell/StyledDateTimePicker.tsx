@@ -8,14 +8,15 @@ type Props = {
 }
 
 const StyledDateTimePicker = ({ onChange }: Props) => {
-  const [startDate] = useState(new Date())
+  const [startDate, setStartDate] = useState(new Date())
 
   const today = new Date()
   const tomorrow = new Date(today)
   tomorrow.setDate(tomorrow.getDate() + 1)
 
-  const handleDateChange = (date: Date | null) => {
+  const handleDateChange = (date: Date) => {
     onChange(date)
+    setStartDate(date)
   }
 
   return (
