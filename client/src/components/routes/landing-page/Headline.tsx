@@ -2,7 +2,7 @@ const Headline = () => {
   return (
     <div className="flex flex-col-reverse text-center md:text-left md:flex-row items-center justify-center gap-16 bg-secondary text-primary cursor-pointer group p-10">
       <h1 className="text-4xl md:text-6xl font-bold tracking-wide max-w-[45%]">
-        a minimalist and perfomant online auction system
+        a minimalist and performant online auction system
         {/* a minimalist and performant chat application. lol */}
       </h1>
       <svg

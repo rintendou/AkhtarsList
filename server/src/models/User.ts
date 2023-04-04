@@ -1,8 +1,8 @@
-import mongoose from "mongoose"
-mongoose.set("strictQuery", false)
+import mongoose from "mongoose";
+mongoose.set("strictQuery", false);
 
-const Schema = mongoose.Schema
-const ObjectId = mongoose.Types.ObjectId
+const Schema = mongoose.Schema;
+const ObjectId = mongoose.Types.ObjectId;
 
 // Setting up Schema of User
 const UserSchema = new Schema(
@@ -19,34 +19,42 @@ const UserSchema = new Schema(
       required: true,
       min: 6,
     },
+    securityQuestion: {
+      type: String,
+      required: true,
+    },
+    securityQuestionAnswer: {
+      type: String,
+      required: true,
+    },
     address: {
       type: String,
       required: true,
     },
     balance: {
-      type: String,
+      type: Number,
       required: true,
     },
-    biddedItems: {
+    biddedListings: {
       type: [ObjectId],
       ref: "Listing",
     },
-    listedItems: {
+    listedListings: {
       type: [ObjectId],
       ref: "Listing",
     },
-    wonItems: {
+    wonListings: {
       type: [ObjectId],
       ref: "Listing",
     },
-    disputedItems: {
+    disputedListings: {
       type: [ObjectId],
-      ref: "Listing",
+      ref: "Listing"
     },
   },
   { timestamps: true }
-)
+);
 
-const UserModel = mongoose.model("User", UserSchema)
+const UserModel = mongoose.model("User", UserSchema);
 
-export default UserModel
+export default UserModel;

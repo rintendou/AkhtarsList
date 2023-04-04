@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom"
 
 import Card from "../../ui/Card"
 import Error from "../../ui/Error"
-import StyledButton from "../../ui/StyledButton"
 import StyledInputRef from "../../ui/StyledInputRef"
 import RouterLink from "../../ui/RouterLink"
 
@@ -12,7 +11,10 @@ const RegisterForm = () => {
   // unnecessary re-renders of this component per each character typed
   const usernameRef = useRef<HTMLInputElement>(null)
   const passwordRef = useRef<HTMLInputElement>(null)
+  const confirmPasswordRef = useRef<HTMLInputElement>(null)
   const addressRef = useRef<HTMLInputElement>(null)
+  const securityQuestionRef = useRef<HTMLInputElement>(null)
+  const securityQuestionAnswerRef = useRef<HTMLInputElement>(null)
 
   const [isError, setIsError] = useState(false)
   const [errorMessage, setErrorMessage] = useState("")
@@ -36,14 +38,20 @@ const RegisterForm = () => {
     const registerUser = async () => {
       const username = usernameRef.current!.value
       const password = passwordRef.current!.value
+      const confirmPassword = confirmPasswordRef.current!.value
       const address = addressRef.current!.value
+      const securityQuestion = securityQuestionRef.current!.value
+      const securityQuestionAnswer = securityQuestionAnswerRef.current!.value
 
       const response = await fetch(`http://localhost:5178/api/auth/register`, {
         method: "POST",
         body: JSON.stringify({
           username,
           password,
+          confirmPassword,
           address,
+          securityQuestion,
+          securityQuestionAnswer,
         }),
         headers: { "Content-Type": "application/json" },
       })
@@ -65,9 +73,9 @@ const RegisterForm = () => {
   }
 
   return (
-    <Card twClasses="w-[45rem] mx-auto p-20 border-4 border-secondary space-y-16">
+    <Card twClasses="w-[45rem] mx-auto p-20 border border-secondary space-y-16">
       <h1 className="text-4xl font-bold text-center">Register</h1>
-      <form className="flex flex-col" onSubmit={registerUserHandler}>
+      <form className="flex flex-col gap-5" onSubmit={registerUserHandler}>
         <StyledInputRef
           name="Username"
           type="text"
@@ -81,10 +89,28 @@ const RegisterForm = () => {
           ref={passwordRef}
         />
         <StyledInputRef
+          name="Confirm Password"
+          type="password"
+          placeholder="Confirm Password"
+          ref={confirmPasswordRef}
+        />
+        <StyledInputRef
           name="Address"
           type="text"
           placeholder="Address"
           ref={addressRef}
+        />
+        <StyledInputRef
+          name="Security Question"
+          type="text"
+          placeholder="Security Question"
+          ref={securityQuestionRef}
+        />
+        <StyledInputRef
+          name="Security Question Answer"
+          type="text"
+          placeholder="Security Question Answer"
+          ref={securityQuestionAnswerRef}
         />
         <RegisterButton />
       </form>
@@ -102,7 +128,7 @@ export default RegisterForm
 const RegisterButton = () => {
   return (
     <button
-      className={`px-4 py-2 rounded-lg hover:scale-105 duration-200 ease-in-out bg-secondary text-primary font-bold text-xl`}
+      className={`p-4 rounded-lg duration-200 hover:bg-black ease-in-out bg-secondary text-primary font-bold text-sm`}
       type="submit"
     >
       Register

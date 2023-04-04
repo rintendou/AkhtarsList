@@ -11,6 +11,7 @@ export default {
         secondary: "#1f2937",
         tertiary: "#FF6347",
       },
+      fontFamily: { sans: "'Inter', sans" },
     },
   },
   plugins: [],

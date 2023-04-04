@@ -5,23 +5,51 @@ const Footer = () => {
   const { auth } = useAuth()
 
   return (
-    <footer className="px-4 py-2 flex flex-row justify-between items-center bg-secondary text-primary">
+    <footer className="p-8 flex flex-row justify-between items-center bg-secondary text-primary">
       <nav className="hidden md:flex flex-row gap-4">
         {auth._id ? (
           <>
-            <RouterLink to="/app" routerLinkText="Application" />
-            <RouterLink to="/profile" routerLinkText="Profile" />
+            <RouterLink
+              to="/app"
+              routerLinkText="Browse"
+              twClasses="p-2 text-lg"
+            />
+            <RouterLink
+              to="/profile"
+              routerLinkText="Profile"
+              twClasses="p-2 text-lg"
+            />
           </>
         ) : (
           <>
-            <RouterLink to="/" routerLinkText="Home" />
-            <RouterLink to="/login" routerLinkText="Login" />
-            <RouterLink to="/register" routerLinkText="Register" />
-            <RouterLink to="/dev" routerLinkText="Dev" />
+            <RouterLink
+              to="/"
+              routerLinkText="Home"
+              twClasses="p-2 w-24 text-center text-lg"
+            />
+            <RouterLink
+              to="/login"
+              routerLinkText="Login"
+              twClasses="p-2 w-24 text-center text-lg"
+            />
+            <RouterLink
+              to="/register"
+              routerLinkText="Register"
+              twClasses="p-2 w-24 text-center text-lg"
+            />
+            <RouterLink
+              to="/dev"
+              routerLinkText="Dev"
+              twClasses="p-2 w-24 text-center text-lg"
+            />
           </>
         )}
       </nav>
-      <h1 className="text-2xl font-bold">Synapse</h1>
+      <RouterLink
+        twClasses="text-2xl font-bold"
+        routerLinkText="AkhtarsList"
+        to="/"
+      />
     </footer>
   )
 }
