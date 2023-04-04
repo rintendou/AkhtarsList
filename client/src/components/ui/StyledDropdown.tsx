@@ -26,7 +26,9 @@ const StyledDropdownRef = React.forwardRef<HTMLSelectElement, Props>(
         <label
           htmlFor={name}
           className="absolute duration-200 ease-in-out top-3 left-3 -z-1 origin-0 text-secondary"
-        ></label>
+        >
+          {placeholder}
+        </label>
       </div>
     )
   }
