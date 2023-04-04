@@ -21,23 +21,23 @@ const Withdraw = () => {
 
   const withdrawFundsHandler = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    const depositAmount = withdrawFundsRef.current!.value
+    const withdrawAmount = withdrawFundsRef.current!.value
 
     if (
-      isNaN(Number(depositAmount)) ||
-      depositAmount.length === 0 ||
-      Number(depositAmount) < 0
+      isNaN(Number(withdrawAmount)) ||
+      withdrawAmount.length === 0 ||
+      Number(withdrawAmount) < 0
     ) {
       setError("Invalid Input!")
       return
     }
 
-    if (Number(depositAmount) > balance) {
+    if (Number(withdrawAmount) > balance) {
       setError("Insufficient Funds!")
       return
     }
 
-    withdrawFunds(Number(depositAmount))
+    withdrawFunds(Number(withdrawAmount))
     withdrawFundsRef.current!.value = ""
     withdrawFundsRef.current!.focus()
     setError("")
