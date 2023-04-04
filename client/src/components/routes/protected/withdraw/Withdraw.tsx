@@ -54,7 +54,7 @@ const Withdraw = () => {
             name="Withdraw Amount"
             type="text"
             placeholder="Withdraw Amount"
-            twClasses="rounded-lg shadow-lg"
+            twClasses="rounded-lg shadow-lg flex-auto"
           />
           <WithdrawNowButton />
         </form>{" "}
@@ -70,7 +70,7 @@ export default Withdraw
 const WithdrawNowButton = () => {
   return (
     <button
-      className={`p-4 py-2 rounded-lg duration-200 hover:bg-black ease-in-out bg-secondary text-primary font-bold text-lg shadow-xl w-[50%]`}
+      className={`p-4 py-2 rounded-lg duration-200 hover:bg-black ease-in-out bg-secondary text-primary font-bold text-lg shadow-xl w-[50%] flex-auto`}
       type="submit"
     >
       Withdraw Now
