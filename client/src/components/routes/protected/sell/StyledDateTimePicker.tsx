@@ -27,7 +27,7 @@ const StyledDateTimePicker = ({ onChange }: Props) => {
 
   return (
     <div className="relative">
-      <h1 className="absolute text-xs left-4">Expires At:</h1>
+      <h1 className="absolute text-xs left-6 top-1">Expires At:</h1>
       <ReactDatePicker
         selected={startDate}
         onChange={handleDateChange}
@@ -49,7 +49,7 @@ const StyledDateTimePicker = ({ onChange }: Props) => {
         }
         minTime={today.getHours() < 23 ? today : tomorrow}
         withPortal
-        className="pt-3 p-2 block w-full px-0 mt-0 bg-transparent border-2 appearance-none focus:outline-none focus:ring-0 focus:border-secondary border-gray-200 pl-3"
+        className="pt-5 p-2 block w-full px-0 mt-0 bg-transparent border-2 appearance-none focus:outline-none focus:ring-0 focus:border-secondary border-gray-200 pl-5 rounded-md"
       />
     </div>
   )
