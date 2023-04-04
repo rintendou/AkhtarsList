@@ -14,6 +14,7 @@ import StyledInputRef from "../../../ui/StyledInputRef"
 import StyledButton from "../../../ui/StyledButton"
 import StyledInputAreaRef from "../../../ui/StyledInputAreaRef"
 import StyledDropdownRef from "../../../ui/StyledDropdown"
+import StyledDateTimePicker from "./StyledDateTimePicker"
 
 const SellActions = () => {
   const titleRef = useRef<HTMLInputElement>(null)
@@ -68,12 +69,7 @@ const SellActions = () => {
             </div>
           </div>
 
-          <StyledInputRef
-            name="Expiration (MM/DD/YYYY HH:MM:SS)"
-            placeholder="Expiration (MM/DD/YYYY HH:MM:SS)"
-            type="text"
-            ref={expireAtRef}
-          />
+          <StyledDateTimePicker />
         </div>
 
         <div className="flex flex-col gap-5 pb-10 border-b border-b-gray-500">
