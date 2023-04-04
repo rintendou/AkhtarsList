@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from "react"
 import useAuth from "../../../../lib/hooks/useAuth"
 
+import numberInputIsValid from "../../../../lib/util/numberInputValidator"
+
 const CATEGORIES = [
   "Sneakers",
   "Antiques",
@@ -62,39 +64,35 @@ const SellActions = () => {
       dimensions: [height, width, length],
     }
 
-    if (
-      isNaN(Number(startPrice)) ||
-      startPrice.length === 0 ||
-      Number(startPrice) < 0
-    ) {
+    if (!numberInputIsValid(startPrice)) {
       setError(true)
       setErrorMessage("Invalid Starting Price!")
       startPriceRef.current!.focus()
       return
     }
 
-    if (isNaN(Number(weight)) || weight.length === 0 || Number(weight) < 0) {
+    if (!numberInputIsValid(weight)) {
       setError(true)
       setErrorMessage("Invalid Weight!")
       weightRef.current!.focus()
       return
     }
 
-    if (isNaN(Number(height)) || height.length === 0 || Number(height) < 0) {
+    if (!numberInputIsValid(height)) {
       setError(true)
       setErrorMessage("Invalid Height!")
       heightRef.current!.focus()
       return
     }
 
-    if (isNaN(Number(width)) || width.length === 0 || Number(width) < 0) {
+    if (!numberInputIsValid(width)) {
       setError(true)
       setErrorMessage("Invalid Width!")
       widthRef.current!.focus()
       return
     }
 
-    if (isNaN(Number(length)) || length.length === 0 || Number(length) < 0) {
+    if (!numberInputIsValid(length)) {
       setError(true)
       setErrorMessage("Invalid Length!")
       lengthRef.current!.focus()
