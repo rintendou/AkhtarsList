@@ -67,10 +67,11 @@ export const deleteListing = async (req: Request, res: Response) => {
     const listingId = req.params.listingId
     const lister = req.body.userId
 
+    const user = await UserModel.findById(lister)
     const listing = await ListingModel.findById(listingId)
 
     // If the listing's lister does not match with the userId, then user is trying to manipulate a listing that is not theirs
-    if (!listing?.lister == lister) {
+    if (!listing?.lister == lister || user?.isAdmin == true) { // NEED TO IMPLEMENT IF USER IS ADMIN
         return res.status(400).json({
             message: "You can't delete a listing that is not yours!",
             data: null,
