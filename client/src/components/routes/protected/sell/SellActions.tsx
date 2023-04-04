@@ -101,7 +101,6 @@ const SellActions = () => {
 
   return (
     <div className="flex-auto bg-purple-100 bg-opacity-50 p-10 max-w-none md:max-w-[50%] max-h-[50%] md:max-h-none">
-      {" "}
       {isError && <Error errorMessage={errorMessage} />}
       <form className="space-y-10" onSubmit={createListingHandler}>
         <div className="flex flex-col gap-5 pb-10 border-b border-b-gray-500">
