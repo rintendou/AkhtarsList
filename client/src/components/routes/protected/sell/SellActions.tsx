@@ -86,7 +86,7 @@ const SellActions = () => {
 
         <StyledButton
           buttonText="Place Listing Now"
-          twClasses="text-2xl py-6 w-full hover:scale-100 hover:bg-black hover:text-tertiary"
+          twClasses="text-2xl py-6 w-full hover:scale-100 hover:bg-black hover:text-tertiary focus:outline-tertiary outline-4 focus:text-tertiary focus:bg-black"
           onClick={() => {}}
         />
       </form>
