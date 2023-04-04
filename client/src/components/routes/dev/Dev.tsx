@@ -1,4 +1,5 @@
 import Card from "../../ui/Card"
+import StyledDatePicker from "../../ui/DatePicker"
 import Error from "../../ui/Error"
 import ListingCard from "../../ui/ListingCard"
 import ListingCardSkeleton from "../../ui/ListingCardSkeleton"
@@ -75,6 +76,8 @@ const Dev = () => {
         placeholder="Styled Dropdown"
         options={["test1", "test2"]}
       />
+
+      <StyledDatePicker />
     </div>
   )
 }
