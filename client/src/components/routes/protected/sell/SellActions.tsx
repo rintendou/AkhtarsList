@@ -1,7 +1,7 @@
-import React from "react"
-
 const SellActions = () => {
-  return <div>SellActions</div>
+  return (
+    <div className="flex-auto bg-gray-200 bg-opacity-50 p-10">SellActions</div>
+  )
 }
 
 export default SellActions
