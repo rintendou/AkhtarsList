@@ -7,6 +7,7 @@ const CATEGORIES = [
   "Accessories",
   "Collectibles",
   "Trending",
+  "General",
 ]
 
 // Components
@@ -28,6 +29,7 @@ const SellActions = () => {
 
   const [expiration, setExpiration] = useState<Date | null>(null)
 
+  // Keep track of Expiration
   const handleDateTimeChange = (value: Date | null) => {
     setExpiration(value)
     console.log(expiration)
