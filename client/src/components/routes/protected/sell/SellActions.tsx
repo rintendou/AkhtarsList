@@ -32,20 +32,27 @@ const SellActions = () => {
             ref={titleRef}
           />
           <StyledInputAreaRef name="Description" placeholder="Description" />
-          <div className="flex space-x-5">
-            <StyledInputRef
-              name="Category"
-              placeholder="Category"
-              type="text"
-              ref={categoryRef}
-            />
-            <StyledInputRef
-              name="Starting Price (in $)"
-              placeholder="Starting Price (in $)"
-              type="text"
-              ref={startPriceRef}
-            />
+          <div className="flex gap-5">
+            <div className="flex-1">
+              <StyledInputRef
+                name="Category"
+                placeholder="Category"
+                type="text"
+                ref={categoryRef}
+                twClasses="w-full"
+              />
+            </div>
+            <div className="flex-1">
+              <StyledInputRef
+                name="Starting Price (in $)"
+                placeholder="Starting Price (in $)"
+                type="text"
+                ref={startPriceRef}
+                twClasses="w-full"
+              />
+            </div>
           </div>
+
           <StyledInputRef
             name="Expiration"
             placeholder="Expiration"
