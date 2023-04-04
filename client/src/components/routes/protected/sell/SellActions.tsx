@@ -36,17 +36,19 @@ const SellActions = () => {
 
   const { auth } = useAuth()
 
-  const createListingHandler = () => {
-    const createListing = async () => {
-      const title = titleRef.current!.value
-      const desc = descriptionRef.current!.value
-      const category = categoryRef.current!.value
-      const startPrice = startPriceRef.current!.value
-      const weight = weightRef.current!.value
-      const height = heightRef.current!.value
-      const width = widthRef.current!.value
-      const length = lengthRef.current!.value
+  const createListingHandler = (e: React.FormEvent<HTMLFormElement>) => {
+    // Prevent default behavior of reloading page on form submission
+    e.preventDefault()
+    const title = titleRef.current!.value
+    const desc = descriptionRef.current!.value
+    const category = categoryRef.current!.value
+    const startPrice = startPriceRef.current!.value
+    const weight = weightRef.current!.value
+    const height = heightRef.current!.value
+    const width = widthRef.current!.value
+    const length = lengthRef.current!.value
 
+    const createListing = async () => {
       const response = await fetch("http://localhost:5178/api/createListing", {
         method: "POST",
         body: JSON.stringify({
@@ -71,6 +73,8 @@ const SellActions = () => {
         return
       }
     }
+
+    createListing()
   }
 
   // Keep track of Expiration
@@ -88,7 +92,7 @@ const SellActions = () => {
     <div className="flex-auto bg-gray-200 bg-opacity-50 p-10 max-w-none md:max-w-[50%] max-h-[50%] md:max-h-none">
       {" "}
       {isError && <Error errorMessage={errorMessage} />}
-      <form className="space-y-10">
+      <form className="space-y-10" onSubmit={createListingHandler}>
         <div className="flex flex-col gap-5 pb-10 border-b border-b-gray-500">
           <StyledInputRef
             name="Title"
@@ -156,14 +160,21 @@ const SellActions = () => {
           />
         </div>
 
-        <StyledButton
-          buttonText="Place Listing Now"
-          twClasses="text-2xl py-6 w-full hover:scale-100 hover:bg-black hover:text-tertiary focus:outline-tertiary outline-4 focus:text-tertiary focus:bg-black"
-          onClick={() => {}}
-        />
+        <SubmitListingButton />
       </form>
     </div>
   )
 }
 
 export default SellActions
+
+const SubmitListingButton = () => {
+  return (
+    <button
+      className={`p-4 rounded-lg duration-200 ease-in-out bg-secondary text-primary font-bold text-2xl py-6 w-full hover:scale-100 hover:bg-black hover:text-tertiary focus:outline-tertiary outline-4 focus:text-tertiary focus:bg-black`}
+      type="submit"
+    >
+      Log In
+    </button>
+  )
+}
