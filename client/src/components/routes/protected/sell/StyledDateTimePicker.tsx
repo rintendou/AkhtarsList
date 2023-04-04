@@ -8,7 +8,13 @@ type Props = {
 }
 
 const StyledDateTimePicker = ({ onChange }: Props) => {
-  const [startDate, setStartDate] = useState(new Date())
+  const [startDate, setStartDate] = useState(() => {
+    const tomorrow = new Date()
+    tomorrow.setDate(tomorrow.getDate() + 1)
+    tomorrow.setHours(23)
+    tomorrow.setMinutes(59)
+    return tomorrow
+  })
 
   const today = new Date()
   const tomorrow = new Date(today)
