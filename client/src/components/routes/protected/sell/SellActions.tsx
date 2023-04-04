@@ -53,13 +53,21 @@ const SellActions = () => {
     const width = widthRef.current!.value
     const length = lengthRef.current!.value
 
+    const backupDate = () => {
+      const tomorrow = new Date()
+      tomorrow.setDate(tomorrow.getDate() + 1)
+      tomorrow.setHours(23)
+      tomorrow.setMinutes(59)
+      return tomorrow
+    }
+
     const payload = {
       title,
       lister: auth.username,
       desc,
       image,
       startPrice,
-      expireAt,
+      expireAt: expireAt || backupDate(),
       category,
       weight,
       dimensions: [height, width, length],
