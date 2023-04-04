@@ -15,61 +15,67 @@ const SellActions = () => {
 
   return (
     <div className="flex-auto bg-gray-200 bg-opacity-50 p-10 max-w-none md:max-w-[50%] max-h-[50%] md:max-h-none">
-      <form>
-        <StyledInputRef
-          name="Title"
-          placeholder="Title"
-          type="text"
-          ref={titleRef}
-        />
-        <StyledInputRef
-          name="Description"
-          placeholder="Description"
-          type="text"
-          ref={descriptionRef}
-        />
-        <StyledInputRef
-          name="Category"
-          placeholder="Category"
-          type="text"
-          ref={categoryRef}
-        />
-        <StyledInputRef
-          name="Starting Price"
-          placeholder="Starting Price"
-          type="text"
-          ref={startPriceRef}
-        />
-        <StyledInputRef
-          name="Expiration"
-          placeholder="Expiration"
-          type="text"
-          ref={expireAtRef}
-        />
-        <StyledInputRef
-          name="Weight"
-          placeholder="Weight"
-          type="text"
-          ref={weightRef}
-        />
-        <StyledInputRef
-          name="Height"
-          placeholder="Height"
-          type="text"
-          ref={heightRef}
-        />
-        <StyledInputRef
-          name="Width"
-          placeholder="Width"
-          type="text"
-          ref={widthRef}
-        />
-        <StyledInputRef
-          name="Length"
-          placeholder="Length"
-          type="text"
-          ref={lengthRef}
-        />
+      <form className="space-y-10">
+        <div className="flex flex-col gap-5 pb-10 border-b border-b-gray-500">
+          <StyledInputRef
+            name="Title"
+            placeholder="Title"
+            type="text"
+            ref={titleRef}
+          />
+          <StyledInputRef
+            name="Description"
+            placeholder="Description"
+            type="text"
+            ref={descriptionRef}
+          />
+          <div className="flex space-x-5">
+            <StyledInputRef
+              name="Category"
+              placeholder="Category"
+              type="text"
+              ref={categoryRef}
+            />
+            <StyledInputRef
+              name="Starting Price"
+              placeholder="Starting Price"
+              type="text"
+              ref={startPriceRef}
+            />
+          </div>
+          <StyledInputRef
+            name="Expiration"
+            placeholder="Expiration"
+            type="text"
+            ref={expireAtRef}
+          />
+        </div>
+        <div className="flex flex-col gap-5">
+          <StyledInputRef
+            name="Weight (in kg)"
+            placeholder="Weight (in kg)"
+            type="text"
+            ref={weightRef}
+          />
+          <StyledInputRef
+            name="Height (in kg)"
+            placeholder="Height (in kg)"
+            type="text"
+            ref={heightRef}
+          />
+          <StyledInputRef
+            name="Width (in kg)"
+            placeholder="Width (in kg)"
+            type="text"
+            ref={widthRef}
+          />
+          <StyledInputRef
+            name="Length (in kg)"
+            placeholder="Length (in kg)"
+            type="text"
+            ref={lengthRef}
+          />
+        </div>
       </form>
     </div>
   )
