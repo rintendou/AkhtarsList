@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState } from "react"
-import useProfile from "../../../../../lib/hooks/useProfile"
+import useProfile from "../../../../lib/hooks/useProfile"
 
-import Card from "../../../../ui/Card"
-import StyledInputRef from "../../../../ui/StyledInputRef"
-import Error from "../../../../ui/Error"
-import Success from "../../../../ui/Success"
+import Card from "../../../ui/Card"
+import StyledInputRef from "../../../ui/StyledInputRef"
+import Error from "../../../ui/Error"
+import Success from "../../../ui/Success"
 
 const Deposit = () => {
   const [error, setError] = useState("")
