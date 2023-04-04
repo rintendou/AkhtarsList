@@ -6,6 +6,7 @@ import LoadingSpinner from "../../ui/LoadingSpinner"
 import Overview from "../../ui/Overview"
 import RouterLink from "../../ui/RouterLink"
 import StyledButton from "../../ui/StyledButton"
+import StyledDropdown from "../../ui/StyledDropdown"
 import StyledInput from "../../ui/StyledInput"
 import StyledInputAreaRef from "../../ui/StyledInputAreaRef"
 import Success from "../../ui/Success"
@@ -64,7 +65,16 @@ const Dev = () => {
 
       <LoadingSpinner />
 
-      <StyledInputAreaRef />
+      <StyledInputAreaRef
+        name="Styled TextArea"
+        placeholder="Styled TextArea"
+      />
+
+      <StyledDropdown
+        name="Styled Dropdown"
+        placeholder="Styled Dropdown"
+        options={["test1", "test2"]}
+      />
     </div>
   )
 }
