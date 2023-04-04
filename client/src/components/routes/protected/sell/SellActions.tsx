@@ -13,11 +13,11 @@ const CATEGORIES = [
 
 // Components
 import StyledInputRef from "../../../ui/StyledInputRef"
-import StyledButton from "../../../ui/StyledButton"
 import StyledInputAreaRef from "../../../ui/StyledInputAreaRef"
 import StyledDropdownRef from "../../../ui/StyledDropdown"
 import StyledDateTimePicker from "./StyledDateTimePicker"
 import Error from "../../../ui/Error"
+import { useNavigate } from "react-router-dom"
 
 const SellActions = () => {
   const titleRef = useRef<HTMLInputElement>(null)
@@ -36,6 +36,8 @@ const SellActions = () => {
 
   const { auth } = useAuth()
 
+  const navigate = useNavigate()
+
   const createListingHandler = (e: React.FormEvent<HTMLFormElement>) => {
     // Prevent default behavior of reloading page on form submission
     e.preventDefault()
@@ -48,20 +50,25 @@ const SellActions = () => {
     const width = widthRef.current!.value
     const length = lengthRef.current!.value
 
+    const payload = {
+      title,
+      lister: auth.username,
+      desc,
+      image,
+      startPrice,
+      expireAt,
+      category,
+      weight,
+      dimension: [height, width, length],
+    }
+    console.log(payload)
+
+    navigate("/preview", { replace: true, state: { ...payload } })
+
     const createListing = async () => {
       const response = await fetch("http://localhost:5178/api/createListing", {
         method: "POST",
-        body: JSON.stringify({
-          title,
-          lister: auth.username,
-          desc,
-          image,
-          startPrice,
-          expireAt,
-          category,
-          weight,
-          dimension: [height, width, length],
-        }),
+        body: JSON.stringify(payload),
         headers: { "Content-Type": "application/json" },
       })
 
@@ -72,6 +79,10 @@ const SellActions = () => {
         setErrorMessage(data.message)
         return
       }
+
+      setIsError(false)
+      setErrorMessage("")
+      navigate("/preview", { replace: true })
     }
 
     createListing()

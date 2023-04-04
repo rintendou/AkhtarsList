@@ -14,6 +14,7 @@ import Withdraw from "./components/routes/protected/withdraw/Withdraw"
 import ChangePassword from "./components/routes/forgot-password/ResetPassword"
 import Category from "./components/routes/categories/Category"
 import Sell from "./components/routes/protected/sell/Sell"
+import Preview from "./components/routes/protected/preview/Preview"
 
 // Components
 import Body from "./components/layout/body/Body"
@@ -45,6 +46,7 @@ function App() {
           <Route element={<RequireAuth />}>
             <Route path="/app" element={<Application />} />
             <Route path="/sell" element={<Sell />} />
+            <Route path="/preview" element={<Preview />} />
 
             <Route element={<ProfileLayout />}>
               <Route path="/profile" element={<Profile />} />
