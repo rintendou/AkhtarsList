@@ -49,16 +49,7 @@ const UserSchema = new Schema(
     },
     disputedListings: {
       type: [ObjectId],
-      ref: "Listing",
-    },
-    isAdmin: {
-      type: Boolean,
-      required: true,
-      default: false,
-    },
-    disputesToManage: {
-      type: [ObjectId],
-      ref: "ExpiredListing",
+      ref: "Listing"
     },
   },
   { timestamps: true }
