@@ -1,14 +1,24 @@
 import { useEffect, useRef } from "react"
 
+const CATEGORIES = [
+  "Sneakers",
+  "Antiques",
+  "Tech",
+  "Accessories",
+  "Collectibles",
+  "Trending",
+]
+
 // Components
 import StyledInputRef from "../../../ui/StyledInputRef"
 import StyledButton from "../../../ui/StyledButton"
 import StyledInputAreaRef from "../../../ui/StyledInputAreaRef"
+import StyledDropdownRef from "../../../ui/StyledDropdown"
 
 const SellActions = () => {
   const titleRef = useRef<HTMLInputElement>(null)
   const descriptionRef = useRef<HTMLTextAreaElement>(null)
-  const categoryRef = useRef<HTMLInputElement>(null)
+  const categoryRef = useRef<HTMLSelectElement>(null)
   const startPriceRef = useRef<HTMLInputElement>(null)
   const expireAtRef = useRef<HTMLInputElement>(null)
   const weightRef = useRef<HTMLInputElement>(null)
@@ -31,21 +41,23 @@ const SellActions = () => {
             type="text"
             ref={titleRef}
           />
+
           <StyledInputAreaRef
             name="Description"
             placeholder="Description"
             ref={descriptionRef}
           />
+
           <div className="flex gap-5">
             <div className="flex-1">
-              <StyledInputRef
+              <StyledDropdownRef
                 name="Category"
                 placeholder="Category"
-                type="text"
                 ref={categoryRef}
-                twClasses="w-full"
+                options={CATEGORIES}
               />
             </div>
+
             <div className="flex-1">
               <StyledInputRef
                 name="Starting Price (in $)"
@@ -64,6 +76,7 @@ const SellActions = () => {
             ref={expireAtRef}
           />
         </div>
+
         <div className="flex flex-col gap-5 pb-10 border-b border-b-gray-500">
           <StyledInputRef
             name="Weight (in kg)"
@@ -71,18 +84,21 @@ const SellActions = () => {
             type="text"
             ref={weightRef}
           />
+
           <StyledInputRef
             name="Height (in kg)"
             placeholder="Height (in kg)"
             type="text"
             ref={heightRef}
           />
+
           <StyledInputRef
             name="Width (in kg)"
             placeholder="Width (in kg)"
             type="text"
             ref={widthRef}
           />
+
           <StyledInputRef
             name="Length (in kg)"
             placeholder="Length (in kg)"
