@@ -16,6 +16,7 @@ import StyledButton from "../../../ui/StyledButton"
 import StyledInputAreaRef from "../../../ui/StyledInputAreaRef"
 import StyledDropdownRef from "../../../ui/StyledDropdown"
 import StyledDateTimePicker from "./StyledDateTimePicker"
+import Error from "../../../ui/Error"
 
 const SellActions = () => {
   const titleRef = useRef<HTMLInputElement>(null)
@@ -28,6 +29,45 @@ const SellActions = () => {
   const lengthRef = useRef<HTMLInputElement>(null)
 
   const [expiration, setExpiration] = useState<Date | null>(null)
+  const [isError, setIsError] = useState(false)
+  const [errorMessage, setErrorMessage] = useState("")
+
+  const createListingHandler = () => {
+    const createListing = async () => {
+      const title = titleRef.current!.value
+      const description = descriptionRef.current!.value
+      const category = categoryRef.current!.value
+      const startPrice = startPriceRef.current!.value
+      const weight = weightRef.current!.value
+      const height = heightRef.current!.value
+      const width = widthRef.current!.value
+      const length = lengthRef.current!.value
+
+      const response = await fetch("http://localhost:5178/api/createListing", {
+        method: "POST",
+        body: JSON.stringify({
+          title,
+          description,
+          category,
+          startPrice,
+          weight,
+          height,
+          width,
+          length,
+          expireAt: expiration,
+        }),
+        headers: { "Content-Type": "application/json" },
+      })
+
+      const data = await response.json()
+
+      if (!data.ok) {
+        setIsError(true)
+        setErrorMessage(data.message)
+        return
+      }
+    }
+  }
 
   // Keep track of Expiration
   const handleDateTimeChange = (value: Date | null) => {
@@ -42,6 +82,8 @@ const SellActions = () => {
 
   return (
     <div className="flex-auto bg-gray-200 bg-opacity-50 p-10 max-w-none md:max-w-[50%] max-h-[50%] md:max-h-none">
+      {" "}
+      {isError && <Error errorMessage={errorMessage} />}
       <form className="space-y-10">
         <div className="flex flex-col gap-5 pb-10 border-b border-b-gray-500">
           <StyledInputRef
