@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react"
 import useAuth from "../../../../lib/hooks/useAuth"
 
 import numberInputIsValid from "../../../../lib/util/numberInputValidator"
+import stringInputIsValid from "../../../../lib/util/stringInputValidator"
 
 const CATEGORIES = [
   "Sneakers",
@@ -62,6 +63,27 @@ const SellActions = () => {
       category,
       weight,
       dimensions: [height, width, length],
+    }
+
+    if (!stringInputIsValid(title)) {
+      setError(true)
+      setErrorMessage("Title is a required field!")
+      titleRef.current!.focus()
+      return
+    }
+
+    if (!stringInputIsValid(desc)) {
+      setError(true)
+      setErrorMessage("Description is a required field!")
+      descriptionRef.current!.focus()
+      return
+    }
+
+    if (!stringInputIsValid(category)) {
+      setError(true)
+      setErrorMessage("Category is a required field!")
+      categoryRef.current!.focus()
+      return
     }
 
     if (!numberInputIsValid(startPrice)) {
