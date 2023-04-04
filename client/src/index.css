@@ -12,3 +12,12 @@ input:not(:placeholder-shown) ~ label {
 input:focus-within ~ label {
   @apply text-gray-900;
 }
+
+textarea:focus-within ~ label,
+textarea:not(:placeholder-shown) ~ label {
+  @apply transform scale-75 -translate-y-4;
+}
+
+textarea:focus-within ~ label {
+  @apply text-gray-900;
+}
