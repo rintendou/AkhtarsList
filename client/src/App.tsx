@@ -14,6 +14,8 @@ import Withdraw from "./components/routes/protected/profile/withdraw/Withdraw"
 import ChangePassword from "./components/routes/forgot-password/ResetPassword"
 import Category from "./components/routes/categories/Category"
 
+import Sell from "./components/routes/protected/profile/sell/Sell"
+
 // Components
 import Body from "./components/layout/body/Body"
 import Footer from "./components/layout/footer/Footer"
@@ -46,6 +48,7 @@ function App() {
               <Route path="/profile" element={<Profile />} />
               <Route path="/deposit" element={<Deposit />} />
               <Route path="/withdraw" element={<Withdraw />} />
+              <Route path="/sell" element={<Sell />} />
             </Route>
           </Route>
 
