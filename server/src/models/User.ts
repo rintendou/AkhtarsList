@@ -35,31 +35,41 @@ const UserSchema = new Schema(
       type: Number,
       required: true,
     },
-    biddedListings: {
-      type: [ObjectId],
-      ref: "Listing",
-    },
-    listedListings: {
-      type: [ObjectId],
-      ref: "Listing",
-    },
-    wonListings: {
-      type: [ObjectId],
-      ref: "Listing",
-    },
-    disputedListings: {
-      type: [ObjectId],
-      ref: "Listing",
-    },
+    biddedListings: [
+      {
+        type: ObjectId,
+        ref: "Listing",
+      },
+    ],
+    listedListings: [
+      {
+        type: ObjectId,
+        ref: "Listing",
+      },
+    ],
+    wonListings: [
+      {
+        type: ObjectId,
+        ref: "Listing",
+      },
+    ],
+    disputedListings: [
+      {
+        type: ObjectId,
+        ref: "Listing",
+      },
+    ],
     isAdmin: {
       type: Boolean,
       required: true,
       default: false,
     },
-    disputesToManage: {
-      type: [ObjectId],
-      ref: "ExpiredListing",
-    },
+    disputesToManage: [
+      {
+        type: ObjectId,
+        ref: "ExpiredListing",
+      },
+    ],
   },
   { timestamps: true }
 )
