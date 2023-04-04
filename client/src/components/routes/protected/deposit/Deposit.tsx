@@ -33,12 +33,13 @@ const Deposit = () => {
       Number(depositAmount) < 0
     ) {
       setError("Invalid Input!")
+      depositAmountRef.current!.focus()
       return
     }
 
     depositFunds(Number(depositAmount))
     depositAmountRef.current!.value = ""
-    cardHolderRef.current!.focus()
+    depositAmountRef.current!.focus()
     setError("")
     setSuccess("Funds Deposited Successfully!")
   }
