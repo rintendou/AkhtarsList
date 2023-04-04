@@ -3,6 +3,7 @@ import { useEffect, useRef } from "react"
 // Components
 import StyledInputRef from "../../../ui/StyledInputRef"
 import StyledButton from "../../../ui/StyledButton"
+import StyledInputAreaRef from "../../../ui/StyledInputAreaRef"
 
 const SellActions = () => {
   const titleRef = useRef<HTMLInputElement>(null)
@@ -30,12 +31,7 @@ const SellActions = () => {
             type="text"
             ref={titleRef}
           />
-          <StyledInputRef
-            name="Description"
-            placeholder="Description"
-            type="text"
-            ref={descriptionRef}
-          />
+          <StyledInputAreaRef name="Description" placeholder="Description" />
           <div className="flex space-x-5">
             <StyledInputRef
               name="Category"
