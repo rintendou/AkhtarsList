@@ -1,4 +1,4 @@
-import { useRef } from "react"
+import { useEffect, useRef } from "react"
 
 // Components
 import StyledInputRef from "../../../ui/StyledInputRef"
@@ -14,6 +14,11 @@ const SellActions = () => {
   const heightRef = useRef<HTMLInputElement>(null)
   const widthRef = useRef<HTMLInputElement>(null)
   const lengthRef = useRef<HTMLInputElement>(null)
+
+  // Focus on component mount
+  useEffect(() => {
+    titleRef.current!.focus()
+  }, [])
 
   return (
     <div className="flex-auto bg-gray-200 bg-opacity-50 p-10 max-w-none md:max-w-[50%] max-h-[50%] md:max-h-none">

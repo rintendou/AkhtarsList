@@ -21,7 +21,7 @@ const StyledButton = ({
   return (
     <button
       onClick={onClick}
-      className={`${twClasses} px-4 py-2 rounded-lg hover:scale-105 duration-200 ease-in-out ${isPrimaryClasses} `}
+      className={`${twClasses} px-4 py-2 rounded-lg hover:scale-105 duration-200 ease-in-out outline-none ${isPrimaryClasses} `}
       type={type}
     >
       {buttonText}
