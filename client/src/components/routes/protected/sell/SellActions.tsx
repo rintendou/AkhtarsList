@@ -60,18 +60,17 @@ const SellActions = () => {
 
             <div className="flex-1">
               <StyledInputRef
-                name="Starting Price (in $)"
-                placeholder="Starting Price (in $)"
+                name="Starting Price ($)"
+                placeholder="Starting Price ($)"
                 type="text"
                 ref={startPriceRef}
-                twClasses="w-full"
               />
             </div>
           </div>
 
           <StyledInputRef
-            name="Expiration"
-            placeholder="Expiration"
+            name="Expiration (MM/DD/YYYY HH:MM:SS)"
+            placeholder="Expiration (MM/DD/YYYY HH:MM:SS)"
             type="text"
             ref={expireAtRef}
           />
@@ -79,29 +78,29 @@ const SellActions = () => {
 
         <div className="flex flex-col gap-5 pb-10 border-b border-b-gray-500">
           <StyledInputRef
-            name="Weight (in kg)"
-            placeholder="Weight (in kg)"
+            name="Weight (kg)"
+            placeholder="Weight (kg)"
             type="text"
             ref={weightRef}
           />
 
           <StyledInputRef
-            name="Height (in kg)"
-            placeholder="Height (in kg)"
+            name="Height (kg)"
+            placeholder="Height (kg)"
             type="text"
             ref={heightRef}
           />
 
           <StyledInputRef
-            name="Width (in kg)"
-            placeholder="Width (in kg)"
+            name="Width (kg)"
+            placeholder="Width (kg)"
             type="text"
             ref={widthRef}
           />
 
           <StyledInputRef
-            name="Length (in kg)"
-            placeholder="Length (in kg)"
+            name="Length (kg)"
+            placeholder="Length (kg)"
             type="text"
             ref={lengthRef}
           />
