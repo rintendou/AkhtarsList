@@ -87,22 +87,22 @@ const SellActions = () => {
           />
 
           <StyledInputRef
-            name="Height (kg)"
-            placeholder="Height (kg)"
+            name="Height (cm)"
+            placeholder="Height (cm)"
             type="text"
             ref={heightRef}
           />
 
           <StyledInputRef
-            name="Width (kg)"
-            placeholder="Width (kg)"
+            name="Width (cm)"
+            placeholder="Width (cm)"
             type="text"
             ref={widthRef}
           />
 
           <StyledInputRef
-            name="Length (kg)"
-            placeholder="Length (kg)"
+            name="Length (cm)"
+            placeholder="Length (cm)"
             type="text"
             ref={lengthRef}
           />
