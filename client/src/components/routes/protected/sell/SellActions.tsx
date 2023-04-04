@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react"
+import useAuth from "../../../../lib/hooks/useAuth"
 
 const CATEGORIES = [
   "Sneakers",
@@ -28,14 +29,17 @@ const SellActions = () => {
   const widthRef = useRef<HTMLInputElement>(null)
   const lengthRef = useRef<HTMLInputElement>(null)
 
-  const [expiration, setExpiration] = useState<Date | null>(null)
+  const [expireAt, setExpireAt] = useState<Date | null>(null)
   const [isError, setIsError] = useState(false)
   const [errorMessage, setErrorMessage] = useState("")
+  const [image] = useState("fakesubway.jpg")
+
+  const { auth } = useAuth()
 
   const createListingHandler = () => {
     const createListing = async () => {
       const title = titleRef.current!.value
-      const description = descriptionRef.current!.value
+      const desc = descriptionRef.current!.value
       const category = categoryRef.current!.value
       const startPrice = startPriceRef.current!.value
       const weight = weightRef.current!.value
@@ -47,14 +51,14 @@ const SellActions = () => {
         method: "POST",
         body: JSON.stringify({
           title,
-          description,
-          category,
+          lister: auth.username,
+          desc,
+          image,
           startPrice,
+          expireAt,
+          category,
           weight,
-          height,
-          width,
-          length,
-          expireAt: expiration,
+          dimension: [height, width, length],
         }),
         headers: { "Content-Type": "application/json" },
       })
@@ -71,8 +75,8 @@ const SellActions = () => {
 
   // Keep track of Expiration
   const handleDateTimeChange = (value: Date | null) => {
-    setExpiration(value)
-    console.log(expiration)
+    setExpireAt(value)
+    console.log(expireAt)
   }
 
   // Focus on component mount
