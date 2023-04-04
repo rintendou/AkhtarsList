@@ -13,6 +13,7 @@ import Deposit from "./components/routes/protected/profile/deposit/Deposit"
 import Withdraw from "./components/routes/protected/profile/withdraw/Withdraw"
 import ChangePassword from "./components/routes/forgot-password/ResetPassword"
 import Category from "./components/routes/categories/Category"
+import Sell from "./components/routes/protected/sell/Sell"
 
 // Components
 import Body from "./components/layout/body/Body"
@@ -21,6 +22,8 @@ import Header from "./components/layout/header/Header"
 
 // Navguard
 import RequireAuth from "./components/routes/protected/RequireAuth"
+
+// Layouts
 import ProfileLayout from "./components/routes/protected/ProfileLayout"
 
 function App() {
@@ -41,6 +44,7 @@ function App() {
           {/* Protected Routes */}
           <Route element={<RequireAuth />}>
             <Route path="/app" element={<Application />} />
+            <Route path="/sell" element={<Sell />} />
 
             <Route element={<ProfileLayout />}>
               <Route path="/profile" element={<Profile />} />

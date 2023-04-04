@@ -15,14 +15,7 @@ const Header = () => {
       {auth._id && <SearchBar />}
       <nav className="hidden md:flex flex-row gap-4">
         {auth._id ? (
-          <>
-            <RouterLink to="/app" routerLinkText="Browse" twClasses="p-2" />
-            <RouterLink
-              to="/profile"
-              routerLinkText="Profile"
-              twClasses="p-2"
-            />
-          </>
+          <LoggedInNavbar />
         ) : (
           <>
             <RouterLink
@@ -53,3 +46,14 @@ const Header = () => {
 }
 
 export default Header
+
+const LoggedInNavbar = () => {
+  return (
+    <>
+      <RouterLink to="/app" routerLinkText="Browse" twClasses="p-2" />
+
+      <RouterLink to="/sell" routerLinkText="Sell" twClasses="p-2" />
+      <RouterLink to="/profile" routerLinkText="Profile" twClasses="p-2" />
+    </>
+  )
+}
