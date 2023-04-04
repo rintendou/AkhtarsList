@@ -21,22 +21,22 @@ const Header = () => {
             <RouterLink
               to="/"
               routerLinkText="Home"
-              twClasses="border p-2 border-main rounded-md w-20 text-center text-lg"
+              twClasses="border p-2 border-main rounded-md w-24 text-center text-lg"
             />
             <RouterLink
               to="/login"
               routerLinkText="Login"
-              twClasses="border p-2 border-main rounded-md w-20 text-center text-lg"
+              twClasses="border p-2 border-main rounded-md w-24 text-center text-lg"
             />
             <RouterLink
               to="/register"
               routerLinkText="Register"
-              twClasses="border p-2 border-main rounded-md w-20 text-center text-lg"
+              twClasses="border p-2 border-main rounded-md w-24 text-center text-lg"
             />
             <RouterLink
               to="/dev"
               routerLinkText="Dev"
-              twClasses="border p-2 border-main rounded-md w-20 text-center text-lg"
+              twClasses="border p-2 border-main rounded-md w-24 text-center text-lg"
             />
           </>
         )}
