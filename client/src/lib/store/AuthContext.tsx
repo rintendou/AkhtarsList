@@ -13,7 +13,7 @@ type initialContextType = {
 
 const initialContext = {
   auth: { username: "", _id: "" },
-  login: (_id: string, username: string) => {},
+  login: () => {},
   logout: () => {},
 }
 
