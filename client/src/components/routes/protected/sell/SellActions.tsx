@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 
 const CATEGORIES = [
   "Sneakers",
@@ -21,11 +21,17 @@ const SellActions = () => {
   const descriptionRef = useRef<HTMLTextAreaElement>(null)
   const categoryRef = useRef<HTMLSelectElement>(null)
   const startPriceRef = useRef<HTMLInputElement>(null)
-  const expireAtRef = useRef<HTMLInputElement>(null)
   const weightRef = useRef<HTMLInputElement>(null)
   const heightRef = useRef<HTMLInputElement>(null)
   const widthRef = useRef<HTMLInputElement>(null)
   const lengthRef = useRef<HTMLInputElement>(null)
+
+  const [expiration, setExpiration] = useState<Date | null>(null)
+
+  const handleDateTimeChange = (value: Date | null) => {
+    setExpiration(value)
+    console.log(expiration)
+  }
 
   // Focus on component mount
   useEffect(() => {
@@ -69,7 +75,7 @@ const SellActions = () => {
             </div>
           </div>
 
-          <StyledDateTimePicker />
+          <StyledDateTimePicker onChange={handleDateTimeChange} />
         </div>
 
         <div className="flex flex-col gap-5 pb-10 border-b border-b-gray-500">

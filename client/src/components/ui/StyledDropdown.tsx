@@ -16,8 +16,6 @@ const StyledDropdownRef = React.forwardRef<HTMLSelectElement, Props>(
       setSelected(event.target.value)
     }
 
-    console.log(selected)
-
     return (
       <div className="relative z-0">
         <select

@@ -3,17 +3,25 @@ import ReactDatePicker from "react-datepicker"
 
 import "react-datepicker/dist/react-datepicker.css"
 
-const StyledDateTimePicker = () => {
-  const [startDate, setStartDate] = useState(new Date())
+type Props = {
+  onChange: (date: Date | null) => void
+}
+
+const StyledDateTimePicker = ({ onChange }: Props) => {
+  const [startDate] = useState(new Date())
 
   const today = new Date()
   const tomorrow = new Date(today)
   tomorrow.setDate(tomorrow.getDate() + 1)
 
+  const handleDateChange = (date: Date | null) => {
+    onChange(date)
+  }
+
   return (
     <ReactDatePicker
       selected={startDate}
-      onChange={(date: Date) => setStartDate(date)}
+      onChange={handleDateChange}
       showTimeSelect
       timeFormat="HH:mm"
       timeIntervals={15}
