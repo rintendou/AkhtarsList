@@ -1,6 +1,8 @@
 import { Request, Response } from "express"
-import UserModel from "../models/User"
 import bcrypt from "bcrypt"
+import jwt from "jsonwebtoken"
+
+import UserModel from "../models/User"
 
 export const registerUser = async (req: Request, res: Response) => {
   // destructure the payload attached to the body
@@ -123,9 +125,15 @@ export const loginUser = async (req: Request, res: Response) => {
         .status(400)
         .json({ message: "User not found", data: null, ok: false })
 
+    const token = await jwt.sign(
+      { _id: user._id, username: user.username },
+      process.env.JWT_KEY as jwt.Secret
+    )
+
     return res
       .status(200)
-      .json({ message: "Login Success!", data: user, ok: true })
+      .header("Authorization", `Bearer ${token}`)
+      .json({ message: "Login Success!", data: token, ok: true })
   } catch (error) {
     return res.status(500).json({ message: error, data: null, ok: false })
   }
