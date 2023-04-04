@@ -17,6 +17,8 @@ const Header = () => {
         {auth._id ? (
           <>
             <RouterLink to="/app" routerLinkText="Browse" twClasses="p-2" />
+
+            <RouterLink to="/sell" routerLinkText="Sell" twClasses="p-2" />
             <RouterLink
               to="/profile"
               routerLinkText="Profile"
