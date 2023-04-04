@@ -2,7 +2,7 @@ import mongoose from "mongoose"
 mongoose.set("strictQuery", false)
 
 const Schema = mongoose.Schema
-const ObjectId = mongoose.Types.ObjectId
+const ObjectId = Schema.Types.ObjectId
 
 // Setting up Schema of User
 const UserSchema = new Schema(
