@@ -1,8 +1,8 @@
-import mongoose from "mongoose";
-mongoose.set("strictQuery", false);
+import mongoose from "mongoose"
+mongoose.set("strictQuery", false)
 
-const Schema = mongoose.Schema;
-const ObjectId = mongoose.Types.ObjectId;
+const Schema = mongoose.Schema
+const ObjectId = mongoose.Types.ObjectId
 
 // Setting up Schema of User
 const UserSchema = new Schema(
@@ -49,12 +49,21 @@ const UserSchema = new Schema(
     },
     disputedListings: {
       type: [ObjectId],
-      ref: "Listing"
+      ref: "Listing",
+    },
+    isAdmin: {
+      type: Boolean,
+      required: true,
+      default: false,
+    },
+    disputesToManage: {
+      type: [ObjectId],
+      ref: "ExpiredListing",
     },
   },
   { timestamps: true }
-);
+)
 
-const UserModel = mongoose.model("User", UserSchema);
+const UserModel = mongoose.model("User", UserSchema)
 
-export default UserModel;
+export default UserModel
