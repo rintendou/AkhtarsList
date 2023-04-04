@@ -16,6 +16,7 @@ const StyledInputAreaRef = React.forwardRef<HTMLTextAreaElement, Props>(
           placeholder=""
           className={`${twClasses} pt-3 pl-5 p-2 block w-full px-0 mt-0 bg-transparent border-2 appearance-none focus:outline-none focus:ring-0 focus:border-secondary border-gray-200`}
           ref={ref}
+          rows={5}
         />
         <label
           htmlFor={name}
