@@ -63,7 +63,7 @@ const SellActions = () => {
     }
     console.log(payload)
 
-    navigate("/preview", { replace: true, state: { ...payload } })
+    navigate("/preview", { replace: true, state: payload })
 
     const createListing = async () => {
       const response = await fetch("http://localhost:5178/api/createListing", {
