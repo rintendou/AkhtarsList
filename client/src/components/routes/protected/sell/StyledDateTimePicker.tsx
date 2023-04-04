@@ -18,6 +18,7 @@ const StyledDateTimePicker = () => {
       timeFormat="HH:mm"
       timeIntervals={15}
       timeCaption="time"
+      timeInputLabel="Expiration: "
       dateFormat="MMMM d, yyyy h:mm aa"
       minDate={new Date()}
       maxTime={

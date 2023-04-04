@@ -60,8 +60,8 @@ const SellActions = () => {
 
             <div className="flex-1">
               <StyledInputRef
-                name="Starting Price ($)"
-                placeholder="Starting Price ($)"
+                name="Start Price ($)"
+                placeholder="Start Price ($)"
                 type="text"
                 ref={startPriceRef}
               />
