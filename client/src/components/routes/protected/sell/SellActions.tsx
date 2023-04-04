@@ -7,7 +7,7 @@ import StyledInputAreaRef from "../../../ui/StyledInputAreaRef"
 
 const SellActions = () => {
   const titleRef = useRef<HTMLInputElement>(null)
-  const descriptionRef = useRef<HTMLInputElement>(null)
+  const descriptionRef = useRef<HTMLTextAreaElement>(null)
   const categoryRef = useRef<HTMLInputElement>(null)
   const startPriceRef = useRef<HTMLInputElement>(null)
   const expireAtRef = useRef<HTMLInputElement>(null)
@@ -31,7 +31,11 @@ const SellActions = () => {
             type="text"
             ref={titleRef}
           />
-          <StyledInputAreaRef name="Description" placeholder="Description" />
+          <StyledInputAreaRef
+            name="Description"
+            placeholder="Description"
+            ref={descriptionRef}
+          />
           <div className="flex gap-5">
             <div className="flex-1">
               <StyledInputRef
