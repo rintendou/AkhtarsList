@@ -11,7 +11,7 @@ const Preview = () => {
   const expireAt = location.state!.expireAt
   const category = location.state!.category
   const weight = location.state!.weight
-  const dimension = location.state!.dimension
+  const dimensions = location.state!.dimensions
 
   return (
     <div className="min-h-screen flex flex-col justify-between">
@@ -35,12 +35,12 @@ const Preview = () => {
             <p>Expiration Date and Time: {expireAt.toString()}</p>
           </div>
           <div className="pb-10 border-b border-gray-300">
-            <h1 className="text-lg font-semibold">Listing Dimensions</h1>
+            <h1 className="text-lg font-semibold">Listing Dimensionss</h1>
             <p>Weight: {weight} kg</p>
             <div>
-              <p>Height: {dimension[0]} cm</p>
-              <p>Width: {dimension[1]} cm</p>
-              <p>Length: {dimension[2]} cm</p>
+              <p>Height: {dimensions[0]} cm</p>
+              <p>Width: {dimensions[1]} cm</p>
+              <p>Length: {dimensions[2]} cm</p>
             </div>
           </div>
         </div>

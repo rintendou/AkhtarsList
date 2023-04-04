@@ -30,7 +30,7 @@ const SellActions = () => {
   const lengthRef = useRef<HTMLInputElement>(null)
 
   const [expireAt, setExpireAt] = useState<Date | null>(null)
-  const [isError, setIsError] = useState(false)
+  const [error, setError] = useState(false)
   const [errorMessage, setErrorMessage] = useState("")
   const [image] = useState("fakesubway.jpg")
 
@@ -59,30 +59,67 @@ const SellActions = () => {
       expireAt,
       category,
       weight,
-      dimension: [height, width, length],
+      dimensions: [height, width, length],
     }
-    console.log(payload)
 
-    navigate("/preview", { replace: true, state: payload })
+    if (
+      isNaN(Number(startPrice)) ||
+      startPrice.length === 0 ||
+      Number(startPrice) < 0
+    ) {
+      setError(true)
+      setErrorMessage("Invalid Starting Price!")
+      startPriceRef.current!.focus()
+      return
+    }
+
+    if (isNaN(Number(weight)) || weight.length === 0 || Number(weight) < 0) {
+      setError(true)
+      setErrorMessage("Invalid Weight!")
+      weightRef.current!.focus()
+      return
+    }
+
+    if (isNaN(Number(height)) || height.length === 0 || Number(height) < 0) {
+      setError(true)
+      setErrorMessage("Invalid Height!")
+      heightRef.current!.focus()
+      return
+    }
+
+    if (isNaN(Number(width)) || width.length === 0 || Number(width) < 0) {
+      setError(true)
+      setErrorMessage("Invalid Width!")
+      widthRef.current!.focus()
+      return
+    }
+
+    if (isNaN(Number(length)) || length.length === 0 || Number(length) < 0) {
+      setError(true)
+      setErrorMessage("Invalid Length!")
+      lengthRef.current!.focus()
+      return
+    }
 
     const createListing = async () => {
-      const response = await fetch("http://localhost:5178/api/createListing", {
+      const response = await fetch("http://localhost:5178/api/listing/post", {
         method: "POST",
         body: JSON.stringify(payload),
         headers: { "Content-Type": "application/json" },
       })
 
       const data = await response.json()
+      console.log(data)
 
       if (!data.ok) {
-        setIsError(true)
+        setError(true)
         setErrorMessage(data.message)
         return
       }
 
-      setIsError(false)
+      setError(false)
       setErrorMessage("")
-      navigate("/preview", { replace: true })
+      navigate("/preview", { replace: true, state: payload })
     }
 
     createListing()
@@ -101,7 +138,7 @@ const SellActions = () => {
 
   return (
     <div className="flex-auto bg-purple-100 bg-opacity-50 p-10 max-w-none md:max-w-[50%] max-h-[50%] md:max-h-none">
-      {isError && <Error errorMessage={errorMessage} />}
+      {error && <Error errorMessage={errorMessage} />}
       <form className="space-y-10" onSubmit={createListingHandler}>
         <div className="flex flex-col gap-5 pb-10 border-b border-b-gray-500">
           <StyledInputRef
