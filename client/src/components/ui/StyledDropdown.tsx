@@ -9,7 +9,7 @@ type Props = {
 const StyledDropdownRef = React.forwardRef<HTMLSelectElement, Props>(
   ({ name, options, placeholder = "", ...rest }, ref) => {
     return (
-      <div className="relative z-0 mb-8">
+      <div className="relative z-0">
         <select
           {...rest}
           id={name}
