@@ -17,7 +17,7 @@ const StyledInput = ({
         id={name}
         type={type}
         placeholder=""
-        className="pt-3 p-2 block w-full px-0 mt-0 bg-transparent border-2 appearance-none focus:outline-none focus:ring-0 focus:border-secondary border-gray-200"
+        className="pt-5 p-2 block w-full mt-0 bg-transparent border-2 appearance-none focus:outline-none focus:ring-0 focus:border-secondary border-gray-200 pl-5 rounded-md"
       />
       <label
         htmlFor={name}
