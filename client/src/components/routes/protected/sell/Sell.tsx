@@ -3,7 +3,7 @@ import SellActions from "./SellActions"
 
 const Sell = () => {
   return (
-    <div className="min-h-screen flex">
+    <div className="min-h-screen flex flex-col md:flex-row">
       <ImageContainer />
       <SellActions />
     </div>
