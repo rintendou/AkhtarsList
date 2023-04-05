@@ -6,6 +6,8 @@ import Error from "../../ui/Error"
 import StyledInputRef from "../../ui/StyledInputRef"
 import RouterLink from "../../ui/RouterLink"
 
+import { settings } from "../../../settings"
+
 const RegisterForm = () => {
   // I opted to use the useRef hook instead of useState to prevent
   // unnecessary re-renders of this component per each character typed
@@ -43,18 +45,21 @@ const RegisterForm = () => {
       const securityQuestion = securityQuestionRef.current!.value
       const securityQuestionAnswer = securityQuestionAnswerRef.current!.value
 
-      const response = await fetch(`http://localhost:5178/api/auth/register`, {
-        method: "POST",
-        body: JSON.stringify({
-          username,
-          password,
-          confirmPassword,
-          address,
-          securityQuestion,
-          securityQuestionAnswer,
-        }),
-        headers: { "Content-Type": "application/json" },
-      })
+      const response = await fetch(
+        `http://localhost:${settings.BACKEND_SERVER_PORT}/api/auth/register`,
+        {
+          method: "POST",
+          body: JSON.stringify({
+            username,
+            password,
+            confirmPassword,
+            address,
+            securityQuestion,
+            securityQuestionAnswer,
+          }),
+          headers: { "Content-Type": "application/json" },
+        }
+      )
       const data = await response.json()
 
       if (!data.ok) {
