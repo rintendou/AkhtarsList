@@ -152,3 +152,39 @@ export const fetchListings = async (req: Request, res: Response) => {
     })
   }
 }
+
+export const fetchListingsByCategory = async (req: Request, res: Response) => {
+  const { category } = req.body
+
+  if (!category) {
+    return res.status(400).json({
+      message: "category property is required!",
+      data: null,
+      ok: false,
+    })
+  }
+
+  try {
+    const listings = await ListingModel.find({ category })
+
+    if (listings.length === 0) {
+      return res.status(404).json({
+        message: "No listings found!",
+        data: listings,
+        ok: true,
+      })
+    }
+
+    res.status(200).json({
+      message: "Listings successfully fetched!",
+      data: listings,
+      ok: true,
+    })
+  } catch (error) {
+    return res.status(500).json({
+      message: error,
+      data: null,
+      ok: false,
+    })
+  }
+}
