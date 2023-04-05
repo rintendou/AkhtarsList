@@ -1,8 +1,8 @@
 type Props = {
-  errorMessage: string
-}
+  errorMessage: string;
+};
 
-const Error = ({ errorMessage }: Props) => {
+const Error = ({ errorMessage = "Something went wrong!" }: Props) => {
   return (
     <div className="flex flex-row items-center gap-2 text-red-900 border-2 border-red-900 bg-red-400 rounded-lg px-4 py-2">
       <svg
@@ -22,7 +22,7 @@ const Error = ({ errorMessage }: Props) => {
       </svg>
       <h1>{errorMessage}</h1>
     </div>
-  )
-}
+  );
+};
 
-export default Error
+export default Error;
