@@ -23,7 +23,7 @@ const Biddings = () => {
             </li>
           ))
         ) : (
-          <h1>No Biddings Found!</h1>
+          <h1 className="text-2xl font-semibold">No Biddings Found!</h1>
         )}
       </ul>
     </div>
