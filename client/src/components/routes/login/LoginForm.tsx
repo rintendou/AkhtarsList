@@ -102,7 +102,7 @@ const LoginForm = ({ didRegisterSuccessfully, successMessage }: Props) => {
       {!isError && didRegisterSuccessfully && (
         <Success successMessage={scsMessage} />
       )}
-      {/* {isError && <Error errorMessage={errorMessage} />} */}
+      {isError && <Error errorMessage={errorMessage} />}
     </Card>
   );
 };
