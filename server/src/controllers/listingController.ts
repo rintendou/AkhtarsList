@@ -65,13 +65,17 @@ export const deleteListing = async (req: Request, res: Response) => {
     // FALSE -> Throw error
 
     const listingId = req.params.listingId
-    const lister = req.body.userId
+    const username = req.body.username
 
-    const user = await UserModel.findById(lister)
+    const user = await UserModel.findOne({
+        username,
+    })
+
     const listing = await ListingModel.findById(listingId)
 
     // If the listing's lister does not match with the userId, then user is trying to manipulate a listing that is not theirs
-    if (!listing?.lister == lister || user?.isAdmin == true) { // NEED TO IMPLEMENT IF USER IS ADMIN
+    if (!listing?.lister == username || user?.isAdmin == true) {
+        // NEED TO IMPLEMENT IF USER IS ADMIN
         return res.status(400).json({
             message: "You can't delete a listing that is not yours!",
             data: null,
@@ -95,6 +99,24 @@ export const deleteListing = async (req: Request, res: Response) => {
     }
 }
 
-export const updateListing = async (req: Request, res: Response) => {}
+export const updateListing = async (req: Request, res: Response) => {
+    // Req body contains all the changes we want
+    // req params will be the id
+
+    const listingId = req.params.listingId
+    const listing = await ListingModel.findById(listingId)
+
+    const username = req.body.username
+    const user = await UserModel.findOne({
+        username: username
+    })
+
+    try {
+        if (!listing?.lister == username || user?.isAdmin == true) {
+            // 
+
+        }
+    } catch (error) {}
+}
 
 export const fetchListings = async (req: Request, res: Response) => {}
