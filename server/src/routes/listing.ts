@@ -8,6 +8,7 @@ import {
   fetchListings,
   fetchListingsByCategory,
   fetchTrendingListings,
+  fetchListing,
 } from "../controllers/listingController"
 
 const ListingRoute = express.Router()
@@ -29,5 +30,8 @@ ListingRoute.get("/fetch-by-category", fetchListingsByCategory)
 
 // Fetch trending listings
 ListingRoute.get("/fetch-by-trending", fetchTrendingListings)
+
+// Fetch specific listing
+ListingRoute.get("/fetch/:listingId", fetchListing)
 
 export default ListingRoute
