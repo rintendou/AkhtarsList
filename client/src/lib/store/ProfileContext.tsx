@@ -79,10 +79,18 @@ const ProfileContextProvider = ({
 
   const refetchUserDetails = () => {
     const refetchUser = async () => {
+      if (!_id) {
+        return
+      }
+
       const response = await fetch(
         `http://localhost:${settings.BACKEND_SERVER_PORT}/api/user/${_id}`
       )
       const data = await response.json()
+
+      if (!data.ok) {
+        return
+      }
 
       setAddress(data.data.address)
       setBalance(data.data.balance)
