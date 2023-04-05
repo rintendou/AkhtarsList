@@ -21,6 +21,8 @@ import StyledDropdownRef from "../../../ui/StyledDropdown"
 import StyledDateTimePicker from "./StyledDateTimePicker"
 import Error from "../../../ui/Error"
 import { useNavigate } from "react-router-dom"
+import { settings } from "../../../../settings"
+import useProfile from "../../../../lib/hooks/useProfile"
 
 const SellActions = () => {
   const titleRef = useRef<HTMLInputElement>(null)
@@ -38,6 +40,7 @@ const SellActions = () => {
   const [image] = useState("fakesubway.jpg")
 
   const { auth } = useAuth()
+  const { refetchUserDetails } = useProfile()
 
   const navigate = useNavigate()
 
@@ -130,11 +133,14 @@ const SellActions = () => {
     }
 
     const createListing = async () => {
-      const response = await fetch("http://localhost:5178/api/listing/post", {
-        method: "POST",
-        body: JSON.stringify(payload),
-        headers: { "Content-Type": "application/json" },
-      })
+      const response = await fetch(
+        `http://localhost:${settings.BACKEND_SERVER_PORT}/api/listing/post`,
+        {
+          method: "POST",
+          body: JSON.stringify(payload),
+          headers: { "Content-Type": "application/json" },
+        }
+      )
 
       const data = await response.json()
       console.log(data)
@@ -148,6 +154,7 @@ const SellActions = () => {
       setError(false)
       setErrorMessage("")
       navigate("/preview", { replace: true, state: payload })
+      refetchUserDetails()
     }
 
     createListing()

@@ -1,5 +1,3 @@
-import ListingCard from "../../../ui/ListingCard"
-import ListingCardSkeleton from "../../../ui/ListingCardSkeleton"
 import UserDetails from "./UserDetails"
 import Biddings from "./biddings/Biddings"
 import Listings from "./listings/Listings"
@@ -10,17 +8,6 @@ const Profile = () => {
       <UserDetails />
       <Listings />
       <Biddings />
-
-      <ListingCard
-        _id="someId"
-        img="test"
-        title="Dummy Title"
-        price={100}
-        timeRemaining="10 days"
-        views={69}
-      />
-
-      <ListingCardSkeleton />
     </div>
   )
 }

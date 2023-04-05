@@ -7,6 +7,7 @@ type UserType = {
 }
 
 type ListingType = {
+  _id: string
   image: string
   bidders: UserType[]
   lister: UserType
@@ -18,7 +19,7 @@ type ListingType = {
   views: number
   category: string
   weight: number
-  dimensions: number[]
+  dimensions: [height: number, width: number, length: number]
 }
 
 type initialContextType = {
@@ -30,6 +31,7 @@ type initialContextType = {
   biddings: ListingType[]
   //   wonListings: []
   //   disputedListings: []
+  refetchUserDetails: () => void
 }
 
 const initialContext: initialContextType = {
@@ -39,6 +41,7 @@ const initialContext: initialContextType = {
   withdrawFunds: () => {},
   listings: [],
   biddings: [],
+  refetchUserDetails: () => {},
 }
 
 const ProfileContext = createContext<initialContextType>(initialContext)
@@ -57,32 +60,52 @@ const ProfileContextProvider = ({
   const [biddings, setBiddings] = useState<ListingType[]>([])
   const [listings, setListings] = useState<ListingType[]>([])
 
-  // Fetch user details
+  // Fetch user details on component mount and when _id changes on auth
   useEffect(() => {
     const fetchUserDetails = async () => {
-      const response = await fetch(`http://localhost:${settings.BACKEND_SERVER_PORT}/api/user/${_id}`)
+      const response = await fetch(
+        `http://localhost:${settings.BACKEND_SERVER_PORT}/api/user/${_id}`
+      )
       const data = await response.json()
 
       setAddress(data.data.address)
       setBalance(data.data.balance)
-      setBiddings(data.data.biddedListings)
-      setListings(data.data.listedListings)
+      setBiddings(data.data.biddedListings.reverse())
+      setListings(data.data.listedListings.reverse())
     }
 
     fetchUserDetails()
   }, [_id])
 
+  const refetchUserDetails = () => {
+    const refetchUser = async () => {
+      const response = await fetch(
+        `http://localhost:${settings.BACKEND_SERVER_PORT}/api/user/${_id}`
+      )
+      const data = await response.json()
+
+      setAddress(data.data.address)
+      setBalance(data.data.balance)
+      setBiddings(data.data.biddedListings.reverse())
+      setListings(data.data.listedListings.reverse())
+    }
+    refetchUser()
+  }
+
   // Deposit funds
   const depositFunds = (amount: number) => {
     const deposit = async () => {
-      const response = await fetch(`http://localhost:${settings.BACKEND_SERVER_PORT}/api/user/deposit`, {
-        method: "POST",
-        body: JSON.stringify({
-          userId: _id,
-          depositAmount: amount,
-        }),
-        headers: { "Content-Type": "application/json" },
-      })
+      const response = await fetch(
+        `http://localhost:${settings.BACKEND_SERVER_PORT}/api/user/deposit`,
+        {
+          method: "POST",
+          body: JSON.stringify({
+            userId: _id,
+            depositAmount: amount,
+          }),
+          headers: { "Content-Type": "application/json" },
+        }
+      )
       const data = await response.json()
 
       if (!data.ok) {
@@ -97,14 +120,17 @@ const ProfileContextProvider = ({
   // Withdraw funds
   const withdrawFunds = (amount: number) => {
     const withdraw = async () => {
-      const response = await fetch(`http://localhost:${settings.BACKEND_SERVER_PORT}/api/user/withdraw`, {
-        method: "POST",
-        body: JSON.stringify({
-          userId: _id,
-          withdrawAmount: amount,
-        }),
-        headers: { "Content-Type": "application/json" },
-      })
+      const response = await fetch(
+        `http://localhost:${settings.BACKEND_SERVER_PORT}/api/user/withdraw`,
+        {
+          method: "POST",
+          body: JSON.stringify({
+            userId: _id,
+            withdrawAmount: amount,
+          }),
+          headers: { "Content-Type": "application/json" },
+        }
+      )
       const data = await response.json()
 
       if (!data.ok) {
@@ -123,6 +149,7 @@ const ProfileContextProvider = ({
     withdrawFunds,
     biddings,
     listings,
+    refetchUserDetails,
   }
 
   return (
