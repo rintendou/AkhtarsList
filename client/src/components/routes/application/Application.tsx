@@ -11,15 +11,6 @@ const IMAGESET1 = [
   "assorted1.jpg",
 ]
 
-const IMAGESET2 = [
-  "sneakers.jpg",
-  "antiques.jpg",
-  "tech.jpg",
-  "accessories.jpg",
-  "collectibles.jpg",
-  "assorted.jpg",
-]
-
 const Application = () => {
   return (
     <div className="min-h-screen flex flex-col">
