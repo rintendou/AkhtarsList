@@ -7,7 +7,7 @@ const ImageContainer = () => {
       <img
         src={ImageUpload}
         alt="Upload Image Here"
-        className="h-full p-5 group-hover:animate-pulse duration-200 ease-in-out"
+        className="h-full p-5 my-20 md:my-0 group-hover:animate-pulse duration-200 ease-in-out"
       />
     </div>
   )
