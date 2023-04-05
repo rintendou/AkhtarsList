@@ -10,7 +10,7 @@ const Footer = () => {
         {auth._id ? (
           <>
             <RouterLink
-              to="/app"
+              to="/"
               routerLinkText="Browse"
               twClasses="p-2 text-lg"
             />
@@ -22,11 +22,6 @@ const Footer = () => {
           </>
         ) : (
           <>
-            <RouterLink
-              to="/"
-              routerLinkText="Home"
-              twClasses="p-2 w-24 text-center text-lg"
-            />
             <RouterLink
               to="/login"
               routerLinkText="Login"

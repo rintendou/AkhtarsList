@@ -19,11 +19,6 @@ const Header = () => {
         ) : (
           <>
             <RouterLink
-              to="/"
-              routerLinkText="Home"
-              twClasses="p-2 w-24 text-center text-lg"
-            />
-            <RouterLink
               to="/login"
               routerLinkText="Login"
               twClasses="p-2 w-24 text-center text-lg"
@@ -50,7 +45,7 @@ export default Header
 const LoggedInNavbar = () => {
   return (
     <>
-      <RouterLink to="/app" routerLinkText="Browse" twClasses="p-2 text-lg" />
+      <RouterLink to="/" routerLinkText="Browse" twClasses="p-2 text-lg" />
 
       <RouterLink to="/sell" routerLinkText="Sell" twClasses="p-2 text-lg" />
       <RouterLink
