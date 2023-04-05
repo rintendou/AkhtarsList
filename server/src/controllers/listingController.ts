@@ -127,4 +127,28 @@ export const deleteListing = async (req: Request, res: Response) => {
 
 export const updateListing = async (req: Request, res: Response) => {}
 
-export const fetchListings = async (req: Request, res: Response) => {}
+export const fetchListings = async (req: Request, res: Response) => {
+  try {
+    const listings = await ListingModel.find()
+
+    if (listings.length === 0) {
+      return res.status(404).json({
+        message: "No listings found!",
+        data: listings,
+        ok: true,
+      })
+    }
+
+    res.status(200).json({
+      message: "Listings successfully fetched!",
+      data: listings,
+      ok: true,
+    })
+  } catch (error) {
+    return res.status(500).json({
+      message: error,
+      data: null,
+      ok: false,
+    })
+  }
+}
