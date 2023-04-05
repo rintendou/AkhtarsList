@@ -188,3 +188,34 @@ export const fetchListingsByCategory = async (req: Request, res: Response) => {
     })
   }
 }
+
+export const fetchTrendingListings = async (req: Request, res: Response) => {
+  try {
+    // Get listings that have views greater than 1 and sort in descending order
+    const listings = await ListingModel.find({ views: { $gt: 0 } }).sort({
+      views: -1,
+    })
+
+    console.log(listings)
+
+    if (listings.length === 0) {
+      return res.status(404).json({
+        message: "No listings found!",
+        data: listings,
+        ok: true,
+      })
+    }
+
+    res.status(200).json({
+      message: "Listings successfully fetched!",
+      data: listings,
+      ok: true,
+    })
+  } catch (error) {
+    return res.status(500).json({
+      message: error,
+      data: null,
+      ok: false,
+    })
+  }
+}
