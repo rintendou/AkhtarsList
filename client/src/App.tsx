@@ -15,6 +15,7 @@ import ChangePassword from "./components/routes/forgot-password/ResetPassword"
 import Category from "./components/routes/categories/Category"
 import Sell from "./components/routes/protected/sell/Sell"
 import Preview from "./components/routes/protected/preview/Preview"
+import ListingDetail from "./components/routes/listing-detail/ListingDetail"
 
 // Components
 import Body from "./components/layout/body/Body"
@@ -41,6 +42,7 @@ function App() {
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/reset-password" element={<ChangePassword />} />
           <Route path="/category/:categoryName" element={<Category />} />
+          <Route path="/listings/:listingId" element={<ListingDetail />} />
           <Route path="/dev" element={<Dev />} />
 
           {/* Protected Routes */}

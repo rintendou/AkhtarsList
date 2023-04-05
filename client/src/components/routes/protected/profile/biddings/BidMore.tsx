@@ -5,7 +5,7 @@ const BidMore = () => {
   const navigate = useNavigate()
 
   return (
-    <div onClick={() => navigate("/app")}>
+    <div onClick={() => navigate("/")}>
       <Card twClasses="p-2 w-56 h-76 flex flex-col justify-between opacity-50 cursor-pointer hover:scale-105 duration-200 ease-in-out">
         <div className="h-36 w-auto rounded-md bg-gray-400  mb-2 flex items-center justify-center">
           <svg

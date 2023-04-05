@@ -139,7 +139,7 @@ export const fetchListings = async (req: Request, res: Response) => {
 
     res.status(200).json({
       message: "Listings successfully fetched!",
-      data: listings,
+      data: listings.reverse(),
       ok: true,
     })
   } catch (error) {

@@ -23,6 +23,7 @@ import Error from "../../../ui/Error"
 import { useNavigate } from "react-router-dom"
 import { settings } from "../../../../settings"
 import useProfile from "../../../../lib/hooks/useProfile"
+import useTimeline from "../../../../lib/hooks/useTimeline"
 
 const SellActions = () => {
   const titleRef = useRef<HTMLInputElement>(null)
@@ -41,6 +42,7 @@ const SellActions = () => {
 
   const { auth } = useAuth()
   const { refetchUserDetails } = useProfile()
+  const { refetchTimeline } = useTimeline()
 
   const navigate = useNavigate()
 
@@ -155,6 +157,7 @@ const SellActions = () => {
       setErrorMessage("")
       navigate("/preview", { replace: true, state: payload })
       refetchUserDetails()
+      refetchTimeline()
     }
 
     createListing()

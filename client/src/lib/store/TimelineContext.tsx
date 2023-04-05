@@ -25,12 +25,22 @@ type ListingType = {
 type initialContextType = {
   allListings: ListingType[]
   trendingListings: ListingType[]
+  sneakersListings: ListingType[]
+  antiquesListings: ListingType[]
+  techListings: ListingType[]
+  accessoriesListings: ListingType[]
+  collectiblesListings: ListingType[]
   refetchTimeline: () => void
 }
 
 const initialContext = {
   allListings: [],
   trendingListings: [],
+  sneakersListings: [],
+  antiquesListings: [],
+  techListings: [],
+  accessoriesListings: [],
+  collectiblesListings: [],
   refetchTimeline: () => {},
 }
 
@@ -39,6 +49,15 @@ const TimelineContext = createContext<initialContextType>(initialContext)
 const TimelineContextProvider = ({ children }: { children: ReactNode }) => {
   const [allListings, setAllListings] = useState<ListingType[]>([])
   const [trendingListings, setTrendingListings] = useState<ListingType[]>([])
+  const [sneakersListings, setSneakersListings] = useState<ListingType[]>([])
+  const [antiquesListings, setAntiquesListings] = useState<ListingType[]>([])
+  const [techListings, setTechListings] = useState<ListingType[]>([])
+  const [accessoriesListings, setAccessoriesListings] = useState<ListingType[]>(
+    []
+  )
+  const [collectiblesListings, setCollectiblesListings] = useState<
+    ListingType[]
+  >([])
 
   // Fetch all and trending listings on component mount
   useEffect(() => {
@@ -52,7 +71,28 @@ const TimelineContextProvider = ({ children }: { children: ReactNode }) => {
         return
       }
 
+      const sneakersListings = json.data.filter(
+        (listing: ListingType) => listing.category === "Sneakers"
+      )
+      const antiquesListings = json.data.filter(
+        (listing: ListingType) => listing.category === "Antiques"
+      )
+      const techListings = json.data.filter(
+        (listing: ListingType) => listing.category === "Tech"
+      )
+      const accessoriesListings = json.data.filter(
+        (listing: ListingType) => listing.category === "Accessories"
+      )
+      const collectiblesListings = json.data.filter(
+        (listing: ListingType) => listing.category === "Collectibles"
+      )
+
       setAllListings(json.data)
+      setSneakersListings(sneakersListings)
+      setAntiquesListings(antiquesListings)
+      setTechListings(techListings)
+      setAccessoriesListings(accessoriesListings)
+      setCollectiblesListings(collectiblesListings)
     }
 
     const fetchTrendingListings = async () => {
@@ -83,7 +123,28 @@ const TimelineContextProvider = ({ children }: { children: ReactNode }) => {
         return
       }
 
+      const sneakersListings = json.data.filter(
+        (listing: ListingType) => listing.category === "Sneakers"
+      )
+      const antiquesListings = json.data.filter(
+        (listing: ListingType) => listing.category === "Antiques"
+      )
+      const techListings = json.data.filter(
+        (listing: ListingType) => listing.category === "Tech"
+      )
+      const accessoriesListings = json.data.filter(
+        (listing: ListingType) => listing.category === "Accessories"
+      )
+      const collectiblesListings = json.data.filter(
+        (listing: ListingType) => listing.category === "Collectibles"
+      )
+
       setAllListings(json.data)
+      setSneakersListings(sneakersListings)
+      setAntiquesListings(antiquesListings)
+      setTechListings(techListings)
+      setAccessoriesListings(accessoriesListings)
+      setCollectiblesListings(collectiblesListings)
     }
 
     const fetchTrendingListings = async () => {
@@ -106,6 +167,11 @@ const TimelineContextProvider = ({ children }: { children: ReactNode }) => {
   const contextValue = {
     allListings,
     trendingListings,
+    sneakersListings,
+    antiquesListings,
+    techListings,
+    accessoriesListings,
+    collectiblesListings,
     refetchTimeline,
   }
 
