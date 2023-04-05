@@ -8,17 +8,17 @@ const Biddings = () => {
   return (
     <div>
       <h1 className="text-4xl font-bold pb-5 border-b-2 w-full">Biddings</h1>
-      <ul className="flex flex-wrap gap-5 py-5 justify-center content-center">
+      <ul className="flex gap-8 py-8 overflow-x-auto">
         {biddings.length !== 0 ? (
-          biddings.map((listing) => (
-            <li key={listing._id}>
+          biddings.map((bidding) => (
+            <li key={bidding._id}>
               <ListingCard
-                _id={listing._id}
-                img={listing.image}
-                title={listing.title}
-                price={listing.finalPrice}
+                _id={bidding._id}
+                img={bidding.image}
+                title={bidding.title}
+                price={bidding.finalPrice}
                 timeRemaining="10 days"
-                views={listing.views}
+                views={bidding.views}
               />
             </li>
           ))

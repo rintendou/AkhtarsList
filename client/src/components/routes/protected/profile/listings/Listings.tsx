@@ -8,7 +8,7 @@ const Listings = () => {
   return (
     <div>
       <h1 className="text-4xl font-bold pb-5 border-b-2 w-full">Listings</h1>
-      <ul className="flex flex-wrap gap-5 py-5 justify-center content-center">
+      <ul className="flex gap-8 py-8 overflow-x-auto">
         {listings.length !== 0 ? (
           listings.map((listing) => (
             <li key={listing._id}>
