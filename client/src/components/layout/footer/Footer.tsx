@@ -23,7 +23,7 @@ const Footer = () => {
         ) : (
           <>
             <RouterLink
-              to="/"
+              to="/app"
               routerLinkText="Home"
               twClasses="p-2 w-24 text-center text-lg"
             />
@@ -48,7 +48,7 @@ const Footer = () => {
       <RouterLink
         twClasses="text-2xl font-bold"
         routerLinkText="AkhtarsList"
-        to="/"
+        to="/app"
       />
     </footer>
   )

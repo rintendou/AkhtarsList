@@ -10,7 +10,7 @@ const Header = () => {
       <RouterLink
         twClasses="text-2xl font-bold"
         routerLinkText="AkhtarsList"
-        to="/"
+        to="/app"
       />
       {auth._id && <SearchBar />}
       <nav className="hidden md:flex flex-row gap-4">
@@ -19,7 +19,7 @@ const Header = () => {
         ) : (
           <>
             <RouterLink
-              to="/"
+              to="/app"
               routerLinkText="Home"
               twClasses="p-2 w-24 text-center text-lg"
             />
