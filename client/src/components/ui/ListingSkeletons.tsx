@@ -4,7 +4,7 @@ const ListingSkeletons = () => {
   const skeletons = []
 
   for (let i = 0; i < 30; i++) {
-    skeletons.push(<ListingCardSkeleton />)
+    skeletons.push(<ListingCardSkeleton key={i} />)
   }
 
   return (

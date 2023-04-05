@@ -3,23 +3,18 @@ import { useNavigate } from "react-router-dom"
 
 import classNames from "classnames"
 
-const IMAGES = [
-  "sneakers.jpg",
-  "antiques.jpg",
-  "tech.jpg",
-  "accessories.jpg",
-  "collectibles.jpg",
-  "assorted.jpg",
-]
+type Props = {
+  images: string[]
+}
 
 const INTERVAL_TIME = 3000
 
-const Carousel = () => {
+const Carousel = ({ images }: Props) => {
   const [activeIndex, setActiveIndex] = useState(0)
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setActiveIndex((activeIndex + 1) % IMAGES.length)
+      setActiveIndex((activeIndex + 1) % images.length)
     }, INTERVAL_TIME)
 
     // Cleanup function to clear interval when component unmounts
@@ -27,11 +22,11 @@ const Carousel = () => {
   }, [activeIndex])
 
   const prevImage = () => {
-    setActiveIndex((activeIndex - 1 + IMAGES.length) % IMAGES.length)
+    setActiveIndex((activeIndex - 1 + images.length) % images.length)
   }
 
   const nextImage = () => {
-    setActiveIndex((activeIndex + 1) % IMAGES.length)
+    setActiveIndex((activeIndex + 1) % images.length)
   }
 
   const navigate = useNavigate()
@@ -76,16 +71,16 @@ const Carousel = () => {
       </div>
       <div className="absolute inset-0 flex items-center justify-center">
         <img
-          src={`carousel/${IMAGES[activeIndex]}`}
+          src={`carousel/${images[activeIndex]}`}
           alt={`Image ${activeIndex + 1}`}
           className="w-full h-full object-cover cursor-pointer"
           onClick={() =>
-            navigate(`/category/${cleanUpPathname(IMAGES[activeIndex])}`)
+            navigate(`/category/${cleanUpPathname(images[activeIndex])}`)
           }
         />
       </div>
       <div className="absolute bottom-0 left-0 right-0 flex justify-center py-2">
-        {IMAGES.map((_, index) => (
+        {images.map((_, index) => (
           <button
             key={index}
             onClick={() => setActiveIndex(index)}
@@ -111,6 +106,6 @@ const cleanUpPathname = (pathname: string): string => {
     // No file extension found
     return pathname
   } else {
-    return pathname.slice(0, dotIndex)
+    return pathname.slice(0, dotIndex - 1)
   }
 }
