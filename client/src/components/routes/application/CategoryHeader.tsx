@@ -33,6 +33,11 @@ const CategoryHeader = () => {
         to="/category/trending"
         twClasses="text-xl"
       />
+      <RouterLink
+        routerLinkText="Trending"
+        to="/category/trending"
+        twClasses="text-xl"
+      />
     </div>
   )
 }
