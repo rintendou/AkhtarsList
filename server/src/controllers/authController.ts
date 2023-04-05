@@ -71,6 +71,11 @@ export const registerUser = async (req: Request, res: Response) => {
       password: hashedPassword,
       address,
       balance: 0,
+      listedListings: [],
+      biddedListings: [],
+      disputedListings: [],
+      wonListings: [],
+      disputesToManage: [],
       securityQuestion,
       securityQuestionAnswer: hashedSecurityQuestionAnswer,
     })

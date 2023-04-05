@@ -6,7 +6,7 @@ const Header = () => {
   const { auth } = useAuth()
 
   return (
-    <header className="p-8 flex flex-row justify-between items-center bg-secondary text-primary sticky top-0 gap-8 z-10">
+    <header className="p-8 flex flex-row justify-between items-center bg-secondary text-primary sticky top-0 gap-8 z-50">
       <RouterLink
         twClasses="text-2xl font-bold"
         routerLinkText="AkhtarsList"
@@ -18,11 +18,6 @@ const Header = () => {
           <LoggedInNavbar />
         ) : (
           <>
-            <RouterLink
-              to="/"
-              routerLinkText="Home"
-              twClasses="p-2 w-24 text-center text-lg"
-            />
             <RouterLink
               to="/login"
               routerLinkText="Login"
@@ -50,7 +45,7 @@ export default Header
 const LoggedInNavbar = () => {
   return (
     <>
-      <RouterLink to="/app" routerLinkText="Browse" twClasses="p-2 text-lg" />
+      <RouterLink to="/" routerLinkText="Browse" twClasses="p-2 text-lg" />
 
       <RouterLink to="/sell" routerLinkText="Sell" twClasses="p-2 text-lg" />
       <RouterLink

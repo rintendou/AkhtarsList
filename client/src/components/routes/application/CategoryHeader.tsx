@@ -2,7 +2,7 @@ import RouterLink from "../../ui/RouterLink"
 
 const CategoryHeader = () => {
   return (
-    <div className="bg-purple-100 flex justify-center gap-8 p-4">
+    <div className="bg-purple-100 flex justify-center gap-8 p-4 mb-6">
       <RouterLink
         routerLinkText="Sneakers"
         to="/category/sneakers"
@@ -31,6 +31,11 @@ const CategoryHeader = () => {
       <RouterLink
         routerLinkText="Trending"
         to="/category/trending"
+        twClasses="text-xl"
+      />
+      <RouterLink
+        routerLinkText="All"
+        to="/category/none"
         twClasses="text-xl"
       />
     </div>

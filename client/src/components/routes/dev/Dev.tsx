@@ -1,16 +1,26 @@
-import Card from "../../ui/Card"
-import Error from "../../ui/Error"
-import ListingCard from "../../ui/ListingCard"
-import ListingCardSkeleton from "../../ui/ListingCardSkeleton"
-import LoadingSpinner from "../../ui/LoadingSpinner"
-import Overview from "../../ui/Overview"
-import RouterLink from "../../ui/RouterLink"
-import StyledButton from "../../ui/StyledButton"
-import StyledDropdown from "../../ui/StyledDropdown"
-import StyledInput from "../../ui/StyledInput"
-import StyledInputAreaRef from "../../ui/StyledInputAreaRef"
-import Success from "../../ui/Success"
-import StyledDateTimePicker from "../protected/sell/StyledDateTimePicker"
+import Card from "../../ui/Card";
+import Carousel from "../../ui/Carousel";
+import Error from "../../ui/Error";
+import ListingCard from "../../ui/ListingCard";
+import ListingCardSkeleton from "../../ui/ListingCardSkeleton";
+import LoadingSpinner from "../../ui/LoadingSpinner";
+import Overview from "../../ui/Overview";
+import RouterLink from "../../ui/RouterLink";
+import StyledButton from "../../ui/StyledButton";
+import StyledDropdown from "../../ui/StyledDropdown";
+import StyledInput from "../../ui/StyledInput";
+import StyledInputAreaRef from "../../ui/StyledInputAreaRef";
+import Success from "../../ui/Success";
+import StyledDateTimePicker from "../protected/sell/StyledDateTimePicker";
+
+const IMAGESET1 = [
+  "sneakers1.jpg",
+  "antiques1.jpg",
+  "tech1.jpg",
+  "accessories1.jpg",
+  "collectibles1.jpg",
+  "assorted1.jpg",
+];
 
 const Dev = () => {
   return (
@@ -31,14 +41,14 @@ const Dev = () => {
       <div className="flex flex-row gap-5">
         <StyledButton
           onClick={() => {
-            console.log("Hello")
+            console.log("Hello");
           }}
           buttonText="Primary Button"
           intent="primary"
         />
         <StyledButton
           onClick={() => {
-            console.log("Hello")
+            console.log("Hello");
           }}
           buttonText="Secondary Button"
           intent="secondary"
@@ -77,9 +87,11 @@ const Dev = () => {
         options={["test1", "test2"]}
       />
 
-      <StyledDateTimePicker />
-    </div>
-  )
-}
+      <StyledDateTimePicker onChange={() => {}} />
 
-export default Dev
+      <Carousel images={IMAGESET1} />
+    </div>
+  );
+};
+
+export default Dev;

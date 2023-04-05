@@ -6,7 +6,7 @@
 
 input:focus-within ~ label,
 input:not(:placeholder-shown) ~ label {
-  @apply transform scale-75 -translate-y-4;
+  @apply transform scale-75 -translate-y-2.5;
 }
 
 input:focus-within ~ label {
@@ -15,7 +15,7 @@ input:focus-within ~ label {
 
 textarea:focus-within ~ label,
 textarea:not(:placeholder-shown) ~ label {
-  @apply transform scale-75 -translate-y-4;
+  @apply transform scale-75 -translate-y-2.5;
 }
 
 textarea:focus-within ~ label {
@@ -24,7 +24,7 @@ textarea:focus-within ~ label {
 
 select:focus-within ~ label,
 select:not(:placeholder-shown) ~ label {
-  @apply transform scale-75 -translate-y-4;
+  @apply transform scale-75 -translate-y-2.5;
 }
 
 select:focus-within ~ label {

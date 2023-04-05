@@ -33,6 +33,11 @@ const SideNavLinks = () => {
         to="/category/trending"
         twClasses="text-lg"
       />
+      <RouterLink
+        routerLinkText="Assorted"
+        to="/category/assorted"
+        twClasses="text-lg"
+      />
     </div>
   )
 }
