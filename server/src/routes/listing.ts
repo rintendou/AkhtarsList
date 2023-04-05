@@ -12,7 +12,7 @@ ListingRoute.post('/post', createListing)
 ListingRoute.delete('/delete/:listingId', deleteListing)
 
 // Update listing
-ListingRoute.put('/edit/:listingId', updateListing)
+ListingRoute.put('/update/:listingId', updateListing)
 
 // Fetch all listings
 ListingRoute.get('/fetch', fetchListings)
