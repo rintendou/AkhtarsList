@@ -106,6 +106,6 @@ const cleanUpPathname = (pathname: string): string => {
     // No file extension found
     return pathname
   } else {
-    return pathname.slice(0, dotIndex)
+    return pathname.slice(0, dotIndex - 1)
   }
 }
