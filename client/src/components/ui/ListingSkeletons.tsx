@@ -7,7 +7,9 @@ const ListingSkeletons = () => {
     skeletons.push(<ListingCardSkeleton />)
   }
 
-  return <ul className="flex gap-8 py-5 flex-wrap">{}</ul>
+  return (
+    <ul className="flex gap-8 py-5 flex-wrap mx-auto container">{skeletons}</ul>
+  )
 }
 
 export default ListingSkeletons
