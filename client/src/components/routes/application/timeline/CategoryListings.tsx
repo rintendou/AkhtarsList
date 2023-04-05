@@ -1,6 +1,7 @@
 import useTimeline from "../../../../lib/hooks/useTimeline"
 import ListingCard from "../../../ui/ListingCard"
 import ListingSkeletons from "../../../ui/ListingSkeletons"
+import SeeAll from "./SeeAll"
 
 const CategoryListings = () => {
   const {
@@ -12,7 +13,10 @@ const CategoryListings = () => {
   } = useTimeline()
   return (
     <div className="space-y-8">
-      <h1 className="text-lg font-semibold w-full">Sneakers</h1>
+      <div className="flex justify-between">
+        <h1 className="text-lg font-semibold w-full">Sneakers</h1>
+        <SeeAll to="/category/sneakers" />
+      </div>
       <ul className="flex gap-8 py-5 overflow-x-scroll">
         {sneakersListings.length !== 0 ? (
           sneakersListings.map((listing) => (
@@ -31,7 +35,10 @@ const CategoryListings = () => {
           <ListingSkeletons />
         )}
       </ul>
-      <h1 className="text-lg font-semibold w-full">Antiques</h1>
+      <div className="flex justify-between">
+        <h1 className="text-lg font-semibold w-full">Antiques</h1>
+        <SeeAll to="/category/antiques" />
+      </div>
       <ul className="flex gap-8 py-5 overflow-x-scroll">
         {antiquesListings.length !== 0 ? (
           antiquesListings.map((listing) => (
@@ -50,7 +57,10 @@ const CategoryListings = () => {
           <ListingSkeletons />
         )}
       </ul>
-      <h1 className="text-lg font-semibold w-full">Tech</h1>
+      <div className="flex justify-between">
+        <h1 className="text-lg font-semibold w-full">Tech</h1>
+        <SeeAll to="/category/tech" />
+      </div>
       <ul className="flex gap-8 py-5 overflow-x-scroll">
         {techListings.length !== 0 ? (
           techListings.map((listing) => (
@@ -69,7 +79,10 @@ const CategoryListings = () => {
           <ListingSkeletons />
         )}
       </ul>
-      <h1 className="text-lg font-semibold w-full">Accessories</h1>
+      <div className="flex justify-between">
+        <h1 className="text-lg font-semibold w-full">Accessories</h1>
+        <SeeAll to="/category/accessories" />
+      </div>
       <ul className="flex gap-8 py-5 overflow-x-scroll">
         {accessoriesListings.length !== 0 ? (
           accessoriesListings.map((listing) => (
@@ -88,7 +101,10 @@ const CategoryListings = () => {
           <ListingSkeletons />
         )}
       </ul>
-      <h1 className="text-lg font-semibold w-full">Collectibles</h1>
+      <div className="flex justify-between">
+        <h1 className="text-lg font-semibold w-full">Collectibles</h1>
+        <SeeAll to="/category/collectibles" />
+      </div>
       <ul className="flex gap-8 py-5 overflow-x-scroll">
         {collectiblesListings.length !== 0 ? (
           collectiblesListings.map((listing) => (
