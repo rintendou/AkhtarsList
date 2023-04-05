@@ -125,6 +125,149 @@ export const deleteListing = async (req: Request, res: Response) => {
   }
 }
 
-export const updateListing = async (req: Request, res: Response) => {}
+export const fetchListings = async (req: Request, res: Response) => {
+  try {
+    const listings = await ListingModel.find()
 
-export const fetchListings = async (req: Request, res: Response) => {}
+    if (listings.length === 0) {
+      return res.status(404).json({
+        message: "No listings found!",
+        data: listings,
+        ok: true,
+      })
+    }
+
+    res.status(200).json({
+      message: "Listings successfully fetched!",
+      data: listings,
+      ok: true,
+    })
+  } catch (error) {
+    return res.status(500).json({
+      message: error,
+      data: null,
+      ok: false,
+    })
+  }
+}
+
+export const fetchListingsByCategory = async (req: Request, res: Response) => {
+  const { category } = req.body
+
+  if (!category) {
+    return res.status(400).json({
+      message: "category property is required!",
+      data: null,
+      ok: false,
+    })
+  }
+
+  try {
+    const listings = await ListingModel.find({ category })
+
+    if (listings.length === 0) {
+      return res.status(404).json({
+        message: "No listings found!",
+        data: listings,
+        ok: true,
+      })
+    }
+
+    res.status(200).json({
+      message: "Listings successfully fetched!",
+      data: listings,
+      ok: true,
+    })
+  } catch (error) {
+    return res.status(500).json({
+      message: error,
+      data: null,
+      ok: false,
+    })
+  }
+}
+
+export const fetchTrendingListings = async (req: Request, res: Response) => {
+  try {
+    // Get listings that have views greater than 1 and sort in descending order
+    const listings = await ListingModel.find({ views: { $gt: 0 } }).sort({
+      views: -1,
+    })
+
+    console.log(listings)
+
+    if (listings.length === 0) {
+      return res.status(404).json({
+        message: "No listings found!",
+        data: listings,
+        ok: true,
+      })
+    }
+
+    res.status(200).json({
+      message: "Listings successfully fetched!",
+      data: listings,
+      ok: true,
+    })
+  } catch (error) {
+    return res.status(500).json({
+      message: error,
+      data: null,
+      ok: false,
+    })
+  }
+}
+
+export const updateListing = async (req: Request, res: Response) => {
+  // update listing when a user is bidding on it (update finalPrice, highestBidder, etc. )
+}
+
+export const fetchListing = async (req: Request, res: Response) => {
+  // Fetch listing and increment its views field
+
+  const { listingId } = req.params
+
+  // Check if the required fields are filled in
+  if (!listingId) {
+    return res.status(400).json({
+      message: "listingId params is required!",
+      data: null,
+      ok: false,
+    })
+  }
+
+  // Check if the listingId is a valid ObjectId
+  if (!mongoose.Types.ObjectId.isValid(listingId)) {
+    return res.status(400).json({
+      message: "Invalid listingId!",
+      data: null,
+      ok: false,
+    })
+  }
+
+  try {
+    // Check if listing exists
+    const existingListing = await ListingModel.findOneAndUpdate(
+      { _id: listingId },
+      { $inc: { views: 1 } },
+      { new: true }
+    )
+    if (!existingListing) {
+      return res
+        .status(400)
+        .json({ message: "Listing does not exist!", data: null, ok: false })
+    }
+
+    res.status(200).json({
+      message: "Listing successfully fetched!",
+      data: existingListing,
+      ok: true,
+    })
+  } catch (error) {
+    return res.status(500).json({
+      message: error,
+      data: null,
+      ok: false,
+    })
+  }
+}

@@ -7,15 +7,18 @@ import { BrowserRouter as Router } from "react-router-dom"
 // Global State
 import AuthContextProvider from "./lib/store/AuthContext"
 import ProfileContextProvider from "./lib/store/ProfileContext"
+import TimelineContextProvider from "./lib/store/TimelineContext"
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
     <Router>
-      <AuthContextProvider>
-        <ProfileContextProvider>
-          <App />
-        </ProfileContextProvider>
-      </AuthContextProvider>
+      <TimelineContextProvider>
+        <AuthContextProvider>
+          <ProfileContextProvider>
+            <App />
+          </ProfileContextProvider>
+        </AuthContextProvider>
+      </TimelineContextProvider>
     </Router>
   </React.StrictMode>
 )

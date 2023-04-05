@@ -6,7 +6,7 @@ const Header = () => {
   const { auth } = useAuth()
 
   return (
-    <header className="p-8 flex flex-row justify-between items-center bg-secondary text-primary sticky top-0 gap-8 z-10">
+    <header className="p-8 flex flex-row justify-between items-center bg-secondary text-primary sticky top-0 gap-8 z-50">
       <RouterLink
         twClasses="text-2xl font-bold"
         routerLinkText="AkhtarsList"
