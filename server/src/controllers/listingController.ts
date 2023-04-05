@@ -96,12 +96,16 @@ export const deleteListing = async (req: Request, res: Response) => {
   // FALSE -> Throw error
 
   const listingId = req.params.listingId
-  const lister = req.body.userId
-
   const listing = await ListingModel.findById(listingId)
 
+  const username = req.body.username
+  const user = await UserModel.findOne({
+    username: username
+  })
+
+
   // If the listing's lister does not match with the userId, then user is trying to manipulate a listing that is not theirs
-  if (!listing?.lister == lister) {
+  if (!listing?.lister == username || user?.isAdmin == true) {
     return res.status(400).json({
       message: "You can't delete a listing that is not yours!",
       data: null,
@@ -232,7 +236,7 @@ export const updateListing = async (req: Request, res: Response) => {
 
     try {
         if (!listing?.lister == username || user?.isAdmin == true) {
-            // 
+            
 
         }
     } catch (error) {}
