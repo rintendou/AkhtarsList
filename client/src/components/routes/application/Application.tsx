@@ -13,7 +13,7 @@ const IMAGESET1 = [
 
 const Application = () => {
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col pb-20">
       <CategoryHeader />
       <div className="container mx-auto flex flex-col gap-5">
         <Carousel images={IMAGESET1} />
