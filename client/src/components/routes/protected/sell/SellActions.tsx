@@ -23,6 +23,7 @@ import Error from "../../../ui/Error"
 import { useNavigate } from "react-router-dom"
 import { settings } from "../../../../settings"
 import useProfile from "../../../../lib/hooks/useProfile"
+import useTimeline from "../../../../lib/hooks/useTimeline"
 
 const SellActions = () => {
   const titleRef = useRef<HTMLInputElement>(null)
@@ -41,6 +42,7 @@ const SellActions = () => {
 
   const { auth } = useAuth()
   const { refetchUserDetails } = useProfile()
+  const { refetchTimeline } = useTimeline()
 
   const navigate = useNavigate()
 
@@ -158,6 +160,7 @@ const SellActions = () => {
     }
 
     createListing()
+    refetchTimeline()
   }
 
   // Keep track of Expiration
