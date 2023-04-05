@@ -11,9 +11,9 @@ const CategoryListings = () => {
     collectiblesListings,
   } = useTimeline()
   return (
-    <div>
+    <div className="space-y-8">
       <h1 className="text-lg font-semibold w-full">Sneakers</h1>
-      <ul className="flex gap-8 py-5 flex-wrap">
+      <ul className="flex gap-8 py-5 overflow-x-scroll">
         {sneakersListings.length !== 0 ? (
           sneakersListings.map((listing) => (
             <li key={listing._id}>
@@ -32,7 +32,7 @@ const CategoryListings = () => {
         )}
       </ul>
       <h1 className="text-lg font-semibold w-full">Antiques</h1>
-      <ul className="flex gap-8 py-5 flex-wrap">
+      <ul className="flex gap-8 py-5 overflow-x-scroll">
         {antiquesListings.length !== 0 ? (
           antiquesListings.map((listing) => (
             <li key={listing._id}>
@@ -51,7 +51,7 @@ const CategoryListings = () => {
         )}
       </ul>
       <h1 className="text-lg font-semibold w-full">Tech</h1>
-      <ul className="flex gap-8 py-5 flex-wrap">
+      <ul className="flex gap-8 py-5 overflow-x-scroll">
         {techListings.length !== 0 ? (
           techListings.map((listing) => (
             <li key={listing._id}>
@@ -70,7 +70,7 @@ const CategoryListings = () => {
         )}
       </ul>
       <h1 className="text-lg font-semibold w-full">Accessories</h1>
-      <ul className="flex gap-8 py-5 flex-wrap">
+      <ul className="flex gap-8 py-5 overflow-x-scroll">
         {accessoriesListings.length !== 0 ? (
           accessoriesListings.map((listing) => (
             <li key={listing._id}>
@@ -89,7 +89,7 @@ const CategoryListings = () => {
         )}
       </ul>
       <h1 className="text-lg font-semibold w-full">Collectibles</h1>
-      <ul className="flex gap-8 py-5 flex-wrap">
+      <ul className="flex gap-8 py-5 overflow-x-scroll">
         {collectiblesListings.length !== 0 ? (
           collectiblesListings.map((listing) => (
             <li key={listing._id}>
