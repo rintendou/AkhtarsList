@@ -1,4 +1,5 @@
 import Card from "../../ui/Card"
+import Carousel from "../../ui/Carousel"
 import Error from "../../ui/Error"
 import ListingCard from "../../ui/ListingCard"
 import ListingCardSkeleton from "../../ui/ListingCardSkeleton"
@@ -77,7 +78,9 @@ const Dev = () => {
         options={["test1", "test2"]}
       />
 
-      <StyledDateTimePicker />
+      <StyledDateTimePicker onChange={() => {}} />
+
+      <Carousel />
     </div>
   )
 }
