@@ -222,26 +222,6 @@ export const fetchTrendingListings = async (req: Request, res: Response) => {
   }
 }
 
-export const updateListing = async (req: Request, res: Response) => {
-  // Req body contains all the changes we want
-  // req params will be the id
-
-    const listingId = req.params.listingId
-    const listing = await ListingModel.findById(listingId)
-
-    const username = req.body.username
-    const user = await UserModel.findOne({
-        username: username
-    })
-
-    try {
-        if (!listing?.lister == username || user?.isAdmin == true) {
-            
-
-        }
-    } catch (error) {}
-}
-
 export const fetchListing = async (req: Request, res: Response) => {
   // Fetch listing and increment its views field
 
@@ -290,4 +270,24 @@ export const fetchListing = async (req: Request, res: Response) => {
       ok: false,
     })
   }
+}
+
+export const updateListing = async (req: Request, res: Response) => {
+  // Req body contains all the changes we want
+  // req params will be the id
+
+    const listingId = req.params.listingId
+    const listing = await ListingModel.findById(listingId)
+
+    const username = req.body.username
+    const user = await UserModel.findOne({
+        username: username
+    })
+
+    try {
+        if (!listing?.lister == username || user?.isAdmin == true) {
+            
+
+        }
+    } catch (error) {}
 }
