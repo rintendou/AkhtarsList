@@ -37,7 +37,7 @@ const Carousel = () => {
   const navigate = useNavigate()
 
   return (
-    <div className="relative h-96 w-full">
+    <div className="relative h-80 w-full">
       {/* left overlay */}
       <div
         className="absolute inset-y-0 left-0 z-10 flex items-center justify-center bg-black bg-opacity-0 cursor-pointer w-[20%]"
