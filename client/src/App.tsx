@@ -35,7 +35,7 @@ function App() {
         <Routes>
           {/*  Unprotected Routes */}
           {/* <Route path="/" element={<LandingPage />} /> */}
-          <Route path="/app" element={<Application />} />
+          <Route path="/" element={<Application />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
