@@ -8,7 +8,6 @@ import {
   fetchListings,
   fetchListingsByCategory,
   fetchTrendingListings,
-  fetchListing,
 } from "../controllers/listingController"
 
 const ListingRoute = express.Router()
@@ -20,7 +19,7 @@ ListingRoute.post("/post", createListing)
 ListingRoute.delete("/delete/:listingId", deleteListing)
 
 // Update listing
-ListingRoute.put("/edit/:listingId", updateListing)
+ListingRoute.put('/update/:listingId', updateListing)
 
 // Fetch all listings
 ListingRoute.get("/fetch", fetchListings)
@@ -32,6 +31,6 @@ ListingRoute.get("/fetch-by-category", fetchListingsByCategory)
 ListingRoute.get("/fetch-by-trending", fetchTrendingListings)
 
 // Fetch specific listing
-ListingRoute.get("/fetch/:listingId", fetchListing)
+ListingRoute.get("/fetch/:listingId", fetchListings)
 
 export default ListingRoute
