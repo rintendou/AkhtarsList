@@ -1,11 +1,11 @@
 import { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import useAuth from "../../../lib/hooks/useAuth";
 
 import Card from "../../ui/Card";
 import Error from "../../ui/Error";
 import StyledInputRef from "../../ui/StyledInputRef";
 import Success from "../../ui/Success";
-import useAuth from "../../../lib/hooks/useAuth";
-import { useNavigate } from "react-router-dom";
 import RouterLink from "../../ui/RouterLink";
 import { settings } from "../../../settings";
 
@@ -96,13 +96,13 @@ const LoginForm = ({ didRegisterSuccessfully, successMessage }: Props) => {
         <LoginButton />
       </form>
       <h1 className="text-center">
-        Don't have an account yet?{" "}
+        Don't have an account yet?
         <RouterLink routerLinkText="Register here" to="/register" />
       </h1>
       {!isError && didRegisterSuccessfully && (
         <Success successMessage={scsMessage} />
       )}
-      {isError && <Error errorMessage={errorMessage} />}
+      {/* {isError && <Error errorMessage={errorMessage} />} */}
     </Card>
   );
 };
