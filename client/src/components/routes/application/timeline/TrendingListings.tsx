@@ -1,6 +1,7 @@
 import useTimeline from "../../../../lib/hooks/useTimeline"
 
 import ListingCard from "../../../ui/ListingCard"
+import ListingSkeletons from "../../../ui/ListingSkeletons"
 
 const TrendingListings = () => {
   const { trendingListings } = useTimeline()
@@ -23,7 +24,7 @@ const TrendingListings = () => {
             </li>
           ))
         ) : (
-          <h1 className="text-center text-2xl font-bold">No Listings Found!</h1>
+          <ListingSkeletons />
         )}
       </ul>
     </div>
