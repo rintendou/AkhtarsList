@@ -69,7 +69,7 @@ const ProfileContextProvider = ({
       setBalance(data.data.balance)
       setBiddings(data.data.biddedListings)
       setListings(data.data.listedListings)
-      console.log(data.data.listedListings)
+      console.log(data)
     }
 
     fetchUserDetails()
