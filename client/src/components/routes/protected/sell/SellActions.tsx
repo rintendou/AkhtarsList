@@ -157,10 +157,10 @@ const SellActions = () => {
       setErrorMessage("")
       navigate("/preview", { replace: true, state: payload })
       refetchUserDetails()
+      refetchTimeline()
     }
 
     createListing()
-    refetchTimeline()
   }
 
   // Keep track of Expiration
