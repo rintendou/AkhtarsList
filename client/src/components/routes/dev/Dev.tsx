@@ -80,8 +80,6 @@ const Dev = () => {
 
       <StyledDateTimePicker onChange={() => {}} />
 
-      <img src="carousel/tech.jpg" alt="" />
-
       <Carousel />
     </div>
   )
