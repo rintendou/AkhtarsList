@@ -1,4 +1,4 @@
-import RandomListingImage from "../../../../../public/random-listing-image.svg"
+import RandomListingImage from "../../../../../public/random-listing-image-undraw.svg"
 
 type Props = {
   img: string
