@@ -7,8 +7,8 @@ const AllListings = () => {
 
   return (
     <div>
-      <h1 className="text-4xl font-bold pb-5 border-b-2 w-full">Listings</h1>
-      <ul className="flex gap-8 py-8 overflow-x-auto">
+      <h1 className="text-lg font-semibold w-full">All Listings</h1>
+      <ul className="flex gap-8 py-5 flex-wrap">
         {allListings.length !== 0 ? (
           allListings.map((listing) => (
             <li key={listing._id}>
