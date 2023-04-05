@@ -18,7 +18,7 @@ type ListingType = {
   views: number
   category: string
   weight: number
-  dimensions: number[]
+  dimensions: [height: number, width: number, length: number]
 }
 
 type initialContextType = {
@@ -60,13 +60,16 @@ const ProfileContextProvider = ({
   // Fetch user details
   useEffect(() => {
     const fetchUserDetails = async () => {
-      const response = await fetch(`http://localhost:${settings.BACKEND_SERVER_PORT}/api/user/${_id}`)
+      const response = await fetch(
+        `http://localhost:${settings.BACKEND_SERVER_PORT}/api/user/${_id}`
+      )
       const data = await response.json()
 
       setAddress(data.data.address)
       setBalance(data.data.balance)
       setBiddings(data.data.biddedListings)
       setListings(data.data.listedListings)
+      console.log(data.data.listedListings)
     }
 
     fetchUserDetails()
@@ -75,14 +78,17 @@ const ProfileContextProvider = ({
   // Deposit funds
   const depositFunds = (amount: number) => {
     const deposit = async () => {
-      const response = await fetch(`http://localhost:${settings.BACKEND_SERVER_PORT}/api/user/deposit`, {
-        method: "POST",
-        body: JSON.stringify({
-          userId: _id,
-          depositAmount: amount,
-        }),
-        headers: { "Content-Type": "application/json" },
-      })
+      const response = await fetch(
+        `http://localhost:${settings.BACKEND_SERVER_PORT}/api/user/deposit`,
+        {
+          method: "POST",
+          body: JSON.stringify({
+            userId: _id,
+            depositAmount: amount,
+          }),
+          headers: { "Content-Type": "application/json" },
+        }
+      )
       const data = await response.json()
 
       if (!data.ok) {
@@ -97,14 +103,17 @@ const ProfileContextProvider = ({
   // Withdraw funds
   const withdrawFunds = (amount: number) => {
     const withdraw = async () => {
-      const response = await fetch(`http://localhost:${settings.BACKEND_SERVER_PORT}/api/user/withdraw`, {
-        method: "POST",
-        body: JSON.stringify({
-          userId: _id,
-          withdrawAmount: amount,
-        }),
-        headers: { "Content-Type": "application/json" },
-      })
+      const response = await fetch(
+        `http://localhost:${settings.BACKEND_SERVER_PORT}/api/user/withdraw`,
+        {
+          method: "POST",
+          body: JSON.stringify({
+            userId: _id,
+            withdrawAmount: amount,
+          }),
+          headers: { "Content-Type": "application/json" },
+        }
+      )
       const data = await response.json()
 
       if (!data.ok) {
