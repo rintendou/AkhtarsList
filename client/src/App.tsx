@@ -35,6 +35,7 @@ function App() {
         <Routes>
           {/*  Unprotected Routes */}
           {/* <Route path="/" element={<LandingPage />} /> */}
+          <Route path="/app" element={<Application />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
@@ -44,7 +45,6 @@ function App() {
 
           {/* Protected Routes */}
           <Route element={<RequireAuth />}>
-            <Route path="/app" element={<Application />} />
             <Route path="/sell" element={<Sell />} />
             <Route path="/preview" element={<Preview />} />
 
