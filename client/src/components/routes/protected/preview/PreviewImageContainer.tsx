@@ -1,3 +1,5 @@
+import RandomListingImage from "../../../../../public/random-listing-image.svg"
+
 type Props = {
   img: string
   title: string
@@ -5,12 +7,12 @@ type Props = {
 
 const PreviewImageContainer = ({ img, title }: Props) => {
   return (
-    <div className="flex-auto p-10 text-center capitalize text-2xl font-semibold max-w-none md:max-w-[50%] max-h-[50%] md:max-h-none cursor-pointer group">
+    <div className="flex-auto p-10 text-center capitalize text-2xl font-semibold cursor-pointer flex flex-col justify-center">
       <h1 className="capitalize">{title}</h1>
       <img
-        src={img}
+        src={RandomListingImage}
         alt={title}
-        className="h-full p-5 group-hover:animate-pulse duration-200 ease-in-out"
+        className="h-full w-auto p-5 ml-60"
       />
     </div>
   )
