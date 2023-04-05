@@ -4,7 +4,6 @@ import ListingCard from "../../../../ui/ListingCard"
 
 const Listings = () => {
   const { listings } = useProfile()
-  console.log(listings)
 
   return (
     <div>
