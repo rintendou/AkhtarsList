@@ -21,7 +21,7 @@ const ListingCard = ({
   return (
     <Card twClasses="p-2 w-56 text-sm h-76 justify-between cursor-pointer hover:shadow-xl duration-100 ease-in-out">
       <Link to={`/listings/${_id}`}>
-        <div className="flex flex-col">
+        <div className="flex flex-col gap-1">
           <img
             src="https://picsum.photos/200/300"
             alt={title}
