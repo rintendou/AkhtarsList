@@ -7,6 +7,7 @@ type UserType = {
 }
 
 type ListingType = {
+  _id: string
   image: string
   bidders: UserType[]
   lister: UserType
@@ -30,6 +31,7 @@ type initialContextType = {
   biddings: ListingType[]
   //   wonListings: []
   //   disputedListings: []
+  refetchUserDetails: () => void
 }
 
 const initialContext: initialContextType = {
@@ -39,6 +41,7 @@ const initialContext: initialContextType = {
   withdrawFunds: () => {},
   listings: [],
   biddings: [],
+  refetchUserDetails: () => {},
 }
 
 const ProfileContext = createContext<initialContextType>(initialContext)
@@ -57,7 +60,7 @@ const ProfileContextProvider = ({
   const [biddings, setBiddings] = useState<ListingType[]>([])
   const [listings, setListings] = useState<ListingType[]>([])
 
-  // Fetch user details
+  // Fetch user details on component mount and when _id changes on auth
   useEffect(() => {
     const fetchUserDetails = async () => {
       const response = await fetch(
@@ -69,11 +72,27 @@ const ProfileContextProvider = ({
       setBalance(data.data.balance)
       setBiddings(data.data.biddedListings)
       setListings(data.data.listedListings)
-      console.log(data)
+
+      console.log(data.data.listedListings)
     }
 
     fetchUserDetails()
   }, [_id])
+
+  const refetchUserDetails = () => {
+    const refetchUser = async () => {
+      const response = await fetch(
+        `http://localhost:${settings.BACKEND_SERVER_PORT}/api/user/${_id}`
+      )
+      const data = await response.json()
+
+      setAddress(data.data.address)
+      setBalance(data.data.balance)
+      setBiddings(data.data.biddedListings)
+      setListings(data.data.listedListings)
+    }
+    refetchUser()
+  }
 
   // Deposit funds
   const depositFunds = (amount: number) => {
@@ -132,6 +151,7 @@ const ProfileContextProvider = ({
     withdrawFunds,
     biddings,
     listings,
+    refetchUserDetails,
   }
 
   return (
