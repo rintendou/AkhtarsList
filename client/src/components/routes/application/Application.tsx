@@ -1,3 +1,5 @@
+import { useEffect } from "react"
+import useTimeline from "../../../lib/hooks/useTimeline"
 import Carousel from "../../ui/Carousel"
 import CategoryHeader from "./CategoryHeader"
 import Timeline from "./timeline/Timeline"
@@ -12,6 +14,13 @@ const IMAGESET1 = [
 ]
 
 const Application = () => {
+  const { refetchTimeline } = useTimeline()
+
+  // Refresh timeline on component mount
+  useEffect(() => {
+    refetchTimeline()
+  }, [])
+
   return (
     <div className="min-h-screen flex flex-col pb-20">
       <CategoryHeader />
