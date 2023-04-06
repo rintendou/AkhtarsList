@@ -87,7 +87,7 @@ const SeeOtherListings = ({ category, idToFilter }: Props) => {
         ) : (
           <div>
             <div>
-              <h1>No More Listing Cards found in {category}</h1>
+              <h1>No Other Listings Found in {category}</h1>
             </div>
             <ListMore />
           </div>
