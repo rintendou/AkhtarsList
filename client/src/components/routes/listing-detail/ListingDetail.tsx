@@ -51,7 +51,7 @@ const ListingDetail = () => {
   useEffect(() => {
     fetchListing(listingId!)
     bidInputRef.current!.focus()
-  }, [])
+  }, [listingId])
 
   const onSubmitBid = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
