@@ -153,7 +153,7 @@ const ListingDetail = () => {
             <div className="flex items-center gap-3">
               <h1>Expires At:</h1>
               <p className="text-lg font-semibold truncate">
-                Expires in: {timeRemaining.days} d, {timeRemaining.hours} h,
+                {timeRemaining.days} d, {timeRemaining.hours} h,
                 {timeRemaining.minutes} m, and {timeRemaining.seconds} s
               </p>
             </div>
