@@ -74,8 +74,13 @@ const ListingDetailContextProvider = ({
     setListingId(listingId)
   }
 
+  const contextValue = {
+    listing,
+    fetchListing,
+  }
+
   return (
-    <ListingDetailContext.Provider value={{ listing, fetchListing }}>
+    <ListingDetailContext.Provider value={contextValue}>
       {children}
     </ListingDetailContext.Provider>
   )

@@ -1,5 +1,4 @@
 import { useState } from "react"
-import { useLocation } from "react-router"
 
 import { settings } from "../../../settings"
 
@@ -8,23 +7,6 @@ import Bidders from "./Bidders"
 
 const ListingDetail = () => {
   const [bidAmount, setBidAmount] = useState(0)
-  const location = useLocation()
-
-  const {
-    _id,
-    image,
-    bidders,
-    lister,
-    desc,
-    title,
-    startPrice,
-    finalPrice,
-    expireAt,
-    views,
-    category,
-    weight,
-    dimensions,
-  } = location.state
 
   const onSubmitBid = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
