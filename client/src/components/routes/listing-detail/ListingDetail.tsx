@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react"
-import { useLocation } from "react-router"
+import { useLocation, useNavigate } from "react-router"
+import useAuth from "../../../lib/hooks/useAuth"
 
 // Components
 import Error from "../../ui/Error"
@@ -21,6 +22,9 @@ const ListingDetail = () => {
   const [errorMessage, setErrorMessage] = useState("")
   const bidInputRef = useRef<HTMLInputElement>(null)
   const location = useLocation()
+
+  const { auth } = useAuth()
+  const navigate = useNavigate()
 
   const {
     _id,
@@ -47,6 +51,12 @@ const ListingDetail = () => {
 
     const bidAmount = bidInputRef.current!.value
 
+    if (!auth._id) {
+      navigate("/login", {
+        state: { errorMessage: "Must be logged in to do that!" },
+      })
+    }
+
     if (!numberInputIsValid(bidAmount)) {
       bidInputRef.current!.value = ""
       bidInputRef.current!.focus()
@@ -55,10 +65,12 @@ const ListingDetail = () => {
       return
     }
 
-    if (Number(bidAmount) < finalPrice) {
+    if (Number(bidAmount) <= finalPrice) {
       bidInputRef.current!.focus()
       setIsError(true)
-      setErrorMessage("Bid amount cannot be less than current price!")
+      setErrorMessage(
+        "Bid amount cannot be less than or equalt to the current price!"
+      )
       return
     }
 
@@ -149,11 +161,8 @@ const ListingDetail = () => {
               <p className="text-lg font-semibold"> ${finalPrice}</p>
             </div>
             <div className="flex items-center gap-3">
-              <h1>Expires At:</h1>
-              <p className="text-lg font-semibold truncate">
-                Expires in: {timeRemaining.days} d, {timeRemaining.hours} h,
-                {timeRemaining.minutes} m, and {timeRemaining.seconds} s
-              </p>
+              <h1>Expires In:</h1>
+              <p className="text-lg font-semibold truncate">{timeRemaining}</p>
             </div>
           </div>
           <form

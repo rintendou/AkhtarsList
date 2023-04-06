@@ -7,6 +7,7 @@ import SeeOthersButton from "./SeeOthersButton"
 
 // Types
 import ListingType from "../../../lib/types/ListingType"
+import ListMore from "../protected/profile/listings/ListMore"
 
 type Props = {
   category: string
@@ -84,7 +85,12 @@ const SeeOtherListings = ({ category, idToFilter }: Props) => {
             </li>
           ))
         ) : (
-          <h1 className="h-64">No More Listing Cards found!</h1>
+          <div>
+            <div>
+              <h1>No Other Listings Found in {category}</h1>
+            </div>
+            <ListMore />
+          </div>
         )}
       </ul>
     </div>

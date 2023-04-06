@@ -15,9 +15,14 @@ import { settings } from "../../../settings"
 type Props = {
   didRegisterSuccessfully: boolean
   successMessage: string
+  errorMessageFromOtherRoute: string
 }
 
-const LoginForm = ({ didRegisterSuccessfully, successMessage }: Props) => {
+const LoginForm = ({
+  didRegisterSuccessfully,
+  successMessage,
+  errorMessageFromOtherRoute,
+}: Props) => {
   const { login } = useAuth()
   const navigate = useNavigate()
 
@@ -31,8 +36,7 @@ const LoginForm = ({ didRegisterSuccessfully, successMessage }: Props) => {
     usernameRef.current!.focus()
   }, [])
   // Keep track of error
-  const [isError, setIsError] = useState(false)
-  const [errorMessage, setErrorMessage] = useState("")
+  const [errorMessage, setErrorMessage] = useState(errorMessageFromOtherRoute)
 
   // Keep track of login success
   const [scsMessage, setScsMessage] = useState(successMessage)
@@ -62,12 +66,10 @@ const LoginForm = ({ didRegisterSuccessfully, successMessage }: Props) => {
       const data = await response.json()
 
       if (!data.ok) {
-        setIsError(true)
         setErrorMessage(data.message)
         return
       }
 
-      setIsError(false)
       setScsMessage(data.data.message)
       login(data.data.user._id, data.data.user.username, data.data.user.token)
       navigate("/", { replace: true })
@@ -102,10 +104,10 @@ const LoginForm = ({ didRegisterSuccessfully, successMessage }: Props) => {
         Don't have an account yet?
         <RouterLink routerLinkText="Register here" to="/register" />
       </h1>
-      {!isError && didRegisterSuccessfully && (
+      {!errorMessage && didRegisterSuccessfully && (
         <Success successMessage={scsMessage} />
       )}
-      {isError && <Error errorMessage={errorMessage} />}
+      {errorMessage && <Error errorMessage={errorMessage} />}
     </Card>
   )
 }
