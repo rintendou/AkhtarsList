@@ -1,4 +1,6 @@
 import { useCallback, useMemo, useState } from "react"
+import useTimeline from "./useTimeline"
+
 import ListingType from "../types/ListingType"
 import { settings } from "../../settings"
 
@@ -25,6 +27,8 @@ const useListingDetail = () => {
     useMemo(() => initialListingState, [])
   )
 
+  const { allListings } = useTimeline()
+
   const fetchListing = useCallback((listingId: string) => {
     const fetchListingDetail = async () => {
       const response = await fetch(
@@ -47,7 +51,11 @@ const useListingDetail = () => {
     fetchListingDetail()
   }, [])
 
-  return { listing, fetchListing }
+  const checkIfListingExists = (listingId: string) => {
+    return allListings.some((listing) => listing._id === listingId)
+  }
+
+  return { listing, fetchListing, checkIfListingExists }
 }
 
 export default useListingDetail
