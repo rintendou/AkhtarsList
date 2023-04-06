@@ -1,5 +1,4 @@
 import { useNavigate } from "react-router-dom"
-import useUpdateListingViewCount from "../../lib/hooks/useUpdateListingViewCount"
 
 // Components
 import Card from "./Card"
@@ -9,6 +8,7 @@ import getTimeRemaining from "../../lib/util/getTimeRemaining"
 
 // Types
 import ListingType from "../../lib/types/ListingType"
+import useListingDetail from "../../lib/hooks/useListingDetail"
 
 const ListingCard = ({
   _id,
@@ -26,10 +26,11 @@ const ListingCard = ({
   dimensions,
 }: ListingType) => {
   const navigate = useNavigate()
-  const { updateListingViewCount } = useUpdateListingViewCount()
+
+  const { fetchListing } = useListingDetail()
 
   const handleClick = () => {
-    updateListingViewCount(_id)
+    fetchListing(_id)
     navigate(`/listings/${_id}`, {
       state: {
         _id,

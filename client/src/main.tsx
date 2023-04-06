@@ -8,6 +8,7 @@ import { BrowserRouter as Router } from "react-router-dom"
 import AuthContextProvider from "./lib/store/AuthContext"
 import ProfileContextProvider from "./lib/store/ProfileContext"
 import TimelineContextProvider from "./lib/store/TimelineContext"
+import ListingDetailContextProvider from "./lib/store/ListingDetailContext"
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
@@ -15,7 +16,9 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
       <TimelineContextProvider>
         <AuthContextProvider>
           <ProfileContextProvider>
-            <App />
+            <ListingDetailContextProvider>
+              <App />
+            </ListingDetailContextProvider>
           </ProfileContextProvider>
         </AuthContextProvider>
       </TimelineContextProvider>

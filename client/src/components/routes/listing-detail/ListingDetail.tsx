@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react"
-import { useLocation, useNavigate } from "react-router"
+import { useNavigate } from "react-router"
 import useAuth from "../../../lib/hooks/useAuth"
+import useListingDetail from "../../../lib/hooks/useListingDetail"
 
 // Components
 import Error from "../../ui/Error"
@@ -20,11 +21,29 @@ import SeeOtherListings from "./SeeOtherListings"
 const ListingDetail = () => {
   const [isError, setIsError] = useState(false)
   const [errorMessage, setErrorMessage] = useState("")
+
   const bidInputRef = useRef<HTMLInputElement>(null)
-  const location = useLocation()
 
   const { auth } = useAuth()
   const navigate = useNavigate()
+
+  const { listing } = useListingDetail()
+
+  // const {
+  //   _id,
+  //   image,
+  //   bidders,
+  //   lister,
+  //   desc,
+  //   title,
+  //   startPrice,
+  //   finalPrice,
+  //   expireAt,
+  //   views,
+  //   category,
+  //   weight,
+  //   dimensions,
+  // } = location.state
 
   const {
     _id,
@@ -40,7 +59,7 @@ const ListingDetail = () => {
     category,
     weight,
     dimensions,
-  } = location.state
+  } = listing
 
   useEffect(() => {
     bidInputRef.current!.focus()
@@ -69,7 +88,7 @@ const ListingDetail = () => {
       bidInputRef.current!.focus()
       setIsError(true)
       setErrorMessage(
-        "Bid amount cannot be less than or equalt to the current price!"
+        "Bid amount cannot be less than or equal to the current price!"
       )
       return
     }
