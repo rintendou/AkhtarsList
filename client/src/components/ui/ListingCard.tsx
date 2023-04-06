@@ -1,5 +1,6 @@
-import { Link, useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import Card from "./Card"
+import useUpdateListingViewCount from "../../lib/hooks/useUpdateListingViewCount"
 
 type UserType = {
   username: string
@@ -37,8 +38,10 @@ const ListingCard = ({
   dimensions,
 }: ListingType) => {
   const navigate = useNavigate()
+  const { updateListingViewCount } = useUpdateListingViewCount()
 
   const handleClick = () => {
+    updateListingViewCount(_id)
     navigate(`/listings/${_id}`, {
       state: {
         _id,
