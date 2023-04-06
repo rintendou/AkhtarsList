@@ -27,4 +27,4 @@ const SeeOthersButton = ({ to }: Props) => {
   )
 }
 
-export default SeeOtherListings
+export default SeeOthersButton
