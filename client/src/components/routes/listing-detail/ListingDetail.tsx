@@ -1,12 +1,34 @@
 import { useState } from "react"
+import useListingDetail from "../../../lib/hooks/useListingDetail"
 
 import { settings } from "../../../settings"
 
 import DUMMYIMAGE from "../../../../public/random-listing-image-undraw.svg"
+
 import Bidders from "./Bidders"
+import { useLocation } from "react-router"
 
 const ListingDetail = () => {
-  const [bidAmount, setBidAmount] = useState(0)
+  const [bidAmount, setBidAmount] = useState("0")
+  const location = useLocation()
+
+  const {
+    _id,
+    image,
+    bidders,
+    lister,
+    desc,
+    title,
+    startPrice,
+    finalPrice,
+    expireAt,
+    views,
+    category,
+    weight,
+    dimensions,
+  } = location.state
+
+  // console.log(location.state)
 
   const onSubmitBid = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -109,6 +131,8 @@ const ListingDetail = () => {
             <input
               id="Bid Amount ($)"
               placeholder=""
+              value={bidAmount}
+              onChange={(event) => setBidAmount(event.target.value)}
               className="pt-3 pl-3 p-2 block px-0 mt-0 bg-transparent border-2 focus:outline-none focus:ring-0 border-secondary rounded-md w-full"
             />
             <label
