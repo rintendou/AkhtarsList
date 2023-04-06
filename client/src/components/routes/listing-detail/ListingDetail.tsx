@@ -1,5 +1,4 @@
 import { useState } from "react"
-import useListingDetail from "../../../lib/hooks/useListingDetail"
 
 import { settings } from "../../../settings"
 
