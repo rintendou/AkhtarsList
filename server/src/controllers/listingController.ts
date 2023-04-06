@@ -153,7 +153,7 @@ export const fetchListings = async (req: Request, res: Response) => {
 }
 
 export const fetchListingsByCategory = async (req: Request, res: Response) => {
-  const { category } = req.body
+  const { category } = req.params
 
   if (!category) {
     return res.status(400).json({

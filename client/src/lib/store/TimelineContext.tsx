@@ -151,16 +151,9 @@ const TimelineContextProvider = ({ children }: { children: ReactNode }) => {
   }
 
   const fetchListingsByCategory = (category: string) => {
-    const fetchListings = async () => {
+    const fetchCategorizedListings = async () => {
       const response = await fetch(
-        `http://localhost:${settings.BACKEND_SERVER_PORT}/api/listing/fetch-by-category`,
-        {
-          method: "GET",
-          body: JSON.stringify({
-            category,
-          }),
-          headers: { "Content-Type": "application/json" },
-        }
+        `http://localhost:${settings.BACKEND_SERVER_PORT}/api/listing/fetch-by-category/${category}`
       )
       const json = await response.json()
 
@@ -192,21 +185,7 @@ const TimelineContextProvider = ({ children }: { children: ReactNode }) => {
       }
     }
 
-    const fetchTrendingListings = async () => {
-      const response = await fetch(
-        `http://localhost:${settings.BACKEND_SERVER_PORT}/api/listing/fetch-by-trending`
-      )
-      const json = await response.json()
-
-      if (!json.ok) {
-        return
-      }
-
-      setTrendingListings(json.data)
-    }
-
-    fetchListings()
-    fetchTrendingListings()
+    fetchCategorizedListings()
   }
 
   const contextValue = {

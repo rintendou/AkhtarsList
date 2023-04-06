@@ -8,7 +8,6 @@ import SeeOthersButton from "./SeeOthersButton"
 // Types
 import ListingType from "../../../lib/types/ListingType"
 import ListMore from "../protected/profile/listings/ListMore"
-import useListingDetail from "../../../lib/hooks/useListingDetail"
 import { useNavigate } from "react-router-dom"
 
 type Props = {
@@ -25,6 +24,7 @@ const SeeOtherListings = ({ category, idToFilter }: Props) => {
     techListings,
     accessoriesListings,
     collectiblesListings,
+    fetchListingsByCategory,
   } = useTimeline()
 
   let categorizedListings: ListingType[] = []
@@ -60,6 +60,7 @@ const SeeOtherListings = ({ category, idToFilter }: Props) => {
   const navigate = useNavigate()
 
   const onListingClick = (listing: ListingType) => {
+    fetchListingsByCategory(category)
     navigate(`/listings/${listing._id}`, {
       state: {
         id: listing._id,
