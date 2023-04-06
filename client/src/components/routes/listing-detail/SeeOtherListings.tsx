@@ -4,6 +4,7 @@ import SeeAll from "../application/timeline/SeeAll"
 // Types
 import ListingType from "../../../lib/types/ListingType"
 import ListingCard from "../../ui/ListingCard"
+import ListingCardSkeleton from "../../ui/ListingCardSkeleton"
 
 type Props = {
   category: string
@@ -22,7 +23,7 @@ const SeeOtherListings = ({ category }: Props) => {
 
   let categorizedListings: ListingType[] = []
 
-  switch (category) {
+  switch (category.toLowerCase()) {
     case "sneakers":
       categorizedListings = sneakersListings
       break
@@ -47,13 +48,15 @@ const SeeOtherListings = ({ category }: Props) => {
   }
 
   return (
-    <div>
+    <div className="mx-auto container my-10">
       <div className="flex justify-between">
-        <h1 className="text-lg font-semibold w-full">Trending</h1>
+        <h1 className="text-lg font-semibold w-full">
+          See Other Listings in {category}
+        </h1>
         <SeeAll to="/category/trending" />
       </div>
       <ul className="flex gap-8 py-5 overflow-x-scroll">
-        {categorizedListings.length !== 0 &&
+        {categorizedListings.length !== 0 ? (
           categorizedListings.map((listing) => (
             <li key={listing._id}>
               <ListingCard
@@ -72,7 +75,10 @@ const SeeOtherListings = ({ category }: Props) => {
                 dimensions={listing.dimensions}
               />
             </li>
-          ))}
+          ))
+        ) : (
+          <ListingCardSkeleton />
+        )}
       </ul>
     </div>
   )
