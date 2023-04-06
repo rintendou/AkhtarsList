@@ -1,10 +1,8 @@
-import UserType from "./UserType"
-
 type ListingType = {
   _id: string
   image: string
-  bidders: UserType[]
-  lister: UserType
+  bidders: string[]
+  lister: string
   title: string
   desc: string
   startPrice: number
