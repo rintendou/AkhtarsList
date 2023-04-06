@@ -7,7 +7,7 @@ function getTimeRemaining(expireAt: Date): string {
   const minutes = Math.floor((totalSeconds / 60) % 60)
   const seconds = Math.floor(totalSeconds % 60)
 
-  return `${days} d, ${hours}, ${minutes} m, ${seconds} s`
+  return `${days} d, ${hours} h, ${minutes} m, ${seconds} s`
 }
 
 export default getTimeRemaining
