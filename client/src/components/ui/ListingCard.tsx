@@ -8,7 +8,6 @@ import getTimeRemaining from "../../lib/util/getTimeRemaining"
 
 // Types
 import ListingType from "../../lib/types/ListingType"
-import useListingDetail from "../../lib/hooks/useListingDetail"
 
 const ListingCard = ({
   _id,
@@ -29,10 +28,7 @@ const ListingCard = ({
 }: ListingType) => {
   const navigate = useNavigate()
 
-  const { fetchListing } = useListingDetail()
-
   const handleClick = () => {
-    fetchListing(_id)
     navigate(`/listings/${_id}`, {
       state: {
         _id,

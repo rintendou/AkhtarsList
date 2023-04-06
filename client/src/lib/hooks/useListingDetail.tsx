@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useCallback, useMemo, useState } from "react"
 import ListingType from "../types/ListingType"
 import { settings } from "../../settings"
 
@@ -21,9 +21,11 @@ const initialListingState = {
 }
 
 const useListingDetail = () => {
-  const [listing, setListing] = useState<ListingType>(initialListingState)
+  const [listing, setListing] = useState<ListingType>(
+    useMemo(() => initialListingState, [])
+  )
 
-  const fetchListing = (listingId: string) => {
+  const fetchListing = useCallback((listingId: string) => {
     const fetchListingDetail = async () => {
       const response = await fetch(
         `http://localhost:${settings.BACKEND_SERVER_PORT}/api/listing/fetch/${listingId}`
@@ -43,7 +45,7 @@ const useListingDetail = () => {
     }
 
     fetchListingDetail()
-  }
+  }, [])
 
   return { listing, fetchListing }
 }
