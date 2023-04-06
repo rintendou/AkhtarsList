@@ -3,6 +3,7 @@ import { useLocation } from "react-router"
 
 import DUMMYIMAGE from "../../../../public/random-listing-image-undraw.svg"
 import StyledInputRef from "../../ui/StyledInputRef"
+import { settings } from "../../../settings"
 
 const ListingDetail = () => {
   const [bidAmount, setBidAmount] = useState(0)
@@ -23,6 +24,23 @@ const ListingDetail = () => {
     weight,
     dimensions,
   } = location.state
+
+  const onSubmitBid = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+
+    const submitBid = async () => {
+      const response = await fetch(
+        `http://localhost:${settings.BACKEND_SERVER_PORT}/THISAPICALLWILLFAIL`
+      )
+      const json = await response.json()
+
+      if (!json.ok) {
+        return
+      }
+    }
+
+    submitBid()
+  }
 
   return (
     <div className="min-h-screen flex flex-col md:flex-row">
@@ -85,6 +103,7 @@ const ListingDetail = () => {
           </div>
         </div>
       </div>
+
       <div className="flex-auto p-10 py-24 max-w-none md:max-w-[50%] max-h-[50%] md:max-h-none space-y-10 flex flex-col items-center bg-purple-100">
         <h1 className="text-3xl text-center font-semibold">Biddings</h1>
         <div className="flex justify-between w-full">
