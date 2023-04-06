@@ -1,7 +1,6 @@
 import Card from "../../ui/Card"
 import Carousel from "../../ui/Carousel"
 import Error from "../../ui/Error"
-import ListingCard from "../../ui/ListingCard"
 import ListingCardSkeleton from "../../ui/ListingCardSkeleton"
 import LoadingSpinner from "../../ui/LoadingSpinner"
 import Overview from "../../ui/Overview"

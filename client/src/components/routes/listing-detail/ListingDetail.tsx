@@ -55,10 +55,12 @@ const ListingDetail = () => {
       return
     }
 
-    if (Number(bidAmount) < finalPrice) {
+    if (Number(bidAmount) <= finalPrice) {
       bidInputRef.current!.focus()
       setIsError(true)
-      setErrorMessage("Bid amount cannot be less than current price!")
+      setErrorMessage(
+        "Bid amount cannot be less than or equalt to the current price!"
+      )
       return
     }
 
