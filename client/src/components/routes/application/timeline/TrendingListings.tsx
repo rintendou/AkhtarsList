@@ -21,13 +21,13 @@ const TrendingListings = () => {
                 _id={listing._id}
                 image={listing.image}
                 title={listing.title}
-                startPrice={listing.finalPrice}
                 finalPrice={listing.finalPrice}
-                expireAt={10}
+                expireAt={listing.expireAt}
                 views={listing.views}
                 bidders={listing.bidders}
                 lister={listing.lister}
                 desc={listing.desc}
+                startPrice={listing.startPrice}
                 category={listing.category}
                 weight={listing.weight}
                 dimensions={listing.dimensions}

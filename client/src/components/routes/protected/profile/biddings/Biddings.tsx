@@ -16,11 +16,18 @@ const Biddings = () => {
             <li key={bidding._id}>
               <ListingCard
                 _id={bidding._id}
-                img={bidding.image}
+                image={bidding.image}
                 title={bidding.title}
-                price={bidding.finalPrice}
-                timeRemaining="10 days"
+                finalPrice={bidding.finalPrice}
+                expireAt={bidding.expireAt}
                 views={bidding.views}
+                bidders={bidding.bidders}
+                lister={bidding.lister}
+                desc={bidding.desc}
+                startPrice={bidding.startPrice}
+                category={bidding.category}
+                weight={bidding.weight}
+                dimensions={bidding.dimensions}
               />
             </li>
           ))}
