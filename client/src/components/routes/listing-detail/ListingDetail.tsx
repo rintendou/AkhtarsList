@@ -50,7 +50,7 @@ const ListingDetail = () => {
   useEffect(() => {
     fetchListing(listingId!)
     if (!checkIfListingExists(listingId!)) {
-      navigate("/page-not-found")
+      navigate("/listings/listing-not-found")
     }
     bidInputRef.current!.focus()
   }, [listingId])
