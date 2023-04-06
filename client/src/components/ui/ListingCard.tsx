@@ -1,5 +1,4 @@
 import { useNavigate } from "react-router-dom"
-import useUpdateListingViewCount from "../../lib/hooks/useUpdateListingViewCount"
 
 // Components
 import Card from "./Card"

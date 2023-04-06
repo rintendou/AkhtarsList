@@ -127,7 +127,7 @@ const ListingDetail = () => {
               <div className="flex justify-between">
                 <div className="flex items-center gap-3">
                   <h1>Lister: </h1>
-                  <p className="text-lg font-semibold">{lister.username}</p>
+                  <p className="text-lg font-semibold">{lister}</p>
                 </div>
               </div>
               <div className="flex items-center gap-3">

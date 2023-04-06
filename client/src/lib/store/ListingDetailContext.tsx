@@ -15,9 +15,7 @@ const initialListingState = {
   _id: "",
   image: "",
   bidders: [],
-  lister: {
-    username: "",
-  },
+  lister: "",
   title: "",
   desc: "",
   startPrice: 0,
