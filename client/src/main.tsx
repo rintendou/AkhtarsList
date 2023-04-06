@@ -16,9 +16,9 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
       <TimelineContextProvider>
         <AuthContextProvider>
           <ProfileContextProvider>
-            <ListingDetailContextProvider>
-              <App />
-            </ListingDetailContextProvider>
+            {/* <ListingDetailContextProvider> */}
+            <App />
+            {/* </ListingDetailContextProvider> */}
           </ProfileContextProvider>
         </AuthContextProvider>
       </TimelineContextProvider>

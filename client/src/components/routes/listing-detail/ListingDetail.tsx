@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react"
-import { useNavigate } from "react-router"
+import { useNavigate, useParams } from "react-router"
 import useAuth from "../../../lib/hooks/useAuth"
 import useListingDetail from "../../../lib/hooks/useListingDetail"
 
@@ -26,10 +26,10 @@ const ListingDetail = () => {
 
   const { auth } = useAuth()
   const navigate = useNavigate()
-  const { listing } = useListingDetail()
+  const { listing, fetchListing } = useListingDetail()
 
   const {
-    _id,
+    // _id,
     image,
     bidders,
     lister,
@@ -46,7 +46,10 @@ const ListingDetail = () => {
     length,
   } = listing
 
+  const { listingId } = useParams()
+
   useEffect(() => {
+    fetchListing(listingId!)
     bidInputRef.current!.focus()
   }, [])
 
@@ -194,7 +197,7 @@ const ListingDetail = () => {
           <Bidders bidders={bidders} />
         </div>
       </div>
-      <SeeOtherListings category={category} idToFilter={_id} />
+      <SeeOtherListings category={category} idToFilter={listingId!} />
     </div>
   )
 }
