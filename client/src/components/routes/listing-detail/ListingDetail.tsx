@@ -81,13 +81,13 @@ const ListingDetail = () => {
             <p className="font-semibold text-lg indent-10">{desc}</p>
           </div>
 
-          <div className="flex flex-col md:flex-row justify-between items-center">
+          <div className="flex flex-col xl:flex-row justify-between items-center">
             <div className="flex items-center gap-3">
               <h1>Weight:</h1>
               <p className="text-lg font-semibold">{weight} kg</p>
             </div>
 
-            {/* <div className="flex gap-3 items-center">
+            <div className="flex gap-3 items-center">
               <h1>Dimensions: </h1>
               <div className="flex items-center gap-3">
                 <h1>H:</h1>
@@ -101,7 +101,7 @@ const ListingDetail = () => {
                 <h1>W:</h1>
                 <p className="text-lg font-semibold">{dimensions[2]} cm </p>
               </div>
-            </div> */}
+            </div>
           </div>
         </div>
       </div>
