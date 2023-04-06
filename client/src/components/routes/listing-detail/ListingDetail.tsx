@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useRef, useState } from "react"
 
 import { settings } from "../../../settings"
 
@@ -9,7 +9,8 @@ import { useLocation } from "react-router"
 import getTimeRemaining from "../../../lib/util/getTimeRemaining"
 
 const ListingDetail = () => {
-  const [bidAmount, setBidAmount] = useState("0")
+  const bidInputRef = useRef<HTMLInputElement>(null)
+  const [bidAmount, setBidAmount] = useState<number>()
   const location = useLocation()
 
   const {
@@ -27,6 +28,10 @@ const ListingDetail = () => {
     weight,
     dimensions,
   } = location.state
+
+  useEffect(() => {
+    bidInputRef.current!.focus()
+  }, [])
 
   const onSubmitBid = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -135,7 +140,7 @@ const ListingDetail = () => {
               id="Bid Amount ($)"
               placeholder=""
               value={bidAmount}
-              onChange={(event) => setBidAmount(event.target.value)}
+              ref={bidInputRef}
               className="pt-3 pl-3 p-2 block px-0 mt-0 bg-transparent border-2 focus:outline-none focus:ring-0 border-secondary rounded-md w-full"
             />
             <label
