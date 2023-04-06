@@ -1,5 +1,7 @@
 import { useLocation } from "react-router"
 
+import DUMMYIMAGE from "../../../../public/random-listing-image-undraw.svg"
+
 const ListingDetail = () => {
   const location = useLocation()
 
@@ -24,7 +26,7 @@ const ListingDetail = () => {
       <div className="flex-auto p-10 py-24 max-w-none md:max-w-[50%] max-h-[50%] md:max-h-none space-y-10 flex flex-col items-center justify-between">
         <div className="space-y-10">
           <h1 className="text-3xl text-center font-semibold">{title}</h1>
-          <img src={image} alt={title} />
+          <img src={DUMMYIMAGE} alt={title} />
         </div>
 
         <div className="space-y-10 w-full">
