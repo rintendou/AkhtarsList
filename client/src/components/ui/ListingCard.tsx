@@ -1,6 +1,9 @@
 import { useNavigate } from "react-router-dom"
-import Card from "./Card"
 import useUpdateListingViewCount from "../../lib/hooks/useUpdateListingViewCount"
+
+import Card from "./Card"
+
+import getTimeRemaining from "../../lib/util/getTimeRemaining"
 
 type UserType = {
   username: string
@@ -61,6 +64,8 @@ const ListingCard = ({
     })
   }
 
+  const timeRemaining = getTimeRemaining(expireAt)
+
   return (
     <Card twClasses="p-2 w-56 text-sm h-76 justify-between cursor-pointer hover:shadow-xl duration-100 ease-in-out">
       <div className="flex flex-col gap-1" onClick={handleClick}>
@@ -82,23 +87,9 @@ const ListingCard = ({
         </div>
         <div className="flex justify-between">
           <p className="bg-gray-200 p-1 rounded md w-min whitespace-nowrap">
-            Expires In:{" "}
-            {Math.floor(
-              (new Date(expireAt).getTime() - Date.now()) /
-                (1000 * 60 * 60 * 24)
-            )}{" "}
-            days{" "}
-            {Math.floor(
-              (new Date(expireAt).getTime() - Date.now()) / (1000 * 60 * 60)
-            ) % 24}{" "}
-            hours{" "}
-            {Math.floor(
-              (new Date(expireAt).getTime() - Date.now()) / (1000 * 60)
-            ) % 60}{" "}
-            minutes{" "}
-            {Math.floor((new Date(expireAt).getTime() - Date.now()) / 1000) %
-              60}{" "}
-            seconds
+            Expires in: ${timeRemaining.days} days, ${timeRemaining.hours}{" "}
+            hours, ${timeRemaining.minutes} minutes, and $
+            {timeRemaining.seconds} seconds
           </p>
         </div>
       </div>
