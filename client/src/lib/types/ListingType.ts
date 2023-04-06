@@ -11,7 +11,9 @@ type ListingType = {
   views: number
   category: string
   weight: number
-  dimensions: number[]
+  height: number
+  length: number
+  width: number
 }
 
 export default ListingType

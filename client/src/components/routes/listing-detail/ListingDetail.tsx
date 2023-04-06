@@ -26,24 +26,7 @@ const ListingDetail = () => {
 
   const { auth } = useAuth()
   const navigate = useNavigate()
-
   const { listing } = useListingDetail()
-
-  // const {
-  //   _id,
-  //   image,
-  //   bidders,
-  //   lister,
-  //   desc,
-  //   title,
-  //   startPrice,
-  //   finalPrice,
-  //   expireAt,
-  //   views,
-  //   category,
-  //   weight,
-  //   dimensions,
-  // } = location.state
 
   const {
     _id,
@@ -58,7 +41,9 @@ const ListingDetail = () => {
     views,
     category,
     weight,
-    dimensions,
+    height,
+    width,
+    length,
   } = listing
 
   useEffect(() => {
@@ -156,17 +141,18 @@ const ListingDetail = () => {
               </div>
               <div className="flex gap-3 items-center">
                 <h1>Dimensions: </h1>
+
                 <div className="flex items-center gap-3">
                   <h1>H:</h1>
-                  <p className="text-lg font-semibold">{dimensions[0]} cm </p>
+                  <p className="text-lg font-semibold">{height} cm </p>
                 </div>
                 <div className="flex items-center gap-3">
                   <h1>L:</h1>
-                  <p className="text-lg font-semibold">{dimensions[1]} cm </p>
+                  <p className="text-lg font-semibold">{width} cm </p>
                 </div>
                 <div className="flex items-center gap-3">
                   <h1>W:</h1>
-                  <p className="text-lg font-semibold">{dimensions[2]} cm </p>
+                  <p className="text-lg font-semibold">{length} cm </p>
                 </div>
               </div>
             </div>

@@ -23,7 +23,9 @@ const ListingCard = ({
   views,
   category,
   weight,
-  dimensions,
+  height,
+  width,
+  length,
 }: ListingType) => {
   const navigate = useNavigate()
 
@@ -45,7 +47,9 @@ const ListingCard = ({
         views,
         category,
         weight,
-        dimensions,
+        height,
+        width,
+        length,
       },
     })
   }
