@@ -8,8 +8,11 @@ import Bidders from "./Bidders"
 import { useLocation } from "react-router"
 import getTimeRemaining from "../../../lib/util/getTimeRemaining"
 import numberInputIsValid from "../../../lib/util/numberInputValidator"
+import Error from "../../ui/Error"
 
 const ListingDetail = () => {
+  const [isError, setIsError] = useState(false)
+  const [errorMessage, setErrorMessage] = useState("")
   const bidInputRef = useRef<HTMLInputElement>(null)
   const location = useLocation()
 
@@ -41,11 +44,15 @@ const ListingDetail = () => {
     if (!numberInputIsValid(bidAmount)) {
       bidInputRef.current!.value = ""
       bidInputRef.current!.focus()
+      setIsError(true)
+      setErrorMessage("Invalid Input")
       return
     }
 
     if (Number(bidAmount) < finalPrice) {
       bidInputRef.current!.focus()
+      setIsError(true)
+      setErrorMessage("Bid amount cannot be less than current price!")
       return
     }
 
@@ -56,8 +63,13 @@ const ListingDetail = () => {
       const json = await response.json()
 
       if (!json.ok) {
+        setIsError(false)
+        setErrorMessage(json.message)
         return
       }
+
+      setIsError(false)
+      setErrorMessage("")
     }
 
     submitBid()
@@ -143,7 +155,6 @@ const ListingDetail = () => {
             </p>
           </div>
         </div>
-
         <form
           className="w-full flex flex-col md:flex-row gap-5 items-center"
           onSubmit={onSubmitBid}
@@ -163,7 +174,8 @@ const ListingDetail = () => {
             </label>
           </div>
           <BidButton />
-        </form>
+        </form>{" "}
+        {isError && <Error errorMessage={errorMessage} />}
         {/* <Bidders /> */}
       </div>
     </div>
