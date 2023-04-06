@@ -34,9 +34,13 @@ const initialContext = {
   fetchListing: () => {},
 }
 
-const ListingDetail = createContext<initialContextType>(initialContext)
+const ListingDetailContext = createContext<initialContextType>(initialContext)
 
-const ListingDetailProvider = ({ children }: { children: ReactNode }) => {
+const ListingDetailContextProvider = ({
+  children,
+}: {
+  children: ReactNode
+}) => {
   const [listing, setListing] = useState<ListingType>(initialListingState)
 
   const fetchListing = (listingId: string) => {
@@ -68,5 +72,5 @@ const ListingDetailProvider = ({ children }: { children: ReactNode }) => {
   )
 }
 
-export default ListingDetailProvider
-export { ListingDetail }
+export default ListingDetailContextProvider
+export { ListingDetailContext }
