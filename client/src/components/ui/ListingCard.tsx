@@ -77,7 +77,28 @@ const ListingCard = ({
             Views: {views}
           </p>
           <p className="bg-gray-200 p-1 rounded md w-min whitespace-nowrap">
-            Expires In: {expireAt.toString()}
+            {category}
+          </p>
+        </div>
+        <div className="flex justify-between">
+          <p className="bg-gray-200 p-1 rounded md w-min whitespace-nowrap">
+            Expires In:{" "}
+            {Math.floor(
+              (new Date(expireAt).getTime() - Date.now()) /
+                (1000 * 60 * 60 * 24)
+            )}{" "}
+            days{" "}
+            {Math.floor(
+              (new Date(expireAt).getTime() - Date.now()) / (1000 * 60 * 60)
+            ) % 24}{" "}
+            hours{" "}
+            {Math.floor(
+              (new Date(expireAt).getTime() - Date.now()) / (1000 * 60)
+            ) % 60}{" "}
+            minutes{" "}
+            {Math.floor((new Date(expireAt).getTime() - Date.now()) / 1000) %
+              60}{" "}
+            seconds
           </p>
         </div>
       </div>
