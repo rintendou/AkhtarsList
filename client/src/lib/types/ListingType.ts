@@ -13,7 +13,7 @@ type ListingType = {
   views: number
   category: string
   weight: number
-  dimensions: [height: number, width: number, length: number]
+  dimensions: number[]
 }
 
 export default ListingType
