@@ -1,9 +1,10 @@
 import { useState } from "react"
 import { useLocation } from "react-router"
 
-import DUMMYIMAGE from "../../../../public/random-listing-image-undraw.svg"
-import StyledInputRef from "../../ui/StyledInputRef"
 import { settings } from "../../../settings"
+
+import DUMMYIMAGE from "../../../../public/random-listing-image-undraw.svg"
+import Bidders from "./Bidders"
 
 const ListingDetail = () => {
   const [bidAmount, setBidAmount] = useState(0)
@@ -137,6 +138,7 @@ const ListingDetail = () => {
           </div>
           <BidButton />
         </form>
+        <Bidders />
       </div>
     </div>
   )

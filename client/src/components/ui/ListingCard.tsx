@@ -74,7 +74,8 @@ const ListingCard = ({
             Views: {views}
           </p>
           <p className="bg-gray-200 p-1 rounded md w-min whitespace-nowrap">
-            Expires In: {expireAt.toString()}
+            {/* Expires In: {expireAt.toString()} */}
+            Expires In: 10
           </p>
         </div>
       </div>
