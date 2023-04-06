@@ -52,7 +52,9 @@ const ListingDetail = () => {
     const bidAmount = bidInputRef.current!.value
 
     if (!auth._id) {
-      navigate("/login")
+      navigate("/login", {
+        state: { errorMessage: "Must be logged in to do that!" },
+      })
     }
 
     if (!numberInputIsValid(bidAmount)) {
