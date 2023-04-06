@@ -26,10 +26,9 @@ const ListingDetail = () => {
 
   const { auth } = useAuth()
   const navigate = useNavigate()
-  const { listing, fetchListing } = useListingDetail()
+  const { listing, fetchListing, checkIfListingExists } = useListingDetail()
 
   const {
-    // _id,
     image,
     bidders,
     lister,
@@ -50,6 +49,9 @@ const ListingDetail = () => {
 
   useEffect(() => {
     fetchListing(listingId!)
+    if (!checkIfListingExists(listingId!)) {
+      navigate("/page-not-found")
+    }
     bidInputRef.current!.focus()
   }, [listingId])
 
