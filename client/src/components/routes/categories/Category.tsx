@@ -4,6 +4,10 @@ import SideNavLinks from "./SideNavLinks"
 import useTimeline from "../../../lib/hooks/useTimeline"
 import ListingCard from "../../ui/ListingCard"
 
+type UserType = {
+  username: string
+}
+
 type ListingType = {
   _id: string
   image: string
