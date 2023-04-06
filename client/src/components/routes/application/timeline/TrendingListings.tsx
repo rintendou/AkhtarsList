@@ -19,11 +19,18 @@ const TrendingListings = () => {
             <li key={listing._id}>
               <ListingCard
                 _id={listing._id}
-                img={listing.image}
+                image={listing.image}
                 title={listing.title}
-                price={listing.finalPrice}
-                timeRemaining="10 days"
+                finalPrice={listing.finalPrice}
+                expireAt={listing.expireAt}
                 views={listing.views}
+                bidders={listing.bidders}
+                lister={listing.lister}
+                desc={listing.desc}
+                startPrice={listing.startPrice}
+                category={listing.category}
+                weight={listing.weight}
+                dimensions={listing.dimensions}
               />
             </li>
           ))

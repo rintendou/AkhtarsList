@@ -22,7 +22,7 @@ const AllListings = () => {
                 image={listing.image}
                 title={listing.title}
                 finalPrice={listing.finalPrice}
-                expireAt={10}
+                expireAt={listing.expireAt}
                 views={listing.views}
                 bidders={listing.bidders}
                 lister={listing.lister}

@@ -15,7 +15,7 @@ type ListingType = {
   desc: string
   startPrice: number
   finalPrice: number
-  expireAt: number
+  expireAt: Date
   views: number
   category: string
   weight: number
@@ -67,6 +67,8 @@ const ProfileContextProvider = ({
         `http://localhost:${settings.BACKEND_SERVER_PORT}/api/user/${_id}`
       )
       const data = await response.json()
+
+      console.log(data.data.listedListings)
 
       setAddress(data.data.address)
       setBalance(data.data.balance)

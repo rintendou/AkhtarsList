@@ -1,13 +1,19 @@
-import { useState } from "react"
-import { useLocation } from "react-router"
+import { useEffect, useRef, useState } from "react"
 
 import { settings } from "../../../settings"
 
 import DUMMYIMAGE from "../../../../public/random-listing-image-undraw.svg"
+
 import Bidders from "./Bidders"
+import { useLocation } from "react-router"
+import getTimeRemaining from "../../../lib/util/getTimeRemaining"
+import numberInputIsValid from "../../../lib/util/numberInputValidator"
+import Error from "../../ui/Error"
 
 const ListingDetail = () => {
-  const [bidAmount, setBidAmount] = useState(0)
+  const [isError, setIsError] = useState(false)
+  const [errorMessage, setErrorMessage] = useState("")
+  const bidInputRef = useRef<HTMLInputElement>(null)
   const location = useLocation()
 
   const {
@@ -26,8 +32,29 @@ const ListingDetail = () => {
     dimensions,
   } = location.state
 
+  useEffect(() => {
+    bidInputRef.current!.focus()
+  }, [])
+
   const onSubmitBid = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+
+    const bidAmount = bidInputRef.current!.value
+
+    if (!numberInputIsValid(bidAmount)) {
+      bidInputRef.current!.value = ""
+      bidInputRef.current!.focus()
+      setIsError(true)
+      setErrorMessage("Invalid Input")
+      return
+    }
+
+    if (Number(bidAmount) < finalPrice) {
+      bidInputRef.current!.focus()
+      setIsError(true)
+      setErrorMessage("Bid amount cannot be less than current price!")
+      return
+    }
 
     const submitBid = async () => {
       const response = await fetch(
@@ -36,12 +63,19 @@ const ListingDetail = () => {
       const json = await response.json()
 
       if (!json.ok) {
+        setIsError(false)
+        setErrorMessage(json.message)
         return
       }
+
+      setIsError(false)
+      setErrorMessage("")
     }
 
     submitBid()
   }
+
+  const timeRemaining = getTimeRemaining(expireAt)
 
   return (
     <div className="min-h-screen flex flex-col md:flex-row">
@@ -70,7 +104,7 @@ const ListingDetail = () => {
               </div>
               <div className="flex items-center gap-3">
                 <h1>Views:</h1>
-                <p className="text-lg font-semibold">{views} bidders so far</p>
+                <p className="text-lg font-semibold">{views}</p>
               </div>
             </div>
           </div>
@@ -80,7 +114,7 @@ const ListingDetail = () => {
             <p className="font-semibold text-lg indent-10">{desc}</p>
           </div>
 
-          <div className="flex flex-col md:flex-row justify-between items-center">
+          <div className="flex flex-col xl:flex-row justify-between items-center">
             <div className="flex items-center gap-3">
               <h1>Weight:</h1>
               <p className="text-lg font-semibold">{weight} kg</p>
@@ -115,10 +149,12 @@ const ListingDetail = () => {
 
           <div className="flex items-center gap-3">
             <h1>Expires At:</h1>
-            <p className="text-lg font-semibold">{expireAt}</p>
+            <p className="text-lg font-semibold truncate">
+              Expires in: {timeRemaining.days} d, {timeRemaining.hours} h,
+              {timeRemaining.minutes} m, and {timeRemaining.seconds} s
+            </p>
           </div>
         </div>
-
         <form
           className="w-full flex flex-col md:flex-row gap-5 items-center"
           onSubmit={onSubmitBid}
@@ -127,6 +163,7 @@ const ListingDetail = () => {
             <input
               id="Bid Amount ($)"
               placeholder=""
+              ref={bidInputRef}
               className="pt-3 pl-3 p-2 block px-0 mt-0 bg-transparent border-2 focus:outline-none focus:ring-0 border-secondary rounded-md w-full"
             />
             <label
@@ -138,7 +175,8 @@ const ListingDetail = () => {
           </div>
           <BidButton />
         </form>
-        <Bidders />
+        {isError && <Error errorMessage={errorMessage} />}
+        {/* <Bidders /> */}
       </div>
     </div>
   )

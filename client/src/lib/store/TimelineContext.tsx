@@ -15,7 +15,7 @@ type ListingType = {
   desc: string
   startPrice: number
   finalPrice: number
-  expireAt: number
+  expireAt: Date
   views: number
   category: string
   weight: number

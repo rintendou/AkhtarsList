@@ -55,6 +55,7 @@ const ListingSchema = new Schema(
     dimensions: {
       type: [Number],
       required: true,
+      default: [10, 10, 10],
     },
   },
   { timestamps: true }
