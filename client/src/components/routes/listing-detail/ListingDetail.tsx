@@ -11,7 +11,6 @@ import numberInputIsValid from "../../../lib/util/numberInputValidator"
 
 const ListingDetail = () => {
   const bidInputRef = useRef<HTMLInputElement>(null)
-  const [bidAmount, setBidAmount] = useState<number>()
   const location = useLocation()
 
   const {
@@ -41,6 +40,11 @@ const ListingDetail = () => {
 
     if (!numberInputIsValid(bidAmount)) {
       bidInputRef.current!.value = ""
+      bidInputRef.current!.focus()
+      return
+    }
+
+    if (Number(bidAmount) < finalPrice) {
       bidInputRef.current!.focus()
       return
     }
@@ -148,7 +152,6 @@ const ListingDetail = () => {
             <input
               id="Bid Amount ($)"
               placeholder=""
-              value={bidAmount}
               ref={bidInputRef}
               className="pt-3 pl-3 p-2 block px-0 mt-0 bg-transparent border-2 focus:outline-none focus:ring-0 border-secondary rounded-md w-full"
             />
