@@ -15,7 +15,7 @@ type ListingType = {
   desc: string
   startPrice: number
   finalPrice: number
-  expireAt: number
+  expireAt: Date
   views: number
   category: string
   weight: number
@@ -77,8 +77,7 @@ const ListingCard = ({
             Views: {views}
           </p>
           <p className="bg-gray-200 p-1 rounded md w-min whitespace-nowrap">
-            {/* Expires In: {expireAt.toString()} */}
-            Expires In: 10
+            Expires In: {expireAt.toString()}
           </p>
         </div>
       </div>
