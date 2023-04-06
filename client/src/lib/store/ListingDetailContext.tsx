@@ -24,7 +24,9 @@ const initialListingState = {
   views: 0,
   category: "General",
   weight: 0,
-  dimensions: [],
+  height: 0,
+  width: 0,
+  length: 0,
 }
 
 const initialContext = {
@@ -52,7 +54,12 @@ const ListingDetailContextProvider = ({
         return
       }
 
-      setListing(json.data)
+      setListing({
+        ...json.data,
+        height: json.data.dimensions[0],
+        width: json.data.dimensions[1],
+        length: json.data.dimensions[2],
+      })
     }
 
     fetchListingDetail()

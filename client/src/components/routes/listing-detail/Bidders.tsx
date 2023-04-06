@@ -1,8 +1,5 @@
-// Types
-import UserType from "../../../lib/types/UserType"
-
 type BiddersProps = {
-  bidders: UserType[]
+  bidders: string[]
 }
 
 const Bidders = ({ bidders }: BiddersProps) => {
@@ -15,8 +12,8 @@ const Bidders = ({ bidders }: BiddersProps) => {
         </div>
       )}
       {bidders.length !== 0 ? (
-        bidders.map((bidder: UserType, index: number) => (
-          <li key={index}>{bidder.username}</li>
+        bidders.map((bidder: string, index: number) => (
+          <li key={index}>{bidder}</li>
         ))
       ) : (
         <div className="text-center">
