@@ -5,6 +5,7 @@ import {
   createListing,
   deleteListing,
   updateListing,
+  fetchListing,
   fetchListings,
   fetchListingsByCategory,
   fetchTrendingListings,
@@ -19,7 +20,10 @@ ListingRoute.post("/post", createListing)
 ListingRoute.delete("/delete/:listingId", deleteListing)
 
 // Update listing
-ListingRoute.put('/update/:listingId', updateListing)
+ListingRoute.put("/update/:listingId", updateListing)
+
+// Fetch specific listing
+ListingRoute.get("/fetch/:listingId", fetchListing)
 
 // Fetch all listings
 ListingRoute.get("/fetch", fetchListings)
@@ -29,8 +33,5 @@ ListingRoute.get("/fetch-by-category", fetchListingsByCategory)
 
 // Fetch trending listings
 ListingRoute.get("/fetch-by-trending", fetchTrendingListings)
-
-// Fetch specific listing
-ListingRoute.get("/fetch/:listingId", fetchListings)
 
 export default ListingRoute
