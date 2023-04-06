@@ -1,8 +1,8 @@
 import { useContext } from "react"
 import { ListingDetailContext } from "../store/ListingDetailContext"
 
-const useProfile = () => {
+const useListingDetail = () => {
   return useContext(ListingDetailContext)
 }
 
-export default useProfile
+export default useListingDetail

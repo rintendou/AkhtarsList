@@ -66,9 +66,9 @@ const ListingDetailContextProvider = ({
   }
 
   return (
-    <ListingDetail.Provider value={contextValue}>
+    <ListingDetailContext.Provider value={contextValue}>
       {children}
-    </ListingDetail.Provider>
+    </ListingDetailContext.Provider>
   )
 }
 

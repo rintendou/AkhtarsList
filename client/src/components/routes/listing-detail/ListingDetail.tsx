@@ -16,15 +16,34 @@ import { settings } from "../../../settings"
 // Assets
 import DUMMYIMAGE from "../../../../public/random-listing-image-undraw.svg"
 import SeeOtherListings from "./SeeOtherListings"
+import useListingDetail from "../../../lib/hooks/useListingDetail"
 
 const ListingDetail = () => {
   const [isError, setIsError] = useState(false)
   const [errorMessage, setErrorMessage] = useState("")
+
   const bidInputRef = useRef<HTMLInputElement>(null)
-  const location = useLocation()
 
   const { auth } = useAuth()
   const navigate = useNavigate()
+
+  const { listing } = useListingDetail()
+
+  // const {
+  //   _id,
+  //   image,
+  //   bidders,
+  //   lister,
+  //   desc,
+  //   title,
+  //   startPrice,
+  //   finalPrice,
+  //   expireAt,
+  //   views,
+  //   category,
+  //   weight,
+  //   dimensions,
+  // } = location.state
 
   const {
     _id,
@@ -40,7 +59,7 @@ const ListingDetail = () => {
     category,
     weight,
     dimensions,
-  } = location.state
+  } = listing
 
   useEffect(() => {
     bidInputRef.current!.focus()
@@ -108,7 +127,7 @@ const ListingDetail = () => {
               <div className="flex justify-between">
                 <div className="flex items-center gap-3">
                   <h1>Lister: </h1>
-                  <p className="text-lg font-semibold">{lister}</p>
+                  <p className="text-lg font-semibold">{lister.username}</p>
                 </div>
               </div>
               <div className="flex items-center gap-3">
