@@ -27,6 +27,7 @@ import RequireAuth from "./components/routes/protected/RequireAuth"
 
 // Layouts
 import ProfileLayout from "./components/routes/protected/ProfileLayout"
+import ListingNotFound from "./components/routes/page-not-found/ListingNotFound"
 
 function App() {
   return (
@@ -59,6 +60,10 @@ function App() {
 
           {/* Catch-All Route */}
           <Route path="*" element={<PageNotFound />} />
+          <Route
+            path="/listings/listing-not-found"
+            element={<ListingNotFound />}
+          />
         </Routes>
       </Body>
       <Footer />

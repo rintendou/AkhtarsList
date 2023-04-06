@@ -1,6 +1,9 @@
 import { useCallback, useMemo, useState } from "react"
+import useTimeline from "./useTimeline"
+
 import ListingType from "../types/ListingType"
 import { settings } from "../../settings"
+import { useNavigate } from "react-router-dom"
 
 const initialListingState = {
   _id: "",
@@ -47,7 +50,28 @@ const useListingDetail = () => {
     fetchListingDetail()
   }, [])
 
-  return { listing, fetchListing }
+  const navigate = useNavigate()
+
+  const checkIfListingExists = (listingId: string) => {
+    const checkExistingListing = async () => {
+      const response = await fetch(`http://localhost:5173/api/listing/`)
+      const json = await response.json()
+
+      if (!json.ok) {
+        navigate("/listings/listing-not-found")
+      }
+
+      const listingExists = json.data.some(
+        (listing: ListingType) => listing._id === listingId
+      )
+      if (!listingExists) {
+        navigate("/listings/listing-not-found")
+      }
+    }
+    checkExistingListing()
+  }
+
+  return { listing, fetchListing, checkIfListingExists }
 }
 
 export default useListingDetail
