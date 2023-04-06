@@ -32,7 +32,6 @@ const ListingCard = ({
   const { fetchListing } = useListingDetail()
 
   const handleClick = () => {
-    fetchListing(_id)
     navigate(`/listings/${_id}`, {
       state: {
         _id,
