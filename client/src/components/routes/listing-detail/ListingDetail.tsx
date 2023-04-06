@@ -14,6 +14,7 @@ import { settings } from "../../../settings"
 
 // Assets
 import DUMMYIMAGE from "../../../../public/random-listing-image-undraw.svg"
+import SeeOtherListings from "./SeeOtherListings"
 
 const ListingDetail = () => {
   const [isError, setIsError] = useState(false)
@@ -183,6 +184,7 @@ const ListingDetail = () => {
         {isError && <Error errorMessage={errorMessage} />}
         <Bidders bidders={bidders} />
       </div>
+      <SeeOtherListings category={category} />
     </div>
   )
 }
