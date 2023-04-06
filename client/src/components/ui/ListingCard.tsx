@@ -1,28 +1,60 @@
 import { Link, useNavigate } from "react-router-dom"
 import Card from "./Card"
 
-type Props = {
+type UserType = {
+  username: string
+}
+
+type ListingType = {
   _id: string
-  img: string
+  image: string
+  bidders: UserType[]
+  lister: UserType
   title: string
-  price: number
-  timeRemaining: string
+  desc: string
+  startPrice: number
+  finalPrice: number
+  expireAt: number
   views: number
+  category: string
+  weight: number
+  dimensions: [height: number, width: number, length: number]
 }
 
 const ListingCard = ({
   _id,
-  img,
+  image,
+  bidders,
+  lister,
+  desc,
   title,
-  price,
-  timeRemaining,
+  startPrice,
+  finalPrice,
+  expireAt,
   views,
-}: Props) => {
+  category,
+  weight,
+  dimensions,
+}: ListingType) => {
   const navigate = useNavigate()
 
   const handleClick = () => {
     navigate(`/listings/${_id}`, {
-      state: { _id, img, title, price, timeRemaining, views },
+      state: {
+        _id,
+        image,
+        bidders,
+        lister,
+        desc,
+        title,
+        startPrice,
+        finalPrice,
+        expireAt,
+        views,
+        category,
+        weight,
+        dimensions,
+      },
     })
   }
 
@@ -36,13 +68,13 @@ const ListingCard = ({
         />
         <h1 className="text-lg font-light">{title}</h1>
         <p className="text-gray-500">Current Price:</p>
-        <p className="font-bold text-2xl">${price}</p>
+        <p className="font-bold text-2xl">${startPrice}</p>
         <div className="flex justify-between">
           <p className="bg-gray-200 p-1 rounded md w-min whitespace-nowrap">
             Views: {views}
           </p>
           <p className="bg-gray-200 p-1 rounded md w-min whitespace-nowrap">
-            Expires In: {timeRemaining.toString()}
+            Expires In: {expireAt.toString()}
           </p>
         </div>
       </div>
