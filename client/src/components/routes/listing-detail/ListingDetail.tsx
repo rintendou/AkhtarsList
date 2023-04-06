@@ -17,6 +17,7 @@ import { settings } from "../../../settings"
 // Assets
 import DUMMYIMAGE from "../../../../public/random-listing-image-undraw.svg"
 import SeeOtherListings from "./SeeOtherListings"
+import useTimeline from "../../../lib/hooks/useTimeline"
 
 const ListingDetail = () => {
   const [isError, setIsError] = useState(false)
@@ -26,6 +27,7 @@ const ListingDetail = () => {
 
   const { auth } = useAuth()
   const navigate = useNavigate()
+
   const { listing, fetchListing, checkIfListingExists } = useListingDetail()
 
   const {
@@ -49,9 +51,7 @@ const ListingDetail = () => {
 
   useEffect(() => {
     fetchListing(listingId!)
-    if (!checkIfListingExists(listingId!)) {
-      navigate("/listings/listing-not-found")
-    }
+    checkIfListingExists(listingId!)
     bidInputRef.current!.focus()
   }, [listingId])
 
