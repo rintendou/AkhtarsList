@@ -7,6 +7,7 @@ import DUMMYIMAGE from "../../../../public/random-listing-image-undraw.svg"
 import Bidders from "./Bidders"
 import { useLocation } from "react-router"
 import getTimeRemaining from "../../../lib/util/getTimeRemaining"
+import numberInputIsValid from "../../../lib/util/numberInputValidator"
 
 const ListingDetail = () => {
   const bidInputRef = useRef<HTMLInputElement>(null)
@@ -35,6 +36,14 @@ const ListingDetail = () => {
 
   const onSubmitBid = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+
+    const bidAmount = bidInputRef.current!.value
+
+    if (!numberInputIsValid(bidAmount)) {
+      bidInputRef.current!.value = ""
+      bidInputRef.current!.focus()
+      return
+    }
 
     const submitBid = async () => {
       const response = await fetch(
