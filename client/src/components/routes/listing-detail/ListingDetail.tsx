@@ -151,11 +151,8 @@ const ListingDetail = () => {
               <p className="text-lg font-semibold"> ${finalPrice}</p>
             </div>
             <div className="flex items-center gap-3">
-              <h1>Expires At:</h1>
-              <p className="text-lg font-semibold truncate">
-                {timeRemaining.days} d, {timeRemaining.hours} h,
-                {timeRemaining.minutes} m, and {timeRemaining.seconds} s
-              </p>
+              <h1>Expires In:</h1>
+              <p className="text-lg font-semibold truncate">{timeRemaining}</p>
             </div>
           </div>
           <form
