@@ -161,8 +161,6 @@ const TimelineContextProvider = ({ children }: { children: ReactNode }) => {
         return
       }
 
-      console.log(category)
-
       switch (category) {
         case "Sneakers":
           setSneakersListings(json.data)
