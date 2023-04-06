@@ -2,25 +2,8 @@ import { createContext, useEffect, useState } from "react"
 import useAuth from "../hooks/useAuth"
 import { settings } from "../../settings"
 
-type UserType = {
-  username: string
-}
-
-type ListingType = {
-  _id: string
-  image: string
-  bidders: UserType[]
-  lister: UserType
-  title: string
-  desc: string
-  startPrice: number
-  finalPrice: number
-  expireAt: Date
-  views: number
-  category: string
-  weight: number
-  dimensions: [height: number, width: number, length: number]
-}
+// Types
+import ListingType from "../types/ListingType"
 
 type initialContextType = {
   address: string

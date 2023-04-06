@@ -1,28 +1,12 @@
 import { useParams } from "react-router-dom"
-
-import SideNavLinks from "./SideNavLinks"
 import useTimeline from "../../../lib/hooks/useTimeline"
+
+// Components
+import SideNavLinks from "./SideNavLinks"
 import ListingCard from "../../ui/ListingCard"
 
-type UserType = {
-  username: string
-}
-
-type ListingType = {
-  _id: string
-  image: string
-  bidders: UserType[]
-  lister: UserType
-  title: string
-  desc: string
-  startPrice: number
-  finalPrice: number
-  expireAt: Date
-  views: number
-  category: string
-  weight: number
-  dimensions: [height: number, width: number, length: number]
-}
+// Types
+import ListingType from "../../../lib/types/ListingType"
 
 const Category = () => {
   const { categoryName } = useParams()

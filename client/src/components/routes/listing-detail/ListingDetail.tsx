@@ -1,14 +1,19 @@
 import { useEffect, useRef, useState } from "react"
-
-import { settings } from "../../../settings"
-
-import DUMMYIMAGE from "../../../../public/random-listing-image-undraw.svg"
-
-import Bidders from "./Bidders"
 import { useLocation } from "react-router"
+
+// Components
+import Error from "../../ui/Error"
+import Bidders from "./Bidders"
+
+// Util functions
 import getTimeRemaining from "../../../lib/util/getTimeRemaining"
 import numberInputIsValid from "../../../lib/util/numberInputValidator"
-import Error from "../../ui/Error"
+
+// Port number
+import { settings } from "../../../settings"
+
+// Assets
+import DUMMYIMAGE from "../../../../public/random-listing-image-undraw.svg"
 
 const ListingDetail = () => {
   const [isError, setIsError] = useState(false)

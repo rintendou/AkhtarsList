@@ -1,6 +1,5 @@
-type UserType = {
-  username: string
-}
+// Types
+import UserType from "../../../lib/types/UserType"
 
 type BiddersProps = {
   bidders: UserType[]

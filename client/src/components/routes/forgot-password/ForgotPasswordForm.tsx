@@ -65,7 +65,7 @@ const ForgotPasswordForm = () => {
       setIsError(false)
       setDidSubmit(true)
       setSecurityQuestion(data.data.securityQuestion)
-      login("", data.data.username)
+      login("", data.data.username, "")
       console.log("Username:" + data.data.username)
       console.log(data)
     }
