@@ -28,8 +28,6 @@ const ListingDetail = () => {
     dimensions,
   } = location.state
 
-  // console.log(location.state)
-
   const onSubmitBid = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
@@ -74,7 +72,7 @@ const ListingDetail = () => {
               </div>
               <div className="flex items-center gap-3">
                 <h1>Views:</h1>
-                <p className="text-lg font-semibold">{views} bidders so far</p>
+                <p className="text-lg font-semibold">{views}</p>
               </div>
             </div>
           </div>
