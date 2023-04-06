@@ -118,7 +118,10 @@ const ListingDetail = () => {
           </div>
         </div>
 
-        <form className="w-full flex flex-col md:flex-row gap-5 items-center">
+        <form
+          className="w-full flex flex-col md:flex-row gap-5 items-center"
+          onSubmit={onSubmitBid}
+        >
           <div className="w-full max-w-[50%]">
             <input
               id="Bid Amount ($)"
