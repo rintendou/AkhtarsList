@@ -1,5 +1,4 @@
 import useTimeline from "../../../lib/hooks/useTimeline"
-import SeeAll from "../application/timeline/SeeAll"
 
 // Components
 import ListingCardSkeleton from "../../ui/ListingCardSkeleton"
@@ -11,9 +10,10 @@ import ListingType from "../../../lib/types/ListingType"
 
 type Props = {
   category: string
+  idToFilter: string
 }
 
-const SeeOtherListings = ({ category }: Props) => {
+const SeeOtherListings = ({ category, idToFilter }: Props) => {
   const {
     allListings,
     trendingListings,
@@ -50,17 +50,21 @@ const SeeOtherListings = ({ category }: Props) => {
       break
   }
 
+  const filteredAndCategorizedListings = categorizedListings.filter(
+    (l) => l._id !== idToFilter
+  )
+
   return (
     <div className="mx-auto container my-10">
       <div className="flex justify-between">
         <h1 className="text-lg font-semibold w-full">
           See Other Listings in {category}
         </h1>
-        <SeeAll to="/category/trending" />
+        <SeeOthersButton to={`/category/${category.toLowerCase()}`} />
       </div>
       <ul className="flex gap-8 py-5 overflow-x-scroll">
-        {categorizedListings.length !== 0 ? (
-          categorizedListings.map((listing) => (
+        {filteredAndCategorizedListings.length !== 0 ? (
+          filteredAndCategorizedListings.map((listing) => (
             <li key={listing._id}>
               <ListingCard
                 _id={listing._id}
@@ -80,9 +84,11 @@ const SeeOtherListings = ({ category }: Props) => {
             </li>
           ))
         ) : (
-          <ListingCardSkeleton />
+          <h1 className="h-64">No More Listing Cards found!</h1>
         )}
       </ul>
     </div>
   )
 }
+
+export default SeeOtherListings

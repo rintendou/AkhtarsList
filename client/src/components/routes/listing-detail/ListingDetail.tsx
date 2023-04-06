@@ -180,7 +180,7 @@ const ListingDetail = () => {
           <Bidders bidders={bidders} />
         </div>
       </div>
-      <SeeOtherListings category={category} />
+      <SeeOtherListings category={category} idToFilter={_id} />
     </div>
   )
 }
