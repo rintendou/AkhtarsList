@@ -6,6 +6,7 @@ import DUMMYIMAGE from "../../../../public/random-listing-image-undraw.svg"
 
 import Bidders from "./Bidders"
 import { useLocation } from "react-router"
+import getTimeRemaining from "../../../lib/util/getTimeRemaining"
 
 const ListingDetail = () => {
   const [bidAmount, setBidAmount] = useState("0")
@@ -43,6 +44,8 @@ const ListingDetail = () => {
 
     submitBid()
   }
+
+  const timeRemaining = getTimeRemaining(expireAt)
 
   return (
     <div className="min-h-screen flex flex-col md:flex-row">
@@ -116,7 +119,10 @@ const ListingDetail = () => {
 
           <div className="flex items-center gap-3">
             <h1>Expires At:</h1>
-            <p className="text-lg font-semibold">{expireAt}</p>
+            <p className="text-lg font-semibold truncate">
+              Expires in: {timeRemaining.days} d, {timeRemaining.hours} h,
+              {timeRemaining.minutes} m, and {timeRemaining.seconds} s
+            </p>
           </div>
         </div>
 
