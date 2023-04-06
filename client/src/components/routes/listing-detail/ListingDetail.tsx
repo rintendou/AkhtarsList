@@ -176,7 +176,7 @@ const ListingDetail = () => {
           <BidButton />
         </form>
         {isError && <Error errorMessage={errorMessage} />}
-        {/* <Bidders /> */}
+        <Bidders bidders={bidders} />
       </div>
     </div>
   )

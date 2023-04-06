@@ -1,9 +1,17 @@
-const Bidders = ({ bidders }: any) => {
+type UserType = {
+  username: string
+}
+
+type BiddersProps = {
+  bidders: UserType[]
+}
+
+const Bidders = ({ bidders }: BiddersProps) => {
   return (
     <ul>
-      {!bidders &&
-        bidders.map((bidder: any, index: number) => (
-          <li key={index}>{bidder.name}</li>
+      {bidders &&
+        bidders.map((bidder: UserType, index: number) => (
+          <li key={index}>{bidder.username}</li>
         ))}
     </ul>
   )
