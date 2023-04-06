@@ -15,6 +15,7 @@ type initialContextType = {
   accessoriesListings: ListingType[]
   collectiblesListings: ListingType[]
   refetchTimeline: () => void
+  fetchListingsByCategory: (category: string) => void
 }
 
 const initialContext = {
@@ -26,6 +27,7 @@ const initialContext = {
   accessoriesListings: [],
   collectiblesListings: [],
   refetchTimeline: () => {},
+  fetchListingsByCategory: () => {},
 }
 
 const TimelineContext = createContext<initialContextType>(initialContext)
@@ -148,6 +150,65 @@ const TimelineContextProvider = ({ children }: { children: ReactNode }) => {
     fetchTrendingListings()
   }
 
+  const fetchListingsByCategory = (category: string) => {
+    const fetchListings = async () => {
+      const response = await fetch(
+        `http://localhost:${settings.BACKEND_SERVER_PORT}/api/listing/fetch-by-category`,
+        {
+          method: "GET",
+          body: JSON.stringify({
+            category,
+          }),
+          headers: { "Content-Type": "application/json" },
+        }
+      )
+      const json = await response.json()
+
+      if (!json.ok) {
+        return
+      }
+
+      console.log(category)
+
+      switch (category) {
+        case "Sneakers":
+          setSneakersListings(json.data)
+          break
+        case "Antiques":
+          setAntiquesListings(json.data)
+          break
+        case "Tech":
+          setTechListings(json.data)
+          break
+        case "Accessories":
+          setAccessoriesListings(json.data)
+          break
+        case "Sneakers":
+          setSneakersListings(json.data)
+          break
+        case "Collectibles":
+          setCollectiblesListings(json.data)
+          break
+      }
+    }
+
+    const fetchTrendingListings = async () => {
+      const response = await fetch(
+        `http://localhost:${settings.BACKEND_SERVER_PORT}/api/listing/fetch-by-trending`
+      )
+      const json = await response.json()
+
+      if (!json.ok) {
+        return
+      }
+
+      setTrendingListings(json.data)
+    }
+
+    fetchListings()
+    fetchTrendingListings()
+  }
+
   const contextValue = {
     allListings,
     trendingListings,
@@ -157,6 +218,7 @@ const TimelineContextProvider = ({ children }: { children: ReactNode }) => {
     accessoriesListings,
     collectiblesListings,
     refetchTimeline,
+    fetchListingsByCategory,
   }
 
   return (
