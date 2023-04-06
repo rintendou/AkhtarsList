@@ -26,6 +26,7 @@ const ListingCard = ({
   dimensions,
 }: ListingType) => {
   const navigate = useNavigate()
+
   const { fetchListing } = useListingDetail()
 
   const handleClick = () => {

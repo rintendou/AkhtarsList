@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react"
-import { useLocation, useNavigate } from "react-router"
+import { useNavigate } from "react-router"
 import useAuth from "../../../lib/hooks/useAuth"
+import useListingDetail from "../../../lib/hooks/useListingDetail"
 
 // Components
 import Error from "../../ui/Error"
@@ -16,7 +17,6 @@ import { settings } from "../../../settings"
 // Assets
 import DUMMYIMAGE from "../../../../public/random-listing-image-undraw.svg"
 import SeeOtherListings from "./SeeOtherListings"
-import useListingDetail from "../../../lib/hooks/useListingDetail"
 
 const ListingDetail = () => {
   const [isError, setIsError] = useState(false)
