@@ -86,10 +86,9 @@ const ListingCard = ({
           </p>
         </div>
         <div className="flex justify-between">
-          <p className="bg-gray-200 p-1 rounded md w-min whitespace-nowrap">
-            Expires in: ${timeRemaining.days} days, ${timeRemaining.hours}{" "}
-            hours, ${timeRemaining.minutes} minutes, and $
-            {timeRemaining.seconds} seconds
+          <p className="bg-gray-200 p-1 rounded md w-min whitespace-nowrap truncate">
+            Expires in: {timeRemaining.days} d, {timeRemaining.hours} h,
+            {timeRemaining.minutes} m, and {timeRemaining.seconds} s
           </p>
         </div>
       </div>
