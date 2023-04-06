@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react"
-import { useLocation } from "react-router"
+import { useLocation, useNavigate } from "react-router"
+import useAuth from "../../../lib/hooks/useAuth"
 
 // Components
 import Error from "../../ui/Error"
@@ -21,6 +22,9 @@ const ListingDetail = () => {
   const [errorMessage, setErrorMessage] = useState("")
   const bidInputRef = useRef<HTMLInputElement>(null)
   const location = useLocation()
+
+  const { auth } = useAuth()
+  const navigate = useNavigate()
 
   const {
     _id,
@@ -46,6 +50,10 @@ const ListingDetail = () => {
     e.preventDefault()
 
     const bidAmount = bidInputRef.current!.value
+
+    if (!auth._id) {
+      navigate("/login")
+    }
 
     if (!numberInputIsValid(bidAmount)) {
       bidInputRef.current!.value = ""
