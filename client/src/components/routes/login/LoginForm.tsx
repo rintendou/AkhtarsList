@@ -1,47 +1,50 @@
-import { useEffect, useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import useAuth from "../../../lib/hooks/useAuth";
+import { useEffect, useRef, useState } from "react"
+import { useNavigate } from "react-router-dom"
+import useAuth from "../../../lib/hooks/useAuth"
 
-import Card from "../../ui/Card";
-import Error from "../../ui/Error";
-import StyledInputRef from "../../ui/StyledInputRef";
-import Success from "../../ui/Success";
-import RouterLink from "../../ui/RouterLink";
-import { settings } from "../../../settings";
+// Components
+import Card from "../../ui/Card"
+import Error from "../../ui/Error"
+import StyledInputRef from "../../ui/StyledInputRef"
+import Success from "../../ui/Success"
+import RouterLink from "../../ui/RouterLink"
+
+// Port number
+import { settings } from "../../../settings"
 
 type Props = {
-  didRegisterSuccessfully: boolean;
-  successMessage: string;
-};
+  didRegisterSuccessfully: boolean
+  successMessage: string
+}
 
 const LoginForm = ({ didRegisterSuccessfully, successMessage }: Props) => {
-  const { login } = useAuth();
-  const navigate = useNavigate();
+  const { login } = useAuth()
+  const navigate = useNavigate()
 
   // I opted to use the useRef hook instead of useState to prevent
   // unnecessary re-renders of this component per each character typed
-  const usernameRef = useRef<HTMLInputElement>(null);
-  const passwordRef = useRef<HTMLInputElement>(null);
+  const usernameRef = useRef<HTMLInputElement>(null)
+  const passwordRef = useRef<HTMLInputElement>(null)
 
   // focus on the first input on component mount
   useEffect(() => {
-    usernameRef.current!.focus();
-  }, []);
+    usernameRef.current!.focus()
+  }, [])
   // Keep track of error
-  const [isError, setIsError] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
+  const [isError, setIsError] = useState(false)
+  const [errorMessage, setErrorMessage] = useState("")
 
   // Keep track of login success
-  const [scsMessage, setScsMessage] = useState(successMessage);
+  const [scsMessage, setScsMessage] = useState(successMessage)
 
   // send post request to api endpoint /api/auth/login by calling the
   // the endpoint and backend_server_port number: 5178. Payload is passed
   // by attaching data to the body object.
   const loginUserHandler = (e: React.FormEvent<HTMLFormElement>) => {
     // Prevent default behavior of reloading page on form submission
-    e.preventDefault();
-    const username = usernameRef.current!.value;
-    const password = passwordRef.current!.value;
+    e.preventDefault()
+    const username = usernameRef.current!.value
+    const password = passwordRef.current!.value
 
     const loginUser = async () => {
       const response = await fetch(
@@ -54,23 +57,23 @@ const LoginForm = ({ didRegisterSuccessfully, successMessage }: Props) => {
           }),
           headers: { "Content-Type": "application/json" },
         }
-      );
+      )
 
-      const data = await response.json();
+      const data = await response.json()
 
       if (!data.ok) {
-        setIsError(true);
-        setErrorMessage(data.message);
-        return;
+        setIsError(true)
+        setErrorMessage(data.message)
+        return
       }
 
-      setIsError(false);
-      setScsMessage(data.data.message);
-      login(data.data.user._id, data.data.user.username, data.data.user.token);
-      navigate("/", { replace: true });
-    };
-    loginUser();
-  };
+      setIsError(false)
+      setScsMessage(data.data.message)
+      login(data.data.user._id, data.data.user.username, data.data.user.token)
+      navigate("/", { replace: true })
+    }
+    loginUser()
+  }
 
   return (
     <Card twClasses="w-[45rem] mx-auto p-20 border border-secondary space-y-16 flex flex-col justify-center">
@@ -104,10 +107,10 @@ const LoginForm = ({ didRegisterSuccessfully, successMessage }: Props) => {
       )}
       {isError && <Error errorMessage={errorMessage} />}
     </Card>
-  );
-};
+  )
+}
 
-export default LoginForm;
+export default LoginForm
 
 const LoginButton = () => {
   return (
@@ -117,5 +120,5 @@ const LoginButton = () => {
     >
       Log In
     </button>
-  );
-};
+  )
+}

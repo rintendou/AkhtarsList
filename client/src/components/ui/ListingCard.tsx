@@ -1,29 +1,14 @@
 import { useNavigate } from "react-router-dom"
 import useUpdateListingViewCount from "../../lib/hooks/useUpdateListingViewCount"
 
+// Components
 import Card from "./Card"
 
+// Util functions
 import getTimeRemaining from "../../lib/util/getTimeRemaining"
 
-type UserType = {
-  username: string
-}
-
-type ListingType = {
-  _id: string
-  image: string
-  bidders: UserType[]
-  lister: UserType
-  title: string
-  desc: string
-  startPrice: number
-  finalPrice: number
-  expireAt: Date
-  views: number
-  category: string
-  weight: number
-  dimensions: [height: number, width: number, length: number]
-}
+// Types
+import ListingType from "../../lib/types/ListingType"
 
 const ListingCard = ({
   _id,

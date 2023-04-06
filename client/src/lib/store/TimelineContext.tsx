@@ -1,26 +1,10 @@
 import { createContext, useState, ReactNode, useEffect } from "react"
 
+// Types
+import ListingType from "../types/ListingType"
+
+// Port Number
 import { settings } from "../../settings"
-
-type UserType = {
-  username: string
-}
-
-type ListingType = {
-  _id: string
-  image: string
-  bidders: UserType[]
-  lister: UserType
-  title: string
-  desc: string
-  startPrice: number
-  finalPrice: number
-  expireAt: Date
-  views: number
-  category: string
-  weight: number
-  dimensions: [height: number, width: number, length: number]
-}
 
 type initialContextType = {
   allListings: ListingType[]
