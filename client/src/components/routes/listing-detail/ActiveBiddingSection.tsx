@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useRef, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import useAuth from "../../../lib/hooks/useAuth"
 
@@ -11,21 +11,22 @@ import numberInputIsValid from "../../../lib/util/numberInputValidator"
 
 // Backend port number
 import { settings } from "../../../settings"
+import getTimeRemaining from "../../../lib/util/getTimeRemaining"
 
 type Props = {
   bidders: string[]
+  expireAt: Date
   finalPrice: number
-  timeRemaining: string
   isLister: boolean
 }
 
 const ActiveBiddingSection = ({
   bidders,
+  expireAt,
   finalPrice,
-  timeRemaining,
   isLister,
 }: Props) => {
-  const [bidAmount, setBidAmount] = useState("0")
+  const bidAmountRef = useRef<HTMLInputElement>(null)
   const [errorMessage, setErrorMessage] = useState("")
 
   const { auth } = useAuth()
@@ -33,6 +34,7 @@ const ActiveBiddingSection = ({
 
   const onSubmitBid = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+    const bidAmount = bidAmountRef.current!.value
 
     if (!auth._id) {
       navigate("/login", {
@@ -69,6 +71,8 @@ const ActiveBiddingSection = ({
     submitBid()
   }
 
+  const timeRemaining = getTimeRemaining(expireAt)
+
   return (
     <div
       className={`flex-auto p-10 py-24 max-w-none md:max-w-[50%] max-h-[50%] md:max-h-none space-y-10 flex flex-col items-center bg-purple-100`}
@@ -96,8 +100,7 @@ const ActiveBiddingSection = ({
           <div className="w-full max-w-[50%]">
             <input
               id="Bid Amount ($)"
-              onChange={(e) => setBidAmount(e.target.value)}
-              value={bidAmount}
+              ref={bidAmountRef}
               className="pt-3 pl-3 p-2 block px-0 mt-0 bg-transparent border-2 focus:outline-none focus:ring-0 border-secondary rounded-md w-full"
             />
             <label
