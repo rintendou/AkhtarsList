@@ -11,7 +11,7 @@ import StyledDropdown from "../../ui/StyledDropdown"
 import StyledInput from "../../ui/StyledInput"
 import StyledInputAreaRef from "../../ui/StyledInputAreaRef"
 import Success from "../../ui/Success"
-import StyledDateTimePicker from "../protected/sell/StyledDateTimePicker"
+import StyledDateTimePicker from "../../ui/StyledDateTimePicker"
 
 const IMAGESET1 = [
   "sneakers1.jpg",

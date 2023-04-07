@@ -18,7 +18,7 @@ const CATEGORIES = [
 import StyledInputRef from "../../../ui/StyledInputRef"
 import StyledInputAreaRef from "../../../ui/StyledInputAreaRef"
 import StyledDropdownRef from "../../../ui/StyledDropdown"
-import StyledDateTimePicker from "./StyledDateTimePicker"
+import StyledDateTimePicker from "../../../ui/StyledDateTimePicker"
 import Error from "../../../ui/Error"
 import { useNavigate } from "react-router-dom"
 import { settings } from "../../../../settings"
