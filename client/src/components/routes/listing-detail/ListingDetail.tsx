@@ -10,14 +10,8 @@ import ActiveBiddingSection from "./ActiveBiddingSection"
 import ListingDetailSkeleton from "./ListingDetailSkeleton"
 
 const ListingDetail = () => {
-  const {
-    listing,
-    fetchListing,
-    isLister,
-    isExpired,
-    isLoading,
-    checkIfListingExists,
-  } = useListingDetail()
+  const { listing, fetchListing, isLister, isExpired, isLoading } =
+    useListingDetail()
 
   const {
     image,
@@ -39,13 +33,11 @@ const ListingDetail = () => {
   const { listingId } = useParams()
 
   useEffect(() => {
-    console.log("RAN")
     window.scrollTo({
       top: 0,
       behavior: "smooth",
     })
 
-    checkIfListingExists(listingId!)
     fetchListing(listingId!)
   }, [listingId])
 
