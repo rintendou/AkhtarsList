@@ -56,8 +56,6 @@ const ListingDetail = () => {
     />
   )
 
-  console.log(isLoading)
-
   return (
     <div>
       {!isLoading ? (

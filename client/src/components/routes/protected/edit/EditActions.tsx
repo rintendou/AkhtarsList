@@ -37,8 +37,6 @@ const EditActions = () => {
 
   const location = useLocation()
 
-  console.log(location.state)
-
   useEffect(() => {
     if (!location.state) {
       return
@@ -85,7 +83,6 @@ const EditActions = () => {
       return tomorrow
     }
 
-    console.log(expireAt)
     const payload = {
       userId: auth._id,
       title,
@@ -98,7 +95,6 @@ const EditActions = () => {
       weight,
       dimensions: [height, width, length],
     }
-    console.log(payload)
 
     if (!stringInputIsValid(title)) {
       setError(true)
@@ -190,7 +186,6 @@ const EditActions = () => {
   // Keep track of Expiration
   const handleDateTimeChange = (value: Date | null) => {
     setExpireAt(value)
-    console.log(expireAt)
   }
 
   // Focus on component mount
