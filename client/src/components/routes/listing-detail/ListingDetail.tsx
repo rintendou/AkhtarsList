@@ -10,8 +10,14 @@ import ActiveBiddingSection from "./ActiveBiddingSection"
 import ListingDetailSkeleton from "./ListingDetailSkeleton"
 
 const ListingDetail = () => {
-  const { listing, fetchListing, isLister, isExpired, isLoading } =
-    useListingDetail()
+  const {
+    listing,
+    fetchListing,
+    isLister,
+    isExpired,
+    isLoading,
+    checkIfListingExists,
+  } = useListingDetail()
 
   const {
     image,
@@ -37,6 +43,7 @@ const ListingDetail = () => {
       top: 0,
       behavior: "smooth",
     })
+    checkIfListingExists(listingId!)
     fetchListing(listingId!)
   }, [listingId])
 
@@ -55,8 +62,6 @@ const ListingDetail = () => {
       isLister={isLister}
     />
   )
-
-  console.log(isLoading)
 
   return (
     <div>
