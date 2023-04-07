@@ -17,18 +17,17 @@ import { settings } from "../../../settings"
 // Assets
 import DUMMYIMAGE from "../../../../public/random-listing-image-undraw.svg"
 import SeeOtherListings from "./SeeOtherListings"
-import useTimeline from "../../../lib/hooks/useTimeline"
 
 const ListingDetail = () => {
+  const [bidAmount, setBidAmount] = useState("0")
+
   const [isError, setIsError] = useState(false)
   const [errorMessage, setErrorMessage] = useState("")
-
-  const bidInputRef = useRef<HTMLInputElement>(null)
 
   const { auth } = useAuth()
   const navigate = useNavigate()
 
-  const { listing, fetchListing, checkIfListingExists } = useListingDetail()
+  const { listing, fetchListing, isLister } = useListingDetail()
 
   const {
     image,
@@ -51,14 +50,10 @@ const ListingDetail = () => {
 
   useEffect(() => {
     fetchListing(listingId!)
-    checkIfListingExists(listingId!)
-    bidInputRef.current!.focus()
   }, [listingId])
 
   const onSubmitBid = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-
-    const bidAmount = bidInputRef.current!.value
 
     if (!auth._id) {
       navigate("/login", {
@@ -67,15 +62,12 @@ const ListingDetail = () => {
     }
 
     if (!numberInputIsValid(bidAmount)) {
-      bidInputRef.current!.value = ""
-      bidInputRef.current!.focus()
       setIsError(true)
       setErrorMessage("Invalid Input")
       return
     }
 
     if (Number(bidAmount) <= finalPrice) {
-      bidInputRef.current!.focus()
       setIsError(true)
       setErrorMessage(
         "Bid amount cannot be less than or equal to the current price!"
@@ -175,28 +167,35 @@ const ListingDetail = () => {
               <p className="text-lg font-semibold truncate">{timeRemaining}</p>
             </div>
           </div>
-          <form
-            className="w-full flex flex-col md:flex-row gap-5 items-center"
-            onSubmit={onSubmitBid}
-          >
-            <div className="w-full max-w-[50%]">
-              <input
-                id="Bid Amount ($)"
-                placeholder=""
-                ref={bidInputRef}
-                className="pt-3 pl-3 p-2 block px-0 mt-0 bg-transparent border-2 focus:outline-none focus:ring-0 border-secondary rounded-md w-full"
-              />
-              <label
-                htmlFor="Bid Amount ($)"
-                className="absolute duration-200 ease-in-out top-3 left-3 -z-1 origin-0 text-secondary"
-              >
-                Bid Amount ($)
-              </label>
+
+          {!isLister ? (
+            <form
+              className="w-full flex flex-col md:flex-row gap-5 items-center"
+              onSubmit={onSubmitBid}
+            >
+              <div className="w-full max-w-[50%]">
+                <input
+                  id="Bid Amount ($)"
+                  onChange={(e) => setBidAmount(e.target.value)}
+                  className="pt-3 pl-3 p-2 block px-0 mt-0 bg-transparent border-2 focus:outline-none focus:ring-0 border-secondary rounded-md w-full"
+                />
+                <label
+                  htmlFor="Bid Amount ($)"
+                  className="absolute duration-200 ease-in-out top-3 left-3 -z-1 origin-0 text-secondary"
+                >
+                  Bid Amount ($)
+                </label>
+              </div>
+              <BidButton />
+            </form>
+          ) : (
+            <div className="text-3xl font-semibold underline">
+              You own this listing
             </div>
-            <BidButton />
-          </form>
+          )}
+
           {isError && <Error errorMessage={errorMessage} />}
-          <Bidders bidders={bidders} />
+          <Bidders bidders={bidders} isLister={isLister} />
         </div>
       </div>
       <SeeOtherListings category={category} idToFilter={listingId!} />

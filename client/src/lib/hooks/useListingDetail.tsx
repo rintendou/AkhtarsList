@@ -4,6 +4,7 @@ import useTimeline from "./useTimeline"
 import ListingType from "../types/ListingType"
 import { settings } from "../../settings"
 import { useNavigate } from "react-router-dom"
+import useAuth from "./useAuth"
 
 const initialListingState = {
   _id: "",
@@ -27,6 +28,9 @@ const useListingDetail = () => {
   const [listing, setListing] = useState<ListingType>(
     useMemo(() => initialListingState, [])
   )
+  const [isLister, setIsLister] = useState(false)
+
+  const { auth } = useAuth()
 
   const fetchListing = useCallback((listingId: string) => {
     const fetchListingDetail = async () => {
@@ -45,6 +49,8 @@ const useListingDetail = () => {
         width: json.data.dimensions[1],
         length: json.data.dimensions[2],
       })
+      const result = auth._id.length !== 0 && auth._id === json.data.lister
+      setIsLister(result)
     }
 
     fetchListingDetail()
@@ -71,7 +77,7 @@ const useListingDetail = () => {
     checkExistingListing()
   }
 
-  return { listing, fetchListing, checkIfListingExists }
+  return { listing, fetchListing, checkIfListingExists, isLister }
 }
 
 export default useListingDetail
