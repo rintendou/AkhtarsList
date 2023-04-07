@@ -9,7 +9,8 @@ import ExpiredBiddingSection from "./ExpiredBiddingSection"
 import ActiveBiddingSection from "./ActiveBiddingSection"
 
 const ListingDetail = () => {
-  const { listing, fetchListing, isLister, isExpired } = useListingDetail()
+  const { listing, fetchListing, isLister, isExpired, fetchLister } =
+    useListingDetail()
 
   const {
     image,
@@ -37,6 +38,11 @@ const ListingDetail = () => {
     })
     fetchListing(listingId!)
   }, [listingId])
+
+  useEffect(() => {
+    console.log(lister)
+    fetchLister(lister)
+  }, [lister])
 
   return (
     <div>

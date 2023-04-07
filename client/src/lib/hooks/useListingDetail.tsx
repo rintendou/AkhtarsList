@@ -50,6 +50,7 @@ const useListingDetail = () => {
       const isAdmin = localStorage.getItem("isAdmin") === "true"
       const isLister = localStorage.getItem("_id") === json.data.lister
 
+      fetchLister(json.data.lister)
       setIsLister(isAdmin || isLister)
       setIsExpired(json.data.expireAt < new Date())
     }
@@ -78,7 +79,33 @@ const useListingDetail = () => {
     checkExistingListing()
   }
 
-  return { listing, fetchListing, checkIfListingExists, isLister, isExpired }
+  const fetchLister = (listerId: string) => {
+    const getLister = async () => {
+      const response = await fetch(`http://localhost:5173/api/user/${listerId}`)
+      const json = await response.json()
+
+      console.log(json)
+      if (!json.ok) {
+        return
+      }
+
+      setListing({
+        ...listing,
+        lister: json.data.username,
+      })
+    }
+
+    getLister()
+  }
+
+  return {
+    listing,
+    fetchListing,
+    checkIfListingExists,
+    isLister,
+    isExpired,
+    fetchLister,
+  }
 }
 
 export default useListingDetail
