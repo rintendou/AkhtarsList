@@ -17,6 +17,8 @@ import { settings } from "../../../settings"
 // Assets
 import SeeOtherListings from "./SeeOtherListings"
 import ListingOverview from "./ListingOverview"
+import ExpiredBiddingSection from "./ExpiredBiddingSection"
+import UnexpiredBiddingSection from "./ActiveBiddingSection"
 
 const ListingDetail = () => {
   const [bidAmount, setBidAmount] = useState("0")
@@ -111,6 +113,9 @@ const ListingDetail = () => {
           width={width}
           height={height}
         />
+
+        {isExpired ? <ExpiredBiddingSection /> : <UnexpiredBiddingSection />}
+
         <div
           className={`flex-auto p-10 py-24 max-w-none md:max-w-[50%] max-h-[50%] md:max-h-none space-y-10 flex flex-col items-center bg-purple-100 ${
             isExpired && "opacity-40"
