@@ -30,8 +30,11 @@ const ExpiredBiddingSection = ({ bidders, finalPrice, isLister }: Props) => {
         </div>
       </div>
 
-      <div className="text-3xl font-semibold underline">
-        You own this listing
+      <div>
+        <h1 className="text-3xl font-semibold">You own this listing</h1>
+        <h1 className="text-xs font-light text-gray-500 tracking-widest line-through text-center cursor-not-allowed duration-200 ease-in-out hover:font-semibold uppercase">
+          Cannot Edit Expired Listing
+        </h1>
       </div>
 
       <Bidders bidders={bidders} isLister={isLister} />
