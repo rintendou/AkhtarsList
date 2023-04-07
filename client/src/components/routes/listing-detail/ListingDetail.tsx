@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router"
 import useAuth from "../../../lib/hooks/useAuth"
 import useListingDetail from "../../../lib/hooks/useListingDetail"
@@ -50,7 +50,7 @@ const ListingDetail = () => {
 
   useEffect(() => {
     fetchListing(listingId!)
-  }, [listingId, isLister])
+  }, [listingId])
 
   const onSubmitBid = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
