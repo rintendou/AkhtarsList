@@ -11,7 +11,7 @@ import numberInputIsValid from "../../../lib/util/numberInputValidator"
 
 // Backend port number
 import { settings } from "../../../settings"
-import getTimeRemaining from "../../../lib/util/getTimeRemaining"
+import Countdown from "../../ui/Countdown"
 
 type Props = {
   bidders: string[]
@@ -71,8 +71,6 @@ const ActiveBiddingSection = ({
     submitBid()
   }
 
-  const timeRemaining = getTimeRemaining(expireAt)
-
   return (
     <div
       className={`flex-auto p-10 py-24 max-w-none md:max-w-[50%] max-h-[50%] md:max-h-none space-y-10 flex flex-col items-center bg-purple-100`}
@@ -81,7 +79,7 @@ const ActiveBiddingSection = ({
         Biddings
       </h1>
 
-      <div className="flex justify-between w-full">
+      <div className="flex flex-col md:flex-row justify-between  text-center gap-10">
         <div className="flex items-center gap-3">
           <h1>Current Price:</h1>
           <p className="text-lg font-semibold"> ${finalPrice}</p>
@@ -89,7 +87,7 @@ const ActiveBiddingSection = ({
 
         <div className="flex items-center gap-3">
           <h1>Expires In:</h1>
-          <p className="text-lg font-semibold truncate">{timeRemaining}</p>
+          <Countdown targetDate={expireAt.toString()} />
         </div>
       </div>
 
