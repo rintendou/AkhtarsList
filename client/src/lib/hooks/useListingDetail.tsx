@@ -50,7 +50,7 @@ const useListingDetail = () => {
 
       fetchLister(json.data.lister, json.data)
       setIsLister(isAdmin || isLister)
-      setIsExpired(json.data.expireAt < new Date())
+      setIsExpired(new Date(json.data.expireAt) < new Date())
       setIsLoading(false)
     }
 
