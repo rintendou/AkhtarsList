@@ -53,9 +53,10 @@ const useListingDetail = () => {
       const isAdmin = localStorage.getItem("isAdmin") === "true"
       const isLister = localStorage.getItem("_id") === json.data.lister
 
-      fetchLister(json.data.lister)
+      fetchLister(json.data.lister, json.data)
       setIsLister(isAdmin || isLister)
       setIsExpired(json.data.expireAt < new Date())
+      setIsLoading(false)
     }
 
     fetchListingDetail()
@@ -85,7 +86,7 @@ const useListingDetail = () => {
     checkExistingListing()
   }
 
-  const fetchLister = (listerId: string) => {
+  const fetchLister = (listerId: string, updatedListing: ListingType) => {
     setIsLoading(true)
     const getLister = async () => {
       const response = await fetch(`http://localhost:5173/api/user/${listerId}`)
@@ -97,7 +98,7 @@ const useListingDetail = () => {
       }
 
       setListing({
-        ...listing,
+        ...updatedListing,
         lister: json.data.username,
       })
       setIsLoading(false)

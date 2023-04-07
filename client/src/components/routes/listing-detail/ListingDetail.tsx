@@ -9,8 +9,7 @@ import ExpiredBiddingSection from "./ExpiredBiddingSection"
 import ActiveBiddingSection from "./ActiveBiddingSection"
 
 const ListingDetail = () => {
-  const { listing, fetchListing, isLister, isExpired, fetchLister } =
-    useListingDetail()
+  const { listing, fetchListing, isLister, isExpired } = useListingDetail()
 
   const {
     image,
