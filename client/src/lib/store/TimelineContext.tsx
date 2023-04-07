@@ -14,6 +14,7 @@ type initialContextType = {
   techListings: ListingType[]
   accessoriesListings: ListingType[]
   collectiblesListings: ListingType[]
+  unexpiredListings: ListingType[]
   refetchTimeline: () => void
   fetchListingsByCategory: (category: string) => void
 }
@@ -26,6 +27,7 @@ const initialContext = {
   techListings: [],
   accessoriesListings: [],
   collectiblesListings: [],
+  unexpiredListings: [],
   refetchTimeline: () => {},
   fetchListingsByCategory: () => {},
 }
@@ -44,6 +46,7 @@ const TimelineContextProvider = ({ children }: { children: ReactNode }) => {
   const [collectiblesListings, setCollectiblesListings] = useState<
     ListingType[]
   >([])
+  const [unexpiredListings, setUnexpiredListings] = useState<ListingType[]>([])
 
   // Fetch all and trending listings on component mount
   useEffect(() => {
@@ -72,6 +75,9 @@ const TimelineContextProvider = ({ children }: { children: ReactNode }) => {
       const collectiblesListings = json.data.filter(
         (listing: ListingType) => listing.category === "Collectibles"
       )
+      const unexpiredListings = json.data.filter(
+        (listing: ListingType) => new Date(listing.expireAt) > new Date()
+      )
 
       setAllListings(json.data)
       setSneakersListings(sneakersListings)
@@ -79,6 +85,7 @@ const TimelineContextProvider = ({ children }: { children: ReactNode }) => {
       setTechListings(techListings)
       setAccessoriesListings(accessoriesListings)
       setCollectiblesListings(collectiblesListings)
+      setUnexpiredListings(unexpiredListings)
     }
 
     const fetchTrendingListings = async () => {
@@ -124,6 +131,9 @@ const TimelineContextProvider = ({ children }: { children: ReactNode }) => {
       const collectiblesListings = json.data.filter(
         (listing: ListingType) => listing.category === "Collectibles"
       )
+      const unexpiredListings = json.data.filter(
+        (listing: ListingType) => new Date(listing.expireAt) > new Date()
+      )
 
       setAllListings(json.data)
       setSneakersListings(sneakersListings)
@@ -131,6 +141,7 @@ const TimelineContextProvider = ({ children }: { children: ReactNode }) => {
       setTechListings(techListings)
       setAccessoriesListings(accessoriesListings)
       setCollectiblesListings(collectiblesListings)
+      setUnexpiredListings(unexpiredListings)
     }
 
     const fetchTrendingListings = async () => {
@@ -194,6 +205,7 @@ const TimelineContextProvider = ({ children }: { children: ReactNode }) => {
     techListings,
     accessoriesListings,
     collectiblesListings,
+    unexpiredListings,
     refetchTimeline,
     fetchListingsByCategory,
   }
