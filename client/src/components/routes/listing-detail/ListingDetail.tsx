@@ -50,7 +50,7 @@ const ListingDetail = () => {
 
   useEffect(() => {
     fetchListing(listingId!)
-  }, [listingId, isLister])
+  }, [listingId])
 
   const onSubmitBid = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
