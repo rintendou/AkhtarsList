@@ -5,14 +5,14 @@ import useAuth from "../../../lib/hooks/useAuth"
 // Components
 import Bidders from "./Bidders"
 import Error from "../../ui/Error"
+import Countdown from "../../ui/Countdown"
+import EditListing from "./EditListing"
 
 // Utility functions
 import numberInputIsValid from "../../../lib/util/numberInputValidator"
 
 // Backend port number
 import { settings } from "../../../settings"
-import Countdown from "../../ui/Countdown"
-import EditListingButton from "./EditListingButton"
 
 type Props = {
   bidders: string[]
@@ -117,9 +117,11 @@ const ActiveBiddingSection = ({
           <BidButton />
         </form>
       ) : (
-        <div className="text-3xl font-semibold w-full text-center">
-          <h1 className="bg-red-500">You own this listing</h1>
-          <EditListingButton />
+        <div>
+          <h1 className="text-3xl font-semibold w-full text-center">
+            You own this listing
+          </h1>
+          <EditListing />
         </div>
       )}
 

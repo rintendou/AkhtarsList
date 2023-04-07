@@ -1,9 +1,6 @@
 import { useEffect, useState } from "react"
-import { useNavigate, useParams } from "react-router"
+import { useParams } from "react-router"
 import useListingDetail from "../../../lib/hooks/useListingDetail"
-
-// Util functions
-import getTimeRemaining from "../../../lib/util/getTimeRemaining"
 
 // Assets
 import SeeOtherListings from "./SeeOtherListings"
