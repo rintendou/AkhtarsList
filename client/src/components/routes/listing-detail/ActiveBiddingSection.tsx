@@ -1,4 +1,4 @@
-import { useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import useAuth from "../../../lib/hooks/useAuth"
 
@@ -70,6 +70,10 @@ const ActiveBiddingSection = ({
 
     submitBid()
   }
+
+  useEffect(() => {
+    bidAmountRef.current!.focus()
+  }, [])
 
   return (
     <div
