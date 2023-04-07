@@ -80,7 +80,7 @@ const ActiveBiddingSection = ({
     <div
       className={`flex-auto p-10 py-24 max-w-none md:max-w-[50%] max-h-[50%] md:max-h-none space-y-10 flex flex-col items-center bg-purple-100`}
     >
-      <h1 className="text-3xl text-center font-semibold backdrop-opacity-30">
+      <h1 className="text-5xl text-center font-semibold backdrop-opacity-30">
         Biddings
       </h1>
 

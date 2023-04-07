@@ -16,7 +16,7 @@ const ExpiredBiddingSection = ({ bidders, finalPrice, isLister }: Props) => {
         Listing Expired
       </h1>
 
-      <h1 className="text-3xl text-center font-semibold backdrop-opacity-30">
+      <h1 className="text-5xl text-center font-semibold backdrop-opacity-30">
         Biddings
       </h1>
 
