@@ -276,8 +276,6 @@ export const updateListing = async (req: Request, res: Response) => {
   const listingId = req.params.listingId
   const listing = await ListingModel.findById(listingId)
 
-  console.log("TEST")
-
   const userId = req.body.userId
 
   if (!listingId || !userId) {
