@@ -60,10 +60,14 @@ const ListingCard = ({
   }, [lister])
 
   const timeRemaining = getTimeRemaining(expireAt)
+  const isExpired = timeRemaining === "Expired"
 
   return (
     <Card twClasses="p-2 w-56 text-sm h-76 justify-between cursor-pointer hover:shadow-xl duration-100 ease-in-out">
-      <div className="flex flex-col gap-1" onClick={handleClick}>
+      <div
+        className={`flex flex-col gap-1 ${isExpired && "opacity-30"}`}
+        onClick={handleClick}
+      >
         <img
           src="https://picsum.photos/200/300"
           alt={title}
@@ -88,7 +92,7 @@ const ListingCard = ({
         </div>
         <div className="flex justify-between">
           <p className="bg-gray-200 p-1 rounded md whitespace-nowrap truncate w-full text-center">
-            Expires in: {timeRemaining}
+            {timeRemaining}
           </p>
         </div>
       </div>
