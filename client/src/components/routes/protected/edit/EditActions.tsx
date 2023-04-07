@@ -158,7 +158,7 @@ const EditActions = () => {
 
     const editListing = async () => {
       const response = await fetch(
-        `http://localhost:5173/api/listing/update/${location.state.listing._id}`,
+        `http://localhost:${settings.BACKEND_SERVER_PORT}/api/listing/update/${location.state.listing._id}`,
         {
           method: "PUT",
           body: JSON.stringify(payload),
