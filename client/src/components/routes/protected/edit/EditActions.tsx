@@ -87,16 +87,18 @@ const EditActions = () => {
     }
 
     const payload = {
+      userId: auth._id,
       title,
-      lister: auth.username,
+      lister: auth._id,
       desc,
       image,
       startPrice,
       expireAt: expireAt || backupDate(),
       category,
       weight,
-      dimensions: [height, width, length],
+      dimensions: [Number(height), Number(width), Number(length)],
     }
+    console.log(payload)
 
     if (!stringInputIsValid(title)) {
       setError(true)
@@ -156,16 +158,17 @@ const EditActions = () => {
 
     const editListing = async () => {
       const response = await fetch(
-        `http://localhost:${settings.BACKEND_SERVER_PORT}/api/listing/update/${location.state.listing._id}`,
+        `http://localhost:5173/api/listing/update/${location.state.listing._id}`,
         {
-          method: "POST",
+          method: "PUT",
           body: JSON.stringify(payload),
           headers: { "Content-Type": "application/json" },
         }
       )
+      console.log(response)
 
       const data = await response.json()
-
+      console.log(data)
       if (!data.ok) {
         setError(true)
         setErrorMessage(data.message)
