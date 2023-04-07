@@ -1,5 +1,6 @@
 import AllListings from "./AllListings"
 import CategoryListings from "./CategoryListings"
+import ExpiredListings from "./ExpiredListings"
 import TrendingListings from "./TrendingListings"
 
 const Timeline = () => {
@@ -8,6 +9,7 @@ const Timeline = () => {
       <TrendingListings />
       <CategoryListings />
       <AllListings />
+      <ExpiredListings />
     </>
   )
 }

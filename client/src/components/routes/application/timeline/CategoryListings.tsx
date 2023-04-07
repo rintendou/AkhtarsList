@@ -93,7 +93,9 @@ const CategoryListings = () => {
         </ul>
       </div>
 
-      <Carousel images={IMAGESET2} />
+      <div className="py-14">
+        <Carousel images={IMAGESET2} />
+      </div>
 
       <div>
         <div className="flex justify-between">
