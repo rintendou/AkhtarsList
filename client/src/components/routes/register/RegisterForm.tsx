@@ -82,7 +82,7 @@ const RegisterForm = () => {
   }
 
   return (
-    <Card twClasses="w-[45rem] mx-auto p-20 border border-secondary space-y-16">
+    <Card twClasses="w-[30rem] md:w-[45rem] mx-auto p-20 border border-secondary space-y-16">
       <h1 className="text-4xl font-bold text-center">Register</h1>
       <form className="flex flex-col gap-5" onSubmit={registerUserHandler}>
         <StyledInputRef
@@ -123,10 +123,10 @@ const RegisterForm = () => {
         />
         <RegisterButton />
       </form>
-      <h1 className="text-center">
-        Already have an account?{" "}
+      <div className="text-center w-full flex flex-col md:flex-row space-x-0 md:space-x-3 justify-center mx-auto">
+        <h1>Already have an account?</h1>
         <RouterLink routerLinkText="Login here" to="/login" />
-      </h1>
+      </div>
       {isError && <Error errorMessage={errorMessage} />}
     </Card>
   )

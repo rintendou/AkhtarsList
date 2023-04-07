@@ -87,7 +87,7 @@ const LoginForm = ({
   }
 
   return (
-    <Card twClasses="w-[45rem] mx-auto p-20 border border-secondary space-y-16 flex flex-col justify-center">
+    <Card twClasses="w-[30rem] md:w-[45rem] mx-auto p-20 border border-secondary space-y-16 flex flex-col justify-center">
       <h1 className="text-4xl font-bold text-center">Log In</h1>
       <form className="flex flex-col gap-5" onSubmit={loginUserHandler}>
         <StyledInputRef
@@ -109,10 +109,10 @@ const LoginForm = ({
         />
         <LoginButton />
       </form>
-      <h1 className="text-center">
-        Don't have an account yet?
+      <div className="text-center flex flex-col md:flex-row space-x-0 md:space-x-3 mx-auto">
+        <h1>Don't have an account yet?</h1>
         <RouterLink routerLinkText="Register here" to="/register" />
-      </h1>
+      </div>
       {!errorMessage && didRegisterSuccessfully && (
         <Success successMessage={scsMessage} />
       )}
