@@ -155,7 +155,10 @@ const SellActions = () => {
 
       setError(false)
       setErrorMessage("")
-      navigate("/preview", { replace: true, state: payload })
+      navigate("/preview", {
+        replace: true,
+        state: { ...payload, message: "Listing Successfully Posted!" },
+      })
       refetchUserDetails()
       refetchTimeline()
     }

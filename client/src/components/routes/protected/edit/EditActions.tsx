@@ -176,7 +176,10 @@ const EditActions = () => {
 
       setError(false)
       setErrorMessage("")
-      navigate("/preview", { replace: true, state: payload })
+      navigate("/preview", {
+        replace: true,
+        state: { ...payload, message: "Listing Successfully Updated!" },
+      })
       refetchUserDetails()
       refetchTimeline()
     }
