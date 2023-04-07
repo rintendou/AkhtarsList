@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useRef, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import useAuth from "../../../lib/hooks/useAuth"
 
@@ -26,7 +26,7 @@ const ActiveBiddingSection = ({
   finalPrice,
   isLister,
 }: Props) => {
-  const [bidAmount, setBidAmount] = useState("0")
+  const bidAmountRef = useRef<HTMLInputElement>(null)
   const [errorMessage, setErrorMessage] = useState("")
 
   const { auth } = useAuth()
@@ -34,6 +34,7 @@ const ActiveBiddingSection = ({
 
   const onSubmitBid = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+    const bidAmount = bidAmountRef.current!.value
 
     if (!auth._id) {
       navigate("/login", {
@@ -99,8 +100,7 @@ const ActiveBiddingSection = ({
           <div className="w-full max-w-[50%]">
             <input
               id="Bid Amount ($)"
-              onChange={(e) => setBidAmount(e.target.value)}
-              value={bidAmount}
+              ref={bidAmountRef}
               className="pt-3 pl-3 p-2 block px-0 mt-0 bg-transparent border-2 focus:outline-none focus:ring-0 border-secondary rounded-md w-full"
             />
             <label
