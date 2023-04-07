@@ -43,7 +43,7 @@ const Countdown = ({ targetDate }: Props) => {
     }, 1000)
 
     return () => clearInterval(interval)
-  }, [])
+  }, [targetDate])
 
   const { days, hours, minutes, seconds } = timeRemaining
 
