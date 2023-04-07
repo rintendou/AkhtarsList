@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import { useState, useEffect } from "react"
 
 type Props = {
   targetDate: string
@@ -48,9 +48,9 @@ const Countdown = ({ targetDate }: Props) => {
   const { days, hours, minutes, seconds } = timeRemaining
 
   return (
-    <div>
-      {days} days, {hours} hours, {minutes} minutes, {seconds} seconds left!
-    </div>
+    <p className="text-lg font-semibold truncate">
+      {days} d, {hours} h, {minutes} m, {seconds} s
+    </p>
   )
 }
 

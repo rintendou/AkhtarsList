@@ -86,6 +86,7 @@ const ActiveBiddingSection = ({
           <h1>Current Price:</h1>
           <p className="text-lg font-semibold"> ${finalPrice}</p>
         </div>
+
         <div className="flex items-center gap-3">
           <h1>Expires In:</h1>
           <p className="text-lg font-semibold truncate">{timeRemaining}</p>
