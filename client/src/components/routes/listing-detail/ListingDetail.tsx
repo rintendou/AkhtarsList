@@ -55,7 +55,7 @@ const ListingDetail = () => {
           height={height}
         />
 
-        {isExpired ? (
+        {!isExpired ? (
           <ExpiredBiddingSection
             bidders={bidders}
             finalPrice={finalPrice}
