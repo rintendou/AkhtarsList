@@ -28,6 +28,9 @@ const Biddings = () => {
                 category={bidding.category}
                 weight={bidding.weight}
                 dimensions={bidding.dimensions}
+                height={bidding.height}
+                width={bidding.width}
+                length={bidding.length}
               />
             </li>
           ))}

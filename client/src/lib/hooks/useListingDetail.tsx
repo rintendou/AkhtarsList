@@ -16,6 +16,7 @@ const initialListingState = {
   expireAt: new Date(),
   views: 0,
   category: "General",
+  dimensions: [0, 0, 0],
   weight: 0,
   height: 0,
   width: 0,
@@ -23,12 +24,12 @@ const initialListingState = {
 }
 
 const useListingDetail = () => {
-  const [listing, setListing] = useState<ListingType>(
-    useMemo(() => initialListingState, [])
-  )
   const [isLister, setIsLister] = useState(false)
   const [isExpired, setIsExpired] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
+  const [listing, setListing] = useState<ListingType>(
+    useMemo(() => initialListingState, [])
+  )
 
   const fetchListing = useCallback((listingId: string) => {
     setIsLoading(true)
@@ -40,22 +41,17 @@ const useListingDetail = () => {
 
       if (!json.ok) {
         setIsLoading(false)
+        navigate("/listings/listing-not-found")
         return
       }
-
-      setListing({
-        ...json.data,
-        height: json.data.dimensions[0],
-        width: json.data.dimensions[1],
-        length: json.data.dimensions[2],
-      })
 
       const isAdmin = localStorage.getItem("isAdmin") === "true"
       const isLister = localStorage.getItem("_id") === json.data.lister
 
       fetchLister(json.data.lister, json.data)
       setIsLister(isAdmin || isLister)
-      setIsExpired(json.data.expireAt < new Date())
+      setIsExpired(new Date(json.data.expireAt) < new Date())
+      setIsLoading(false)
     }
 
     fetchListingDetail()
@@ -63,60 +59,39 @@ const useListingDetail = () => {
 
   const navigate = useNavigate()
 
-  const checkIfListingExists = (listingId: string) => {
-    setIsLoading(true)
-    const checkExistingListing = async () => {
-      const response = await fetch(
-        `http://localhost:${settings.BACKEND_SERVER_PORT}/api/listing/fetch`
-      )
+  const fetchLister = useCallback(
+    (listerId: string, updatedListing: ListingType) => {
+      setIsLoading(true)
+      const getLister = async () => {
+        const response = await fetch(
+          `http://localhost:${settings.BACKEND_SERVER_PORT}/api/user/${listerId}`
+        )
+        const json = await response.json()
 
-      const json = await response.json()
+        if (!json.ok) {
+          setIsLoading(false)
+          return
+        }
 
-      if (!json.ok) {
+        setListing({
+          ...updatedListing,
+          lister: json.data.username,
+          height: updatedListing.dimensions[0],
+          width: updatedListing.dimensions[1],
+          length: updatedListing.dimensions[2],
+        })
         setIsLoading(false)
-        navigate("/listings/listing-not-found")
       }
 
-      const listingExists = json.data.some(
-        (listing: ListingType) => listing._id === listingId
-      )
-
-      if (!listingExists) {
-        setIsLoading(false)
-        navigate("/listings/listing-not-found")
-      }
-    }
-    checkExistingListing()
-  }
-
-  const fetchLister = (listerId: string, updatedListing: ListingType) => {
-    setIsLoading(true)
-    const getLister = async () => {
-      const response = await fetch(
-        `http://localhost:${settings.BACKEND_SERVER_PORT}/api/user/${listerId}`
-      )
-      const json = await response.json()
-
-      if (!json.ok) {
-        setIsLoading(false)
-        return
-      }
-
-      setListing({
-        ...updatedListing,
-        lister: json.data.username,
-      })
-      setIsLoading(false)
-    }
-
-    getLister()
-  }
+      getLister()
+    },
+    []
+  )
 
   return {
     isLoading,
     listing,
     fetchListing,
-    checkIfListingExists,
     isLister,
     isExpired,
     fetchLister,
