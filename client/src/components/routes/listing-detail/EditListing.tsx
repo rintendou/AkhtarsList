@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom"
+
 import ListingType from "../../../lib/types/ListingType"
 
 type Props = {
@@ -10,7 +11,7 @@ const EditListing = ({ listing }: Props) => {
 
   const onListingEditClick = () => {
     navigate("/edit", {
-      state: { listing },
+      state: { listing: listing },
     })
   }
 

@@ -13,12 +13,14 @@ import numberInputIsValid from "../../../lib/util/numberInputValidator"
 
 // Backend port number
 import { settings } from "../../../settings"
+import ListingType from "../../../lib/types/ListingType"
 
 type Props = {
   bidders: string[]
   expireAt: Date
   finalPrice: number
   isLister: boolean
+  listing: ListingType
 }
 
 const ActiveBiddingSection = ({
@@ -26,6 +28,7 @@ const ActiveBiddingSection = ({
   expireAt,
   finalPrice,
   isLister,
+  listing,
 }: Props) => {
   const bidAmountRef = useRef<HTMLInputElement>(null)
   const [errorMessage, setErrorMessage] = useState("")
@@ -128,7 +131,7 @@ const ActiveBiddingSection = ({
           <h1 className="text-3xl font-semibold w-full text-center">
             You own this listing
           </h1>
-          <EditListing />
+          <EditListing listing={listing} />
         </div>
       )}
 

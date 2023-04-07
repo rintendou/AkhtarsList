@@ -48,6 +48,7 @@ const ListingDetail = () => {
     />
   ) : (
     <ActiveBiddingSection
+      listing={listing}
       bidders={bidders}
       finalPrice={finalPrice}
       expireAt={expireAt}
