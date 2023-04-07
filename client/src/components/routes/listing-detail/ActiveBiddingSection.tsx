@@ -12,6 +12,7 @@ import numberInputIsValid from "../../../lib/util/numberInputValidator"
 // Backend port number
 import { settings } from "../../../settings"
 import Countdown from "../../ui/Countdown"
+import EditListingButton from "./EditListingButton"
 
 type Props = {
   bidders: string[]
@@ -83,7 +84,7 @@ const ActiveBiddingSection = ({
         Biddings
       </h1>
 
-      <div className="flex flex-col md:flex-row justify-between  text-center gap-10">
+      <div className="flex flex-col md:flex-row justify-between text-center gap-10">
         <div className="flex items-center gap-3">
           <h1>Current Price:</h1>
           <p className="text-lg font-semibold"> ${finalPrice}</p>
@@ -116,8 +117,9 @@ const ActiveBiddingSection = ({
           <BidButton />
         </form>
       ) : (
-        <div className="text-3xl font-semibold underline">
-          You own this listing
+        <div className="text-3xl font-semibold w-full text-center">
+          <h1 className="bg-red-500">You own this listing</h1>
+          <EditListingButton />
         </div>
       )}
 
