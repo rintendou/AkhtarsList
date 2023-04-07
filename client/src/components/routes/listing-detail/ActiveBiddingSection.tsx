@@ -1,9 +1,15 @@
+import { useState } from "react"
+import { useNavigate } from "react-router-dom"
+import useAuth from "../../../lib/hooks/useAuth"
+
+// Components
 import Bidders from "./Bidders"
 import Error from "../../ui/Error"
-import { useState } from "react"
-import useAuth from "../../../lib/hooks/useAuth"
-import { useNavigate } from "react-router-dom"
+
+// Utility functions
 import numberInputIsValid from "../../../lib/util/numberInputValidator"
+
+// Backend port number
 import { settings } from "../../../settings"
 
 type Props = {
