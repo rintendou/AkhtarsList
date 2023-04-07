@@ -1,3 +1,4 @@
+import { useEffect } from "react"
 import { useParams } from "react-router-dom"
 import useTimeline from "../../../lib/hooks/useTimeline"
 
@@ -9,6 +10,13 @@ import ListingCard from "../../ui/ListingCard"
 import ListingType from "../../../lib/types/ListingType"
 
 const Category = () => {
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    })
+  }, [])
+
   const { categoryName } = useParams()
   const {
     allListings,
@@ -72,7 +80,9 @@ const Category = () => {
                     startPrice={listing.startPrice}
                     category={listing.category}
                     weight={listing.weight}
-                    dimensions={listing.dimensions}
+                    height={listing.height}
+                    width={listing.width}
+                    length={listing.length}
                   />
                 </li>
               ))
