@@ -66,8 +66,9 @@ const useListingDetail = () => {
   const checkIfListingExists = (listingId: string) => {
     setIsLoading(true)
     const checkExistingListing = async () => {
-      const response = await fetch(`http://localhost:5173/api/listing/fetch`)
-      console.log(response)
+      const response = await fetch(
+        `http://localhost:${settings.BACKEND_SERVER_PORT}/api/listing/fetch`
+      )
 
       const json = await response.json()
 
@@ -91,7 +92,9 @@ const useListingDetail = () => {
   const fetchLister = (listerId: string, updatedListing: ListingType) => {
     setIsLoading(true)
     const getLister = async () => {
-      const response = await fetch(`http://localhost:5173/api/user/${listerId}`)
+      const response = await fetch(
+        `http://localhost:${settings.BACKEND_SERVER_PORT}/api/user/${listerId}`
+      )
       const json = await response.json()
 
       if (!json.ok) {
