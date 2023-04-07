@@ -29,7 +29,7 @@ ListingRoute.get("/fetch/:listingId", fetchListing)
 ListingRoute.get("/fetch", fetchListings)
 
 // Fetch listings by category
-ListingRoute.get("/fetch-by-category", fetchListingsByCategory)
+ListingRoute.get("/fetch-by-category/:category", fetchListingsByCategory)
 
 // Fetch trending listings
 ListingRoute.get("/fetch-by-trending", fetchTrendingListings)

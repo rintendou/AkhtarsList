@@ -1,5 +1,6 @@
+import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
-import useUpdateListingViewCount from "../../lib/hooks/useUpdateListingViewCount"
+import useAuth from "../../lib/hooks/useAuth"
 
 // Components
 import Card from "./Card"
@@ -23,13 +24,15 @@ const ListingCard = ({
   views,
   category,
   weight,
-  dimensions,
+  height,
+  width,
+  length,
 }: ListingType) => {
   const navigate = useNavigate()
-  const { updateListingViewCount } = useUpdateListingViewCount()
+  const [isLister, setIsLister] = useState(false)
+  const { auth } = useAuth()
 
   const handleClick = () => {
-    updateListingViewCount(_id)
     navigate(`/listings/${_id}`, {
       state: {
         _id,
@@ -44,10 +47,17 @@ const ListingCard = ({
         views,
         category,
         weight,
-        dimensions,
+        height,
+        width,
+        length,
       },
     })
   }
+
+  useEffect(() => {
+    const determineIfLister = lister === auth._id
+    setIsLister(determineIfLister)
+  }, [lister])
 
   const timeRemaining = getTimeRemaining(expireAt)
 
@@ -61,19 +71,24 @@ const ListingCard = ({
         />
         <h1 className="text-lg font-light truncate">{title}</h1>
         <p className="text-gray-500">Current Price:</p>
-        <p className="font-bold text-2xl">${finalPrice}</p>
         <div className="flex justify-between">
-          <p className="bg-gray-200 p-1 rounded md w-min whitespace-nowrap">
+          <p className="font-bold text-2xl">${finalPrice}</p>
+
+          {isLister && (
+            <p className="bg-black text-white p-1 rounded-md">Owned by you</p>
+          )}
+        </div>
+        <div className="flex justify-between">
+          <p className="bg-gray-200 p-1 rounded-md whitespace-nowrap">
             Views: {views}
           </p>
-          <p className="bg-gray-200 p-1 rounded md w-min whitespace-nowrap">
+          <p className="bg-gray-200 p-1 rounded-md whitespace-nowrap">
             {category}
           </p>
         </div>
         <div className="flex justify-between">
-          <p className="bg-gray-200 p-1 rounded md w-min whitespace-nowrap truncate">
-            Expires in: {timeRemaining.days} d, {timeRemaining.hours} h,
-            {timeRemaining.minutes} m, and {timeRemaining.seconds} s
+          <p className="bg-gray-200 p-1 rounded md whitespace-nowrap truncate w-full text-center">
+            Expires in: {timeRemaining}
           </p>
         </div>
       </div>

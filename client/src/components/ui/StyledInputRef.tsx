@@ -5,6 +5,7 @@ type Props = {
   type: "text" | "email" | "password" | "number"
   placeholder: string
   twClasses?: string
+  disabled?: boolean
 }
 
 const StyledInputRef = React.forwardRef<HTMLInputElement, Props>(

@@ -1,10 +1,8 @@
-import UserType from "./UserType"
-
 type ListingType = {
   _id: string
   image: string
-  bidders: UserType[]
-  lister: UserType
+  bidders: string[]
+  lister: string
   title: string
   desc: string
   startPrice: number
@@ -13,7 +11,9 @@ type ListingType = {
   views: number
   category: string
   weight: number
-  dimensions: [height: number, width: number, length: number]
+  height: number
+  length: number
+  width: number
 }
 
 export default ListingType
