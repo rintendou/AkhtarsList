@@ -38,7 +38,9 @@ const ExpiredBiddingSection = ({ bidders, finalPrice, isLister }: Props) => {
           </h1>
         </div>
       ) : (
-        <h1 className="text-3xl font-semibold">You cannot bid anymore</h1>
+        <h1 className="text-3xl font-semibold text-center">
+          Bidding has finished
+        </h1>
       )}
 
       <Bidders bidders={bidders} isLister={isLister} />
