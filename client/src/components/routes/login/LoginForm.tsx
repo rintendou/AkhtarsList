@@ -71,7 +71,12 @@ const LoginForm = ({
       }
 
       setScsMessage(data.data.message)
-      login(data.data.user._id, data.data.user.username, data.data.user.token)
+      login(
+        data.data.user._id,
+        data.data.user.username,
+        data.data.user.token,
+        data.data.user.isAdmin
+      )
       navigate("/", { replace: true })
     }
     loginUser()

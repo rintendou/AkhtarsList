@@ -1,10 +1,8 @@
 import { useCallback, useMemo, useState } from "react"
-import useTimeline from "./useTimeline"
 
 import ListingType from "../types/ListingType"
 import { settings } from "../../settings"
 import { useNavigate } from "react-router-dom"
-import useAuth from "./useAuth"
 
 const initialListingState = {
   _id: "",
@@ -29,8 +27,7 @@ const useListingDetail = () => {
     useMemo(() => initialListingState, [])
   )
   const [isLister, setIsLister] = useState(false)
-
-  const { auth } = useAuth()
+  const [isExpired, setIsExpired] = useState(false)
 
   const fetchListing = useCallback((listingId: string) => {
     const fetchListingDetail = async () => {
@@ -49,8 +46,12 @@ const useListingDetail = () => {
         width: json.data.dimensions[1],
         length: json.data.dimensions[2],
       })
-      const result = auth._id.length !== 0 && auth._id === json.data.lister
-      setIsLister(result)
+
+      const isAdmin = localStorage.getItem("isAdmin") === "true"
+      const isLister = localStorage.getItem("_id") === json.data.lister
+
+      setIsLister(isAdmin || isLister)
+      setIsExpired(json.data.expireAt < new Date())
     }
 
     fetchListingDetail()
@@ -77,7 +78,7 @@ const useListingDetail = () => {
     checkExistingListing()
   }
 
-  return { listing, fetchListing, checkIfListingExists, isLister }
+  return { listing, fetchListing, checkIfListingExists, isLister, isExpired }
 }
 
 export default useListingDetail
