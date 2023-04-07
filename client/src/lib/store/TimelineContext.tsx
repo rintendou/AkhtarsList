@@ -98,7 +98,11 @@ const TimelineContextProvider = ({ children }: { children: ReactNode }) => {
         return
       }
 
-      setTrendingListings(json.data)
+      const trendingListings = json.data.filter(
+        (listing: ListingType) => new Date(listing.expireAt) > new Date()
+      )
+
+      setTrendingListings(trendingListings)
     }
 
     fetchListings()
