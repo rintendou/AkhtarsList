@@ -34,6 +34,10 @@ const ListingDetail = () => {
   const { listingId } = useParams()
 
   useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    })
     fetchListing(listingId!)
   }, [listingId])
 
