@@ -23,14 +23,12 @@ const initialListingState = {
 }
 
 const useListingDetail = () => {
-  const [listing, setListing] = useState<ListingType>(
-    useMemo(() => initialListingState, [])
-  )
   const [isLister, setIsLister] = useState(false)
   const [isExpired, setIsExpired] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
+  const [listing, setListing] = useState<ListingType>(initialListingState)
 
-  const fetchListing = useCallback((listingId: string) => {
+  const fetchListing = (listingId: string) => {
     setIsLoading(true)
     const fetchListingDetail = async () => {
       const response = await fetch(
@@ -59,7 +57,7 @@ const useListingDetail = () => {
     }
 
     fetchListingDetail()
-  }, [])
+  }
 
   const navigate = useNavigate()
 

@@ -39,10 +39,12 @@ const ListingDetail = () => {
   const { listingId } = useParams()
 
   useEffect(() => {
+    console.log("RAN")
     window.scrollTo({
       top: 0,
       behavior: "smooth",
     })
+
     checkIfListingExists(listingId!)
     fetchListing(listingId!)
   }, [listingId])

@@ -51,6 +51,10 @@ const ProfileContextProvider = ({
       )
       const data = await response.json()
 
+      if (!data.ok) {
+        return
+      }
+
       setAddress(data.data.address)
       setBalance(data.data.balance)
       setBiddings(data.data.biddedListings.reverse())
