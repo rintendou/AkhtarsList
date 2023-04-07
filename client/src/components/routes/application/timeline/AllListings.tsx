@@ -30,7 +30,9 @@ const AllListings = () => {
                 startPrice={listing.startPrice}
                 category={listing.category}
                 weight={listing.weight}
-                dimensions={listing.dimensions}
+                height={listing.height}
+                width={listing.width}
+                length={listing.length}
               />
             </li>
           ))
