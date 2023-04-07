@@ -51,11 +51,10 @@ const EditActions = () => {
     widthRef.current!.value = location.state.listing!.dimensions[0]
     heightRef.current!.value = location.state.listing!.dimensions[1]
     lengthRef.current!.value = location.state.listing!.dimensions[2]
+    handleDateTimeChange(location.state.listing!.expireAt)
   }, [])
 
-  const [expireAt, setExpireAt] = useState<Date | null>(
-    location.state.listing!.expireAt
-  )
+  const [expireAt, setExpireAt] = useState<Date | null>(null)
   const [error, setError] = useState(false)
   const [errorMessage, setErrorMessage] = useState("")
   const [image] = useState("fakesubway.jpg")
@@ -86,6 +85,7 @@ const EditActions = () => {
       return tomorrow
     }
 
+    console.log(expireAt)
     const payload = {
       userId: auth._id,
       title,
@@ -96,7 +96,7 @@ const EditActions = () => {
       expireAt: expireAt || backupDate(),
       category,
       weight,
-      dimensions: [Number(height), Number(width), Number(length)],
+      dimensions: [height, width, length],
     }
     console.log(payload)
 
@@ -165,10 +165,9 @@ const EditActions = () => {
           headers: { "Content-Type": "application/json" },
         }
       )
-      console.log(response)
 
       const data = await response.json()
-      console.log(data)
+
       if (!data.ok) {
         setError(true)
         setErrorMessage(data.message)
@@ -232,12 +231,16 @@ const EditActions = () => {
                 name="Start Price ($)"
                 placeholder="Start Price ($)"
                 type="text"
+                disabled
                 ref={startPriceRef}
+                twClasses="opacity-30 cursor-not-allowed"
               />
             </div>
           </div>
-
-          <StyledDateTimePicker onChange={handleDateTimeChange} />
+          <StyledDateTimePicker
+            onChange={handleDateTimeChange}
+            initialDate={location.state.listing!.expireAt}
+          />
         </div>
 
         <div className="flex flex-col gap-5 pb-10 border-b border-b-gray-500">

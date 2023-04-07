@@ -5,16 +5,21 @@ import "react-datepicker/dist/react-datepicker.css"
 
 type Props = {
   onChange: (date: Date | null) => void
+  initialDate?: Date | null
 }
 
-const StyledDateTimePicker = ({ onChange }: Props) => {
-  const [startDate, setStartDate] = useState(() => {
-    const tomorrow = new Date()
-    tomorrow.setDate(tomorrow.getDate() + 1)
-    tomorrow.setHours(23)
-    tomorrow.setMinutes(59)
-    return tomorrow
-  })
+const StyledDateTimePicker = ({ onChange, initialDate }: Props) => {
+  const [startDate, setStartDate] = useState(
+    initialDate
+      ? new Date(initialDate)
+      : () => {
+          const tomorrow = new Date()
+          tomorrow.setDate(tomorrow.getDate() + 1)
+          tomorrow.setHours(23)
+          tomorrow.setMinutes(59)
+          return tomorrow
+        }
+  )
 
   const today = new Date()
   const tomorrow = new Date(today)
