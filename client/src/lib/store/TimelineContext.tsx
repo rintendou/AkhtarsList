@@ -14,6 +14,7 @@ type initialContextType = {
   techListings: ListingType[]
   accessoriesListings: ListingType[]
   collectiblesListings: ListingType[]
+  expiredListings: ListingType[]
   unexpiredListings: ListingType[]
   refetchTimeline: () => void
   fetchListingsByCategory: (category: string) => void
@@ -27,6 +28,7 @@ const initialContext = {
   techListings: [],
   accessoriesListings: [],
   collectiblesListings: [],
+  expiredListings: [],
   unexpiredListings: [],
   refetchTimeline: () => {},
   fetchListingsByCategory: () => {},
@@ -46,6 +48,7 @@ const TimelineContextProvider = ({ children }: { children: ReactNode }) => {
   const [collectiblesListings, setCollectiblesListings] = useState<
     ListingType[]
   >([])
+  const [expiredListings, setExpiredListings] = useState<ListingType[]>([])
   const [unexpiredListings, setUnexpiredListings] = useState<ListingType[]>([])
 
   // Fetch all and trending listings on component mount
@@ -75,6 +78,9 @@ const TimelineContextProvider = ({ children }: { children: ReactNode }) => {
       const collectiblesListings = json.data.filter(
         (listing: ListingType) => listing.category === "Collectibles"
       )
+      const expiredListings = json.data.filter(
+        (listing: ListingType) => new Date(listing.expireAt) < new Date()
+      )
       const unexpiredListings = json.data.filter(
         (listing: ListingType) => new Date(listing.expireAt) > new Date()
       )
@@ -85,6 +91,7 @@ const TimelineContextProvider = ({ children }: { children: ReactNode }) => {
       setTechListings(techListings)
       setAccessoriesListings(accessoriesListings)
       setCollectiblesListings(collectiblesListings)
+      setExpiredListings(expiredListings)
       setUnexpiredListings(unexpiredListings)
     }
 
@@ -135,6 +142,9 @@ const TimelineContextProvider = ({ children }: { children: ReactNode }) => {
       const collectiblesListings = json.data.filter(
         (listing: ListingType) => listing.category === "Collectibles"
       )
+      const expiredListings = json.data.filter(
+        (listing: ListingType) => new Date(listing.expireAt) < new Date()
+      )
       const unexpiredListings = json.data.filter(
         (listing: ListingType) => new Date(listing.expireAt) > new Date()
       )
@@ -145,6 +155,7 @@ const TimelineContextProvider = ({ children }: { children: ReactNode }) => {
       setTechListings(techListings)
       setAccessoriesListings(accessoriesListings)
       setCollectiblesListings(collectiblesListings)
+      setExpiredListings(expiredListings)
       setUnexpiredListings(unexpiredListings)
     }
 
@@ -209,6 +220,7 @@ const TimelineContextProvider = ({ children }: { children: ReactNode }) => {
     techListings,
     accessoriesListings,
     collectiblesListings,
+    expiredListings,
     unexpiredListings,
     refetchTimeline,
     fetchListingsByCategory,
