@@ -75,7 +75,7 @@ const ListingCard = ({
           </p>
         </div>
         <div className="flex justify-between">
-          <p className="bg-gray-200 p-1 rounded md w-min whitespace-nowrap truncate">
+          <p className="bg-gray-200 p-1 rounded md whitespace-nowrap truncate w-full text-center">
             Expires in: {timeRemaining}
           </p>
         </div>
