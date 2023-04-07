@@ -1,5 +1,4 @@
 import { useCallback, useMemo, useState } from "react"
-import useTimeline from "./useTimeline"
 
 import ListingType from "../types/ListingType"
 import { settings } from "../../settings"
@@ -27,6 +26,8 @@ const useListingDetail = () => {
   const [listing, setListing] = useState<ListingType>(
     useMemo(() => initialListingState, [])
   )
+  const [isLister, setIsLister] = useState(false)
+  const [isExpired, setIsExpired] = useState(false)
 
   const fetchListing = useCallback((listingId: string) => {
     const fetchListingDetail = async () => {
@@ -45,6 +46,12 @@ const useListingDetail = () => {
         width: json.data.dimensions[1],
         length: json.data.dimensions[2],
       })
+
+      const isAdmin = localStorage.getItem("isAdmin") === "true"
+      const isLister = localStorage.getItem("_id") === json.data.lister
+
+      setIsLister(isAdmin || isLister)
+      setIsExpired(json.data.expireAt < new Date())
     }
 
     fetchListingDetail()
@@ -71,7 +78,7 @@ const useListingDetail = () => {
     checkExistingListing()
   }
 
-  return { listing, fetchListing, checkIfListingExists }
+  return { listing, fetchListing, checkIfListingExists, isLister, isExpired }
 }
 
 export default useListingDetail

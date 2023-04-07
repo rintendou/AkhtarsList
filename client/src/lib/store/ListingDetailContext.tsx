@@ -5,10 +5,12 @@ import ListingType from "../types/ListingType"
 
 // Port Number
 import { settings } from "../../settings"
+import useAuth from "../hooks/useAuth"
 
 type initialContextType = {
   listing: ListingType
   fetchListing: (listingId: string) => void
+  isLister: boolean
 }
 
 const initialListingState = {
@@ -32,6 +34,7 @@ const initialListingState = {
 const initialContext = {
   listing: initialListingState,
   fetchListing: () => {},
+  isLister: false,
 }
 
 const ListingDetailContext = createContext<initialContextType>(initialContext)
@@ -42,6 +45,9 @@ const ListingDetailContextProvider = ({
   children: ReactNode
 }) => {
   const [listing, setListing] = useState<ListingType>(initialListingState)
+  const [isLister, setIsLister] = useState(false)
+
+  const { auth } = useAuth()
 
   const fetchListing = (listingId: string) => {
     const fetchListingDetail = async () => {
@@ -60,6 +66,7 @@ const ListingDetailContextProvider = ({
         width: json.data.dimensions[1],
         length: json.data.dimensions[2],
       })
+      setIsLister(auth._id === json.data.lister)
     }
 
     fetchListingDetail()
@@ -68,6 +75,7 @@ const ListingDetailContextProvider = ({
   const contextValue = {
     listing,
     fetchListing,
+    isLister,
   }
 
   return (
