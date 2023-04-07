@@ -73,6 +73,9 @@ const ActiveBiddingSection = ({
   }
 
   useEffect(() => {
+    if (!bidAmountRef.current) {
+      return
+    }
     bidAmountRef.current!.focus()
   }, [])
 

@@ -7,9 +7,11 @@ import SeeOtherListings from "./SeeOtherListings"
 import ListingOverview from "./ListingOverview"
 import ExpiredBiddingSection from "./ExpiredBiddingSection"
 import ActiveBiddingSection from "./ActiveBiddingSection"
+import ListingDetailSkeleton from "./ListingDetailSkeleton"
 
 const ListingDetail = () => {
-  const { listing, fetchListing, isLister, isExpired } = useListingDetail()
+  const { listing, fetchListing, isLister, isExpired, isLoading } =
+    useListingDetail()
 
   const {
     image,
@@ -38,38 +40,51 @@ const ListingDetail = () => {
     fetchListing(listingId!)
   }, [listingId])
 
+  const biddingSection = isExpired ? (
+    <ExpiredBiddingSection
+      bidders={bidders}
+      finalPrice={finalPrice}
+      isLister={isLister}
+    />
+  ) : (
+    <ActiveBiddingSection
+      bidders={bidders}
+      finalPrice={finalPrice}
+      expireAt={expireAt}
+      isLister={isLister}
+    />
+  )
+
+  console.log(isLoading)
+
   return (
     <div>
-      <div className="flex flex-col md:flex-row min-h-screen border-b-2 border-b-tertiary">
-        <ListingOverview
-          title={title}
-          lister={lister}
-          startPrice={startPrice}
-          category={category}
-          views={views}
-          desc={desc}
-          weight={weight}
-          length={length}
-          width={width}
-          height={height}
-        />
-
-        {isExpired ? (
-          <ExpiredBiddingSection
-            bidders={bidders}
-            finalPrice={finalPrice}
-            isLister={isLister}
-          />
-        ) : (
-          <ActiveBiddingSection
-            bidders={bidders}
-            finalPrice={finalPrice}
-            expireAt={expireAt}
-            isLister={isLister}
-          />
-        )}
-      </div>
-      <SeeOtherListings category={category} idToFilter={listingId!} />
+      {!isLoading ? (
+        <>
+          <div className="flex flex-col md:flex-row min-h-screen border-b-2 border-b-tertiary">
+            <ListingOverview
+              title={title}
+              lister={lister}
+              startPrice={startPrice}
+              category={category}
+              views={views}
+              desc={desc}
+              weight={weight}
+              length={length}
+              width={width}
+              height={height}
+            />
+            {biddingSection}
+          </div>
+          <SeeOtherListings category={category} idToFilter={listingId!} />
+        </>
+      ) : (
+        <>
+          <div className="flex flex-col md:flex-row min-h-screen border-b-2 border-b-tertiary">
+            <ListingDetailSkeleton />
+          </div>
+        </>
+      )}
     </div>
   )
 }
