@@ -77,6 +77,10 @@ const ActiveBiddingSection = ({
       return
     }
     bidAmountRef.current!.focus()
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    })
   }, [])
 
   return (

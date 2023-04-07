@@ -1,4 +1,13 @@
+import { useEffect } from "react"
+
 const ListingDetailSkeleton = () => {
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    })
+  }, [])
+
   return (
     <div className="flex flex-col md:flex-row min-h-screen border-b-2 animate-pulse">
       <div className="flex-auto p-10 py-24 flex flex-col items-center justify-between">
