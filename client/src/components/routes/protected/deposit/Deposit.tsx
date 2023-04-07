@@ -20,6 +20,10 @@ const Deposit = () => {
 
   // Focus on first input on component amount
   useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    })
     cardHolderRef.current!.focus()
   }, [])
 

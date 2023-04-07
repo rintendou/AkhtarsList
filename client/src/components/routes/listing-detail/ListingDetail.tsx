@@ -79,11 +79,7 @@ const ListingDetail = () => {
           <SeeOtherListings category={category} idToFilter={listingId!} />
         </>
       ) : (
-        <>
-          <div className="flex flex-col md:flex-row min-h-screen border-b-2 border-b-tertiary">
-            <ListingDetailSkeleton />
-          </div>
-        </>
+        <ListingDetailSkeleton />
       )}
     </div>
   )
