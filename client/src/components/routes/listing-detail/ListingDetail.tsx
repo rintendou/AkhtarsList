@@ -39,7 +39,7 @@ const ListingDetail = () => {
     })
 
     fetchListing(listingId!)
-  }, [listingId, isExpired])
+  }, [listingId])
 
   const biddingSection = isExpired ? (
     <ExpiredBiddingSection

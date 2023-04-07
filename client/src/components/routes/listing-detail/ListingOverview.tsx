@@ -71,12 +71,12 @@ const ListingOverview = ({
               <p className="text-lg font-semibold">{height} cm </p>
             </div>
             <div className="flex items-center gap-3">
-              <h1>L:</h1>
-              <p className="text-lg font-semibold">{width} cm </p>
-            </div>
-            <div className="flex items-center gap-3">
               <h1>W:</h1>
               <p className="text-lg font-semibold">{length} cm </p>
+            </div>
+            <div className="flex items-center gap-3">
+              <h1>L:</h1>
+              <p className="text-lg font-semibold">{width} cm </p>
             </div>
           </div>
         </div>

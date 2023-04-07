@@ -29,7 +29,6 @@ const ListingCard = ({
   length,
 }: ListingType) => {
   const navigate = useNavigate()
-  const [isLister, setIsLister] = useState(false)
   const { auth } = useAuth()
 
   const handleClick = () => {
@@ -54,10 +53,8 @@ const ListingCard = ({
     })
   }
 
-  useEffect(() => {
-    const determineIfLister = lister === auth._id
-    setIsLister(determineIfLister)
-  }, [lister])
+  const isLister = lister === auth._id
+  const isAdmin = auth.isAdmin
 
   const timeRemaining = getTimeRemaining(expireAt)
   const isExpired = timeRemaining === "Expired"

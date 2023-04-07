@@ -46,9 +46,9 @@ const EditActions = () => {
     categoryRef.current!.value = location.state.listing!.category
     startPriceRef.current!.value = location.state.listing!.startPrice
     weightRef.current!.value = location.state.listing!.weight
-    widthRef.current!.value = location.state.listing!.dimensions[0]
-    heightRef.current!.value = location.state.listing!.dimensions[1]
-    lengthRef.current!.value = location.state.listing!.dimensions[2]
+    heightRef.current!.value = location.state.listing!.dimensions[0]
+    lengthRef.current!.value = location.state.listing!.dimensions[1]
+    widthRef.current!.value = location.state.listing!.dimensions[2]
     handleDateTimeChange(location.state.listing!.expireAt)
   }, [])
 
