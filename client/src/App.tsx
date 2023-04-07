@@ -3,7 +3,6 @@ import { Routes, Route } from "react-router-dom"
 // Routes
 import Application from "./components/routes/application/Application"
 import Dev from "./components/routes/dev/Dev"
-import LandingPage from "./components/routes/landing-page/LandingPage"
 import PageNotFound from "./components/routes/page-not-found/PageNotFound"
 import Login from "./components/routes/login/Login"
 import Register from "./components/routes/register/Register"
@@ -16,6 +15,8 @@ import Category from "./components/routes/categories/Category"
 import Sell from "./components/routes/protected/sell/Sell"
 import Preview from "./components/routes/protected/preview/Preview"
 import ListingDetail from "./components/routes/listing-detail/ListingDetail"
+import ListingNotFound from "./components/routes/page-not-found/ListingNotFound"
+import ListingEdit from "./components/routes/listing-detail/ListingEdit"
 
 // Components
 import Body from "./components/layout/body/Body"
@@ -27,7 +28,6 @@ import RequireAuth from "./components/routes/protected/RequireAuth"
 
 // Layouts
 import ProfileLayout from "./components/routes/protected/ProfileLayout"
-import ListingNotFound from "./components/routes/page-not-found/ListingNotFound"
 
 function App() {
   return (
@@ -50,6 +50,7 @@ function App() {
           <Route element={<RequireAuth />}>
             <Route path="/sell" element={<Sell />} />
             <Route path="/preview" element={<Preview />} />
+            <Route path="/edit" element={<ListingEdit />} />
 
             <Route element={<ProfileLayout />}>
               <Route path="/profile" element={<Profile />} />

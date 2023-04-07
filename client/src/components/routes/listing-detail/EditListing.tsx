@@ -9,7 +9,7 @@ const EditListing = ({ listing }: Props) => {
   const navigate = useNavigate()
 
   const onListingEditClick = () => {
-    navigate("/listings/edit", {
+    navigate("/edit", {
       state: { listing },
     })
   }
