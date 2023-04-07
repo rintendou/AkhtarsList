@@ -16,7 +16,7 @@ import Sell from "./components/routes/protected/sell/Sell"
 import Preview from "./components/routes/protected/preview/Preview"
 import ListingDetail from "./components/routes/listing-detail/ListingDetail"
 import ListingNotFound from "./components/routes/page-not-found/ListingNotFound"
-import ListingEdit from "./components/routes/listing-detail/ListingEdit"
+import Edit from "./components/routes/protected/edit/Edit"
 
 // Components
 import Body from "./components/layout/body/Body"
@@ -50,7 +50,7 @@ function App() {
           <Route element={<RequireAuth />}>
             <Route path="/sell" element={<Sell />} />
             <Route path="/preview" element={<Preview />} />
-            <Route path="/edit" element={<ListingEdit />} />
+            <Route path="/edit" element={<Edit />} />
 
             <Route element={<ProfileLayout />}>
               <Route path="/profile" element={<Profile />} />
