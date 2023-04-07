@@ -12,11 +12,12 @@ const Preview = () => {
   const category = location.state!.category
   const weight = location.state!.weight
   const dimensions = location.state!.dimensions
+  const message = location.state!.message
 
   return (
     <div className="min-h-screen flex flex-col justify-between">
       <h1 className="text-4xl font-bold text-center w-full tracking-wide py-10">
-        Listing Successfully Posted!
+        {message}
       </h1>
       <PreviewImageContainer img={image} title={title} />
       <div className="bg-purple-100 p-10 md:p-20 md:pt-10">

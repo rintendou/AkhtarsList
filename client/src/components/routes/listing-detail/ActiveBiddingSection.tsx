@@ -1,23 +1,26 @@
-import { useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import useAuth from "../../../lib/hooks/useAuth"
 
 // Components
 import Bidders from "./Bidders"
 import Error from "../../ui/Error"
+import Countdown from "../../ui/Countdown"
+import EditListing from "./EditListing"
 
 // Utility functions
 import numberInputIsValid from "../../../lib/util/numberInputValidator"
 
 // Backend port number
 import { settings } from "../../../settings"
-import getTimeRemaining from "../../../lib/util/getTimeRemaining"
+import ListingType from "../../../lib/types/ListingType"
 
 type Props = {
   bidders: string[]
   expireAt: Date
   finalPrice: number
   isLister: boolean
+  listing: ListingType
 }
 
 const ActiveBiddingSection = ({
@@ -25,6 +28,7 @@ const ActiveBiddingSection = ({
   expireAt,
   finalPrice,
   isLister,
+  listing,
 }: Props) => {
   const bidAmountRef = useRef<HTMLInputElement>(null)
   const [errorMessage, setErrorMessage] = useState("")
@@ -71,24 +75,34 @@ const ActiveBiddingSection = ({
     submitBid()
   }
 
-  const timeRemaining = getTimeRemaining(expireAt)
+  useEffect(() => {
+    if (!bidAmountRef.current) {
+      return
+    }
+    bidAmountRef.current!.focus()
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    })
+  }, [])
 
   return (
     <div
       className={`flex-auto p-10 py-24 max-w-none md:max-w-[50%] max-h-[50%] md:max-h-none space-y-10 flex flex-col items-center bg-purple-100`}
     >
-      <h1 className="text-3xl text-center font-semibold backdrop-opacity-30">
+      <h1 className="text-5xl text-center font-semibold backdrop-opacity-30">
         Biddings
       </h1>
 
-      <div className="flex justify-between w-full">
+      <div className="flex flex-col md:flex-row justify-between text-center gap-10">
         <div className="flex items-center gap-3">
           <h1>Current Price:</h1>
           <p className="text-lg font-semibold"> ${finalPrice}</p>
         </div>
+
         <div className="flex items-center gap-3">
           <h1>Expires In:</h1>
-          <p className="text-lg font-semibold truncate">{timeRemaining}</p>
+          <Countdown targetDate={expireAt.toString()} />
         </div>
       </div>
 
@@ -113,8 +127,11 @@ const ActiveBiddingSection = ({
           <BidButton />
         </form>
       ) : (
-        <div className="text-3xl font-semibold underline">
-          You own this listing
+        <div>
+          <h1 className="text-3xl font-semibold w-full text-center">
+            You own this listing
+          </h1>
+          <EditListing listing={listing} />
         </div>
       )}
 

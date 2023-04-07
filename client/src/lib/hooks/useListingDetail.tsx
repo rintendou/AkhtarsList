@@ -28,8 +28,10 @@ const useListingDetail = () => {
   )
   const [isLister, setIsLister] = useState(false)
   const [isExpired, setIsExpired] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
 
   const fetchListing = useCallback((listingId: string) => {
+    setIsLoading(true)
     const fetchListingDetail = async () => {
       const response = await fetch(
         `http://localhost:${settings.BACKEND_SERVER_PORT}/api/listing/fetch/${listingId}`
@@ -37,6 +39,7 @@ const useListingDetail = () => {
       const json = await response.json()
 
       if (!json.ok) {
+        setIsLoading(false)
         return
       }
 
@@ -50,6 +53,7 @@ const useListingDetail = () => {
       const isAdmin = localStorage.getItem("isAdmin") === "true"
       const isLister = localStorage.getItem("_id") === json.data.lister
 
+      fetchLister(json.data.lister, json.data)
       setIsLister(isAdmin || isLister)
       setIsExpired(json.data.expireAt < new Date())
     }
@@ -60,11 +64,13 @@ const useListingDetail = () => {
   const navigate = useNavigate()
 
   const checkIfListingExists = (listingId: string) => {
+    setIsLoading(true)
     const checkExistingListing = async () => {
       const response = await fetch(`http://localhost:5173/api/listing/`)
       const json = await response.json()
 
       if (!json.ok) {
+        setIsLoading(false)
         navigate("/listings/listing-not-found")
       }
 
@@ -72,13 +78,43 @@ const useListingDetail = () => {
         (listing: ListingType) => listing._id === listingId
       )
       if (!listingExists) {
+        setIsLoading(false)
         navigate("/listings/listing-not-found")
       }
     }
     checkExistingListing()
   }
 
-  return { listing, fetchListing, checkIfListingExists, isLister, isExpired }
+  const fetchLister = (listerId: string, updatedListing: ListingType) => {
+    setIsLoading(true)
+    const getLister = async () => {
+      const response = await fetch(`http://localhost:5173/api/user/${listerId}`)
+      const json = await response.json()
+
+      if (!json.ok) {
+        setIsLoading(false)
+        return
+      }
+
+      setListing({
+        ...updatedListing,
+        lister: json.data.username,
+      })
+      setIsLoading(false)
+    }
+
+    getLister()
+  }
+
+  return {
+    isLoading,
+    listing,
+    fetchListing,
+    checkIfListingExists,
+    isLister,
+    isExpired,
+    fetchLister,
+  }
 }
 
 export default useListingDetail

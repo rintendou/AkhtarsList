@@ -16,6 +16,10 @@ const Withdraw = () => {
 
   // Focus on input element on component mount
   useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    })
     withdrawFundsRef.current!.focus()
   }, [])
 

@@ -27,6 +27,10 @@ const RegisterForm = () => {
 
   // focus on the first input on component mount
   useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    })
     usernameRef.current!.focus()
   }, [])
 

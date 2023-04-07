@@ -1,4 +1,6 @@
+import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
+import useAuth from "../../lib/hooks/useAuth"
 
 // Components
 import Card from "./Card"
@@ -8,7 +10,6 @@ import getTimeRemaining from "../../lib/util/getTimeRemaining"
 
 // Types
 import ListingType from "../../lib/types/ListingType"
-import useListingDetail from "../../lib/hooks/useListingDetail"
 
 const ListingCard = ({
   _id,
@@ -28,8 +29,8 @@ const ListingCard = ({
   length,
 }: ListingType) => {
   const navigate = useNavigate()
-
-  const { fetchListing } = useListingDetail()
+  const [isLister, setIsLister] = useState(false)
+  const { auth } = useAuth()
 
   const handleClick = () => {
     navigate(`/listings/${_id}`, {
@@ -53,6 +54,11 @@ const ListingCard = ({
     })
   }
 
+  useEffect(() => {
+    const determineIfLister = lister === auth._id
+    setIsLister(determineIfLister)
+  }, [lister])
+
   const timeRemaining = getTimeRemaining(expireAt)
 
   return (
@@ -65,17 +71,23 @@ const ListingCard = ({
         />
         <h1 className="text-lg font-light truncate">{title}</h1>
         <p className="text-gray-500">Current Price:</p>
-        <p className="font-bold text-2xl">${finalPrice}</p>
         <div className="flex justify-between">
-          <p className="bg-gray-200 p-1 rounded md w-min whitespace-nowrap">
+          <p className="font-bold text-2xl">${finalPrice}</p>
+
+          {isLister && (
+            <p className="bg-black text-white p-1 rounded-md">Owned by you</p>
+          )}
+        </div>
+        <div className="flex justify-between">
+          <p className="bg-gray-200 p-1 rounded-md whitespace-nowrap">
             Views: {views}
           </p>
-          <p className="bg-gray-200 p-1 rounded md w-min whitespace-nowrap">
+          <p className="bg-gray-200 p-1 rounded-md whitespace-nowrap">
             {category}
           </p>
         </div>
         <div className="flex justify-between">
-          <p className="bg-gray-200 p-1 rounded md w-min whitespace-nowrap truncate">
+          <p className="bg-gray-200 p-1 rounded md whitespace-nowrap truncate w-full text-center">
             Expires in: {timeRemaining}
           </p>
         </div>

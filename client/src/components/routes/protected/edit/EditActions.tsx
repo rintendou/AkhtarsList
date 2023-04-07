@@ -1,5 +1,8 @@
 import { useEffect, useRef, useState } from "react"
 import useAuth from "../../../../lib/hooks/useAuth"
+import useProfile from "../../../../lib/hooks/useProfile"
+import { useLocation, useNavigate } from "react-router-dom"
+import useTimeline from "../../../../lib/hooks/useTimeline"
 
 import numberInputIsValid from "../../../../lib/util/numberInputValidator"
 import stringInputIsValid from "../../../../lib/util/stringInputValidator"
@@ -18,14 +21,11 @@ const CATEGORIES = [
 import StyledInputRef from "../../../ui/StyledInputRef"
 import StyledInputAreaRef from "../../../ui/StyledInputAreaRef"
 import StyledDropdownRef from "../../../ui/StyledDropdown"
-import StyledDateTimePicker from "../../../ui/StyledDateTimePicker"
 import Error from "../../../ui/Error"
-import { useNavigate } from "react-router-dom"
 import { settings } from "../../../../settings"
-import useProfile from "../../../../lib/hooks/useProfile"
-import useTimeline from "../../../../lib/hooks/useTimeline"
+import StyledDateTimePicker from "../../../ui/StyledDateTimePicker"
 
-const SellActions = () => {
+const EditActions = () => {
   const titleRef = useRef<HTMLInputElement>(null)
   const descriptionRef = useRef<HTMLTextAreaElement>(null)
   const categoryRef = useRef<HTMLSelectElement>(null)
@@ -34,6 +34,25 @@ const SellActions = () => {
   const heightRef = useRef<HTMLInputElement>(null)
   const widthRef = useRef<HTMLInputElement>(null)
   const lengthRef = useRef<HTMLInputElement>(null)
+
+  const location = useLocation()
+
+  console.log(location.state)
+
+  useEffect(() => {
+    if (!location.state) {
+      return
+    }
+    titleRef.current!.value = location.state.listing!.title
+    descriptionRef.current!.value = location.state.listing!.desc
+    categoryRef.current!.value = location.state.listing!.category
+    startPriceRef.current!.value = location.state.listing!.startPrice
+    weightRef.current!.value = location.state.listing!.weight
+    widthRef.current!.value = location.state.listing!.dimensions[0]
+    heightRef.current!.value = location.state.listing!.dimensions[1]
+    lengthRef.current!.value = location.state.listing!.dimensions[2]
+    handleDateTimeChange(location.state.listing!.expireAt)
+  }, [])
 
   const [expireAt, setExpireAt] = useState<Date | null>(null)
   const [error, setError] = useState(false)
@@ -46,7 +65,7 @@ const SellActions = () => {
 
   const navigate = useNavigate()
 
-  const createListingHandler = (e: React.FormEvent<HTMLFormElement>) => {
+  const editListingHandler = (e: React.FormEvent<HTMLFormElement>) => {
     // Prevent default behavior of reloading page on form submission
     e.preventDefault()
     const title = titleRef.current!.value
@@ -66,9 +85,11 @@ const SellActions = () => {
       return tomorrow
     }
 
+    console.log(expireAt)
     const payload = {
+      userId: auth._id,
       title,
-      lister: auth.username,
+      lister: auth._id,
       desc,
       image,
       startPrice,
@@ -77,6 +98,7 @@ const SellActions = () => {
       weight,
       dimensions: [height, width, length],
     }
+    console.log(payload)
 
     if (!stringInputIsValid(title)) {
       setError(true)
@@ -134,18 +156,17 @@ const SellActions = () => {
       return
     }
 
-    const createListing = async () => {
+    const editListing = async () => {
       const response = await fetch(
-        `http://localhost:${settings.BACKEND_SERVER_PORT}/api/listing/post`,
+        `http://localhost:${settings.BACKEND_SERVER_PORT}/api/listing/update/${location.state.listing._id}`,
         {
-          method: "POST",
+          method: "PUT",
           body: JSON.stringify(payload),
           headers: { "Content-Type": "application/json" },
         }
       )
 
       const data = await response.json()
-      console.log(data)
 
       if (!data.ok) {
         setError(true)
@@ -157,13 +178,13 @@ const SellActions = () => {
       setErrorMessage("")
       navigate("/preview", {
         replace: true,
-        state: { ...payload, message: "Listing Successfully Posted!" },
+        state: { ...payload, message: "Listing Successfully Updated!" },
       })
       refetchUserDetails()
       refetchTimeline()
     }
 
-    createListing()
+    editListing()
   }
 
   // Keep track of Expiration
@@ -174,16 +195,16 @@ const SellActions = () => {
 
   // Focus on component mount
   useEffect(() => {
+    titleRef.current!.focus()
     window.scrollTo({
       top: 0,
       behavior: "smooth",
     })
-    titleRef.current!.focus()
   }, [])
 
   return (
     <div className="flex-auto bg-purple-100 bg-opacity-50 p-10 max-w-none md:max-w-[50%] max-h-[50%] md:max-h-none space-y-10">
-      <form className="space-y-10" onSubmit={createListingHandler}>
+      <form className="space-y-10" onSubmit={editListingHandler}>
         <div className="flex flex-col gap-5 pb-10 border-b border-b-gray-500">
           <StyledInputRef
             name="Title"
@@ -213,12 +234,16 @@ const SellActions = () => {
                 name="Start Price ($)"
                 placeholder="Start Price ($)"
                 type="text"
+                disabled
                 ref={startPriceRef}
+                twClasses="opacity-30 cursor-not-allowed"
               />
             </div>
           </div>
-
-          <StyledDateTimePicker onChange={handleDateTimeChange} />
+          <StyledDateTimePicker
+            onChange={handleDateTimeChange}
+            initialDate={location.state.listing!.expireAt}
+          />
         </div>
 
         <div className="flex flex-col gap-5 pb-10 border-b border-b-gray-500">
@@ -258,7 +283,7 @@ const SellActions = () => {
   )
 }
 
-export default SellActions
+export default EditActions
 
 const SubmitListingButton = () => {
   return (
@@ -266,7 +291,7 @@ const SubmitListingButton = () => {
       className={`p-4 rounded-lg duration-200 ease-in-out bg-secondary text-primary font-bold text-2xl py-6 w-full hover:scale-100 hover:bg-black hover:text-tertiary focus:outline-tertiary outline-4 focus:text-tertiary focus:bg-black`}
       type="submit"
     >
-      Place Listing Now
+      Update Listing
     </button>
   )
 }
