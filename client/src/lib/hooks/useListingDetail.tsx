@@ -53,7 +53,6 @@ const useListingDetail = () => {
       const isAdmin = localStorage.getItem("isAdmin") === "true"
       const isLister = localStorage.getItem("_id") === json.data.lister
 
-      setIsLoading(false)
       fetchLister(json.data.lister)
       setIsLister(isAdmin || isLister)
       setIsExpired(json.data.expireAt < new Date())

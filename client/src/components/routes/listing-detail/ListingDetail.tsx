@@ -39,11 +39,6 @@ const ListingDetail = () => {
     fetchListing(listingId!)
   }, [listingId])
 
-  useEffect(() => {
-    console.log(lister)
-    fetchLister(lister)
-  }, [lister])
-
   return (
     <div>
       <div className="flex flex-col md:flex-row min-h-screen border-b-2 border-b-tertiary">
