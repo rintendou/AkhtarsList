@@ -277,6 +277,26 @@ export const updateListing = async (req: Request, res: Response) => {
   const listing = await ListingModel.findById(listingId)
 
   const userId = req.body.userId
+
+  if (!listingId || !userId) {
+    return res.status(400).json({
+      message: "listingId params and userId property is required!",
+      data: null,
+      ok: false,
+    })
+  }
+
+  if (
+    !mongoose.Types.ObjectId.isValid(listingId) ||
+    !mongoose.Types.ObjectId.isValid(userId)
+  ) {
+    return res.status(400).json({
+      message: "invalid listingId or userId!",
+      data: null,
+      ok: false,
+    })
+  }
+
   const user = await UserModel.findById(userId)
 
   try {

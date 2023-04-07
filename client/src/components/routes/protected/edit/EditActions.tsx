@@ -282,7 +282,7 @@ const SubmitListingButton = () => {
       className={`p-4 rounded-lg duration-200 ease-in-out bg-secondary text-primary font-bold text-2xl py-6 w-full hover:scale-100 hover:bg-black hover:text-tertiary focus:outline-tertiary outline-4 focus:text-tertiary focus:bg-black`}
       type="submit"
     >
-      Place Listing Now
+      Update Listing
     </button>
   )
 }
