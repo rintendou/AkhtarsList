@@ -66,7 +66,9 @@ const useListingDetail = () => {
   const checkIfListingExists = (listingId: string) => {
     setIsLoading(true)
     const checkExistingListing = async () => {
-      const response = await fetch(`http://localhost:5173/api/listing/`)
+      const response = await fetch(`http://localhost:5173/api/listing/fetch`)
+      console.log(response)
+
       const json = await response.json()
 
       if (!json.ok) {
@@ -77,6 +79,7 @@ const useListingDetail = () => {
       const listingExists = json.data.some(
         (listing: ListingType) => listing._id === listingId
       )
+
       if (!listingExists) {
         setIsLoading(false)
         navigate("/listings/listing-not-found")
