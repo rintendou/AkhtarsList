@@ -11,18 +11,19 @@ import numberInputIsValid from "../../../lib/util/numberInputValidator"
 
 // Backend port number
 import { settings } from "../../../settings"
+import getTimeRemaining from "../../../lib/util/getTimeRemaining"
 
 type Props = {
   bidders: string[]
+  expireAt: Date
   finalPrice: number
-  timeRemaining: string
   isLister: boolean
 }
 
 const ActiveBiddingSection = ({
   bidders,
+  expireAt,
   finalPrice,
-  timeRemaining,
   isLister,
 }: Props) => {
   const [bidAmount, setBidAmount] = useState("0")
@@ -68,6 +69,8 @@ const ActiveBiddingSection = ({
 
     submitBid()
   }
+
+  const timeRemaining = getTimeRemaining(expireAt)
 
   return (
     <div

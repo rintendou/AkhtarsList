@@ -37,8 +37,6 @@ const ListingDetail = () => {
     fetchListing(listingId!)
   }, [listingId])
 
-  const timeRemaining = getTimeRemaining(expireAt)
-
   return (
     <div>
       <div className="flex flex-col md:flex-row min-h-screen border-b-2 border-b-tertiary">
@@ -65,7 +63,7 @@ const ListingDetail = () => {
           <ActiveBiddingSection
             bidders={bidders}
             finalPrice={finalPrice}
-            timeRemaining={timeRemaining}
+            expireAt={expireAt}
             isLister={isLister}
           />
         )}
