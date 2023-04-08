@@ -43,7 +43,7 @@ const DragAndDrop = ({ imageUrl, setImageUrl }: Props) => {
 
   return (
     <div
-      className="relative flex justify-center items-center h-[50rem] w-[50rem] max-w-none md:max-w-[50%] max-h-full cursor-pointer select-none group my-auto mx-5"
+      className="relative flex justify-center items-center  h-[35em] w-[35em] max-w-none md:max-w-[50%] max-h-full md:max-h-none cursor-pointer select-none group my-auto mx-auto p-4"
       onDrop={handleDrop}
       onClick={handleClick}
       onDragOver={(event) => event.preventDefault()}
@@ -52,7 +52,7 @@ const DragAndDrop = ({ imageUrl, setImageUrl }: Props) => {
         <>
           <img
             src={imageUrl}
-            className="absolute inset-0 w-full h-full object-contain rounded-lg"
+            className="h-full w-full absolute inset-0 object-contain"
           />
           <button
             className="absolute top-2 right-2 rounded-full bg-white border-2 border-black p-1 z-10 hover:bg-black hover:border-white group duration-200 ease-in-out opacity-30"
