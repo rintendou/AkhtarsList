@@ -12,6 +12,7 @@ import StyledInput from "../../ui/StyledInput"
 import StyledInputAreaRef from "../../ui/StyledInputAreaRef"
 import Success from "../../ui/Success"
 import StyledDateTimePicker from "../../ui/StyledDateTimePicker"
+import DragAndDrop from "../../ui/DragAndDrop"
 
 const IMAGESET1 = [
   "sneakers1.jpg",
@@ -31,6 +32,8 @@ const Dev = () => {
           and an overview of their functionalities
         </h1>
       </Overview>
+
+      <DragAndDrop />
 
       <Countdown targetDate="2023-04-13T00:00:00" />
 
