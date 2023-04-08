@@ -2,7 +2,7 @@ import React, { useState } from "react"
 
 import ImageUpload from "../../../public/image-upload-undraw.svg"
 
-function ImageUploader() {
+const DragAndDrop = () => {
   const [imageUrl, setImageUrl] = useState<string>("")
 
   const handleDrop = (event: React.DragEvent<HTMLDivElement>): void => {
@@ -15,7 +15,8 @@ function ImageUploader() {
     reader.readAsDataURL(file)
   }
 
-  const handleRemove = (): void => {
+  const handleRemove = (event: React.MouseEvent<HTMLButtonElement>): void => {
+    event.stopPropagation()
     setImageUrl("")
   }
 
@@ -39,7 +40,7 @@ function ImageUploader() {
 
   return (
     <div
-      className="relative flex justify-center items-center h-96 w-96 max-w-full max-h-full rounded-lg cursor-pointer select-none group"
+      className="relative flex justify-center items-center h-[50rem] w-[50rem] max-w-full max-h-full rounded-lg cursor-pointer select-none group"
       onDrop={handleDrop}
       onClick={handleClick}
       onDragOver={(event) => event.preventDefault()}
@@ -48,10 +49,10 @@ function ImageUploader() {
         <>
           <img
             src={imageUrl}
-            className="absolute inset-0 w-full h-full object-cover rounded-lg"
+            className="absolute inset-0 w-full h-full object-contain rounded-lg"
           />
           <button
-            className="absolute top-2 right-2 rounded-full bg-white border-2 border-black p-1 z-10 hover:bg-black hover:border-white group duration-200 ease-in-out"
+            className="absolute top-2 right-2 rounded-full bg-white border-2 border-black p-1 z-10 hover:bg-black hover:border-white group duration-200 ease-in-out opacity-30"
             onClick={handleRemove}
           >
             <svg
@@ -84,4 +85,4 @@ function ImageUploader() {
   )
 }
 
-export default ImageUploader
+export default DragAndDrop
