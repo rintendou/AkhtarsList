@@ -8,7 +8,7 @@ const WonListings = () => {
 
   return (
     <div className="w-full flex flex-col justify-center items-center">
-      <ul className="flex gap-8 py-8 overflow-x-auto">
+      <ul className="flex gap-8 py-8 flex-wrap">
         {wonListings.length !== 0 ? (
           wonListings.map((wonListing) => (
             <li key={wonListing._id}>

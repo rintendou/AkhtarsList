@@ -1,14 +1,13 @@
 import useProfile from "../../../../lib/hooks/useProfile"
 import Card from "../../../ui/Card"
 import ListingCard from "../../../ui/ListingCard"
-import RouterLink from "../../../ui/RouterLink"
 
 const DisputedListings = () => {
   const { disputedListings } = useProfile()
 
   return (
     <div className="w-full flex flex-col justify-center items-center">
-      <ul className="flex gap-8 py-8 overflow-x-auto">
+      <ul className="flex gap-8 py-8 flex-wrap">
         {disputedListings.length !== 0 ? (
           disputedListings.map((disputedListing) => (
             <li key={disputedListing._id}>
