@@ -117,10 +117,10 @@ const ProfileActions = ({ logout }: Props) => {
             <p className="text-gray-500">Manage undelivered items</p>
           </div>
         </ProfileRouterLink>
+        {auth.isAdmin === "true" && <AdminActions />}
       </div>
 
       <div>
-        {auth.isAdmin === "true" && <AdminActions />}
         <ProfileRouterLink to="/settings">
           <svg
             className="mr-4"
