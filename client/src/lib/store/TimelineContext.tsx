@@ -18,6 +18,7 @@ type initialContextType = {
   unexpiredListings: ListingType[]
   refetchTimeline: () => void
   fetchListingsByCategory: (category: string) => void
+  isLoading: boolean
 }
 
 const initialContext = {
@@ -32,6 +33,7 @@ const initialContext = {
   unexpiredListings: [],
   refetchTimeline: () => {},
   fetchListingsByCategory: () => {},
+  isLoading: false,
 }
 
 const TimelineContext = createContext<initialContextType>(initialContext)
