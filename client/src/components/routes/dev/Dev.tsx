@@ -12,6 +12,7 @@ import StyledInput from "../../ui/StyledInput"
 import StyledInputAreaRef from "../../ui/StyledInputAreaRef"
 import Success from "../../ui/Success"
 import StyledDateTimePicker from "../../ui/StyledDateTimePicker"
+import Dropdown from "../../ui/Dropdown"
 import DragAndDrop from "../../ui/DragAndDrop"
 
 const IMAGESET1 = [
@@ -33,7 +34,15 @@ const Dev = () => {
         </h1>
       </Overview>
 
-      <DragAndDrop />
+      <Dropdown
+        options={[
+          { label: "23", value: "23" },
+          { label: "34", value: "34" },
+        ]}
+        onSelect={() => {}}
+      />
+
+      {/* <DragAndDrop /> */}
 
       <Countdown targetDate="2023-04-13T00:00:00" />
 
