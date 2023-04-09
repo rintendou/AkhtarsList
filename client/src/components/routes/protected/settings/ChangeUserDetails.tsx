@@ -1,4 +1,4 @@
-import { useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import StyledInputRef from "../../../ui/StyledInputRef"
 import PasswordInputRef from "../../../ui/PasswordInputRef"
 import { settings } from "../../../../settings"
@@ -13,6 +13,10 @@ const ChangeUserDetails = () => {
 
   const addressRef = useRef<HTMLInputElement>(null)
   const passwordRef = useRef<HTMLInputElement>(null)
+
+  useEffect(() => {
+    addressRef.current!.focus()
+  }, [])
 
   const editUserDetailsHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
