@@ -6,9 +6,11 @@ import useAuth from "../../../../lib/hooks/useAuth"
 import Error from "../../../ui/Error"
 import stringInputIsValid from "../../../../lib/util/stringInputValidator"
 import Success from "../../../ui/Success"
+import useProfile from "../../../../lib/hooks/useProfile"
 
 const ChangeUserDetails = () => {
   const { auth } = useAuth()
+  const { refetchUserDetails } = useProfile()
 
   const [errorMessage, setErrorMessage] = useState("")
   const [successMessage, setSuccessMessage] = useState("")
@@ -58,6 +60,7 @@ const ChangeUserDetails = () => {
 
       setErrorMessage("")
       setSuccessMessage(json.message)
+      refetchUserDetails()
     }
     editUserDetails()
   }
