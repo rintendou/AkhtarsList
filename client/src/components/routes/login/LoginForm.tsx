@@ -11,6 +11,7 @@ import RouterLink from "../../ui/RouterLink"
 
 // Port number
 import { settings } from "../../../settings"
+import PasswordInputRef from "../../ui/PasswordInputRef"
 
 type Props = {
   didRegisterSuccessfully: boolean
@@ -96,12 +97,7 @@ const LoginForm = ({
           placeholder="Username"
           ref={usernameRef}
         />
-        <StyledInputRef
-          name="Password"
-          type="password"
-          placeholder="Password"
-          ref={passwordRef}
-        />
+        <PasswordInputRef name="Password" ref={passwordRef} />
         <RouterLink
           routerLinkText="Forgot Password?"
           twClasses="text-xs ml-auto"
