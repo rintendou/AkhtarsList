@@ -1,8 +1,10 @@
-import { useCallback, useMemo, useState } from "react"
+import { useCallback, useEffect, useMemo, useState } from "react"
 
 import ListingType from "../types/ListingType"
 import { settings } from "../../settings"
 import { useNavigate } from "react-router-dom"
+import calculateTimeRemaining from "../util/calculateTimeRemaining"
+import TimeRemainingType from "../types/TimeRemainingType"
 
 const initialListingState = {
   _id: "",
@@ -28,10 +30,14 @@ const useListingDetail = () => {
   const [isExpired, setIsExpired] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
   const [listing, setListing] = useState<ListingType>(initialListingState)
+  const [timeRemaining, setTimeRemaining] = useState<TimeRemainingType>(
+    calculateTimeRemaining(listing.expireAt)
+  )
 
-  const fetchListing = useCallback((listingId: string) => {
+  useEffect(() => {
     setIsLoading(true)
-    const fetchListingDetail = async () => {
+
+    const fetchListing = async () => {
       const response = await fetch(
         `http://localhost:${settings.BACKEND_SERVER_PORT}/api/listing/fetch/${listingId}`
       )
@@ -52,7 +58,7 @@ const useListingDetail = () => {
       setIsLoading(false)
     }
 
-    fetchListingDetail()
+    fetchListing()
   }, [])
 
   const navigate = useNavigate()
