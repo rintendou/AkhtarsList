@@ -1,5 +1,7 @@
 import useProfile from "../../../../lib/hooks/useProfile"
+import Card from "../../../ui/Card"
 import ListingCard from "../../../ui/ListingCard"
+import RouterLink from "../../../ui/RouterLink"
 
 const DisputedListings = () => {
   const { disputedListings } = useProfile()
@@ -7,7 +9,7 @@ const DisputedListings = () => {
   return (
     <div className="w-full flex flex-col justify-center items-center">
       <ul className="flex gap-8 py-8 overflow-x-auto">
-        {disputedListings.length !== 0 &&
+        {disputedListings.length !== 0 ? (
           disputedListings.map((disputedListing) => (
             <li key={disputedListing._id}>
               <ListingCard
@@ -29,7 +31,18 @@ const DisputedListings = () => {
                 length={disputedListing.length}
               />
             </li>
-          ))}
+          ))
+        ) : (
+          <Card twClasses="p-10 md:p-20 text-center">
+            <h1 className="text-2xl font-semibold">
+              Great! There has not any been disputed listings that you have won
+            </h1>
+
+            <h1 className="font-extralight">
+              Your disputed listings will be here
+            </h1>
+          </Card>
+        )}
       </ul>
     </div>
   )

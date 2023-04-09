@@ -38,7 +38,7 @@ const WonListings = () => {
               You have not won any listings yet
             </h1>
 
-            <h1>
+            <h1 className="font-extralight">
               Click{" "}
               <RouterLink to="/" routerLinkText="here" twClasses="underline" />{" "}
               to bid on listings
