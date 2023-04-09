@@ -1,8 +1,16 @@
+import { useEffect } from "react"
 import ChangePassword from "./ChangePassword"
 import ChangeSecurityQuestions from "./ChangeSecurityQuestions"
-import EditUserDetails from "./EditUserDetails"
+import EditUserDetails from "./ChangeUserDetails"
 
 const Settings = () => {
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    })
+  }, [])
+
   return (
     <div className="flex flex-col w-full p-5 gap-10">
       <h1 className="text-4xl font-bold pb-5 border-b-2 w-full">Profile</h1>
