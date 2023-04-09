@@ -269,6 +269,55 @@ export const resetPassword = async (req: Request, res: Response) => {
   }
 }
 
+export const changeUserDetails = async (req: Request, res: Response) => {
+  // destructure the payload attached to the body
+  const { username, password, address } = req.body
+
+  // Check if appropriate payload is attached to the body
+  if (!username || !password || !address) {
+    return res.status(400).json({
+      message: "username, password, and address properties are required!",
+      data: null,
+      ok: false,
+    })
+  }
+
+  // Check if user exists
+  const existingUser = await UserModel.findOne({ username })
+  if (!existingUser) {
+    return res
+      .status(400)
+      .json({ message: "Bad Request!", data: null, ok: false })
+  }
+
+  // Check if password matches user password
+  const doesPasswordMatch = await bcrypt.compare(
+    password,
+    existingUser.password
+  )
+  if (!doesPasswordMatch) {
+    return res.status(400).json({
+      message: "You provided the wrong password!",
+      data: null,
+      ok: false,
+    })
+  }
+
+  try {
+    // Update user details
+    existingUser.address = address
+    await existingUser!.save()
+
+    res.status(200).json({
+      message: "User Details Updated Successfully!",
+      data: null,
+      ok: true,
+    })
+  } catch (error) {
+    res.status(500).json({ message: error, data: null, ok: false })
+  }
+}
+
 export const changePassword = async (req: Request, res: Response) => {
   // destructure the payload attached to the body
   const { username, oldPassword, newPassword, newConfirmPassword } = req.body
@@ -307,7 +356,7 @@ export const changePassword = async (req: Request, res: Response) => {
   )
   if (!doesOldPasswordMatch) {
     return res.status(400).json({
-      message: "You provided a wrong password!",
+      message: "You provided the wrong password!",
       data: null,
       ok: false,
     })
