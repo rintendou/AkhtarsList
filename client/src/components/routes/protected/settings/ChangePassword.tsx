@@ -3,6 +3,7 @@ import PasswordInputRef from "../../../ui/PasswordInputRef"
 import { settings } from "../../../../settings"
 import useAuth from "../../../../lib/hooks/useAuth"
 import Error from "../../../ui/Error"
+import stringInputIsValid from "../../../../lib/util/stringInputValidator"
 
 const ChangePassword = () => {
   const { auth } = useAuth()
@@ -25,6 +26,18 @@ const ChangePassword = () => {
       oldPassword,
       newPassword,
       newConfirmPassword,
+    }
+
+    if (!stringInputIsValid(newConfirmPassword)) {
+      newConfirmPasswordRef.current!.focus()
+    }
+
+    if (!stringInputIsValid(newPassword)) {
+      newPasswordRef.current!.focus()
+    }
+
+    if (!stringInputIsValid(oldPassword)) {
+      oldPasswordRef.current!.focus()
     }
 
     const changePassword = async () => {

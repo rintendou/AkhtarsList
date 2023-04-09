@@ -4,6 +4,7 @@ import PasswordInputRef from "../../../ui/PasswordInputRef"
 import { settings } from "../../../../settings"
 import useAuth from "../../../../lib/hooks/useAuth"
 import Error from "../../../ui/Error"
+import stringInputIsValid from "../../../../lib/util/stringInputValidator"
 
 const ChangeUserDetails = () => {
   const { auth } = useAuth()
@@ -23,6 +24,14 @@ const ChangeUserDetails = () => {
       username: auth.username,
       password,
       address,
+    }
+
+    if (!stringInputIsValid(password)) {
+      passwordRef.current!.focus()
+    }
+
+    if (!stringInputIsValid(address)) {
+      addressRef.current!.focus()
     }
 
     const editUserDetails = async () => {

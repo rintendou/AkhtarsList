@@ -4,6 +4,7 @@ import PasswordInputRef from "../../../ui/PasswordInputRef"
 import { settings } from "../../../../settings"
 import useAuth from "../../../../lib/hooks/useAuth"
 import Error from "../../../ui/Error"
+import stringInputIsValid from "../../../../lib/util/stringInputValidator"
 
 const ChangeSecurityQuestions = () => {
   const { auth } = useAuth()
@@ -26,6 +27,18 @@ const ChangeSecurityQuestions = () => {
       password,
       newSecurityQuestion,
       newSecurityQAnswer,
+    }
+
+    if (!stringInputIsValid(password)) {
+      passwordRef.current!.focus()
+    }
+
+    if (!stringInputIsValid(newSecurityQAnswer)) {
+      newSecurityQuestionAnswerRef.current!.focus()
+    }
+
+    if (!stringInputIsValid(newSecurityQuestion)) {
+      newSecurityQuestionRef.current!.focus()
     }
 
     const changeSecurityQA = async () => {
