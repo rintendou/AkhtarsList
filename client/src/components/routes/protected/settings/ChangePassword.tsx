@@ -4,11 +4,13 @@ import { settings } from "../../../../settings"
 import useAuth from "../../../../lib/hooks/useAuth"
 import Error from "../../../ui/Error"
 import stringInputIsValid from "../../../../lib/util/stringInputValidator"
+import Success from "../../../ui/Success"
 
 const ChangePassword = () => {
   const { auth } = useAuth()
 
   const [errorMessage, setErrorMessage] = useState("")
+  const [successMessage, setSuccessMessage] = useState("")
 
   const oldPasswordRef = useRef<HTMLInputElement>(null)
   const newPasswordRef = useRef<HTMLInputElement>(null)
@@ -57,6 +59,7 @@ const ChangePassword = () => {
       }
 
       setErrorMessage("")
+      setSuccessMessage(json.message)
     }
     changePassword()
   }
@@ -70,6 +73,9 @@ const ChangePassword = () => {
         <PasswordInputRef name="Confirm Password" ref={newConfirmPasswordRef} />
         <ChangePasswordButton />
       </form>
+      {!errorMessage && successMessage && (
+        <Success successMessage={successMessage} />
+      )}
       {errorMessage && <Error errorMessage={errorMessage} />}
     </div>
   )

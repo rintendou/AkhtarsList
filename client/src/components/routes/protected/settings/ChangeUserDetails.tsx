@@ -5,11 +5,13 @@ import { settings } from "../../../../settings"
 import useAuth from "../../../../lib/hooks/useAuth"
 import Error from "../../../ui/Error"
 import stringInputIsValid from "../../../../lib/util/stringInputValidator"
+import Success from "../../../ui/Success"
 
 const ChangeUserDetails = () => {
   const { auth } = useAuth()
 
   const [errorMessage, setErrorMessage] = useState("")
+  const [successMessage, setSuccessMessage] = useState("")
 
   const addressRef = useRef<HTMLInputElement>(null)
   const passwordRef = useRef<HTMLInputElement>(null)
@@ -55,6 +57,7 @@ const ChangeUserDetails = () => {
       }
 
       setErrorMessage("")
+      setSuccessMessage(json.message)
     }
     editUserDetails()
   }
@@ -72,6 +75,9 @@ const ChangeUserDetails = () => {
         <PasswordInputRef name="Password" ref={passwordRef} />
         <EditProfileButton />
       </form>
+      {!errorMessage && successMessage && (
+        <Success successMessage={successMessage} />
+      )}
       {errorMessage && <Error errorMessage={errorMessage} />}
     </div>
   )

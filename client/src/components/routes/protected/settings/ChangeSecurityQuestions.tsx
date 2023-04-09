@@ -5,11 +5,13 @@ import { settings } from "../../../../settings"
 import useAuth from "../../../../lib/hooks/useAuth"
 import Error from "../../../ui/Error"
 import stringInputIsValid from "../../../../lib/util/stringInputValidator"
+import Success from "../../../ui/Success"
 
 const ChangeSecurityQuestions = () => {
   const { auth } = useAuth()
 
   const [errorMessage, setErrorMessage] = useState("")
+  const [successMessage, setSuccessMessage] = useState("")
 
   const passwordRef = useRef<HTMLInputElement>(null)
   const newSecurityQuestionRef = useRef<HTMLInputElement>(null)
@@ -59,6 +61,7 @@ const ChangeSecurityQuestions = () => {
       }
 
       setErrorMessage("")
+      setSuccessMessage(json.message)
     }
     changeSecurityQA()
   }
@@ -82,6 +85,9 @@ const ChangeSecurityQuestions = () => {
         <PasswordInputRef name="Password" ref={passwordRef} />
         <ChangeSecurityQAButton />
       </form>
+      {!errorMessage && successMessage && (
+        <Success successMessage={successMessage} />
+      )}
       {errorMessage && <Error errorMessage={errorMessage} />}
     </div>
   )
