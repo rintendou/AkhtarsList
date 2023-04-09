@@ -8,7 +8,7 @@ const PageNotFound = () => {
       <Overview twClasses="space-y-20">
         <img src={PageNotFoundImage} alt="Page Not Found!" />
         <h1 className="text-2xl font-bold">
-          404 Error! Looks like you accessed a dead end!{" "}
+          404 Error! Looks like you accessed a dead end!
         </h1>
       </Overview>
     </div>
