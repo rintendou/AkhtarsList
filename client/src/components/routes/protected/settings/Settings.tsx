@@ -1,4 +1,5 @@
 import Card from "../../../ui/Card"
+import ChangeSecurityQuestions from "./ChangeSecurityQuestions"
 import EditUserDetails from "./EditUserDetails"
 
 const Settings = () => {
@@ -8,6 +9,7 @@ const Settings = () => {
         <h1 className="text-4xl font-bold text-center mb-10">Settings</h1>
         <div className="flex flex-col gap-5">
           <EditUserDetails />
+          <ChangeSecurityQuestions />
         </div>
       </Card>
     </div>
