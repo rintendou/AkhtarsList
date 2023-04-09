@@ -1,3 +1,5 @@
+// Util fn for listing cards
+
 function getTimeRemaining(expireAt: Date): string {
   const totalSeconds = Math.floor(
     (new Date(expireAt).getTime() - Date.now()) / 1000

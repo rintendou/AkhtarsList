@@ -1,8 +1,10 @@
-import { useCallback, useMemo, useState } from "react"
+import { useCallback, useEffect, useMemo, useState } from "react"
 
 import ListingType from "../types/ListingType"
 import { settings } from "../../settings"
-import { useNavigate } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
+import calculateTimeRemaining from "../util/calculateTimeRemaining"
+import TimeRemainingType from "../types/TimeRemainingType"
 
 const initialListingState = {
   _id: "",
@@ -27,13 +29,18 @@ const useListingDetail = () => {
   const [isLister, setIsLister] = useState(false)
   const [isExpired, setIsExpired] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
-  const [listing, setListing] = useState<ListingType>(
-    useMemo(() => initialListingState, [])
+  const [listing, setListing] = useState<ListingType>(initialListingState)
+  const [timeRemaining, setTimeRemaining] = useState<TimeRemainingType>(
+    calculateTimeRemaining(listing.expireAt)
   )
 
-  const fetchListing = useCallback((listingId: string) => {
+  const navigate = useNavigate()
+  const { listingId } = useParams()
+
+  useEffect(() => {
     setIsLoading(true)
-    const fetchListingDetail = async () => {
+
+    const fetchListing = async () => {
       const response = await fetch(
         `http://localhost:${settings.BACKEND_SERVER_PORT}/api/listing/fetch/${listingId}`
       )
@@ -51,50 +58,63 @@ const useListingDetail = () => {
       fetchLister(json.data.lister, json.data)
       setIsLister(isAdmin || isLister)
       setIsExpired(new Date(json.data.expireAt) < new Date())
+    }
+
+    fetchListing()
+  }, [listingId])
+
+  const fetchLister = (listerId: string, updatedListing: ListingType) => {
+    setIsLoading(true)
+
+    const getLister = async () => {
+      const response = await fetch(
+        `http://localhost:${settings.BACKEND_SERVER_PORT}/api/user/${listerId}`
+      )
+      const json = await response.json()
+
+      if (!json.ok) {
+        setIsLoading(false)
+        return
+      }
+
+      setListing({
+        ...updatedListing,
+        lister: json.data.username,
+        height: updatedListing.dimensions[0],
+        width: updatedListing.dimensions[1],
+        length: updatedListing.dimensions[2],
+      })
       setIsLoading(false)
     }
 
-    fetchListingDetail()
-  }, [])
+    getLister()
+  }
 
-  const navigate = useNavigate()
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const TR = calculateTimeRemaining(listing.expireAt)
 
-  const fetchLister = useCallback(
-    (listerId: string, updatedListing: ListingType) => {
-      setIsLoading(true)
-      const getLister = async () => {
-        const response = await fetch(
-          `http://localhost:${settings.BACKEND_SERVER_PORT}/api/user/${listerId}`
-        )
-        const json = await response.json()
-
-        if (!json.ok) {
-          setIsLoading(false)
-          return
-        }
-
-        setListing({
-          ...updatedListing,
-          lister: json.data.username,
-          height: updatedListing.dimensions[0],
-          width: updatedListing.dimensions[1],
-          length: updatedListing.dimensions[2],
-        })
-        setIsLoading(false)
+      if (
+        TR.days === 0 &&
+        TR.hours === 0 &&
+        TR.minutes === 0 &&
+        TR.seconds === 0
+      ) {
+        setIsExpired(true)
       }
 
-      getLister()
-    },
-    []
-  )
+      setTimeRemaining(TR)
+    }, 1000)
+
+    return () => clearInterval(interval)
+  }, [listing])
 
   return {
     isLoading,
     listing,
-    fetchListing,
     isLister,
     isExpired,
-    fetchLister,
+    timeRemaining,
   }
 }
 
