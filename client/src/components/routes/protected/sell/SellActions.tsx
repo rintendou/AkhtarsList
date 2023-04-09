@@ -71,7 +71,7 @@ const SellActions = () => {
       title,
       lister: auth.username,
       desc,
-      image,
+      image: image.length !== 0 ? image : "someRandomArmpit.jpg",
       startPrice,
       expireAt: expireAt || backupDate(),
       category,
@@ -170,7 +170,6 @@ const SellActions = () => {
   // Keep track of Expiration
   const handleDateTimeChange = (value: Date | null) => {
     setExpireAt(value)
-    console.log(expireAt)
   }
 
   // Focus on component mount

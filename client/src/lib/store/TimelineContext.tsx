@@ -18,6 +18,7 @@ type initialContextType = {
   unexpiredListings: ListingType[]
   refetchTimeline: () => void
   fetchListingsByCategory: (category: string) => void
+  isLoading: boolean
 }
 
 const initialContext = {
@@ -32,6 +33,7 @@ const initialContext = {
   unexpiredListings: [],
   refetchTimeline: () => {},
   fetchListingsByCategory: () => {},
+  isLoading: false,
 }
 
 const TimelineContext = createContext<initialContextType>(initialContext)
@@ -50,9 +52,12 @@ const TimelineContextProvider = ({ children }: { children: ReactNode }) => {
   >([])
   const [expiredListings, setExpiredListings] = useState<ListingType[]>([])
   const [unexpiredListings, setUnexpiredListings] = useState<ListingType[]>([])
+  const [isLoading, setIsLoading] = useState(false)
 
   // Fetch all and trending listings on component mount
   useEffect(() => {
+    setIsLoading(true)
+
     const fetchListings = async () => {
       const response = await fetch(
         `http://localhost:${settings.BACKEND_SERVER_PORT}/api/listing/fetch`
@@ -60,23 +65,33 @@ const TimelineContextProvider = ({ children }: { children: ReactNode }) => {
       const json = await response.json()
 
       if (!json.ok) {
+        setIsLoading(false)
         return
       }
 
       const sneakersListings = json.data.filter(
-        (listing: ListingType) => listing.category === "Sneakers"
+        (listing: ListingType) =>
+          listing.category === "Sneakers" &&
+          new Date(listing.expireAt) > new Date()
       )
       const antiquesListings = json.data.filter(
-        (listing: ListingType) => listing.category === "Antiques"
+        (listing: ListingType) =>
+          listing.category === "Antiques" &&
+          new Date(listing.expireAt) > new Date()
       )
       const techListings = json.data.filter(
-        (listing: ListingType) => listing.category === "Tech"
+        (listing: ListingType) =>
+          listing.category === "Tech" && new Date(listing.expireAt) > new Date()
       )
       const accessoriesListings = json.data.filter(
-        (listing: ListingType) => listing.category === "Accessories"
+        (listing: ListingType) =>
+          listing.category === "Accessories" &&
+          new Date(listing.expireAt) > new Date()
       )
       const collectiblesListings = json.data.filter(
-        (listing: ListingType) => listing.category === "Collectibles"
+        (listing: ListingType) =>
+          listing.category === "Collectibles" &&
+          new Date(listing.expireAt) > new Date()
       )
       const expiredListings = json.data.filter(
         (listing: ListingType) => new Date(listing.expireAt) < new Date()
@@ -102,6 +117,7 @@ const TimelineContextProvider = ({ children }: { children: ReactNode }) => {
       const json = await response.json()
 
       if (!json.ok) {
+        setIsLoading(false)
         return
       }
 
@@ -110,6 +126,7 @@ const TimelineContextProvider = ({ children }: { children: ReactNode }) => {
       )
 
       setTrendingListings(trendingListings)
+      setIsLoading(false)
     }
 
     fetchListings()
@@ -117,6 +134,8 @@ const TimelineContextProvider = ({ children }: { children: ReactNode }) => {
   }, [])
 
   const refetchTimeline = () => {
+    setIsLoading(true)
+
     const fetchListings = async () => {
       const response = await fetch(
         `http://localhost:${settings.BACKEND_SERVER_PORT}/api/listing/fetch`
@@ -124,23 +143,33 @@ const TimelineContextProvider = ({ children }: { children: ReactNode }) => {
       const json = await response.json()
 
       if (!json.ok) {
+        setIsLoading(false)
         return
       }
 
       const sneakersListings = json.data.filter(
-        (listing: ListingType) => listing.category === "Sneakers"
+        (listing: ListingType) =>
+          listing.category === "Sneakers" &&
+          new Date(listing.expireAt) > new Date()
       )
       const antiquesListings = json.data.filter(
-        (listing: ListingType) => listing.category === "Antiques"
+        (listing: ListingType) =>
+          listing.category === "Antiques" &&
+          new Date(listing.expireAt) > new Date()
       )
       const techListings = json.data.filter(
-        (listing: ListingType) => listing.category === "Tech"
+        (listing: ListingType) =>
+          listing.category === "Tech" && new Date(listing.expireAt) > new Date()
       )
       const accessoriesListings = json.data.filter(
-        (listing: ListingType) => listing.category === "Accessories"
+        (listing: ListingType) =>
+          listing.category === "Accessories" &&
+          new Date(listing.expireAt) > new Date()
       )
       const collectiblesListings = json.data.filter(
-        (listing: ListingType) => listing.category === "Collectibles"
+        (listing: ListingType) =>
+          listing.category === "Collectibles" &&
+          new Date(listing.expireAt) > new Date()
       )
       const expiredListings = json.data.filter(
         (listing: ListingType) => new Date(listing.expireAt) < new Date()
@@ -166,6 +195,7 @@ const TimelineContextProvider = ({ children }: { children: ReactNode }) => {
       const json = await response.json()
 
       if (!json.ok) {
+        setIsLoading(false)
         return
       }
 
@@ -174,6 +204,7 @@ const TimelineContextProvider = ({ children }: { children: ReactNode }) => {
       )
 
       setTrendingListings(trendingListings)
+      setIsLoading(false)
     }
 
     fetchListings()
@@ -181,6 +212,8 @@ const TimelineContextProvider = ({ children }: { children: ReactNode }) => {
   }
 
   const fetchListingsByCategory = (category: string) => {
+    setIsLoading(true)
+
     const fetchCategorizedListings = async () => {
       const response = await fetch(
         `http://localhost:${settings.BACKEND_SERVER_PORT}/api/listing/fetch-by-category/${category}`
@@ -211,6 +244,8 @@ const TimelineContextProvider = ({ children }: { children: ReactNode }) => {
           setCollectiblesListings(json.data)
           break
       }
+
+      setIsLoading(false)
     }
 
     fetchCategorizedListings()
@@ -228,6 +263,7 @@ const TimelineContextProvider = ({ children }: { children: ReactNode }) => {
     unexpiredListings,
     refetchTimeline,
     fetchListingsByCategory,
+    isLoading,
   }
 
   return (

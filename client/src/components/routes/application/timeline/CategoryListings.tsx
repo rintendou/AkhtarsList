@@ -20,17 +20,20 @@ const CategoryListings = () => {
     techListings,
     accessoriesListings,
     collectiblesListings,
+    isLoading,
   } = useTimeline()
   return (
     <div className="space-y-8">
-      <div>
-        <div className="flex justify-between">
-          <h1 className="text-lg font-semibold w-full">Sneakers</h1>
-          <SeeAll to="/category/sneakers" />
-        </div>
-        <ul className="flex gap-8 py-5 overflow-x-scroll">
-          {sneakersListings.length !== 0 ? (
-            sneakersListings.map((listing) => (
+      {isLoading && <ListingSkeletons />}
+
+      {sneakersListings.length !== 0 && (
+        <div>
+          <div className="flex justify-between">
+            <h1 className="text-lg font-semibold w-full">Sneakers</h1>
+            <SeeAll to="/category/sneakers" />
+          </div>
+          <ul className="flex gap-8 py-5 overflow-x-scroll">
+            {sneakersListings.map((listing) => (
               <li key={listing._id}>
                 <ListingCard
                   _id={listing._id}
@@ -51,21 +54,18 @@ const CategoryListings = () => {
                   length={listing.length}
                 />
               </li>
-            ))
-          ) : (
-            <ListingSkeletons />
-          )}
-        </ul>
-      </div>
-
-      <div>
-        <div className="flex justify-between">
-          <h1 className="text-lg font-semibold w-full">Antiques</h1>
-          <SeeAll to="/category/antiques" />
+            ))}
+          </ul>
         </div>
-        <ul className="flex gap-8 py-5 overflow-x-scroll">
-          {antiquesListings.length !== 0 ? (
-            antiquesListings.map((listing) => (
+      )}
+      {antiquesListings.length !== 0 && (
+        <div>
+          <div className="flex justify-between">
+            <h1 className="text-lg font-semibold w-full">Antiques</h1>
+            <SeeAll to="/category/antiques" />
+          </div>
+          <ul className="flex gap-8 py-5 overflow-x-scroll">
+            {antiquesListings.map((listing) => (
               <li key={listing._id}>
                 <ListingCard
                   _id={listing._id}
@@ -86,25 +86,21 @@ const CategoryListings = () => {
                   length={listing.length}
                 />
               </li>
-            ))
-          ) : (
-            <ListingSkeletons />
-          )}
-        </ul>
-      </div>
-
+            ))}
+          </ul>
+        </div>
+      )}
       <div className="py-14">
         <Carousel images={IMAGESET2} />
       </div>
-
-      <div>
-        <div className="flex justify-between">
-          <h1 className="text-lg font-semibold w-full">Tech</h1>
-          <SeeAll to="/category/tech" />
-        </div>
-        <ul className="flex gap-8 py-5 overflow-x-scroll">
-          {techListings.length !== 0 ? (
-            techListings.map((listing) => (
+      {techListings.length !== 0 && (
+        <div>
+          <div className="flex justify-between">
+            <h1 className="text-lg font-semibold w-full">Tech</h1>
+            <SeeAll to="/category/tech" />
+          </div>
+          <ul className="flex gap-8 py-5 overflow-x-scroll">
+            {techListings.map((listing) => (
               <li key={listing._id}>
                 <ListingCard
                   _id={listing._id}
@@ -125,20 +121,18 @@ const CategoryListings = () => {
                   length={listing.length}
                 />
               </li>
-            ))
-          ) : (
-            <ListingSkeletons />
-          )}
-        </ul>
-      </div>
-      <div>
-        <div className="flex justify-between">
-          <h1 className="text-lg font-semibold w-full">Accessories</h1>
-          <SeeAll to="/category/accessories" />
+            ))}
+          </ul>
         </div>
-        <ul className="flex gap-8 py-5 overflow-x-scroll">
-          {accessoriesListings.length !== 0 ? (
-            accessoriesListings.map((listing) => (
+      )}
+      {accessoriesListings.length !== 0 && (
+        <div>
+          <div className="flex justify-between">
+            <h1 className="text-lg font-semibold w-full">Accessories</h1>
+            <SeeAll to="/category/accessories" />
+          </div>
+          <ul className="flex gap-8 py-5 overflow-x-scroll">
+            {accessoriesListings.map((listing) => (
               <li key={listing._id}>
                 <ListingCard
                   _id={listing._id}
@@ -159,20 +153,18 @@ const CategoryListings = () => {
                   length={listing.length}
                 />
               </li>
-            ))
-          ) : (
-            <ListingSkeletons />
-          )}
-        </ul>
-      </div>
-      <div>
-        <div className="flex justify-between">
-          <h1 className="text-lg font-semibold w-full">Collectibles</h1>
-          <SeeAll to="/category/collectibles" />
+            ))}
+          </ul>
         </div>
-        <ul className="flex gap-8 py-5 overflow-x-scroll">
-          {collectiblesListings.length !== 0 ? (
-            collectiblesListings.map((listing) => (
+      )}
+      {collectiblesListings.length !== 0 && (
+        <div>
+          <div className="flex justify-between">
+            <h1 className="text-lg font-semibold w-full">Collectibles</h1>
+            <SeeAll to="/category/collectibles" />
+          </div>
+          <ul className="flex gap-8 py-5 overflow-x-scroll">
+            {collectiblesListings.map((listing) => (
               <li key={listing._id}>
                 <ListingCard
                   _id={listing._id}
@@ -193,14 +185,13 @@ const CategoryListings = () => {
                   length={listing.length}
                 />
               </li>
-            ))
-          ) : (
-            <ListingSkeletons />
-          )}
-        </ul>
-      </div>
+            ))}
+          </ul>
+        </div>
+      )}
     </div>
   )
 }
 
 export default CategoryListings
+// {isLoading && <ListingSkeletons />}
