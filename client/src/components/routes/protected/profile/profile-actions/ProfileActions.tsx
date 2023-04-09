@@ -121,7 +121,7 @@ const ProfileActions = ({ logout }: Props) => {
         </div>
       </ProfileRouterLink>
 
-      {auth.isAdmin && <AdminActions />}
+      {auth.isAdmin === "true" && <AdminActions />}
 
       <ProfileButton onClick={logoutHandler}>
         <svg
