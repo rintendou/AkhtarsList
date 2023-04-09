@@ -29,6 +29,8 @@ import RequireAuth from "./components/routes/protected/RequireAuth"
 // Layouts
 import ProfileLayout from "./components/routes/protected/ProfileLayout"
 import DevListingDetail from "./components/routes/dev-route/DevListingDetail"
+import WonListings from "./components/routes/protected/won-listings/WonListings"
+import DisputedListings from "./components/routes/protected/disputed-listings/DisputedListings"
 
 function App() {
   return (
@@ -59,6 +61,8 @@ function App() {
               <Route path="/profile" element={<Profile />} />
               <Route path="/deposit" element={<Deposit />} />
               <Route path="/withdraw" element={<Withdraw />} />
+              <Route path="/won-listings" element={<WonListings />} />
+              <Route path="/disputed-listings" element={<DisputedListings />} />
             </Route>
           </Route>
 
