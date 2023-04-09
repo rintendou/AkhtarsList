@@ -268,3 +268,79 @@ export const resetPassword = async (req: Request, res: Response) => {
     res.status(500).json({ message: error, data: null, ok: false })
   }
 }
+
+export const changePassword = async (req: Request, res: Response) => {
+  // destructure the payload attached to the body
+  const { username, oldPassword, newPassword, newConfirmPassword } = req.body
+
+  // Check if appropriate payload is attached to the body
+  if (!username || !oldPassword || !newPassword || !newConfirmPassword) {
+    return res.status(400).json({
+      message:
+        "username, oldPassword, newPassword, and confirmPassword properties are required!",
+      data: null,
+      ok: false,
+    })
+  }
+
+  // Check if user exists
+  const existingUser = await UserModel.findOne({ username })
+  if (!existingUser) {
+    return res
+      .status(400)
+      .json({ message: "Bad Request!", data: null, ok: false })
+  }
+
+  // Check if password and confirmPassword matches
+  if (newPassword !== newConfirmPassword) {
+    return res.status(400).json({
+      message: "New Password does not match!",
+      data: null,
+      ok: false,
+    })
+  }
+
+  // Check if old password matches user password
+  const doesOldPasswordMatch = await bcrypt.compare(
+    oldPassword,
+    existingUser.password
+  )
+  if (!doesOldPasswordMatch) {
+    return res.status(400).json({
+      message: "You provided a wrong password!",
+      data: null,
+      ok: false,
+    })
+  }
+
+  // Check if oldPassword and newPassword matches
+  const didPasswordEvenChange = await bcrypt.compare(
+    newPassword,
+    existingUser.password
+  )
+  if (didPasswordEvenChange) {
+    return res.status(400).json({
+      message: "New password cannot match your old password!",
+      data: null,
+      ok: false,
+    })
+  }
+
+  try {
+    // Hashing new password
+    const salt = await bcrypt.genSalt(10)
+    const newHashedPassword = await bcrypt.hash(newPassword, salt)
+
+    // Update user password
+    existingUser.password = newHashedPassword
+    await existingUser!.save()
+
+    res.status(200).json({
+      message: "Password Changed Successful!",
+      data: null,
+      ok: true,
+    })
+  } catch (error) {
+    res.status(500).json({ message: error, data: null, ok: false })
+  }
+}
