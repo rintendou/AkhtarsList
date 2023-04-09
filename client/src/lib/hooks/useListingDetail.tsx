@@ -94,7 +94,7 @@ const useListingDetail = () => {
     listing,
     isLister,
     isExpired,
-    fetchLister,
+    timeRemaining,
   }
 }
 
