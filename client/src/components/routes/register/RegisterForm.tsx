@@ -7,6 +7,7 @@ import StyledInputRef from "../../ui/StyledInputRef"
 import RouterLink from "../../ui/RouterLink"
 
 import { settings } from "../../../settings"
+import PasswordInputRef from "../../ui/PasswordInputRef"
 
 const RegisterForm = () => {
   // I opted to use the useRef hook instead of useState to prevent
@@ -91,18 +92,8 @@ const RegisterForm = () => {
           placeholder="Username"
           ref={usernameRef}
         />
-        <StyledInputRef
-          name="Password"
-          type="password"
-          placeholder="Password"
-          ref={passwordRef}
-        />
-        <StyledInputRef
-          name="Confirm Password"
-          type="password"
-          placeholder="Confirm Password"
-          ref={confirmPasswordRef}
-        />
+        <PasswordInputRef name="Password" ref={passwordRef} />
+        <PasswordInputRef name="Confirm Password" ref={confirmPasswordRef} />
         <StyledInputRef
           name="Address"
           type="text"
