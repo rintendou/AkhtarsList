@@ -326,7 +326,7 @@ export const changePassword = async (req: Request, res: Response) => {
   if (!username || !oldPassword || !newPassword || !newConfirmPassword) {
     return res.status(400).json({
       message:
-        "username, oldPassword, newPassword, and confirmPassword properties are required!",
+        "username, oldPassword, newPassword, and newConfirmPassword properties are required!",
       data: null,
       ok: false,
     })
