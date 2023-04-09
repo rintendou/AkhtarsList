@@ -27,9 +27,7 @@ const useListingDetail = () => {
   const [isLister, setIsLister] = useState(false)
   const [isExpired, setIsExpired] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
-  const [listing, setListing] = useState<ListingType>(
-    useMemo(() => initialListingState, [])
-  )
+  const [listing, setListing] = useState<ListingType>(initialListingState)
 
   const fetchListing = useCallback((listingId: string) => {
     setIsLoading(true)
