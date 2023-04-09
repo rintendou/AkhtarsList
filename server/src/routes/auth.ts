@@ -1,4 +1,4 @@
-import express from "express"
+import express from 'express'
 
 // auth controller
 import {
@@ -15,16 +15,16 @@ import {
 const AuthRoute = express.Router()
 
 // REGISTRATION
-AuthRoute.post("/register", registerUser)
+AuthRoute.post('/register', registerUser)
 
 // LOGIN
-AuthRoute.post("/login", loginUser)
+AuthRoute.post('/login', loginUser)
 
 // GET SECURITY QUESTION
-AuthRoute.post("/get-security-question", getSecurityQuestion)
+AuthRoute.post('/get-security-question', getSecurityQuestion)
 
 // VERIFY SECURITY QA
-AuthRoute.post("/verify-security-qa", verifySecurityQA)
+AuthRoute.post('/verify-security-qa', verifySecurityQA)
 
 // RESET PASSWORD
 AuthRoute.post("/reset-password", resetPassword)
