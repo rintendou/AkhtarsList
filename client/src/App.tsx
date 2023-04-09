@@ -31,6 +31,7 @@ import ProfileLayout from "./components/routes/protected/ProfileLayout"
 import DevListingDetail from "./components/routes/dev-route/DevListingDetail"
 import WonListings from "./components/routes/protected/won-listings/WonListings"
 import DisputedListings from "./components/routes/protected/disputed-listings/DisputedListings"
+import Unauthorized from "./components/routes/unauthorized/Unauthorized"
 
 function App() {
   return (
@@ -72,6 +73,7 @@ function App() {
             path="/listings/listing-not-found"
             element={<ListingNotFound />}
           />
+          <Route path="/unauthorized-access" element={<Unauthorized />} />
         </Routes>
       </Body>
       <Footer />
