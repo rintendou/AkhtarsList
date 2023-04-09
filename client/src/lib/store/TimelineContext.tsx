@@ -50,9 +50,12 @@ const TimelineContextProvider = ({ children }: { children: ReactNode }) => {
   >([])
   const [expiredListings, setExpiredListings] = useState<ListingType[]>([])
   const [unexpiredListings, setUnexpiredListings] = useState<ListingType[]>([])
+  const [isLoading, setIsLoading] = useState(false)
 
   // Fetch all and trending listings on component mount
   useEffect(() => {
+    setIsLoading(true)
+
     const fetchListings = async () => {
       const response = await fetch(
         `http://localhost:${settings.BACKEND_SERVER_PORT}/api/listing/fetch`
@@ -60,6 +63,7 @@ const TimelineContextProvider = ({ children }: { children: ReactNode }) => {
       const json = await response.json()
 
       if (!json.ok) {
+        setIsLoading(false)
         return
       }
 
@@ -111,6 +115,7 @@ const TimelineContextProvider = ({ children }: { children: ReactNode }) => {
       const json = await response.json()
 
       if (!json.ok) {
+        setIsLoading(false)
         return
       }
 
@@ -119,6 +124,7 @@ const TimelineContextProvider = ({ children }: { children: ReactNode }) => {
       )
 
       setTrendingListings(trendingListings)
+      setIsLoading(false)
     }
 
     fetchListings()
@@ -126,6 +132,8 @@ const TimelineContextProvider = ({ children }: { children: ReactNode }) => {
   }, [])
 
   const refetchTimeline = () => {
+    setIsLoading(true)
+
     const fetchListings = async () => {
       const response = await fetch(
         `http://localhost:${settings.BACKEND_SERVER_PORT}/api/listing/fetch`
@@ -133,6 +141,7 @@ const TimelineContextProvider = ({ children }: { children: ReactNode }) => {
       const json = await response.json()
 
       if (!json.ok) {
+        setIsLoading(false)
         return
       }
 
@@ -184,6 +193,7 @@ const TimelineContextProvider = ({ children }: { children: ReactNode }) => {
       const json = await response.json()
 
       if (!json.ok) {
+        setIsLoading(false)
         return
       }
 
@@ -192,6 +202,7 @@ const TimelineContextProvider = ({ children }: { children: ReactNode }) => {
       )
 
       setTrendingListings(trendingListings)
+      setIsLoading(false)
     }
 
     fetchListings()
@@ -199,6 +210,8 @@ const TimelineContextProvider = ({ children }: { children: ReactNode }) => {
   }
 
   const fetchListingsByCategory = (category: string) => {
+    setIsLoading(true)
+
     const fetchCategorizedListings = async () => {
       const response = await fetch(
         `http://localhost:${settings.BACKEND_SERVER_PORT}/api/listing/fetch-by-category/${category}`
@@ -229,6 +242,8 @@ const TimelineContextProvider = ({ children }: { children: ReactNode }) => {
           setCollectiblesListings(json.data)
           break
       }
+
+      setIsLoading(false)
     }
 
     fetchCategorizedListings()
@@ -246,6 +261,7 @@ const TimelineContextProvider = ({ children }: { children: ReactNode }) => {
     unexpiredListings,
     refetchTimeline,
     fetchListingsByCategory,
+    isLoading,
   }
 
   return (
