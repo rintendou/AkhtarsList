@@ -9,6 +9,7 @@ const usePasswordToggle = () => {
 
   const icon = isVisible ? (
     <svg
+      className="cursor-pointer text-secondary"
       stroke="currentColor"
       fill="currentColor"
       strokeWidth="0"
@@ -32,6 +33,7 @@ const usePasswordToggle = () => {
     </svg>
   ) : (
     <svg
+      className="cursor-pointer text-secondary"
       stroke="currentColor"
       fill="currentColor"
       strokeWidth="0"

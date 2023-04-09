@@ -14,6 +14,7 @@ import Success from "../../ui/Success"
 import StyledDateTimePicker from "../../ui/StyledDateTimePicker"
 import Dropdown from "../../ui/Dropdown"
 import DragAndDrop from "../../ui/DragAndDrop"
+import PasswordInputRef from "../../ui/PasswordInputRef"
 
 const IMAGESET1 = [
   "sneakers1.jpg",
@@ -33,6 +34,8 @@ const Dev = () => {
           and an overview of their functionalities
         </h1>
       </Overview>
+
+      <PasswordInputRef name="Password" />
 
       <Dropdown
         options={[
