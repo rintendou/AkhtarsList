@@ -67,17 +67,17 @@ function App() {
               <Route path="/withdraw" element={<Withdraw />} />
               <Route path="/won-listings" element={<WonListings />} />
               <Route path="/disputed-listings" element={<DisputedListings />} />
-            </Route>
 
-            <Route element={<RequireAdmin />}>
-              <Route
-                path="/admin/manage-listings"
-                element={<ManageListings />}
-              />
-              <Route
-                path="/admin/manage-disputes"
-                element={<ManageDisputes />}
-              />
+              <Route element={<RequireAdmin />}>
+                <Route
+                  path="/admin/manage-listings"
+                  element={<ManageListings />}
+                />
+                <Route
+                  path="/admin/manage-disputes"
+                  element={<ManageDisputes />}
+                />
+              </Route>
             </Route>
           </Route>
 
