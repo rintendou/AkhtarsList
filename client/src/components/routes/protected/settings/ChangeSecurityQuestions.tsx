@@ -1,5 +1,6 @@
 import { useRef } from "react"
 import StyledInputRef from "../../../ui/StyledInputRef"
+import PasswordInputRef from "../../../ui/PasswordInputRef"
 
 const ChangeSecurityQuestions = () => {
   const addressRef = useRef<HTMLInputElement>(null)
@@ -16,12 +17,6 @@ const ChangeSecurityQuestions = () => {
         onSubmit={changeSecurityQuestionsHandler}
       >
         <StyledInputRef
-          name="Password"
-          type="password"
-          placeholder="Password"
-          ref={addressRef}
-        />
-        <StyledInputRef
           name="New Security Question"
           type="text"
           placeholder="New Security Question"
@@ -33,6 +28,7 @@ const ChangeSecurityQuestions = () => {
           placeholder="New Security Question Answer"
           ref={newSecurityQuestionAnswerRef}
         />
+        <PasswordInputRef name="Password" ref={addressRef} />
         <EditProfileButton />
       </form>
     </div>

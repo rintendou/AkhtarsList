@@ -1,5 +1,5 @@
 import { useRef } from "react"
-import StyledInputRef from "../../../ui/StyledInputRef"
+import PasswordInputRef from "../../../ui/PasswordInputRef"
 
 const ChangePassword = () => {
   const oldPasswordRef = useRef<HTMLInputElement>(null)
@@ -15,24 +15,9 @@ const ChangePassword = () => {
         className="flex flex-col gap-5"
         onSubmit={changeSecurityQuestionsHandler}
       >
-        <StyledInputRef
-          name="Old Password"
-          type="password"
-          placeholder="Old Password"
-          ref={oldPasswordRef}
-        />
-        <StyledInputRef
-          name="New Password"
-          type="password"
-          placeholder="New Password"
-          ref={newPasswordRef}
-        />
-        <StyledInputRef
-          name="Confirm Password"
-          type="password"
-          placeholder="Confirm Password"
-          ref={newConfirmPasswordRef}
-        />
+        <PasswordInputRef name="Old Password" ref={oldPasswordRef} />
+        <PasswordInputRef name="New Password" ref={newPasswordRef} />
+        <PasswordInputRef name="Confirm Password" ref={newConfirmPasswordRef} />
         <EditProfileButton />
       </form>
     </div>

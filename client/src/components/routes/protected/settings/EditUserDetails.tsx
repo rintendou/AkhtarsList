@@ -1,10 +1,10 @@
 import { useRef } from "react"
 import StyledInputRef from "../../../ui/StyledInputRef"
+import PasswordInputRef from "../../../ui/PasswordInputRef"
 
 const EditUserDetails = () => {
   const addressRef = useRef<HTMLInputElement>(null)
-  const securityQuestionRef = useRef<HTMLInputElement>(null)
-  const securityQuestionAnswerRef = useRef<HTMLInputElement>(null)
+  const passwordRef = useRef<HTMLInputElement>(null)
 
   const editUserDetailsHandler = () => {}
 
@@ -18,18 +18,7 @@ const EditUserDetails = () => {
           placeholder="Address"
           ref={addressRef}
         />
-        <StyledInputRef
-          name="Security Question"
-          type="text"
-          placeholder="Security Question"
-          ref={securityQuestionRef}
-        />
-        <StyledInputRef
-          name="Security Question Answer"
-          type="text"
-          placeholder="Security Question Answer"
-          ref={securityQuestionAnswerRef}
-        />
+        <PasswordInputRef name="Password" ref={passwordRef} />
         <EditProfileButton />
       </form>
     </div>
