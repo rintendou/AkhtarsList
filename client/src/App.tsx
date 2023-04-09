@@ -35,6 +35,7 @@ import Unauthorized from "./components/routes/unauthorized/Unauthorized"
 import ManageListings from "./components/routes/protected/admin/ManageListings"
 import ManageDisputes from "./components/routes/protected/admin/ManageDisputes"
 import RequireAdmin from "./components/routes/protected/admin/RequireAdmin"
+import Settings from "./components/routes/protected/settings/Settings"
 
 function App() {
   return (
@@ -52,10 +53,9 @@ function App() {
           <Route path="/category/:categoryName" element={<Category />} />
           <Route path="/listings/:listingId" element={<ListingDetail />} />
           <Route path="/dev" element={<Dev />} />
-
           <Route path="/dev-listing-detail" element={<DevListingDetail />} />
 
-          {/* Protected Routes */}
+          {/* Authorized Routes */}
           <Route element={<RequireAuth />}>
             <Route path="/sell" element={<Sell />} />
             <Route path="/preview" element={<Preview />} />
@@ -67,8 +67,12 @@ function App() {
               <Route path="/withdraw" element={<Withdraw />} />
               <Route path="/won-listings" element={<WonListings />} />
               <Route path="/disputed-listings" element={<DisputedListings />} />
+              <Route path="/settings" element={<Settings />} />
+            </Route>
 
-              <Route element={<RequireAdmin />}>
+            {/* Admin Routes */}
+            <Route element={<RequireAdmin />}>
+              <Route element={<ProfileLayout />}>
                 <Route
                   path="/admin/manage-listings"
                   element={<ManageListings />}
@@ -81,7 +85,7 @@ function App() {
             </Route>
           </Route>
 
-          {/* Catch-All Route */}
+          {/* Catch-All Routes */}
           <Route path="*" element={<PageNotFound />} />
           <Route
             path="/listings/listing-not-found"

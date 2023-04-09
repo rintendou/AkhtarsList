@@ -68,10 +68,14 @@ const AuthContextProvider = ({ children }: { children: ReactNode }) => {
     localStorage.removeItem("isAdmin")
   }
 
+  const contextValue = {
+    auth,
+    login,
+    logout,
+  }
+
   return (
-    <AuthContext.Provider value={{ auth, login, logout }}>
-      {children}
-    </AuthContext.Provider>
+    <AuthContext.Provider value={contextValue}>{children}</AuthContext.Provider>
   )
 }
 
