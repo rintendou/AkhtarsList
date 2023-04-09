@@ -1,6 +1,6 @@
 import Overview from "../../ui/Overview"
 
-import UnauthorizedAccessImage from "unauthorized-access-undraw.svg"
+import UnauthorizedAccessImage from "../../../../public/unauthorized-access-undraw.svg"
 
 const Unauthorized = () => {
   return (
