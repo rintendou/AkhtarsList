@@ -50,13 +50,13 @@ const Dropdown = ({ options, onSelect }: Props) => {
     <div className="relative" ref={dropdownRef}>
       <button
         type="button"
-        className="inline-flex justify-between items-center w-full rounded-md border-2 border-secondary shadow-sm px-4 py-3 bg-primary text-sm font-medium text-secondary focus:outline-none focus:ring-4 focus:ring-offset-1 focus:ring-tertiary select-none caret-transparent"
+        className="inline-flex justify-between items-center w-full rounded-md border-2 focus:border-secondary border-gray-200 shadow-sm px-4 py-2  text-sm font-medium text-secondary select-none caret-transparent"
         onClick={toggleDropdown}
       >
         {selectedOption ? selectedOption.label : "Sort By:"}
         <div onClick={handleOrderClick}>
           <svg
-            className={`-mr-1 ml-2 h-8 w-8 transform bg-secondary bg-opacity-20 rounded-full p-2 hover:bg-black hover:text-white duration-200 ease-in-out ${
+            className={`-mr-1 ml-2 h-8 w-8 transform text-white bg-secondary bg-opacity-20 rounded-full p-2 hover:bg-black hover:text-white duration-200 ease-in-out ${
               isAscending ? "rotate-0" : "rotate-180"
             }`}
             stroke="currentColor"
