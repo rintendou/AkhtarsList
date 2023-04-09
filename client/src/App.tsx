@@ -29,6 +29,12 @@ import RequireAuth from "./components/routes/protected/RequireAuth"
 // Layouts
 import ProfileLayout from "./components/routes/protected/ProfileLayout"
 import DevListingDetail from "./components/routes/dev-route/DevListingDetail"
+import WonListings from "./components/routes/protected/won-listings/WonListings"
+import DisputedListings from "./components/routes/protected/disputed-listings/DisputedListings"
+import Unauthorized from "./components/routes/unauthorized/Unauthorized"
+import ManageListings from "./components/routes/protected/admin/ManageListings"
+import ManageDisputes from "./components/routes/protected/admin/ManageDisputes"
+import RequireAdmin from "./components/routes/protected/admin/RequireAdmin"
 
 function App() {
   return (
@@ -59,6 +65,19 @@ function App() {
               <Route path="/profile" element={<Profile />} />
               <Route path="/deposit" element={<Deposit />} />
               <Route path="/withdraw" element={<Withdraw />} />
+              <Route path="/won-listings" element={<WonListings />} />
+              <Route path="/disputed-listings" element={<DisputedListings />} />
+
+              <Route element={<RequireAdmin />}>
+                <Route
+                  path="/admin/manage-listings"
+                  element={<ManageListings />}
+                />
+                <Route
+                  path="/admin/manage-disputes"
+                  element={<ManageDisputes />}
+                />
+              </Route>
             </Route>
           </Route>
 
@@ -68,6 +87,7 @@ function App() {
             path="/listings/listing-not-found"
             element={<ListingNotFound />}
           />
+          <Route path="/unauthorized-access" element={<Unauthorized />} />
         </Routes>
       </Body>
       <Footer />
