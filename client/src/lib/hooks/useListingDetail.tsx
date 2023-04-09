@@ -2,7 +2,7 @@ import { useCallback, useEffect, useMemo, useState } from "react"
 
 import ListingType from "../types/ListingType"
 import { settings } from "../../settings"
-import { useNavigate } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import calculateTimeRemaining from "../util/calculateTimeRemaining"
 import TimeRemainingType from "../types/TimeRemainingType"
 
@@ -35,6 +35,7 @@ const useListingDetail = () => {
   )
 
   const navigate = useNavigate()
+  const { listingId } = useParams()
 
   useEffect(() => {
     setIsLoading(true)
@@ -88,6 +89,25 @@ const useListingDetail = () => {
 
     getLister()
   }
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const TR = calculateTimeRemaining(listing.expireAt)
+
+      if (
+        TR.days === 0 &&
+        TR.hours === 0 &&
+        TR.minutes === 0 &&
+        TR.seconds === 0
+      ) {
+        setIsExpired(true)
+      }
+
+      setTimeRemaining(TR)
+    }, 1000)
+
+    return () => clearInterval(interval)
+  }, [listing])
 
   return {
     isLoading,
