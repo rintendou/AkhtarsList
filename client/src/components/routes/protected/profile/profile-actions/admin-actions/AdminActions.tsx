@@ -26,7 +26,7 @@ const AdminActions = () => {
           <p className="text-gray-500">Successful transactions</p>
         </div>
       </AdminRouterLink>
-      <AdminRouterLink to="/admin/disputed-listings">
+      <AdminRouterLink to="/admin/manage-disputes">
         <svg
           className="mr-4"
           stroke="currentColor"
