@@ -9,7 +9,7 @@ const ChangeSecurityQuestions = () => {
   const changeSecurityQuestionsHandler = () => {}
 
   return (
-    <div className="space-y-5 pb-10 border-b border-b-gray-500">
+    <div className="space-y-5">
       <h1 className="text-xl font-semibold">Change Security QA</h1>
       <form
         className="flex flex-col gap-5"
