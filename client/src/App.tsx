@@ -35,6 +35,7 @@ import Unauthorized from "./components/routes/unauthorized/Unauthorized"
 import ManageListings from "./components/routes/protected/admin/ManageListings"
 import ManageDisputes from "./components/routes/protected/admin/ManageDisputes"
 import RequireAdmin from "./components/routes/protected/admin/RequireAdmin"
+import Settings from "./components/routes/protected/settings/Settings"
 
 function App() {
   return (
@@ -66,6 +67,7 @@ function App() {
               <Route path="/withdraw" element={<Withdraw />} />
               <Route path="/won-listings" element={<WonListings />} />
               <Route path="/disputed-listings" element={<DisputedListings />} />
+              <Route path="/settings" element={<Settings />} />
             </Route>
           </Route>
 
