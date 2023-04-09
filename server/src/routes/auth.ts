@@ -33,9 +33,9 @@ AuthRoute.post("/reset-password", resetPassword)
 AuthRoute.post("/change/user-details", changeUserDetails)
 
 // CHANGE PASSWORD
-AuthRoute.post("/change/password", resetPassword)
+AuthRoute.post("/change/password", changePassword)
 
 // CHANGE SECURITY QA
-AuthRoute.post("/change/security-qa", resetPassword)
+AuthRoute.post("/change/security-qa", changeSecurityQA)
 
 export default AuthRoute
