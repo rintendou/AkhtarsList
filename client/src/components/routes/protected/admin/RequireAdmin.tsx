@@ -6,7 +6,7 @@ const RequireAdmin = () => {
 
   const location = useLocation()
 
-  return auth?.isAdmin ? (
+  return auth?.isAdmin === "true" ? (
     <Outlet />
   ) : (
     <Navigate to="/login" state={{ from: location }} replace />

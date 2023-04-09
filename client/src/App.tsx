@@ -34,7 +34,7 @@ import DisputedListings from "./components/routes/protected/disputed-listings/Di
 import Unauthorized from "./components/routes/unauthorized/Unauthorized"
 import ManageListings from "./components/routes/protected/admin/ManageListings"
 import ManageDisputes from "./components/routes/protected/admin/ManageDisputes"
-import RequireAdmin from "./components/routes/protected/admin/AdminLayout"
+import RequireAdmin from "./components/routes/protected/admin/RequireAdmin"
 
 function App() {
   return (
