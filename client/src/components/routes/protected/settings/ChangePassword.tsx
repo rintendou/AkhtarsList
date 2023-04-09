@@ -1,8 +1,11 @@
 import { useRef } from "react"
 import PasswordInputRef from "../../../ui/PasswordInputRef"
 import { settings } from "../../../../settings"
+import useAuth from "../../../../lib/hooks/useAuth"
 
 const ChangePassword = () => {
+  const { auth } = useAuth()
+
   const oldPasswordRef = useRef<HTMLInputElement>(null)
   const newPasswordRef = useRef<HTMLInputElement>(null)
   const newConfirmPasswordRef = useRef<HTMLInputElement>(null)
@@ -15,6 +18,7 @@ const ChangePassword = () => {
     const newConfirmPassword = newConfirmPasswordRef.current!.value
 
     const payload = {
+      username: auth.username,
       oldPassword,
       newPassword,
       newConfirmPassword,

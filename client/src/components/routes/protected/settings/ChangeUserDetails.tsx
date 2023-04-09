@@ -2,8 +2,11 @@ import { useRef } from "react"
 import StyledInputRef from "../../../ui/StyledInputRef"
 import PasswordInputRef from "../../../ui/PasswordInputRef"
 import { settings } from "../../../../settings"
+import useAuth from "../../../../lib/hooks/useAuth"
 
 const ChangeUserDetails = () => {
+  const { auth } = useAuth()
+
   const addressRef = useRef<HTMLInputElement>(null)
   const passwordRef = useRef<HTMLInputElement>(null)
 
@@ -14,9 +17,12 @@ const ChangeUserDetails = () => {
     const password = passwordRef.current!.value
 
     const payload = {
-      address,
+      username: auth.username,
       password,
+      address,
     }
+
+    console.log(payload)
 
     const editUserDetails = async () => {
       const response = await fetch(
