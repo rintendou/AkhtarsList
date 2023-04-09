@@ -8,6 +8,7 @@ import ListingCard from "../../ui/ListingCard"
 
 // Types
 import ListingType from "../../../lib/types/ListingType"
+import ListMore from "../protected/profile/listings/ListMore"
 
 const Category = () => {
   useEffect(() => {
@@ -73,7 +74,7 @@ const Category = () => {
               Active {categoryName} listings
             </h1>
             <ul className="flex gap-8 py-5 flex-wrap">
-              {activeCategorizedListings.length !== 0 &&
+              {activeCategorizedListings.length !== 0 ? (
                 activeCategorizedListings.map((listing) => (
                   <li key={listing._id}>
                     <ListingCard
@@ -95,7 +96,10 @@ const Category = () => {
                       length={listing.length}
                     />
                   </li>
-                ))}
+                ))
+              ) : (
+                <ListMore />
+              )}
             </ul>
           </div>
 
