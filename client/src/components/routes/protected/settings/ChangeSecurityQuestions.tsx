@@ -2,8 +2,11 @@ import { useRef } from "react"
 import StyledInputRef from "../../../ui/StyledInputRef"
 import PasswordInputRef from "../../../ui/PasswordInputRef"
 import { settings } from "../../../../settings"
+import useAuth from "../../../../lib/hooks/useAuth"
 
 const ChangeSecurityQuestions = () => {
+  const { auth } = useAuth()
+
   const passwordRef = useRef<HTMLInputElement>(null)
   const newSecurityQuestionRef = useRef<HTMLInputElement>(null)
   const newSecurityQuestionAnswerRef = useRef<HTMLInputElement>(null)
@@ -13,13 +16,13 @@ const ChangeSecurityQuestions = () => {
 
     const password = passwordRef.current!.value
     const newSecurityQuestion = newSecurityQuestionRef.current!.value
-    const newSecurityQuestionAnswer =
-      newSecurityQuestionAnswerRef.current!.value
+    const newSecurityQAnswer = newSecurityQuestionAnswerRef.current!.value
 
     const payload = {
+      username: auth.username,
       password,
       newSecurityQuestion,
-      newSecurityQuestionAnswer,
+      newSecurityQAnswer,
     }
 
     const changeSecurityQA = async () => {
