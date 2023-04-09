@@ -393,3 +393,59 @@ export const changePassword = async (req: Request, res: Response) => {
     res.status(500).json({ message: error, data: null, ok: false })
   }
 }
+
+export const changeSecurityQA = async (req: Request, res: Response) => {
+  // destructure the payload attached to the body
+  const { username, password, newSecurityQuestion, newSecurityQAnswer } =
+    req.body
+
+  // Check if appropriate payload is attached to the body
+  if (!username || !password || !newSecurityQuestion || !newSecurityQAnswer) {
+    return res.status(400).json({
+      message:
+        "username, password, newSecurityQuestion, and newSecurityQAnswer properties are required!",
+      data: null,
+      ok: false,
+    })
+  }
+
+  // Check if user exists
+  const existingUser = await UserModel.findOne({ username })
+  if (!existingUser) {
+    return res
+      .status(400)
+      .json({ message: "Bad Request!", data: null, ok: false })
+  }
+
+  // Check if password matches user password
+  const doesPasswordMatch = await bcrypt.compare(
+    password,
+    existingUser.password
+  )
+  if (!doesPasswordMatch) {
+    return res.status(400).json({
+      message: "You provided the wrong password!",
+      data: null,
+      ok: false,
+    })
+  }
+
+  try {
+    // Hashing new security question answer
+    const salt = await bcrypt.genSalt(10)
+    const hashedSecurityQAnswer = await bcrypt.hash(newSecurityQAnswer, salt)
+
+    // Update user security qa
+    existingUser.securityQuestion = newSecurityQuestion
+    existingUser.securityQuestionAnswer = hashedSecurityQAnswer
+    await existingUser!.save()
+
+    res.status(200).json({
+      message: "Security QA Updated Successfully!",
+      data: null,
+      ok: true,
+    })
+  } catch (error) {
+    res.status(500).json({ message: error, data: null, ok: false })
+  }
+}
