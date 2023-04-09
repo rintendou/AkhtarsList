@@ -1,10 +1,8 @@
-import ImageContainer from "./ImageContainer"
 import SellActions from "./SellActions"
 
 const Sell = () => {
   return (
-    <div className="min-h-screen flex flex-col md:flex-row">
-      <ImageContainer />
+    <div className="min-h-screen flex flex-col md:flex-row container mx-auto">
       <SellActions />
     </div>
   )

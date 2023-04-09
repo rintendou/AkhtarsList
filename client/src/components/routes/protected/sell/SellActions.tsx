@@ -18,12 +18,13 @@ const CATEGORIES = [
 import StyledInputRef from "../../../ui/StyledInputRef"
 import StyledInputAreaRef from "../../../ui/StyledInputAreaRef"
 import StyledDropdownRef from "../../../ui/StyledDropdown"
-import StyledDateTimePicker from "./StyledDateTimePicker"
+import StyledDateTimePicker from "../../../ui/StyledDateTimePicker"
 import Error from "../../../ui/Error"
 import { useNavigate } from "react-router-dom"
 import { settings } from "../../../../settings"
 import useProfile from "../../../../lib/hooks/useProfile"
 import useTimeline from "../../../../lib/hooks/useTimeline"
+import DragAndDrop from "../../../ui/DragAndDrop"
 
 const SellActions = () => {
   const titleRef = useRef<HTMLInputElement>(null)
@@ -38,7 +39,7 @@ const SellActions = () => {
   const [expireAt, setExpireAt] = useState<Date | null>(null)
   const [error, setError] = useState(false)
   const [errorMessage, setErrorMessage] = useState("")
-  const [image] = useState("fakesubway.jpg")
+  const [image, setImageUrl] = useState("")
 
   const { auth } = useAuth()
   const { refetchUserDetails } = useProfile()
@@ -70,7 +71,7 @@ const SellActions = () => {
       title,
       lister: auth.username,
       desc,
-      image,
+      image: image.length !== 0 ? image : "someRandomArmpit.jpg",
       startPrice,
       expireAt: expireAt || backupDate(),
       category,
@@ -155,7 +156,10 @@ const SellActions = () => {
 
       setError(false)
       setErrorMessage("")
-      navigate("/preview", { replace: true, state: payload })
+      navigate("/preview", {
+        replace: true,
+        state: { ...payload, message: "Listing Successfully Posted!" },
+      })
       refetchUserDetails()
       refetchTimeline()
     }
@@ -166,88 +170,94 @@ const SellActions = () => {
   // Keep track of Expiration
   const handleDateTimeChange = (value: Date | null) => {
     setExpireAt(value)
-    console.log(expireAt)
   }
 
   // Focus on component mount
   useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    })
     titleRef.current!.focus()
   }, [])
 
   return (
-    <div className="flex-auto bg-purple-100 bg-opacity-50 p-10 max-w-none md:max-w-[50%] max-h-[50%] md:max-h-none space-y-10">
-      <form className="space-y-10" onSubmit={createListingHandler}>
-        <div className="flex flex-col gap-5 pb-10 border-b border-b-gray-500">
-          <StyledInputRef
-            name="Title"
-            placeholder="Title"
-            type="text"
-            ref={titleRef}
-          />
+    <>
+      <DragAndDrop setImageUrl={setImageUrl} imageUrl={image} />
+      <div className="flex-auto bg-purple-100 bg-opacity-50 p-10 max-w-none md:max-w-[50%] max-h-[50%] md:max-h-none space-y-10">
+        <form className="space-y-10" onSubmit={createListingHandler}>
+          <div className="flex flex-col gap-5 pb-10 border-b border-b-gray-500">
+            <StyledInputRef
+              name="Title"
+              placeholder="Title"
+              type="text"
+              ref={titleRef}
+            />
 
-          <StyledInputAreaRef
-            name="Description"
-            placeholder="Description"
-            ref={descriptionRef}
-          />
+            <StyledInputAreaRef
+              name="Description"
+              placeholder="Description"
+              ref={descriptionRef}
+            />
 
-          <div className="flex gap-5">
-            <div className="flex-1">
-              <StyledDropdownRef
-                name="Category"
-                placeholder="Category"
-                ref={categoryRef}
-                options={CATEGORIES}
-              />
+            <div className="flex gap-5">
+              <div className="flex-1">
+                <StyledDropdownRef
+                  name="Category"
+                  placeholder="Category"
+                  ref={categoryRef}
+                  options={CATEGORIES}
+                />
+              </div>
+
+              <div className="flex-1">
+                <StyledInputRef
+                  name="Start Price ($)"
+                  placeholder="Start Price ($)"
+                  type="text"
+                  ref={startPriceRef}
+                />
+              </div>
             </div>
 
-            <div className="flex-1">
-              <StyledInputRef
-                name="Start Price ($)"
-                placeholder="Start Price ($)"
-                type="text"
-                ref={startPriceRef}
-              />
-            </div>
+            <StyledDateTimePicker onChange={handleDateTimeChange} />
           </div>
 
-          <StyledDateTimePicker onChange={handleDateTimeChange} />
-        </div>
+          <div className="flex flex-col gap-5 pb-10 border-b border-b-gray-500">
+            <StyledInputRef
+              name="Weight (kg)"
+              placeholder="Weight (kg)"
+              type="text"
+              ref={weightRef}
+            />
 
-        <div className="flex flex-col gap-5 pb-10 border-b border-b-gray-500">
-          <StyledInputRef
-            name="Weight (kg)"
-            placeholder="Weight (kg)"
-            type="text"
-            ref={weightRef}
-          />
+            <StyledInputRef
+              name="Height (cm)"
+              placeholder="Height (cm)"
+              type="text"
+              ref={heightRef}
+            />
 
-          <StyledInputRef
-            name="Height (cm)"
-            placeholder="Height (cm)"
-            type="text"
-            ref={heightRef}
-          />
+            <StyledInputRef
+              name="Width (cm)"
+              placeholder="Width (cm)"
+              type="text"
+              ref={widthRef}
+            />
 
-          <StyledInputRef
-            name="Width (cm)"
-            placeholder="Width (cm)"
-            type="text"
-            ref={widthRef}
-          />
+            <StyledInputRef
+              name="Length (cm)"
+              placeholder="Length (cm)"
+              type="text"
+              ref={lengthRef}
+            />
+          </div>
 
-          <StyledInputRef
-            name="Length (cm)"
-            placeholder="Length (cm)"
-            type="text"
-            ref={lengthRef}
-          />
-        </div>
-
-        <SubmitListingButton />
-      </form>
-      {error && <Error errorMessage={errorMessage} />}
-    </div>
+          <SubmitListingButton />
+        </form>
+        {error && <Error errorMessage={errorMessage} />}
+      </div>
+    </>
   )
 }
 

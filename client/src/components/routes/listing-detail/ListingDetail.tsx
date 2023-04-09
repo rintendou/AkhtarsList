@@ -1,12 +1,90 @@
+import { useEffect } from "react"
+import { useParams } from "react-router"
+import useListingDetail from "../../../lib/hooks/useListingDetail"
+
+// Assets
+import SeeOtherListings from "./SeeOtherListings"
+import ListingOverview from "./ListingOverview"
+import ExpiredBiddingSection from "./ExpiredBiddingSection"
+import ActiveBiddingSection from "./ActiveBiddingSection"
+import ListingDetailSkeleton from "./ListingDetailSkeleton"
+
 const ListingDetail = () => {
+  const { listing, isLister, isExpired, isLoading } = useListingDetail()
+
+  const {
+    image,
+    bidders,
+    lister,
+    desc,
+    title,
+    startPrice,
+    finalPrice,
+    expireAt,
+    views,
+    category,
+    weight,
+    dimensions,
+    height,
+    width,
+    length,
+  } = listing
+
+  const { listingId } = useParams()
+
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    })
+  }, [listingId])
+
+  const biddingSection = isExpired ? (
+    <ExpiredBiddingSection
+      bidders={bidders}
+      finalPrice={finalPrice}
+      isLister={isLister}
+    />
+  ) : (
+    <ActiveBiddingSection
+      listing={listing}
+      bidders={bidders}
+      finalPrice={finalPrice}
+      expireAt={expireAt}
+      isLister={isLister}
+    />
+  )
+
   return (
-    <div className="min-h-screen flex flex-col md:flex-row">
-      <div className="flex-auto p-10 text-center capitalize text-2xl font-semibold max-w-none md:max-w-[50%] max-h-[50%] md:max-h-none cursor-pointer group">
-        TEST
-      </div>
-      <div className="flex-auto bg-purple-100 bg-opacity-50 p-10 max-w-none md:max-w-[50%] max-h-[50%] md:max-h-none space-y-10">
-        TEST
-      </div>
+    <div>
+      {!isLoading ? (
+        <>
+          <div className="flex flex-col md:flex-row min-h-screen border-b-2 border-b-tertiary">
+            <ListingOverview
+              _id={listingId!}
+              image={image}
+              title={title}
+              finalPrice={finalPrice}
+              expireAt={expireAt}
+              views={views}
+              bidders={bidders}
+              lister={lister}
+              desc={desc}
+              startPrice={startPrice}
+              category={category}
+              weight={weight}
+              dimensions={dimensions}
+              height={height}
+              width={width}
+              length={length}
+            />
+            {biddingSection}
+          </div>
+          <SeeOtherListings category={category} idToFilter={listing._id!} />
+        </>
+      ) : (
+        <ListingDetailSkeleton />
+      )}
     </div>
   )
 }

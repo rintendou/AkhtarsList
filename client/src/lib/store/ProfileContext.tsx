@@ -2,25 +2,8 @@ import { createContext, useEffect, useState } from "react"
 import useAuth from "../hooks/useAuth"
 import { settings } from "../../settings"
 
-type UserType = {
-  username: string
-}
-
-type ListingType = {
-  _id: string
-  image: string
-  bidders: UserType[]
-  lister: UserType
-  title: string
-  desc: string
-  startPrice: number
-  finalPrice: number
-  expireAt: number
-  views: number
-  category: string
-  weight: number
-  dimensions: [height: number, width: number, length: number]
-}
+// Types
+import ListingType from "../types/ListingType"
 
 type initialContextType = {
   address: string
@@ -29,8 +12,8 @@ type initialContextType = {
   withdrawFunds: (amount: number) => void
   listings: ListingType[]
   biddings: ListingType[]
-  //   wonListings: []
-  //   disputedListings: []
+  wonListings: ListingType[]
+  disputedListings: ListingType[]
   refetchUserDetails: () => void
 }
 
@@ -41,6 +24,8 @@ const initialContext: initialContextType = {
   withdrawFunds: () => {},
   listings: [],
   biddings: [],
+  wonListings: [],
+  disputedListings: [],
   refetchUserDetails: () => {},
 }
 
@@ -59,6 +44,8 @@ const ProfileContextProvider = ({
 
   const [biddings, setBiddings] = useState<ListingType[]>([])
   const [listings, setListings] = useState<ListingType[]>([])
+  const [wonListings, setWonListings] = useState<ListingType[]>([])
+  const [disputedListings, setDisputedListings] = useState<ListingType[]>([])
 
   // Fetch user details on component mount and when _id changes on auth
   useEffect(() => {
@@ -68,10 +55,16 @@ const ProfileContextProvider = ({
       )
       const data = await response.json()
 
+      if (!data.ok) {
+        return
+      }
+
       setAddress(data.data.address)
       setBalance(data.data.balance)
       setBiddings(data.data.biddedListings.reverse())
       setListings(data.data.listedListings.reverse())
+      setWonListings(data.data.wonListings.reverse())
+      setDisputedListings(data.data.disputedListings.reverse())
     }
 
     fetchUserDetails()
@@ -96,6 +89,8 @@ const ProfileContextProvider = ({
       setBalance(data.data.balance)
       setBiddings(data.data.biddedListings.reverse())
       setListings(data.data.listedListings.reverse())
+      setWonListings(data.data.wonListings.reverse())
+      setDisputedListings(data.data.disputedListings.reverse())
     }
     refetchUser()
   }
@@ -157,6 +152,8 @@ const ProfileContextProvider = ({
     withdrawFunds,
     biddings,
     listings,
+    wonListings,
+    disputedListings,
     refetchUserDetails,
   }
 

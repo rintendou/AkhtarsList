@@ -1,17 +1,20 @@
-import Card from "../../ui/Card";
-import Carousel from "../../ui/Carousel";
-import Error from "../../ui/Error";
-import ListingCard from "../../ui/ListingCard";
-import ListingCardSkeleton from "../../ui/ListingCardSkeleton";
-import LoadingSpinner from "../../ui/LoadingSpinner";
-import Overview from "../../ui/Overview";
-import RouterLink from "../../ui/RouterLink";
-import StyledButton from "../../ui/StyledButton";
-import StyledDropdown from "../../ui/StyledDropdown";
-import StyledInput from "../../ui/StyledInput";
-import StyledInputAreaRef from "../../ui/StyledInputAreaRef";
-import Success from "../../ui/Success";
-import StyledDateTimePicker from "../protected/sell/StyledDateTimePicker";
+import Card from "../../ui/Card"
+import Carousel from "../../ui/Carousel"
+import Countdown from "../../ui/Countdown"
+import Error from "../../ui/Error"
+import ListingCardSkeleton from "../../ui/ListingCardSkeleton"
+import LoadingSpinner from "../../ui/LoadingSpinner"
+import Overview from "../../ui/Overview"
+import RouterLink from "../../ui/RouterLink"
+import StyledButton from "../../ui/StyledButton"
+import StyledDropdown from "../../ui/StyledDropdown"
+import StyledInput from "../../ui/StyledInput"
+import StyledInputAreaRef from "../../ui/StyledInputAreaRef"
+import Success from "../../ui/Success"
+import StyledDateTimePicker from "../../ui/StyledDateTimePicker"
+import Dropdown from "../../ui/Dropdown"
+import DragAndDrop from "../../ui/DragAndDrop"
+import PasswordInputRef from "../../ui/PasswordInputRef"
 
 const IMAGESET1 = [
   "sneakers1.jpg",
@@ -20,7 +23,7 @@ const IMAGESET1 = [
   "accessories1.jpg",
   "collectibles1.jpg",
   "assorted1.jpg",
-];
+]
 
 const Dev = () => {
   return (
@@ -32,6 +35,20 @@ const Dev = () => {
         </h1>
       </Overview>
 
+      <PasswordInputRef name="Password" />
+
+      <Dropdown
+        options={[
+          { label: "23", value: "23" },
+          { label: "34", value: "34" },
+        ]}
+        onSelect={() => {}}
+      />
+
+      {/* <DragAndDrop /> */}
+
+      <Countdown targetDate="2023-04-13T00:00:00" />
+
       <Card>Card Component</Card>
 
       <Overview>Overview Component</Overview>
@@ -41,14 +58,14 @@ const Dev = () => {
       <div className="flex flex-row gap-5">
         <StyledButton
           onClick={() => {
-            console.log("Hello");
+            console.log("Hello")
           }}
           buttonText="Primary Button"
           intent="primary"
         />
         <StyledButton
           onClick={() => {
-            console.log("Hello");
+            console.log("Hello")
           }}
           buttonText="Secondary Button"
           intent="secondary"
@@ -62,15 +79,6 @@ const Dev = () => {
       <Success successMessage="Success component" />
 
       <div className="flex">
-        <ListingCard
-          _id="someId"
-          img="test"
-          title="Dummy Title"
-          price={100}
-          timeRemaining="10 days"
-          views={69}
-        />
-
         <ListingCardSkeleton />
       </div>
 
@@ -91,7 +99,7 @@ const Dev = () => {
 
       <Carousel images={IMAGESET1} />
     </div>
-  );
-};
+  )
+}
 
-export default Dev;
+export default Dev

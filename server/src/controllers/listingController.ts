@@ -1,7 +1,7 @@
 import { Request, Response } from 'express'
 import ListingModel from '../models/Listing'
 import UserModel from '../models/User'
-import mongoose, { Schema } from 'mongoose'
+import mongoose from 'mongoose'
 
 export const createListing = async (req: Request, res: Response) => {
     const { title, listerId, desc, image, startPrice, expireAt, category, weight, dimensions } = req.body
@@ -129,7 +129,7 @@ export const fetchListings = async (req: Request, res: Response) => {
 }
 
 export const fetchListingsByCategory = async (req: Request, res: Response) => {
-    const { category } = req.body
+    const { category } = req.params
 
     if (!category) {
         return res.status(400).json({
@@ -251,11 +251,28 @@ export const updateListing = async (req: Request, res: Response) => {
     const listing = await ListingModel.findById(listingId)
 
     const userId = req.body.userId
+
+    if (!listingId || !userId) {
+        return res.status(400).json({
+            message: 'listingId params and userId property is required!',
+            data: null,
+            ok: false,
+        })
+    }
+
+    if (!mongoose.Types.ObjectId.isValid(listingId) || !mongoose.Types.ObjectId.isValid(userId)) {
+        return res.status(400).json({
+            message: 'invalid listingId or userId!',
+            data: null,
+            ok: false,
+        })
+    }
+
     const user = await UserModel.findById(userId)
 
     try {
-        if (listing!.lister == userId || user!.isAdmin == true) {
-            await listing!.updateOne(req.body)
+        if (listing?.lister == userId || user?.isAdmin == true) {
+            await listing?.updateOne(req.body)
 
             return res.status(200).json({
                 message: 'Successfully updated listing',

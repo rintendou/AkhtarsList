@@ -16,6 +16,10 @@ const Withdraw = () => {
 
   // Focus on input element on component mount
   useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    })
     withdrawFundsRef.current!.focus()
   }, [])
 
@@ -48,7 +52,7 @@ const Withdraw = () => {
 
   return (
     <div className="w-full flex flex-col justify-center items-center">
-      <Card twClasses="p-20 md:p-10 m-0 md:m-10 shadow-lg space-y-5 w-[35rem]">
+      <Card twClasses="p-10 md:p-20 m-0 md:m-10 shadow-lg space-y-5 w-[35rem]">
         <h1 className="text-3xl text-center font-bold">Current Balance:</h1>
         <p className="text-center text-3xl">${balance}</p>
         <form

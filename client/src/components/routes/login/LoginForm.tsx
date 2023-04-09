@@ -1,47 +1,59 @@
-import { useEffect, useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import useAuth from "../../../lib/hooks/useAuth";
+import { useEffect, useRef, useState } from "react"
+import { useNavigate } from "react-router-dom"
+import useAuth from "../../../lib/hooks/useAuth"
 
-import Card from "../../ui/Card";
-import Error from "../../ui/Error";
-import StyledInputRef from "../../ui/StyledInputRef";
-import Success from "../../ui/Success";
-import RouterLink from "../../ui/RouterLink";
-import { settings } from "../../../settings";
+// Components
+import Card from "../../ui/Card"
+import Error from "../../ui/Error"
+import StyledInputRef from "../../ui/StyledInputRef"
+import Success from "../../ui/Success"
+import RouterLink from "../../ui/RouterLink"
+
+// Port number
+import { settings } from "../../../settings"
+import PasswordInputRef from "../../ui/PasswordInputRef"
 
 type Props = {
-  didRegisterSuccessfully: boolean;
-  successMessage: string;
-};
+  didRegisterSuccessfully: boolean
+  successMessage: string
+  errorMessageFromOtherRoute: string
+}
 
-const LoginForm = ({ didRegisterSuccessfully, successMessage }: Props) => {
-  const { login } = useAuth();
-  const navigate = useNavigate();
+const LoginForm = ({
+  didRegisterSuccessfully,
+  successMessage,
+  errorMessageFromOtherRoute,
+}: Props) => {
+  const { login } = useAuth()
+  const navigate = useNavigate()
 
   // I opted to use the useRef hook instead of useState to prevent
   // unnecessary re-renders of this component per each character typed
-  const usernameRef = useRef<HTMLInputElement>(null);
-  const passwordRef = useRef<HTMLInputElement>(null);
+  const usernameRef = useRef<HTMLInputElement>(null)
+  const passwordRef = useRef<HTMLInputElement>(null)
 
   // focus on the first input on component mount
   useEffect(() => {
-    usernameRef.current!.focus();
-  }, []);
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    })
+    usernameRef.current!.focus()
+  }, [])
   // Keep track of error
-  const [isError, setIsError] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState(errorMessageFromOtherRoute)
 
   // Keep track of login success
-  const [scsMessage, setScsMessage] = useState(successMessage);
+  const [scsMessage, setScsMessage] = useState(successMessage)
 
   // send post request to api endpoint /api/auth/login by calling the
   // the endpoint and backend_server_port number: 5178. Payload is passed
   // by attaching data to the body object.
   const loginUserHandler = (e: React.FormEvent<HTMLFormElement>) => {
     // Prevent default behavior of reloading page on form submission
-    e.preventDefault();
-    const username = usernameRef.current!.value;
-    const password = passwordRef.current!.value;
+    e.preventDefault()
+    const username = usernameRef.current!.value
+    const password = passwordRef.current!.value
 
     const loginUser = async () => {
       const response = await fetch(
@@ -54,26 +66,29 @@ const LoginForm = ({ didRegisterSuccessfully, successMessage }: Props) => {
           }),
           headers: { "Content-Type": "application/json" },
         }
-      );
+      )
 
-      const data = await response.json();
+      const data = await response.json()
 
       if (!data.ok) {
-        setIsError(true);
-        setErrorMessage(data.message);
-        return;
+        setErrorMessage(data.message)
+        return
       }
 
-      setIsError(false);
-      setScsMessage(data.data.message);
-      login(data.data.user._id, data.data.user.username, data.data.user.token);
-      navigate("/", { replace: true });
-    };
-    loginUser();
-  };
+      setScsMessage(data.data.message)
+      login(
+        data.data.user._id,
+        data.data.user.username,
+        data.data.user.token,
+        data.data.user.isAdmin
+      )
+      navigate("/", { replace: true })
+    }
+    loginUser()
+  }
 
   return (
-    <Card twClasses="w-[45rem] mx-auto p-20 border border-secondary space-y-16 flex flex-col justify-center">
+    <Card twClasses="w-[30rem] md:w-[45rem] mx-auto p-20 border border-secondary space-y-16 flex flex-col justify-center">
       <h1 className="text-4xl font-bold text-center">Log In</h1>
       <form className="flex flex-col gap-5" onSubmit={loginUserHandler}>
         <StyledInputRef
@@ -82,12 +97,7 @@ const LoginForm = ({ didRegisterSuccessfully, successMessage }: Props) => {
           placeholder="Username"
           ref={usernameRef}
         />
-        <StyledInputRef
-          name="Password"
-          type="password"
-          placeholder="Password"
-          ref={passwordRef}
-        />
+        <PasswordInputRef name="Password" ref={passwordRef} />
         <RouterLink
           routerLinkText="Forgot Password?"
           twClasses="text-xs ml-auto"
@@ -95,19 +105,19 @@ const LoginForm = ({ didRegisterSuccessfully, successMessage }: Props) => {
         />
         <LoginButton />
       </form>
-      <h1 className="text-center">
-        Don't have an account yet?
+      <div className="text-center flex flex-col md:flex-row space-x-0 md:space-x-3 mx-auto">
+        <h1>Don't have an account yet?</h1>
         <RouterLink routerLinkText="Register here" to="/register" />
-      </h1>
-      {!isError && didRegisterSuccessfully && (
+      </div>
+      {!errorMessage && didRegisterSuccessfully && (
         <Success successMessage={scsMessage} />
       )}
-      {isError && <Error errorMessage={errorMessage} />}
+      {errorMessage && <Error errorMessage={errorMessage} />}
     </Card>
-  );
-};
+  )
+}
 
-export default LoginForm;
+export default LoginForm
 
 const LoginButton = () => {
   return (
@@ -117,5 +127,5 @@ const LoginButton = () => {
     >
       Log In
     </button>
-  );
-};
+  )
+}

@@ -2,14 +2,15 @@ import express from 'express'
 
 // auth controller
 import {
-    createListing,
-    deleteListing,
-    updateListing,
-    fetchListings,
-    fetchListingsByCategory,
-    fetchTrendingListings,
-    bidOnListing,
-} from '../controllers/listingController'
+  createListing,
+  deleteListing,
+  updateListing,
+  fetchListing,
+  fetchListings,
+  fetchListingsByCategory,
+  fetchTrendingListings,
+  bidOnListing
+} from "../controllers/listingController"
 
 const ListingRoute = express.Router()
 
@@ -20,13 +21,16 @@ ListingRoute.post('/post', createListing)
 ListingRoute.delete('/delete/:listingId', deleteListing)
 
 // Update listing
-ListingRoute.put('/update/:listingId', updateListing)
+ListingRoute.put("/update/:listingId", updateListing)
+
+// Fetch specific listing
+ListingRoute.get("/fetch/:listingId", fetchListing)
 
 // Fetch all listings
 ListingRoute.get('/fetch', fetchListings)
 
 // Fetch listings by category
-ListingRoute.get('/fetch-by-category', fetchListingsByCategory)
+ListingRoute.get("/fetch-by-category/:category", fetchListingsByCategory)
 
 // Fetch trending listings
 ListingRoute.get('/fetch-by-trending', fetchTrendingListings)

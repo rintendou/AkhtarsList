@@ -1,35 +1,35 @@
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
 
-import classNames from "classnames";
+import classNames from "classnames"
 
 type Props = {
-  images: string[];
-};
+  images: string[]
+}
 
-const INTERVAL_TIME = 3000;
+const INTERVAL_TIME = 3000
 
 const Carousel = ({ images }: Props) => {
-  const [activeIndex, setActiveIndex] = useState(0);
+  const [activeIndex, setActiveIndex] = useState(0)
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setActiveIndex((activeIndex + 1) % images.length);
-    }, INTERVAL_TIME);
+      setActiveIndex((activeIndex + 1) % images.length)
+    }, INTERVAL_TIME)
 
     // Cleanup function to clear interval when component unmounts
-    return () => clearInterval(interval);
-  }, [activeIndex]);
+    return () => clearInterval(interval)
+  }, [activeIndex])
 
   const prevImage = () => {
-    setActiveIndex((activeIndex - 1 + images.length) % images.length);
-  };
+    setActiveIndex((activeIndex - 1 + images.length) % images.length)
+  }
 
   const nextImage = () => {
-    setActiveIndex((activeIndex + 1) % images.length);
-  };
+    setActiveIndex((activeIndex + 1) % images.length)
+  }
 
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   return (
     <div className="relative h-80 w-full">
@@ -95,17 +95,17 @@ const Carousel = ({ images }: Props) => {
         ))}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Carousel;
+export default Carousel
 
 const cleanUpPathname = (pathname: string): string => {
-  const dotIndex = pathname.lastIndexOf(".");
+  const dotIndex = pathname.lastIndexOf(".")
   if (dotIndex === -1) {
     // No file extension found
-    return pathname;
+    return pathname
   } else {
-    return pathname.slice(0, dotIndex - 1);
+    return pathname.slice(0, dotIndex - 1)
   }
-};
+}

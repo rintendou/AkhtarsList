@@ -7,6 +7,7 @@ import StyledInputRef from "../../ui/StyledInputRef"
 import RouterLink from "../../ui/RouterLink"
 
 import { settings } from "../../../settings"
+import PasswordInputRef from "../../ui/PasswordInputRef"
 
 const RegisterForm = () => {
   // I opted to use the useRef hook instead of useState to prevent
@@ -27,6 +28,10 @@ const RegisterForm = () => {
 
   // focus on the first input on component mount
   useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    })
     usernameRef.current!.focus()
   }, [])
 
@@ -78,7 +83,7 @@ const RegisterForm = () => {
   }
 
   return (
-    <Card twClasses="w-[45rem] mx-auto p-20 border border-secondary space-y-16">
+    <Card twClasses="w-[30rem] md:w-[45rem] mx-auto p-20 border border-secondary space-y-16">
       <h1 className="text-4xl font-bold text-center">Register</h1>
       <form className="flex flex-col gap-5" onSubmit={registerUserHandler}>
         <StyledInputRef
@@ -87,18 +92,8 @@ const RegisterForm = () => {
           placeholder="Username"
           ref={usernameRef}
         />
-        <StyledInputRef
-          name="Password"
-          type="password"
-          placeholder="Password"
-          ref={passwordRef}
-        />
-        <StyledInputRef
-          name="Confirm Password"
-          type="password"
-          placeholder="Confirm Password"
-          ref={confirmPasswordRef}
-        />
+        <PasswordInputRef name="Password" ref={passwordRef} />
+        <PasswordInputRef name="Confirm Password" ref={confirmPasswordRef} />
         <StyledInputRef
           name="Address"
           type="text"
@@ -119,10 +114,10 @@ const RegisterForm = () => {
         />
         <RegisterButton />
       </form>
-      <h1 className="text-center">
-        Already have an account?{" "}
+      <div className="text-center w-full flex flex-col md:flex-row space-x-0 md:space-x-3 justify-center mx-auto">
+        <h1>Already have an account?</h1>
         <RouterLink routerLinkText="Login here" to="/login" />
-      </h1>
+      </div>
       {isError && <Error errorMessage={errorMessage} />}
     </Card>
   )
