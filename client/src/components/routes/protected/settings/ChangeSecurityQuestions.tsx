@@ -82,7 +82,11 @@ const ChangeSecurityQuestions = () => {
           placeholder="New Security Question Answer"
           ref={newSecurityQuestionAnswerRef}
         />
-        <PasswordInputRef name="Password" ref={passwordRef} />
+        <PasswordInputRef
+          name="Password"
+          ref={passwordRef}
+          autoCompletePassword={false}
+        />
         <ChangeSecurityQAButton />
       </form>
       {!errorMessage && successMessage && (

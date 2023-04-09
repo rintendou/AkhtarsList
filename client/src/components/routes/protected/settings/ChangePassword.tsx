@@ -68,9 +68,21 @@ const ChangePassword = () => {
     <div className="space-y-5">
       <h1 className="text-xl font-semibold">Change Password</h1>
       <form className="flex flex-col gap-5" onSubmit={changePasswordHandler}>
-        <PasswordInputRef name="Old Password" ref={oldPasswordRef} />
-        <PasswordInputRef name="New Password" ref={newPasswordRef} />
-        <PasswordInputRef name="Confirm Password" ref={newConfirmPasswordRef} />
+        <PasswordInputRef
+          name="Old Password"
+          ref={oldPasswordRef}
+          autoCompletePassword={false}
+        />
+        <PasswordInputRef
+          name="New Password"
+          ref={newPasswordRef}
+          autoCompletePassword={false}
+        />
+        <PasswordInputRef
+          name="Confirm Password"
+          ref={newConfirmPasswordRef}
+          autoCompletePassword={false}
+        />
         <ChangePasswordButton />
       </form>
       {!errorMessage && successMessage && (

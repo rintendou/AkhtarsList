@@ -72,7 +72,11 @@ const ChangeUserDetails = () => {
           placeholder="Address"
           ref={addressRef}
         />
-        <PasswordInputRef name="Password" ref={passwordRef} />
+        <PasswordInputRef
+          name="Password"
+          ref={passwordRef}
+          autoCompletePassword={false}
+        />
         <EditProfileButton />
       </form>
       {!errorMessage && successMessage && (

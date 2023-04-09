@@ -4,21 +4,26 @@ import usePasswordToggle from "../../lib/hooks/usePasswordToggle"
 type Props = {
   name: string
   twClasses?: string
+  autoCompletePassword?: boolean
 }
 
 const PasswordInputRef = React.forwardRef<HTMLInputElement, Props>(
-  ({ name, twClasses, ...rest }, ref) => {
+  ({ name, twClasses, autoCompletePassword = true }, ref) => {
     const { icon, inputType } = usePasswordToggle()
+
+    const autoComplete = autoCompletePassword
+      ? "current-password"
+      : "new-password"
 
     return (
       <div className="relative z-0">
         <input
-          {...rest}
           id={name}
           placeholder=""
           type={inputType}
           className={`${twClasses} pt-5 pl-5 p-2 block w-full px-0 mt-0 bg-transparent border-2 appearance-none focus:outline-none focus:ring-0 focus:border-secondary border-gray-200 rounded-md`}
           ref={ref}
+          autoComplete={autoComplete}
         />
         <label
           htmlFor={name}
