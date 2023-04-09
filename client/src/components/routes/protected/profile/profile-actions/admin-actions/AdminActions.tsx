@@ -2,7 +2,7 @@ import AdminRouterLink from "./AdminRouterLink"
 
 const AdminActions = () => {
   return (
-    <div className="my-5 py-10 border-y border-secondary">
+    <div>
       <AdminRouterLink to="/admin/manage-listings">
         <svg
           className="mr-4"
