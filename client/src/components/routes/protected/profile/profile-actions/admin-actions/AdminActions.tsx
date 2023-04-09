@@ -2,7 +2,7 @@ import AdminRouterLink from "./AdminRouterLink"
 
 const AdminActions = () => {
   return (
-    <>
+    <div className="my-5 py-10 border-y border-secondary">
       <AdminRouterLink to="/admin/manage-listings">
         <svg
           className="mr-4"
@@ -49,7 +49,7 @@ const AdminActions = () => {
           <p className="text-gray-500">Undelivered listings</p>
         </div>
       </AdminRouterLink>
-    </>
+    </div>
   )
 }
 
