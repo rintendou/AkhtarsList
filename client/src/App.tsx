@@ -28,6 +28,7 @@ import RequireAuth from "./components/routes/protected/RequireAuth"
 
 // Layouts
 import ProfileLayout from "./components/routes/protected/ProfileLayout"
+import DevListingDetail from "./components/routes/dev-route/DevListingDetail"
 
 function App() {
   return (
@@ -45,6 +46,8 @@ function App() {
           <Route path="/category/:categoryName" element={<Category />} />
           <Route path="/listings/:listingId" element={<ListingDetail />} />
           <Route path="/dev" element={<Dev />} />
+
+          <Route path="/dev-listing-detail" element={<DevListingDetail />} />
 
           {/* Protected Routes */}
           <Route element={<RequireAuth />}>
