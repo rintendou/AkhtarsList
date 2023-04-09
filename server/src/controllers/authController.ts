@@ -276,7 +276,7 @@ export const changeUserDetails = async (req: Request, res: Response) => {
   // Check if appropriate payload is attached to the body
   if (!username || !password || !address) {
     return res.status(400).json({
-      message: "username, password, and address properties are required!",
+      message: "Password and Address properties are required!",
       data: null,
       ok: false,
     })
@@ -323,10 +323,10 @@ export const changePassword = async (req: Request, res: Response) => {
   const { username, oldPassword, newPassword, newConfirmPassword } = req.body
 
   // Check if appropriate payload is attached to the body
-  if (!username || !oldPassword || !newPassword || !newConfirmPassword) {
+  if (!oldPassword || !newPassword || !newConfirmPassword) {
     return res.status(400).json({
       message:
-        "username, oldPassword, newPassword, and newConfirmPassword properties are required!",
+        "Old Password, New Password, and Confirm Password properties are required!",
       data: null,
       ok: false,
     })
@@ -400,10 +400,10 @@ export const changeSecurityQA = async (req: Request, res: Response) => {
     req.body
 
   // Check if appropriate payload is attached to the body
-  if (!username || !password || !newSecurityQuestion || !newSecurityQAnswer) {
+  if (!password || !newSecurityQuestion || !newSecurityQAnswer) {
     return res.status(400).json({
       message:
-        "username, password, newSecurityQuestion, and newSecurityQAnswer properties are required!",
+        "New Security Question, New Security Question Answer, and Password properties are required!",
       data: null,
       ok: false,
     })
