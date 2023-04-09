@@ -26,33 +26,38 @@ const Category = () => {
     techListings,
     accessoriesListings,
     collectiblesListings,
+    allListings,
   } = useTimeline()
 
-  let categorizedListings: ListingType[] = []
+  let activeCategorizedListings: ListingType[] = []
 
   switch (categoryName) {
     case "sneakers":
-      categorizedListings = sneakersListings
+      activeCategorizedListings = sneakersListings
       break
     case "antiques":
-      categorizedListings = antiquesListings
+      activeCategorizedListings = antiquesListings
       break
     case "tech":
-      categorizedListings = techListings
+      activeCategorizedListings = techListings
       break
     case "accessories":
-      categorizedListings = accessoriesListings
+      activeCategorizedListings = accessoriesListings
       break
     case "collectibles":
-      categorizedListings = collectiblesListings
+      activeCategorizedListings = collectiblesListings
       break
     case "trending":
-      categorizedListings = trendingListings
+      activeCategorizedListings = trendingListings
       break
     case "assorted":
-      categorizedListings = unexpiredListings
+      activeCategorizedListings = unexpiredListings
       break
   }
+
+  const expiredCategorizedListings: ListingType[] = allListings.filter(
+    (listing) => new Date(listing.expireAt) < new Date()
+  )
 
   return (
     <div className="min-h-screen flex flex-col container mx-auto py-5">
@@ -63,34 +68,67 @@ const Category = () => {
         <SideNavLinks />
 
         <div>
-          <ul className="flex justify-around gap-8 py-5 flex-wrap">
-            {categorizedListings.length !== 0 ? (
-              categorizedListings.map((listing) => (
-                <li key={listing._id}>
-                  <ListingCard
-                    _id={listing._id}
-                    image={listing.image}
-                    title={listing.title}
-                    finalPrice={listing.finalPrice}
-                    expireAt={listing.expireAt}
-                    views={listing.views}
-                    bidders={listing.bidders}
-                    lister={listing.lister}
-                    desc={listing.desc}
-                    startPrice={listing.startPrice}
-                    category={listing.category}
-                    weight={listing.weight}
-                    dimensions={listing.dimensions}
-                    height={listing.height}
-                    width={listing.width}
-                    length={listing.length}
-                  />
-                </li>
-              ))
-            ) : (
-              <h1>No Listings Found with Category: {categoryName}</h1>
-            )}
-          </ul>
+          <div className="space-y-10 py-10 mb-10 border-b-2 border-secondary">
+            <h1 className="text-2xl font-semibold capitalize">
+              Active {categoryName} listings
+            </h1>
+            <ul className="flex gap-8 py-5 flex-wrap">
+              {activeCategorizedListings.length !== 0 &&
+                activeCategorizedListings.map((listing) => (
+                  <li key={listing._id}>
+                    <ListingCard
+                      _id={listing._id}
+                      image={listing.image}
+                      title={listing.title}
+                      finalPrice={listing.finalPrice}
+                      expireAt={listing.expireAt}
+                      views={listing.views}
+                      bidders={listing.bidders}
+                      lister={listing.lister}
+                      desc={listing.desc}
+                      startPrice={listing.startPrice}
+                      category={listing.category}
+                      weight={listing.weight}
+                      dimensions={listing.dimensions}
+                      height={listing.height}
+                      width={listing.width}
+                      length={listing.length}
+                    />
+                  </li>
+                ))}
+            </ul>
+          </div>
+
+          <div className="space-y-10 py-10">
+            <h1 className="text-2xl font-semibold capitalize">
+              Expired {categoryName} listings
+            </h1>
+            <ul className="flex gap-8 py-5 flex-wrap">
+              {expiredCategorizedListings.length !== 0 &&
+                expiredCategorizedListings.map((listing) => (
+                  <li key={listing._id}>
+                    <ListingCard
+                      _id={listing._id}
+                      image={listing.image}
+                      title={listing.title}
+                      finalPrice={listing.finalPrice}
+                      expireAt={listing.expireAt}
+                      views={listing.views}
+                      bidders={listing.bidders}
+                      lister={listing.lister}
+                      desc={listing.desc}
+                      startPrice={listing.startPrice}
+                      category={listing.category}
+                      weight={listing.weight}
+                      dimensions={listing.dimensions}
+                      height={listing.height}
+                      width={listing.width}
+                      length={listing.length}
+                    />
+                  </li>
+                ))}
+            </ul>
+          </div>
         </div>
       </div>
     </div>
