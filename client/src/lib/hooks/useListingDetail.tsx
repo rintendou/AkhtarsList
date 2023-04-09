@@ -61,7 +61,7 @@ const useListingDetail = () => {
     }
 
     fetchListing()
-  }, [])
+  }, [listingId])
 
   const fetchLister = (listerId: string, updatedListing: ListingType) => {
     setIsLoading(true)

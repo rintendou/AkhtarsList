@@ -10,8 +10,7 @@ import ActiveBiddingSection from "./ActiveBiddingSection"
 import ListingDetailSkeleton from "./ListingDetailSkeleton"
 
 const ListingDetail = () => {
-  const { listing, fetchListing, isLister, isExpired, isLoading } =
-    useListingDetail()
+  const { listing, isLister, isExpired, isLoading } = useListingDetail()
 
   const {
     image,
@@ -30,16 +29,12 @@ const ListingDetail = () => {
     length,
   } = listing
 
-  const { listingId } = useParams()
-
   useEffect(() => {
     window.scrollTo({
       top: 0,
       behavior: "smooth",
     })
-
-    fetchListing(listingId!)
-  }, [listingId])
+  }, [])
 
   const biddingSection = isExpired ? (
     <ExpiredBiddingSection
@@ -76,7 +71,7 @@ const ListingDetail = () => {
             />
             {biddingSection}
           </div>
-          <SeeOtherListings category={category} idToFilter={listingId!} />
+          <SeeOtherListings category={category} idToFilter={listing._id!} />
         </>
       ) : (
         <ListingDetailSkeleton />
