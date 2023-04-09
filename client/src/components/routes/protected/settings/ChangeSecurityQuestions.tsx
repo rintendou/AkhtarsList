@@ -1,11 +1,14 @@
-import { useRef } from "react"
+import { useRef, useState } from "react"
 import StyledInputRef from "../../../ui/StyledInputRef"
 import PasswordInputRef from "../../../ui/PasswordInputRef"
 import { settings } from "../../../../settings"
 import useAuth from "../../../../lib/hooks/useAuth"
+import Error from "../../../ui/Error"
 
 const ChangeSecurityQuestions = () => {
   const { auth } = useAuth()
+
+  const [errorMessage, setErrorMessage] = useState("")
 
   const passwordRef = useRef<HTMLInputElement>(null)
   const newSecurityQuestionRef = useRef<HTMLInputElement>(null)
@@ -38,8 +41,11 @@ const ChangeSecurityQuestions = () => {
       const json = await response.json()
 
       if (!json.ok) {
+        setErrorMessage(json.message)
         return
       }
+
+      setErrorMessage("")
     }
     changeSecurityQA()
   }
@@ -63,6 +69,7 @@ const ChangeSecurityQuestions = () => {
         <PasswordInputRef name="Password" ref={passwordRef} />
         <ChangeSecurityQAButton />
       </form>
+      {errorMessage && <Error errorMessage={errorMessage} />}
     </div>
   )
 }

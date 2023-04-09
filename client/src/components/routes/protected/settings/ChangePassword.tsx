@@ -1,10 +1,13 @@
-import { useRef } from "react"
+import { useRef, useState } from "react"
 import PasswordInputRef from "../../../ui/PasswordInputRef"
 import { settings } from "../../../../settings"
 import useAuth from "../../../../lib/hooks/useAuth"
+import Error from "../../../ui/Error"
 
 const ChangePassword = () => {
   const { auth } = useAuth()
+
+  const [errorMessage, setErrorMessage] = useState("")
 
   const oldPasswordRef = useRef<HTMLInputElement>(null)
   const newPasswordRef = useRef<HTMLInputElement>(null)
@@ -36,8 +39,11 @@ const ChangePassword = () => {
       const json = await response.json()
 
       if (!json.ok) {
+        setErrorMessage(json.message)
         return
       }
+
+      setErrorMessage("")
     }
     changePassword()
   }
@@ -51,6 +57,7 @@ const ChangePassword = () => {
         <PasswordInputRef name="Confirm Password" ref={newConfirmPasswordRef} />
         <ChangePasswordButton />
       </form>
+      {errorMessage && <Error errorMessage={errorMessage} />}
     </div>
   )
 }

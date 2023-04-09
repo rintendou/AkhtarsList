@@ -1,11 +1,14 @@
-import { useRef } from "react"
+import { useRef, useState } from "react"
 import StyledInputRef from "../../../ui/StyledInputRef"
 import PasswordInputRef from "../../../ui/PasswordInputRef"
 import { settings } from "../../../../settings"
 import useAuth from "../../../../lib/hooks/useAuth"
+import Error from "../../../ui/Error"
 
 const ChangeUserDetails = () => {
   const { auth } = useAuth()
+
+  const [errorMessage, setErrorMessage] = useState("")
 
   const addressRef = useRef<HTMLInputElement>(null)
   const passwordRef = useRef<HTMLInputElement>(null)
@@ -22,8 +25,6 @@ const ChangeUserDetails = () => {
       address,
     }
 
-    console.log(payload)
-
     const editUserDetails = async () => {
       const response = await fetch(
         `http://localhost:${settings.BACKEND_SERVER_PORT}/api/auth/change/user-details`,
@@ -36,8 +37,11 @@ const ChangeUserDetails = () => {
       const json = await response.json()
 
       if (!json.ok) {
+        setErrorMessage(json.message)
         return
       }
+
+      setErrorMessage("")
     }
     editUserDetails()
   }
@@ -55,6 +59,7 @@ const ChangeUserDetails = () => {
         <PasswordInputRef name="Password" ref={passwordRef} />
         <EditProfileButton />
       </form>
+      {errorMessage && <Error errorMessage={errorMessage} />}
     </div>
   )
 }
