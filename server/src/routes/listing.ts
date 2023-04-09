@@ -8,6 +8,7 @@ import {
   fetchListings,
   fetchListingsByCategory,
   fetchTrendingListings,
+  bidOnListing,
 } from "../controllers/listingController"
 
 const ListingRoute = express.Router()
@@ -32,5 +33,8 @@ ListingRoute.get("/fetch-by-trending", fetchTrendingListings)
 
 // Fetch specific listing
 ListingRoute.get("/fetch/:listingId", fetchListings)
+
+// Bid on Listing
+ListingRoute.put("/bid/:listingId", bidOnListing)
 
 export default ListingRoute
