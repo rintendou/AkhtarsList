@@ -64,19 +64,28 @@ const TimelineContextProvider = ({ children }: { children: ReactNode }) => {
       }
 
       const sneakersListings = json.data.filter(
-        (listing: ListingType) => listing.category === "Sneakers"
+        (listing: ListingType) =>
+          listing.category === "Sneakers" &&
+          new Date(listing.expireAt) > new Date()
       )
       const antiquesListings = json.data.filter(
-        (listing: ListingType) => listing.category === "Antiques"
+        (listing: ListingType) =>
+          listing.category === "Antiques" &&
+          new Date(listing.expireAt) > new Date()
       )
       const techListings = json.data.filter(
-        (listing: ListingType) => listing.category === "Tech"
+        (listing: ListingType) =>
+          listing.category === "Tech" && new Date(listing.expireAt) > new Date()
       )
       const accessoriesListings = json.data.filter(
-        (listing: ListingType) => listing.category === "Accessories"
+        (listing: ListingType) =>
+          listing.category === "Accessories" &&
+          new Date(listing.expireAt) > new Date()
       )
       const collectiblesListings = json.data.filter(
-        (listing: ListingType) => listing.category === "Collectibles"
+        (listing: ListingType) =>
+          listing.category === "Collectibles" &&
+          new Date(listing.expireAt) > new Date()
       )
       const expiredListings = json.data.filter(
         (listing: ListingType) => new Date(listing.expireAt) < new Date()
@@ -128,19 +137,28 @@ const TimelineContextProvider = ({ children }: { children: ReactNode }) => {
       }
 
       const sneakersListings = json.data.filter(
-        (listing: ListingType) => listing.category === "Sneakers"
+        (listing: ListingType) =>
+          listing.category === "Sneakers" &&
+          new Date(listing.expireAt) > new Date()
       )
       const antiquesListings = json.data.filter(
-        (listing: ListingType) => listing.category === "Antiques"
+        (listing: ListingType) =>
+          listing.category === "Antiques" &&
+          new Date(listing.expireAt) > new Date()
       )
       const techListings = json.data.filter(
-        (listing: ListingType) => listing.category === "Tech"
+        (listing: ListingType) =>
+          listing.category === "Tech" && new Date(listing.expireAt) > new Date()
       )
       const accessoriesListings = json.data.filter(
-        (listing: ListingType) => listing.category === "Accessories"
+        (listing: ListingType) =>
+          listing.category === "Accessories" &&
+          new Date(listing.expireAt) > new Date()
       )
       const collectiblesListings = json.data.filter(
-        (listing: ListingType) => listing.category === "Collectibles"
+        (listing: ListingType) =>
+          listing.category === "Collectibles" &&
+          new Date(listing.expireAt) > new Date()
       )
       const expiredListings = json.data.filter(
         (listing: ListingType) => new Date(listing.expireAt) < new Date()
