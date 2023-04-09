@@ -7,7 +7,9 @@ const ChangeUserDetails = () => {
   const addressRef = useRef<HTMLInputElement>(null)
   const passwordRef = useRef<HTMLInputElement>(null)
 
-  const editUserDetailsHandler = () => {
+  const editUserDetailsHandler = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+
     const address = addressRef.current!.value
     const password = passwordRef.current!.value
 

@@ -7,7 +7,9 @@ const ChangePassword = () => {
   const newPasswordRef = useRef<HTMLInputElement>(null)
   const newConfirmPasswordRef = useRef<HTMLInputElement>(null)
 
-  const changePasswordHandler = () => {
+  const changePasswordHandler = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+
     const oldPassword = oldPasswordRef.current!.value
     const newPassword = newPasswordRef.current!.value
     const newConfirmPassword = newConfirmPasswordRef.current!.value

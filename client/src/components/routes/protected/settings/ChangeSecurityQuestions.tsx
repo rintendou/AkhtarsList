@@ -8,7 +8,9 @@ const ChangeSecurityQuestions = () => {
   const newSecurityQuestionRef = useRef<HTMLInputElement>(null)
   const newSecurityQuestionAnswerRef = useRef<HTMLInputElement>(null)
 
-  const changeSecurityQAHandler = () => {
+  const changeSecurityQAHandler = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+
     const password = passwordRef.current!.value
     const newSecurityQuestion = newSecurityQuestionRef.current!.value
     const newSecurityQuestionAnswer =
