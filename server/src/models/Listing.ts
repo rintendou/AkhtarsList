@@ -30,6 +30,10 @@ const ListingSchema = new Schema(
         ref: "User",
       },
     ],
+    bestBidder: {
+      type: ObjectId,
+      ref: "User"
+    },
     startPrice: {
       type: Number,
       required: true,
