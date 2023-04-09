@@ -1,5 +1,7 @@
 import useProfile from "../../../../lib/hooks/useProfile"
+import Card from "../../../ui/Card"
 import ListingCard from "../../../ui/ListingCard"
+import RouterLink from "../../../ui/RouterLink"
 
 const WonListings = () => {
   const { wonListings } = useProfile()
@@ -7,7 +9,7 @@ const WonListings = () => {
   return (
     <div className="w-full flex flex-col justify-center items-center">
       <ul className="flex gap-8 py-8 overflow-x-auto">
-        {wonListings.length !== 0 &&
+        {wonListings.length !== 0 ? (
           wonListings.map((wonListing) => (
             <li key={wonListing._id}>
               <ListingCard
@@ -29,7 +31,20 @@ const WonListings = () => {
                 length={wonListing.length}
               />
             </li>
-          ))}
+          ))
+        ) : (
+          <Card twClasses="p-10 md:p-20 text-center">
+            <h1 className="text-2xl font-semibold">
+              You have not won any listings yet
+            </h1>
+
+            <h1>
+              Click{" "}
+              <RouterLink to="/" routerLinkText="here" twClasses="underline" />{" "}
+              to bid on listings
+            </h1>
+          </Card>
+        )}
       </ul>
     </div>
   )
