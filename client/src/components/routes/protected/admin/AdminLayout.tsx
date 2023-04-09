@@ -1,7 +1,7 @@
 import { useLocation, Outlet, Navigate } from "react-router-dom"
 import useAuth from "../../../../lib/hooks/useAuth"
 
-const RequireAuth = () => {
+const RequireAdmin = () => {
   const { auth } = useAuth()
 
   const location = useLocation()
@@ -13,4 +13,4 @@ const RequireAuth = () => {
   )
 }
 
-export default RequireAuth
+export default RequireAdmin

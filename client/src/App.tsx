@@ -32,6 +32,9 @@ import DevListingDetail from "./components/routes/dev-route/DevListingDetail"
 import WonListings from "./components/routes/protected/won-listings/WonListings"
 import DisputedListings from "./components/routes/protected/disputed-listings/DisputedListings"
 import Unauthorized from "./components/routes/unauthorized/Unauthorized"
+import ManageListings from "./components/routes/protected/admin/ManageListings"
+import ManageDisputes from "./components/routes/protected/admin/ManageDisputes"
+import RequireAdmin from "./components/routes/protected/admin/AdminLayout"
 
 function App() {
   return (
@@ -64,6 +67,17 @@ function App() {
               <Route path="/withdraw" element={<Withdraw />} />
               <Route path="/won-listings" element={<WonListings />} />
               <Route path="/disputed-listings" element={<DisputedListings />} />
+            </Route>
+
+            <Route element={<RequireAdmin />}>
+              <Route
+                path="/admin/manage-listings"
+                element={<ManageListings />}
+              />
+              <Route
+                path="/admin/manage-disputes"
+                element={<ManageDisputes />}
+              />
             </Route>
           </Route>
 
