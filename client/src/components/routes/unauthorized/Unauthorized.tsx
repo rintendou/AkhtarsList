@@ -8,7 +8,7 @@ const Unauthorized = () => {
       <Overview twClasses="space-y-20">
         <img src={UnauthorizedAccessImage} alt="Unauthorized Request!" />
         <h1 className="text-2xl font-bold">
-          Nice Try! You are not supposed to access this.
+          Nice Try! You are not supposed to access this route
         </h1>
       </Overview>
     </div>

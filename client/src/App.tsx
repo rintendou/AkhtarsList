@@ -52,10 +52,9 @@ function App() {
           <Route path="/category/:categoryName" element={<Category />} />
           <Route path="/listings/:listingId" element={<ListingDetail />} />
           <Route path="/dev" element={<Dev />} />
-
           <Route path="/dev-listing-detail" element={<DevListingDetail />} />
 
-          {/* Protected Routes */}
+          {/* Authorized Routes */}
           <Route element={<RequireAuth />}>
             <Route path="/sell" element={<Sell />} />
             <Route path="/preview" element={<Preview />} />
@@ -67,21 +66,16 @@ function App() {
               <Route path="/withdraw" element={<Withdraw />} />
               <Route path="/won-listings" element={<WonListings />} />
               <Route path="/disputed-listings" element={<DisputedListings />} />
-
-              <Route element={<RequireAdmin />}>
-                <Route
-                  path="/admin/manage-listings"
-                  element={<ManageListings />}
-                />
-                <Route
-                  path="/admin/manage-disputes"
-                  element={<ManageDisputes />}
-                />
-              </Route>
             </Route>
           </Route>
 
-          {/* Catch-All Route */}
+          {/* Admin Routes */}
+          <Route element={<RequireAdmin />}>
+            <Route path="/admin/manage-listings" element={<ManageListings />} />
+            <Route path="/admin/manage-disputes" element={<ManageDisputes />} />
+          </Route>
+
+          {/* Catch-All Routes */}
           <Route path="*" element={<PageNotFound />} />
           <Route
             path="/listings/listing-not-found"
