@@ -70,7 +70,9 @@ const ListingCard = ({
           alt={title}
           className="h-36 w-auto rounded-md"
         />
-        <h1 className="text-lg font-light truncate">{title}</h1>
+        <h1 className="text-lg font-light whitespace-nowrap truncate">
+          {title}
+        </h1>
         <p className="text-gray-500">Current Price:</p>
         <div className="flex justify-between">
           <p className="font-bold text-2xl">${finalPrice}</p>
