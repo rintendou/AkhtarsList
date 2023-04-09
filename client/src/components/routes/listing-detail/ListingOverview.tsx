@@ -1,17 +1,5 @@
 import DUMMYIMAGE from "../../../../public/random-listing-image-undraw.svg"
-
-type Props = {
-  title: string
-  lister: string
-  startPrice: number
-  category: string
-  views: number
-  desc: string
-  weight: number
-  height: number
-  length: number
-  width: number
-}
+import ListingType from "../../../lib/types/ListingType"
 
 const ListingOverview = ({
   title,
@@ -24,7 +12,7 @@ const ListingOverview = ({
   length,
   width,
   height,
-}: Props) => {
+}: ListingType) => {
   return (
     <div className="flex-auto p-10 py-24 max-w-none md:max-w-[50%] max-h-[50%] md:max-h-none space-y-10 flex flex-col items-center justify-between">
       <div className="space-y-10">

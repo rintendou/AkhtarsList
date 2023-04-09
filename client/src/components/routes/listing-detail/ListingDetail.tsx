@@ -24,17 +24,20 @@ const ListingDetail = () => {
     views,
     category,
     weight,
+    dimensions,
     height,
     width,
     length,
   } = listing
+
+  const { listingId } = useParams()
 
   useEffect(() => {
     window.scrollTo({
       top: 0,
       behavior: "smooth",
     })
-  }, [])
+  }, [listingId])
 
   const biddingSection = isExpired ? (
     <ExpiredBiddingSection
@@ -58,16 +61,22 @@ const ListingDetail = () => {
         <>
           <div className="flex flex-col md:flex-row min-h-screen border-b-2 border-b-tertiary">
             <ListingOverview
+              _id={listingId!}
+              image={image}
               title={title}
+              finalPrice={finalPrice}
+              expireAt={expireAt}
+              views={views}
+              bidders={bidders}
               lister={lister}
+              desc={desc}
               startPrice={startPrice}
               category={category}
-              views={views}
-              desc={desc}
               weight={weight}
-              length={length}
-              width={width}
+              dimensions={dimensions}
               height={height}
+              width={width}
+              length={length}
             />
             {biddingSection}
           </div>

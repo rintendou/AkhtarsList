@@ -1,7 +1,6 @@
 import useTimeline from "../../../lib/hooks/useTimeline"
 
 // Components
-import ListingCardSkeleton from "../../ui/ListingCardSkeleton"
 import ListingCard from "../../ui/ListingCard"
 import SeeOthersButton from "./SeeOthersButton"
 
