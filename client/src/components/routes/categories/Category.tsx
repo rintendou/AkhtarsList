@@ -19,7 +19,7 @@ const Category = () => {
 
   const { categoryName } = useParams()
   const {
-    allListings,
+    unexpiredListings,
     trendingListings,
     sneakersListings,
     antiquesListings,
@@ -50,7 +50,7 @@ const Category = () => {
       categorizedListings = trendingListings
       break
     case "assorted":
-      categorizedListings = allListings
+      categorizedListings = unexpiredListings
       break
   }
 
