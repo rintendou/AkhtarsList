@@ -12,8 +12,8 @@ type initialContextType = {
   withdrawFunds: (amount: number) => void
   listings: ListingType[]
   biddings: ListingType[]
-  //   wonListings: []
-  //   disputedListings: []
+  wonListings: ListingType[]
+  disputedListings: ListingType[]
   refetchUserDetails: () => void
 }
 
@@ -24,6 +24,8 @@ const initialContext: initialContextType = {
   withdrawFunds: () => {},
   listings: [],
   biddings: [],
+  wonListings: [],
+  disputedListings: [],
   refetchUserDetails: () => {},
 }
 
@@ -42,6 +44,8 @@ const ProfileContextProvider = ({
 
   const [biddings, setBiddings] = useState<ListingType[]>([])
   const [listings, setListings] = useState<ListingType[]>([])
+  const [wonListings, setWonListings] = useState<ListingType[]>([])
+  const [disputedListings, setDisputedListings] = useState<ListingType[]>([])
 
   // Fetch user details on component mount and when _id changes on auth
   useEffect(() => {
@@ -59,6 +63,8 @@ const ProfileContextProvider = ({
       setBalance(data.data.balance)
       setBiddings(data.data.biddedListings.reverse())
       setListings(data.data.listedListings.reverse())
+      setWonListings(data.data.wonListings.reverse())
+      setDisputedListings(data.data.disputedListings.reverse())
     }
 
     fetchUserDetails()
@@ -83,6 +89,8 @@ const ProfileContextProvider = ({
       setBalance(data.data.balance)
       setBiddings(data.data.biddedListings.reverse())
       setListings(data.data.listedListings.reverse())
+      setWonListings(data.data.wonListings.reverse())
+      setDisputedListings(data.data.disputedListings.reverse())
     }
     refetchUser()
   }
@@ -144,6 +152,8 @@ const ProfileContextProvider = ({
     withdrawFunds,
     biddings,
     listings,
+    wonListings,
+    disputedListings,
     refetchUserDetails,
   }
 
