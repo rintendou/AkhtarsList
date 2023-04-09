@@ -69,12 +69,20 @@ function App() {
               <Route path="/disputed-listings" element={<DisputedListings />} />
               <Route path="/settings" element={<Settings />} />
             </Route>
-          </Route>
 
-          {/* Admin Routes */}
-          <Route element={<RequireAdmin />}>
-            <Route path="/admin/manage-listings" element={<ManageListings />} />
-            <Route path="/admin/manage-disputes" element={<ManageDisputes />} />
+            {/* Admin Routes */}
+            <Route element={<RequireAdmin />}>
+              <Route element={<ProfileLayout />}>
+                <Route
+                  path="/admin/manage-listings"
+                  element={<ManageListings />}
+                />
+                <Route
+                  path="/admin/manage-disputes"
+                  element={<ManageDisputes />}
+                />
+              </Route>
+            </Route>
           </Route>
 
           {/* Catch-All Routes */}
