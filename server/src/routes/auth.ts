@@ -1,29 +1,29 @@
-import express from "express"
+import express from 'express'
 
 // auth controller
 import {
-  registerUser,
-  loginUser,
-  getSecurityQuestion,
-  verifySecurityQA,
-  resetPassword,
-} from "../controllers/authController"
+    registerUser,
+    loginUser,
+    getSecurityQuestion,
+    verifySecurityQA,
+    resetPassword,
+} from '../controllers/authController'
 
 const AuthRoute = express.Router()
 
 // REGISTRATION
-AuthRoute.post("/register", registerUser)
+AuthRoute.post('/register', registerUser)
 
 // LOGIN
-AuthRoute.post("/login", loginUser)
+AuthRoute.post('/login', loginUser)
 
 // GET SECURITY QUESTION
-AuthRoute.post("/get-security-question", getSecurityQuestion)
+AuthRoute.post('/get-security-question', getSecurityQuestion)
 
 // VERIFY SECURITY QA
-AuthRoute.post("/verify-security-qa", verifySecurityQA)
+AuthRoute.post('/verify-security-qa', verifySecurityQA)
 
 // CHANGE PASSWORD
-AuthRoute.post("/reset-password", resetPassword)
+AuthRoute.post('/reset-password', resetPassword)
 
 export default AuthRoute
