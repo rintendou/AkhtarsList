@@ -3,7 +3,7 @@ import StyledInputRef from "../../../ui/StyledInputRef"
 import PasswordInputRef from "../../../ui/PasswordInputRef"
 import { settings } from "../../../../settings"
 
-const EditUserDetails = () => {
+const ChangeUserDetails = () => {
   const addressRef = useRef<HTMLInputElement>(null)
   const passwordRef = useRef<HTMLInputElement>(null)
 
@@ -36,7 +36,7 @@ const EditUserDetails = () => {
 
   return (
     <div className="space-y-5">
-      <h1 className="text-xl font-semibold">Edit User Details</h1>
+      <h1 className="text-xl font-semibold">Change User Details</h1>
       <form className="flex flex-col gap-5" onSubmit={editUserDetailsHandler}>
         <StyledInputRef
           name="Address"
@@ -54,12 +54,12 @@ const EditUserDetails = () => {
 const EditProfileButton = () => {
   return (
     <button
-      className={`p-4 rounded-lg duration-200 hover:bg-black ease-in-out bg-secondary text-primary font-bold text-sm`}
+      className={`p-4 rounded-lg duration-200 hover:bg-black ease-in-out bg-secondary text-primary font-bold text-lg`}
       type="submit"
     >
-      Edit Profile
+      Change User Details
     </button>
   )
 }
 
-export default EditUserDetails
+export default ChangeUserDetails

@@ -18,19 +18,19 @@ const ChangePassword = () => {
         <PasswordInputRef name="Old Password" ref={oldPasswordRef} />
         <PasswordInputRef name="New Password" ref={newPasswordRef} />
         <PasswordInputRef name="Confirm Password" ref={newConfirmPasswordRef} />
-        <EditProfileButton />
+        <ChangePasswordButton />
       </form>
     </div>
   )
 }
 
-const EditProfileButton = () => {
+const ChangePasswordButton = () => {
   return (
     <button
-      className={`p-4 rounded-lg duration-200 hover:bg-black ease-in-out bg-secondary text-primary font-bold text-sm`}
+      className={`p-4 rounded-lg duration-200 hover:bg-black ease-in-out bg-secondary text-primary font-bold text-lg`}
       type="submit"
     >
-      Edit Profile
+      Change Password
     </button>
   )
 }

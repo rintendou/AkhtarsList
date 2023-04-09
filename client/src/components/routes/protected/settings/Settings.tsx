@@ -1,6 +1,6 @@
 import ChangePassword from "./ChangePassword"
 import ChangeSecurityQuestions from "./ChangeSecurityQuestions"
-import EditUserDetails from "./EditUserDetails"
+import EditUserDetails from "./ChangeUserDetails"
 
 const Settings = () => {
   return (

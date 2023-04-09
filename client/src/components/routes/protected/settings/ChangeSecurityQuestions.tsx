@@ -29,19 +29,19 @@ const ChangeSecurityQuestions = () => {
           ref={newSecurityQuestionAnswerRef}
         />
         <PasswordInputRef name="Password" ref={addressRef} />
-        <EditProfileButton />
+        <ChangeSecurityQAButton />
       </form>
     </div>
   )
 }
 
-const EditProfileButton = () => {
+const ChangeSecurityQAButton = () => {
   return (
     <button
-      className={`p-4 rounded-lg duration-200 hover:bg-black ease-in-out bg-secondary text-primary font-bold text-sm`}
+      className={`p-4 rounded-lg duration-200 hover:bg-black ease-in-out bg-secondary text-primary font-bold text-lg`}
       type="submit"
     >
-      Edit Profile
+      Change Security QA
     </button>
   )
 }
