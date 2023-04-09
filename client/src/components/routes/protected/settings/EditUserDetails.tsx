@@ -10,31 +10,29 @@ const EditUserDetails = () => {
   const editUserDetailsHandler = () => {}
 
   return (
-    <div className="w-full flex flex-col justify-center items-center">
-      <Card twClasses="p-10 md:p-20 m-0 md:m-10 shadow-lg space-y-5 w-[35rem]">
-        <h1 className="text-4xl font-bold text-center">Change User Details</h1>
-        <form className="flex flex-col gap-5" onSubmit={editUserDetailsHandler}>
-          <StyledInputRef
-            name="Address"
-            type="text"
-            placeholder="Address"
-            ref={addressRef}
-          />
-          <StyledInputRef
-            name="Security Question"
-            type="text"
-            placeholder="Security Question"
-            ref={securityQuestionRef}
-          />
-          <StyledInputRef
-            name="Security Question Answer"
-            type="text"
-            placeholder="Security Question Answer"
-            ref={securityQuestionAnswerRef}
-          />
-          <EditProfileButton />
-        </form>
-      </Card>
+    <div className="space-y-5 pb-10 border-b border-b-gray-300">
+      <h1 className="text-xl font-semibold">Edit User Details</h1>
+      <form className="flex flex-col gap-5" onSubmit={editUserDetailsHandler}>
+        <StyledInputRef
+          name="Address"
+          type="text"
+          placeholder="Address"
+          ref={addressRef}
+        />
+        <StyledInputRef
+          name="Security Question"
+          type="text"
+          placeholder="Security Question"
+          ref={securityQuestionRef}
+        />
+        <StyledInputRef
+          name="Security Question Answer"
+          type="text"
+          placeholder="Security Question Answer"
+          ref={securityQuestionAnswerRef}
+        />
+        <EditProfileButton />
+      </form>
     </div>
   )
 }
