@@ -29,7 +29,7 @@ const initialUserState = { username: "", _id: "", token: "", isAdmin: "" }
 const AuthContext = createContext<initialContextType>(initialContext)
 
 const AuthContextProvider = ({ children }: { children: ReactNode }) => {
-  const [auth, setAuth] = useState<User>(useMemo(() => initialUserState, []))
+  const [auth, setAuth] = useState<User>(initialUserState)
 
   useEffect(() => {
     if (
