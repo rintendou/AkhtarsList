@@ -34,6 +34,8 @@ const useListingDetail = () => {
     calculateTimeRemaining(listing.expireAt)
   )
 
+  const navigate = useNavigate()
+
   useEffect(() => {
     setIsLoading(true)
 
@@ -55,47 +57,41 @@ const useListingDetail = () => {
       fetchLister(json.data.lister, json.data)
       setIsLister(isAdmin || isLister)
       setIsExpired(new Date(json.data.expireAt) < new Date())
-      setIsLoading(false)
     }
 
     fetchListing()
   }, [])
 
-  const navigate = useNavigate()
+  const fetchLister = (listerId: string, updatedListing: ListingType) => {
+    setIsLoading(true)
 
-  const fetchLister = useCallback(
-    (listerId: string, updatedListing: ListingType) => {
-      setIsLoading(true)
-      const getLister = async () => {
-        const response = await fetch(
-          `http://localhost:${settings.BACKEND_SERVER_PORT}/api/user/${listerId}`
-        )
-        const json = await response.json()
+    const getLister = async () => {
+      const response = await fetch(
+        `http://localhost:${settings.BACKEND_SERVER_PORT}/api/user/${listerId}`
+      )
+      const json = await response.json()
 
-        if (!json.ok) {
-          setIsLoading(false)
-          return
-        }
-
-        setListing({
-          ...updatedListing,
-          lister: json.data.username,
-          height: updatedListing.dimensions[0],
-          width: updatedListing.dimensions[1],
-          length: updatedListing.dimensions[2],
-        })
+      if (!json.ok) {
         setIsLoading(false)
+        return
       }
 
-      getLister()
-    },
-    []
-  )
+      setListing({
+        ...updatedListing,
+        lister: json.data.username,
+        height: updatedListing.dimensions[0],
+        width: updatedListing.dimensions[1],
+        length: updatedListing.dimensions[2],
+      })
+      setIsLoading(false)
+    }
+
+    getLister()
+  }
 
   return {
     isLoading,
     listing,
-    fetchListing,
     isLister,
     isExpired,
     fetchLister,
