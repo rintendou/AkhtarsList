@@ -14,6 +14,7 @@ import numberInputIsValid from "../../../lib/util/numberInputValidator"
 // Backend port number
 import { settings } from "../../../settings"
 import ListingType from "../../../lib/types/ListingType"
+import Success from "../../ui/Success"
 
 type Props = {
   listingId: string
@@ -34,6 +35,7 @@ const ActiveBiddingSection = ({
 }: Props) => {
   const bidAmountRef = useRef<HTMLInputElement>(null)
   const [errorMessage, setErrorMessage] = useState("")
+  const [successMessage, setSuccessMessage] = useState("")
 
   const { auth } = useAuth()
   const navigate = useNavigate()
@@ -79,10 +81,12 @@ const ActiveBiddingSection = ({
 
       if (!json.ok) {
         setErrorMessage(json.message)
+        setSuccessMessage("")
         return
       }
 
       setErrorMessage("")
+      setSuccessMessage(json.message)
     }
 
     submitBid()
@@ -149,6 +153,9 @@ const ActiveBiddingSection = ({
         </div>
       )}
 
+      {!errorMessage && successMessage && (
+        <Success successMessage={successMessage} />
+      )}
       {errorMessage && <Error errorMessage={errorMessage} />}
       <Bidders bidders={bidders} isLister={isLister} />
     </div>

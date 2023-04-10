@@ -496,7 +496,7 @@ export const bidOnListing = async (req: Request, res: Response) => {
       }
 
       return res.status(200).json({
-        message: `${userId} has placed a better bid of ${req.body.finalPrice}`,
+        message: `${bidder.username} has placed a better bid of $${req.body.finalPrice}`,
         data: listing,
         ok: true,
       })
