@@ -16,6 +16,7 @@ import { settings } from "../../../settings"
 import ListingType from "../../../lib/types/ListingType"
 import Success from "../../ui/Success"
 import useListingDetail from "../../../lib/hooks/useListingDetail"
+import useProfile from "../../../lib/hooks/useProfile"
 
 type Props = {
   listingId: string
@@ -40,6 +41,7 @@ const ActiveBiddingSection = ({
 
   const { auth } = useAuth()
   const navigate = useNavigate()
+  const { refetchUserDetails } = useProfile()
 
   const onSubmitBid = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -92,6 +94,7 @@ const ActiveBiddingSection = ({
       setErrorMessage("")
       setSuccessMessage(json.message)
       bidAmountRef.current!.focus()
+      refetchUserDetails()
     }
 
     submitBid()
