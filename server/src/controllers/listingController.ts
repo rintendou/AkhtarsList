@@ -443,6 +443,18 @@ export const bidOnListing = async (req: Request, res: Response) => {
         })
       }
 
+      try {
+        // Updating the listings bidders array
+        listing!.bidders.push(bidder!._id)
+        await listing!.save()
+      } catch (error) {
+        return res.status(400).json({
+          message: "ERROR: Failed to update the bidders of this listing",
+          data: error,
+          ok: false,
+        })
+      }
+
       return res.status(200).json({
         message: `${userId} has placed a better bid of ${req.body.finalPrice}`,
         data: listing,
