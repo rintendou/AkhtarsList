@@ -24,6 +24,7 @@ const DevListingDetail = () => {
     views,
     category,
     weight,
+    dimensions,
     height,
     width,
     length,
@@ -61,16 +62,22 @@ const DevListingDetail = () => {
         <>
           <div className="flex flex-col md:flex-row min-h-screen border-b-2 border-b-tertiary">
             <ListingOverview
+              _id={listingId!}
+              image={image}
               title={title}
+              finalPrice={finalPrice}
+              expireAt={expireAt}
+              views={views}
+              bidders={bidders}
               lister={lister}
+              desc={desc}
               startPrice={startPrice}
               category={category}
-              views={views}
-              desc={desc}
               weight={weight}
-              length={length}
-              width={width}
+              dimensions={dimensions}
               height={height}
+              width={width}
+              length={length}
             />
             {biddingSection}
           </div>

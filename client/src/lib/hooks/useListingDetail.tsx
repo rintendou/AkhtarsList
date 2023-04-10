@@ -128,7 +128,14 @@ const useListingDetail = () => {
     return () => clearInterval(interval)
   }, [listing])
 
-  return { bidders, isLoading, listing, isLister, isExpired, timeRemaining }
+  return {
+    bidders,
+    isLoading,
+    listing,
+    isLister,
+    isExpired,
+    timeRemaining,
+  }
 }
 
 export default useListingDetail

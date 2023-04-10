@@ -15,6 +15,7 @@ import numberInputIsValid from "../../../lib/util/numberInputValidator"
 import { settings } from "../../../settings"
 import ListingType from "../../../lib/types/ListingType"
 import Success from "../../ui/Success"
+import useListingDetail from "../../../lib/hooks/useListingDetail"
 
 type Props = {
   listingId: string
