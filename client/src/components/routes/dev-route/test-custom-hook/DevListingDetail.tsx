@@ -1,20 +1,20 @@
 import { useEffect } from "react"
 import { useParams } from "react-router"
-import useListingDetail from "../../../lib/hooks/useListingDetail"
+import useDevListingDetail from "./useDevListingDetail"
 
-// Assets
-import SeeOtherListings from "./SeeOtherListings"
-import ListingOverview from "./ListingOverview"
-import ExpiredBiddingSection from "./ExpiredBiddingSection"
-import ActiveBiddingSection from "./ActiveBiddingSection"
-import ListingDetailSkeleton from "./ListingDetailSkeleton"
+import DevActiveBiddingSection from "./DevActiveBiddingSection"
+import DevExpiredBiddingSection from "./DevExpiredBiddingSection"
+import ListingOverview from "../../listing-detail/ListingOverview"
+import SeeOtherListings from "../../listing-detail/SeeOtherListings"
+import ListingDetailSkeleton from "../../listing-detail/ListingDetailSkeleton"
 
-const ListingDetail = () => {
-  const { listing, isLister, isExpired, isLoading, bidders } =
-    useListingDetail()
+const DevListingDetail = () => {
+  const { listing, isLister, isExpired, isLoading, timeRemaining } =
+    useDevListingDetail()
 
   const {
     image,
+    bidders,
     lister,
     desc,
     title,
@@ -30,29 +30,29 @@ const ListingDetail = () => {
     length,
   } = listing
 
-  const { listingId } = useParams()
-
   useEffect(() => {
     window.scrollTo({
       top: 0,
       behavior: "smooth",
     })
-  }, [listingId])
+  }, [])
+
+  const { listingId } = useParams()
 
   const biddingSection = isExpired ? (
-    <ExpiredBiddingSection
+    <DevExpiredBiddingSection
       bidders={bidders}
       finalPrice={finalPrice}
       isLister={isLister}
     />
   ) : (
-    <ActiveBiddingSection
-      listingId={listingId!}
+    <DevActiveBiddingSection
       listing={listing}
       bidders={bidders}
       finalPrice={finalPrice}
       expireAt={expireAt}
       isLister={isLister}
+      timeRemaining={timeRemaining}
     />
   )
 
@@ -81,7 +81,7 @@ const ListingDetail = () => {
             />
             {biddingSection}
           </div>
-          <SeeOtherListings category={category} idToFilter={listing._id!} />
+          <SeeOtherListings category={category} idToFilter={listingId!} />
         </>
       ) : (
         <ListingDetailSkeleton />
@@ -90,4 +90,4 @@ const ListingDetail = () => {
   )
 }
 
-export default ListingDetail
+export default DevListingDetail

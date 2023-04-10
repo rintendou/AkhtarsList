@@ -1,92 +1,27 @@
 import { useEffect, useRef, useState } from "react"
-import { useNavigate } from "react-router-dom"
-import useAuth from "../../../lib/hooks/useAuth"
 
-// Components
-
-// Utility functions
-import numberInputIsValid from "../../../lib/util/numberInputValidator"
-
-// Backend port number
-import { settings } from "../../../settings"
-import ListingType from "../../../lib/types/ListingType"
 import DevCountdown from "./DevCountdown"
-import EditListing from "../listing-detail/EditListing"
-import Error from "../../ui/Error"
-import Bidders from "../listing-detail/Bidders"
-import TimeRemainingType from "../../../lib/types/TimeRemainingType"
+import EditListing from "../../listing-detail/EditListing"
+import Error from "../../../ui/Error"
+import Bidders from "../../listing-detail/Bidders"
+import useListingDetail from "./useListingDetail"
 
-type Props = {
-  bidders: string[]
-  expireAt: Date
-  finalPrice: number
-  isLister: boolean
-  listing: ListingType
-  timeRemaining: TimeRemainingType
-}
-
-const ActiveBiddingSection = ({
-  bidders,
-  expireAt,
-  finalPrice,
-  isLister,
-  listing,
-  timeRemaining,
-}: Props) => {
+const ActiveBiddingSection = () => {
   const bidAmountRef = useRef<HTMLInputElement>(null)
   const [errorMessage, setErrorMessage] = useState("")
 
-  const { auth } = useAuth()
-  const navigate = useNavigate()
+  const { refetchListing, listing, timeRemaining, isLister } =
+    useListingDetail()
+  const { bidders, finalPrice } = listing
 
   const onSubmitBid = (e: React.FormEvent<HTMLFormElement>) => {
+    console.log("TEST")
     e.preventDefault()
-    const bidAmount = bidAmountRef.current!.value
-
-    if (!auth._id) {
-      navigate("/login", {
-        state: { errorMessage: "Must be logged in to do that!" },
-      })
-    }
-
-    if (!numberInputIsValid(bidAmount)) {
-      setErrorMessage("Invalid Input")
-      return
-    }
-
-    if (Number(bidAmount) <= finalPrice) {
-      setErrorMessage(
-        "Bid amount cannot be less than or equal to the current price!"
-      )
-      return
-    }
-
-    const submitBid = async () => {
-      const response = await fetch(
-        `http://localhost:${settings.BACKEND_SERVER_PORT}/THISAPICALLWILLFAIL`
-      )
-      const json = await response.json()
-
-      if (!json.ok) {
-        setErrorMessage(json.message)
-        return
-      }
-
-      setErrorMessage("")
-    }
-
-    submitBid()
+    refetchListing()
   }
+  console.log("TEST")
 
   useEffect(() => {
-    if (!bidAmountRef.current) {
-      return
-    }
-
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    })
     bidAmountRef.current!.focus()
   }, [])
 
@@ -106,7 +41,7 @@ const ActiveBiddingSection = ({
 
         <div className="flex items-center gap-3">
           <h1>Expires In:</h1>
-          <DevCountdown timeRemaining={timeRemaining} />
+          <DevCountdown />
         </div>
       </div>
 

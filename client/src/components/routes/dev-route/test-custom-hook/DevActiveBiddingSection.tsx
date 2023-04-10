@@ -1,47 +1,43 @@
 import { useEffect, useRef, useState } from "react"
 import { useNavigate } from "react-router-dom"
-import useAuth from "../../../lib/hooks/useAuth"
+import useAuth from "../../../../lib/hooks/useAuth"
 
 // Components
-import Bidders from "./Bidders"
-import Error from "../../ui/Error"
-import Countdown from "../../ui/Countdown"
-import EditListing from "./EditListing"
 
 // Utility functions
-import numberInputIsValid from "../../../lib/util/numberInputValidator"
+import numberInputIsValid from "../../../../lib/util/numberInputValidator"
 
 // Backend port number
-import { settings } from "../../../settings"
-import ListingType from "../../../lib/types/ListingType"
-import Success from "../../ui/Success"
-import useListingDetail from "../../../lib/hooks/useListingDetail"
-import useProfile from "../../../lib/hooks/useProfile"
+import { settings } from "../../../../settings"
+import ListingType from "../../../../lib/types/ListingType"
+import DevCountdown from "./DevCountdown"
+import EditListing from "../../listing-detail/EditListing"
+import Error from "../../../ui/Error"
+import Bidders from "../../listing-detail/Bidders"
+import TimeRemainingType from "../../../../lib/types/TimeRemainingType"
 
 type Props = {
-  listingId: string
   bidders: string[]
   expireAt: Date
   finalPrice: number
   isLister: boolean
   listing: ListingType
+  timeRemaining: TimeRemainingType
 }
 
 const ActiveBiddingSection = ({
-  listingId,
   bidders,
   expireAt,
   finalPrice,
   isLister,
   listing,
+  timeRemaining,
 }: Props) => {
   const bidAmountRef = useRef<HTMLInputElement>(null)
   const [errorMessage, setErrorMessage] = useState("")
-  const [successMessage, setSuccessMessage] = useState("")
 
   const { auth } = useAuth()
   const navigate = useNavigate()
-  const { refetchUserDetails } = useProfile()
 
   const onSubmitBid = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -55,7 +51,6 @@ const ActiveBiddingSection = ({
 
     if (!numberInputIsValid(bidAmount)) {
       setErrorMessage("Invalid Input")
-      bidAmountRef.current!.focus()
       return
     }
 
@@ -63,38 +58,21 @@ const ActiveBiddingSection = ({
       setErrorMessage(
         "Bid amount cannot be less than or equal to the current price!"
       )
-      bidAmountRef.current!.focus()
       return
-    }
-
-    const payload = {
-      userId: auth._id,
-      finalPrice: bidAmount,
-      bestBidder: auth._id,
     }
 
     const submitBid = async () => {
       const response = await fetch(
-        `http://localhost:${settings.BACKEND_SERVER_PORT}/api/listing/bid/${listingId}`,
-        {
-          method: "PUT",
-          body: JSON.stringify(payload),
-          headers: { "Content-Type": "application/json" },
-        }
+        `http://localhost:${settings.BACKEND_SERVER_PORT}/THISAPICALLWILLFAIL`
       )
       const json = await response.json()
 
       if (!json.ok) {
         setErrorMessage(json.message)
-        setSuccessMessage("")
-        bidAmountRef.current!.focus()
         return
       }
 
       setErrorMessage("")
-      setSuccessMessage(json.message)
-      bidAmountRef.current!.focus()
-      refetchUserDetails()
     }
 
     submitBid()
@@ -128,7 +106,7 @@ const ActiveBiddingSection = ({
 
         <div className="flex items-center gap-3">
           <h1>Expires In:</h1>
-          <Countdown targetDate={expireAt.toString()} />
+          <DevCountdown timeRemaining={timeRemaining} />
         </div>
       </div>
 
@@ -161,9 +139,6 @@ const ActiveBiddingSection = ({
         </div>
       )}
 
-      {!errorMessage && successMessage && (
-        <Success successMessage={successMessage} />
-      )}
       {errorMessage && <Error errorMessage={errorMessage} />}
       <Bidders bidders={bidders} isLister={isLister} />
     </div>

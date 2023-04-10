@@ -19,8 +19,12 @@ const IMAGESET1 = [
 const Application = () => {
   const { refetchTimeline } = useTimeline()
 
-  // Refresh timeline on component mount
+  // Refresh timeline and scroll to top on component mount
   useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    })
     refetchTimeline()
   }, [])
 

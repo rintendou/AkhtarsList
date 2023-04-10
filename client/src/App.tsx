@@ -28,7 +28,7 @@ import RequireAuth from "./components/routes/protected/RequireAuth"
 
 // Layouts
 import ProfileLayout from "./components/routes/protected/ProfileLayout"
-import DevListingDetail from "./components/routes/dev-route/DevListingDetail"
+import DevListingDetail from "./components/routes/dev-route/test-custom-hook/DevListingDetail"
 import WonListings from "./components/routes/protected/won-listings/WonListings"
 import DisputedListings from "./components/routes/protected/disputed-listings/DisputedListings"
 import Unauthorized from "./components/routes/unauthorized/Unauthorized"
@@ -36,6 +36,8 @@ import ManageListings from "./components/routes/protected/admin/ManageListings"
 import ManageDisputes from "./components/routes/protected/admin/ManageDisputes"
 import RequireAdmin from "./components/routes/protected/admin/RequireAdmin"
 import Settings from "./components/routes/protected/settings/Settings"
+import ListingDetailContextProvider from "./components/routes/dev-route/test-global-ctx/DevListingDetailContext"
+import DevListingDetailGlobal from "./components/routes/dev-route/test-global-ctx/DevListingDetailGlobal"
 
 function App() {
   return (
@@ -54,6 +56,15 @@ function App() {
           <Route path="/listings/:listingId" element={<ListingDetail />} />
           <Route path="/dev" element={<Dev />} />
           <Route path="/dev-listing-detail" element={<DevListingDetail />} />
+
+          <Route
+            path="/dev-listing-detail-global"
+            element={
+              <ListingDetailContextProvider>
+                <DevListingDetailGlobal />
+              </ListingDetailContextProvider>
+            }
+          />
 
           {/* Authorized Routes */}
           <Route element={<RequireAuth />}>

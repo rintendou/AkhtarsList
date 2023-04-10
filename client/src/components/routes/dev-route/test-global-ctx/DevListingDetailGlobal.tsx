@@ -1,16 +1,15 @@
 import { useEffect } from "react"
 import { useParams } from "react-router"
-import useDevListingDetail from "./useDevListingDetail"
+import useListingDetail from "./useListingDetail"
 
 import DevActiveBiddingSection from "./DevActiveBiddingSection"
-import ListingOverview from "../listing-detail/ListingOverview"
-import SeeOtherListings from "../listing-detail/SeeOtherListings"
-import ListingDetailSkeleton from "../listing-detail/ListingDetailSkeleton"
 import DevExpiredBiddingSection from "./DevExpiredBiddingSection"
+import ListingOverview from "../../listing-detail/ListingOverview"
+import SeeOtherListings from "../../listing-detail/SeeOtherListings"
+import ListingDetailSkeleton from "../../listing-detail/ListingDetailSkeleton"
 
-const DevListingDetail = () => {
-  const { listing, isLister, isExpired, isLoading, timeRemaining } =
-    useDevListingDetail()
+const DevListingDetailGlobal = () => {
+  const { listing, isLister, isExpired, isLoading } = useListingDetail()
 
   const {
     image,
@@ -24,6 +23,7 @@ const DevListingDetail = () => {
     views,
     category,
     weight,
+    dimensions,
     height,
     width,
     length,
@@ -45,14 +45,7 @@ const DevListingDetail = () => {
       isLister={isLister}
     />
   ) : (
-    <DevActiveBiddingSection
-      listing={listing}
-      bidders={bidders}
-      finalPrice={finalPrice}
-      expireAt={expireAt}
-      isLister={isLister}
-      timeRemaining={timeRemaining}
-    />
+    <DevActiveBiddingSection />
   )
 
   return (
@@ -61,16 +54,22 @@ const DevListingDetail = () => {
         <>
           <div className="flex flex-col md:flex-row min-h-screen border-b-2 border-b-tertiary">
             <ListingOverview
+              _id={listingId!}
+              image={image}
               title={title}
+              finalPrice={finalPrice}
+              expireAt={expireAt}
+              views={views}
+              bidders={bidders}
               lister={lister}
+              desc={desc}
               startPrice={startPrice}
               category={category}
-              views={views}
-              desc={desc}
               weight={weight}
-              length={length}
-              width={width}
+              dimensions={dimensions}
               height={height}
+              width={width}
+              length={length}
             />
             {biddingSection}
           </div>
@@ -83,4 +82,4 @@ const DevListingDetail = () => {
   )
 }
 
-export default DevListingDetail
+export default DevListingDetailGlobal
