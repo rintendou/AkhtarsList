@@ -52,6 +52,7 @@ const ActiveBiddingSection = ({
 
     if (!numberInputIsValid(bidAmount)) {
       setErrorMessage("Invalid Input")
+      bidAmountRef.current!.focus()
       return
     }
 
@@ -59,6 +60,7 @@ const ActiveBiddingSection = ({
       setErrorMessage(
         "Bid amount cannot be less than or equal to the current price!"
       )
+      bidAmountRef.current!.focus()
       return
     }
 
@@ -82,11 +84,13 @@ const ActiveBiddingSection = ({
       if (!json.ok) {
         setErrorMessage(json.message)
         setSuccessMessage("")
+        bidAmountRef.current!.focus()
         return
       }
 
       setErrorMessage("")
       setSuccessMessage(json.message)
+      bidAmountRef.current!.focus()
     }
 
     submitBid()

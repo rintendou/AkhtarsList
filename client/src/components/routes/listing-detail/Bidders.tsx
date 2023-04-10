@@ -8,7 +8,7 @@ const Bidders = ({ bidders, isLister }: BiddersProps) => {
     <svg
       stroke="currentColor"
       fill="currentColor"
-      stroke-width="0"
+      strokeWidth="0"
       viewBox="0 0 1024 1024"
       height="2em"
       width="2em"
@@ -31,7 +31,7 @@ const Bidders = ({ bidders, isLister }: BiddersProps) => {
           <li
             key={index}
             className={`${
-              index !== 0 && "text-gray-500"
+              index === 0 ? "text-black font-bold" : "text-gray-500"
             } flex items-center gap-3`}
           >
             {index + 1}.) {bidder}
