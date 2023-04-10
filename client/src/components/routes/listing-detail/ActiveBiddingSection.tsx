@@ -16,6 +16,7 @@ import { settings } from "../../../settings"
 import ListingType from "../../../lib/types/ListingType"
 
 type Props = {
+  listingId: string
   bidders: string[]
   expireAt: Date
   finalPrice: number
@@ -24,6 +25,7 @@ type Props = {
 }
 
 const ActiveBiddingSection = ({
+  listingId,
   bidders,
   expireAt,
   finalPrice,
@@ -58,9 +60,20 @@ const ActiveBiddingSection = ({
       return
     }
 
+    const payload = {
+      userId: auth._id,
+      finalPrice: bidAmount,
+      bestBidder: auth._id,
+    }
+
     const submitBid = async () => {
       const response = await fetch(
-        `http://localhost:${settings.BACKEND_SERVER_PORT}/THISAPICALLWILLFAIL`
+        `http://localhost:${settings.BACKEND_SERVER_PORT}/api/listing/bid/${listingId}`,
+        {
+          method: "PUT",
+          body: JSON.stringify(payload),
+          headers: { "Content-Type": "application/json" },
+        }
       )
       const json = await response.json()
 
