@@ -8,7 +8,7 @@ import ListingOverview from "../../listing-detail/ListingOverview"
 import SeeOtherListings from "../../listing-detail/SeeOtherListings"
 import ListingDetailSkeleton from "../../listing-detail/ListingDetailSkeleton"
 
-const DevListingDetail = () => {
+const DevListingDetailGlobal = () => {
   const { listing, isLister, isExpired, isLoading, timeRemaining } =
     useListingDetail()
 
@@ -90,4 +90,4 @@ const DevListingDetail = () => {
   )
 }
 
-export default DevListingDetail
+export default DevListingDetailGlobal

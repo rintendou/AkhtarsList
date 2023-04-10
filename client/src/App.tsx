@@ -36,6 +36,7 @@ import ManageListings from "./components/routes/protected/admin/ManageListings"
 import ManageDisputes from "./components/routes/protected/admin/ManageDisputes"
 import RequireAdmin from "./components/routes/protected/admin/RequireAdmin"
 import Settings from "./components/routes/protected/settings/Settings"
+import ListingDetailContextProvider from "./components/routes/dev-route/test-global-ctx/DevListingDetailContext"
 
 function App() {
   return (
@@ -54,6 +55,15 @@ function App() {
           <Route path="/listings/:listingId" element={<ListingDetail />} />
           <Route path="/dev" element={<Dev />} />
           <Route path="/dev-listing-detail" element={<DevListingDetail />} />
+
+          <Route
+            path="/dev-listing-detail-global"
+            element={
+              <ListingDetailContextProvider>
+                <DevListingDetail />
+              </ListingDetailContextProvider>
+            }
+          />
 
           {/* Authorized Routes */}
           <Route element={<RequireAuth />}>
