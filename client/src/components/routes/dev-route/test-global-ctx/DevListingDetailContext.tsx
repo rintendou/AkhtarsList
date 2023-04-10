@@ -111,20 +111,11 @@ const ListingDetailContextProvider = ({
         console.log("TEST");
         const fetchListing = async () => {
             setListing(updatedListingState);
-            setIsExpired(isListingExpired(timeRemaining));
+            setIsExpired(new Date(updatedListingState.expireAt) < new Date());
             setIsLoading(false);
         };
 
         fetchListing();
-    };
-
-    const isListingExpired = (timeRemaining: TimeRemainingType) => {
-        return (
-            timeRemaining.days === 0 &&
-            timeRemaining.hours === 0 &&
-            timeRemaining.minutes === 0 &&
-            timeRemaining.seconds === 0
-        );
     };
 
     useEffect(() => {
