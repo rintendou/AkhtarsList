@@ -69,7 +69,7 @@ const SellActions = () => {
 
     const payload = {
       title,
-      lister: auth.username,
+      listerId: auth._id,
       desc,
       image: image.length !== 0 ? image : "someRandomArmpit.jpg",
       startPrice,
@@ -146,7 +146,6 @@ const SellActions = () => {
       )
 
       const data = await response.json()
-      console.log(data)
 
       if (!data.ok) {
         setError(true)
