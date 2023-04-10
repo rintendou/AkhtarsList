@@ -37,6 +37,7 @@ import ManageDisputes from "./components/routes/protected/admin/ManageDisputes"
 import RequireAdmin from "./components/routes/protected/admin/RequireAdmin"
 import Settings from "./components/routes/protected/settings/Settings"
 import ListingDetailContextProvider from "./components/routes/dev-route/test-global-ctx/DevListingDetailContext"
+import DevListingDetailGlobal from "./components/routes/dev-route/test-global-ctx/DevListingDetailGlobal"
 
 function App() {
   return (
@@ -60,7 +61,7 @@ function App() {
             path="/dev-listing-detail-global"
             element={
               <ListingDetailContextProvider>
-                <DevListingDetail />
+                <DevListingDetailGlobal />
               </ListingDetailContextProvider>
             }
           />

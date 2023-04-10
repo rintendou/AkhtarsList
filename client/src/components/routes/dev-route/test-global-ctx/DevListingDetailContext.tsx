@@ -42,12 +42,32 @@ const fetchedListingState = {
   length: 7,
 }
 
+const updatedListingState = {
+  _id: "1234123412341234",
+  image: "12341234",
+  bidders: ["sdfsdffd", "Lorem", "Kanor", "KANOR"],
+  lister: "Lil Wayne",
+  title: "Lil Harry Potter",
+  desc: "Hermione Granger",
+  startPrice: 23,
+  finalPrice: 47,
+  expireAt: new Date(new Date().getTime() + 5 * 1000),
+  views: 43,
+  category: "General",
+  dimensions: [1, 2, 3],
+  weight: 4,
+  height: 5,
+  width: 6,
+  length: 7,
+}
+
 type initialContextType = {
   isLister: boolean
   isExpired: boolean
   isLoading: boolean
   listing: ListingType
   timeRemaining: TimeRemainingType
+  refetchListing: () => void
 }
 
 const initialContext: initialContextType = {
@@ -61,6 +81,7 @@ const initialContext: initialContextType = {
     minutes: 0,
     seconds: 0,
   },
+  refetchListing: () => {},
 }
 
 const ListingDetailContext = createContext<initialContextType>(initialContext)
@@ -79,10 +100,23 @@ const ListingDetailContextProvider = ({
   )
 
   useEffect(() => {
+    setIsLoading(true)
     setListing(fetchedListingState)
     setIsExpired(new Date(fetchedListingState.expireAt) < new Date())
     setIsLoading(false)
   }, [])
+
+  const refetchListing = () => {
+    setIsLoading(true)
+    console.log("TEST")
+    const fetchListing = async () => {
+      setListing(updatedListingState)
+      setIsExpired(new Date(updatedListingState.expireAt) < new Date())
+      setIsLoading(false)
+    }
+
+    fetchListing()
+  }
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -108,6 +142,7 @@ const ListingDetailContextProvider = ({
     isLoading,
     listing,
     timeRemaining,
+    refetchListing,
   }
 
   return (

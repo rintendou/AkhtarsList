@@ -1,5 +1,3 @@
-// Components
-
 import DevBidders from "./DevBidders"
 
 type Props = {

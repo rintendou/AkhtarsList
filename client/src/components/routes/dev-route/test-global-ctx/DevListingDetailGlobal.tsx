@@ -9,8 +9,7 @@ import SeeOtherListings from "../../listing-detail/SeeOtherListings"
 import ListingDetailSkeleton from "../../listing-detail/ListingDetailSkeleton"
 
 const DevListingDetailGlobal = () => {
-  const { listing, isLister, isExpired, isLoading, timeRemaining } =
-    useListingDetail()
+  const { listing, isLister, isExpired, isLoading } = useListingDetail()
 
   const {
     image,
@@ -46,14 +45,7 @@ const DevListingDetailGlobal = () => {
       isLister={isLister}
     />
   ) : (
-    <DevActiveBiddingSection
-      listing={listing}
-      bidders={bidders}
-      finalPrice={finalPrice}
-      expireAt={expireAt}
-      isLister={isLister}
-      timeRemaining={timeRemaining}
-    />
+    <DevActiveBiddingSection />
   )
 
   return (

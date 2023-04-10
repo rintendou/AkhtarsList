@@ -1,10 +1,7 @@
-import TimeRemaingType from "../../../lib/types/TimeRemainingType"
+import useListingDetail from "./useListingDetail"
 
-type Props = {
-  timeRemaining: TimeRemaingType
-}
-
-const DevCountdown = ({ timeRemaining }: Props) => {
+const DevCountdown = () => {
+  const { timeRemaining } = useListingDetail()
   const { days, hours, minutes, seconds } = timeRemaining
 
   return (

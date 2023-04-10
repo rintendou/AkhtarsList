@@ -1,9 +1,9 @@
-type BiddersProps = {
-  bidders: string[]
-  isLister: boolean
-}
+import useListingDetail from "./useListingDetail"
 
-const DevBidders = ({ bidders, isLister }: BiddersProps) => {
+const DevBidders = () => {
+  const { isLister, listing } = useListingDetail()
+  const { bidders } = listing
+
   return (
     <ul className="space-y-5">
       {bidders.length !== 0 && (
