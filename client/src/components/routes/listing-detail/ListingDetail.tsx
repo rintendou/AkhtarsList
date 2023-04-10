@@ -10,11 +10,11 @@ import ActiveBiddingSection from "./ActiveBiddingSection"
 import ListingDetailSkeleton from "./ListingDetailSkeleton"
 
 const ListingDetail = () => {
-  const { listing, isLister, isExpired, isLoading } = useListingDetail()
+  const { listing, isLister, isExpired, isLoading, bidders } =
+    useListingDetail()
 
   const {
     image,
-    bidders,
     lister,
     desc,
     title,

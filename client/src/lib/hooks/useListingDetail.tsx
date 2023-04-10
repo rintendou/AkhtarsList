@@ -33,6 +33,7 @@ const useListingDetail = () => {
   const [timeRemaining, setTimeRemaining] = useState<TimeRemainingType>(
     calculateTimeRemaining(listing.expireAt)
   )
+  const [bidders, setBidders] = useState<string[]>([])
 
   const navigate = useNavigate()
   const { listingId } = useParams()
@@ -55,6 +56,7 @@ const useListingDetail = () => {
       const isAdmin = localStorage.getItem("isAdmin") === "true"
       const isLister = localStorage.getItem("_id") === json.data.lister
 
+      fetchUsernames(listingId!)
       fetchLister(json.data.lister, json.data)
       setIsLister(isAdmin || isLister)
       setIsExpired(new Date(json.data.expireAt) < new Date())
@@ -90,6 +92,23 @@ const useListingDetail = () => {
     getLister()
   }
 
+  const fetchUsernames = (listerId: string) => {
+    const getUsernames = async () => {
+      const response = await fetch(
+        `http://localhost:${settings.BACKEND_SERVER_PORT}/api/listing/fetch/bidders/${listerId}`
+      )
+      const json = await response.json()
+
+      if (!json.ok) {
+        return
+      }
+
+      setBidders(json.data)
+    }
+
+    getUsernames()
+  }
+
   useEffect(() => {
     const interval = setInterval(() => {
       const TR = calculateTimeRemaining(listing.expireAt)
@@ -109,13 +128,7 @@ const useListingDetail = () => {
     return () => clearInterval(interval)
   }, [listing])
 
-  return {
-    isLoading,
-    listing,
-    isLister,
-    isExpired,
-    timeRemaining,
-  }
+  return { bidders, isLoading, listing, isLister, isExpired, timeRemaining }
 }
 
 export default useListingDetail
