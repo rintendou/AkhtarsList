@@ -1,20 +1,20 @@
 import { useEffect, useRef, useState } from "react"
 import { useNavigate } from "react-router-dom"
-import useAuth from "../../../lib/hooks/useAuth"
+import useAuth from "../../../../lib/hooks/useAuth"
 
 // Components
 
 // Utility functions
-import numberInputIsValid from "../../../lib/util/numberInputValidator"
+import numberInputIsValid from "../../../../lib/util/numberInputValidator"
 
 // Backend port number
-import { settings } from "../../../settings"
-import ListingType from "../../../lib/types/ListingType"
+import { settings } from "../../../../settings"
+import ListingType from "../../../../lib/types/ListingType"
 import DevCountdown from "./DevCountdown"
-import EditListing from "../listing-detail/EditListing"
-import Error from "../../ui/Error"
-import Bidders from "../listing-detail/Bidders"
-import TimeRemainingType from "../../../lib/types/TimeRemainingType"
+import EditListing from "../../listing-detail/EditListing"
+import Error from "../../../ui/Error"
+import Bidders from "../../listing-detail/Bidders"
+import TimeRemainingType from "../../../../lib/types/TimeRemainingType"
 
 type Props = {
   bidders: string[]

@@ -3,10 +3,10 @@ import { useParams } from "react-router"
 import useDevListingDetail from "./useDevListingDetail"
 
 import DevActiveBiddingSection from "./DevActiveBiddingSection"
-import ListingOverview from "../listing-detail/ListingOverview"
-import SeeOtherListings from "../listing-detail/SeeOtherListings"
-import ListingDetailSkeleton from "../listing-detail/ListingDetailSkeleton"
 import DevExpiredBiddingSection from "./DevExpiredBiddingSection"
+import ListingOverview from "../../listing-detail/ListingOverview"
+import SeeOtherListings from "../../listing-detail/SeeOtherListings"
+import ListingDetailSkeleton from "../../listing-detail/ListingDetailSkeleton"
 
 const DevListingDetail = () => {
   const { listing, isLister, isExpired, isLoading, timeRemaining } =
