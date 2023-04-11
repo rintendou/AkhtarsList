@@ -30,6 +30,7 @@ type initialContextType = {
   isLoading: boolean
   listing: ListingType
   bidders: string[]
+  transactions: string[]
   timeRemaining: TimeRemainingType
   refetchListing: () => void
 }
@@ -40,6 +41,7 @@ const initialContext: initialContextType = {
   isLoading: false,
   listing: initialListingState,
   bidders: [],
+  transactions: [],
   timeRemaining: {
     days: 0,
     hours: 0,
@@ -64,6 +66,7 @@ const ListingDetailContextProvider = ({
     calculateTimeRemaining(listing.expireAt)
   )
   const [bidders, setBidders] = useState<string[]>([])
+  const [transactions, setTransactions] = useState<string[]>([])
 
   const navigate = useNavigate()
   const { listingId } = useParams()
@@ -90,6 +93,7 @@ const ListingDetailContextProvider = ({
       fetchLister(json.data.lister, json.data)
       setIsLister(isAdmin || isLister)
       setIsExpired(new Date(json.data.expireAt) < new Date())
+      setTransactions(json.data.transactions)
     }
 
     fetchListing()
@@ -160,6 +164,7 @@ const ListingDetailContextProvider = ({
       fetchLister(json.data.lister, json.data)
       setIsLister(isAdmin || isLister)
       setIsExpired(new Date(json.data.expireAt) < new Date())
+      setTransactions(json.data.transactions)
     }
 
     refetchListing()
@@ -185,6 +190,7 @@ const ListingDetailContextProvider = ({
 
   const contextValue = {
     bidders,
+    transactions,
     isLister,
     isExpired,
     isLoading,
