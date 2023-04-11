@@ -42,8 +42,10 @@ const ExpiredBiddingSection = () => {
         </h1>
       )}
 
-      <Bidders />
-      <Transactions />
+      <div className="w-full flex flex-col lg:flex-row gap-5">
+        <Bidders />
+        <Transactions />
+      </div>
     </div>
   )
 }

@@ -1,7 +1,9 @@
+import useAuth from "../../../lib/hooks/useAuth"
 import useListingDetailContext from "../../../lib/hooks/useListingDetailContext"
 
 const Bidders = () => {
   const { isLister, bidders } = useListingDetailContext()
+  const { auth } = useAuth()
 
   const CrownSVG = (
     <svg
@@ -38,7 +40,7 @@ const Bidders = () => {
                   index === 0 ? "text-black font-bold" : "text-gray-500"
                 } flex items-center gap-3`}
               >
-                {index + 1}.) {bidder}
+                {index + 1}.) {bidder} {auth.username === bidder && "(You)"}
                 {index === 0 && CrownSVG}
               </li>
             ))
