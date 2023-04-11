@@ -35,8 +35,6 @@ const ListingCard = ({ listing }: { listing: ListingType }) => {
   const isExpired = timeRemaining === "Expired"
   const isHighestBidder = bestBidder === auth._id
 
-  console.log(bestBidder, auth._id)
-
   const CrownSVG = (
     <svg
       stroke="currentColor"

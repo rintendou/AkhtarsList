@@ -63,6 +63,7 @@ const ProfileContextProvider = ({
       setBalance(data.data.balance)
       setBiddings(data.data.biddedListings.reverse())
       setListings(data.data.listedListings.reverse())
+      console.log(data.data.wonListings)
       setWonListings(data.data.wonListings.reverse())
       setDisputedListings(data.data.disputedListings.reverse())
     }
