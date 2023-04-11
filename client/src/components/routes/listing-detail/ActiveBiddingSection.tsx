@@ -13,28 +13,14 @@ import numberInputIsValid from "../../../lib/util/numberInputValidator"
 
 // Backend port number
 import { settings } from "../../../settings"
-import ListingType from "../../../lib/types/ListingType"
 import Success from "../../ui/Success"
-import useListingDetail from "../../../lib/hooks/useListingDetail"
 import useProfile from "../../../lib/hooks/useProfile"
+import useListingDetailContext from "../../../lib/hooks/useListingDetailContext"
 
-type Props = {
-  listingId: string
-  bidders: string[]
-  expireAt: Date
-  finalPrice: number
-  isLister: boolean
-  listing: ListingType
-}
+const ActiveBiddingSection = () => {
+  const { listing, isLister, refetchListing } = useListingDetailContext()
+  const { _id: listingId, expireAt, finalPrice } = listing
 
-const ActiveBiddingSection = ({
-  listingId,
-  bidders,
-  expireAt,
-  finalPrice,
-  isLister,
-  listing,
-}: Props) => {
   const bidAmountRef = useRef<HTMLInputElement>(null)
   const [errorMessage, setErrorMessage] = useState("")
   const [successMessage, setSuccessMessage] = useState("")
@@ -42,6 +28,14 @@ const ActiveBiddingSection = ({
   const { auth } = useAuth()
   const navigate = useNavigate()
   const { refetchUserDetails } = useProfile()
+
+  useEffect(() => {
+    if (!bidAmountRef.current) {
+      return
+    }
+
+    bidAmountRef.current!.focus()
+  }, [])
 
   const onSubmitBid = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -93,24 +87,14 @@ const ActiveBiddingSection = ({
 
       setErrorMessage("")
       setSuccessMessage(json.message)
+      bidAmountRef.current!.value = ""
       bidAmountRef.current!.focus()
       refetchUserDetails()
+      refetchListing()
     }
 
     submitBid()
   }
-
-  useEffect(() => {
-    if (!bidAmountRef.current) {
-      return
-    }
-
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    })
-    bidAmountRef.current!.focus()
-  }, [])
 
   return (
     <div
@@ -157,7 +141,7 @@ const ActiveBiddingSection = ({
           <h1 className="text-3xl font-semibold w-full text-center">
             You own this listing
           </h1>
-          <EditListing listing={listing} />
+          <EditListing />
         </div>
       )}
 
@@ -165,7 +149,7 @@ const ActiveBiddingSection = ({
         <Success successMessage={successMessage} />
       )}
       {errorMessage && <Error errorMessage={errorMessage} />}
-      <Bidders bidders={bidders} isLister={isLister} />
+      <Bidders />
     </div>
   )
 }

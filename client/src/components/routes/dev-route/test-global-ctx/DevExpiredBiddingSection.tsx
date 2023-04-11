@@ -1,12 +1,10 @@
 import DevBidders from "./DevBidders"
+import useListingDetail from "./useListingDetail"
 
-type Props = {
-  bidders: string[]
-  finalPrice: number
-  isLister: boolean
-}
+const DevExpiredBiddingSection = () => {
+  const { listing, isLister } = useListingDetail()
+  const { finalPrice } = listing
 
-const DevExpiredBiddingSection = ({ bidders, finalPrice, isLister }: Props) => {
   return (
     <div
       className={`flex-auto p-10 py-24 max-w-none md:max-w-[50%] max-h-[50%] md:max-h-none space-y-10 flex flex-col items-center bg-purple-100 opacity-40 select-none`}
@@ -42,7 +40,7 @@ const DevExpiredBiddingSection = ({ bidders, finalPrice, isLister }: Props) => {
         </h1>
       )}
 
-      <DevBidders bidders={bidders} isLister={isLister} />
+      <DevBidders />
     </div>
   )
 }

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 
-import ListingType from "../../../lib/types/ListingType"
-import TimeRemainingType from "../../../lib/types/TimeRemainingType"
+import ListingType from "../../../../lib/types/ListingType"
+import TimeRemainingType from "../../../../lib/types/TimeRemainingType"
 
 const initialListingState = {
   _id: "",
@@ -105,27 +105,3 @@ const useDevListingDetail = () => {
 }
 
 export default useDevListingDetail
-
-// const fetchListing = useCallback((listingId: string) => {
-//   setIsLoading(true)
-//   const fetchListingDetail = async () => {
-//     setListing(fetchedListingState)
-//     console.log(isExpired)
-//     setIsExpired(new Date(fetchedListingState.expireAt) < new Date())
-//     console.log(new Date(fetchedListingState.expireAt) < new Date())
-//     setIsLoading(false)
-//   }
-
-//   fetchListingDetail()
-// }, [])
-
-// useEffect(() => {
-//   // const interval = setInterval(() => {
-//   //   // console.log("TEST")
-//   //   if (listing.expireAt < new Date()) {
-//   //     // console.log("EXPIREd")
-//   //     setIsExpired(true)
-//   //   }
-//   // }, 1000)
-//   // return () => clearInterval(interval)
-// }, [isExpired])

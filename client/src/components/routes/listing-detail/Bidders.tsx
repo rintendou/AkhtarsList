@@ -1,9 +1,8 @@
-type BiddersProps = {
-  bidders: string[]
-  isLister: boolean
-}
+import useListingDetailContext from "../../../lib/hooks/useListingDetailContext"
 
-const Bidders = ({ bidders, isLister }: BiddersProps) => {
+const Bidders = () => {
+  const { isLister, bidders } = useListingDetailContext()
+
   const CrownSVG = (
     <svg
       stroke="currentColor"

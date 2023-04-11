@@ -108,7 +108,6 @@ const ListingDetailContextProvider = ({
 
   const refetchListing = () => {
     setIsLoading(true)
-    console.log("TEST")
     const fetchListing = async () => {
       setListing(updatedListingState)
       setIsExpired(new Date(updatedListingState.expireAt) < new Date())

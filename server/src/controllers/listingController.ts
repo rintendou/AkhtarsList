@@ -466,7 +466,7 @@ export const bidOnListing = async (req: Request, res: Response) => {
         )
         updatedUserBiddings.push(listing._id)
 
-        bidder.biddedListings = updatedUserBiddings
+        bidder.biddedListings = updatedUserBiddings.reverse()
 
         await bidder.save()
       } catch (error) {

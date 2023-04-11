@@ -1,13 +1,11 @@
 // Components
+import useListingDetailContext from "../../../lib/hooks/useListingDetailContext"
 import Bidders from "./Bidders"
 
-type Props = {
-  bidders: string[]
-  finalPrice: number
-  isLister: boolean
-}
+const ExpiredBiddingSection = () => {
+  const { listing, isLister } = useListingDetailContext()
+  const { finalPrice } = listing
 
-const ExpiredBiddingSection = ({ bidders, finalPrice, isLister }: Props) => {
   return (
     <div
       className={`flex-auto p-10 py-24 max-w-none md:max-w-[50%] max-h-[50%] md:max-h-none space-y-10 flex flex-col items-center bg-purple-100 opacity-40 select-none`}
@@ -43,7 +41,7 @@ const ExpiredBiddingSection = ({ bidders, finalPrice, isLister }: Props) => {
         </h1>
       )}
 
-      <Bidders bidders={bidders} isLister={isLister} />
+      <Bidders />
     </div>
   )
 }

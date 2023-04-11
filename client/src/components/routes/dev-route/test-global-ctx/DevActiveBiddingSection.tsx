@@ -10,16 +10,13 @@ const ActiveBiddingSection = () => {
   const bidAmountRef = useRef<HTMLInputElement>(null)
   const [errorMessage, setErrorMessage] = useState("")
 
-  const { refetchListing, listing, timeRemaining, isLister } =
-    useListingDetail()
+  const { refetchListing, listing, isLister } = useListingDetail()
   const { bidders, finalPrice } = listing
 
   const onSubmitBid = (e: React.FormEvent<HTMLFormElement>) => {
-    console.log("TEST")
     e.preventDefault()
     refetchListing()
   }
-  console.log("TEST")
 
   useEffect(() => {
     bidAmountRef.current!.focus()
