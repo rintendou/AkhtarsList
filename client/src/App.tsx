@@ -43,6 +43,7 @@ import ListingDetailContextProvider from "./lib/store/ListingDetailContext"
 // DEV
 import DevListingDetailContextProvider from "./components/routes/dev-route/test-global-ctx/DevListingDetailContext"
 import DevListingDetailGlobal from "./components/routes/dev-route/test-global-ctx/DevListingDetailGlobal"
+import SearchResults from "./components/routes/search-results/SearchResults"
 
 function App() {
   return (
@@ -53,12 +54,12 @@ function App() {
           {/*  Unprotected Routes */}
           {/* <Route path="/" element={<LandingPage />} /> */}
           <Route path="/" element={<Application />} />
+          <Route path="/search-results" element={<SearchResults />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/reset-password" element={<ChangePassword />} />
           <Route path="/category/:categoryName" element={<Category />} />
-
           <Route
             path="/listings/:listingId"
             element={
