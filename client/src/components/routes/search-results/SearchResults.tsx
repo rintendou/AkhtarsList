@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom"
 import Carousel from "../../ui/Carousel"
 import CategoryHeader from "../application/CategoryHeader"
+import Results from "./Results"
 
 const IMAGESET2 = [
   "sneakers2.jpg",
@@ -18,6 +19,7 @@ const SearchResults = () => {
     <div className="min-h-screen flex flex-col pb-20">
       <CategoryHeader />
       <div className="container mx-auto flex flex-col gap-5">
+        <Results />
         <div className="mb-10">
           <Carousel images={IMAGESET2} />
         </div>

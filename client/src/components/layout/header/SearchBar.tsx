@@ -1,4 +1,6 @@
 import { useState } from "react"
+import { settings } from "../../../settings"
+import { useNavigate } from "react-router-dom"
 
 const SearchBar = () => {
   const [query, setQuery] = useState("")
@@ -7,10 +9,19 @@ const SearchBar = () => {
     setQuery(event.target.value)
   }
 
+  const navigate = useNavigate()
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    // Do something with the search query, such as send it to an API
-    console.log(query)
+
+    const fetchListings = async () => {
+      const response = await fetch(
+        `http://localhost:${settings.BACKEND_SERVER_PORT}/api/listing/thisapiendptdoesnotexist`
+      )
+      const json = await response.json()
+      navigate("/search-results", { state: json.data })
+    }
+    fetchListings()
   }
 
   return (
