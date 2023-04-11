@@ -487,7 +487,7 @@ export const bidOnListing = async (req: Request, res: Response) => {
         listing.bidders = updatedListingBidders
 
         listing.transactions = [
-          `${bidder.username} ${req.body.finalPrice}`,
+          `${bidder.username} $${req.body.finalPrice}`,
           ...listing.transactions,
         ]
 

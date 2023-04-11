@@ -20,10 +20,10 @@ const Transactions = () => {
   return (
     <div className="w-full">
       <h1 className="text-center text-2xl font-semibold">Transactions</h1>
-      <div className="space-y-5 w-full overflow-y-auto h-full border-2 p-4 border-secondary rounded-md">
+      <div className="space-y-5 w-full overflow-y-auto h-96 border-2 p-4 border-secondary rounded-md">
         <div className="flex items-center space-x-4">
           <h1>Number of Transactions: </h1>
-          <p className="text-lg font-semibold">{Transactions.length}</p>
+          <p className="text-lg font-semibold">{transactions.length}</p>
         </div>
 
         <ul>
@@ -32,14 +32,8 @@ const Transactions = () => {
           )}
           {transactions.length !== 0 ? (
             transactions.map((bidder: string, index: number) => (
-              <li
-                key={index}
-                className={`${
-                  index === 0 ? "text-black font-bold" : "text-gray-500"
-                } flex items-center gap-3`}
-              >
-                {index + 1}.) {bidder}
-                {index === 0 && CrownSVG}
+              <li key={index} className="gap-3">
+                {transactions.length - index}.) {bidder}
               </li>
             ))
           ) : (
