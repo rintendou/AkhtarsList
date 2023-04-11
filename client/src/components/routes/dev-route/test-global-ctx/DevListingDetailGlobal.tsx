@@ -17,7 +17,6 @@ const DevListingDetailGlobal = () => {
   //   })
   // }, [])
 
-  const { listingId } = useParams()
   return (
     <div>
       {!isLoading ? (
