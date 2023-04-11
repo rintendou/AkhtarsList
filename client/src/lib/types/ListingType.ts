@@ -15,6 +15,7 @@ type ListingType = {
   height: number
   length: number
   width: number
+  [key: string]: any
 }
 
 export default ListingType

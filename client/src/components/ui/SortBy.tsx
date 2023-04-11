@@ -7,12 +7,12 @@ type Option = {
 
 type Props = {
   options: Option[]
-  onSelect: (value: string) => void
+  onSort: (value: string, isAscending: boolean) => void
 }
 
-const SortBy = ({ options, onSelect }: Props) => {
+const SortBy = ({ options, onSort }: Props) => {
   const [isOpen, setIsOpen] = useState(false)
-  const [selectedOption, setSelectedOption] = useState<Option | null>(null)
+  const [selectedOption, setSelectedOption] = useState("")
   const [isAscending, setIsAscending] = useState(true)
   const sortByRef = useRef<HTMLDivElement>(null)
 
@@ -21,8 +21,8 @@ const SortBy = ({ options, onSelect }: Props) => {
   }
 
   const handleOptionClick = (option: Option) => {
-    setSelectedOption(option)
-    onSelect(option.value)
+    setSelectedOption(option.value)
+    onSort(selectedOption, isAscending)
     setIsOpen(false)
   }
 
@@ -44,17 +44,18 @@ const SortBy = ({ options, onSelect }: Props) => {
   const handleOrderClick: React.MouseEventHandler<HTMLDivElement> = (event) => {
     event.stopPropagation()
     setIsAscending(!isAscending)
+    onSort(selectedOption, isAscending)
   }
 
   return (
     <div className="relative" ref={sortByRef}>
       <button
         type="button"
-        className="inline-flex justify-between items-center w-44 rounded-md border-2 focus:border-secondary border-gray-200 shadow-sm px-4 py-2  text-sm font-medium text-secondary select-none caret-transparent"
+        className="inline-flex justify-between items-center w-56 rounded-md border-2 focus:border-secondary border-gray-200 shadow-sm px-4 py-2  text-sm font-medium text-secondary select-none caret-transparent"
         onClick={togglesortBy}
       >
-        <div className="">
-          {selectedOption ? `Sort By: ${selectedOption.label}` : "Sort By:"}
+        <div className="truncate">
+          {selectedOption ? `Sort By: ${selectedOption}` : "Sort By:"}
         </div>
         <div onClick={handleOrderClick}>
           <svg
