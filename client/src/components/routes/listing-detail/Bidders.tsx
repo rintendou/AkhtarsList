@@ -18,7 +18,7 @@ const Bidders = () => {
   )
 
   return (
-    <ol className="space-y-5 w-full pt-10 border-t-2 border-t-secondary flex flex-col gap-2">
+    <ul className="space-y-5 w-full overflow-y-auto h-96 border-2 p-4 border-secondary rounded-md">
       {bidders.length !== 0 && (
         <div className="flex items-center gap-3">
           <h1>Number of Bidders: </h1>
@@ -48,7 +48,7 @@ const Bidders = () => {
           <p className="text-sm">Be the first one to bid!</p>
         </div>
       )}
-    </ol>
+    </ul>
   )
 }
 
