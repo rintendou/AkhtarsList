@@ -15,11 +15,9 @@ const ActiveBiddingSection = () => {
   const { bidders, finalPrice } = listing
 
   const onSubmitBid = (e: React.FormEvent<HTMLFormElement>) => {
-    console.log("TEST")
     e.preventDefault()
     refetchListing()
   }
-  console.log("TEST")
 
   useEffect(() => {
     bidAmountRef.current!.focus()

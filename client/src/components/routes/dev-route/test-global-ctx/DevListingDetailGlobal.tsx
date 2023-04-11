@@ -1,4 +1,3 @@
-import { useParams } from "react-router"
 import useListingDetail from "./useListingDetail"
 
 import DevActiveBiddingSection from "./DevActiveBiddingSection"
@@ -8,14 +7,7 @@ import DevSeeOtherListings from "./DevSeeOtherListings"
 import ListingDetailSkeleton from "../../listing-detail/ListingDetailSkeleton"
 
 const DevListingDetailGlobal = () => {
-  const { listing, isExpired, isLoading } = useListingDetail()
-
-  // useEffect(() => {
-  //   window.scrollTo({
-  //     top: 0,
-  //     behavior: "smooth",
-  //   })
-  // }, [])
+  const { isExpired, isLoading } = useListingDetail()
 
   return (
     <div>
