@@ -11,25 +11,27 @@ import getTimeRemaining from "../../lib/util/getTimeRemaining"
 // Types
 import ListingType from "../../lib/types/ListingType"
 
-const ListingCard = ({
-  _id,
-  image,
-  bidders,
-  lister,
-  desc,
-  title,
-  startPrice,
-  finalPrice,
-  expireAt,
-  views,
-  category,
-  weight,
-  height,
-  width,
-  length,
-}: ListingType) => {
+const ListingCard = ({ listing }: { listing: ListingType }) => {
   const navigate = useNavigate()
   const { auth } = useAuth()
+
+  const {
+    _id,
+    image,
+    bidders,
+    lister,
+    desc,
+    title,
+    startPrice,
+    finalPrice,
+    expireAt,
+    views,
+    category,
+    weight,
+    height,
+    width,
+    length,
+  } = listing
 
   const handleClick = () => {
     navigate(`/listings/${_id}`, {
@@ -54,7 +56,6 @@ const ListingCard = ({
   }
 
   const isLister = lister === auth._id
-  const isAdmin = auth.isAdmin
 
   const timeRemaining = getTimeRemaining(expireAt)
   const isExpired = timeRemaining === "Expired"

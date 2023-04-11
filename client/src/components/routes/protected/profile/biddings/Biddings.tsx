@@ -14,24 +14,7 @@ const Biddings = () => {
         {biddings.length !== 0 &&
           biddings.map((bidding) => (
             <li key={bidding._id}>
-              <ListingCard
-                _id={bidding._id}
-                image={bidding.image}
-                title={bidding.title}
-                finalPrice={bidding.finalPrice}
-                expireAt={bidding.expireAt}
-                views={bidding.views}
-                bidders={bidding.bidders}
-                lister={bidding.lister}
-                desc={bidding.desc}
-                startPrice={bidding.startPrice}
-                category={bidding.category}
-                weight={bidding.weight}
-                dimensions={bidding.dimensions}
-                height={bidding.height}
-                width={bidding.width}
-                length={bidding.length}
-              />
+              <ListingCard listing={bidding} />
             </li>
           ))}
       </ul>

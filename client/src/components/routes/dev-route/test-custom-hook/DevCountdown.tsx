@@ -1,4 +1,4 @@
-import TimeRemaingType from "../../../lib/types/TimeRemainingType"
+import TimeRemaingType from "../../../../lib/types/TimeRemainingType"
 
 type Props = {
   timeRemaining: TimeRemaingType
