@@ -13,28 +13,14 @@ import numberInputIsValid from "../../../lib/util/numberInputValidator"
 
 // Backend port number
 import { settings } from "../../../settings"
-import ListingType from "../../../lib/types/ListingType"
 import Success from "../../ui/Success"
-import useListingDetail from "../../../lib/hooks/useListingDetail"
 import useProfile from "../../../lib/hooks/useProfile"
+import useListingDetailContext from "../../../lib/hooks/useListingDetailContext"
 
-type Props = {
-  listingId: string
-  bidders: string[]
-  expireAt: Date
-  finalPrice: number
-  isLister: boolean
-  listing: ListingType
-}
+const ActiveBiddingSection = () => {
+  const { listing, isLister } = useListingDetailContext()
+  const { _id: listingId, expireAt, finalPrice } = listing
 
-const ActiveBiddingSection = ({
-  listingId,
-  bidders,
-  expireAt,
-  finalPrice,
-  isLister,
-  listing,
-}: Props) => {
   const bidAmountRef = useRef<HTMLInputElement>(null)
   const [errorMessage, setErrorMessage] = useState("")
   const [successMessage, setSuccessMessage] = useState("")
@@ -157,7 +143,7 @@ const ActiveBiddingSection = ({
           <h1 className="text-3xl font-semibold w-full text-center">
             You own this listing
           </h1>
-          <EditListing listing={listing} />
+          <EditListing />
         </div>
       )}
 
@@ -165,7 +151,7 @@ const ActiveBiddingSection = ({
         <Success successMessage={successMessage} />
       )}
       {errorMessage && <Error errorMessage={errorMessage} />}
-      <Bidders bidders={bidders} isLister={isLister} />
+      <Bidders />
     </div>
   )
 }

@@ -1,18 +1,21 @@
 import DUMMYIMAGE from "../../../../public/random-listing-image-undraw.svg"
-import ListingType from "../../../lib/types/ListingType"
+import useListingDetailContext from "../../../lib/hooks/useListingDetailContext"
 
-const ListingOverview = ({
-  title,
-  lister,
-  startPrice,
-  category,
-  views,
-  desc,
-  weight,
-  length,
-  width,
-  height,
-}: ListingType) => {
+const ListingOverview = () => {
+  const { listing } = useListingDetailContext()
+  const {
+    title,
+    lister,
+    startPrice,
+    category,
+    views,
+    desc,
+    weight,
+    length,
+    width,
+    height,
+  } = listing
+
   return (
     <div className="flex-auto p-10 py-24 max-w-none md:max-w-[50%] max-h-[50%] md:max-h-none space-y-10 flex flex-col items-center justify-between">
       <div className="space-y-10">
