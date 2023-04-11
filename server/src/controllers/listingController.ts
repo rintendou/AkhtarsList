@@ -563,3 +563,32 @@ export const fetchListingsBidders = async (req: Request, res: Response) => {
     })
   }
 }
+
+export const fetchListingsFromSearch = async (req: Request, res: Response) => {
+  try {
+    const query = req.query.q as string
+
+    if (!query) {
+      return res
+        .status(400)
+        .json({ message: "query property is required!", data: null, ok: false })
+    }
+
+    const regex = new RegExp(query, "i") // 'i' flag makes the search case-insensitive
+
+    const listings = await ListingModel.find({ title: regex })
+
+    return res.status(200).json({
+      message: "Listings fetched successfully",
+      data: listings,
+      ok: true,
+    })
+  } catch (error) {
+    console.error(error)
+    return res.status(500).json({
+      message: "Error fetching listings",
+      data: null,
+      ok: false,
+    })
+  }
+}
