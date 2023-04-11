@@ -10,13 +10,13 @@ type Props = {
   onSelect: (value: string) => void
 }
 
-const Dropdown = ({ options, onSelect }: Props) => {
+const SortBy = ({ options, onSelect }: Props) => {
   const [isOpen, setIsOpen] = useState(false)
   const [selectedOption, setSelectedOption] = useState<Option | null>(null)
   const [isAscending, setIsAscending] = useState(true)
-  const dropdownRef = useRef<HTMLDivElement>(null)
+  const sortByRef = useRef<HTMLDivElement>(null)
 
-  const toggleDropdown = () => {
+  const togglesortBy = () => {
     setIsOpen(!isOpen)
   }
 
@@ -29,8 +29,8 @@ const Dropdown = ({ options, onSelect }: Props) => {
   useEffect(() => {
     const handleOutsideClick = (event: MouseEvent) => {
       if (
-        dropdownRef.current &&
-        !dropdownRef.current.contains(event.target as Node)
+        sortByRef.current &&
+        !sortByRef.current.contains(event.target as Node)
       ) {
         setIsOpen(false)
       }
@@ -39,7 +39,7 @@ const Dropdown = ({ options, onSelect }: Props) => {
     return () => {
       document.removeEventListener("mousedown", handleOutsideClick)
     }
-  }, [dropdownRef])
+  }, [sortByRef])
 
   const handleOrderClick: React.MouseEventHandler<HTMLDivElement> = (event) => {
     event.stopPropagation()
@@ -47,11 +47,11 @@ const Dropdown = ({ options, onSelect }: Props) => {
   }
 
   return (
-    <div className="relative" ref={dropdownRef}>
+    <div className="relative" ref={sortByRef}>
       <button
         type="button"
         className="inline-flex justify-between items-center w-full rounded-md border-2 focus:border-secondary border-gray-200 shadow-sm px-4 py-2  text-sm font-medium text-secondary select-none caret-transparent"
-        onClick={toggleDropdown}
+        onClick={togglesortBy}
       >
         {selectedOption ? selectedOption.label : "Sort By:"}
         <div onClick={handleOrderClick}>
@@ -96,4 +96,4 @@ const Dropdown = ({ options, onSelect }: Props) => {
   )
 }
 
-export default Dropdown
+export default SortBy

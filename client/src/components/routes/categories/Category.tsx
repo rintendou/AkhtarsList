@@ -70,9 +70,11 @@ const Category = () => {
 
         <div>
           <div className="space-y-10 py-10 mb-10 border-b-2 border-secondary">
-            <h1 className="text-2xl font-semibold capitalize">
-              Active {categoryName} listings
-            </h1>
+            <div>
+              <h1 className="text-2xl font-semibold capitalize">
+                Active {categoryName} listings
+              </h1>
+            </div>
             <ul className="flex gap-8 py-5 flex-wrap">
               {activeCategorizedListings.length !== 0 ? (
                 activeCategorizedListings.map((listing) => (
