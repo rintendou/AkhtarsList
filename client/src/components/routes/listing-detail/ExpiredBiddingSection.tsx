@@ -1,6 +1,7 @@
 // Components
 import useListingDetailContext from "../../../lib/hooks/useListingDetailContext"
 import Bidders from "./Bidders"
+import Transactions from "./Transactions"
 
 const ExpiredBiddingSection = () => {
   const { listing, isLister } = useListingDetailContext()
@@ -41,7 +42,10 @@ const ExpiredBiddingSection = () => {
         </h1>
       )}
 
-      <Bidders />
+      <div className="w-full flex flex-col lg:flex-row gap-5">
+        <Bidders />
+        <Transactions />
+      </div>
     </div>
   )
 }

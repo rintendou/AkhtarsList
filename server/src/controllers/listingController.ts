@@ -486,6 +486,11 @@ export const bidOnListing = async (req: Request, res: Response) => {
         updatedListingBidders.push(bidder._id)
         listing.bidders = updatedListingBidders
 
+        listing.transactions = [
+          `${bidder.username} $${req.body.finalPrice}`,
+          ...listing.transactions,
+        ]
+
         await listing.save()
       } catch (error) {
         return res.status(400).json({

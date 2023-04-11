@@ -1,9 +1,7 @@
-import useAuth from "../../../lib/hooks/useAuth"
 import useListingDetailContext from "../../../lib/hooks/useListingDetailContext"
 
-const Bidders = () => {
-  const { isLister, bidders } = useListingDetailContext()
-  const { auth } = useAuth()
+const Transactions = () => {
+  const { isLister, transactions } = useListingDetailContext()
 
   const CrownSVG = (
     <svg
@@ -21,32 +19,26 @@ const Bidders = () => {
 
   return (
     <div className="w-full">
-      <h1 className="text-center text-2xl font-semibold">Bidders</h1>
+      <h1 className="text-center text-2xl font-semibold">Transactions</h1>
       <div className="space-y-5 w-full overflow-y-auto h-96 border-2 p-4 border-secondary rounded-md">
         <div className="flex items-center space-x-4">
-          <h1>Number of Bidders: </h1>
-          <p className="text-lg font-semibold">{bidders.length}</p>
+          <h1>Number of Transactions: </h1>
+          <p className="text-lg font-semibold">{transactions.length}</p>
         </div>
 
         <ul>
-          {bidders.length !== 0 && (
+          {transactions.length !== 0 && (
             <div className="flex items-center gap-3"></div>
           )}
-          {bidders.length !== 0 ? (
-            bidders.map((bidder: string, index: number) => (
-              <li
-                key={index}
-                className={`${
-                  index === 0 ? "text-black font-bold" : "text-gray-500"
-                } flex items-center gap-3`}
-              >
-                {index + 1}.) {bidder} {auth.username === bidder && "(You)"}
-                {index === 0 && CrownSVG}
+          {transactions.length !== 0 ? (
+            transactions.map((bidder: string, index: number) => (
+              <li key={index} className="gap-3">
+                {transactions.length - index}.) {bidder}
               </li>
             ))
           ) : (
             <div className="text-center">
-              <h1 className="font-semibold text-lg">No bidders yet!</h1>
+              <h1 className="font-semibold text-lg">No Transactions yet!</h1>
               {isLister ? (
                 <p className="text-sm">Waiting for other users to bid!</p>
               ) : (
@@ -60,4 +52,4 @@ const Bidders = () => {
   )
 }
 
-export default Bidders
+export default Transactions
