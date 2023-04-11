@@ -33,6 +33,7 @@ const ListingSchema = new Schema(
     transactions: [
       {
         type: String,
+        default: [],
       },
     ],
     bestBidder: {
