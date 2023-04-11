@@ -62,6 +62,7 @@ const updatedListingState = {
 }
 
 type initialContextType = {
+  bidders: string[]
   isLister: boolean
   isExpired: boolean
   isLoading: boolean
@@ -71,6 +72,7 @@ type initialContextType = {
 }
 
 const initialContext: initialContextType = {
+  bidders: [""],
   isLister: false,
   isExpired: false,
   isLoading: false,
@@ -83,6 +85,8 @@ const initialContext: initialContextType = {
   },
   refetchListing: () => {},
 }
+
+const initialBidderArr = ["TEST1", "TEST2"]
 
 const ListingDetailContext = createContext<initialContextType>(initialContext)
 
@@ -98,8 +102,10 @@ const ListingDetailContextProvider = ({
   const [timeRemaining, setTimeRemaining] = useState<TimeRemainingType>(
     calculateTimeRemaining(listing.expireAt)
   )
+  const [bidders, setBidders] = useState<string[]>([])
 
   useEffect(() => {
+    setBidders(initialBidderArr)
     setIsLoading(true)
     setListing(fetchedListingState)
     setIsExpired(new Date(fetchedListingState.expireAt) < new Date())
@@ -108,6 +114,7 @@ const ListingDetailContextProvider = ({
 
   const refetchListing = () => {
     setIsLoading(true)
+    setBidders([new Date().toString(), ...bidders!])
     const fetchListing = async () => {
       setListing(updatedListingState)
       setIsExpired(new Date(updatedListingState.expireAt) < new Date())
@@ -136,6 +143,7 @@ const ListingDetailContextProvider = ({
   }, [listing])
 
   const contextValue = {
+    bidders,
     isLister,
     isExpired,
     isLoading,

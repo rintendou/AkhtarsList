@@ -1,8 +1,7 @@
 import useListingDetail from "./useListingDetail"
 
 const DevBidders = () => {
-  const { isLister, listing } = useListingDetail()
-  const { bidders } = listing
+  const { isLister, bidders } = useListingDetail()
 
   return (
     <ul className="space-y-5">
