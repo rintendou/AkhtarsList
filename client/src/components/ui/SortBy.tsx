@@ -50,10 +50,12 @@ const SortBy = ({ options, onSelect }: Props) => {
     <div className="relative" ref={sortByRef}>
       <button
         type="button"
-        className="inline-flex justify-between items-center w-full rounded-md border-2 focus:border-secondary border-gray-200 shadow-sm px-4 py-2  text-sm font-medium text-secondary select-none caret-transparent"
+        className="inline-flex justify-between items-center w-44 rounded-md border-2 focus:border-secondary border-gray-200 shadow-sm px-4 py-2  text-sm font-medium text-secondary select-none caret-transparent"
         onClick={togglesortBy}
       >
-        {selectedOption ? selectedOption.label : "Sort By:"}
+        <div className="">
+          {selectedOption ? `Sort By: ${selectedOption.label}` : "Sort By:"}
+        </div>
         <div onClick={handleOrderClick}>
           <svg
             className={`-mr-1 ml-2 h-8 w-8 transform text-white bg-secondary bg-opacity-20 rounded-full p-2 hover:bg-black hover:text-white duration-200 ease-in-out ${

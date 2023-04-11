@@ -9,6 +9,7 @@ import ListingCard from "../../ui/ListingCard"
 // Types
 import ListingType from "../../../lib/types/ListingType"
 import ListMore from "../protected/profile/listings/ListMore"
+import SortBy from "../../ui/SortBy"
 
 const Category = () => {
   useEffect(() => {
@@ -70,10 +71,17 @@ const Category = () => {
 
         <div>
           <div className="space-y-10 py-10 mb-10 border-b-2 border-secondary">
-            <div>
+            <div className="flex justify-between">
               <h1 className="text-2xl font-semibold capitalize">
                 Active {categoryName} listings
               </h1>
+              <SortBy
+                options={[
+                  { label: "23", value: "23" },
+                  { label: "34", value: "34" },
+                ]}
+                onSelect={() => {}}
+              />
             </div>
             <ul className="flex gap-8 py-5 flex-wrap">
               {activeCategorizedListings.length !== 0 ? (
