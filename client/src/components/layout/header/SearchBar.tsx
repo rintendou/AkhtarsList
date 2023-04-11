@@ -20,10 +20,12 @@ const SearchBar = () => {
 
     const fetchListings = async () => {
       const response = await fetch(
-        `http://localhost:${settings.BACKEND_SERVER_PORT}/api/listing/thisapiendptdoesnotexist`
+        `http://localhost:${settings.BACKEND_SERVER_PORT}/api/listing/search?q=${query}`
       )
       const json = await response.json()
-      navigate("/search-results", { state: json.data })
+      navigate("/search-results", {
+        state: { searchResults: json.data, query: query },
+      })
     }
     fetchListings()
   }
