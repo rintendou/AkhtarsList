@@ -566,15 +566,15 @@ export const fetchListingsBidders = async (req: Request, res: Response) => {
 
 export const fetchListingsFromSearch = async (req: Request, res: Response) => {
   try {
-    const { query } = req.body // assuming the search query is passed as a query parameter
+    const query = req.query.q as string
 
-    const regex = new RegExp(query, "i") // 'i' flag makes the search case-insensitive
-
-    if (!regex) {
+    if (!query) {
       return res
         .status(400)
         .json({ message: "query property is required!", data: null, ok: false })
     }
+
+    const regex = new RegExp(query, "i") // 'i' flag makes the search case-insensitive
 
     const listings = await ListingModel.find({ title: regex })
 
