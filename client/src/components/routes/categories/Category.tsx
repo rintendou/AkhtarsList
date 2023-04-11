@@ -83,7 +83,7 @@ const Category = () => {
                 onSelect={() => {}}
               />
             </div>
-            <ul className="flex gap-8 py-5 flex-wrap">
+            <ul className="flex gap-8 justify-between py-5 flex-wrap">
               {activeCategorizedListings.length !== 0 ? (
                 activeCategorizedListings.map((listing) => (
                   <li key={listing._id}>
@@ -100,7 +100,7 @@ const Category = () => {
             <h1 className="text-2xl font-semibold capitalize">
               Expired {categoryName} listings
             </h1>
-            <ul className="flex gap-8 py-5 flex-wrap">
+            <ul className="flex gap-8 justify-between py-5 flex-wrap">
               {expiredCategorizedListings.length !== 0 &&
                 expiredCategorizedListings.map((listing) => (
                   <li key={listing._id}>
