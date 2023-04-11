@@ -39,7 +39,7 @@ ListingRoute.get("/fetch-by-trending", fetchTrendingListings)
 // Fetch specific listing
 ListingRoute.get("/fetch/:listingId", fetchListing)
 
-// Get Listing Bidder Usernames
+// Fetch Listing Bidder Usernames
 ListingRoute.get("/fetch/bidders/:listingId", fetchListingsBidders)
 
 // Bid on Listing
