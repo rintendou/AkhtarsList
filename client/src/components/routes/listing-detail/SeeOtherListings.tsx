@@ -8,13 +8,12 @@ import SeeOthersButton from "./SeeOthersButton"
 import ListingType from "../../../lib/types/ListingType"
 import ListMore from "../protected/profile/listings/ListMore"
 import { useNavigate } from "react-router-dom"
+import useListingDetailContext from "../../../lib/hooks/useListingDetailContext"
 
-type Props = {
-  category: string
-  idToFilter: string
-}
+const SeeOtherListings = () => {
+  const { listing } = useListingDetailContext()
+  const { _id: idToFilter, category } = listing
 
-const SeeOtherListings = ({ category, idToFilter }: Props) => {
   const {
     allListings,
     trendingListings,
