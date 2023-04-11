@@ -31,9 +31,9 @@ const Transactions = () => {
             <div className="flex items-center gap-3"></div>
           )}
           {transactions.length !== 0 ? (
-            transactions.map((bidder: string, index: number) => (
+            transactions.map((transaction: string, index: number) => (
               <li key={index} className="gap-3">
-                {transactions.length - index}.) {bidder}
+                - {transaction}
               </li>
             ))
           ) : (

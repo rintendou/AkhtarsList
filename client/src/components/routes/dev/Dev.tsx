@@ -12,7 +12,7 @@ import StyledInput from "../../ui/StyledInput"
 import StyledInputAreaRef from "../../ui/StyledInputAreaRef"
 import Success from "../../ui/Success"
 import StyledDateTimePicker from "../../ui/StyledDateTimePicker"
-import Dropdown from "../../ui/Dropdown"
+import Dropdown from "../../ui/SortBy"
 import DragAndDrop from "../../ui/DragAndDrop"
 import PasswordInputRef from "../../ui/PasswordInputRef"
 
