@@ -132,6 +132,21 @@ export const fetchListings = async (req: Request, res: Response) => {
       })
     }
 
+    const expiredListings = listings.filter(
+      (listing) => new Date(listing.expireAt) < new Date()
+    )
+
+    for (const expiredListing of expiredListings) {
+      const winner = await UserModel.findByIdAndUpdate(
+        expiredListing.bestBidder,
+        {
+          $addToSet: { wonListings: expiredListing._id },
+        },
+        { new: true }
+      )
+      console.log(`Added expired listings to ${winner!.username}'s wonListings`)
+    }
+
     res.status(200).json({
       message: "Listings successfully fetched!",
       data: listings.reverse(),
