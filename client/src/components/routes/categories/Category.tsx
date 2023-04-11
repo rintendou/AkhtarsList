@@ -71,7 +71,7 @@ const Category = () => {
 
         <div>
           <div className="space-y-10 py-10 mb-10 border-b-2 border-secondary">
-            <div className="flex justify-between">
+            <div className="flex flex-col md:flex-row gap-5 justify-between">
               <h1 className="text-2xl font-semibold capitalize">
                 Active {categoryName} listings
               </h1>
