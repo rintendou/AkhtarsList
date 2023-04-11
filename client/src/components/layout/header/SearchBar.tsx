@@ -14,6 +14,10 @@ const SearchBar = () => {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
 
+    if (query.length === 0) {
+      return
+    }
+
     const fetchListings = async () => {
       const response = await fetch(
         `http://localhost:${settings.BACKEND_SERVER_PORT}/api/listing/thisapiendptdoesnotexist`
