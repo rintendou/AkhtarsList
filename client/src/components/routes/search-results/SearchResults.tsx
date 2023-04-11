@@ -17,7 +17,6 @@ const BUYSELLIMAGE = "timeline/buy-sell.jpg"
 const SearchResults = () => {
   const location = useLocation()
 
-  console.log(location.state!)
   const searchResults = location.state!.searchResults
   const query = location.state!.query
 
