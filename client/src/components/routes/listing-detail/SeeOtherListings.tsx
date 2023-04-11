@@ -60,26 +60,7 @@ const SeeOtherListings = ({ category, idToFilter }: Props) => {
 
   const onListingClick = (listing: ListingType) => {
     fetchListingsByCategory(category)
-    navigate(`/listings/${listing._id}`, {
-      state: {
-        id: listing._id,
-        image: listing.image,
-        bidders: listing.bidders,
-        lister: listing.lister,
-        desc: listing.desc,
-        title: listing.title,
-        startPrice: listing.startPrice,
-        finalPrice: listing.finalPrice,
-        expireAt: listing.expireAt,
-        views: listing.views,
-        category: listing.category,
-        dimensions: listing.dimensions,
-        weight: listing.weight,
-        height: listing.height,
-        width: listing.width,
-        length: listing.length,
-      },
-    })
+    navigate(`/listings/${listing._id}`)
   }
 
   return (
@@ -95,24 +76,7 @@ const SeeOtherListings = ({ category, idToFilter }: Props) => {
           filteredAndCategorizedListings.map((listing) => (
             <li key={listing._id}>
               <div onClick={() => onListingClick(listing)}>
-                <ListingCard
-                  _id={listing._id}
-                  image={listing.image}
-                  title={listing.title}
-                  finalPrice={listing.finalPrice}
-                  expireAt={listing.expireAt}
-                  views={listing.views}
-                  bidders={listing.bidders}
-                  lister={listing.lister}
-                  desc={listing.desc}
-                  startPrice={listing.startPrice}
-                  category={listing.category}
-                  weight={listing.weight}
-                  dimensions={listing.dimensions}
-                  height={listing.height}
-                  width={listing.width}
-                  length={listing.length}
-                />
+                <ListingCard listing={listing} />
               </div>
             </li>
           ))
