@@ -18,7 +18,7 @@ import useProfile from "../../../lib/hooks/useProfile"
 import useListingDetailContext from "../../../lib/hooks/useListingDetailContext"
 
 const ActiveBiddingSection = () => {
-  const { listing, isLister } = useListingDetailContext()
+  const { listing, isLister, refetchListing } = useListingDetailContext()
   const { _id: listingId, expireAt, finalPrice } = listing
 
   const bidAmountRef = useRef<HTMLInputElement>(null)
@@ -28,6 +28,14 @@ const ActiveBiddingSection = () => {
   const { auth } = useAuth()
   const navigate = useNavigate()
   const { refetchUserDetails } = useProfile()
+
+  useEffect(() => {
+    if (!bidAmountRef.current) {
+      return
+    }
+
+    bidAmountRef.current!.focus()
+  }, [])
 
   const onSubmitBid = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -79,24 +87,14 @@ const ActiveBiddingSection = () => {
 
       setErrorMessage("")
       setSuccessMessage(json.message)
+      bidAmountRef.current!.value = ""
       bidAmountRef.current!.focus()
       refetchUserDetails()
+      refetchListing()
     }
 
     submitBid()
   }
-
-  useEffect(() => {
-    if (!bidAmountRef.current) {
-      return
-    }
-
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    })
-    bidAmountRef.current!.focus()
-  }, [])
 
   return (
     <div

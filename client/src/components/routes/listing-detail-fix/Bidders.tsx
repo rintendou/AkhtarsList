@@ -1,8 +1,7 @@
 import useListingDetailContext from "../../../lib/hooks/useListingDetailContext"
 
 const Bidders = () => {
-  const { listing, isLister } = useListingDetailContext()
-  const { bidders } = listing
+  const { isLister, bidders } = useListingDetailContext()
 
   const CrownSVG = (
     <svg

@@ -4,7 +4,7 @@ import Bidders from "./Bidders"
 
 const ExpiredBiddingSection = () => {
   const { listing, isLister } = useListingDetailContext()
-  const { bidders, finalPrice } = listing
+  const { finalPrice } = listing
 
   return (
     <div

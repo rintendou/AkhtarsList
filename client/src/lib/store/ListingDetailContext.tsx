@@ -2,6 +2,8 @@ import { createContext, useEffect, useState } from "react"
 import ListingType from "../types/ListingType"
 import TimeRemainingType from "../types/TimeRemainingType"
 import calculateTimeRemaining from "../util/calculateTimeRemaining"
+import { settings } from "../../settings"
+import { useNavigate, useParams } from "react-router-dom"
 
 const initialListingState = {
   _id: "",
@@ -22,49 +24,12 @@ const initialListingState = {
   length: 0,
 }
 
-const fetchedListingState = {
-  _id: "1234123412341234",
-  image: "12341234",
-  bidders: ["sdfsdffd", "Lorem", "Kanor"],
-  lister: "Lil Wayne",
-  title: "Lil Harry Potter",
-  desc: "Hermione Granger",
-  startPrice: 23,
-  finalPrice: 23,
-  expireAt: new Date(new Date().getTime() + 5 * 1000),
-  views: 34,
-  category: "General",
-  dimensions: [1, 2, 3],
-  weight: 4,
-  height: 5,
-  width: 6,
-  length: 7,
-}
-
-const updatedListingState = {
-  _id: "1234123412341234",
-  image: "12341234",
-  bidders: ["sdfsdffd", "Lorem", "Kanor", "KANOR"],
-  lister: "Lil Wayne",
-  title: "Lil Harry Potter",
-  desc: "Hermione Granger",
-  startPrice: 23,
-  finalPrice: 47,
-  expireAt: new Date(new Date().getTime() + 5 * 1000),
-  views: 43,
-  category: "General",
-  dimensions: [1, 2, 3],
-  weight: 4,
-  height: 5,
-  width: 6,
-  length: 7,
-}
-
 type initialContextType = {
   isLister: boolean
   isExpired: boolean
   isLoading: boolean
   listing: ListingType
+  bidders: string[]
   timeRemaining: TimeRemainingType
   refetchListing: () => void
 }
@@ -74,6 +39,7 @@ const initialContext: initialContextType = {
   isExpired: false,
   isLoading: false,
   listing: initialListingState,
+  bidders: [],
   timeRemaining: {
     days: 0,
     hours: 0,
@@ -97,23 +63,106 @@ const ListingDetailContextProvider = ({
   const [timeRemaining, setTimeRemaining] = useState<TimeRemainingType>(
     calculateTimeRemaining(listing.expireAt)
   )
+  const [bidders, setBidders] = useState<string[]>([])
+
+  const navigate = useNavigate()
+  const { listingId } = useParams()
 
   useEffect(() => {
     setIsLoading(true)
-    setListing(fetchedListingState)
-    setIsExpired(new Date(fetchedListingState.expireAt) < new Date())
-    setIsLoading(false)
-  }, [])
 
-  const refetchListing = () => {
-    setIsLoading(true)
     const fetchListing = async () => {
-      setListing(updatedListingState)
-      setIsExpired(new Date(updatedListingState.expireAt) < new Date())
-      setIsLoading(false)
+      const response = await fetch(
+        `http://localhost:${settings.BACKEND_SERVER_PORT}/api/listing/fetch/${listingId}`
+      )
+      const json = await response.json()
+
+      if (!json.ok) {
+        setIsLoading(false)
+        navigate("/listings/listing-not-found")
+        return
+      }
+
+      const isAdmin = localStorage.getItem("isAdmin") === "true"
+      const isLister = localStorage.getItem("_id") === json.data.lister
+
+      fetchUsernames(listingId!)
+      fetchLister(json.data.lister, json.data)
+      setIsLister(isAdmin || isLister)
+      setIsExpired(new Date(json.data.expireAt) < new Date())
     }
 
     fetchListing()
+  }, [listingId])
+
+  const fetchUsernames = (listerId: string) => {
+    const getUsernames = async () => {
+      const response = await fetch(
+        `http://localhost:${settings.BACKEND_SERVER_PORT}/api/listing/fetch/bidders/${listerId}`
+      )
+      const json = await response.json()
+
+      if (!json.ok) {
+        return
+      }
+
+      setBidders(json.data)
+    }
+
+    getUsernames()
+  }
+
+  const fetchLister = (listerId: string, updatedListing: ListingType) => {
+    setIsLoading(true)
+
+    const getLister = async () => {
+      const response = await fetch(
+        `http://localhost:${settings.BACKEND_SERVER_PORT}/api/user/${listerId}`
+      )
+      const json = await response.json()
+
+      if (!json.ok) {
+        setIsLoading(false)
+        return
+      }
+
+      setListing({
+        ...updatedListing,
+        lister: json.data.username,
+        height: updatedListing.dimensions[0],
+        width: updatedListing.dimensions[1],
+        length: updatedListing.dimensions[2],
+      })
+      setIsLoading(false)
+    }
+
+    getLister()
+  }
+
+  const refetchListing = () => {
+    setIsLoading(true)
+    const refetchListing = async () => {
+      const response = await fetch(
+        `http://localhost:${settings.BACKEND_SERVER_PORT}/api/listing/fetch/${listingId}`
+      )
+      const json = await response.json()
+
+      if (!json.ok) {
+        setIsLoading(false)
+        navigate("/listings/listing-not-found")
+        return
+      }
+
+      const isAdmin = localStorage.getItem("isAdmin") === "true"
+      const isLister = localStorage.getItem("_id") === json.data.lister
+
+      fetchUsernames(listingId!)
+      fetchLister(json.data.lister, json.data)
+      setIsLister(isAdmin || isLister)
+      setIsExpired(new Date(json.data.expireAt) < new Date())
+    }
+
+    refetchListing()
   }
 
   useEffect(() => {
@@ -135,6 +184,7 @@ const ListingDetailContextProvider = ({
   }, [listing])
 
   const contextValue = {
+    bidders,
     isLister,
     isExpired,
     isLoading,
