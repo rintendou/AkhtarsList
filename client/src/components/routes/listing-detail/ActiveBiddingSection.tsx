@@ -36,6 +36,10 @@ const ActiveBiddingSection = () => {
     }
 
     bidAmountRef.current!.focus()
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    })
   }, [])
 
   const onSubmitBid = (e: React.FormEvent<HTMLFormElement>) => {
