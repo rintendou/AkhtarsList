@@ -137,6 +137,9 @@ export const fetchListings = async (req: Request, res: Response) => {
     )
 
     for (const expiredListing of expiredListings) {
+      if (expiredListing.bestBidder!.equals(expiredListing.lister)) {
+        continue
+      }
       const winner = await UserModel.findByIdAndUpdate(
         expiredListing.bestBidder,
         {
@@ -203,8 +206,6 @@ export const fetchTrendingListings = async (req: Request, res: Response) => {
     const listings = await ListingModel.find({ views: { $gt: 0 } }).sort({
       views: -1,
     })
-
-    console.log(listings)
 
     if (listings.length === 0) {
       return res.status(404).json({
@@ -599,7 +600,6 @@ export const fetchListingsFromSearch = async (req: Request, res: Response) => {
       ok: true,
     })
   } catch (error) {
-    console.error(error)
     return res.status(500).json({
       message: "Error fetching listings",
       data: null,
