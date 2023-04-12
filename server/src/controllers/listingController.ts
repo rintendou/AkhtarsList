@@ -140,14 +140,13 @@ export const fetchListings = async (req: Request, res: Response) => {
       if (expiredListing.bestBidder!.equals(expiredListing.lister)) {
         continue
       }
-      const winner = await UserModel.findByIdAndUpdate(
+      await UserModel.findByIdAndUpdate(
         expiredListing.bestBidder,
         {
           $addToSet: { wonListings: expiredListing._id },
         },
         { new: true }
       )
-      console.log(`Added expired listings to ${winner!.username}'s wonListings`)
     }
 
     res.status(200).json({

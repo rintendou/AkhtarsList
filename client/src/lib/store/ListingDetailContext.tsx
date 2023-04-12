@@ -145,7 +145,6 @@ const ListingDetailContextProvider = ({
 
   const refetchListing = () => {
     setIsLoading(true)
-    console.log("REFETCH")
     const refetchListing = async () => {
       const response = await fetch(
         `http://localhost:${settings.BACKEND_SERVER_PORT}/api/listing/fetch/${listingId}`
