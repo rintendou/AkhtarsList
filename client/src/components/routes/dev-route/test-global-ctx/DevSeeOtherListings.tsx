@@ -1,19 +1,16 @@
-import useTimeline from "../../../lib/hooks/useTimeline"
-
 // Components
-import ListingCard from "../../ui/ListingCard"
-import SeeOthersButton from "./SeeOthersButton"
 
 // Types
-import ListingType from "../../../lib/types/ListingType"
-import ListMore from "../protected/profile/listings/ListMore"
+
 import { useNavigate } from "react-router-dom"
-import useListingDetailContext from "../../../lib/hooks/useListingDetailContext"
+import useTimeline from "../../../../lib/hooks/useTimeline"
+import ListingType from "../../../../lib/types/ListingType"
+import SeeOthersButton from "../../listing-detail/SeeOthersButton"
+import ListingCard from "../../../ui/ListingCard"
+import ListMore from "../../protected/profile/listings/ListMore"
+import useListingDetail from "./useListingDetail"
 
-const SeeOtherListings = () => {
-  const { listing } = useListingDetailContext()
-  const { _id: idToFilter, category } = listing
-
+const DevSeeOtherListings = () => {
   const {
     allListings,
     trendingListings,
@@ -24,6 +21,9 @@ const SeeOtherListings = () => {
     collectiblesListings,
     fetchListingsByCategory,
   } = useTimeline()
+
+  const { listing } = useListingDetail()
+  const { _id: idToFilter, category } = listing
 
   let categorizedListings: ListingType[] = []
 
@@ -59,7 +59,26 @@ const SeeOtherListings = () => {
 
   const onListingClick = (listing: ListingType) => {
     fetchListingsByCategory(category)
-    navigate(`/listings/${listing._id}`)
+    navigate(`/listings/${listing._id}`, {
+      state: {
+        id: listing._id,
+        image: listing.image,
+        bidders: listing.bidders,
+        lister: listing.lister,
+        desc: listing.desc,
+        title: listing.title,
+        startPrice: listing.startPrice,
+        finalPrice: listing.finalPrice,
+        expireAt: listing.expireAt,
+        views: listing.views,
+        category: listing.category,
+        dimensions: listing.dimensions,
+        weight: listing.weight,
+        height: listing.height,
+        width: listing.width,
+        length: listing.length,
+      },
+    })
   }
 
   return (
@@ -92,4 +111,4 @@ const SeeOtherListings = () => {
   )
 }
 
-export default SeeOtherListings
+export default DevSeeOtherListings

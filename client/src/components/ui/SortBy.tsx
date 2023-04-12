@@ -7,30 +7,30 @@ type Option = {
 
 type Props = {
   options: Option[]
-  onSelect: (value: string) => void
+  onSort: (value: string, isAscending: boolean) => void
 }
 
-const Dropdown = ({ options, onSelect }: Props) => {
+const SortBy = ({ options, onSort }: Props) => {
   const [isOpen, setIsOpen] = useState(false)
-  const [selectedOption, setSelectedOption] = useState<Option | null>(null)
+  const [selectedOption, setSelectedOption] = useState("")
   const [isAscending, setIsAscending] = useState(true)
-  const dropdownRef = useRef<HTMLDivElement>(null)
+  const sortByRef = useRef<HTMLDivElement>(null)
 
-  const toggleDropdown = () => {
+  const togglesortBy = () => {
     setIsOpen(!isOpen)
   }
 
   const handleOptionClick = (option: Option) => {
-    setSelectedOption(option)
-    onSelect(option.value)
+    setSelectedOption(option.value)
+    onSort(selectedOption, isAscending)
     setIsOpen(false)
   }
 
   useEffect(() => {
     const handleOutsideClick = (event: MouseEvent) => {
       if (
-        dropdownRef.current &&
-        !dropdownRef.current.contains(event.target as Node)
+        sortByRef.current &&
+        !sortByRef.current.contains(event.target as Node)
       ) {
         setIsOpen(false)
       }
@@ -39,21 +39,24 @@ const Dropdown = ({ options, onSelect }: Props) => {
     return () => {
       document.removeEventListener("mousedown", handleOutsideClick)
     }
-  }, [dropdownRef])
+  }, [sortByRef])
 
   const handleOrderClick: React.MouseEventHandler<HTMLDivElement> = (event) => {
     event.stopPropagation()
     setIsAscending(!isAscending)
+    onSort(selectedOption, isAscending)
   }
 
   return (
-    <div className="relative" ref={dropdownRef}>
+    <div className="relative" ref={sortByRef}>
       <button
         type="button"
-        className="inline-flex justify-between items-center w-full rounded-md border-2 focus:border-secondary border-gray-200 shadow-sm px-4 py-2  text-sm font-medium text-secondary select-none caret-transparent"
-        onClick={toggleDropdown}
+        className="inline-flex justify-between items-center w-56 rounded-md border-2 focus:border-secondary border-gray-200 shadow-sm px-4 py-2  text-sm font-medium text-secondary select-none caret-transparent"
+        onClick={togglesortBy}
       >
-        {selectedOption ? selectedOption.label : "Sort By:"}
+        <div className="truncate">
+          {selectedOption ? `Sort By: ${selectedOption}` : "Sort By:"}
+        </div>
         <div onClick={handleOrderClick}>
           <svg
             className={`-mr-1 ml-2 h-8 w-8 transform text-white bg-secondary bg-opacity-20 rounded-full p-2 hover:bg-black hover:text-white duration-200 ease-in-out ${
@@ -96,4 +99,4 @@ const Dropdown = ({ options, onSelect }: Props) => {
   )
 }
 
-export default Dropdown
+export default SortBy

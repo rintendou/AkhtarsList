@@ -1,14 +1,14 @@
-import { useEffect, useState } from "react"
-
+import { createContext, useEffect, useState } from "react"
 import ListingType from "../types/ListingType"
+import TimeRemainingType from "../types/TimeRemainingType"
+import calculateTimeRemaining from "../util/calculateTimeRemaining"
 import { settings } from "../../settings"
 import { useNavigate, useParams } from "react-router-dom"
-import calculateTimeRemaining from "../util/calculateTimeRemaining"
-import TimeRemainingType from "../types/TimeRemainingType"
 
 const initialListingState = {
   _id: "",
   image: "",
+  bestBidder: "",
   bidders: [],
   lister: "",
   title: "",
@@ -25,7 +25,40 @@ const initialListingState = {
   length: 0,
 }
 
-const useListingDetail = () => {
+type initialContextType = {
+  isLister: boolean
+  isExpired: boolean
+  isLoading: boolean
+  listing: ListingType
+  bidders: string[]
+  transactions: string[]
+  timeRemaining: TimeRemainingType
+  refetchListing: () => void
+}
+
+const initialContext: initialContextType = {
+  isLister: false,
+  isExpired: false,
+  isLoading: false,
+  listing: initialListingState,
+  bidders: [],
+  transactions: [],
+  timeRemaining: {
+    days: 0,
+    hours: 0,
+    minutes: 0,
+    seconds: 0,
+  },
+  refetchListing: () => {},
+}
+
+const ListingDetailContext = createContext<initialContextType>(initialContext)
+
+const ListingDetailContextProvider = ({
+  children,
+}: {
+  children: React.ReactNode
+}) => {
   const [isLister, setIsLister] = useState(false)
   const [isExpired, setIsExpired] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
@@ -34,13 +67,13 @@ const useListingDetail = () => {
     calculateTimeRemaining(listing.expireAt)
   )
   const [bidders, setBidders] = useState<string[]>([])
+  const [transactions, setTransactions] = useState<string[]>([])
 
   const navigate = useNavigate()
   const { listingId } = useParams()
 
   useEffect(() => {
     setIsLoading(true)
-
     const fetchListing = async () => {
       const response = await fetch(
         `http://localhost:${settings.BACKEND_SERVER_PORT}/api/listing/fetch/${listingId}`
@@ -60,10 +93,28 @@ const useListingDetail = () => {
       fetchLister(json.data.lister, json.data)
       setIsLister(isAdmin || isLister)
       setIsExpired(new Date(json.data.expireAt) < new Date())
+      setTransactions(json.data.transactions)
     }
 
     fetchListing()
   }, [listingId])
+
+  const fetchUsernames = (listerId: string) => {
+    const getUsernames = async () => {
+      const response = await fetch(
+        `http://localhost:${settings.BACKEND_SERVER_PORT}/api/listing/fetch/bidders/${listerId}`
+      )
+      const json = await response.json()
+
+      if (!json.ok) {
+        return
+      }
+
+      setBidders(json.data)
+    }
+
+    getUsernames()
+  }
 
   const fetchLister = (listerId: string, updatedListing: ListingType) => {
     setIsLoading(true)
@@ -92,27 +143,36 @@ const useListingDetail = () => {
     getLister()
   }
 
-  const fetchUsernames = (listerId: string) => {
-    const getUsernames = async () => {
+  const refetchListing = () => {
+    setIsLoading(true)
+    const refetchListing = async () => {
       const response = await fetch(
-        `http://localhost:${settings.BACKEND_SERVER_PORT}/api/listing/fetch/bidders/${listerId}`
+        `http://localhost:${settings.BACKEND_SERVER_PORT}/api/listing/fetch/${listingId}`
       )
       const json = await response.json()
 
       if (!json.ok) {
+        setIsLoading(false)
+        navigate("/listings/listing-not-found")
         return
       }
 
-      setBidders(json.data)
+      const isAdmin = localStorage.getItem("isAdmin") === "true"
+      const isLister = localStorage.getItem("_id") === json.data.lister
+
+      fetchUsernames(listingId!)
+      fetchLister(json.data.lister, json.data)
+      setIsLister(isAdmin || isLister)
+      setIsExpired(new Date(json.data.expireAt) < new Date())
+      setTransactions(json.data.transactions)
     }
 
-    getUsernames()
+    refetchListing()
   }
 
   useEffect(() => {
     const interval = setInterval(() => {
       const TR = calculateTimeRemaining(listing.expireAt)
-
       if (
         TR.days === 0 &&
         TR.hours === 0 &&
@@ -126,16 +186,25 @@ const useListingDetail = () => {
     }, 1000)
 
     return () => clearInterval(interval)
-  }, [listing])
+  }, [listing.expireAt])
 
-  return {
+  const contextValue = {
     bidders,
-    isLoading,
-    listing,
+    transactions,
     isLister,
     isExpired,
+    isLoading,
+    listing,
     timeRemaining,
+    refetchListing,
   }
+
+  return (
+    <ListingDetailContext.Provider value={contextValue}>
+      {children}
+    </ListingDetailContext.Provider>
+  )
 }
 
-export default useListingDetail
+export default ListingDetailContextProvider
+export { ListingDetailContext }

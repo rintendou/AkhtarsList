@@ -1,12 +1,9 @@
 import { useNavigate } from "react-router-dom"
+import useListingDetailContext from "../../../lib/hooks/useListingDetailContext"
 
-import ListingType from "../../../lib/types/ListingType"
+const EditListing = () => {
+  const { listing } = useListingDetailContext()
 
-type Props = {
-  listing: ListingType
-}
-
-const EditListing = ({ listing }: Props) => {
   const navigate = useNavigate()
 
   const onListingEditClick = () => {

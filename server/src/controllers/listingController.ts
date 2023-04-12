@@ -132,6 +132,23 @@ export const fetchListings = async (req: Request, res: Response) => {
       })
     }
 
+    const expiredListings = listings.filter(
+      (listing) => new Date(listing.expireAt) < new Date()
+    )
+
+    for (const expiredListing of expiredListings) {
+      if (expiredListing.bestBidder!.equals(expiredListing.lister)) {
+        continue
+      }
+      await UserModel.findByIdAndUpdate(
+        expiredListing.bestBidder,
+        {
+          $addToSet: { wonListings: expiredListing._id },
+        },
+        { new: true }
+      )
+    }
+
     res.status(200).json({
       message: "Listings successfully fetched!",
       data: listings.reverse(),
@@ -188,8 +205,6 @@ export const fetchTrendingListings = async (req: Request, res: Response) => {
     const listings = await ListingModel.find({ views: { $gt: 0 } }).sort({
       views: -1,
     })
-
-    console.log(listings)
 
     if (listings.length === 0) {
       return res.status(404).json({
@@ -466,7 +481,7 @@ export const bidOnListing = async (req: Request, res: Response) => {
         )
         updatedUserBiddings.push(listing._id)
 
-        bidder.biddedListings = updatedUserBiddings
+        bidder.biddedListings = updatedUserBiddings.reverse()
 
         await bidder.save()
       } catch (error) {
@@ -485,6 +500,11 @@ export const bidOnListing = async (req: Request, res: Response) => {
 
         updatedListingBidders.push(bidder._id)
         listing.bidders = updatedListingBidders
+
+        listing.transactions = [
+          `${bidder.username} $${req.body.finalPrice}`,
+          ...listing.transactions,
+        ]
 
         await listing.save()
       } catch (error) {
@@ -553,6 +573,34 @@ export const fetchListingsBidders = async (req: Request, res: Response) => {
   } catch (error) {
     return res.status(500).json({
       message: error,
+      data: null,
+      ok: false,
+    })
+  }
+}
+
+export const fetchListingsFromSearch = async (req: Request, res: Response) => {
+  try {
+    const query = req.query.q as string
+
+    if (!query) {
+      return res
+        .status(400)
+        .json({ message: "query property is required!", data: null, ok: false })
+    }
+
+    const regex = new RegExp(query, "i") // 'i' flag makes the search case-insensitive
+
+    const listings = await ListingModel.find({ title: regex })
+
+    return res.status(200).json({
+      message: "Listings fetched successfully",
+      data: listings,
+      ok: true,
+    })
+  } catch (error) {
+    return res.status(500).json({
+      message: "Error fetching listings",
       data: null,
       ok: false,
     })

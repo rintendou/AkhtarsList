@@ -1,4 +1,6 @@
 import { useState } from "react"
+import { settings } from "../../../settings"
+import { useNavigate } from "react-router-dom"
 
 const SearchBar = () => {
   const [query, setQuery] = useState("")
@@ -7,10 +9,25 @@ const SearchBar = () => {
     setQuery(event.target.value)
   }
 
+  const navigate = useNavigate()
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    // Do something with the search query, such as send it to an API
-    console.log(query)
+
+    if (query.length === 0) {
+      return
+    }
+
+    const fetchListings = async () => {
+      const response = await fetch(
+        `http://localhost:${settings.BACKEND_SERVER_PORT}/api/listing/search?q=${query}`
+      )
+      const json = await response.json()
+      navigate("/search-results", {
+        state: { searchResults: json.data, query: query },
+      })
+    }
+    fetchListings()
   }
 
   return (
@@ -42,8 +59,8 @@ const SearchBar = () => {
       </button>
       <input
         type="text"
-        placeholder="Search..."
-        className="border bg-primary h-10 pl-8 pr-10 text-sm focus:outline-none focus:border-gray-500 text-black w-full max-w-lg rounded-lg"
+        placeholder="Search Listings"
+        className="border h-10 bg-secondary pl-8 pr-10 text-sm focus:outline-none focus:border-gray-500 text-primary w-full max-w-lg rounded-lg"
         value={query}
         onChange={handleInputChange}
       />

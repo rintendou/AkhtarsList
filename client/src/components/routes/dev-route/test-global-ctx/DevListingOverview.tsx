@@ -1,8 +1,9 @@
-import DUMMYIMAGE from "../../../../public/random-listing-image-undraw.svg"
-import useListingDetailContext from "../../../lib/hooks/useListingDetailContext"
+import DUMMYIMAGE from "../../../../../public/random-listing-image-undraw.svg"
+import useListingDetail from "./useListingDetail"
 
-const ListingOverview = () => {
-  const { listing } = useListingDetailContext()
+const DevListingOverview = () => {
+  const { listing } = useListingDetail()
+
   const {
     title,
     lister,
@@ -76,4 +77,4 @@ const ListingOverview = () => {
   )
 }
 
-export default ListingOverview
+export default DevListingOverview
