@@ -23,7 +23,7 @@ export const getUser = async (req: Request, res: Response) => {
   try {
     // Check if user exists
     const existingUser = await UserModel.findById(userId).populate(
-      "listedListings biddedListings"
+      "listedListings biddedListings wonListings"
     )
     if (!existingUser) {
       return res

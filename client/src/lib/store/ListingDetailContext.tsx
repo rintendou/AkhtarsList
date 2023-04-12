@@ -8,6 +8,7 @@ import { useNavigate, useParams } from "react-router-dom"
 const initialListingState = {
   _id: "",
   image: "",
+  bestBidder: "",
   bidders: [],
   lister: "",
   title: "",
@@ -73,7 +74,6 @@ const ListingDetailContextProvider = ({
 
   useEffect(() => {
     setIsLoading(true)
-
     const fetchListing = async () => {
       const response = await fetch(
         `http://localhost:${settings.BACKEND_SERVER_PORT}/api/listing/fetch/${listingId}`
@@ -186,7 +186,7 @@ const ListingDetailContextProvider = ({
     }, 1000)
 
     return () => clearInterval(interval)
-  }, [listing])
+  }, [listing.expireAt])
 
   const contextValue = {
     bidders,

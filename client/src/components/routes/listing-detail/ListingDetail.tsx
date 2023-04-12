@@ -1,5 +1,4 @@
 import { useEffect } from "react"
-import { useParams } from "react-router"
 import useListingDetail from "../../../lib/hooks/useListingDetail"
 
 // Assets
@@ -12,14 +11,12 @@ import ListingDetailSkeleton from "./ListingDetailSkeleton"
 const ListingDetail = () => {
   const { isExpired, isLoading } = useListingDetail()
 
-  const { listingId } = useParams()
-
   useEffect(() => {
     window.scrollTo({
       top: 0,
       behavior: "smooth",
     })
-  }, [listingId])
+  }, [])
 
   const biddingSection = isExpired ? (
     <ExpiredBiddingSection />

@@ -69,9 +69,9 @@ function App() {
             }
           />
 
+          {/*  Dev Routes */}
           <Route path="/dev" element={<Dev />} />
           <Route path="/dev-listing-detail" element={<DevListingDetail />} />
-
           <Route
             path="/dev-listing-detail-global"
             element={

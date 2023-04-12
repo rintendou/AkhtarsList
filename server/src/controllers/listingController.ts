@@ -132,6 +132,23 @@ export const fetchListings = async (req: Request, res: Response) => {
       })
     }
 
+    const expiredListings = listings.filter(
+      (listing) => new Date(listing.expireAt) < new Date()
+    )
+
+    for (const expiredListing of expiredListings) {
+      if (expiredListing.bestBidder!.equals(expiredListing.lister)) {
+        continue
+      }
+      await UserModel.findByIdAndUpdate(
+        expiredListing.bestBidder,
+        {
+          $addToSet: { wonListings: expiredListing._id },
+        },
+        { new: true }
+      )
+    }
+
     res.status(200).json({
       message: "Listings successfully fetched!",
       data: listings.reverse(),
@@ -188,8 +205,6 @@ export const fetchTrendingListings = async (req: Request, res: Response) => {
     const listings = await ListingModel.find({ views: { $gt: 0 } }).sort({
       views: -1,
     })
-
-    console.log(listings)
 
     if (listings.length === 0) {
       return res.status(404).json({
@@ -584,7 +599,6 @@ export const fetchListingsFromSearch = async (req: Request, res: Response) => {
       ok: true,
     })
   } catch (error) {
-    console.error(error)
     return res.status(500).json({
       message: "Error fetching listings",
       data: null,
