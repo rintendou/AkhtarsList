@@ -9,7 +9,6 @@ import {
   fetchListings,
   fetchListingsByCategory,
   fetchTrendingListings,
-  fetchListingsBidders,
   fetchListingsFromSearch,
   bidOnListing,
 } from "../controllers/listingController"
@@ -39,9 +38,6 @@ ListingRoute.get("/fetch-by-trending", fetchTrendingListings)
 
 // Fetch specific listing
 ListingRoute.get("/fetch/:listingId", fetchListing)
-
-// Fetch Listing Bidder Usernames
-ListingRoute.get("/fetch/bidders/:listingId", fetchListingsBidders)
 
 // Fetch Listing From Search
 ListingRoute.get("/search", fetchListingsFromSearch)
