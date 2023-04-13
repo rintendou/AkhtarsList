@@ -89,7 +89,8 @@ const ListingDetailContextProvider = ({
       const isAdmin = localStorage.getItem("isAdmin") === "true"
       const isLister = localStorage.getItem("_id") === json.data.lister
 
-      fetchUsernames(listingId!)
+      // fetchUsernames(listingId!)
+      setBidders(json.data.bidders)
       fetchLister(json.data.lister, json.data)
       setIsLister(isAdmin || isLister)
       setIsExpired(new Date(json.data.expireAt) < new Date())
@@ -109,7 +110,7 @@ const ListingDetailContextProvider = ({
       if (!json.ok) {
         return
       }
-
+      console.log(json.data)
       setBidders(json.data)
     }
 

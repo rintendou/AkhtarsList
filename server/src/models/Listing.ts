@@ -26,8 +26,8 @@ const ListingSchema = new Schema(
     },
     bidders: [
       {
-        type: ObjectId,
-        ref: "User",
+        type: String,
+        default: [],
       },
     ],
     transactions: [

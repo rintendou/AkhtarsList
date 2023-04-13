@@ -494,12 +494,15 @@ export const bidOnListing = async (req: Request, res: Response) => {
 
       try {
         // Updating the listing's list of bidders but also updating if a bidder has already bid on this listing before
-        const updatedListingBidders = listing.bidders.filter(
-          (listingBiddersId) => !listingBiddersId.equals(bidder._id)
+        let updatedListingBidders = listing.bidders
+
+        updatedListingBidders = updatedListingBidders.filter(
+          (listingBiddersId) => {
+            return listingBiddersId !== bidder.username
+          }
         )
 
-        updatedListingBidders.push(bidder._id)
-        listing.bidders = updatedListingBidders
+        listing.bidders = [bidder.username, ...updatedListingBidders]
 
         listing.transactions = [
           `${bidder.username} $${req.body.finalPrice}`,
