@@ -89,7 +89,6 @@ const ListingDetailContextProvider = ({
       const isAdmin = localStorage.getItem("isAdmin") === "true"
       const isLister = localStorage.getItem("_id") === json.data.lister
 
-      // fetchUsernames(listingId!)
       setBidders(json.data.bidders)
       fetchLister(json.data.lister, json.data)
       setIsLister(isAdmin || isLister)
@@ -99,23 +98,6 @@ const ListingDetailContextProvider = ({
 
     fetchListing()
   }, [listingId])
-
-  const fetchUsernames = (listerId: string) => {
-    const getUsernames = async () => {
-      const response = await fetch(
-        `http://localhost:${settings.BACKEND_SERVER_PORT}/api/listing/fetch/bidders/${listerId}`
-      )
-      const json = await response.json()
-
-      if (!json.ok) {
-        return
-      }
-      console.log(json.data)
-      setBidders(json.data)
-    }
-
-    getUsernames()
-  }
 
   const fetchLister = (listerId: string, updatedListing: ListingType) => {
     setIsLoading(true)
@@ -161,7 +143,7 @@ const ListingDetailContextProvider = ({
       const isAdmin = localStorage.getItem("isAdmin") === "true"
       const isLister = localStorage.getItem("_id") === json.data.lister
 
-      fetchUsernames(listingId!)
+      setBidders(json.data.bidders)
       fetchLister(json.data.lister, json.data)
       setIsLister(isAdmin || isLister)
       setIsExpired(new Date(json.data.expireAt) < new Date())
