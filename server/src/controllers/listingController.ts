@@ -539,49 +539,6 @@ export const bidOnListing = async (req: Request, res: Response) => {
   }
 }
 
-export const fetchListingsBidders = async (req: Request, res: Response) => {
-  // Destructure payload
-  const { listingId } = req.params
-  const listing = await ListingModel.findOne({ _id: listingId })
-
-  // Edge Case: Check if listing exists
-  if (!listing) {
-    return res
-      .status(404)
-      .json({ message: "Listing does not exist", data: null, ok: false })
-  }
-
-  // Edge Case: Check if listing does not have bidders
-  if (listing.bidders.length === 0) {
-    return res.status(404).json({
-      message: "Listing does not have any bidders",
-      data: null,
-      ok: false,
-    })
-  }
-
-  const listingBidderIds = listing.bidders
-
-  try {
-    const users = await UserModel.find(
-      { _id: { $in: listingBidderIds } },
-      { username: 1 }
-    )
-    const usernames = users.map((user) => user.username)
-    res.status(200).json({
-      message: "Usernames retrieved successfully",
-      data: usernames,
-      ok: true,
-    })
-  } catch (error) {
-    return res.status(500).json({
-      message: error,
-      data: null,
-      ok: false,
-    })
-  }
-}
-
 export const fetchListingsFromSearch = async (req: Request, res: Response) => {
   try {
     const query = req.query.q as string
