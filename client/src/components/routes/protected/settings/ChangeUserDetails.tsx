@@ -12,12 +12,19 @@ const ChangeUserDetails = () => {
   const { auth } = useAuth()
   const { refetchUserDetails } = useProfile()
 
-  const [errorMessage, setErrorMessage] = useState("")
-  const [successMessage, setSuccessMessage] = useState("")
+  const { fullName, address } = useProfile()
 
   const fullNameRef = useRef<HTMLInputElement>(null)
   const addressRef = useRef<HTMLInputElement>(null)
   const passwordRef = useRef<HTMLInputElement>(null)
+
+  useEffect(() => {
+    fullNameRef.current!.value = fullName
+    addressRef.current!.value = address
+  }, [])
+
+  const [errorMessage, setErrorMessage] = useState("")
+  const [successMessage, setSuccessMessage] = useState("")
 
   useEffect(() => {
     fullNameRef.current!.focus()
