@@ -6,7 +6,7 @@ import ActiveBiddingSection from "./ActiveBiddingSection"
 import ListingDetailSkeleton from "./ListingDetailSkeleton"
 import useListingDetailContextQuery from "../../../lib/hooks/useListingDetailContext"
 
-const ListingDetailQuery = () => {
+const ListingDetail = () => {
   const { data, isLoading } = useListingDetailContextQuery()
 
   if (isLoading) {
@@ -34,4 +34,4 @@ const ListingDetailQuery = () => {
   )
 }
 
-export default ListingDetailQuery
+export default ListingDetail

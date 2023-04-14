@@ -45,7 +45,7 @@ import DevListingDetailContextProvider from "./components/routes/dev-route/test-
 import DevListingDetailGlobal from "./components/routes/dev-route/test-global-ctx/DevListingDetailGlobal"
 import SearchResults from "./components/routes/search-results/SearchResults"
 import ListingDetailContextQueryProvider from "./lib/store/ListingDetailContext"
-import ListingDetailQuery from "./components/routes/listing-detail/ListingDetailQuery"
+import ListingDetailQuery from "./components/routes/listing-detail/ListingDetail"
 import Dev from "./components/routes/dev-route/ui/Dev"
 
 function App() {
@@ -64,7 +64,7 @@ function App() {
           <Route path="/reset-password" element={<ChangePassword />} />
           <Route path="/category/:categoryName" element={<Category />} />
           <Route
-            path="/listings-query/:listingId"
+            path="/listings/:listingId"
             element={
               <ListingDetailContextQueryProvider>
                 <ListingDetailQuery />
