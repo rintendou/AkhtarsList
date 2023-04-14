@@ -8,6 +8,7 @@ import ListingType from "../types/ListingType"
 type initialContextType = {
   address: string
   balance: number
+  fullName: string
   depositFunds: (amount: number) => void
   withdrawFunds: (amount: number) => void
   listings: ListingType[]
@@ -20,6 +21,7 @@ type initialContextType = {
 const initialContext: initialContextType = {
   address: "",
   balance: 0,
+  fullName: "",
   depositFunds: () => {},
   withdrawFunds: () => {},
   listings: [],
@@ -41,6 +43,7 @@ const ProfileContextProvider = ({
 
   const [balance, setBalance] = useState(initialContext.balance)
   const [address, setAddress] = useState("")
+  const [fullName, setFullName] = useState("")
 
   const [biddings, setBiddings] = useState<ListingType[]>([])
   const [listings, setListings] = useState<ListingType[]>([])
@@ -61,6 +64,7 @@ const ProfileContextProvider = ({
 
       setAddress(data.data.address)
       setBalance(data.data.balance)
+      setFullName(data.data.fullName)
       setBiddings(data.data.biddedListings.reverse())
       setListings(data.data.listedListings.reverse())
       setWonListings(data.data.wonListings.reverse())
@@ -87,6 +91,7 @@ const ProfileContextProvider = ({
 
       setAddress(data.data.address)
       setBalance(data.data.balance)
+      setFullName(data.data.fullName)
       setBiddings(data.data.biddedListings.reverse())
       setListings(data.data.listedListings.reverse())
       setWonListings(data.data.wonListings.reverse())
@@ -148,6 +153,7 @@ const ProfileContextProvider = ({
   const contextValue = {
     address,
     balance,
+    fullName,
     depositFunds,
     withdrawFunds,
     biddings,
