@@ -35,7 +35,7 @@ const CategoryHeader = () => {
       />
       <RouterLink
         routerLinkText="All"
-        to="/category/none"
+        to="/category/assorted"
         twClasses="text-xl"
       />
     </div>
