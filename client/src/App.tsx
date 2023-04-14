@@ -2,7 +2,7 @@ import { Routes, Route } from "react-router-dom"
 
 // Routes
 import Application from "./components/routes/application/Application"
-import Dev from "./components/routes/dev/Dev"
+
 import PageNotFound from "./components/routes/page-not-found/PageNotFound"
 import Login from "./components/routes/login/Login"
 import Register from "./components/routes/register/Register"
@@ -46,6 +46,7 @@ import DevListingDetailGlobal from "./components/routes/dev-route/test-global-ct
 import SearchResults from "./components/routes/search-results/SearchResults"
 import ListingDetailContextQueryProvider from "./components/routes/listing-detail-query/ListingDetailContext"
 import ListingDetailQuery from "./components/routes/listing-detail-query/ListingDetailQuery"
+import Dev from "./components/routes/dev-route/ui/Dev"
 
 function App() {
   return (
