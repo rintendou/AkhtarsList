@@ -1,22 +1,17 @@
-import { useEffect } from "react"
-import useListingDetail from "../../../lib/hooks/useListingDetail"
-
 // Assets
 import SeeOtherListings from "./SeeOtherListings"
 import ListingOverview from "./ListingOverview"
 import ExpiredBiddingSection from "./ExpiredBiddingSection"
 import ActiveBiddingSection from "./ActiveBiddingSection"
 import ListingDetailSkeleton from "./ListingDetailSkeleton"
+import { useListingDetailContextQuery } from "./ListingDetailContext"
 
-const ListingDetail = () => {
-  const { isExpired, isLoading } = useListingDetail()
+const ListingDetailQuery = () => {
+  const { isExpired, isLoading } = useListingDetailContextQuery()
 
-  useEffect(() => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    })
-  }, [])
+  if (isLoading) {
+    return <ListingDetailSkeleton />
+  }
 
   const biddingSection = isExpired ? (
     <ExpiredBiddingSection />
@@ -41,4 +36,4 @@ const ListingDetail = () => {
   )
 }
 
-export default ListingDetail
+export default ListingDetailQuery

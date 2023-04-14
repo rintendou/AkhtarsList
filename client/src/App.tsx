@@ -44,6 +44,8 @@ import ListingDetailContextProvider from "./lib/store/ListingDetailContext"
 import DevListingDetailContextProvider from "./components/routes/dev-route/test-global-ctx/DevListingDetailContext"
 import DevListingDetailGlobal from "./components/routes/dev-route/test-global-ctx/DevListingDetailGlobal"
 import SearchResults from "./components/routes/search-results/SearchResults"
+import ListingDetailContextQueryProvider from "./components/routes/listing-detail-query/ListingDetailContext"
+import ListingDetailQuery from "./components/routes/listing-detail-query/ListingDetailQuery"
 
 function App() {
   return (
@@ -78,6 +80,14 @@ function App() {
               <DevListingDetailContextProvider>
                 <DevListingDetailGlobal />
               </DevListingDetailContextProvider>
+            }
+          />
+          <Route
+            path="/dev-query/:listingId"
+            element={
+              <ListingDetailContextQueryProvider>
+                <ListingDetailQuery />
+              </ListingDetailContextQueryProvider>
             }
           />
 

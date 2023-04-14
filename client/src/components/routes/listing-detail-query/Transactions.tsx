@@ -1,7 +1,9 @@
-import useListingDetailContext from "../../../lib/hooks/useListingDetailContext"
+import { useListingDetailContextQuery } from "./ListingDetailContext"
 
 const Transactions = () => {
-  const { isLister, transactions } = useListingDetailContext()
+  const { data, isLister } = useListingDetailContextQuery()
+  const { data: listing } = data
+  const { transactions } = listing
 
   return (
     <div className="w-full">

@@ -1,9 +1,11 @@
 import useAuth from "../../../lib/hooks/useAuth"
-import useListingDetailContext from "../../../lib/hooks/useListingDetailContext"
+import { useListingDetailContextQuery } from "./ListingDetailContext"
 
 const Bidders = () => {
-  const { isLister, bidders } = useListingDetailContext()
+  const { data, isLister } = useListingDetailContextQuery()
   const { auth } = useAuth()
+  const { data: listing } = data
+  const { bidders } = listing
 
   const CrownSVG = (
     <svg

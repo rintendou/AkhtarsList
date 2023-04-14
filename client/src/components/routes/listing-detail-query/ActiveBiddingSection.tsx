@@ -15,12 +15,12 @@ import numberInputIsValid from "../../../lib/util/numberInputValidator"
 import { settings } from "../../../settings"
 import Success from "../../ui/Success"
 import useProfile from "../../../lib/hooks/useProfile"
-import useListingDetailContext from "../../../lib/hooks/useListingDetailContext"
 import Transactions from "./Transactions"
+import { useListingDetailContextQuery } from "./ListingDetailContext"
 
 const ActiveBiddingSection = () => {
-  const { listing, isLister, refetchListing } = useListingDetailContext()
-  const { _id: listingId, expireAt, finalPrice } = listing
+  const { data, isLister } = useListingDetailContextQuery()
+  const { _id: listingId, expireAt, finalPrice } = data.data
 
   const bidAmountRef = useRef<HTMLInputElement>(null)
   const [errorMessage, setErrorMessage] = useState("")
@@ -95,7 +95,6 @@ const ActiveBiddingSection = () => {
       bidAmountRef.current!.value = ""
       bidAmountRef.current!.focus()
       refetchUserDetails()
-      refetchListing()
     }
 
     submitBid()
