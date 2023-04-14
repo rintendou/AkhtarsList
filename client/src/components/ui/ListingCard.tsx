@@ -27,10 +27,7 @@ const ListingCard = ({ listing }: { listing: ListingType }) => {
 
   const handleClick = () => {
     const viewListing = async () => {
-      const response = await fetch(
-        `http://localhost:5173/api/listing/fetch-view/${_id}`
-      )
-      const json = await response.json()
+      await fetch(`http://localhost:5173/api/listing/fetch-view/${_id}`)
       navigate(`/listings-query/${_id}`)
     }
     viewListing()

@@ -44,8 +44,8 @@ import ListingDetailContextProvider from "./lib/store/ListingDetailContext"
 import DevListingDetailContextProvider from "./components/routes/dev-route/test-global-ctx/DevListingDetailContext"
 import DevListingDetailGlobal from "./components/routes/dev-route/test-global-ctx/DevListingDetailGlobal"
 import SearchResults from "./components/routes/search-results/SearchResults"
-import ListingDetailContextQueryProvider from "./components/routes/listing-detail-query/ListingDetailContext"
-import ListingDetailQuery from "./components/routes/listing-detail-query/ListingDetailQuery"
+import ListingDetailContextQueryProvider from "./components/routes/listing-detail/ListingDetailContext"
+import ListingDetailQuery from "./components/routes/listing-detail/ListingDetailQuery"
 import Dev from "./components/routes/dev-route/ui/Dev"
 
 function App() {

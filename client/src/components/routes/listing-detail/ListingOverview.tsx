@@ -6,7 +6,7 @@ const ListingOverview = () => {
   const { data: listing } = data
   const {
     title,
-    lister,
+    listerUsername,
     startPrice,
     category,
     views,
@@ -28,7 +28,7 @@ const ListingOverview = () => {
           <div className="flex justify-between">
             <div className="flex items-center gap-3">
               <h1>Lister: </h1>
-              <p className="text-lg font-semibold">{lister}</p>
+              <p className="text-lg font-semibold">{listerUsername}</p>
             </div>
           </div>
           <div className="flex items-center gap-3">
