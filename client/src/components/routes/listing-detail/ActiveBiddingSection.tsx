@@ -16,7 +16,7 @@ import { settings } from "../../../settings"
 import Success from "../../ui/Success"
 import useProfile from "../../../lib/hooks/useProfile"
 import Transactions from "./Transactions"
-import { useListingDetailContextQuery } from "./ListingDetailContext"
+import useListingDetailContextQuery from "../../../lib/hooks/useListingDetailContext"
 
 const ActiveBiddingSection = () => {
   const { data } = useListingDetailContextQuery()

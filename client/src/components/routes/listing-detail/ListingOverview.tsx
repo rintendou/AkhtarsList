@@ -1,5 +1,5 @@
 import DUMMYIMAGE from "../../../../public/random-listing-image-undraw.svg"
-import { useListingDetailContextQuery } from "./ListingDetailContext"
+import useListingDetailContextQuery from "../../../lib/hooks/useListingDetailContext"
 
 const ListingOverview = () => {
   const { data } = useListingDetailContextQuery()

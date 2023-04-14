@@ -1,27 +1,7 @@
-import { createContext, useEffect, useState, useContext } from "react"
+import { createContext, useContext } from "react"
 import { useNavigate, useParams } from "react-router-dom"
-import { settings } from "../../../settings"
+import { settings } from "../../settings"
 import { useQuery } from "@tanstack/react-query"
-
-// const initialListingState = {
-//   _id: "",
-//   image: "",
-//   bestBidder: "",
-//   bidders: [],
-//   lister: "",
-//   title: "",
-//   desc: "",
-//   startPrice: 0,
-//   finalPrice: 0,
-//   expireAt: new Date(),
-//   views: 0,
-//   category: "General",
-//   dimensions: [0, 0, 0],
-//   weight: 0,
-//   height: 0,
-//   width: 0,
-//   length: 0,
-// }
 
 type initialContextType = {
   data: any | null
@@ -75,9 +55,5 @@ const ListingDetailContextQueryProvider = ({
   )
 }
 
-const useListingDetailContextQuery = () => {
-  return useContext(ListingDetailContext)
-}
-
 export default ListingDetailContextQueryProvider
-export { ListingDetailContext, useListingDetailContextQuery }
+export { ListingDetailContext }

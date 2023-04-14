@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom"
-import { useListingDetailContextQuery } from "./ListingDetailContext"
+import useListingDetailContextQuery from "../../../lib/hooks/useListingDetailContext"
 
 const EditListing = () => {
   const { data } = useListingDetailContextQuery()

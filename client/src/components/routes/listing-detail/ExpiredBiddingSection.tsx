@@ -1,7 +1,8 @@
 // Components
 import useAuth from "../../../lib/hooks/useAuth"
+import useListingDetailContextQuery from "../../../lib/hooks/useListingDetailContext"
 import Bidders from "./Bidders"
-import { useListingDetailContextQuery } from "./ListingDetailContext"
+
 import Transactions from "./Transactions"
 
 const ExpiredBiddingSection = () => {

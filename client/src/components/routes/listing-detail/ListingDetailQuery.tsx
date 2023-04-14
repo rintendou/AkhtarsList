@@ -4,7 +4,7 @@ import ListingOverview from "./ListingOverview"
 import ExpiredBiddingSection from "./ExpiredBiddingSection"
 import ActiveBiddingSection from "./ActiveBiddingSection"
 import ListingDetailSkeleton from "./ListingDetailSkeleton"
-import { useListingDetailContextQuery } from "./ListingDetailContext"
+import useListingDetailContextQuery from "../../../lib/hooks/useListingDetailContext"
 
 const ListingDetailQuery = () => {
   const { data, isLoading } = useListingDetailContextQuery()
