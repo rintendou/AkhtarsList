@@ -42,11 +42,20 @@ export const createListing = async (req: Request, res: Response) => {
         - lodash: This package provides various utility functions for working with arrays, objects, and strings, which can be useful for implementing duplicate detection algorithms.
         */
 
+    const lister = await UserModel.findById(listerId)
+
+    if (!lister) {
+      return res
+        .status(404)
+        .json({ message: "User does not exist!", data: null, ok: false })
+    }
+
     // Create listing object
     const listing = new ListingModel({
       _id: new mongoose.Types.ObjectId(),
       title: title,
       lister: listerId,
+      listerUsername: lister.username,
       desc: desc,
       image: image,
       bidders: [],
@@ -64,7 +73,7 @@ export const createListing = async (req: Request, res: Response) => {
     await listing.save()
 
     // Saving Listing to User
-    const lister = await UserModel.findById(listerId)
+
     lister!.listedListings.push(listing._id)
     await lister!.save()
 
