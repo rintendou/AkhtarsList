@@ -65,7 +65,6 @@ const ProfileContextProvider = ({
       setAddress(data.data.address)
       setBalance(data.data.balance)
       setFullName(data.data.fullName)
-      console.log(data.data.fullName)
       setBiddings(data.data.biddedListings.reverse())
       setListings(data.data.listedListings.reverse())
       setWonListings(data.data.wonListings.reverse())
