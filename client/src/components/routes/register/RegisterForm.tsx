@@ -44,7 +44,7 @@ const RegisterForm = () => {
     e.preventDefault()
 
     const registerUser = async () => {
-      const fullName = usernameRef.current!.value
+      const fullName = fullNameRef.current!.value
       const username = usernameRef.current!.value
       const password = passwordRef.current!.value
       const confirmPassword = confirmPasswordRef.current!.value
