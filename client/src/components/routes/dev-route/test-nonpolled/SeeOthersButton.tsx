@@ -1,4 +1,4 @@
-import RouterLink from "../../ui/RouterLink"
+import RouterLink from "../../../ui/RouterLink"
 
 type Props = {
   to: string

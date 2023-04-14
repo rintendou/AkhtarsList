@@ -1,21 +1,21 @@
 import { useEffect, useRef, useState } from "react"
 import { useNavigate } from "react-router-dom"
-import useAuth from "../../../lib/hooks/useAuth"
+import useAuth from "../../../../lib/hooks/useAuth"
 
 // Components
 import Bidders from "./Bidders"
-import Error from "../../ui/Error"
-import Countdown from "../../ui/Countdown"
+import Error from "../../../ui/Error"
+import Countdown from "../../../ui/Countdown"
 import EditListing from "./EditListing"
 
 // Utility functions
-import numberInputIsValid from "../../../lib/util/numberInputValidator"
+import numberInputIsValid from "../../../../lib/util/numberInputValidator"
 
 // Backend port number
-import { settings } from "../../../settings"
-import Success from "../../ui/Success"
-import useProfile from "../../../lib/hooks/useProfile"
-import useListingDetailContext from "../../../lib/hooks/useListingDetailContext"
+import { settings } from "../../../../settings"
+import Success from "../../../ui/Success"
+import useProfile from "../../../../lib/hooks/useProfile"
+import useListingDetailContext from "../../../../lib/hooks/useListingDetailContext"
 import Transactions from "./Transactions"
 
 const ActiveBiddingSection = () => {

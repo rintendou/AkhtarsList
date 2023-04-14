@@ -11,9 +11,9 @@ import numberInputIsValid from "../../../../lib/util/numberInputValidator"
 import { settings } from "../../../../settings"
 import ListingType from "../../../../lib/types/ListingType"
 import DevCountdown from "./DevCountdown"
-import EditListing from "../../listing-detail/EditListing"
+import EditListing from "../test-nonpolled/EditListing"
 import Error from "../../../ui/Error"
-import Bidders from "../../listing-detail/Bidders"
+import Bidders from "../test-nonpolled/Bidders"
 import TimeRemainingType from "../../../../lib/types/TimeRemainingType"
 
 type Props = {

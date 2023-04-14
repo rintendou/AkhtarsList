@@ -1,14 +1,14 @@
-import useTimeline from "../../../lib/hooks/useTimeline"
+import useTimeline from "../../../../lib/hooks/useTimeline"
 
 // Components
-import ListingCard from "../../ui/ListingCard"
+import ListingCard from "../../../ui/ListingCard"
 import SeeOthersButton from "./SeeOthersButton"
 
 // Types
-import ListingType from "../../../lib/types/ListingType"
-import ListMore from "../protected/profile/listings/ListMore"
+import ListingType from "../../../../lib/types/ListingType"
+import ListMore from "../../protected/profile/listings/ListMore"
 import { useNavigate } from "react-router-dom"
-import useListingDetailContext from "../../../lib/hooks/useListingDetailContext"
+import useListingDetailContext from "../../../../lib/hooks/useListingDetailContext"
 
 const SeeOtherListings = () => {
   const { listing } = useListingDetailContext()

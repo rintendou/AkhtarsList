@@ -1,4 +1,4 @@
-import useListingDetailContext from "../../../lib/hooks/useListingDetailContext"
+import useListingDetailContext from "../../../../lib/hooks/useListingDetailContext"
 
 const Transactions = () => {
   const { isLister, transactions } = useListingDetailContext()

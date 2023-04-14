@@ -1,5 +1,5 @@
 import { useEffect } from "react"
-import useListingDetail from "../../../lib/hooks/useListingDetail"
+import useListingDetail from "../../../../lib/hooks/useListingDetail"
 
 // Assets
 import SeeOtherListings from "./SeeOtherListings"

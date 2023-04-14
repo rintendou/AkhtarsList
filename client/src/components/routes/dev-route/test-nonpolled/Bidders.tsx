@@ -1,5 +1,5 @@
-import useAuth from "../../../lib/hooks/useAuth"
-import useListingDetailContext from "../../../lib/hooks/useListingDetailContext"
+import useAuth from "../../../../lib/hooks/useAuth"
+import useListingDetailContext from "../../../../lib/hooks/useListingDetailContext"
 
 const Bidders = () => {
   const { isLister, bidders } = useListingDetailContext()
