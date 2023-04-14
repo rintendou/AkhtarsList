@@ -23,7 +23,6 @@ const SeeOtherListings = () => {
     techListings,
     accessoriesListings,
     collectiblesListings,
-    fetchListingsByCategory,
   } = useTimeline()
 
   let categorizedListings: ListingType[] = []
@@ -59,7 +58,6 @@ const SeeOtherListings = () => {
   const navigate = useNavigate()
 
   const onListingClick = (listing: ListingType) => {
-    fetchListingsByCategory(category)
     navigate(`/listings/${listing._id}`)
   }
 
