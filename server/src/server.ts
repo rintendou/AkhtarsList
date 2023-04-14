@@ -2,9 +2,11 @@ require('dotenv').config()
 
 import express, { Request, Response } from 'express'
 import mongoose from 'mongoose'
+import mongodb, { GridFSBucket, MongoClient } from 'mongodb'
 import helmet from 'helmet'
 import morgan from 'morgan'
 import cors from 'cors'
+import multer from 'multer'
 
 // Import all routes
 // import UserRoute from "./routes/users"
@@ -43,9 +45,20 @@ app.use('/api/auth', AuthRoute)
 app.use('/api/listing', ListingRoute)
 app.use('/api/user', UserRoute)
 
-mongoose.connect(MONGODB_URL!).then(() => {
+
+// Mongoose will be used for the database (reading and writing documents for users)
+await mongoose.connect(MONGODB_URL!).then(() => {
     console.log('Connected to MongoDB')
     app.listen(PORT, () => {
         console.log(`Listening on port ${PORT}`)
     })
+    
 })
+
+// MongoDB will be used for GridFs, two instances of the same DB are running, very inefficient but idgaf
+const client = new MongoClient(MONGODB_URL!)
+const db = client.db()
+
+export const bucket = new GridFSBucket(db, { bucketName: 'listing-images'})
+export const storage = multer.memoryStorage() // Local memory storage using multer, this will store the images in-memory to be used later
+export const upload = multer({ storage: storage, limits: { fields: 1, files: 1, parts: 2 } }) // Multer object, defined properties of it here
