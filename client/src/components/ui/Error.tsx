@@ -1,6 +1,6 @@
 type Props = {
-  errorMessage: string;
-};
+  errorMessage: string
+}
 
 const Error = ({ errorMessage = "Something went wrong!" }: Props) => {
   return (
@@ -22,7 +22,7 @@ const Error = ({ errorMessage = "Something went wrong!" }: Props) => {
       </svg>
       <h1>{errorMessage}</h1>
     </div>
-  );
-};
+  )
+}
 
-export default Error;
+export default Error

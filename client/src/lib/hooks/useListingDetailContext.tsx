@@ -1,8 +1,8 @@
 import { useContext } from "react"
 import { ListingDetailContext } from "../store/ListingDetailContext"
 
-const useListingDetailContext = () => {
+const useListingDetailContextQuery = () => {
   return useContext(ListingDetailContext)
 }
 
-export default useListingDetailContext
+export default useListingDetailContextQuery

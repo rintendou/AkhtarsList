@@ -15,12 +15,13 @@ import numberInputIsValid from "../../../lib/util/numberInputValidator"
 import { settings } from "../../../settings"
 import Success from "../../ui/Success"
 import useProfile from "../../../lib/hooks/useProfile"
-import useListingDetailContext from "../../../lib/hooks/useListingDetailContext"
 import Transactions from "./Transactions"
+import useListingDetailContextQuery from "../../../lib/hooks/useListingDetailContext"
 
 const ActiveBiddingSection = () => {
-  const { listing, isLister, refetchListing } = useListingDetailContext()
-  const { _id: listingId, expireAt, finalPrice } = listing
+  const { data } = useListingDetailContextQuery()
+  const { data: listing } = data
+  const { _id: listingId, expireAt, finalPrice, lister, bestBidder } = listing
 
   const bidAmountRef = useRef<HTMLInputElement>(null)
   const [errorMessage, setErrorMessage] = useState("")
@@ -30,16 +31,14 @@ const ActiveBiddingSection = () => {
   const navigate = useNavigate()
   const { refetchUserDetails } = useProfile()
 
+  const isLister = lister === auth._id
+
   useEffect(() => {
     if (!bidAmountRef.current) {
       return
     }
 
     bidAmountRef.current!.focus()
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    })
   }, [])
 
   const onSubmitBid = (e: React.FormEvent<HTMLFormElement>) => {
@@ -91,11 +90,10 @@ const ActiveBiddingSection = () => {
       }
 
       setErrorMessage("")
-      setSuccessMessage(json.message)
+      setSuccessMessage("You are currently the best bidder!")
       bidAmountRef.current!.value = ""
       bidAmountRef.current!.focus()
       refetchUserDetails()
-      refetchListing()
     }
 
     submitBid()
@@ -150,7 +148,7 @@ const ActiveBiddingSection = () => {
         </div>
       )}
 
-      {!errorMessage && successMessage && (
+      {!errorMessage && successMessage && bestBidder === auth._id && (
         <Success successMessage={successMessage} />
       )}
       {errorMessage && <Error errorMessage={errorMessage} />}

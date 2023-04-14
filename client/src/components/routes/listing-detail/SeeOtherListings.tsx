@@ -8,10 +8,11 @@ import SeeOthersButton from "./SeeOthersButton"
 import ListingType from "../../../lib/types/ListingType"
 import ListMore from "../protected/profile/listings/ListMore"
 import { useNavigate } from "react-router-dom"
-import useListingDetailContext from "../../../lib/hooks/useListingDetailContext"
+import useListingDetailContextQuery from "../../../lib/hooks/useListingDetailContext"
 
 const SeeOtherListings = () => {
-  const { listing } = useListingDetailContext()
+  const { data } = useListingDetailContextQuery()
+  const { data: listing } = data
   const { _id: idToFilter, category } = listing
 
   const {

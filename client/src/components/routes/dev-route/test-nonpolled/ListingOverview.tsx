@@ -1,12 +1,11 @@
-import DUMMYIMAGE from "../../../../public/random-listing-image-undraw.svg"
-import useListingDetailContextQuery from "../../../lib/hooks/useListingDetailContext"
+import DUMMYIMAGE from "../../../../../public/random-listing-image-undraw.svg"
+import useListingDetailContext from "./useListingDetailContext"
 
 const ListingOverview = () => {
-  const { data } = useListingDetailContextQuery()
-  const { data: listing } = data
+  const { listing } = useListingDetailContext()
   const {
     title,
-    listerUsername,
+    lister,
     startPrice,
     category,
     views,
@@ -28,7 +27,7 @@ const ListingOverview = () => {
           <div className="flex justify-between">
             <div className="flex items-center gap-3">
               <h1>Lister: </h1>
-              <p className="text-lg font-semibold">{listerUsername}</p>
+              <p className="text-lg font-semibold">{lister}</p>
             </div>
           </div>
           <div className="flex items-center gap-3">

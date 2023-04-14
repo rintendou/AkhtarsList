@@ -26,7 +26,11 @@ const ListingCard = ({ listing }: { listing: ListingType }) => {
   } = listing
 
   const handleClick = () => {
-    navigate(`/listings/${_id}`)
+    const viewListing = async () => {
+      await fetch(`http://localhost:5173/api/listing/fetch-view/${_id}`)
+      navigate(`/listings/${_id}`)
+    }
+    viewListing()
   }
 
   const isLister = lister === auth._id

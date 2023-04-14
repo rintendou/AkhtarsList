@@ -2,7 +2,7 @@ import { Routes, Route } from "react-router-dom"
 
 // Routes
 import Application from "./components/routes/application/Application"
-import Dev from "./components/routes/dev/Dev"
+
 import PageNotFound from "./components/routes/page-not-found/PageNotFound"
 import Login from "./components/routes/login/Login"
 import Register from "./components/routes/register/Register"
@@ -14,7 +14,7 @@ import ChangePassword from "./components/routes/forgot-password/ResetPassword"
 import Category from "./components/routes/categories/Category"
 import Sell from "./components/routes/protected/sell/Sell"
 import Preview from "./components/routes/protected/preview/Preview"
-import ListingDetail from "./components/routes/listing-detail/ListingDetail"
+import ListingDetail from "./components/routes/dev-route/test-nonpolled/ListingDetail"
 import ListingNotFound from "./components/routes/page-not-found/ListingNotFound"
 import Edit from "./components/routes/protected/edit/Edit"
 
@@ -38,12 +38,15 @@ import RequireAdmin from "./components/routes/protected/admin/RequireAdmin"
 import Settings from "./components/routes/protected/settings/Settings"
 
 // Providers
-import ListingDetailContextProvider from "./lib/store/ListingDetailContext"
+import ListingDetailContextProvider from "./components/routes/dev-route/test-nonpolled/ListingDetailContext"
 
 // DEV
 import DevListingDetailContextProvider from "./components/routes/dev-route/test-global-ctx/DevListingDetailContext"
 import DevListingDetailGlobal from "./components/routes/dev-route/test-global-ctx/DevListingDetailGlobal"
 import SearchResults from "./components/routes/search-results/SearchResults"
+import ListingDetailContextQueryProvider from "./lib/store/ListingDetailContext"
+import ListingDetailQuery from "./components/routes/listing-detail/ListingDetail"
+import Dev from "./components/routes/dev-route/ui/Dev"
 
 function App() {
   return (
@@ -63,9 +66,9 @@ function App() {
           <Route
             path="/listings/:listingId"
             element={
-              <ListingDetailContextProvider>
-                <ListingDetail />
-              </ListingDetailContextProvider>
+              <ListingDetailContextQueryProvider>
+                <ListingDetailQuery />
+              </ListingDetailContextQueryProvider>
             }
           />
 
@@ -78,6 +81,14 @@ function App() {
               <DevListingDetailContextProvider>
                 <DevListingDetailGlobal />
               </DevListingDetailContextProvider>
+            }
+          />
+          <Route
+            path="/listings-nonpolled/:listingId"
+            element={
+              <ListingDetailContextProvider>
+                <ListingDetail />
+              </ListingDetailContextProvider>
             }
           />
 

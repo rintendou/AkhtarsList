@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react"
 import DevCountdown from "./DevCountdown"
 import Error from "../../../ui/Error"
 import useListingDetail from "./useListingDetail"
-import EditListing from "../../listing-detail/EditListing"
+import EditListing from "../test-nonpolled/EditListing"
 import DevBidders from "./DevBidders"
 
 const ActiveBiddingSection = () => {

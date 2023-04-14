@@ -4,6 +4,7 @@ type ListingType = {
   bidders: string[]
   bestBidder: string
   lister: string
+  listerUsername: string
   title: string
   desc: string
   startPrice: number

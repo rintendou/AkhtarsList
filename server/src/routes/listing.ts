@@ -5,6 +5,7 @@ import {
   createListing,
   deleteListing,
   updateListing,
+  viewListing,
   fetchListing,
   fetchListings,
   fetchListingsByCategory,
@@ -35,6 +36,9 @@ ListingRoute.get("/fetch-by-category/:category", fetchListingsByCategory)
 
 // Fetch trending listings
 ListingRoute.get("/fetch-by-trending", fetchTrendingListings)
+
+// Fetch (view) listing
+ListingRoute.get("/fetch-view/:listingId", viewListing)
 
 // Fetch specific listing
 ListingRoute.get("/fetch/:listingId", fetchListing)

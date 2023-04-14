@@ -3,41 +3,44 @@ import { useNavigate } from "react-router-dom"
 import useAuth from "../../../../lib/hooks/useAuth"
 
 // Components
+import Bidders from "./Bidders"
+import Error from "../../../ui/Error"
+import Countdown from "../../../ui/Countdown"
+import EditListing from "./EditListing"
 
 // Utility functions
 import numberInputIsValid from "../../../../lib/util/numberInputValidator"
 
 // Backend port number
 import { settings } from "../../../../settings"
-import ListingType from "../../../../lib/types/ListingType"
-import DevCountdown from "./DevCountdown"
-import EditListing from "../test-nonpolled/EditListing"
-import Error from "../../../ui/Error"
-import Bidders from "../test-nonpolled/Bidders"
-import TimeRemainingType from "../../../../lib/types/TimeRemainingType"
+import Success from "../../../ui/Success"
+import useProfile from "../../../../lib/hooks/useProfile"
+import useListingDetailContext from "./useListingDetailContext"
+import Transactions from "./Transactions"
 
-type Props = {
-  bidders: string[]
-  expireAt: Date
-  finalPrice: number
-  isLister: boolean
-  listing: ListingType
-  timeRemaining: TimeRemainingType
-}
+const ActiveBiddingSection = () => {
+  const { listing, isLister, refetchListing } = useListingDetailContext()
+  const { _id: listingId, expireAt, finalPrice } = listing
 
-const ActiveBiddingSection = ({
-  bidders,
-  expireAt,
-  finalPrice,
-  isLister,
-  listing,
-  timeRemaining,
-}: Props) => {
   const bidAmountRef = useRef<HTMLInputElement>(null)
   const [errorMessage, setErrorMessage] = useState("")
+  const [successMessage, setSuccessMessage] = useState("")
 
   const { auth } = useAuth()
   const navigate = useNavigate()
+  const { refetchUserDetails } = useProfile()
+
+  useEffect(() => {
+    if (!bidAmountRef.current) {
+      return
+    }
+
+    bidAmountRef.current!.focus()
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    })
+  }, [])
 
   const onSubmitBid = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -51,6 +54,7 @@ const ActiveBiddingSection = ({
 
     if (!numberInputIsValid(bidAmount)) {
       setErrorMessage("Invalid Input")
+      bidAmountRef.current!.focus()
       return
     }
 
@@ -58,37 +62,44 @@ const ActiveBiddingSection = ({
       setErrorMessage(
         "Bid amount cannot be less than or equal to the current price!"
       )
+      bidAmountRef.current!.focus()
       return
+    }
+
+    const payload = {
+      userId: auth._id,
+      finalPrice: bidAmount,
+      bestBidder: auth._id,
     }
 
     const submitBid = async () => {
       const response = await fetch(
-        `http://localhost:${settings.BACKEND_SERVER_PORT}/THISAPICALLWILLFAIL`
+        `http://localhost:${settings.BACKEND_SERVER_PORT}/api/listing/bid/${listingId}`,
+        {
+          method: "PUT",
+          body: JSON.stringify(payload),
+          headers: { "Content-Type": "application/json" },
+        }
       )
       const json = await response.json()
 
       if (!json.ok) {
         setErrorMessage(json.message)
+        setSuccessMessage("")
+        bidAmountRef.current!.focus()
         return
       }
 
       setErrorMessage("")
+      setSuccessMessage(json.message)
+      bidAmountRef.current!.value = ""
+      bidAmountRef.current!.focus()
+      refetchUserDetails()
+      refetchListing()
     }
 
     submitBid()
   }
-
-  useEffect(() => {
-    if (!bidAmountRef.current) {
-      return
-    }
-
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    })
-    bidAmountRef.current!.focus()
-  }, [])
 
   return (
     <div
@@ -106,7 +117,7 @@ const ActiveBiddingSection = ({
 
         <div className="flex items-center gap-3">
           <h1>Expires In:</h1>
-          <DevCountdown timeRemaining={timeRemaining} />
+          <Countdown targetDate={expireAt.toString()} />
         </div>
       </div>
 
@@ -135,12 +146,18 @@ const ActiveBiddingSection = ({
           <h1 className="text-3xl font-semibold w-full text-center">
             You own this listing
           </h1>
-          <EditListing listing={listing} />
+          <EditListing />
         </div>
       )}
 
+      {!errorMessage && successMessage && (
+        <Success successMessage={successMessage} />
+      )}
       {errorMessage && <Error errorMessage={errorMessage} />}
-      <Bidders bidders={bidders} isLister={isLister} />
+      <div className="w-full flex flex-col lg:flex-row gap-5">
+        <Bidders />
+        <Transactions />
+      </div>
     </div>
   )
 }

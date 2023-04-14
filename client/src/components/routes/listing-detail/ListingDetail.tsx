@@ -1,22 +1,22 @@
-import { useEffect } from "react"
-import useListingDetail from "../../../lib/hooks/useListingDetail"
-
 // Assets
 import SeeOtherListings from "./SeeOtherListings"
 import ListingOverview from "./ListingOverview"
 import ExpiredBiddingSection from "./ExpiredBiddingSection"
 import ActiveBiddingSection from "./ActiveBiddingSection"
 import ListingDetailSkeleton from "./ListingDetailSkeleton"
+import useListingDetailContextQuery from "../../../lib/hooks/useListingDetailContext"
+import { useEffect } from "react"
 
 const ListingDetail = () => {
-  const { isExpired, isLoading } = useListingDetail()
+  const { data, isLoading } = useListingDetailContextQuery()
 
-  useEffect(() => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    })
-  }, [])
+  if (isLoading) {
+    return <ListingDetailSkeleton />
+  }
+
+  const { data: listing } = data
+
+  const isExpired = listing && new Date(listing.expireAt) < new Date()
 
   const biddingSection = isExpired ? (
     <ExpiredBiddingSection />
@@ -26,17 +26,11 @@ const ListingDetail = () => {
 
   return (
     <div>
-      {!isLoading ? (
-        <>
-          <div className="flex flex-col md:flex-row min-h-screen border-b-2 border-b-tertiary">
-            <ListingOverview />
-            {biddingSection}
-          </div>
-          <SeeOtherListings />
-        </>
-      ) : (
-        <ListingDetailSkeleton />
-      )}
+      <div className="flex flex-col md:flex-row min-h-screen border-b-2 border-b-tertiary">
+        <ListingOverview />
+        {biddingSection}
+      </div>
+      <SeeOtherListings />
     </div>
   )
 }
