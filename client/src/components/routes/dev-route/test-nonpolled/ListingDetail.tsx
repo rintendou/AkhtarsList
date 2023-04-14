@@ -1,5 +1,4 @@
 import { useEffect } from "react"
-import useListingDetail from "../../../../lib/hooks/useListingDetail"
 
 // Assets
 import SeeOtherListings from "./SeeOtherListings"
@@ -7,9 +6,10 @@ import ListingOverview from "./ListingOverview"
 import ExpiredBiddingSection from "./ExpiredBiddingSection"
 import ActiveBiddingSection from "./ActiveBiddingSection"
 import ListingDetailSkeleton from "./ListingDetailSkeleton"
+import useListingDetailContext from "./useListingDetailContext"
 
 const ListingDetail = () => {
-  const { isExpired, isLoading } = useListingDetail()
+  const { isExpired, isLoading } = useListingDetailContext()
 
   useEffect(() => {
     window.scrollTo({
