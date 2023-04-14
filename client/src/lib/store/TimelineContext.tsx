@@ -5,6 +5,7 @@ import ListingType from "../types/ListingType"
 
 // Port Number
 import { settings } from "../../settings"
+import { useQuery } from "@tanstack/react-query"
 
 type initialContextType = {
   allListings: ListingType[]
@@ -36,6 +37,14 @@ const initialContext = {
   isLoading: false,
 }
 
+const fetchListings = async () => {
+  const response = await fetch(
+    `http://localhost:${settings.BACKEND_SERVER_PORT}/api/listing/fetch`
+  )
+  const json = await response.json()
+  return json
+}
+
 const TimelineContext = createContext<initialContextType>(initialContext)
 
 const TimelineContextProvider = ({ children }: { children: ReactNode }) => {
@@ -52,11 +61,16 @@ const TimelineContextProvider = ({ children }: { children: ReactNode }) => {
   >([])
   const [expiredListings, setExpiredListings] = useState<ListingType[]>([])
   const [unexpiredListings, setUnexpiredListings] = useState<ListingType[]>([])
-  const [isLoading, setIsLoading] = useState(false)
+  // const [isLoading, setIsLoading] = useState(false)
+
+  const { data, isLoading } = useQuery({
+    queryKey: ["timelineListings"],
+    queryFn: fetchListings,
+  })
 
   // Fetch all and trending listings on component mount
   useEffect(() => {
-    setIsLoading(true)
+    // setIsLoading(true)
 
     const fetchListings = async () => {
       const response = await fetch(
@@ -65,7 +79,7 @@ const TimelineContextProvider = ({ children }: { children: ReactNode }) => {
       const json = await response.json()
 
       if (!json.ok) {
-        setIsLoading(false)
+        // setIsLoading(false)
         return
       }
 
@@ -117,7 +131,7 @@ const TimelineContextProvider = ({ children }: { children: ReactNode }) => {
       const json = await response.json()
 
       if (!json.ok) {
-        setIsLoading(false)
+        // setIsLoading(false)
         return
       }
 
@@ -126,7 +140,7 @@ const TimelineContextProvider = ({ children }: { children: ReactNode }) => {
       )
 
       setTrendingListings(trendingListings)
-      setIsLoading(false)
+      // setIsLoading(false)
     }
 
     fetchListings()
@@ -134,7 +148,7 @@ const TimelineContextProvider = ({ children }: { children: ReactNode }) => {
   }, [])
 
   const refetchTimeline = () => {
-    setIsLoading(true)
+    // setIsLoading(true)
 
     const fetchListings = async () => {
       const response = await fetch(
@@ -143,7 +157,7 @@ const TimelineContextProvider = ({ children }: { children: ReactNode }) => {
       const json = await response.json()
 
       if (!json.ok) {
-        setIsLoading(false)
+        // setIsLoading(false)
         return
       }
 
@@ -195,7 +209,7 @@ const TimelineContextProvider = ({ children }: { children: ReactNode }) => {
       const json = await response.json()
 
       if (!json.ok) {
-        setIsLoading(false)
+        // setIsLoading(false)
         return
       }
 
@@ -204,7 +218,7 @@ const TimelineContextProvider = ({ children }: { children: ReactNode }) => {
       )
 
       setTrendingListings(trendingListings)
-      setIsLoading(false)
+      // setIsLoading(false)
     }
 
     fetchListings()
@@ -212,7 +226,7 @@ const TimelineContextProvider = ({ children }: { children: ReactNode }) => {
   }
 
   const fetchListingsByCategory = (category: string) => {
-    setIsLoading(true)
+    // setIsLoading(true)
 
     const fetchCategorizedListings = async () => {
       const response = await fetch(
@@ -245,7 +259,7 @@ const TimelineContextProvider = ({ children }: { children: ReactNode }) => {
           break
       }
 
-      setIsLoading(false)
+      // setIsLoading(false)
     }
 
     fetchCategorizedListings()
