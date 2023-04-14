@@ -21,7 +21,7 @@ import useListingDetailContextQuery from "../../../lib/hooks/useListingDetailCon
 const ActiveBiddingSection = () => {
   const { data } = useListingDetailContextQuery()
   const { data: listing } = data
-  const { _id: listingId, expireAt, finalPrice, lister } = listing
+  const { _id: listingId, expireAt, finalPrice, lister, bestBidder } = listing
 
   const bidAmountRef = useRef<HTMLInputElement>(null)
   const [errorMessage, setErrorMessage] = useState("")
@@ -90,7 +90,7 @@ const ActiveBiddingSection = () => {
       }
 
       setErrorMessage("")
-      setSuccessMessage(json.message)
+      setSuccessMessage("You are currently the best bidder!")
       bidAmountRef.current!.value = ""
       bidAmountRef.current!.focus()
       refetchUserDetails()
@@ -148,7 +148,7 @@ const ActiveBiddingSection = () => {
         </div>
       )}
 
-      {!errorMessage && successMessage && (
+      {!errorMessage && successMessage && bestBidder === auth._id && (
         <Success successMessage={successMessage} />
       )}
       {errorMessage && <Error errorMessage={errorMessage} />}
