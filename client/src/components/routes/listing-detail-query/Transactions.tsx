@@ -1,9 +1,13 @@
+import useAuth from "../../../lib/hooks/useAuth"
 import { useListingDetailContextQuery } from "./ListingDetailContext"
 
 const Transactions = () => {
-  const { data, isLister } = useListingDetailContextQuery()
+  const { data } = useListingDetailContextQuery()
   const { data: listing } = data
-  const { transactions } = listing
+  const { transactions, lister } = listing
+  const { auth } = useAuth()
+
+  const isLister = lister === auth._id
 
   return (
     <div className="w-full">

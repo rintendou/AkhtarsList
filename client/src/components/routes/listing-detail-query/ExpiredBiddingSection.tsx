@@ -10,7 +10,7 @@ const ExpiredBiddingSection = () => {
   const { finalPrice, lister } = listing
   const { auth } = useAuth()
 
-  const isLister = listing && lister === auth._id
+  const isLister = lister === auth._id
 
   return (
     <div

@@ -31,7 +31,7 @@ const ActiveBiddingSection = () => {
   const navigate = useNavigate()
   const { refetchUserDetails } = useProfile()
 
-  const isLister = listing && lister === auth._id
+  const isLister = lister === auth._id
 
   useEffect(() => {
     if (!bidAmountRef.current) {

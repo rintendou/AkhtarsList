@@ -7,7 +7,7 @@ const Bidders = () => {
   const { data: listing } = data
   const { bidders, lister } = listing
 
-  const isLister = listing && lister === auth._id
+  const isLister = lister === auth._id
 
   const CrownSVG = (
     <svg
