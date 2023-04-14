@@ -1,7 +1,7 @@
 import { Request, Response } from "express"
 import ListingModel from "../models/Listing"
 import UserModel from "../models/User"
-import mongoose, { Types } from "mongoose"
+import mongoose from "mongoose"
 
 export const createListing = async (req: Request, res: Response) => {
   const {
