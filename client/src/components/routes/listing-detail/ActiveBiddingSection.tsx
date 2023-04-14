@@ -33,17 +33,17 @@ const ActiveBiddingSection = () => {
 
   const isLister = lister === auth._id
 
-  useEffect(() => {
-    if (!bidAmountRef.current) {
-      return
-    }
+  // useEffect(() => {
+  //   if (!bidAmountRef.current) {
+  //     return
+  //   }
 
-    bidAmountRef.current!.focus()
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    })
-  }, [])
+  //   bidAmountRef.current!.focus()
+  //   window.scrollTo({
+  //     top: 0,
+  //     behavior: "smooth",
+  //   })
+  // }, [])
 
   const onSubmitBid = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()

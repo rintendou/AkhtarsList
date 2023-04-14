@@ -1,4 +1,4 @@
-import { createContext, useContext } from "react"
+import { createContext, useContext, useEffect } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import { settings } from "../../settings"
 import { useQuery } from "@tanstack/react-query"
@@ -35,6 +35,13 @@ const ListingDetailContextQueryProvider = ({
     queryFn: () => fetchListingDetail(listingId!),
     refetchInterval: 1000,
   })
+
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    })
+  }, [listingId])
 
   const navigate = useNavigate()
 

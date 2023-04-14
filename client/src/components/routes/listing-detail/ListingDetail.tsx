@@ -5,6 +5,7 @@ import ExpiredBiddingSection from "./ExpiredBiddingSection"
 import ActiveBiddingSection from "./ActiveBiddingSection"
 import ListingDetailSkeleton from "./ListingDetailSkeleton"
 import useListingDetailContextQuery from "../../../lib/hooks/useListingDetailContext"
+import { useEffect } from "react"
 
 const ListingDetail = () => {
   const { data, isLoading } = useListingDetailContextQuery()
