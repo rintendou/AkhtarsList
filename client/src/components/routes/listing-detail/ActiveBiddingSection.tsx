@@ -17,6 +17,7 @@ import Success from "../../ui/Success"
 import useProfile from "../../../lib/hooks/useProfile"
 import Transactions from "./Transactions"
 import useListingDetailContextQuery from "../../../lib/hooks/useListingDetailContext"
+import CurrentBalance from "./CurrentBalance"
 
 const ActiveBiddingSection = () => {
   const { data } = useListingDetailContextQuery()
@@ -120,25 +121,28 @@ const ActiveBiddingSection = () => {
       </div>
 
       {!isLister ? (
-        <form
-          className="w-full flex flex-col md:flex-row gap-5 items-center"
-          onSubmit={onSubmitBid}
-        >
-          <div className="w-full max-w-[50%]">
-            <input
-              id="Bid Amount ($)"
-              ref={bidAmountRef}
-              className="pt-3 pl-3 p-2 block px-0 mt-0 bg-transparent border-2 focus:outline-none focus:ring-0 border-secondary rounded-md w-full"
-            />
-            <label
-              htmlFor="Bid Amount ($)"
-              className="absolute duration-200 ease-in-out top-3 left-3 -z-1 origin-0 text-secondary"
-            >
-              Bid Amount ($)
-            </label>
-          </div>
-          <BidButton />
-        </form>
+        <>
+          <form
+            className="w-full flex flex-col md:flex-row gap-5 items-center"
+            onSubmit={onSubmitBid}
+          >
+            <div className="w-full max-w-[50%]">
+              <input
+                id="Bid Amount ($)"
+                ref={bidAmountRef}
+                className="pt-3 pl-3 p-2 block px-0 mt-0 bg-transparent border-2 focus:outline-none focus:ring-0 border-secondary rounded-md w-full"
+              />
+              <label
+                htmlFor="Bid Amount ($)"
+                className="absolute duration-200 ease-in-out top-3 left-3 -z-1 origin-0 text-secondary"
+              >
+                Bid Amount ($)
+              </label>
+            </div>
+            <BidButton />
+          </form>
+          <CurrentBalance />
+        </>
       ) : (
         <div>
           <h1 className="text-3xl font-semibold w-full text-center">
