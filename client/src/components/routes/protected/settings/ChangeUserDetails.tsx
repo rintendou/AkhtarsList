@@ -15,24 +15,20 @@ const ChangeUserDetails = () => {
   const [errorMessage, setErrorMessage] = useState("")
   const [successMessage, setSuccessMessage] = useState("")
 
+  const fullNameRef = useRef<HTMLInputElement>(null)
   const addressRef = useRef<HTMLInputElement>(null)
   const passwordRef = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
-    addressRef.current!.focus()
+    fullNameRef.current!.focus()
   }, [])
 
   const editUserDetailsHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
+    const fullName = fullNameRef.current!.value
     const address = addressRef.current!.value
     const password = passwordRef.current!.value
-
-    const payload = {
-      username: auth.username,
-      password,
-      address,
-    }
 
     if (!stringInputIsValid(password)) {
       passwordRef.current!.focus()
@@ -40,6 +36,17 @@ const ChangeUserDetails = () => {
 
     if (!stringInputIsValid(address)) {
       addressRef.current!.focus()
+    }
+
+    if (!stringInputIsValid(fullName)) {
+      fullNameRef.current!.focus()
+    }
+
+    const payload = {
+      username: auth.username,
+      password,
+      fullName,
+      address,
     }
 
     const editUserDetails = async () => {
@@ -69,6 +76,12 @@ const ChangeUserDetails = () => {
     <div className="space-y-5">
       <h1 className="text-xl font-semibold">Change User Details</h1>
       <form className="flex flex-col gap-5" onSubmit={editUserDetailsHandler}>
+        <StyledInputRef
+          name="Full Name"
+          type="text"
+          placeholder="Full Name"
+          ref={fullNameRef}
+        />
         <StyledInputRef
           name="Address"
           type="text"
