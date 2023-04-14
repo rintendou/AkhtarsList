@@ -33,7 +33,7 @@ const RegisterForm = () => {
       top: 0,
       behavior: "smooth",
     })
-    usernameRef.current!.focus()
+    fullNameRef.current!.focus()
   }, [])
 
   // send post request to api endpoint /api/auth/register by calling the
@@ -52,19 +52,21 @@ const RegisterForm = () => {
       const securityQuestion = securityQuestionRef.current!.value
       const securityQuestionAnswer = securityQuestionAnswerRef.current!.value
 
+      const payload = {
+        fullName,
+        username,
+        password,
+        confirmPassword,
+        address,
+        securityQuestion,
+        securityQuestionAnswer,
+      }
+
       const response = await fetch(
         `http://localhost:${settings.BACKEND_SERVER_PORT}/api/auth/register`,
         {
           method: "POST",
-          body: JSON.stringify({
-            fullName,
-            username,
-            password,
-            confirmPassword,
-            address,
-            securityQuestion,
-            securityQuestionAnswer,
-          }),
+          body: JSON.stringify(payload),
           headers: { "Content-Type": "application/json" },
         }
       )
