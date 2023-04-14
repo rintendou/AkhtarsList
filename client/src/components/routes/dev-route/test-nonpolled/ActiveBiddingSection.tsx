@@ -15,7 +15,7 @@ import numberInputIsValid from "../../../../lib/util/numberInputValidator"
 import { settings } from "../../../../settings"
 import Success from "../../../ui/Success"
 import useProfile from "../../../../lib/hooks/useProfile"
-import useListingDetailContext from "../../../../lib/hooks/useListingDetailContext"
+import useListingDetailContext from "./useListingDetailContext"
 import Transactions from "./Transactions"
 
 const ActiveBiddingSection = () => {

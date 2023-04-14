@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom"
-import useListingDetailContext from "../../../../lib/hooks/useListingDetailContext"
+import useListingDetailContext from "./useListingDetailContext"
 
 const EditListing = () => {
   const { listing } = useListingDetailContext()

@@ -1,8 +1,8 @@
 import { createContext, useEffect, useState } from "react"
-import ListingType from "../types/ListingType"
-import TimeRemainingType from "../types/TimeRemainingType"
-import calculateTimeRemaining from "../util/calculateTimeRemaining"
-import { settings } from "../../settings"
+import ListingType from "../../../../lib/types/ListingType"
+import TimeRemainingType from "../../../../lib/types/TimeRemainingType"
+import calculateTimeRemaining from "../../../../lib/util/calculateTimeRemaining"
+import { settings } from "../../../../settings"
 import { useNavigate, useParams } from "react-router-dom"
 
 const initialListingState = {
@@ -11,6 +11,7 @@ const initialListingState = {
   bestBidder: "",
   bidders: [],
   lister: "",
+  listerUsername: "",
   title: "",
   desc: "",
   startPrice: 0,

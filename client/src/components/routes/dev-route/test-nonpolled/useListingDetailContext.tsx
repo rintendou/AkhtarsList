@@ -1,5 +1,5 @@
 import { useContext } from "react"
-import { ListingDetailContext } from "../store/ListingDetailContext"
+import { ListingDetailContext } from "./ListingDetailContext"
 
 const useListingDetailContext = () => {
   return useContext(ListingDetailContext)

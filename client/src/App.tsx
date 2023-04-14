@@ -38,7 +38,7 @@ import RequireAdmin from "./components/routes/protected/admin/RequireAdmin"
 import Settings from "./components/routes/protected/settings/Settings"
 
 // Providers
-import ListingDetailContextProvider from "./lib/store/ListingDetailContext"
+import ListingDetailContextProvider from "./components/routes/dev-route/test-nonpolled/ListingDetailContext"
 
 // DEV
 import DevListingDetailContextProvider from "./components/routes/dev-route/test-global-ctx/DevListingDetailContext"

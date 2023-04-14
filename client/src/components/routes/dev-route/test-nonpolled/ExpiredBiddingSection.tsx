@@ -1,5 +1,5 @@
 // Components
-import useListingDetailContext from "../../../../lib/hooks/useListingDetailContext"
+import useListingDetailContext from "./useListingDetailContext"
 import Bidders from "./Bidders"
 import Transactions from "./Transactions"
 

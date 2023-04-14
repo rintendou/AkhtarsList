@@ -8,7 +8,7 @@ import SeeOthersButton from "./SeeOthersButton"
 import ListingType from "../../../lib/types/ListingType"
 import ListMore from "../protected/profile/listings/ListMore"
 import { useNavigate } from "react-router-dom"
-import useListingDetailContext from "../../../lib/hooks/useListingDetailContext"
+import useListingDetailContext from "../dev-route/test-nonpolled/useListingDetailContext"
 import { useListingDetailContextQuery } from "./ListingDetailContext"
 
 const SeeOtherListings = () => {
