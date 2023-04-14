@@ -7,11 +7,15 @@ import ListingDetailSkeleton from "./ListingDetailSkeleton"
 import { useListingDetailContextQuery } from "./ListingDetailContext"
 
 const ListingDetailQuery = () => {
-  const { isExpired, isLoading } = useListingDetailContextQuery()
+  const { data, isLoading } = useListingDetailContextQuery()
 
   if (isLoading) {
     return <ListingDetailSkeleton />
   }
+
+  const { data: listing } = data
+
+  const isExpired = listing && new Date(listing.expireAt) < new Date()
 
   const biddingSection = isExpired ? (
     <ExpiredBiddingSection />
@@ -21,17 +25,11 @@ const ListingDetailQuery = () => {
 
   return (
     <div>
-      {!isLoading ? (
-        <>
-          <div className="flex flex-col md:flex-row min-h-screen border-b-2 border-b-tertiary">
-            <ListingOverview />
-            {biddingSection}
-          </div>
-          <SeeOtherListings />
-        </>
-      ) : (
-        <ListingDetailSkeleton />
-      )}
+      <div className="flex flex-col md:flex-row min-h-screen border-b-2 border-b-tertiary">
+        <ListingOverview />
+        {biddingSection}
+      </div>
+      <SeeOtherListings />
     </div>
   )
 }

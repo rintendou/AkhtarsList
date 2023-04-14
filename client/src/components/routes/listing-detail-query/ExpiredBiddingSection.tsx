@@ -1,4 +1,5 @@
 // Components
+import useAuth from "../../../lib/hooks/useAuth"
 import Bidders from "./Bidders"
 import { useListingDetailContextQuery } from "./ListingDetailContext"
 import Transactions from "./Transactions"
@@ -6,7 +7,10 @@ import Transactions from "./Transactions"
 const ExpiredBiddingSection = () => {
   const { data } = useListingDetailContextQuery()
   const { data: listing } = data
-  const { finalPrice } = listing
+  const { finalPrice, lister } = listing
+  const { auth } = useAuth()
+
+  const isLister = listing && lister === auth._id
 
   return (
     <div

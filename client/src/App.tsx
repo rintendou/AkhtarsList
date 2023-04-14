@@ -63,11 +63,11 @@ function App() {
           <Route path="/reset-password" element={<ChangePassword />} />
           <Route path="/category/:categoryName" element={<Category />} />
           <Route
-            path="/listings/:listingId"
+            path="/listings-query/:listingId"
             element={
-              <ListingDetailContextProvider>
-                <ListingDetail />
-              </ListingDetailContextProvider>
+              <ListingDetailContextQueryProvider>
+                <ListingDetailQuery />
+              </ListingDetailContextQueryProvider>
             }
           />
 
@@ -83,11 +83,11 @@ function App() {
             }
           />
           <Route
-            path="/dev-query/:listingId"
+            path="/listings-nonpolled/:listingId"
             element={
-              <ListingDetailContextQueryProvider>
-                <ListingDetailQuery />
-              </ListingDetailContextQueryProvider>
+              <ListingDetailContextProvider>
+                <ListingDetail />
+              </ListingDetailContextProvider>
             }
           />
 

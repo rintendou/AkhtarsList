@@ -19,8 +19,9 @@ import Transactions from "./Transactions"
 import { useListingDetailContextQuery } from "./ListingDetailContext"
 
 const ActiveBiddingSection = () => {
-  const { data, isLister } = useListingDetailContextQuery()
-  const { _id: listingId, expireAt, finalPrice } = data.data
+  const { data } = useListingDetailContextQuery()
+  const { data: listing } = data
+  const { _id: listingId, expireAt, finalPrice, lister } = listing
 
   const bidAmountRef = useRef<HTMLInputElement>(null)
   const [errorMessage, setErrorMessage] = useState("")
@@ -29,6 +30,8 @@ const ActiveBiddingSection = () => {
   const { auth } = useAuth()
   const navigate = useNavigate()
   const { refetchUserDetails } = useProfile()
+
+  const isLister = listing && lister === auth._id
 
   useEffect(() => {
     if (!bidAmountRef.current) {

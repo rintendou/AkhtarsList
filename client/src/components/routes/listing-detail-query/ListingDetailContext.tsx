@@ -25,15 +25,11 @@ import { useQuery } from "@tanstack/react-query"
 
 type initialContextType = {
   data: any | null
-  isLister: boolean
-  isExpired: boolean
   isLoading: boolean
 }
 
 const initialContext: initialContextType = {
   data: null,
-  isLister: false,
-  isExpired: false,
   isLoading: false,
 }
 
@@ -52,14 +48,12 @@ const ListingDetailContextQueryProvider = ({
 }: {
   children: React.ReactNode
 }) => {
-  const [isLister, setIsLister] = useState(false)
-  const [isExpired, setIsExpired] = useState(false)
-
   const { listingId } = useParams()
 
   const { data, isLoading, error } = useQuery({
     queryKey: ["listingDetail"],
     queryFn: () => fetchListingDetail(listingId!),
+    refetchInterval: 1000,
   })
 
   const navigate = useNavigate()
@@ -68,20 +62,9 @@ const ListingDetailContextQueryProvider = ({
     navigate("/listings/listing-not-found")
     return null
   }
-  console.log(data)
-
-  // useEffect(() => {
-  //   const isAdmin = localStorage.getItem("isAdmin") === "true"
-  //   const isLister = localStorage.getItem("_id") === data.data.lister
-
-  //   setIsLister(isAdmin || isLister)
-  //   setIsExpired(new Date(data.data.expireAt) < new Date())
-  // }, [data])
 
   const contextValue = {
     data,
-    isLister,
-    isExpired,
     isLoading,
   }
 

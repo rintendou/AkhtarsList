@@ -26,7 +26,7 @@ const ListingCard = ({ listing }: { listing: ListingType }) => {
   } = listing
 
   const handleClick = () => {
-    navigate(`/listings/${_id}`)
+    navigate(`/listings-query/${_id}`)
   }
 
   const isLister = lister === auth._id
