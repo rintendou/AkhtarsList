@@ -12,6 +12,7 @@ import PasswordInputRef from "../../ui/PasswordInputRef"
 const RegisterForm = () => {
   // I opted to use the useRef hook instead of useState to prevent
   // unnecessary re-renders of this component per each character typed
+  const fullNameRef = useRef<HTMLInputElement>(null)
   const usernameRef = useRef<HTMLInputElement>(null)
   const passwordRef = useRef<HTMLInputElement>(null)
   const confirmPasswordRef = useRef<HTMLInputElement>(null)
@@ -43,6 +44,7 @@ const RegisterForm = () => {
     e.preventDefault()
 
     const registerUser = async () => {
+      const fullName = usernameRef.current!.value
       const username = usernameRef.current!.value
       const password = passwordRef.current!.value
       const confirmPassword = confirmPasswordRef.current!.value
@@ -55,6 +57,7 @@ const RegisterForm = () => {
         {
           method: "POST",
           body: JSON.stringify({
+            fullName,
             username,
             password,
             confirmPassword,
@@ -86,6 +89,12 @@ const RegisterForm = () => {
     <Card twClasses="w-[30rem] md:w-[45rem] mx-auto p-20 border border-secondary space-y-16">
       <h1 className="text-4xl font-bold text-center">Register</h1>
       <form className="flex flex-col gap-5" onSubmit={registerUserHandler}>
+        <StyledInputRef
+          name="Full Name"
+          type="text"
+          placeholder="Full Name"
+          ref={fullNameRef}
+        />
         <StyledInputRef
           name="Username"
           type="text"
