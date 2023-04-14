@@ -16,6 +16,10 @@ const ListingSchema = new Schema(
       ref: "User",
       required: true,
     },
+    listerUsername: {
+      type: String,
+      required: true,
+    },
     desc: {
       type: String,
       required: true,
