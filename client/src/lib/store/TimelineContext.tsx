@@ -7,6 +7,7 @@ import ListingType from "../types/ListingType"
 import { settings } from "../../settings"
 import { useQuery } from "@tanstack/react-query"
 import ListingSkeletons from "../../components/ui/ListingSkeletons"
+import { useLocation } from "react-router-dom"
 
 type initialContextType = {
   allListings: ListingType[]
@@ -57,8 +58,10 @@ const TimelineContextProvider = ({ children }: { children: ReactNode }) => {
     refetchInterval: 60_000, // refetch listings every minute
   })
 
+  const { pathname } = useLocation()
+
   if (isLoading) {
-    return <ListingSkeletons />
+    return pathname === "/" ? <ListingSkeletons /> : null
   }
 
   const allListings = allListingsData.data
