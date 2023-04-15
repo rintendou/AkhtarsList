@@ -12,9 +12,7 @@ const ListingOverview = () => {
     views,
     desc,
     weight,
-    length,
-    width,
-    height,
+    dimensions,
   } = listing
 
   return (
@@ -60,15 +58,15 @@ const ListingOverview = () => {
 
             <div className="flex items-center gap-3">
               <h1>H:</h1>
-              <p className="text-lg font-semibold">{height} cm </p>
+              <p className="text-lg font-semibold">{dimensions[0]} cm </p>
             </div>
             <div className="flex items-center gap-3">
               <h1>W:</h1>
-              <p className="text-lg font-semibold">{length} cm </p>
+              <p className="text-lg font-semibold">{dimensions[1]} cm </p>
             </div>
             <div className="flex items-center gap-3">
               <h1>L:</h1>
-              <p className="text-lg font-semibold">{width} cm </p>
+              <p className="text-lg font-semibold">{dimensions[2]} cm </p>
             </div>
           </div>
         </div>
