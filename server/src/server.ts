@@ -31,6 +31,7 @@ app.use(
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true,
+    exposedHeaders: ["Authorization"],
   })
 )
 app.use((req: Request, res: Response, next: Function) => {
