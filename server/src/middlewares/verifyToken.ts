@@ -1,12 +1,10 @@
-import { NextFunction, Request, Response } from "express"
+import { NextFunction, Response } from "express"
 import jwt from "jsonwebtoken"
 
-interface RequestWithToken extends Request {
-  user: any
-}
+import JWTRequest from "../lib/types/JWTRequest"
 
 const verifyToken = async (
-  req: RequestWithToken,
+  req: JWTRequest,
   res: Response,
   next: NextFunction
 ) => {

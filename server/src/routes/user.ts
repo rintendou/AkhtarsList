@@ -7,10 +7,13 @@ import {
   withdrawFunds,
 } from "../controllers/userController"
 
+// middlewares
+import verifyToken from "../middlewares/verifyToken"
+
 const UserRoute = express.Router()
 
 // GET USER
-UserRoute.get("/:userId", getUser)
+UserRoute.get("/:userId", verifyToken, getUser)
 
 // DEPOSIT FUNDS
 UserRoute.post("/deposit", depositFunds)
