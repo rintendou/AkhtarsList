@@ -19,6 +19,7 @@ const verifyToken = async (
     const JWT_KEY = process.env.JWT_KEY
     const decoded = jwt.verify(token, JWT_KEY!)
 
+    console.log(decoded)
     req.user = decoded
     next()
   } catch (err) {

@@ -5,4 +5,5 @@ interface CustomHeaders extends Headers {
 export default interface JWTRequest extends Request {
   headers: CustomHeaders
   user: any
+  params?: any
 }
