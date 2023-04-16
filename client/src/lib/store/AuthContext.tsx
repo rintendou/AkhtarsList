@@ -1,4 +1,4 @@
-import { createContext, useState, ReactNode, useEffect, useMemo } from "react"
+import { createContext, useState, ReactNode, useEffect } from "react"
 
 type User = {
   username: string

@@ -54,7 +54,13 @@ const ProfileContextProvider = ({
   useEffect(() => {
     const fetchUserDetails = async () => {
       const response = await fetch(
-        `http://localhost:${settings.BACKEND_SERVER_PORT}/api/user/${_id}`
+        `http://localhost:${settings.BACKEND_SERVER_PORT}/api/user/${_id}`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: auth.token,
+          },
+        }
       )
       const data = await response.json()
 

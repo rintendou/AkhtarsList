@@ -133,7 +133,7 @@ export const loginUser = async (req: Request, res: Response) => {
         .status(400)
         .json({ message: "User not found", data: null, ok: false })
 
-    const token = await jwt.sign(
+    const token = jwt.sign(
       { _id: user._id, username: user.username },
       process.env.JWT_KEY as jwt.Secret
     )
