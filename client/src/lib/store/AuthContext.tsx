@@ -10,6 +10,7 @@ type initialContextType = {
   auth: User
   login: (_id: string, token: string, isAdmin: string) => void
   logout: () => void
+  isLoggedIn: boolean
 }
 
 const initialUserState = { _id: "", token: "", isAdmin: "" }
@@ -18,12 +19,14 @@ const initialContext = {
   auth: initialUserState,
   login: () => {},
   logout: () => {},
+  isLoggedIn: false,
 }
 
 const AuthContext = createContext<initialContextType>(initialContext)
 
 const AuthContextProvider = ({ children }: { children: ReactNode }) => {
   const [auth, setAuth] = useState<User>(initialUserState)
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
 
   useEffect(() => {
     if (
@@ -36,6 +39,7 @@ const AuthContextProvider = ({ children }: { children: ReactNode }) => {
         token: localStorage!.getItem("token")!,
         isAdmin: localStorage!.getItem("isAdmin")!,
       })
+      setIsLoggedIn(true)
     }
   }, [])
 
@@ -44,6 +48,7 @@ const AuthContextProvider = ({ children }: { children: ReactNode }) => {
     localStorage.setItem("_id", _id)
     localStorage.setItem("token", token)
     localStorage.setItem("isAdmin", isAdmin)
+    setIsLoggedIn(true)
   }
 
   const logout = () => {
@@ -51,12 +56,14 @@ const AuthContextProvider = ({ children }: { children: ReactNode }) => {
     localStorage.removeItem("_id")
     localStorage.removeItem("token")
     localStorage.removeItem("isAdmin")
+    setIsLoggedIn(false)
   }
 
   const contextValue = {
     auth,
     login,
     logout,
+    isLoggedIn,
   }
 
   return (
