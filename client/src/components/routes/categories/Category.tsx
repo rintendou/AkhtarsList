@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
-import useTimeline from "../../../lib/hooks/useTimeline"
+import useTimelineContext from "../../../lib/hooks/context-hooks/useTimelineContext"
 
 // Components
 import SideNavLinks from "./SideNavLinks"
@@ -9,7 +9,6 @@ import ListingCard from "../../ui/ListingCard"
 // Types
 import ListingType from "../../../lib/types/ListingType"
 import ListMore from "../protected/profile/listings/ListMore"
-import CategoryActions from "./CategoryActions"
 
 const Category = () => {
   useEffect(() => {
@@ -29,7 +28,7 @@ const Category = () => {
     accessoriesListings,
     collectiblesListings,
     allListings,
-  } = useTimeline()
+  } = useTimelineContext()
 
   let activeCategorizedListings: ListingType[] = []
 

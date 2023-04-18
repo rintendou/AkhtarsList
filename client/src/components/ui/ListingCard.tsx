@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom"
-import useAuth from "../../lib/hooks/useAuth"
+import useAuth from "../../lib/hooks/context-hooks/useAuthContext"
 
 // Components
 import Card from "./Card"

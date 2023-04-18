@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from "react"
-import useAuth from "../../../../lib/hooks/useAuth"
-import useProfile from "../../../../lib/hooks/useProfile"
+import useAuthContext from "../../../../lib/hooks/context-hooks/useAuthContext"
+import useProfileContext from "../../../../lib/hooks/context-hooks/useProfileContext"
 import { useLocation, useNavigate } from "react-router-dom"
-import useTimeline from "../../../../lib/hooks/useTimeline"
+import useTimelineContext from "../../../../lib/hooks/context-hooks/useTimelineContext"
 
 import numberInputIsValid from "../../../../lib/util/numberInputValidator"
 import stringInputIsValid from "../../../../lib/util/stringInputValidator"
@@ -57,9 +57,9 @@ const EditActions = () => {
   const [errorMessage, setErrorMessage] = useState("")
   const [image] = useState("fakesubway.jpg")
 
-  const { auth } = useAuth()
-  const { refetchUserDetails } = useProfile()
-  const { refetchTimeline } = useTimeline()
+  const { auth } = useAuthContext()
+  const { refetchUserDetails } = useProfileContext()
+  const { refetchTimeline } = useTimelineContext()
 
   const navigate = useNavigate()
 

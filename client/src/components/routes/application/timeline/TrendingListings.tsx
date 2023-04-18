@@ -1,11 +1,11 @@
-import useTimeline from "../../../../lib/hooks/useTimeline"
+import useTimelineContext from "../../../../lib/hooks/context-hooks/useTimelineContext"
 
 import ListingCard from "../../../ui/ListingCard"
 import ListingSkeletons from "../../../ui/ListingSkeletons"
 import SeeAll from "./SeeAll"
 
 const TrendingListings = () => {
-  const { trendingListings } = useTimeline()
+  const { trendingListings } = useTimelineContext()
 
   return (
     <div>

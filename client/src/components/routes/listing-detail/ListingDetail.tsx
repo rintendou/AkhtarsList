@@ -3,7 +3,7 @@ import SeeOtherListings from "./SeeOtherListings"
 import ListingOverview from "./ListingOverview"
 import ExpiredBiddingSection from "./ExpiredBiddingSection"
 import ActiveBiddingSection from "./ActiveBiddingSection"
-import useListingDetailContextQuery from "../../../lib/hooks/useListingDetailContext"
+import useListingDetailContextQuery from "../../../lib/hooks/context-hooks/useListingDetailContext"
 
 const ListingDetail = () => {
   const { data } = useListingDetailContextQuery()

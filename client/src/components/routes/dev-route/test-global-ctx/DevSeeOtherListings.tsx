@@ -3,7 +3,7 @@
 // Types
 
 import { useNavigate } from "react-router-dom"
-import useTimeline from "../../../../lib/hooks/useTimeline"
+import useTimeline from "../../../../lib/hooks/context-hooks/useTimelineContext"
 import ListingType from "../../../../lib/types/ListingType"
 import SeeOthersButton from "../test-nonpolled/SeeOthersButton"
 import ListingCard from "../../../ui/ListingCard"

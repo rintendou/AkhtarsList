@@ -1,10 +1,10 @@
-import useAuth from "../../../lib/hooks/useAuth"
+import useAuthContext from "../../../lib/hooks/context-hooks/useAuthContext"
 import { useLocation, Navigate } from "react-router-dom"
 
 import LoginForm from "./LoginForm"
 
 const Login = () => {
-  const { auth } = useAuth()
+  const { auth } = useAuthContext()
 
   const location = useLocation()
   const didRegisterSuccessfully = location.state?.didRegisterSuccessfully

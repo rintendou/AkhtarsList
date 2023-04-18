@@ -1,5 +1,5 @@
 import RouterLink from "../../ui/RouterLink"
-import useAuth from "../../../lib/hooks/useAuth"
+import useAuth from "../../../lib/hooks/context-hooks/useAuthContext"
 import SearchBar from "./SearchBar"
 
 const Header = () => {

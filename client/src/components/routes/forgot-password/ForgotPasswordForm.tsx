@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react"
 import { useNavigate } from "react-router-dom"
-import useAuth from "../../../lib/hooks/useAuth"
+import useAuthContext from "../../../lib/hooks/context-hooks/useAuthContext"
 
 import Card from "../../ui/Card"
 import Error from "../../ui/Error"
@@ -9,7 +9,7 @@ import StyledInputRef from "../../ui/StyledInputRef"
 import { settings } from "../../../settings"
 
 const ForgotPasswordForm = () => {
-  const { auth, login } = useAuth()
+  const { auth, login } = useAuthContext()
 
   // I opted to use the useRef hook instead of useState to prevent
   // unnecessary re-renders of this component per each character typed
@@ -65,9 +65,12 @@ const ForgotPasswordForm = () => {
       setIsError(false)
       setDidSubmit(true)
       setSecurityQuestion(data.data.securityQuestion)
-      login("", data.data.username, "", "")
-      console.log("Username:" + data.data.username)
-      console.log(data)
+      navigate("/login", {
+        state: {
+          didRegisterSuccessfully: true,
+          successMessage: data.message,
+        },
+      })
     }
     getSecurityQuestions()
   }

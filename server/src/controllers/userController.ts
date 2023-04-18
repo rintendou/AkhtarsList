@@ -2,7 +2,9 @@ import { Request, Response } from "express"
 import UserModel from "../models/User"
 import mongoose from "mongoose"
 
-export const getUser = async (req: Request, res: Response) => {
+import JWTRequest from "../lib/types/JWTRequest"
+
+export const getUser = async (req: JWTRequest, res: Response) => {
   // Extract username from params
   const { userId } = req.params
 
@@ -18,6 +20,16 @@ export const getUser = async (req: Request, res: Response) => {
     return res
       .status(400)
       .json({ message: "Invalid userId!", data: null, ok: false })
+  }
+
+  // Extract decoded token from verifyToken middleware
+  const { _idFromToken } = req.user
+
+  // Check if user has an id equal to the id from the token
+  if (userId !== _idFromToken) {
+    return res
+      .status(400)
+      .json({ message: "Invalid Credentials!", data: null, ok: false })
   }
 
   try {
@@ -36,20 +48,6 @@ export const getUser = async (req: Request, res: Response) => {
       data: existingUser,
       ok: true,
     })
-  } catch (err) {
-    res.status(500).json({ message: err, data: null, ok: false })
-  }
-}
-
-export const getListers = async (req: Request, res: Response) => {
-  try {
-  } catch (err) {
-    res.status(500).json({ message: err, data: null, ok: false })
-  }
-}
-
-export const getBidders = async (req: Request, res: Response) => {
-  try {
   } catch (err) {
     res.status(500).json({ message: err, data: null, ok: false })
   }

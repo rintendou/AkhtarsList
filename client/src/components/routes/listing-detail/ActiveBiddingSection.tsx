@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react"
 import { useNavigate } from "react-router-dom"
-import useAuth from "../../../lib/hooks/useAuth"
+import useAuthContext from "../../../lib/hooks/context-hooks/useAuthContext"
 
 // Components
 import Bidders from "./Bidders"
@@ -14,9 +14,9 @@ import numberInputIsValid from "../../../lib/util/numberInputValidator"
 // Backend port number
 import { settings } from "../../../settings"
 import Success from "../../ui/Success"
-import useProfile from "../../../lib/hooks/useProfile"
+import useProfileContext from "../../../lib/hooks/context-hooks/useProfileContext"
 import Transactions from "./Transactions"
-import useListingDetailContextQuery from "../../../lib/hooks/useListingDetailContext"
+import useListingDetailContextQuery from "../../../lib/hooks/context-hooks/useListingDetailContext"
 import CurrentBalance from "./CurrentBalance"
 import getNumberWithCommas from "../../../lib/util/getNumberWithCommas"
 
@@ -29,9 +29,9 @@ const ActiveBiddingSection = () => {
   const [errorMessage, setErrorMessage] = useState("")
   const [successMessage, setSuccessMessage] = useState("")
 
-  const { auth } = useAuth()
+  const { auth } = useAuthContext()
   const navigate = useNavigate()
-  const { refetchUserDetails } = useProfile()
+  const { refetchUserDetails } = useProfileContext()
 
   const isLister = lister === auth._id
 

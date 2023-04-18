@@ -1,6 +1,7 @@
 import { NextFunction, Response } from "express"
 import jwt from "jsonwebtoken"
 
+import DecodedJWT from "../lib/types/DecodedJWT"
 import JWTRequest from "../lib/types/JWTRequest"
 
 const verifyToken = async (
@@ -17,9 +18,8 @@ const verifyToken = async (
 
   try {
     const JWT_KEY = process.env.JWT_KEY
-    const decoded = jwt.verify(token, JWT_KEY!)
+    const decoded = jwt.verify(token, JWT_KEY!) as DecodedJWT
 
-    console.log(decoded)
     req.user = decoded
     next()
   } catch (err) {

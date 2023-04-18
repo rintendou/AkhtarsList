@@ -1,11 +1,12 @@
 import { createContext, useEffect, useState } from "react"
-import useAuth from "../hooks/useAuth"
+import useAuthContext from "../hooks/context-hooks/useAuthContext"
 import { settings } from "../../settings"
 
 // Types
 import ListingType from "../types/ListingType"
 
 type initialContextType = {
+  username: string
   address: string
   balance: number
   fullName: string
@@ -19,6 +20,7 @@ type initialContextType = {
 }
 
 const initialContext: initialContextType = {
+  username: "",
   address: "",
   balance: 0,
   fullName: "",
@@ -38,10 +40,11 @@ const ProfileContextProvider = ({
 }: {
   children: React.ReactNode
 }) => {
-  const { auth } = useAuth()
+  const { auth } = useAuthContext()
   const { _id } = auth
 
-  const [balance, setBalance] = useState(initialContext.balance)
+  const [username, setUsername] = useState("")
+  const [balance, setBalance] = useState(0)
   const [address, setAddress] = useState("")
   const [fullName, setFullName] = useState("")
 
@@ -53,6 +56,10 @@ const ProfileContextProvider = ({
   // Fetch user details on component mount and when _id changes on auth
   useEffect(() => {
     const fetchUserDetails = async () => {
+      if (!_id) {
+        return
+      }
+
       const response = await fetch(
         `http://localhost:${settings.BACKEND_SERVER_PORT}/api/user/${_id}`,
         {
@@ -62,12 +69,14 @@ const ProfileContextProvider = ({
           },
         }
       )
+
       const data = await response.json()
 
       if (!data.ok) {
         return
       }
 
+      setUsername(data.data.username)
       setAddress(data.data.address)
       setBalance(data.data.balance)
       setFullName(data.data.fullName)
@@ -78,7 +87,7 @@ const ProfileContextProvider = ({
     }
 
     fetchUserDetails()
-  }, [_id])
+  }, [auth.token, auth._id])
 
   const refetchUserDetails = () => {
     const refetchUser = async () => {
@@ -157,6 +166,7 @@ const ProfileContextProvider = ({
   }
 
   const contextValue = {
+    username,
     address,
     balance,
     fullName,
