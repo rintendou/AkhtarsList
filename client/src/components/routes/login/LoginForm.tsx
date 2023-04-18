@@ -77,15 +77,8 @@ const LoginForm = ({
 
       const token = response.headers.get("authorization")
 
-      console.log(token)
-
       setScsMessage(data.data.message)
-      login(
-        data.data.user._id,
-        data.data.user.username,
-        token!,
-        data.data.user.isAdmin
-      )
+      login(data.data.user._id, token!, data.data.user.isAdmin)
       navigate("/", { replace: true })
     }
     loginUser()
