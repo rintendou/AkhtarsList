@@ -1,5 +1,6 @@
 import useAuth from "../../../../lib/hooks/useAuth"
 import useProfile from "../../../../lib/hooks/useProfile"
+import getNumberWithCommas from "../../../../lib/util/getNumberWithCommas"
 
 const UserDetails = () => {
   const { auth } = useAuth()
@@ -29,7 +30,7 @@ const UserDetails = () => {
       </div>
       <div>
         <h1 className="font-semibold">Balance</h1>
-        <p className="font-light">${balance}</p>
+        <p className="font-light">${getNumberWithCommas(balance)}</p>
       </div>
     </div>
   )

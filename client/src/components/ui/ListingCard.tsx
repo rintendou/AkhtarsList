@@ -9,6 +9,7 @@ import getTimeRemaining from "../../lib/util/getTimeRemaining"
 
 // Types
 import ListingType from "../../lib/types/ListingType"
+import getNumberWithCommas from "../../lib/util/getNumberWithCommas"
 
 const ListingCard = ({ listing }: { listing: ListingType }) => {
   const navigate = useNavigate()
@@ -74,7 +75,9 @@ const ListingCard = ({ listing }: { listing: ListingType }) => {
         </div>
         <p className="text-gray-500">Current Price:</p>
         <div className="flex justify-between">
-          <p className="font-bold text-2xl">${finalPrice}</p>
+          <p className="font-bold text-2xl max-w-[50%] truncate">
+            ${getNumberWithCommas(finalPrice)}
+          </p>
 
           {isLister && (
             <p className="bg-black text-white p-1 rounded-md">Owned by you</p>
