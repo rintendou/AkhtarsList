@@ -1,4 +1,4 @@
-import { createContext, useState, ReactNode, useEffect } from "react"
+import { createContext, ReactNode } from "react"
 
 // Types
 import ListingType from "../types/ListingType"

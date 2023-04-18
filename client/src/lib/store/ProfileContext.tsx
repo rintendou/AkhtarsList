@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from "react"
-import useAuth from "../hooks/context-hooks/useAuthContext"
+import useAuthContext from "../hooks/context-hooks/useAuthContext"
 import { settings } from "../../settings"
 
 // Types
@@ -40,7 +40,7 @@ const ProfileContextProvider = ({
 }: {
   children: React.ReactNode
 }) => {
-  const { auth } = useAuth()
+  const { auth } = useAuthContext()
   const { _id } = auth
 
   const [username, setUsername] = useState("")
@@ -87,7 +87,7 @@ const ProfileContextProvider = ({
     }
 
     fetchUserDetails()
-  }, [auth])
+  }, [auth.token, auth._id])
 
   const refetchUserDetails = () => {
     const refetchUser = async () => {

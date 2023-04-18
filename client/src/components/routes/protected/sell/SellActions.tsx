@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react"
-import useAuth from "../../../../lib/hooks/context-hooks/useAuthContext"
+import useAuthContext from "../../../../lib/hooks/context-hooks/useAuthContext"
 
 import numberInputIsValid from "../../../../lib/util/numberInputValidator"
 import stringInputIsValid from "../../../../lib/util/stringInputValidator"
@@ -41,7 +41,7 @@ const SellActions = () => {
   const [errorMessage, setErrorMessage] = useState("")
   const [image, setImageUrl] = useState("")
 
-  const { auth } = useAuth()
+  const { auth } = useAuthContext()
   const { refetchUserDetails } = useProfile()
   const { refetchTimeline } = useTimeline()
 

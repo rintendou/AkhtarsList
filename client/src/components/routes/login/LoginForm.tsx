@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react"
 import { useNavigate } from "react-router-dom"
-import useAuth from "../../../lib/hooks/context-hooks/useAuthContext"
+import useAuthContext from "../../../lib/hooks/context-hooks/useAuthContext"
 
 // Components
 import Card from "../../ui/Card"
@@ -24,7 +24,7 @@ const LoginForm = ({
   successMessage,
   errorMessageFromOtherRoute,
 }: Props) => {
-  const { login } = useAuth()
+  const { login } = useAuthContext()
   const navigate = useNavigate()
 
   // I opted to use the useRef hook instead of useState to prevent

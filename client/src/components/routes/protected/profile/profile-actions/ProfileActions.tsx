@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom"
 
 import ProfileButton from "./ProfileButton"
 import ProfileRouterLink from "./ProfileRouterLink"
-import useAuth from "../../../../../lib/hooks/context-hooks/useAuthContext"
+import useAuthContext from "../../../../../lib/hooks/context-hooks/useAuthContext"
 import AdminActions from "./admin-actions/AdminActions"
 
 type Props = {
@@ -11,7 +11,7 @@ type Props = {
 
 const ProfileActions = ({ logout }: Props) => {
   const navigate = useNavigate()
-  const { auth } = useAuth()
+  const { auth } = useAuthContext()
 
   const logoutHandler = () => {
     logout()

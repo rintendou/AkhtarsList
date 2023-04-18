@@ -1,11 +1,11 @@
 import { useEffect } from "react"
-import useProfile from "../../../../lib/hooks/context-hooks/useProfileContext"
+import useProfileContext from "../../../../lib/hooks/context-hooks/useProfileContext"
 import UserDetails from "./UserDetails"
 import Biddings from "./biddings/Biddings"
 import Listings from "./listings/Listings"
 
 const Profile = () => {
-  const { refetchUserDetails } = useProfile()
+  const { refetchUserDetails } = useProfileContext()
 
   useEffect(() => {
     refetchUserDetails()

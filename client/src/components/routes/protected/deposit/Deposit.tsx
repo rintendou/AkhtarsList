@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react"
-import useProfile from "../../../../lib/hooks/context-hooks/useProfileContext"
+import useProfileContext from "../../../../lib/hooks/context-hooks/useProfileContext"
 
 import Card from "../../../ui/Card"
 import StyledInputRef from "../../../ui/StyledInputRef"
@@ -15,7 +15,7 @@ const Deposit = () => {
   const [error, setError] = useState("")
   const [success, setSuccess] = useState("")
 
-  const { balance, depositFunds } = useProfile()
+  const { balance, depositFunds } = useProfileContext()
 
   const cardHolderRef = useRef<HTMLInputElement>(null)
   const cardNumberRef = useRef<HTMLInputElement>(null)

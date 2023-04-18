@@ -1,10 +1,10 @@
-import useAuth from "../../../../lib/hooks/context-hooks/useAuthContext"
-import useProfile from "../../../../lib/hooks/context-hooks/useProfileContext"
+import useAuthContext from "../../../../lib/hooks/context-hooks/useAuthContext"
+import useProfileContext from "../../../../lib/hooks/context-hooks/useProfileContext"
 import getNumberWithCommas from "../../../../lib/util/getNumberWithCommas"
 
 const UserDetails = () => {
-  const { auth } = useAuth()
-  const { username, balance, address, fullName } = useProfile()
+  const { auth } = useAuthContext()
+  const { username, balance, address, fullName } = useProfileContext()
 
   return (
     <div className="space-y-10">

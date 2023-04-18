@@ -1,9 +1,9 @@
-import useAuth from "../../../lib/hooks/context-hooks/useAuthContext"
-import useProfile from "../../../lib/hooks/context-hooks/useProfileContext"
+import useAuthContext from "../../../lib/hooks/context-hooks/useAuthContext"
+import useProfileContext from "../../../lib/hooks/context-hooks/useProfileContext"
 
 const CurrentBalance = () => {
-  const { balance } = useProfile()
-  const { isLoggedIn } = useAuth()
+  const { balance } = useProfileContext()
+  const { isLoggedIn } = useAuthContext()
 
   return isLoggedIn ? (
     <div className="text-center flex gap-2 items-center">

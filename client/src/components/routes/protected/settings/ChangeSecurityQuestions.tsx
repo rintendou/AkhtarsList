@@ -2,13 +2,13 @@ import { useRef, useState } from "react"
 import StyledInputRef from "../../../ui/StyledInputRef"
 import PasswordInputRef from "../../../ui/PasswordInputRef"
 import { settings } from "../../../../settings"
-import useAuth from "../../../../lib/hooks/context-hooks/useAuthContext"
+import useAuthContext from "../../../../lib/hooks/context-hooks/useAuthContext"
 import Error from "../../../ui/Error"
 import stringInputIsValid from "../../../../lib/util/stringInputValidator"
 import Success from "../../../ui/Success"
 
 const ChangeSecurityQuestions = () => {
-  const { auth } = useAuth()
+  const { auth } = useAuthContext()
 
   const [errorMessage, setErrorMessage] = useState("")
   const [successMessage, setSuccessMessage] = useState("")

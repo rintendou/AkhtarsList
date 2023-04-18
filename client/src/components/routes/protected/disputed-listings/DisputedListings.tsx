@@ -1,9 +1,9 @@
-import useProfile from "../../../../lib/hooks/context-hooks/useProfileContext"
+import useProfileContext from "../../../../lib/hooks/context-hooks/useProfileContext"
 import Card from "../../../ui/Card"
 import ListingCard from "../../../ui/ListingCard"
 
 const DisputedListings = () => {
-  const { disputedListings } = useProfile()
+  const { disputedListings } = useProfileContext()
 
   return (
     <div className="w-full flex flex-col justify-center items-center">

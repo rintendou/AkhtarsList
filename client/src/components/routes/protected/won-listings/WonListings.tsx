@@ -1,10 +1,10 @@
-import useProfile from "../../../../lib/hooks/context-hooks/useProfileContext"
+import useProfileContext from "../../../../lib/hooks/context-hooks/useProfileContext"
 import Card from "../../../ui/Card"
 import ListingCard from "../../../ui/ListingCard"
 import RouterLink from "../../../ui/RouterLink"
 
 const WonListings = () => {
-  const { wonListings } = useProfile()
+  const { wonListings } = useProfileContext()
 
   return (
     <div className="w-full flex flex-col justify-center items-center">

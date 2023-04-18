@@ -1,4 +1,5 @@
-import useTimeline from "../../../../lib/hooks/context-hooks/useTimelineContext"
+import useTimelineContext from "../../../../lib/hooks/context-hooks/useTimelineContext"
+
 import Carousel from "../../../ui/Carousel"
 import ListingCard from "../../../ui/ListingCard"
 import ListingSkeletons from "../../../ui/ListingSkeletons"
@@ -21,7 +22,7 @@ const CategoryListings = () => {
     accessoriesListings,
     collectiblesListings,
     isLoading,
-  } = useTimeline()
+  } = useTimelineContext()
   return (
     <div className="space-y-8">
       {isLoading && <ListingSkeletons />}

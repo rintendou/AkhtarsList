@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect } from "react"
+import { createContext, useEffect } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import { settings } from "../../settings"
 import { useQuery } from "@tanstack/react-query"
