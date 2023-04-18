@@ -59,7 +59,7 @@ const ProfileContextProvider = ({
       if (!_id) {
         return
       }
-      console.log(_id)
+
       const response = await fetch(
         `http://localhost:${settings.BACKEND_SERVER_PORT}/api/user/${_id}`,
         {
@@ -69,7 +69,7 @@ const ProfileContextProvider = ({
           },
         }
       )
-      console.log(response)
+
       const data = await response.json()
 
       if (!data.ok) {
