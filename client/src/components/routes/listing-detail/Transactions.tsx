@@ -1,5 +1,5 @@
-import useAuth from "../../../lib/hooks/useAuth"
-import useListingDetailContextQuery from "../../../lib/hooks/useListingDetailContext"
+import useAuth from "../../../lib/hooks/context-hooks/useAuth"
+import useListingDetailContextQuery from "../../../lib/hooks/context-hooks/useListingDetailContext"
 
 const Transactions = () => {
   const { data } = useListingDetailContextQuery()

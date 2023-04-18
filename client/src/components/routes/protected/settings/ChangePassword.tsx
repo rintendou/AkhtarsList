@@ -1,7 +1,7 @@
 import { useRef, useState } from "react"
 import PasswordInputRef from "../../../ui/PasswordInputRef"
 import { settings } from "../../../../settings"
-import useAuth from "../../../../lib/hooks/useAuth"
+import useAuth from "../../../../lib/hooks/context-hooks/useAuth"
 import Error from "../../../ui/Error"
 import stringInputIsValid from "../../../../lib/util/stringInputValidator"
 import Success from "../../../ui/Success"

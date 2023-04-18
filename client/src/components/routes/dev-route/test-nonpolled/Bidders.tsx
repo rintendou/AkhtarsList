@@ -1,4 +1,4 @@
-import useAuth from "../../../../lib/hooks/useAuth"
+import useAuth from "../../../../lib/hooks/context-hooks/useAuth"
 import useListingDetailContext from "./useListingDetailContext"
 
 const Bidders = () => {

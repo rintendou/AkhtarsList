@@ -1,8 +1,8 @@
-import useAuth from "../../../lib/hooks/useAuth";
-import RouterLink from "../../ui/RouterLink";
+import useAuth from "../../../lib/hooks/context-hooks/useAuth"
+import RouterLink from "../../ui/RouterLink"
 
 const Footer = () => {
-  const { auth } = useAuth();
+  const { auth } = useAuth()
 
   return (
     <footer className="p-8 flex flex-row justify-between items-center bg-secondary text-primary">
@@ -51,7 +51,7 @@ const Footer = () => {
         to="/"
       />
     </footer>
-  );
-};
+  )
+}
 
-export default Footer;
+export default Footer

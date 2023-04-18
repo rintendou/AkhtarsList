@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react"
 import { useNavigate } from "react-router-dom"
-import useAuth from "../../../../lib/hooks/useAuth"
+import useAuth from "../../../../lib/hooks/context-hooks/useAuth"
 
 // Components
 import Bidders from "./Bidders"
@@ -14,7 +14,7 @@ import numberInputIsValid from "../../../../lib/util/numberInputValidator"
 // Backend port number
 import { settings } from "../../../../settings"
 import Success from "../../../ui/Success"
-import useProfile from "../../../../lib/hooks/useProfile"
+import useProfile from "../../../../lib/hooks/context-hooks/useProfile"
 import useListingDetailContext from "./useListingDetailContext"
 import Transactions from "./Transactions"
 

@@ -1,4 +1,4 @@
-import useProfile from "../../../../../lib/hooks/useProfile"
+import useProfile from "../../../../../lib/hooks/context-hooks/useProfile"
 
 import ListingCard from "../../../../ui/ListingCard"
 import BidMore from "./BidMore"

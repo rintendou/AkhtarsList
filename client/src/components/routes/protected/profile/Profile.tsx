@@ -1,5 +1,5 @@
 import { useEffect } from "react"
-import useProfile from "../../../../lib/hooks/useProfile"
+import useProfile from "../../../../lib/hooks/context-hooks/useProfile"
 import UserDetails from "./UserDetails"
 import Biddings from "./biddings/Biddings"
 import Listings from "./listings/Listings"

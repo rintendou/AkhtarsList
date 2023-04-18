@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react"
-import useProfile from "../../../../lib/hooks/useProfile"
+import useProfile from "../../../../lib/hooks/context-hooks/useProfile"
 
 import Card from "../../../ui/Card"
 import StyledInputRef from "../../../ui/StyledInputRef"

@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react"
 import { useNavigate } from "react-router-dom"
-import useAuth from "../../../lib/hooks/useAuth"
+import useAuth from "../../../lib/hooks/context-hooks/useAuth"
 
 // Components
 import Bidders from "./Bidders"
@@ -14,9 +14,9 @@ import numberInputIsValid from "../../../lib/util/numberInputValidator"
 // Backend port number
 import { settings } from "../../../settings"
 import Success from "../../ui/Success"
-import useProfile from "../../../lib/hooks/useProfile"
+import useProfile from "../../../lib/hooks/context-hooks/useProfile"
 import Transactions from "./Transactions"
-import useListingDetailContextQuery from "../../../lib/hooks/useListingDetailContext"
+import useListingDetailContextQuery from "../../../lib/hooks/context-hooks/useListingDetailContext"
 import CurrentBalance from "./CurrentBalance"
 import getNumberWithCommas from "../../../lib/util/getNumberWithCommas"
 

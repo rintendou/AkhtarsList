@@ -1,5 +1,5 @@
-import useAuth from "../../../lib/hooks/useAuth"
-import useProfile from "../../../lib/hooks/useProfile"
+import useAuth from "../../../lib/hooks/context-hooks/useAuth"
+import useProfile from "../../../lib/hooks/context-hooks/useProfile"
 
 const CurrentBalance = () => {
   const { balance } = useProfile()

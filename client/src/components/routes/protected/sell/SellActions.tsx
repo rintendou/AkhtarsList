@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react"
-import useAuth from "../../../../lib/hooks/useAuth"
+import useAuth from "../../../../lib/hooks/context-hooks/useAuth"
 
 import numberInputIsValid from "../../../../lib/util/numberInputValidator"
 import stringInputIsValid from "../../../../lib/util/stringInputValidator"
@@ -22,8 +22,8 @@ import StyledDateTimePicker from "../../../ui/StyledDateTimePicker"
 import Error from "../../../ui/Error"
 import { useNavigate } from "react-router-dom"
 import { settings } from "../../../../settings"
-import useProfile from "../../../../lib/hooks/useProfile"
-import useTimeline from "../../../../lib/hooks/useTimeline"
+import useProfile from "../../../../lib/hooks/context-hooks/useProfile"
+import useTimeline from "../../../../lib/hooks/context-hooks/useTimeline"
 import DragAndDrop from "../../../ui/DragAndDrop"
 
 const SellActions = () => {

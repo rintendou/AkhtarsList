@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom"
-import useAuth from "../../../lib/hooks/useAuth"
+import useAuth from "../../../lib/hooks/context-hooks/useAuth"
 
 import ProfileActions from "./profile/profile-actions/ProfileActions"
 

@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from "react"
-import useAuth from "../hooks/useAuth"
+import useAuth from "../hooks/context-hooks/useAuth"
 import { settings } from "../../settings"
 
 // Types

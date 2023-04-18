@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react"
 import { useNavigate } from "react-router-dom"
-import useAuth from "../../../lib/hooks/useAuth"
+import useAuth from "../../../lib/hooks/context-hooks/useAuth"
 
 // Components
 import Card from "../../ui/Card"

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
-import useTimeline from "../../../lib/hooks/useTimeline"
+import useTimeline from "../../../lib/hooks/context-hooks/useTimeline"
 
 // Components
 import SideNavLinks from "./SideNavLinks"
