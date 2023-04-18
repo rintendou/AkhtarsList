@@ -9,6 +9,8 @@ const verifyToken = async (
   res: Response,
   next: NextFunction
 ) => {
+  // Verify token attached by the client that is placed on the request headers
+
   const authHeader = req.headers.authorization
   const token = authHeader && authHeader.split(" ")[1]
 
@@ -18,9 +20,14 @@ const verifyToken = async (
 
   try {
     const JWT_KEY = process.env.JWT_KEY
+
+    // Verify token using the key
     const decoded = jwt.verify(token, JWT_KEY!) as DecodedJWT
 
+    // Attach token to the request to be sent to other middleware
     req.user = decoded
+
+    // Pass control to the next middleware
     next()
   } catch (err) {
     console.log(err)
