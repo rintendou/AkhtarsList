@@ -1,6 +1,6 @@
 import DUMMYIMAGE from "../../../../public/random-listing-image-undraw.svg"
 import useListingDetailContextQuery from "../../../lib/hooks/context-hooks/useListingDetailContext"
-import getNumberWithCommas from "../../../lib/util/getNumberWithCommas"
+import getNumberWithCommas from "../../../lib/util/functions/getNumberWithCommas"
 
 const ListingOverview = () => {
   const { data } = useListingDetailContextQuery()

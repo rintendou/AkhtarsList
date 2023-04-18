@@ -4,7 +4,7 @@ import PasswordInputRef from "../../../ui/PasswordInputRef"
 import { settings } from "../../../../settings"
 import useAuthContext from "../../../../lib/hooks/context-hooks/useAuthContext"
 import Error from "../../../ui/Error"
-import stringInputIsValid from "../../../../lib/util/stringInputValidator"
+import stringInputIsValid from "../../../../lib/util/functions/stringInputValidator"
 import Success from "../../../ui/Success"
 import useProfileContext from "../../../../lib/hooks/context-hooks/useProfileContext"
 

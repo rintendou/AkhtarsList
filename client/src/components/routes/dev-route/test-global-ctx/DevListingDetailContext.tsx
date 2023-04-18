@@ -2,7 +2,7 @@ import { createContext, useEffect, useState } from "react"
 
 import ListingType from "../../../../lib/types/ListingType"
 import TimeRemainingType from "../../../../lib/types/TimeRemainingType"
-import calculateTimeRemaining from "../../../../lib/util/calculateTimeRemaining"
+import calculateTimeRemaining from "../../../../lib/util/functions/calculateTimeRemaining"
 
 const initialListingState = {
   _id: "",

@@ -9,7 +9,7 @@ import Countdown from "../../ui/Countdown"
 import EditListing from "./EditListing"
 
 // Utility functions
-import numberInputIsValid from "../../../lib/util/numberInputValidator"
+import numberInputIsValid from "../../../lib/util/functions/numberInputValidator"
 
 // Backend port number
 import { settings } from "../../../settings"
@@ -18,7 +18,7 @@ import useProfileContext from "../../../lib/hooks/context-hooks/useProfileContex
 import Transactions from "./Transactions"
 import useListingDetailContextQuery from "../../../lib/hooks/context-hooks/useListingDetailContext"
 import CurrentBalance from "./CurrentBalance"
-import getNumberWithCommas from "../../../lib/util/getNumberWithCommas"
+import getNumberWithCommas from "../../../lib/util/functions/getNumberWithCommas"
 
 const ActiveBiddingSection = () => {
   const { data } = useListingDetailContextQuery()

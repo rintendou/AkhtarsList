@@ -5,11 +5,11 @@ import useAuth from "../../lib/hooks/context-hooks/useAuthContext"
 import Card from "./Card"
 
 // Util functions
-import getTimeRemaining from "../../lib/util/getTimeRemaining"
+import getTimeRemaining from "../../lib/util/functions/getTimeRemaining"
 
 // Types
 import ListingType from "../../lib/types/ListingType"
-import getNumberWithCommas from "../../lib/util/getNumberWithCommas"
+import getNumberWithCommas from "../../lib/util/functions/getNumberWithCommas"
 
 const ListingCard = ({ listing }: { listing: ListingType }) => {
   const navigate = useNavigate()

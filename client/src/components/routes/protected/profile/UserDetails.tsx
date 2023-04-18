@@ -1,6 +1,6 @@
 import useAuthContext from "../../../../lib/hooks/context-hooks/useAuthContext"
 import useProfileContext from "../../../../lib/hooks/context-hooks/useProfileContext"
-import getNumberWithCommas from "../../../../lib/util/getNumberWithCommas"
+import getNumberWithCommas from "../../../../lib/util/functions/getNumberWithCommas"
 
 const UserDetails = () => {
   const { auth } = useAuthContext()

@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from "react"
 import useAuthContext from "../../../../lib/hooks/context-hooks/useAuthContext"
 
-import numberInputIsValid from "../../../../lib/util/numberInputValidator"
-import stringInputIsValid from "../../../../lib/util/stringInputValidator"
+import numberInputIsValid from "../../../../lib/util/functions/numberInputValidator"
+import stringInputIsValid from "../../../../lib/util/functions/stringInputValidator"
 
 const CATEGORIES = [
   "Sneakers",
