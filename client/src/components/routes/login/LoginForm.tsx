@@ -77,6 +77,8 @@ const LoginForm = ({
 
       const token = response.headers.get("authorization")
 
+      console.log(token)
+
       setScsMessage(data.data.message)
       login(
         data.data.user._id,
