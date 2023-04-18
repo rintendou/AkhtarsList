@@ -23,10 +23,10 @@ export const getUser = async (req: JWTRequest, res: Response) => {
   }
 
   // Extract decoded token from verifyToken middleware
-  const { _id } = req.user
+  const { _idFromToken } = req.user
 
   // Check if user has an id equal to the id from the token
-  if (userId !== _id) {
+  if (userId !== _idFromToken) {
     return res
       .status(400)
       .json({ message: "Invalid Credentials!", data: null, ok: false })
