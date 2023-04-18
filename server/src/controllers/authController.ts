@@ -271,8 +271,8 @@ export const resetPassword = async (req: Request, res: Response) => {
   }
 }
 
-export const changeUserDetails = async (req: Request, res: Response) => {
-  // destructure the payload attached to the body
+export const changeUserDetails = async (req: JWTRequest, res: Response) => {
+  // Destructure the payload attached to the body
   const { fullName, userId, password, address } = req.body
 
   // Check if appropriate payload is attached to the body
@@ -289,6 +289,16 @@ export const changeUserDetails = async (req: Request, res: Response) => {
     return res
       .status(400)
       .json({ message: "Invalid userId!", data: null, ok: false })
+  }
+
+  // Extract decoded token from verifyToken middleware
+  const { _idFromToken } = req.user
+
+  // Check if user has an id equal to the id from the token
+  if (userId !== _idFromToken) {
+    return res
+      .status(400)
+      .json({ message: "Invalid Credentials!", data: null, ok: false })
   }
 
   // Check if user exists
@@ -329,7 +339,7 @@ export const changeUserDetails = async (req: Request, res: Response) => {
 }
 
 export const changePassword = async (req: JWTRequest, res: Response) => {
-  // destructure the payload attached to the body
+  // Destructure the payload attached to the body
   const { userId, oldPassword, newPassword, newConfirmPassword } = req.body
 
   // Check if appropriate payload is attached to the body
@@ -347,6 +357,16 @@ export const changePassword = async (req: JWTRequest, res: Response) => {
     return res
       .status(400)
       .json({ message: "Invalid userId!", data: null, ok: false })
+  }
+
+  // Extract decoded token from verifyToken middleware
+  const { _idFromToken } = req.user
+
+  // Check if user has an id equal to the id from the token
+  if (userId !== _idFromToken) {
+    return res
+      .status(400)
+      .json({ message: "Invalid Credentials!", data: null, ok: false })
   }
 
   // Check if user exists
@@ -411,7 +431,7 @@ export const changePassword = async (req: JWTRequest, res: Response) => {
   }
 }
 
-export const changeSecurityQA = async (req: Request, res: Response) => {
+export const changeSecurityQA = async (req: JWTRequest, res: Response) => {
   // destructure the payload attached to the body
   const { userId, password, newSecurityQuestion, newSecurityQAnswer } = req.body
 
@@ -430,6 +450,16 @@ export const changeSecurityQA = async (req: Request, res: Response) => {
     return res
       .status(400)
       .json({ message: "Invalid userId!", data: null, ok: false })
+  }
+
+  // Extract decoded token from verifyToken middleware
+  const { _idFromToken } = req.user
+
+  // Check if user has an id equal to the id from the token
+  if (userId !== _idFromToken) {
+    return res
+      .status(400)
+      .json({ message: "Invalid Credentials!", data: null, ok: false })
   }
 
   // Check if user exists
