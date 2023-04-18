@@ -46,7 +46,7 @@ const Footer = () => {
         )}
       </nav>
       <RouterLink
-        twClasses="text-2xl font-bold"
+        twClasses="text-2xl font-bold select-none"
         routerLinkText="AkhtarsList"
         to="/"
       />
