@@ -4,6 +4,7 @@ import jwt from "jsonwebtoken"
 
 import UserModel from "../models/User"
 import mongoose from "mongoose"
+import JWTRequest from "../lib/types/JWTRequest"
 
 export const registerUser = async (req: Request, res: Response) => {
   // destructure the payload attached to the body
@@ -327,7 +328,7 @@ export const changeUserDetails = async (req: Request, res: Response) => {
   }
 }
 
-export const changePassword = async (req: Request, res: Response) => {
+export const changePassword = async (req: JWTRequest, res: Response) => {
   // destructure the payload attached to the body
   const { userId, oldPassword, newPassword, newConfirmPassword } = req.body
 
