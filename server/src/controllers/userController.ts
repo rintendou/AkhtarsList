@@ -2,7 +2,9 @@ import { Request, Response } from "express"
 import UserModel from "../models/User"
 import mongoose from "mongoose"
 
-export const getUser = async (req: Request, res: Response) => {
+import JWTRequest from "../lib/types/JWTRequest"
+
+export const getUser = async (req: JWTRequest, res: Response) => {
   // Extract username from params
   const { userId } = req.params
 

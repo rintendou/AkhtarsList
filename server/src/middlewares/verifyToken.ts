@@ -1,6 +1,7 @@
 import { NextFunction, Response } from "express"
 import jwt from "jsonwebtoken"
 
+import DecodedJWT from "../lib/types/DecodedJWT"
 import JWTRequest from "../lib/types/JWTRequest"
 
 const verifyToken = async (
@@ -8,16 +9,16 @@ const verifyToken = async (
   res: Response,
   next: NextFunction
 ) => {
+  console.log("TEST")
   const authHeader = req.headers.authorization
   const token = authHeader && authHeader.split(" ")[1]
-
   if (!token) {
     return res.status(401).json({ message: "Missing token", ok: false })
   }
 
   try {
     const JWT_KEY = process.env.JWT_KEY
-    const decoded = jwt.verify(token, JWT_KEY!)
+    const decoded = jwt.verify(token, JWT_KEY!) as DecodedJWT
 
     console.log(decoded)
     req.user = decoded
