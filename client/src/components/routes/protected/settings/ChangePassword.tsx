@@ -48,7 +48,10 @@ const ChangePassword = () => {
         {
           method: "POST",
           body: JSON.stringify(payload),
-          headers: { "Content-Type": "application/json" },
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: auth.token,
+          },
         }
       )
       const json = await response.json()
