@@ -7,6 +7,7 @@ import Error from "../../../ui/Error"
 import Success from "../../../ui/Success"
 import stringInputIsValid from "../../../../lib/util/stringInputValidator"
 import numberInputIsValid from "../../../../lib/util/numberInputValidator"
+import CreditCardInput from "../../../ui/CreditCardInput"
 
 const Deposit = () => {
   const [error, setError] = useState("")
@@ -33,10 +34,12 @@ const Deposit = () => {
     event.preventDefault()
 
     const cardHolder = cardHolderRef.current!.value
-    const cardNumber = cardNumberRef.current!.value
     const expiration = expirationRef.current!.value
     const cvv = cvvRef.current!.value
     const depositAmount = depositAmountRef.current!.value
+
+    const dirtyCardNumber = cardNumberRef.current!.value
+    const cleanCardNumber = dirtyCardNumber.replace(/\s+/g, "")
 
     if (!stringInputIsValid(cardHolder)) {
       setError("Card Holder is Required!")
@@ -44,7 +47,7 @@ const Deposit = () => {
       return
     }
 
-    if (cardNumber.trim().length != 16 || !numberInputIsValid(cardNumber)) {
+    if (cleanCardNumber.length !== 16 || !numberInputIsValid(cleanCardNumber)) {
       setError("Invalid Card Number!")
       cardNumberRef.current!.focus()
       return
@@ -58,6 +61,7 @@ const Deposit = () => {
     const expirationMonth = parseInt(expiration.substring(0, 2), 10)
 
     if (
+      !stringInputIsValid(expiration) ||
       expirationYear < currentYear ||
       (expirationYear === currentYear && expirationMonth < currentMonth)
     ) {
@@ -98,7 +102,7 @@ const Deposit = () => {
             placeholder="Card Holder"
             twClasses="rounded-lg shadow-lg"
           />
-          <StyledInputRef
+          <CreditCardInput
             ref={cardNumberRef}
             name="Card Number"
             type="text"
