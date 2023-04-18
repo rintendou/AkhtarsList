@@ -2,11 +2,11 @@ import { useEffect, useRef, useState } from "react"
 import StyledInputRef from "../../../ui/StyledInputRef"
 import PasswordInputRef from "../../../ui/PasswordInputRef"
 import { settings } from "../../../../settings"
-import useAuth from "../../../../lib/hooks/context-hooks/useAuth"
+import useAuth from "../../../../lib/hooks/context-hooks/useAuthContext"
 import Error from "../../../ui/Error"
 import stringInputIsValid from "../../../../lib/util/stringInputValidator"
 import Success from "../../../ui/Success"
-import useProfile from "../../../../lib/hooks/context-hooks/useProfile"
+import useProfile from "../../../../lib/hooks/context-hooks/useProfileContext"
 
 const ChangeUserDetails = () => {
   const { auth } = useAuth()

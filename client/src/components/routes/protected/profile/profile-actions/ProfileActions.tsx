@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom"
 
 import ProfileButton from "./ProfileButton"
 import ProfileRouterLink from "./ProfileRouterLink"
-import useAuth from "../../../../../lib/hooks/context-hooks/useAuth"
+import useAuth from "../../../../../lib/hooks/context-hooks/useAuthContext"
 import AdminActions from "./admin-actions/AdminActions"
 
 type Props = {

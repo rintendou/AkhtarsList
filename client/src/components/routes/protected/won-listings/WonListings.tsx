@@ -1,4 +1,4 @@
-import useProfile from "../../../../lib/hooks/context-hooks/useProfile"
+import useProfile from "../../../../lib/hooks/context-hooks/useProfileContext"
 import Card from "../../../ui/Card"
 import ListingCard from "../../../ui/ListingCard"
 import RouterLink from "../../../ui/RouterLink"

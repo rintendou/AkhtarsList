@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from "react"
-import useAuth from "../../../../lib/hooks/context-hooks/useAuth"
-import useProfile from "../../../../lib/hooks/context-hooks/useProfile"
+import useAuth from "../../../../lib/hooks/context-hooks/useAuthContext"
+import useProfile from "../../../../lib/hooks/context-hooks/useProfileContext"
 import { useLocation, useNavigate } from "react-router-dom"
-import useTimeline from "../../../../lib/hooks/context-hooks/useTimeline"
+import useTimeline from "../../../../lib/hooks/context-hooks/useTimelineContext"
 
 import numberInputIsValid from "../../../../lib/util/numberInputValidator"
 import stringInputIsValid from "../../../../lib/util/stringInputValidator"

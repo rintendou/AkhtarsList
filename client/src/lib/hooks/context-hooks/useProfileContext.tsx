@@ -1,8 +1,8 @@
 import { useContext } from "react"
 import { ProfileContext } from "../../store/ProfileContext"
 
-const useProfile = () => {
+const useProfileContext = () => {
   return useContext(ProfileContext)
 }
 
-export default useProfile
+export default useProfileContext

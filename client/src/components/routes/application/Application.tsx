@@ -1,5 +1,5 @@
 import { useEffect } from "react"
-import useTimeline from "../../../lib/hooks/context-hooks/useTimeline"
+import useTimeline from "../../../lib/hooks/context-hooks/useTimelineContext"
 import Carousel from "../../ui/Carousel"
 import CategoryHeader from "./CategoryHeader"
 import Timeline from "./timeline/Timeline"

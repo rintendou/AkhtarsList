@@ -1,8 +1,8 @@
 import { useContext } from "react"
 import { TimelineContext } from "../../store/TimelineContext"
 
-const useTimeline = () => {
+const useTimelineContext = () => {
   return useContext(TimelineContext)
 }
 
-export default useTimeline
+export default useTimelineContext

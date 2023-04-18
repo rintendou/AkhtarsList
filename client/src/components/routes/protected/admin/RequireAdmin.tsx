@@ -1,5 +1,5 @@
 import { useLocation, Outlet, Navigate } from "react-router-dom"
-import useAuth from "../../../../lib/hooks/context-hooks/useAuth"
+import useAuth from "../../../../lib/hooks/context-hooks/useAuthContext"
 
 const RequireAdmin = () => {
   const { auth } = useAuth()

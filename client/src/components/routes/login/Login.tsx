@@ -1,4 +1,4 @@
-import useAuth from "../../../lib/hooks/context-hooks/useAuth"
+import useAuth from "../../../lib/hooks/context-hooks/useAuthContext"
 import { useLocation, Navigate } from "react-router-dom"
 
 import LoginForm from "./LoginForm"

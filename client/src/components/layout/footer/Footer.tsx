@@ -1,4 +1,4 @@
-import useAuth from "../../../lib/hooks/context-hooks/useAuth"
+import useAuth from "../../../lib/hooks/context-hooks/useAuthContext"
 import RouterLink from "../../ui/RouterLink"
 
 const Footer = () => {

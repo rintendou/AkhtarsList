@@ -1,4 +1,4 @@
-import useTimeline from "../../../../lib/hooks/context-hooks/useTimeline"
+import useTimeline from "../../../../lib/hooks/context-hooks/useTimelineContext"
 
 import ListingCard from "../../../ui/ListingCard"
 import ListingSkeletons from "../../../ui/ListingSkeletons"
