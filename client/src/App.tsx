@@ -47,103 +47,94 @@ import SearchResults from "./components/routes/search-results/SearchResults"
 import ListingDetailContextQueryProvider from "./lib/store/ListingDetailContext"
 import ListingDetailQuery from "./components/routes/listing-detail/ListingDetail"
 import Dev from "./components/routes/dev-route/ui/Dev"
-import TimelineContextProvider from "./lib/store/TimelineContext"
-import AuthContextProvider from "./lib/store/AuthContext"
-import ProfileContextProvider from "./lib/store/ProfileContext"
+import GlobalContextProviderLayout from "./components/layout/GlobalContextProviderLayout"
 
 function App() {
   return (
     <div className="bg-primary text-black tracking-tight overflow-x-hidden">
       <Header />
       <Body>
-        <TimelineContextProvider>
-          <AuthContextProvider>
-            <ProfileContextProvider>
-              <Routes>
-                {/*  Unprotected Routes */}
-                <Route path="/" element={<Application />} />
-                <Route path="/search-results" element={<SearchResults />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/register" element={<Register />} />
-                <Route path="/forgot-password" element={<ForgotPassword />} />
-                <Route path="/reset-password" element={<ChangePassword />} />
-                <Route path="/category/:categoryName" element={<Category />} />
-                <Route
-                  path="/listings/:listingId"
-                  element={
-                    <ListingDetailContextQueryProvider>
-                      <ListingDetailQuery />
-                    </ListingDetailContextQueryProvider>
-                  }
-                />
+        <GlobalContextProviderLayout>
+          <Routes>
+            {/*  Unprotected Routes */}
+            <Route path="/" element={<Application />} />
+            <Route path="/search-results" element={<SearchResults />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/forgot-password" element={<ForgotPassword />} />
+            <Route path="/reset-password" element={<ChangePassword />} />
+            <Route path="/category/:categoryName" element={<Category />} />
+            <Route
+              path="/listings/:listingId"
+              element={
+                <ListingDetailContextQueryProvider>
+                  <ListingDetailQuery />
+                </ListingDetailContextQueryProvider>
+              }
+            />
 
-                {/*  Dev Routes */}
-                <Route path="/dev" element={<Dev />} />
-                <Route
-                  path="/dev-listing-detail"
-                  element={<DevListingDetail />}
-                />
-                <Route
-                  path="/dev-listing-detail-global"
-                  element={
-                    <DevListingDetailContextProvider>
-                      <DevListingDetailGlobal />
-                    </DevListingDetailContextProvider>
-                  }
-                />
-                <Route
-                  path="/listings-nonpolled/:listingId"
-                  element={
-                    <ListingDetailContextProvider>
-                      <ListingDetail />
-                    </ListingDetailContextProvider>
-                  }
-                />
+            {/*  Dev Routes */}
+            <Route path="/dev" element={<Dev />} />
+            <Route path="/dev-listing-detail" element={<DevListingDetail />} />
+            <Route
+              path="/dev-listing-detail-global"
+              element={
+                <DevListingDetailContextProvider>
+                  <DevListingDetailGlobal />
+                </DevListingDetailContextProvider>
+              }
+            />
+            <Route
+              path="/listings-nonpolled/:listingId"
+              element={
+                <ListingDetailContextProvider>
+                  <ListingDetail />
+                </ListingDetailContextProvider>
+              }
+            />
 
-                {/* Authorized Routes */}
-                <Route element={<RequireAuth />}>
-                  <Route path="/sell" element={<Sell />} />
-                  <Route path="/preview" element={<Preview />} />
-                  <Route path="/edit" element={<Edit />} />
+            {/* Authorized Routes */}
+            <Route element={<RequireAuth />}>
+              <Route path="/sell" element={<Sell />} />
+              <Route path="/preview" element={<Preview />} />
+              <Route path="/edit" element={<Edit />} />
 
-                  <Route element={<ProfileLayout />}>
-                    <Route path="/profile" element={<Profile />} />
-                    <Route path="/deposit" element={<Deposit />} />
-                    <Route path="/withdraw" element={<Withdraw />} />
-                    <Route path="/won-listings" element={<WonListings />} />
-                    <Route
-                      path="/disputed-listings"
-                      element={<DisputedListings />}
-                    />
-                    <Route path="/settings" element={<Settings />} />
-                  </Route>
+              <Route element={<ProfileLayout />}>
+                <Route path="/profile" element={<Profile />} />
+                <Route path="/deposit" element={<Deposit />} />
+                <Route path="/withdraw" element={<Withdraw />} />
+                <Route path="/won-listings" element={<WonListings />} />
+                <Route
+                  path="/disputed-listings"
+                  element={<DisputedListings />}
+                />
+                <Route path="/settings" element={<Settings />} />
+              </Route>
 
-                  {/* Admin Routes */}
-                  <Route element={<RequireAdmin />}>
-                    <Route element={<ProfileLayout />}>
-                      <Route
-                        path="/admin/manage-listings"
-                        element={<ManageListings />}
-                      />
-                      <Route
-                        path="/admin/manage-disputes"
-                        element={<ManageDisputes />}
-                      />
-                    </Route>
-                  </Route>
+              {/* Admin Routes */}
+              <Route element={<RequireAdmin />}>
+                <Route element={<ProfileLayout />}>
+                  <Route
+                    path="/admin/manage-listings"
+                    element={<ManageListings />}
+                  />
+                  <Route
+                    path="/admin/manage-disputes"
+                    element={<ManageDisputes />}
+                  />
                 </Route>
+              </Route>
+            </Route>
 
-                {/* Catch-All Routes */}
-                <Route path="*" element={<PageNotFound />} />
-                <Route
-                  path="/listings/listing-not-found"
-                  element={<ListingNotFound />}
-                />
-                <Route path="/unauthorized-access" element={<Unauthorized />} />
-              </Routes>
-            </ProfileContextProvider>
-          </AuthContextProvider>
-        </TimelineContextProvider>
+            {/* Catch-All Routes */}
+            <Route path="*" element={<PageNotFound />} />
+            <Route
+              path="/listings/listing-not-found"
+              element={<ListingNotFound />}
+            />
+            <Route path="/unauthorized-access" element={<Unauthorized />} />
+          </Routes>
+        </GlobalContextProviderLayout>
       </Body>
       <Footer />
     </div>
