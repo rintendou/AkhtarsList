@@ -6,6 +6,7 @@ import { settings } from "../../settings"
 import ListingType from "../types/ListingType"
 
 type initialContextType = {
+  username: string
   address: string
   balance: number
   fullName: string
@@ -19,6 +20,7 @@ type initialContextType = {
 }
 
 const initialContext: initialContextType = {
+  username: "",
   address: "",
   balance: 0,
   fullName: "",
@@ -41,7 +43,8 @@ const ProfileContextProvider = ({
   const { auth } = useAuth()
   const { _id } = auth
 
-  const [balance, setBalance] = useState(initialContext.balance)
+  const [username, setUsername] = useState("")
+  const [balance, setBalance] = useState(0)
   const [address, setAddress] = useState("")
   const [fullName, setFullName] = useState("")
 
@@ -68,6 +71,7 @@ const ProfileContextProvider = ({
         return
       }
 
+      setUsername(data.data.username)
       setAddress(data.data.address)
       setBalance(data.data.balance)
       setFullName(data.data.fullName)
@@ -157,6 +161,7 @@ const ProfileContextProvider = ({
   }
 
   const contextValue = {
+    username,
     address,
     balance,
     fullName,
