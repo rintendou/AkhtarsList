@@ -5,6 +5,8 @@ import Card from "../../../ui/Card"
 import StyledInputRef from "../../../ui/StyledInputRef"
 import Error from "../../../ui/Error"
 import Success from "../../../ui/Success"
+import stringInputIsValid from "../../../../lib/util/stringInputValidator"
+import numberInputIsValid from "../../../../lib/util/numberInputValidator"
 
 const Deposit = () => {
   const [error, setError] = useState("")
@@ -29,13 +31,48 @@ const Deposit = () => {
 
   const depositFundsHandler = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
+
+    const cardHolder = cardHolderRef.current!.value
+    const cardNumber = cardNumberRef.current!.value
+    const expiration = expirationRef.current!.value
+    const cvv = cvvRef.current!.value
     const depositAmount = depositAmountRef.current!.value
 
+    if (!stringInputIsValid(cardHolder)) {
+      setError("Card Holder is Required!")
+      cardHolderRef.current!.focus()
+      return
+    }
+
+    if (cardNumber.trim().length != 16 || !numberInputIsValid(cardNumber)) {
+      setError("Invalid Card Number!")
+      cardNumberRef.current!.focus()
+      return
+    }
+
+    const currentDate = new Date()
+    const currentYear = currentDate.getFullYear()
+    const currentMonth = currentDate.getMonth() + 1
+
+    const expirationYear = parseInt(expiration.substring(3), 10) + 2000
+    const expirationMonth = parseInt(expiration.substring(0, 2), 10)
+
     if (
-      isNaN(Number(depositAmount)) ||
-      depositAmount.length === 0 ||
-      Number(depositAmount) < 0
+      expirationYear < currentYear ||
+      (expirationYear === currentYear && expirationMonth < currentMonth)
     ) {
+      setError("Expiration is Invalid!")
+      expirationRef.current!.focus()
+      return
+    }
+
+    if (!numberInputIsValid(cvv)) {
+      setError("Invalid CVV!")
+      cvvRef.current!.focus()
+      return
+    }
+
+    if (!numberInputIsValid(depositAmount)) {
       setError("Invalid Input!")
       depositAmountRef.current!.focus()
       return
@@ -71,9 +108,9 @@ const Deposit = () => {
           <div className="flex flex-col md:flex-row gap-5">
             <StyledInputRef
               ref={expirationRef}
-              name="Expiration"
+              name="Expiration MM/YY"
               type="text"
-              placeholder="Expiration"
+              placeholder="Expiration MM/YY"
               twClasses="rounded-lg shadow-lg"
             />
             <StyledInputRef
@@ -81,16 +118,16 @@ const Deposit = () => {
               name="CVV"
               type="text"
               placeholder="CVV"
-              twClasses="rounded-lg shadow-lg md:w-24"
-            />
-            <StyledInputRef
-              ref={depositAmountRef}
-              name="Deposit Amount"
-              type="text"
-              placeholder="Deposit Amount"
               twClasses="rounded-lg shadow-lg"
             />
           </div>
+          <StyledInputRef
+            ref={depositAmountRef}
+            name="Deposit Amount"
+            type="text"
+            placeholder="Deposit Amount"
+            twClasses="rounded-lg shadow-lg"
+          />
           <DepositNowButton />
         </form>
         {!error && success && <Success successMessage={success} />}
