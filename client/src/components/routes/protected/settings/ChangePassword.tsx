@@ -24,7 +24,7 @@ const ChangePassword = () => {
     const newConfirmPassword = newConfirmPasswordRef.current!.value
 
     const payload = {
-      username: auth.username,
+      userId: auth._id,
       oldPassword,
       newPassword,
       newConfirmPassword,

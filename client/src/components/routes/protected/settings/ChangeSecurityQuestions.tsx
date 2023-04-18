@@ -25,7 +25,7 @@ const ChangeSecurityQuestions = () => {
     const newSecurityQAnswer = newSecurityQuestionAnswerRef.current!.value
 
     const payload = {
-      username: auth.username,
+      userId: auth._id,
       password,
       newSecurityQuestion,
       newSecurityQAnswer,

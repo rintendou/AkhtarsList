@@ -50,7 +50,7 @@ const ChangeUserDetails = () => {
     }
 
     const payload = {
-      username: auth.username,
+      userId: auth._id,
       password,
       fullName,
       address,

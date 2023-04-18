@@ -274,10 +274,10 @@ export const resetPassword = async (req: Request, res: Response) => {
 
 export const changeUserDetails = async (req: Request, res: Response) => {
   // destructure the payload attached to the body
-  const { fullName, username, password, address } = req.body
+  const { fullName, userId, password, address } = req.body
 
   // Check if appropriate payload is attached to the body
-  if (!username || !password || !fullName || !address) {
+  if (!userId || !password || !fullName || !address) {
     return res.status(400).json({
       message: "Full Name, Password and Address properties are required!",
       data: null,
@@ -286,7 +286,7 @@ export const changeUserDetails = async (req: Request, res: Response) => {
   }
 
   // Check if user exists
-  const existingUser = await UserModel.findOne({ username })
+  const existingUser = await UserModel.findOne({ _id: userId })
   if (!existingUser) {
     return res
       .status(400)
