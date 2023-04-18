@@ -53,20 +53,6 @@ export const getUser = async (req: JWTRequest, res: Response) => {
   }
 }
 
-export const getListers = async (req: Request, res: Response) => {
-  try {
-  } catch (err) {
-    res.status(500).json({ message: err, data: null, ok: false })
-  }
-}
-
-export const getBidders = async (req: Request, res: Response) => {
-  try {
-  } catch (err) {
-    res.status(500).json({ message: err, data: null, ok: false })
-  }
-}
-
 export const withdrawFunds = async (req: Request, res: Response) => {
   // Extract userId and withdrawAmount from body
   const { userId, withdrawAmount } = req.body
