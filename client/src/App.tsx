@@ -53,8 +53,8 @@ function App() {
   return (
     <div className="bg-primary text-black tracking-tight overflow-x-hidden">
       <Header />
-      <Body>
-        <GlobalContextProviderLayout>
+      <GlobalContextProviderLayout>
+        <Body>
           <Routes>
             {/*  Unprotected Routes */}
             <Route path="/" element={<Application />} />
@@ -134,8 +134,8 @@ function App() {
             />
             <Route path="/unauthorized-access" element={<Unauthorized />} />
           </Routes>
-        </GlobalContextProviderLayout>
-      </Body>
+        </Body>
+      </GlobalContextProviderLayout>
       <Footer />
     </div>
   )
