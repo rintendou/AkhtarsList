@@ -8,6 +8,7 @@ import Success from "../../../ui/Success"
 import stringInputIsValid from "../../../../lib/util/stringInputValidator"
 import numberInputIsValid from "../../../../lib/util/numberInputValidator"
 import CreditCardInput from "./CreditCardInput"
+import CVVInput from "./CVVInput"
 
 const Deposit = () => {
   const [error, setError] = useState("")
@@ -117,7 +118,7 @@ const Deposit = () => {
               placeholder="Expiration MM/YY"
               twClasses="rounded-lg shadow-lg"
             />
-            <StyledInputRef
+            <CVVInput
               ref={cvvRef}
               name="CVV"
               type="text"
