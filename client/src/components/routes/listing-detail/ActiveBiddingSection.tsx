@@ -18,6 +18,7 @@ import useProfile from "../../../lib/hooks/useProfile"
 import Transactions from "./Transactions"
 import useListingDetailContextQuery from "../../../lib/hooks/useListingDetailContext"
 import CurrentBalance from "./CurrentBalance"
+import getNumberWithCommas from "../../../lib/util/getNumberWithCommas"
 
 const ActiveBiddingSection = () => {
   const { data } = useListingDetailContextQuery()
@@ -111,7 +112,10 @@ const ActiveBiddingSection = () => {
       <div className="flex flex-col md:flex-row justify-between text-center gap-10">
         <div className="flex items-center gap-3">
           <h1>Current Price:</h1>
-          <p className="text-lg font-semibold"> ${finalPrice}</p>
+          <p className="text-lg font-semibold">
+            {" "}
+            ${getNumberWithCommas(finalPrice)}
+          </p>
         </div>
 
         <div className="flex items-center gap-3">

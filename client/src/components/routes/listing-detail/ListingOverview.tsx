@@ -1,5 +1,6 @@
 import DUMMYIMAGE from "../../../../public/random-listing-image-undraw.svg"
 import useListingDetailContextQuery from "../../../lib/hooks/useListingDetailContext"
+import getNumberWithCommas from "../../../lib/util/getNumberWithCommas"
 
 const ListingOverview = () => {
   const { data } = useListingDetailContextQuery()
@@ -31,7 +32,9 @@ const ListingOverview = () => {
           </div>
           <div className="flex items-center gap-3">
             <h1>Start Price: </h1>
-            <p className="text-lg font-semibold">${startPrice}</p>
+            <p className="text-lg font-semibold">
+              ${getNumberWithCommas(startPrice)}
+            </p>
           </div>
           <div className="flex justify-between">
             <div className="flex items-center gap-3">
@@ -40,7 +43,9 @@ const ListingOverview = () => {
             </div>
             <div className="flex items-center gap-3">
               <h1>Views:</h1>
-              <p className="text-lg font-semibold">{views}</p>
+              <p className="text-lg font-semibold">
+                {getNumberWithCommas(views)}
+              </p>
             </div>
           </div>
         </div>

@@ -9,6 +9,7 @@ import stringInputIsValid from "../../../../lib/util/stringInputValidator"
 import numberInputIsValid from "../../../../lib/util/numberInputValidator"
 import CreditCardInput from "./CreditCardInput"
 import CVVInput from "./CVVInput"
+import getNumberWithCommas from "../../../../lib/util/getNumberWithCommas"
 
 const Deposit = () => {
   const [error, setError] = useState("")
@@ -94,7 +95,7 @@ const Deposit = () => {
     <div className="w-full flex flex-col justify-center items-center">
       <Card twClasses="p-10 md:p-20 m-0 md:m-10 shadow-lg space-y-5 w-[35rem]">
         <h1 className="text-3xl text-center font-semibold">Current Balance:</h1>
-        <p className="text-center text-3xl">${balance}</p>
+        <p className="text-center text-3xl">${getNumberWithCommas(balance)}</p>
         <form className="flex flex-col gap-5" onSubmit={depositFundsHandler}>
           <StyledInputRef
             ref={cardHolderRef}

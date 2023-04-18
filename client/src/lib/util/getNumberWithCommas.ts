@@ -1,4 +1,4 @@
-const numberWithCommas = (number: string) => {
+const getNumberWithCommas = (number: number) => {
   // Convert the number to a string
   let numberString = String(number)
 
@@ -7,3 +7,5 @@ const numberWithCommas = (number: string) => {
 
   return numberString
 }
+
+export default getNumberWithCommas
