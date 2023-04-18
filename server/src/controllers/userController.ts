@@ -15,6 +15,13 @@ export const getUser = async (req: JWTRequest, res: Response) => {
       .json({ message: "userId params is required!", data: null, ok: false })
   }
 
+  // Check if userId is a valid ObjectId
+  if (!mongoose.Types.ObjectId.isValid(userId)) {
+    return res
+      .status(400)
+      .json({ message: "Invalid userId!", data: null, ok: false })
+  }
+
   // Extract decoded token from verifyToken middleware
   const { _id } = req.user
 
@@ -23,13 +30,6 @@ export const getUser = async (req: JWTRequest, res: Response) => {
     return res
       .status(400)
       .json({ message: "Invalid Credentials!", data: null, ok: false })
-  }
-
-  // Check if userId is a valid ObjectId
-  if (!mongoose.Types.ObjectId.isValid(userId)) {
-    return res
-      .status(400)
-      .json({ message: "Invalid userId!", data: null, ok: false })
   }
 
   try {

@@ -3,6 +3,7 @@ import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken"
 
 import UserModel from "../models/User"
+import mongoose from "mongoose"
 
 export const registerUser = async (req: Request, res: Response) => {
   // destructure the payload attached to the body
@@ -285,6 +286,13 @@ export const changeUserDetails = async (req: Request, res: Response) => {
     })
   }
 
+  // Check if userId is a valid ObjectId
+  if (!mongoose.Types.ObjectId.isValid(userId)) {
+    return res
+      .status(400)
+      .json({ message: "Invalid userId!", data: null, ok: false })
+  }
+
   // Check if user exists
   const existingUser = await UserModel.findOne({ _id: userId })
   if (!existingUser) {
@@ -310,7 +318,7 @@ export const changeUserDetails = async (req: Request, res: Response) => {
     // Update user details
     existingUser.address = address
     existingUser.fullName = fullName
-    await existingUser!.save()
+    await existingUser.save()
 
     res.status(200).json({
       message: "User Details Updated Successfully!",
@@ -324,7 +332,7 @@ export const changeUserDetails = async (req: Request, res: Response) => {
 
 export const changePassword = async (req: Request, res: Response) => {
   // destructure the payload attached to the body
-  const { username, oldPassword, newPassword, newConfirmPassword } = req.body
+  const { userId, oldPassword, newPassword, newConfirmPassword } = req.body
 
   // Check if appropriate payload is attached to the body
   if (!oldPassword || !newPassword || !newConfirmPassword) {
@@ -336,8 +344,15 @@ export const changePassword = async (req: Request, res: Response) => {
     })
   }
 
+  // Check if userId is a valid ObjectId
+  if (!mongoose.Types.ObjectId.isValid(userId)) {
+    return res
+      .status(400)
+      .json({ message: "Invalid userId!", data: null, ok: false })
+  }
+
   // Check if user exists
-  const existingUser = await UserModel.findOne({ username })
+  const existingUser = await UserModel.findOne({ _id: userId })
   if (!existingUser) {
     return res
       .status(400)
@@ -400,8 +415,7 @@ export const changePassword = async (req: Request, res: Response) => {
 
 export const changeSecurityQA = async (req: Request, res: Response) => {
   // destructure the payload attached to the body
-  const { username, password, newSecurityQuestion, newSecurityQAnswer } =
-    req.body
+  const { userId, password, newSecurityQuestion, newSecurityQAnswer } = req.body
 
   // Check if appropriate payload is attached to the body
   if (!password || !newSecurityQuestion || !newSecurityQAnswer) {
@@ -413,8 +427,15 @@ export const changeSecurityQA = async (req: Request, res: Response) => {
     })
   }
 
+  // Check if userId is a valid ObjectId
+  if (!mongoose.Types.ObjectId.isValid(userId)) {
+    return res
+      .status(400)
+      .json({ message: "Invalid userId!", data: null, ok: false })
+  }
+
   // Check if user exists
-  const existingUser = await UserModel.findOne({ username })
+  const existingUser = await UserModel.findOne({ _id: userId })
   if (!existingUser) {
     return res
       .status(400)
