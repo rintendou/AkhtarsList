@@ -7,7 +7,7 @@ import Error from "../../../ui/Error"
 import Success from "../../../ui/Success"
 import stringInputIsValid from "../../../../lib/util/stringInputValidator"
 import numberInputIsValid from "../../../../lib/util/numberInputValidator"
-import CreditCardInput from "../../../ui/CreditCardInput"
+import CreditCardInput from "./CreditCardInput"
 
 const Deposit = () => {
   const [error, setError] = useState("")
