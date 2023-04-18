@@ -94,7 +94,8 @@ const TimelineContextProvider = ({ children }: { children: ReactNode }) => {
     (listing: ListingType) => new Date(listing.expireAt) > new Date()
   )
   const trendingListings = allListingsData.data.filter(
-    (listing: ListingType) => listing.views > 0
+    (listing: ListingType) =>
+      new Date(listing.expireAt) > new Date() && listing.views > 0
   )
 
   const contextValue = {
