@@ -56,6 +56,10 @@ const ProfileContextProvider = ({
   // Fetch user details on component mount and when _id changes on auth
   useEffect(() => {
     const fetchUserDetails = async () => {
+      if (!_id) {
+        return
+      }
+      console.log(_id)
       const response = await fetch(
         `http://localhost:${settings.BACKEND_SERVER_PORT}/api/user/${_id}`,
         {
@@ -65,6 +69,7 @@ const ProfileContextProvider = ({
           },
         }
       )
+      console.log(response)
       const data = await response.json()
 
       if (!data.ok) {
@@ -82,7 +87,7 @@ const ProfileContextProvider = ({
     }
 
     fetchUserDetails()
-  }, [_id])
+  }, [auth])
 
   const refetchUserDetails = () => {
     const refetchUser = async () => {
