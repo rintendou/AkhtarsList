@@ -18,6 +18,7 @@ import stringInputIsValid from "../../../../lib/util/functions/stringInputValida
 
 // Backend Server Port
 import { settings } from "../../../../settings"
+import DragAndDrop from "../../../ui/DragAndDrop"
 
 // Constant Variables
 const CATEGORIES = [
@@ -66,7 +67,18 @@ const EditActions = () => {
   const { refetchUserDetails } = useProfileContext()
   const { refetchTimeline } = useTimelineContext()
 
+  const [imageUrl, setImageUrl] = useState("")
+  const [fileData, setFileData] = useState<File | null>(null)
+
   const navigate = useNavigate()
+
+  const onFileSelection = (f: File | null) => {
+    setFileData(f)
+    const reader = new FileReader()
+    reader.onload = () => {
+      setImageUrl(reader.result as string)
+    }
+  }
 
   const editListingHandler = (e: React.FormEvent<HTMLFormElement>) => {
     // Prevent default behavior of reloading page on form submission
@@ -203,83 +215,90 @@ const EditActions = () => {
   }, [])
 
   return (
-    <div className="flex-auto bg-purple-100 bg-opacity-50 p-10 max-w-none md:max-w-[50%] max-h-[50%] md:max-h-none space-y-10">
-      <form className="space-y-10" onSubmit={editListingHandler}>
-        <div className="flex flex-col gap-5 pb-10 border-b border-b-gray-500">
-          <StyledInputRef
-            name="Title"
-            placeholder="Title"
-            type="text"
-            ref={titleRef}
-          />
+    <>
+      <DragAndDrop
+        setImageUrl={setImageUrl}
+        onFileSelection={onFileSelection}
+        imageUrl={imageUrl}
+      />
+      <div className="flex-auto bg-purple-100 bg-opacity-50 p-10 max-w-none md:max-w-[50%] max-h-[50%] md:max-h-none space-y-10">
+        <form className="space-y-10" onSubmit={editListingHandler}>
+          <div className="flex flex-col gap-5 pb-10 border-b border-b-gray-500">
+            <StyledInputRef
+              name="Title"
+              placeholder="Title"
+              type="text"
+              ref={titleRef}
+            />
 
-          <StyledInputAreaRef
-            name="Description"
-            placeholder="Description"
-            ref={descriptionRef}
-          />
+            <StyledInputAreaRef
+              name="Description"
+              placeholder="Description"
+              ref={descriptionRef}
+            />
 
-          <div className="flex gap-5">
-            <div className="flex-1">
-              <StyledDropdownRef
-                name="Category"
-                placeholder="Category"
-                ref={categoryRef}
-                options={CATEGORIES}
-              />
+            <div className="flex gap-5">
+              <div className="flex-1">
+                <StyledDropdownRef
+                  name="Category"
+                  placeholder="Category"
+                  ref={categoryRef}
+                  options={CATEGORIES}
+                />
+              </div>
+
+              <div className="flex-1">
+                <StyledInputRef
+                  name="Start Price ($)"
+                  placeholder="Start Price ($)"
+                  type="text"
+                  disabled
+                  ref={startPriceRef}
+                  twClasses="opacity-30 cursor-not-allowed"
+                />
+              </div>
             </div>
-
-            <div className="flex-1">
-              <StyledInputRef
-                name="Start Price ($)"
-                placeholder="Start Price ($)"
-                type="text"
-                disabled
-                ref={startPriceRef}
-                twClasses="opacity-30 cursor-not-allowed"
-              />
-            </div>
+            <StyledDateTimePicker
+              onChange={handleDateTimeChange}
+              initialDate={location.state.listing!.expireAt}
+            />
           </div>
-          <StyledDateTimePicker
-            onChange={handleDateTimeChange}
-            initialDate={location.state.listing!.expireAt}
-          />
-        </div>
 
-        <div className="flex flex-col gap-5 pb-10 border-b border-b-gray-500">
-          <StyledInputRef
-            name="Weight (kg)"
-            placeholder="Weight (kg)"
-            type="text"
-            ref={weightRef}
-          />
+          <div className="flex flex-col gap-5 pb-10 border-b border-b-gray-500">
+            <StyledInputRef
+              name="Weight (kg)"
+              placeholder="Weight (kg)"
+              type="text"
+              ref={weightRef}
+            />
 
-          <StyledInputRef
-            name="Height (cm)"
-            placeholder="Height (cm)"
-            type="text"
-            ref={heightRef}
-          />
+            <StyledInputRef
+              name="Height (cm)"
+              placeholder="Height (cm)"
+              type="text"
+              ref={heightRef}
+            />
 
-          <StyledInputRef
-            name="Width (cm)"
-            placeholder="Width (cm)"
-            type="text"
-            ref={widthRef}
-          />
+            <StyledInputRef
+              name="Width (cm)"
+              placeholder="Width (cm)"
+              type="text"
+              ref={widthRef}
+            />
 
-          <StyledInputRef
-            name="Length (cm)"
-            placeholder="Length (cm)"
-            type="text"
-            ref={lengthRef}
-          />
-        </div>
+            <StyledInputRef
+              name="Length (cm)"
+              placeholder="Length (cm)"
+              type="text"
+              ref={lengthRef}
+            />
+          </div>
 
-        <SubmitListingButton />
-      </form>
-      {error && <Error errorMessage={errorMessage} />}
-    </div>
+          <SubmitListingButton />
+        </form>
+        {error && <Error errorMessage={errorMessage} />}
+      </div>
+    </>
   )
 }
 
