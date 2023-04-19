@@ -55,7 +55,11 @@ const EditActions = () => {
     heightRef.current!.value = location.state.listing!.dimensions[0]
     lengthRef.current!.value = location.state.listing!.dimensions[1]
     widthRef.current!.value = location.state.listing!.dimensions[2]
-    setImageUrl(location.state.listing!.image)
+
+    if (location.state.listing!.image.length !== 0) {
+      setImageUrl(location.state.listing!.image)
+    }
+
     handleDateTimeChange(location.state.listing!.expireAt)
   }, [])
 

@@ -12,7 +12,7 @@ const PreviewImageContainer = ({ img, title }: Props) => {
       <img
         src={img.length !== 0 ? img : RandomListingImage}
         alt={title}
-        className="h-full w-auto p-5"
+        className="h-full min-h-[50rem] w-auto p-5"
       />
     </div>
   )
