@@ -1,14 +1,15 @@
 import { useNavigate } from "react-router-dom"
-import useAuth from "../../lib/hooks/useAuth"
+import useAuth from "../../lib/hooks/context-hooks/useAuthContext"
 
 // Components
 import Card from "./Card"
 
 // Util functions
-import getTimeRemaining from "../../lib/util/getTimeRemaining"
+import getTimeRemaining from "../../lib/util/functions/getTimeRemaining"
 
 // Types
 import ListingType from "../../lib/types/ListingType"
+import getNumberWithCommas from "../../lib/util/functions/getNumberWithCommas"
 
 const ListingCard = ({ listing }: { listing: ListingType }) => {
   const navigate = useNavigate()
@@ -74,7 +75,9 @@ const ListingCard = ({ listing }: { listing: ListingType }) => {
         </div>
         <p className="text-gray-500">Current Price:</p>
         <div className="flex justify-between">
-          <p className="font-bold text-2xl">${finalPrice}</p>
+          <p className="font-bold text-2xl max-w-[50%] truncate">
+            ${getNumberWithCommas(finalPrice)}
+          </p>
 
           {isLister && (
             <p className="bg-black text-white p-1 rounded-md">Owned by you</p>

@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react"
 import { useNavigate } from "react-router-dom"
-import useAuth from "../../../lib/hooks/useAuth"
+import useAuthContext from "../../../lib/hooks/context-hooks/useAuthContext"
 
 // Components
 import Card from "../../ui/Card"
@@ -24,7 +24,7 @@ const LoginForm = ({
   successMessage,
   errorMessageFromOtherRoute,
 }: Props) => {
-  const { login } = useAuth()
+  const { login } = useAuthContext()
   const navigate = useNavigate()
 
   // I opted to use the useRef hook instead of useState to prevent
@@ -34,10 +34,6 @@ const LoginForm = ({
 
   // focus on the first input on component mount
   useEffect(() => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    })
     usernameRef.current!.focus()
   }, [])
   // Keep track of error
@@ -75,13 +71,10 @@ const LoginForm = ({
         return
       }
 
+      const token = response.headers.get("authorization")
+
       setScsMessage(data.data.message)
-      login(
-        data.data.user._id,
-        data.data.user.username,
-        data.data.user.token,
-        data.data.user.isAdmin
-      )
+      login(data.data.user._id, token!, data.data.user.isAdmin)
       navigate("/", { replace: true })
     }
     loginUser()

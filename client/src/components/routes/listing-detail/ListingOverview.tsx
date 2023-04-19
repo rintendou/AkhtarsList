@@ -1,5 +1,6 @@
 import DUMMYIMAGE from "../../../../public/random-listing-image-undraw.svg"
-import useListingDetailContextQuery from "../../../lib/hooks/useListingDetailContext"
+import useListingDetailContextQuery from "../../../lib/hooks/context-hooks/useListingDetailContext"
+import getNumberWithCommas from "../../../lib/util/functions/getNumberWithCommas"
 
 const ListingOverview = () => {
   const { data } = useListingDetailContextQuery()
@@ -12,9 +13,7 @@ const ListingOverview = () => {
     views,
     desc,
     weight,
-    length,
-    width,
-    height,
+    dimensions,
   } = listing
 
   return (
@@ -33,7 +32,9 @@ const ListingOverview = () => {
           </div>
           <div className="flex items-center gap-3">
             <h1>Start Price: </h1>
-            <p className="text-lg font-semibold">${startPrice}</p>
+            <p className="text-lg font-semibold">
+              ${getNumberWithCommas(startPrice)}
+            </p>
           </div>
           <div className="flex justify-between">
             <div className="flex items-center gap-3">
@@ -42,7 +43,9 @@ const ListingOverview = () => {
             </div>
             <div className="flex items-center gap-3">
               <h1>Views:</h1>
-              <p className="text-lg font-semibold">{views}</p>
+              <p className="text-lg font-semibold">
+                {getNumberWithCommas(views)}
+              </p>
             </div>
           </div>
         </div>
@@ -60,15 +63,15 @@ const ListingOverview = () => {
 
             <div className="flex items-center gap-3">
               <h1>H:</h1>
-              <p className="text-lg font-semibold">{height} cm </p>
+              <p className="text-lg font-semibold">{dimensions[0]} cm </p>
             </div>
             <div className="flex items-center gap-3">
               <h1>W:</h1>
-              <p className="text-lg font-semibold">{length} cm </p>
+              <p className="text-lg font-semibold">{dimensions[1]} cm </p>
             </div>
             <div className="flex items-center gap-3">
               <h1>L:</h1>
-              <p className="text-lg font-semibold">{width} cm </p>
+              <p className="text-lg font-semibold">{dimensions[2]} cm </p>
             </div>
           </div>
         </div>

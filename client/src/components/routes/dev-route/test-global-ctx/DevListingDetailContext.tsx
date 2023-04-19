@@ -2,13 +2,15 @@ import { createContext, useEffect, useState } from "react"
 
 import ListingType from "../../../../lib/types/ListingType"
 import TimeRemainingType from "../../../../lib/types/TimeRemainingType"
-import calculateTimeRemaining from "../../../../lib/util/calculateTimeRemaining"
+import calculateTimeRemaining from "../../../../lib/util/functions/calculateTimeRemaining"
 
 const initialListingState = {
   _id: "",
   image: "",
-  bidders: [],
+  bidders: [""],
+  bestBidder: "",
   lister: "",
+  listerUsername: "",
   title: "",
   desc: "",
   startPrice: 0,
@@ -18,16 +20,15 @@ const initialListingState = {
   category: "General",
   dimensions: [0, 0, 0],
   weight: 0,
-  height: 0,
-  width: 0,
-  length: 0,
 }
 
 const fetchedListingState = {
   _id: "1234123412341234",
   image: "12341234",
   bidders: ["sdfsdffd", "Lorem", "Kanor"],
+  bestBidder: "",
   lister: "Lil Wayne",
+  listerUsername: "",
   title: "Lil Harry Potter",
   desc: "Hermione Granger",
   startPrice: 23,
@@ -37,16 +38,15 @@ const fetchedListingState = {
   category: "General",
   dimensions: [1, 2, 3],
   weight: 4,
-  height: 5,
-  width: 6,
-  length: 7,
 }
 
 const updatedListingState = {
   _id: "1234123412341234",
   image: "12341234",
   bidders: ["sdfsdffd", "Lorem", "Kanor", "KANOR"],
+  bestBidder: "",
   lister: "Lil Wayne",
+  listerUsername: "Your mama",
   title: "Lil Harry Potter",
   desc: "Hermione Granger",
   startPrice: 23,
@@ -56,13 +56,9 @@ const updatedListingState = {
   category: "General",
   dimensions: [1, 2, 3],
   weight: 4,
-  height: 5,
-  width: 6,
-  length: 7,
 }
 
 type initialContextType = {
-  bidders: string[]
   isLister: boolean
   isExpired: boolean
   isLoading: boolean
@@ -72,7 +68,6 @@ type initialContextType = {
 }
 
 const initialContext: initialContextType = {
-  bidders: [""],
   isLister: false,
   isExpired: false,
   isLoading: false,
@@ -85,8 +80,6 @@ const initialContext: initialContextType = {
   },
   refetchListing: () => {},
 }
-
-const initialBidderArr = ["TEST1", "TEST2"]
 
 const ListingDetailContext = createContext<initialContextType>(initialContext)
 
@@ -102,10 +95,8 @@ const ListingDetailContextProvider = ({
   const [timeRemaining, setTimeRemaining] = useState<TimeRemainingType>(
     calculateTimeRemaining(listing.expireAt)
   )
-  const [bidders, setBidders] = useState<string[]>([])
 
   useEffect(() => {
-    setBidders(initialBidderArr)
     setIsLoading(true)
     setListing(fetchedListingState)
     setIsExpired(new Date(fetchedListingState.expireAt) < new Date())
@@ -114,7 +105,7 @@ const ListingDetailContextProvider = ({
 
   const refetchListing = () => {
     setIsLoading(true)
-    setBidders([new Date().toString(), ...bidders!])
+    console.log("TEST")
     const fetchListing = async () => {
       setListing(updatedListingState)
       setIsExpired(new Date(updatedListingState.expireAt) < new Date())
@@ -143,7 +134,6 @@ const ListingDetailContextProvider = ({
   }, [listing])
 
   const contextValue = {
-    bidders,
     isLister,
     isExpired,
     isLoading,

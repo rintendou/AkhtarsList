@@ -1,5 +1,5 @@
 import React from "react"
-import usePasswordToggle from "../../lib/hooks/usePasswordToggle"
+import usePasswordToggle from "../../lib/hooks/regular-hooks/usePasswordToggle"
 
 type Props = {
   name: string

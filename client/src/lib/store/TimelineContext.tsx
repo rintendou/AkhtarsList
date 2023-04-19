@@ -1,4 +1,4 @@
-import { createContext, useState, ReactNode, useEffect } from "react"
+import { createContext, ReactNode } from "react"
 
 // Types
 import ListingType from "../types/ListingType"
@@ -7,6 +7,7 @@ import ListingType from "../types/ListingType"
 import { settings } from "../../settings"
 import { useQuery } from "@tanstack/react-query"
 import ListingSkeletons from "../../components/ui/ListingSkeletons"
+import { useLocation } from "react-router-dom"
 
 type initialContextType = {
   allListings: ListingType[]
@@ -57,8 +58,10 @@ const TimelineContextProvider = ({ children }: { children: ReactNode }) => {
     refetchInterval: 60_000, // refetch listings every minute
   })
 
+  const { pathname } = useLocation()
+
   if (isLoading) {
-    return <ListingSkeletons />
+    return pathname === "/" ? <ListingSkeletons /> : null
   }
 
   const allListings = allListingsData.data
@@ -91,7 +94,8 @@ const TimelineContextProvider = ({ children }: { children: ReactNode }) => {
     (listing: ListingType) => new Date(listing.expireAt) > new Date()
   )
   const trendingListings = allListingsData.data.filter(
-    (listing: ListingType) => listing.views > 0
+    (listing: ListingType) =>
+      new Date(listing.expireAt) > new Date() && listing.views > 0
   )
 
   const contextValue = {

@@ -14,9 +14,6 @@ type ListingType = {
   category: string
   weight: number
   dimensions: number[]
-  height: number
-  length: number
-  width: number
   [key: string]: any
 }
 

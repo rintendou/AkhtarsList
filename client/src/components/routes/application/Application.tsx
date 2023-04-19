@@ -1,5 +1,5 @@
 import { useEffect } from "react"
-import useTimeline from "../../../lib/hooks/useTimeline"
+import useTimelineContext from "../../../lib/hooks/context-hooks/useTimelineContext"
 import Carousel from "../../ui/Carousel"
 import CategoryHeader from "./CategoryHeader"
 import Timeline from "./timeline/Timeline"
@@ -17,7 +17,7 @@ const IMAGESET1 = [
 ]
 
 const Application = () => {
-  const { refetchTimeline } = useTimeline()
+  const { refetchTimeline } = useTimelineContext()
 
   // Refresh timeline and scroll to top on component mount
   useEffect(() => {

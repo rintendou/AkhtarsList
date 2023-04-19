@@ -1,9 +1,10 @@
-import useAuth from "../../../../lib/hooks/useAuth"
-import useProfile from "../../../../lib/hooks/useProfile"
+import useAuthContext from "../../../../lib/hooks/context-hooks/useAuthContext"
+import useProfileContext from "../../../../lib/hooks/context-hooks/useProfileContext"
+import getNumberWithCommas from "../../../../lib/util/functions/getNumberWithCommas"
 
 const UserDetails = () => {
-  const { auth } = useAuth()
-  const { balance, address, fullName } = useProfile()
+  const { auth } = useAuthContext()
+  const { username, balance, address, fullName } = useProfileContext()
 
   return (
     <div className="space-y-10">
@@ -17,7 +18,7 @@ const UserDetails = () => {
 
       <div>
         <h1 className="font-semibold">Username</h1>
-        <p className="font-light">{auth.username}</p>
+        <p className="font-light">{username}</p>
       </div>
       <div>
         <h1 className="font-semibold">Full Name</h1>
@@ -29,7 +30,7 @@ const UserDetails = () => {
       </div>
       <div>
         <h1 className="font-semibold">Balance</h1>
-        <p className="font-light">${balance}</p>
+        <p className="font-light">${getNumberWithCommas(balance)}</p>
       </div>
     </div>
   )

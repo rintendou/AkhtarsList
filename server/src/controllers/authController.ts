@@ -3,6 +3,8 @@ import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken"
 
 import UserModel from "../models/User"
+import mongoose from "mongoose"
+import JWTRequest from "../lib/types/JWTRequest"
 
 export const registerUser = async (req: Request, res: Response) => {
   // destructure the payload attached to the body
@@ -133,8 +135,8 @@ export const loginUser = async (req: Request, res: Response) => {
         .status(400)
         .json({ message: "User not found", data: null, ok: false })
 
-    const token = await jwt.sign(
-      { _id: user._id, username: user.username },
+    const token = jwt.sign(
+      { _idFromToken: user._id },
       process.env.JWT_KEY as jwt.Secret
     )
 
@@ -272,12 +274,12 @@ export const resetPassword = async (req: Request, res: Response) => {
   }
 }
 
-export const changeUserDetails = async (req: Request, res: Response) => {
-  // destructure the payload attached to the body
-  const { fullName, username, password, address } = req.body
+export const changeUserDetails = async (req: JWTRequest, res: Response) => {
+  // Destructure the payload attached to the body
+  const { fullName, userId, password, address } = req.body
 
   // Check if appropriate payload is attached to the body
-  if (!username || !password || !fullName || !address) {
+  if (!userId || !password || !fullName || !address) {
     return res.status(400).json({
       message: "Full Name, Password and Address properties are required!",
       data: null,
@@ -285,8 +287,25 @@ export const changeUserDetails = async (req: Request, res: Response) => {
     })
   }
 
+  // Check if userId is a valid ObjectId
+  if (!mongoose.Types.ObjectId.isValid(userId)) {
+    return res
+      .status(400)
+      .json({ message: "Invalid userId!", data: null, ok: false })
+  }
+
+  // Extract decoded token from verifyToken middleware
+  const { _idFromToken } = req.user
+
+  // Check if user has an id equal to the id from the token
+  if (userId !== _idFromToken) {
+    return res
+      .status(400)
+      .json({ message: "Invalid Credentials!", data: null, ok: false })
+  }
+
   // Check if user exists
-  const existingUser = await UserModel.findOne({ username })
+  const existingUser = await UserModel.findOne({ _id: userId })
   if (!existingUser) {
     return res
       .status(400)
@@ -310,7 +329,7 @@ export const changeUserDetails = async (req: Request, res: Response) => {
     // Update user details
     existingUser.address = address
     existingUser.fullName = fullName
-    await existingUser!.save()
+    await existingUser.save()
 
     res.status(200).json({
       message: "User Details Updated Successfully!",
@@ -322,9 +341,9 @@ export const changeUserDetails = async (req: Request, res: Response) => {
   }
 }
 
-export const changePassword = async (req: Request, res: Response) => {
-  // destructure the payload attached to the body
-  const { username, oldPassword, newPassword, newConfirmPassword } = req.body
+export const changePassword = async (req: JWTRequest, res: Response) => {
+  // Destructure the payload attached to the body
+  const { userId, oldPassword, newPassword, newConfirmPassword } = req.body
 
   // Check if appropriate payload is attached to the body
   if (!oldPassword || !newPassword || !newConfirmPassword) {
@@ -336,8 +355,25 @@ export const changePassword = async (req: Request, res: Response) => {
     })
   }
 
+  // Check if userId is a valid ObjectId
+  if (!mongoose.Types.ObjectId.isValid(userId)) {
+    return res
+      .status(400)
+      .json({ message: "Invalid userId!", data: null, ok: false })
+  }
+
+  // Extract decoded token from verifyToken middleware
+  const { _idFromToken } = req.user
+
+  // Check if user has an id equal to the id from the token
+  if (userId !== _idFromToken) {
+    return res
+      .status(400)
+      .json({ message: "Invalid Credentials!", data: null, ok: false })
+  }
+
   // Check if user exists
-  const existingUser = await UserModel.findOne({ username })
+  const existingUser = await UserModel.findOne({ _id: userId })
   if (!existingUser) {
     return res
       .status(400)
@@ -398,10 +434,9 @@ export const changePassword = async (req: Request, res: Response) => {
   }
 }
 
-export const changeSecurityQA = async (req: Request, res: Response) => {
+export const changeSecurityQA = async (req: JWTRequest, res: Response) => {
   // destructure the payload attached to the body
-  const { username, password, newSecurityQuestion, newSecurityQAnswer } =
-    req.body
+  const { userId, password, newSecurityQuestion, newSecurityQAnswer } = req.body
 
   // Check if appropriate payload is attached to the body
   if (!password || !newSecurityQuestion || !newSecurityQAnswer) {
@@ -413,8 +448,25 @@ export const changeSecurityQA = async (req: Request, res: Response) => {
     })
   }
 
+  // Check if userId is a valid ObjectId
+  if (!mongoose.Types.ObjectId.isValid(userId)) {
+    return res
+      .status(400)
+      .json({ message: "Invalid userId!", data: null, ok: false })
+  }
+
+  // Extract decoded token from verifyToken middleware
+  const { _idFromToken } = req.user
+
+  // Check if user has an id equal to the id from the token
+  if (userId !== _idFromToken) {
+    return res
+      .status(400)
+      .json({ message: "Invalid Credentials!", data: null, ok: false })
+  }
+
   // Check if user exists
-  const existingUser = await UserModel.findOne({ username })
+  const existingUser = await UserModel.findOne({ _id: userId })
   if (!existingUser) {
     return res
       .status(400)

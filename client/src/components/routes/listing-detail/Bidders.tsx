@@ -1,9 +1,9 @@
-import useAuth from "../../../lib/hooks/useAuth"
-import useListingDetailContextQuery from "../../../lib/hooks/useListingDetailContext"
+import useAuthContext from "../../../lib/hooks/context-hooks/useAuthContext"
+import useListingDetailContextQuery from "../../../lib/hooks/context-hooks/useListingDetailContext"
 
 const Bidders = () => {
   const { data } = useListingDetailContextQuery()
-  const { auth } = useAuth()
+  const { auth } = useAuthContext()
   const { data: listing } = data
   const { bidders, lister } = listing
 

@@ -1,10 +1,10 @@
-import useProfile from "../../../../../lib/hooks/useProfile"
+import useProfileContext from "../../../../../lib/hooks/context-hooks/useProfileContext"
 
 import ListingCard from "../../../../ui/ListingCard"
 import BidMore from "./BidMore"
 
 const Biddings = () => {
-  const { biddings } = useProfile()
+  const { biddings } = useProfileContext()
 
   return (
     <div>

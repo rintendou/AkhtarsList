@@ -35,7 +35,7 @@ const Carousel = ({ images }: Props) => {
     <div className="relative h-80 w-full">
       {/* left overlay */}
       <div
-        className="absolute inset-y-0 left-0 z-10 flex items-center justify-center bg-black bg-opacity-0 cursor-pointer w-[20%]"
+        className="absolute inset-y-0 left-0 z-10 flex items-center justify-center bg-black bg-opacity-0 cursor-pointer w-[20%] hover:bg-opacity-50 duration-200 group ease-in-out"
         onClick={prevImage}
       >
         <svg
@@ -46,14 +46,14 @@ const Carousel = ({ images }: Props) => {
           strokeWidth="2"
           strokeLinecap="round"
           strokeLinejoin="round"
-          className="w-16 h-16 bg-black bg-opacity-20 rounded-full p-4"
+          className="w-16 h-16 bg-black opacity-20 rounded-full p-4 text-white group-hover:opacity-100 duration-200 ease-in-out caret-transparent"
         >
           <polyline points="15 18 9 12 15 6"></polyline>
         </svg>
       </div>
       {/* right overlay */}
       <div
-        className="absolute inset-y-0 right-0 z-10 flex items-center justify-center bg-black bg-opacity-0 cursor-pointer w-[20%]"
+        className="absolute inset-y-0 right-0 z-10 flex items-center justify-center bg-black bg-opacity-0 cursor-pointer w-[20%] hover:bg-opacity-50 duration-200 group ease-in-out"
         onClick={nextImage}
       >
         <svg
@@ -64,7 +64,7 @@ const Carousel = ({ images }: Props) => {
           strokeWidth="2"
           strokeLinecap="round"
           strokeLinejoin="round"
-          className="w-16 h-16 bg-black bg-opacity-20 rounded-full p-4"
+          className="w-16 h-16 bg-black opacity-20 rounded-full p-4 text-white group-hover:opacity-100 duration-200 ease-in-out caret-transparent"
         >
           <polyline points="9 18 15 12 9 6"></polyline>
         </svg>
@@ -87,8 +87,8 @@ const Carousel = ({ images }: Props) => {
             className={classNames(
               "w-3 h-3 rounded-full mx-2 focus:outline-none",
               {
-                "bg-gray-800": activeIndex === index,
-                "bg-gray-400": activeIndex !== index,
+                "bg-black": activeIndex === index,
+                "bg-gray-500": activeIndex !== index,
               }
             )}
           />

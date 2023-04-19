@@ -1,10 +1,11 @@
-import useAuth from "../../../lib/hooks/useAuth"
+import useAuthContext from "../../../lib/hooks/context-hooks/useAuthContext"
 import { useLocation, Navigate } from "react-router-dom"
 
 import LoginForm from "./LoginForm"
+import ScrollToTop from "../../../lib/util/components/ScrollToTop"
 
 const Login = () => {
-  const { auth } = useAuth()
+  const { auth } = useAuthContext()
 
   const location = useLocation()
   const didRegisterSuccessfully = location.state?.didRegisterSuccessfully
@@ -13,6 +14,7 @@ const Login = () => {
 
   return (
     <div className="min-h-screen flex flex-col justify-center">
+      <ScrollToTop />
       {!auth._id ? (
         <LoginForm
           didRegisterSuccessfully={didRegisterSuccessfully}

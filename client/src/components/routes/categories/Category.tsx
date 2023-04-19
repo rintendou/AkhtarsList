@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
-import useTimeline from "../../../lib/hooks/useTimeline"
+import useTimelineContext from "../../../lib/hooks/context-hooks/useTimelineContext"
 
 // Components
 import SideNavLinks from "./SideNavLinks"
@@ -9,7 +9,6 @@ import ListingCard from "../../ui/ListingCard"
 // Types
 import ListingType from "../../../lib/types/ListingType"
 import ListMore from "../protected/profile/listings/ListMore"
-import CategoryActions from "./CategoryActions"
 
 const Category = () => {
   useEffect(() => {
@@ -20,6 +19,7 @@ const Category = () => {
   }, [])
 
   const { categoryName } = useParams()
+
   const {
     unexpiredListings,
     trendingListings,
@@ -29,7 +29,7 @@ const Category = () => {
     accessoriesListings,
     collectiblesListings,
     allListings,
-  } = useTimeline()
+  } = useTimelineContext()
 
   let activeCategorizedListings: ListingType[] = []
 
@@ -57,9 +57,17 @@ const Category = () => {
       break
   }
 
-  const expiredCategorizedListings: ListingType[] = allListings.filter(
-    (listing) => new Date(listing.expireAt) < new Date()
+  let expiredCategorizedListings: ListingType[] = allListings.filter(
+    (listing) =>
+      new Date(listing.expireAt) < new Date() &&
+      listing.category.toLowerCase() === categoryName!.toLowerCase()
   )
+
+  if (categoryName === "assorted") {
+    expiredCategorizedListings = allListings.filter(
+      (listing) => new Date(listing.expireAt) < new Date()
+    )
+  }
 
   // const [sortedListings, setSortedListings] = useState<ListingType[]>(
   //   activeCategorizedListings
@@ -111,19 +119,21 @@ const Category = () => {
             </ul>
           </div>
 
-          <div className="space-y-10 py-10">
-            <h1 className="text-2xl font-semibold capitalize">
-              Expired {categoryName} listings
-            </h1>
-            <ul className="flex gap-8 justify-between py-5 flex-wrap">
-              {expiredCategorizedListings.length !== 0 &&
-                expiredCategorizedListings.map((listing) => (
-                  <li key={listing._id}>
-                    <ListingCard listing={listing} />
-                  </li>
-                ))}
-            </ul>
-          </div>
+          {categoryName !== "trending" && (
+            <div className="space-y-10 py-10">
+              <h1 className="text-2xl font-semibold capitalize">
+                Expired {categoryName} listings
+              </h1>
+              <ul className="flex gap-8 justify-between py-5 flex-wrap">
+                {expiredCategorizedListings.length !== 0 &&
+                  expiredCategorizedListings.map((listing) => (
+                    <li key={listing._id}>
+                      <ListingCard listing={listing} />
+                    </li>
+                  ))}
+              </ul>
+            </div>
+          )}
         </div>
       </div>
     </div>

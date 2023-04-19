@@ -1,7 +1,8 @@
-import { createContext, useContext, useEffect } from "react"
+import { createContext, useEffect } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import { settings } from "../../settings"
 import { useQuery } from "@tanstack/react-query"
+import ListingDetailSkeleton from "../../components/routes/listing-detail/ListingDetailSkeleton"
 
 type initialContextType = {
   data: any | null
@@ -48,6 +49,10 @@ const ListingDetailContextQueryProvider = ({
   if (error) {
     navigate("/listings/listing-not-found")
     return null
+  }
+
+  if (isLoading) {
+    return <ListingDetailSkeleton />
   }
 
   const contextValue = {

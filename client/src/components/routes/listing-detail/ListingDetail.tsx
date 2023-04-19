@@ -3,16 +3,10 @@ import SeeOtherListings from "./SeeOtherListings"
 import ListingOverview from "./ListingOverview"
 import ExpiredBiddingSection from "./ExpiredBiddingSection"
 import ActiveBiddingSection from "./ActiveBiddingSection"
-import ListingDetailSkeleton from "./ListingDetailSkeleton"
-import useListingDetailContextQuery from "../../../lib/hooks/useListingDetailContext"
-import { useEffect } from "react"
+import useListingDetailContextQuery from "../../../lib/hooks/context-hooks/useListingDetailContext"
 
 const ListingDetail = () => {
-  const { data, isLoading } = useListingDetailContextQuery()
-
-  if (isLoading) {
-    return <ListingDetailSkeleton />
-  }
+  const { data } = useListingDetailContextQuery()
 
   const { data: listing } = data
 

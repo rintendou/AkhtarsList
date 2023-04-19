@@ -1,16 +1,26 @@
-import express from "express"
+import express, { NextFunction, Request, Response } from "express"
 
-// auth controller
+// Auth Controller Functions
 import {
   getUser,
   depositFunds,
   withdrawFunds,
 } from "../controllers/userController"
 
+// Types
+import JWTRequest from "../lib/types/JWTRequest"
+import verifyToken from "../middlewares/verifyToken"
+
+// Router
 const UserRoute = express.Router()
 
 // GET USER
-UserRoute.get("/:userId", getUser)
+UserRoute.get(
+  "/:userId",
+  (req: Request, res: Response, next: NextFunction) =>
+    verifyToken(req as JWTRequest, res, next),
+  (req: Request, res: Response) => getUser(req as JWTRequest, res)
+)
 
 // DEPOSIT FUNDS
 UserRoute.post("/deposit", depositFunds)

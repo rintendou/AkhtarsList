@@ -2,17 +2,15 @@ import { useEffect, useRef, useState } from "react"
 import StyledInputRef from "../../../ui/StyledInputRef"
 import PasswordInputRef from "../../../ui/PasswordInputRef"
 import { settings } from "../../../../settings"
-import useAuth from "../../../../lib/hooks/useAuth"
+import useAuthContext from "../../../../lib/hooks/context-hooks/useAuthContext"
 import Error from "../../../ui/Error"
-import stringInputIsValid from "../../../../lib/util/stringInputValidator"
+import stringInputIsValid from "../../../../lib/util/functions/stringInputValidator"
 import Success from "../../../ui/Success"
-import useProfile from "../../../../lib/hooks/useProfile"
+import useProfileContext from "../../../../lib/hooks/context-hooks/useProfileContext"
 
 const ChangeUserDetails = () => {
-  const { auth } = useAuth()
-  const { refetchUserDetails } = useProfile()
-
-  const { fullName, address } = useProfile()
+  const { auth } = useAuthContext()
+  const { fullName, address, refetchUserDetails } = useProfileContext()
 
   const fullNameRef = useRef<HTMLInputElement>(null)
   const addressRef = useRef<HTMLInputElement>(null)
@@ -50,7 +48,7 @@ const ChangeUserDetails = () => {
     }
 
     const payload = {
-      username: auth.username,
+      userId: auth._id,
       password,
       fullName,
       address,
@@ -62,7 +60,10 @@ const ChangeUserDetails = () => {
         {
           method: "POST",
           body: JSON.stringify(payload),
-          headers: { "Content-Type": "application/json" },
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: auth.token,
+          },
         }
       )
       const json = await response.json()

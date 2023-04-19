@@ -1,16 +1,17 @@
 import { useEffect, useRef, useState } from "react"
-import useProfile from "../../../../lib/hooks/useProfile"
+import useProfileContext from "../../../../lib/hooks/context-hooks/useProfileContext"
 
 import Card from "../../../ui/Card"
 import StyledInputRef from "../../../ui/StyledInputRef"
 import Error from "../../../ui/Error"
 import Success from "../../../ui/Success"
+import getNumberWithCommas from "../../../../lib/util/functions/getNumberWithCommas"
 
 const Withdraw = () => {
   const [error, setError] = useState("")
   const [success, setSuccess] = useState("")
 
-  const { balance, withdrawFunds } = useProfile()
+  const { balance, withdrawFunds } = useProfileContext()
 
   const withdrawFundsRef = useRef<HTMLInputElement>(null)
 
@@ -54,7 +55,7 @@ const Withdraw = () => {
     <div className="w-full flex flex-col justify-center items-center">
       <Card twClasses="p-10 md:p-20 m-0 md:m-10 shadow-lg space-y-5 w-[35rem]">
         <h1 className="text-3xl text-center font-bold">Current Balance:</h1>
-        <p className="text-center text-3xl">${balance}</p>
+        <p className="text-center text-3xl">${getNumberWithCommas(balance)}</p>
         <form
           className="flex gap-5 justify-between"
           onSubmit={withdrawFundsHandler}

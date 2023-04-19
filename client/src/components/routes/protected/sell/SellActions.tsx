@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from "react"
-import useAuth from "../../../../lib/hooks/useAuth"
+import useAuthContext from "../../../../lib/hooks/context-hooks/useAuthContext"
 
-import numberInputIsValid from "../../../../lib/util/numberInputValidator"
-import stringInputIsValid from "../../../../lib/util/stringInputValidator"
+import numberInputIsValid from "../../../../lib/util/functions/numberInputValidator"
+import stringInputIsValid from "../../../../lib/util/functions/stringInputValidator"
 
 const CATEGORIES = [
   "Sneakers",
@@ -22,8 +22,8 @@ import StyledDateTimePicker from "../../../ui/StyledDateTimePicker"
 import Error from "../../../ui/Error"
 import { useNavigate } from "react-router-dom"
 import { settings } from "../../../../settings"
-import useProfile from "../../../../lib/hooks/useProfile"
-import useTimeline from "../../../../lib/hooks/useTimeline"
+import useProfile from "../../../../lib/hooks/context-hooks/useProfileContext"
+import useTimeline from "../../../../lib/hooks/context-hooks/useTimelineContext"
 import DragAndDrop from "../../../ui/DragAndDrop"
 
 const SellActions = () => {
@@ -41,7 +41,7 @@ const SellActions = () => {
   const [errorMessage, setErrorMessage] = useState("")
   const [image, setImageUrl] = useState("")
 
-  const { auth } = useAuth()
+  const { auth } = useAuthContext()
   const { refetchUserDetails } = useProfile()
   const { refetchTimeline } = useTimeline()
 

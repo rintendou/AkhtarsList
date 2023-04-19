@@ -1,11 +1,11 @@
 import { useEffect, useRef, useState } from "react"
 import { useNavigate } from "react-router-dom"
-import useAuth from "../../../../lib/hooks/useAuth"
+import useAuth from "../../../../lib/hooks/context-hooks/useAuthContext"
 
 // Components
 
 // Utility functions
-import numberInputIsValid from "../../../../lib/util/numberInputValidator"
+import numberInputIsValid from "../../../../lib/util/functions/numberInputValidator"
 
 // Backend port number
 import { settings } from "../../../../settings"
@@ -135,12 +135,12 @@ const ActiveBiddingSection = ({
           <h1 className="text-3xl font-semibold w-full text-center">
             You own this listing
           </h1>
-          <EditListing listing={listing} />
+          <EditListing />
         </div>
       )}
 
       {errorMessage && <Error errorMessage={errorMessage} />}
-      <Bidders bidders={bidders} isLister={isLister} />
+      <Bidders />
     </div>
   )
 }
