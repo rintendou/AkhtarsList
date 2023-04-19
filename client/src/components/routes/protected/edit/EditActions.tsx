@@ -176,7 +176,7 @@ const EditActions = () => {
         title,
         lister: auth._id,
         desc,
-        image: cloudinaryJson.secure_url,
+        image: cloudinaryJson.secure_url || imageUrl,
         startPrice,
         expireAt: expireAt || backupDate(),
         category,
