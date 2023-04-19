@@ -8,6 +8,7 @@ const ListingOverview = () => {
   const {
     title,
     listerUsername,
+    image,
     startPrice,
     category,
     views,
@@ -20,7 +21,11 @@ const ListingOverview = () => {
     <div className="flex-auto p-10 py-24 max-w-none md:max-w-[50%] max-h-[50%] md:max-h-none space-y-10 flex flex-col items-center justify-between">
       <div className="space-y-10">
         <h1 className="text-5xl text-center font-semibold">{title}</h1>
-        <img src={DUMMYIMAGE} alt={title} />
+        <img
+          src={image.length !== 0 ? image : "https://picsum.photos/200/300"}
+          alt={title}
+          className="w-screen h-max object-cover"
+        />
       </div>
       <div className="space-y-10 w-full">
         <div className="space-y-5 w-full pb-10 border-b border-gray-300">
