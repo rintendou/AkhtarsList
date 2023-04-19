@@ -165,10 +165,12 @@ const EditActions = () => {
       formData.append("file", fileData!)
       formData.append("upload_preset", "ugjfytls")
 
-      const cloudinaryResponse = await fetch(
-        "https://api.cloudinary.com/v1_1/dgryoqa0j/image/upload",
-        { method: "POST", body: formData }
-      )
+      const CLOUDINARY_URL = process.env.REACT_APP_CLOUDINARY_URL
+
+      const cloudinaryResponse = await fetch(CLOUDINARY_URL!, {
+        method: "POST",
+        body: formData,
+      })
       const cloudinaryJson = await cloudinaryResponse.json()
 
       const payload = {
