@@ -1,6 +1,5 @@
 import { createContext, useEffect, useState } from "react"
 import useAuthContext from "../hooks/context-hooks/useAuthContext"
-import { settings } from "../../settings"
 
 // Types
 import ListingType from "../types/ListingType"
@@ -61,7 +60,9 @@ const ProfileContextProvider = ({
       }
 
       const response = await fetch(
-        `http://localhost:${settings.BACKEND_SERVER_PORT}/api/user/${_id}`,
+        `http://localhost:${
+          import.meta.env.VITE_BACKEND_SERVER_PORT
+        }/api/user/${_id}`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -96,7 +97,9 @@ const ProfileContextProvider = ({
       }
 
       const response = await fetch(
-        `http://localhost:${settings.BACKEND_SERVER_PORT}/api/user/${_id}`
+        `http://localhost:${
+          import.meta.env.VITE_BACKEND_SERVER_PORT
+        }/api/user/${_id}`
       )
       const data = await response.json()
 
@@ -119,7 +122,9 @@ const ProfileContextProvider = ({
   const depositFunds = (amount: number) => {
     const deposit = async () => {
       const response = await fetch(
-        `http://localhost:${settings.BACKEND_SERVER_PORT}/api/user/deposit`,
+        `http://localhost:${
+          import.meta.env.VITE_BACKEND_SERVER_PORT
+        }/api/user/deposit`,
         {
           method: "POST",
           body: JSON.stringify({
@@ -144,7 +149,9 @@ const ProfileContextProvider = ({
   const withdrawFunds = (amount: number) => {
     const withdraw = async () => {
       const response = await fetch(
-        `http://localhost:${settings.BACKEND_SERVER_PORT}/api/user/withdraw`,
+        `http://localhost:${
+          import.meta.env.VITE_BACKEND_SERVER_PORT
+        }/api/user/withdraw`,
         {
           method: "POST",
           body: JSON.stringify({

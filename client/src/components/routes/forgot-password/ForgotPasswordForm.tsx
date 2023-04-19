@@ -1,16 +1,11 @@
 import { useEffect, useRef, useState } from "react"
 import { useNavigate } from "react-router-dom"
-import useAuthContext from "../../../lib/hooks/context-hooks/useAuthContext"
 
 import Card from "../../ui/Card"
 import Error from "../../ui/Error"
 import StyledInputRef from "../../ui/StyledInputRef"
 
-import { settings } from "../../../settings"
-
 const ForgotPasswordForm = () => {
-  const { auth } = useAuthContext()
-
   // I opted to use the useRef hook instead of useState to prevent
   // unnecessary re-renders of this component per each character typed
   const usernameRef = useRef<HTMLInputElement>(null)
@@ -29,7 +24,7 @@ const ForgotPasswordForm = () => {
   }, [])
 
   // send post request to api endpoint /api/auth/get-security-question by calling the
-  // the endpoint and backend_server_port number: 5178. Payload is passed
+  // the endpoint and backend_server_port number: 5000. Payload is passed
   // by attaching data to the body object.
   const getSecurityQuestionsHandler = (e: React.FormEvent<HTMLFormElement>) => {
     // Prevent default behavior of reloading page on form submission
@@ -39,7 +34,9 @@ const ForgotPasswordForm = () => {
       const username = usernameRef.current!.value
 
       const response = await fetch(
-        `http://localhost:${settings.BACKEND_SERVER_PORT}/api/auth/get-security-question`,
+        `http://localhost:${
+          import.meta.env.VITE_BACKEND_SERVER_PORT.BACKEND_SERVER_PORT
+        }/api/auth/get-security-question`,
         {
           method: "POST",
           body: JSON.stringify({
@@ -76,7 +73,7 @@ const ForgotPasswordForm = () => {
   }
 
   // send post request to api endpoint /api/auth/verify-security-qa by calling the
-  // the endpoint and backend_server_port number: 5178. Payload is passed
+  // the endpoint and backend_server_port number: 5000. Payload is passed
   // by attaching data to the body object.
   const verifySecurityQAHandler = (e: React.FormEvent<HTMLFormElement>) => {
     // Prevent default behavior of reloading page on form submission
@@ -87,7 +84,9 @@ const ForgotPasswordForm = () => {
       const securityQuestionAnswer = securityQuestionAnswerRef.current!.value
 
       const response = await fetch(
-        `http://localhost:5178/api/auth/verify-security-qa`,
+        `http://localhost:${
+          import.meta.env.VITE_BACKEND_SERVER_PORT
+        }/api/auth/verify-security-qa`,
         {
           method: "POST",
           body: JSON.stringify({

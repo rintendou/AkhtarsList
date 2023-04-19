@@ -17,7 +17,6 @@ import numberInputIsValid from "../../../../lib/util/functions/numberInputValida
 import stringInputIsValid from "../../../../lib/util/functions/stringInputValidator"
 
 // Backend Server Port
-import { settings } from "../../../../settings"
 
 // Constant Variables
 const CATEGORIES = [
@@ -162,7 +161,9 @@ const SellActions = () => {
       }
 
       const response = await fetch(
-        `http://localhost:${settings.BACKEND_SERVER_PORT}/api/listing/post`,
+        `http://localhost:${
+          import.meta.env.VITE_BACKEND_SERVER_PORT
+        }/api/listing/post`,
         {
           method: "POST",
           body: JSON.stringify(payload),

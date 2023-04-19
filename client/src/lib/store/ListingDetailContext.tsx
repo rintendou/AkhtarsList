@@ -1,6 +1,5 @@
 import { createContext, useEffect } from "react"
 import { useNavigate, useParams } from "react-router-dom"
-import { settings } from "../../settings"
 import { useQuery } from "@tanstack/react-query"
 import ListingDetailSkeleton from "../../components/routes/listing-detail/ListingDetailSkeleton"
 
@@ -18,7 +17,9 @@ const ListingDetailContext = createContext<initialContextType>(initialContext)
 
 const fetchListingDetail = async (listingId: string) => {
   const response = await fetch(
-    `http://localhost:${settings.BACKEND_SERVER_PORT}/api/listing/fetch/${listingId}`
+    `http://localhost:${
+      import.meta.env.VITE_BACKEND_SERVER_PORT
+    }/api/listing/fetch/${listingId}`
   )
   const json = await response.json()
   return json

@@ -8,7 +8,6 @@ import useAuth from "../../../../lib/hooks/context-hooks/useAuthContext"
 import numberInputIsValid from "../../../../lib/util/functions/numberInputValidator"
 
 // Backend port number
-import { settings } from "../../../../settings"
 import ListingType from "../../../../lib/types/ListingType"
 import DevCountdown from "./DevCountdown"
 import EditListing from "../test-nonpolled/EditListing"
@@ -63,7 +62,9 @@ const ActiveBiddingSection = ({
 
     const submitBid = async () => {
       const response = await fetch(
-        `http://localhost:${settings.BACKEND_SERVER_PORT}/THISAPICALLWILLFAIL`
+        `http://localhost:${
+          import.meta.env.VITE_BACKEND_SERVER_PORT
+        }/THISAPICALLWILLFAIL`
       )
       const json = await response.json()
 

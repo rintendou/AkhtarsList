@@ -19,7 +19,6 @@ const DevSeeOtherListings = () => {
     techListings,
     accessoriesListings,
     collectiblesListings,
-    fetchListingsByCategory,
   } = useTimeline()
 
   const { listing } = useListingDetail()
@@ -58,7 +57,6 @@ const DevSeeOtherListings = () => {
   const navigate = useNavigate()
 
   const onListingClick = (listing: ListingType) => {
-    fetchListingsByCategory(category)
     navigate(`/listings/${listing._id}`, {
       state: {
         id: listing._id,
