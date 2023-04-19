@@ -10,7 +10,7 @@ const ActiveBiddingSection = () => {
   const bidAmountRef = useRef<HTMLInputElement>(null)
   const [errorMessage, setErrorMessage] = useState("")
 
-  const { refetchListing, listing, isLister, bidders } = useListingDetail()
+  const { refetchListing, listing, isLister } = useListingDetail()
   const { finalPrice } = listing
 
   const onSubmitBid = (e: React.FormEvent<HTMLFormElement>) => {
