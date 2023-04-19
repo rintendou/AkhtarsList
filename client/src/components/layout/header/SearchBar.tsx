@@ -35,7 +35,7 @@ const SearchBar = () => {
       onSubmit={handleSubmit}
       className="relative flex-grow mx-auto hidden md:block"
     >
-      <button type="submit" className="absolute t-0 text-tertiary h-full p-2">
+      <button type="submit" className="absolute t-0 text-gray-700 h-full p-2">
         <svg
           stroke="currentColor"
           fill="currentColor"
