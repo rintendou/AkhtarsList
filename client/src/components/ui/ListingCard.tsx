@@ -67,7 +67,7 @@ const ListingCard = ({ listing }: { listing: ListingType }) => {
           className="h-36 w-auto rounded-md"
         />
         <div className="flex justify-between">
-          <h1 className="text-lg font-light whitespace-nowrap truncate">
+          <h1 className="text-xl font-bold whitespace-nowrap truncate">
             {title}
           </h1>
           {isHighestBidder && !isLister && (
@@ -76,7 +76,7 @@ const ListingCard = ({ listing }: { listing: ListingType }) => {
         </div>
         <p className="text-gray-500">Current Price:</p>
         <div className="flex justify-between">
-          <p className="font-bold text-2xl max-w-[50%] truncate">
+          <p className="font-semibold text-xl max-w-[50%] truncate">
             ${getNumberWithCommas(finalPrice)}
           </p>
 
