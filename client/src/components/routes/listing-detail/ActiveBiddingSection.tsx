@@ -15,11 +15,14 @@ import numberInputIsValid from "../../../lib/util/numberInputValidator"
 import { settings } from "../../../settings"
 import Success from "../../ui/Success"
 import useProfile from "../../../lib/hooks/useProfile"
-import useListingDetailContext from "../../../lib/hooks/useListingDetailContext"
+import Transactions from "./Transactions"
+import useListingDetailContextQuery from "../../../lib/hooks/useListingDetailContext"
+import CurrentBalance from "./CurrentBalance"
 
 const ActiveBiddingSection = () => {
-  const { listing, isLister, refetchListing } = useListingDetailContext()
-  const { _id: listingId, expireAt, finalPrice } = listing
+  const { data } = useListingDetailContextQuery()
+  const { data: listing } = data
+  const { _id: listingId, expireAt, finalPrice, lister, bestBidder } = listing
 
   const bidAmountRef = useRef<HTMLInputElement>(null)
   const [errorMessage, setErrorMessage] = useState("")
@@ -28,6 +31,8 @@ const ActiveBiddingSection = () => {
   const { auth } = useAuth()
   const navigate = useNavigate()
   const { refetchUserDetails } = useProfile()
+
+  const isLister = lister === auth._id
 
   useEffect(() => {
     if (!bidAmountRef.current) {
@@ -86,11 +91,10 @@ const ActiveBiddingSection = () => {
       }
 
       setErrorMessage("")
-      setSuccessMessage(json.message)
+      setSuccessMessage("You are currently the best bidder!")
       bidAmountRef.current!.value = ""
       bidAmountRef.current!.focus()
       refetchUserDetails()
-      refetchListing()
     }
 
     submitBid()
@@ -117,25 +121,28 @@ const ActiveBiddingSection = () => {
       </div>
 
       {!isLister ? (
-        <form
-          className="w-full flex flex-col md:flex-row gap-5 items-center"
-          onSubmit={onSubmitBid}
-        >
-          <div className="w-full max-w-[50%]">
-            <input
-              id="Bid Amount ($)"
-              ref={bidAmountRef}
-              className="pt-3 pl-3 p-2 block px-0 mt-0 bg-transparent border-2 focus:outline-none focus:ring-0 border-secondary rounded-md w-full"
-            />
-            <label
-              htmlFor="Bid Amount ($)"
-              className="absolute duration-200 ease-in-out top-3 left-3 -z-1 origin-0 text-secondary"
-            >
-              Bid Amount ($)
-            </label>
-          </div>
-          <BidButton />
-        </form>
+        <>
+          <form
+            className="w-full flex flex-col md:flex-row gap-5 items-center"
+            onSubmit={onSubmitBid}
+          >
+            <div className="w-full max-w-[50%]">
+              <input
+                id="Bid Amount ($)"
+                ref={bidAmountRef}
+                className="pt-3 pl-3 p-2 block px-0 mt-0 bg-transparent border-2 focus:outline-none focus:ring-0 border-secondary rounded-md w-full"
+              />
+              <label
+                htmlFor="Bid Amount ($)"
+                className="absolute duration-200 ease-in-out top-3 left-3 -z-1 origin-0 text-secondary"
+              >
+                Bid Amount ($)
+              </label>
+            </div>
+            <BidButton />
+          </form>
+          <CurrentBalance />
+        </>
       ) : (
         <div>
           <h1 className="text-3xl font-semibold w-full text-center">
@@ -145,11 +152,14 @@ const ActiveBiddingSection = () => {
         </div>
       )}
 
-      {!errorMessage && successMessage && (
+      {!errorMessage && successMessage && bestBidder === auth._id && (
         <Success successMessage={successMessage} />
       )}
       {errorMessage && <Error errorMessage={errorMessage} />}
-      <Bidders />
+      <div className="w-full flex flex-col lg:flex-row gap-5">
+        <Bidders />
+        <Transactions />
+      </div>
     </div>
   )
 }

@@ -5,7 +5,7 @@
 import { useNavigate } from "react-router-dom"
 import useTimeline from "../../../../lib/hooks/useTimeline"
 import ListingType from "../../../../lib/types/ListingType"
-import SeeOthersButton from "../../listing-detail/SeeOthersButton"
+import SeeOthersButton from "../test-nonpolled/SeeOthersButton"
 import ListingCard from "../../../ui/ListingCard"
 import ListMore from "../../protected/profile/listings/ListMore"
 import useListingDetail from "./useListingDetail"

@@ -2,7 +2,9 @@ type ListingType = {
   _id: string
   image: string
   bidders: string[]
+  bestBidder: string
   lister: string
+  listerUsername: string
   title: string
   desc: string
   startPrice: number
@@ -15,6 +17,7 @@ type ListingType = {
   height: number
   length: number
   width: number
+  [key: string]: any
 }
 
 export default ListingType

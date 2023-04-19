@@ -5,11 +5,12 @@ import {
   createListing,
   deleteListing,
   updateListing,
+  viewListing,
   fetchListing,
   fetchListings,
   fetchListingsByCategory,
   fetchTrendingListings,
-  fetchListingsBidders,
+  fetchListingsFromSearch,
   bidOnListing,
 } from "../controllers/listingController"
 
@@ -36,11 +37,14 @@ ListingRoute.get("/fetch-by-category/:category", fetchListingsByCategory)
 // Fetch trending listings
 ListingRoute.get("/fetch-by-trending", fetchTrendingListings)
 
+// Fetch (view) listing
+ListingRoute.get("/fetch-view/:listingId", viewListing)
+
 // Fetch specific listing
 ListingRoute.get("/fetch/:listingId", fetchListing)
 
-// Fetch Listing Bidder Usernames
-ListingRoute.get("/fetch/bidders/:listingId", fetchListingsBidders)
+// Fetch Listing From Search
+ListingRoute.get("/search", fetchListingsFromSearch)
 
 // Bid on Listing
 ListingRoute.put("/bid/:listingId", bidOnListing)

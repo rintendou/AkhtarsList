@@ -1,18 +1,17 @@
-import useTimeline from "../../../lib/hooks/useTimeline"
+import useTimeline from "../../../../lib/hooks/useTimeline"
 
 // Components
-import ListingCard from "../../ui/ListingCard"
+import ListingCard from "../../../ui/ListingCard"
 import SeeOthersButton from "./SeeOthersButton"
 
 // Types
-import ListingType from "../../../lib/types/ListingType"
-import ListMore from "../protected/profile/listings/ListMore"
+import ListingType from "../../../../lib/types/ListingType"
+import ListMore from "../../protected/profile/listings/ListMore"
 import { useNavigate } from "react-router-dom"
-import useListingDetailContextQuery from "../../../lib/hooks/useListingDetailContext"
+import useListingDetailContext from "./useListingDetailContext"
 
 const SeeOtherListings = () => {
-  const { data } = useListingDetailContextQuery()
-  const { data: listing } = data
+  const { listing } = useListingDetailContext()
   const { _id: idToFilter, category } = listing
 
   const {
@@ -23,6 +22,7 @@ const SeeOtherListings = () => {
     techListings,
     accessoriesListings,
     collectiblesListings,
+    fetchListingsByCategory,
   } = useTimeline()
 
   let categorizedListings: ListingType[] = []
@@ -58,6 +58,7 @@ const SeeOtherListings = () => {
   const navigate = useNavigate()
 
   const onListingClick = (listing: ListingType) => {
+    fetchListingsByCategory(category)
     navigate(`/listings/${listing._id}`)
   }
 

@@ -4,9 +4,9 @@ import useDevListingDetail from "./useDevListingDetail"
 
 import DevActiveBiddingSection from "./DevActiveBiddingSection"
 import DevExpiredBiddingSection from "./DevExpiredBiddingSection"
-import ListingOverview from "../../listing-detail/ListingOverview"
-import SeeOtherListings from "../../listing-detail/SeeOtherListings"
-import ListingDetailSkeleton from "../../listing-detail/ListingDetailSkeleton"
+import ListingOverview from "../test-nonpolled/ListingOverview"
+import SeeOtherListings from "../test-nonpolled/SeeOtherListings"
+import ListingDetailSkeleton from "../test-nonpolled/ListingDetailSkeleton"
 
 const DevListingDetail = () => {
   const { listing, isLister, isExpired, isLoading, timeRemaining } =

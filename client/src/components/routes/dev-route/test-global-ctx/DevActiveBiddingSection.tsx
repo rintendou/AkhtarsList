@@ -1,17 +1,17 @@
 import { useEffect, useRef, useState } from "react"
 
 import DevCountdown from "./DevCountdown"
-import EditListing from "../../listing-detail/EditListing"
 import Error from "../../../ui/Error"
-import Bidders from "../../listing-detail/Bidders"
 import useListingDetail from "./useListingDetail"
+import EditListing from "../test-nonpolled/EditListing"
+import DevBidders from "./DevBidders"
 
 const ActiveBiddingSection = () => {
   const bidAmountRef = useRef<HTMLInputElement>(null)
   const [errorMessage, setErrorMessage] = useState("")
 
-  const { refetchListing, listing, isLister } = useListingDetail()
-  const { bidders, finalPrice } = listing
+  const { refetchListing, listing, isLister, bidders } = useListingDetail()
+  const { finalPrice } = listing
 
   const onSubmitBid = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -67,12 +67,12 @@ const ActiveBiddingSection = () => {
           <h1 className="text-3xl font-semibold w-full text-center">
             You own this listing
           </h1>
-          <EditListing listing={listing} />
+          <EditListing />
         </div>
       )}
 
       {errorMessage && <Error errorMessage={errorMessage} />}
-      <Bidders bidders={bidders} isLister={isLister} />
+      <DevBidders />
     </div>
   )
 }

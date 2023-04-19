@@ -2,7 +2,7 @@ import RouterLink from "../../ui/RouterLink"
 
 const SideNavLinks = () => {
   return (
-    <div className="p-5 flex flex-col gap-2 uppercase w-min">
+    <div className="hidden p-5 md:flex flex-col gap-2 uppercase w-min">
       <RouterLink
         routerLinkText="Sneakers"
         to="/category/sneakers"
