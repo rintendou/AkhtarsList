@@ -26,7 +26,6 @@ const ListingSchema = new Schema(
     },
     image: {
       type: String,
-      required: true,
     },
     bidders: [
       {
