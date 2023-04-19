@@ -1,9 +1,25 @@
 import { useEffect, useRef, useState } from "react"
+import { useNavigate } from "react-router-dom"
 import useAuthContext from "../../../../lib/hooks/context-hooks/useAuthContext"
+import useProfile from "../../../../lib/hooks/context-hooks/useProfileContext"
+import useTimeline from "../../../../lib/hooks/context-hooks/useTimelineContext"
 
+// Components
+import StyledInputRef from "../../../ui/StyledInputRef"
+import StyledInputAreaRef from "../../../ui/StyledInputAreaRef"
+import StyledDropdownRef from "../../../ui/StyledDropdown"
+import StyledDateTimePicker from "../../../ui/StyledDateTimePicker"
+import Error from "../../../ui/Error"
+import DragAndDrop from "../../../ui/DragAndDrop"
+
+// Utility Functions
 import numberInputIsValid from "../../../../lib/util/functions/numberInputValidator"
 import stringInputIsValid from "../../../../lib/util/functions/stringInputValidator"
 
+// Backend Server Port
+import { settings } from "../../../../settings"
+
+// Constant Variables
 const CATEGORIES = [
   "Sneakers",
   "Antiques",
@@ -13,18 +29,6 @@ const CATEGORIES = [
   "Trending",
   "General",
 ]
-
-// Components
-import StyledInputRef from "../../../ui/StyledInputRef"
-import StyledInputAreaRef from "../../../ui/StyledInputAreaRef"
-import StyledDropdownRef from "../../../ui/StyledDropdown"
-import StyledDateTimePicker from "../../../ui/StyledDateTimePicker"
-import Error from "../../../ui/Error"
-import { useNavigate } from "react-router-dom"
-import { settings } from "../../../../settings"
-import useProfile from "../../../../lib/hooks/context-hooks/useProfileContext"
-import useTimeline from "../../../../lib/hooks/context-hooks/useTimelineContext"
-import DragAndDrop from "../../../ui/DragAndDrop"
 
 const SellActions = () => {
   const titleRef = useRef<HTMLInputElement>(null)
