@@ -18,6 +18,7 @@ const ListingCard = ({ listing }: { listing: ListingType }) => {
   const {
     _id,
     lister,
+    image,
     title,
     finalPrice,
     expireAt,
@@ -61,7 +62,7 @@ const ListingCard = ({ listing }: { listing: ListingType }) => {
         onClick={handleClick}
       >
         <img
-          src="https://picsum.photos/200/300"
+          src={image.length !== 0 ? image : "https://picsum.photos/200/300"}
           alt={title}
           className="h-36 w-auto rounded-md"
         />
