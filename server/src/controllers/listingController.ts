@@ -281,66 +281,64 @@ export const viewListing = async (req: Request, res: Response) => {
             return res.status(400).json({ message: 'Listing does not exist!', data: null, ok: false })
         }
 
-    res.status(200).json({
-      message: "Listing successfully fetched!",
-      data: existingListing,
-      ok: true,
-    })
-  } catch (error) {
-    return res.status(500).json({
-      message: error,
-      data: null,
-      ok: false,
-    })
-  }
+        res.status(200).json({
+            message: 'Listing successfully fetched!',
+            data: existingListing,
+            ok: true,
+        })
+    } catch (error) {
+        return res.status(500).json({
+            message: error,
+            data: null,
+            ok: false,
+        })
+    }
 }
 
 export const fetchListing = async (req: Request, res: Response) => {
-  // Fetch listing and increment its views field
+    // Fetch listing and increment its views field
 
-  const { listingId } = req.params
+    const { listingId } = req.params
 
-  // Check if the required fields are filled in
-  if (!listingId) {
-    return res.status(400).json({
-      message: "listingId params is required!",
-      data: null,
-      ok: false,
-    })
-  }
-
-  // Check if the listingId is a valid ObjectId
-  if (!mongoose.Types.ObjectId.isValid(listingId)) {
-    return res.status(400).json({
-      message: "Invalid listingId!",
-      data: null,
-      ok: false,
-    })
-  }
-
-  try {
-    // Check if listing exists
-    const existingListing = await ListingModel.findOne({
-      _id: listingId,
-    })
-    if (!existingListing) {
-      return res
-        .status(400)
-        .json({ message: "Listing does not exist!", data: null, ok: false })
+    // Check if the required fields are filled in
+    if (!listingId) {
+        return res.status(400).json({
+            message: 'listingId params is required!',
+            data: null,
+            ok: false,
+        })
     }
 
-    res.status(200).json({
-      message: "Listing successfully fetched!",
-      data: existingListing,
-      ok: true,
-    })
-  } catch (error) {
-    return res.status(500).json({
-      message: error,
-      data: null,
-      ok: false,
-    })
-  }
+    // Check if the listingId is a valid ObjectId
+    if (!mongoose.Types.ObjectId.isValid(listingId)) {
+        return res.status(400).json({
+            message: 'Invalid listingId!',
+            data: null,
+            ok: false,
+        })
+    }
+
+    try {
+        // Check if listing exists
+        const existingListing = await ListingModel.findOne({
+            _id: listingId,
+        })
+        if (!existingListing) {
+            return res.status(400).json({ message: 'Listing does not exist!', data: null, ok: false })
+        }
+
+        res.status(200).json({
+            message: 'Listing successfully fetched!',
+            data: existingListing,
+            ok: true,
+        })
+    } catch (error) {
+        return res.status(500).json({
+            message: error,
+            data: null,
+            ok: false,
+        })
+    }
 }
 
 export const updateListing = async (req: Request, res: Response) => {
@@ -554,18 +552,17 @@ export const bidOnListing = async (req: Request, res: Response) => {
                 })
             }
 
-      try {
-        // Updating the listing's list of bidders but also updating if a bidder has already bid on this listing before
-        let updatedListingBidders = listing.bidders
+            try {
+                // Updating the listing's list of bidders but also updating if a bidder has already bid on this listing before
+                let updatedListingBidders = listing.bidders
 
-        updatedListingBidders = updatedListingBidders.filter(
-          (listingBiddersId) => {
-            return listingBiddersId !== bidder.username
-          }
-        )
+                updatedListingBidders = updatedListingBidders.filter((listingBiddersId) => {
+                    return listingBiddersId !== bidder.username
+                })
 
-        updatedListingBidders.push(bidder._id)
-        listing.bidders = updatedListingBidders
+                listing.bidders = [bidder.username, ...updatedListingBidders]
+
+                listing.transactions = [`${bidder.username} $${req.body.finalPrice}`, ...listing.transactions]
 
                 await listing.save()
             } catch (error) {
@@ -617,7 +614,7 @@ export const fetchListingsBidders = async (req: Request, res: Response) => {
     }
 
     const listingBidderIds = listing.bidders
-    const listings = await ListingModel.find({ title: regex })
+    const listings = await ListingModel.find({ title: RegExp })
 
     try {
         const users = await UserModel.find({ _id: { $in: listingBidderIds } }, { username: 1 })
