@@ -35,7 +35,7 @@ const SearchBar = () => {
       onSubmit={handleSubmit}
       className="relative flex-grow mx-auto hidden md:block"
     >
-      <button type="submit" className="absolute t-0 text-tertiary h-full p-2">
+      <button type="submit" className="absolute t-0 text-gray-700 h-full p-2">
         <svg
           stroke="currentColor"
           fill="currentColor"
@@ -60,7 +60,7 @@ const SearchBar = () => {
       <input
         type="text"
         placeholder="Search Listings"
-        className="border h-10 bg-secondary pl-8 pr-10 text-sm focus:outline-none focus:border-gray-500 text-primary w-full max-w-lg rounded-lg"
+        className="border h-10 bg-secondary border-gray-700 pl-8 pr-10 text-sm focus:outline-none focus:border-tertiary text-primary w-full max-w-lg rounded-lg"
         value={query}
         onChange={handleInputChange}
       />

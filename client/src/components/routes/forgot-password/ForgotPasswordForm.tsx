@@ -9,7 +9,7 @@ import StyledInputRef from "../../ui/StyledInputRef"
 import { settings } from "../../../settings"
 
 const ForgotPasswordForm = () => {
-  const { auth, login } = useAuthContext()
+  const { auth } = useAuthContext()
 
   // I opted to use the useRef hook instead of useState to prevent
   // unnecessary re-renders of this component per each character typed
@@ -83,8 +83,7 @@ const ForgotPasswordForm = () => {
     e.preventDefault()
 
     const verifySecurityQA = async () => {
-      const { username } = auth
-      console.log(username)
+      const username = usernameRef.current!.value
       const securityQuestionAnswer = securityQuestionAnswerRef.current!.value
 
       const response = await fetch(

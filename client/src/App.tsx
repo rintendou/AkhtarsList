@@ -55,7 +55,6 @@ function App() {
       <Body>
         <Routes>
           {/*  Unprotected Routes */}
-          {/* <Route path="/" element={<LandingPage />} /> */}
           <Route path="/" element={<Application />} />
           <Route path="/search-results" element={<SearchResults />} />
           <Route path="/login" element={<Login />} />

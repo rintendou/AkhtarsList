@@ -4,8 +4,8 @@ import useProfileContext from "../../../../lib/hooks/context-hooks/useProfileCon
 import { useLocation, useNavigate } from "react-router-dom"
 import useTimelineContext from "../../../../lib/hooks/context-hooks/useTimelineContext"
 
-import numberInputIsValid from "../../../../lib/util/numberInputValidator"
-import stringInputIsValid from "../../../../lib/util/stringInputValidator"
+import numberInputIsValid from "../../../../lib/util/functions/numberInputValidator"
+import stringInputIsValid from "../../../../lib/util/functions/stringInputValidator"
 
 const CATEGORIES = [
   "Sneakers",

@@ -5,11 +5,11 @@ import Card from "../../../ui/Card"
 import StyledInputRef from "../../../ui/StyledInputRef"
 import Error from "../../../ui/Error"
 import Success from "../../../ui/Success"
-import stringInputIsValid from "../../../../lib/util/stringInputValidator"
-import numberInputIsValid from "../../../../lib/util/numberInputValidator"
+import stringInputIsValid from "../../../../lib/util/functions/stringInputValidator"
+import numberInputIsValid from "../../../../lib/util/functions/numberInputValidator"
 import CreditCardInput from "./CreditCardInput"
 import CVVInput from "./CVVInput"
-import getNumberWithCommas from "../../../../lib/util/getNumberWithCommas"
+import getNumberWithCommas from "../../../../lib/util/functions/getNumberWithCommas"
 
 const Deposit = () => {
   const [error, setError] = useState("")

@@ -5,7 +5,7 @@ import Card from "../../../ui/Card"
 import StyledInputRef from "../../../ui/StyledInputRef"
 import Error from "../../../ui/Error"
 import Success from "../../../ui/Success"
-import getNumberWithCommas from "../../../../lib/util/getNumberWithCommas"
+import getNumberWithCommas from "../../../../lib/util/functions/getNumberWithCommas"
 
 const Withdraw = () => {
   const [error, setError] = useState("")

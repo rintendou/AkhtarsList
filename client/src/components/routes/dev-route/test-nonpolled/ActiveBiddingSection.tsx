@@ -9,7 +9,7 @@ import Countdown from "../../../ui/Countdown"
 import EditListing from "./EditListing"
 
 // Utility functions
-import numberInputIsValid from "../../../../lib/util/numberInputValidator"
+import numberInputIsValid from "../../../../lib/util/functions/numberInputValidator"
 
 // Backend port number
 import { settings } from "../../../../settings"

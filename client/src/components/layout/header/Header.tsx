@@ -3,18 +3,18 @@ import useAuth from "../../../lib/hooks/context-hooks/useAuthContext"
 import SearchBar from "./SearchBar"
 
 const Header = () => {
-  const { auth } = useAuth()
+  const { isLoggedIn } = useAuth()
 
   return (
     <header className="p-8 flex flex-row justify-between items-center bg-secondary text-primary sticky top-0 gap-8 z-50">
       <RouterLink
-        twClasses="text-2xl font-bold"
+        twClasses="text-2xl font-bold select-none"
         routerLinkText="AkhtarsList"
         to="/"
       />
-      {auth._id && <SearchBar />}
+      <SearchBar />
       <nav className="hidden md:flex flex-row gap-4">
-        {auth._id ? (
+        {isLoggedIn ? (
           <LoggedInNavbar />
         ) : (
           <>
