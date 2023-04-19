@@ -165,7 +165,7 @@ const EditActions = () => {
       formData.append("file", fileData!)
       formData.append("upload_preset", "ugjfytls")
 
-      const CLOUDINARY_URL = process.env.REACT_APP_CLOUDINARY_URL
+      const CLOUDINARY_URL = import.meta.env.VITE_CLOUDINARY_URL
 
       const cloudinaryResponse = await fetch(CLOUDINARY_URL!, {
         method: "POST",
