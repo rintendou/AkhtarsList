@@ -55,13 +55,13 @@ const EditActions = () => {
     heightRef.current!.value = location.state.listing!.dimensions[0]
     lengthRef.current!.value = location.state.listing!.dimensions[1]
     widthRef.current!.value = location.state.listing!.dimensions[2]
+    setImageUrl(location.state.listing!.image)
     handleDateTimeChange(location.state.listing!.expireAt)
   }, [])
 
   const [expireAt, setExpireAt] = useState<Date | null>(null)
   const [error, setError] = useState(false)
   const [errorMessage, setErrorMessage] = useState("")
-  const [image] = useState("fakesubway.jpg")
 
   const { auth } = useAuthContext()
   const { refetchUserDetails } = useProfileContext()
@@ -98,19 +98,6 @@ const EditActions = () => {
       tomorrow.setHours(23)
       tomorrow.setMinutes(59)
       return tomorrow
-    }
-
-    const payload = {
-      userId: auth._id,
-      title,
-      lister: auth._id,
-      desc,
-      image,
-      startPrice,
-      expireAt: expireAt || backupDate(),
-      category,
-      weight,
-      dimensions: [height, width, length],
     }
 
     if (!stringInputIsValid(title)) {
@@ -170,6 +157,29 @@ const EditActions = () => {
     }
 
     const editListing = async () => {
+      const formData = new FormData()
+      formData.append("file", fileData!)
+      formData.append("upload_preset", "ugjfytls")
+
+      const cloudinaryResponse = await fetch(
+        "https://api.cloudinary.com/v1_1/dgryoqa0j/image/upload",
+        { method: "POST", body: formData }
+      )
+      const cloudinaryJson = await cloudinaryResponse.json()
+
+      const payload = {
+        userId: auth._id,
+        title,
+        lister: auth._id,
+        desc,
+        image: cloudinaryJson.secure_url,
+        startPrice,
+        expireAt: expireAt || backupDate(),
+        category,
+        weight,
+        dimensions: [height, width, length],
+      }
+
       const response = await fetch(
         `http://localhost:${settings.BACKEND_SERVER_PORT}/api/listing/update/${location.state.listing._id}`,
         {
