@@ -3,7 +3,6 @@ require("dotenv").config()
 import express, { Request, Response } from "express"
 import mongoose from "mongoose"
 import helmet from "helmet"
-import morgan from "morgan"
 import cors from "cors"
 
 // Import all routes
@@ -24,7 +23,6 @@ const MONGODB_URL = process.env.MONGODB_URL
 // Middleware
 app.use(express.json()) // This allows for requests to be accessed, turns req -> JSON object (body can be accessed &)
 app.use(helmet())
-app.use(morgan("common"))
 app.use(
   cors({
     origin: "*",
@@ -34,8 +32,9 @@ app.use(
     exposedHeaders: ["Authorization"],
   })
 )
+
 app.use((req: Request, res: Response, next: Function) => {
-  console.log(req.path, req.method)
+  console.log(req.method)
   next()
 })
 
