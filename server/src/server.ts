@@ -33,10 +33,10 @@ app.use(
   })
 )
 
-app.use((req: Request, res: Response, next: Function) => {
-  console.log(req.method)
-  next()
-})
+// app.use((req: Request, res: Response, next: Function) => {
+//   console.log(req.method)
+//   next()
+// })
 
 // Declare Routes
 app.use("/api/auth", AuthRoute)

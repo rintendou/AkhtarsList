@@ -437,7 +437,7 @@ export const bidOnListing = async (req: Request, res: Response) => {
   }
 
   // Edge Case: Bidder bids the same amount
-  if (listing.finalPrice == req.body.finalPrice) {
+  if (listing.finalPrice === req.body.finalPrice) {
     return res.status(400).json({
       message: "You can not bid an equal amount.",
       data: null,
@@ -454,143 +454,111 @@ export const bidOnListing = async (req: Request, res: Response) => {
     })
   }
 
+  // Edge Case: The lister tries to bid on their own listing
+  if (listing.bestBidder == listing.lister) {
+    return res.status(400).json({
+      message: "You cannot bid on your own listing.",
+      data: null,
+      ok: false,
+    })
+  }
+
   // Main Logic
   try {
-    // This will cover the case where there are no bid to begin with.
-    if (listing.bestBidder === undefined) {
-      const prevBalance = bidder.balance // In case balance needs to be refunded.
-      bidder.balance -= req.body.finalPrice // Deduct balance
-      await bidder.save()
-
-      try {
-        listing.finalPrice = req.body.finalPrice
-        listing.bestBidder = req.body.bestBidder
-        await listing.save()
-
-        return res.status(200).json({
-          message: `${userId} has placed the first bid of ${req.body.finalPrice}`,
-          data: listing,
-          ok: true,
-        })
-      } catch (error) {
-        bidder.balance = prevBalance // In case of failure, return the balance taken away from the bidder's account
-        await bidder.save()
-
-        return res.status(400).json({
-          message: "ERROR: Refunded balance.",
-          data: error,
-          ok: false,
-        })
-      }
-    }
-
-    // This will cover the case where the lister tries to bid on their own listing
-    if (listing.bestBidder == listing.lister) {
-      return res.status(400).json({
-        message: "You cannot bid on your own listing.",
-        data: null,
-        ok: false,
-      })
-    }
-
     // Update the best bidder + price of the listing, then refund the balance to the previous best bidder
+
     try {
-      try {
-        // Update the balance of the previous bidder
-        const prevBestBidder = await UserModel.findById(listing.bestBidder)
-        prevBestBidder!.balance += listing.finalPrice
-        await prevBestBidder!.save()
+      // Update the balance of the previous bidder
 
-        // the three lines above was not able to handle
-        // when the previous best bidder is the current bidder
-        if (prevBestBidder!._id.equals(bidder._id)) {
-          bidder.balance += listing.finalPrice
-          await bidder.save()
-        }
-      } catch (error) {
-        return res.status(400).json({
-          message: "ERROR: Failed to refund previous bidder",
-          data: error,
-          ok: false,
-        })
+      const prevBestBidder = await UserModel.findById(listing.bestBidder)
+
+      if (prevBestBidder) {
+        prevBestBidder.balance += listing.finalPrice
+        console.log(prevBestBidder.balance)
+        await prevBestBidder.save()
       }
-
-      try {
-        // Update the listing
-        listing.finalPrice = req.body.finalPrice
-        listing.bestBidder = userId
-        await listing.save()
-      } catch (error) {
-        return res.status(400).json({
-          message: "ERROR: Failed to update listing",
-          data: error,
-          ok: false,
-        })
-      }
-
-      try {
-        // Updating the balance and the biddings of the new best bidder
-        bidder.balance -= req.body.finalPrice
-
-        // Check if listing already exists on the biddings list of the bidder
-        const updatedUserBiddings = bidder.biddedListings.filter(
-          (biddedListingId) => !biddedListingId.equals(listing._id)
-        )
-        updatedUserBiddings.push(listing._id)
-
-        bidder.biddedListings = updatedUserBiddings.reverse()
-
-        await bidder.save()
-      } catch (error) {
-        return res.status(400).json({
-          message: "ERROR: Failed to update balance of current bidder",
-          data: error,
-          ok: false,
-        })
-      }
-
-      try {
-        // Updating the listing's list of bidders but also updating if a bidder has already bid on this listing before
-        let updatedListingBidders = listing.bidders
-
-        updatedListingBidders = updatedListingBidders.filter(
-          (listingBiddersId) => {
-            return listingBiddersId !== bidder.username
-          }
-        )
-
-        listing.bidders = [bidder.username, ...updatedListingBidders]
-
-        listing.transactions = [
-          `${bidder.username} $${req.body.finalPrice}`,
-          ...listing.transactions,
-        ]
-
-        await listing.save()
-      } catch (error) {
-        return res.status(400).json({
-          message: "ERROR: Failed to update the bidders of this listing",
-          data: error,
-          ok: false,
-        })
-      }
-
-      return res.status(200).json({
-        message: `${bidder.username} has placed a better bid of $${req.body.finalPrice}`,
-        data: listing,
-        ok: true,
-      })
     } catch (error) {
-      return res.status(500).json({
-        message: "ERROR: EVERYTHING IS WRONG",
+      return res.status(400).json({
+        message: "ERROR: Failed to refund previous bidder",
         data: error,
         ok: false,
       })
     }
+
+    try {
+      // Updating the balance and the biddings of the new best bidder
+      bidder.balance -= req.body.finalPrice
+      console.log(bidder._id, listing.bestBidder)
+      if (bidder._id.equals(listing.bestBidder!._id)) {
+        bidder.balance += +listing.finalPrice
+      }
+
+      // Check if listing already exists on the biddings list of the bidder
+      const updatedUserBiddings = bidder.biddedListings.filter(
+        (biddedListingId) => !biddedListingId.equals(listing._id)
+      )
+      updatedUserBiddings.push(listing._id)
+
+      bidder.biddedListings = updatedUserBiddings.reverse()
+
+      await bidder.save()
+    } catch (error) {
+      return res.status(400).json({
+        message: "ERROR: Failed to update balance of current bidder",
+        data: error,
+        ok: false,
+      })
+    }
+
+    try {
+      // Update the listing
+      listing.finalPrice = req.body.finalPrice
+      listing.bestBidder = userId
+
+      await listing.save()
+    } catch (error) {
+      return res.status(400).json({
+        message: "ERROR: Failed to update listing",
+        data: error,
+        ok: false,
+      })
+    }
+
+    try {
+      // Updating the listing's list of bidders but also updating if a bidder has already bid on this listing before
+      let updatedListingBidders = listing.bidders
+
+      updatedListingBidders = updatedListingBidders.filter(
+        (listingBiddersId) => {
+          return listingBiddersId !== bidder.username
+        }
+      )
+
+      listing.bidders = [bidder.username, ...updatedListingBidders]
+
+      listing.transactions = [
+        `${bidder.username} $${req.body.finalPrice}`,
+        ...listing.transactions,
+      ]
+
+      await listing.save()
+    } catch (error) {
+      return res.status(400).json({
+        message: "ERROR: Failed to update the bidders of this listing",
+        data: error,
+        ok: false,
+      })
+    }
+
+    return res.status(200).json({
+      message: `${bidder.username} has placed a better bid of $${req.body.finalPrice}`,
+      data: listing,
+      ok: true,
+    })
   } catch (error) {
     return res.status(500).json({
-      message: "ERROR: God save the queen...",
-      data: null,
+      message: "ERROR: EVERYTHING IS WRONG",
+      data: error,
       ok: false,
     })
   }
