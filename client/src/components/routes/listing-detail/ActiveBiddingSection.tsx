@@ -12,7 +12,6 @@ import EditListing from "./EditListing"
 import numberInputIsValid from "../../../lib/util/functions/numberInputValidator"
 
 // Backend port number
-import { settings } from "../../../settings"
 import Success from "../../ui/Success"
 import useProfileContext from "../../../lib/hooks/context-hooks/useProfileContext"
 import Transactions from "./Transactions"
@@ -75,7 +74,9 @@ const ActiveBiddingSection = () => {
 
     const submitBid = async () => {
       const response = await fetch(
-        `http://localhost:${settings.BACKEND_SERVER_PORT}/api/listing/bid/${listingId}`,
+        `http://localhost:${
+          import.meta.env.VITE_BACKEND_SERVER_PORT
+        }/api/listing/bid/${listingId}`,
         {
           method: "PUT",
           body: JSON.stringify(payload),

@@ -6,7 +6,6 @@ import Error from "../../ui/Error"
 import StyledInputRef from "../../ui/StyledInputRef"
 import RouterLink from "../../ui/RouterLink"
 
-import { settings } from "../../../settings"
 import PasswordInputRef from "../../ui/PasswordInputRef"
 
 const RegisterForm = () => {
@@ -59,7 +58,9 @@ const RegisterForm = () => {
       }
 
       const response = await fetch(
-        `http://localhost:${settings.BACKEND_SERVER_PORT}/api/auth/register`,
+        `http://localhost:${
+          import.meta.env.VITE_BACKEND_SERVER_PORT
+        }/api/auth/register`,
         {
           method: "POST",
           body: JSON.stringify(payload),

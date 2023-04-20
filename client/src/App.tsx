@@ -91,7 +91,7 @@ function App() {
             }
           />
 
-          {/* Authorized Routes */}
+          {/* Protected Routes */}
           <Route element={<RequireAuth />}>
             <Route path="/sell" element={<Sell />} />
             <Route path="/preview" element={<Preview />} />

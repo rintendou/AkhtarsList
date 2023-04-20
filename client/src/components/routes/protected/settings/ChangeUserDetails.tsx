@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from "react"
 import StyledInputRef from "../../../ui/StyledInputRef"
 import PasswordInputRef from "../../../ui/PasswordInputRef"
-import { settings } from "../../../../settings"
 import useAuthContext from "../../../../lib/hooks/context-hooks/useAuthContext"
 import Error from "../../../ui/Error"
 import stringInputIsValid from "../../../../lib/util/functions/stringInputValidator"
@@ -56,7 +55,9 @@ const ChangeUserDetails = () => {
 
     const editUserDetails = async () => {
       const response = await fetch(
-        `http://localhost:${settings.BACKEND_SERVER_PORT}/api/auth/change/user-details`,
+        `http://localhost:${
+          import.meta.env.VITE_BACKEND_SERVER_PORT
+        }/api/auth/change/user-details`,
         {
           method: "POST",
           body: JSON.stringify(payload),

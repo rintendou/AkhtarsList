@@ -61,27 +61,10 @@ const DevListingDetail = () => {
       {!isLoading ? (
         <>
           <div className="flex flex-col md:flex-row min-h-screen border-b-2 border-b-tertiary">
-            <ListingOverview
-              _id={listingId!}
-              image={image}
-              title={title}
-              finalPrice={finalPrice}
-              expireAt={expireAt}
-              views={views}
-              bidders={bidders}
-              lister={lister}
-              desc={desc}
-              startPrice={startPrice}
-              category={category}
-              weight={weight}
-              dimensions={dimensions}
-              height={height}
-              width={width}
-              length={length}
-            />
+            <ListingOverview />
             {biddingSection}
           </div>
-          <SeeOtherListings category={category} idToFilter={listingId!} />
+          <SeeOtherListings />
         </>
       ) : (
         <ListingDetailSkeleton />

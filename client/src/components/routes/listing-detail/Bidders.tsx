@@ -1,9 +1,12 @@
 import useAuthContext from "../../../lib/hooks/context-hooks/useAuthContext"
 import useListingDetailContextQuery from "../../../lib/hooks/context-hooks/useListingDetailContext"
+import useProfileContext from "../../../lib/hooks/context-hooks/useProfileContext"
 
 const Bidders = () => {
   const { data } = useListingDetailContextQuery()
   const { auth } = useAuthContext()
+  const { username } = useProfileContext()
+
   const { data: listing } = data
   const { bidders, lister } = listing
 
@@ -44,7 +47,7 @@ const Bidders = () => {
                   index === 0 ? "text-black font-bold" : "text-gray-500"
                 } flex items-center gap-3`}
               >
-                {index + 1}.) {bidder} {auth.username === bidder && "(You)"}
+                {index + 1}.) {bidder} {username === bidder && "(You)"}
                 {index === 0 && CrownSVG}
               </li>
             ))
