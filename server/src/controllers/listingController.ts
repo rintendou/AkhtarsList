@@ -474,7 +474,6 @@ export const bidOnListing = async (req: Request, res: Response) => {
 
       if (prevBestBidder) {
         prevBestBidder.balance += listing.finalPrice
-        console.log(prevBestBidder.balance)
         await prevBestBidder.save()
       }
     } catch (error) {
@@ -488,7 +487,6 @@ export const bidOnListing = async (req: Request, res: Response) => {
     try {
       // Updating the balance and the biddings of the new best bidder
       bidder.balance -= req.body.finalPrice
-      console.log(bidder._id, listing.bestBidder)
       if (bidder._id.equals(listing.bestBidder!._id)) {
         bidder.balance += +listing.finalPrice
       }
