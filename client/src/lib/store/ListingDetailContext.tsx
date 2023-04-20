@@ -4,6 +4,7 @@ import { useQuery } from "@tanstack/react-query"
 import ListingDetailSkeleton from "../../components/routes/listing-detail/ListingDetailSkeleton"
 import TimeRemainingType from "../types/TimeRemainingType"
 import calculateTimeRemaining from "../util/functions/calculateTimeRemaining"
+import useProfileContext from "../hooks/context-hooks/useProfileContext"
 
 type initialContextType = {
   data: any | null
@@ -46,6 +47,7 @@ const ListingDetailContextQueryProvider = ({
 }: {
   children: React.ReactNode
 }) => {
+  const { refetchUserDetails } = useProfileContext()
   const { listingId } = useParams()
 
   const { data, isLoading, error } = useQuery({
@@ -74,9 +76,9 @@ const ListingDetailContextQueryProvider = ({
         setIsExpired(true)
       }
 
+      refetchUserDetails()
       setTimeRemaining(TR)
     }, 1000)
-
     return () => clearInterval(interval)
   }, [data?.expireAt])
 
