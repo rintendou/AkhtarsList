@@ -101,18 +101,18 @@ const ProfileContextProvider = ({
           import.meta.env.VITE_BACKEND_SERVER_PORT
         }/api/user/${_id}`,
         {
-          headers: { Authorization: auth.token },
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: auth.token,
+          },
         }
       )
 
       const data = await response.json()
 
       if (!data.ok) {
-        console.log("IFFF")
         return
       }
-
-      console.log("RAN")
 
       setAddress(data.data.address)
       setBalance(data.data.balance)
@@ -138,7 +138,10 @@ const ProfileContextProvider = ({
             userId: _id,
             depositAmount: amount,
           }),
-          headers: { "Content-Type": "application/json" },
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: auth.token,
+          },
         }
       )
       const data = await response.json()
@@ -165,7 +168,10 @@ const ProfileContextProvider = ({
             userId: _id,
             withdrawAmount: amount,
           }),
-          headers: { "Content-Type": "application/json" },
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: auth.token,
+          },
         }
       )
       const data = await response.json()
