@@ -38,7 +38,7 @@ const StyledDateTimePicker = ({ onChange, initialDate }: Props) => {
         onChange={handleDateChange}
         showTimeSelect
         timeFormat="HH:mm"
-        timeIntervals={15}
+        timeIntervals={1}
         timeCaption="time"
         timeInputLabel="Expiration: "
         dateFormat="MMMM d, yyyy h:mm aa"
