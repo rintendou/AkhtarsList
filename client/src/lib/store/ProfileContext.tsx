@@ -99,13 +99,20 @@ const ProfileContextProvider = ({
       const response = await fetch(
         `http://localhost:${
           import.meta.env.VITE_BACKEND_SERVER_PORT
-        }/api/user/${_id}`
+        }/api/user/${_id}`,
+        {
+          headers: { Authorization: auth.token },
+        }
       )
+
       const data = await response.json()
 
       if (!data.ok) {
+        console.log("IFFF")
         return
       }
+
+      console.log("RAN")
 
       setAddress(data.data.address)
       setBalance(data.data.balance)
