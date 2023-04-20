@@ -33,6 +33,11 @@ const fetchListingDetail = async (listingId: string) => {
     }/api/listing/fetch/${listingId}`
   )
   const json = await response.json()
+
+  if (!json.ok) {
+    throw new Error("Failed to fetch listing detail")
+  }
+
   return json
 }
 
@@ -47,6 +52,7 @@ const ListingDetailContextQueryProvider = ({
     queryKey: ["listingDetail"],
     queryFn: () => fetchListingDetail(listingId!),
     refetchInterval: 1000,
+    retry: false,
   })
 
   const navigate = useNavigate()
