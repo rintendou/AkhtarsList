@@ -3,12 +3,19 @@ import StyledButton from "../../../ui/StyledButton"
 import { useState } from "react"
 import Success from "../../../ui/Success"
 import Error from "../../../ui/Error"
+import useListingDetailContextQuery from "../../../../lib/hooks/context-hooks/useListingDetailContext"
 
 const WinnerActions = () => {
   const { listingId } = useParams()
 
   const [errorMessage, setErrorMessage] = useState("")
   const [scsMessage, setScsMessage] = useState("")
+
+  const { data } = useListingDetailContextQuery()
+  const { data: listing } = data
+  const { status } = listing
+
+  const isAlreadySold = status === "sold"
 
   const onConfirmDelivery = async () => {
     const response = await fetch(
@@ -70,13 +77,19 @@ const WinnerActions = () => {
         <StyledButton
           buttonText="Confirm Delivery"
           onClick={onConfirmDelivery}
-          twClasses="text-2xl py-4 w-full hover:bg-tertiary"
+          twClasses={`text-2xl py-4 w-full hover:bg-tertiary ${
+            isAlreadySold && "opacity-40 cursor-not-allowed"
+          }`}
           intent="secondary"
+          disabled={isAlreadySold}
         />
         <StyledButton
           buttonText="Dispute"
           onClick={onDisputeClick}
-          twClasses="text-2xl py-4 w-full bg-transparent text-tertiary underline"
+          twClasses={`text-2xl py-4 w-full bg-transparent text-tertiary underline  ${
+            isAlreadySold && "opacity-40 cursor-not-allowed"
+          }`}
+          disabled={isAlreadySold}
         />
         {scsMessage && <Success successMessage={scsMessage} />}
         {errorMessage && <Error errorMessage={errorMessage} />}

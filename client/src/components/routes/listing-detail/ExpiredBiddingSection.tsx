@@ -2,7 +2,6 @@
 import useAuthContext from "../../../lib/hooks/context-hooks/useAuthContext"
 import useListingDetailContextQuery from "../../../lib/hooks/context-hooks/useListingDetailContext"
 import Status from "../../ui/Status"
-import StyledButton from "../../ui/StyledButton"
 import Bidders from "./Bidders"
 import ReportListing from "./ReportListing"
 
