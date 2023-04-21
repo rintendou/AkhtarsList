@@ -51,6 +51,6 @@ ListingRoute.get("/search", fetchListingsFromSearch)
 ListingRoute.put("/bid/:listingId", bidOnListing)
 
 // Update Listing Status
-ListingRoute.put("/update/:listingId", modifyListingStatus)
+ListingRoute.put("/status/:listingId", modifyListingStatus)
 
 export default ListingRoute
