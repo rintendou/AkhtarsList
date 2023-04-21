@@ -1,5 +1,5 @@
 import DisputedListings from "./DisputedListings"
-import ExpiredListings from "./ExpiredListings"
+import UnsoldListings from "./UnsoldListings"
 import ListingsToFulfill from "./ListingsToFulfill"
 import SoldListings from "./SoldListings"
 
@@ -9,7 +9,7 @@ const Listings = () => {
       <ListingsToFulfill />
       <DisputedListings />
       <SoldListings />
-      <ExpiredListings />
+      <UnsoldListings />
     </div>
   )
 }

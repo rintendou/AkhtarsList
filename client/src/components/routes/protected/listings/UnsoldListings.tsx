@@ -2,13 +2,13 @@ import useProfileContext from "../../../../lib/hooks/context-hooks/useProfileCon
 import ListingCard from "../../../ui/ListingCard"
 import ListMore from "./ListMore"
 
-const ExpiredListings = () => {
+const UnsoldListings = () => {
   const { disputedListings } = useProfileContext()
 
   return (
     <div className="space-y-10">
       <h1 className="text-4xl font-bold pb-5 border-b-2 w-full">
-        Expired Listings
+        Unsold Listings
       </h1>
       <ul className="flex gap-8 py-8 flex-wrap">
         {disputedListings.length !== 0 ? (
@@ -25,4 +25,4 @@ const ExpiredListings = () => {
   )
 }
 
-export default ExpiredListings
+export default UnsoldListings
