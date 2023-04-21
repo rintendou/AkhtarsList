@@ -1,9 +1,16 @@
+import useAuthContext from "../../../../lib/hooks/context-hooks/useAuthContext"
 import useProfileContext from "../../../../lib/hooks/context-hooks/useProfileContext"
 import ListingCard from "../../../ui/ListingCard"
 import BidMore from "./BidMore"
 
 const WonBiddings = () => {
-  const { disputedListings } = useProfileContext()
+  const { biddings } = useProfileContext()
+  const { auth } = useAuthContext()
+
+  const wonBiddings = biddings.filter(
+    (bidding) =>
+      new Date(bidding.expireAt) < new Date() && bidding.bestBidder === auth._id
+  )
 
   return (
     <div className="space-y-10">
@@ -11,10 +18,10 @@ const WonBiddings = () => {
         Won Biddings
       </h1>
       <ul className="flex gap-8 py-8 flex-wrap">
-        {disputedListings.length !== 0 ? (
-          disputedListings.map((disputedListing) => (
-            <li key={disputedListing._id}>
-              <ListingCard listing={disputedListing} />
+        {wonBiddings.length !== 0 ? (
+          wonBiddings.map((bidding) => (
+            <li key={bidding._id}>
+              <ListingCard listing={bidding} />
             </li>
           ))
         ) : (
