@@ -486,7 +486,7 @@ export const bidOnListing = async (req: Request, res: Response) => {
     try {
       // Updating the balance and the biddings of the new best bidder
       bidder.balance -= req.body.finalPrice
-      if (bidder._id.equals(listing.bestBidder!._id)) {
+      if (listing.bestBidder && bidder._id.equals(listing.bestBidder!._id)) {
         bidder.balance += +listing.finalPrice
       }
 
@@ -500,6 +500,7 @@ export const bidOnListing = async (req: Request, res: Response) => {
 
       await bidder.save()
     } catch (error) {
+      console.log(error)
       return res.status(400).json({
         message: "ERROR: Failed to update balance of current bidder",
         data: error,
