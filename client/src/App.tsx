@@ -99,11 +99,14 @@ function App() {
 
             <Route element={<ProfileLayout />}>
               <Route path="/profile" element={<Profile />} />
-              <Route path="/deposit" element={<Deposit />} />
-              <Route path="/withdraw" element={<Withdraw />} />
-              <Route path="/won-listings" element={<WonListings />} />
-              <Route path="/disputed-listings" element={<DisputedListings />} />
-              <Route path="/settings" element={<Settings />} />
+              <Route path="/profile/deposit" element={<Deposit />} />
+              <Route path="/profile/withdraw" element={<Withdraw />} />
+              <Route path="/profile/won-listings" element={<WonListings />} />
+              <Route
+                path="/profile/disputed-listings"
+                element={<DisputedListings />}
+              />
+              <Route path="/profile/settings" element={<Settings />} />
             </Route>
 
             {/* Admin Routes */}

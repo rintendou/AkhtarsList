@@ -42,7 +42,7 @@ const ProfileActions = ({ logout }: Props) => {
             <p className="text-gray-500">See your details</p>
           </div>
         </ProfileRouterLink>
-        <ProfileRouterLink to="/deposit">
+        <ProfileRouterLink to="/profile/deposit">
           <svg
             className="mr-3"
             stroke="currentColor"
@@ -60,7 +60,7 @@ const ProfileActions = ({ logout }: Props) => {
             <p className="text-gray-500">Top up your balance</p>
           </div>
         </ProfileRouterLink>
-        <ProfileRouterLink to="/withdraw">
+        <ProfileRouterLink to="/profile/withdraw">
           <svg
             className="mr-4"
             stroke="currentColor"
@@ -78,7 +78,7 @@ const ProfileActions = ({ logout }: Props) => {
             <p className="text-gray-500">Take your funds</p>
           </div>
         </ProfileRouterLink>
-        <ProfileRouterLink to="/won-listings">
+        <ProfileRouterLink to="/profile/won-listings">
           <svg
             className="mr-4"
             stroke="currentColor"
@@ -96,7 +96,7 @@ const ProfileActions = ({ logout }: Props) => {
             <p className="text-gray-500">Contact the listers</p>
           </div>
         </ProfileRouterLink>
-        <ProfileRouterLink to="/disputed-listings">
+        <ProfileRouterLink to="/profile/disputed-listings">
           <svg
             className="mr-4"
             stroke="currentColor"
@@ -121,7 +121,7 @@ const ProfileActions = ({ logout }: Props) => {
       </div>
 
       <div>
-        <ProfileRouterLink to="/settings">
+        <ProfileRouterLink to="/profile/settings">
           <svg
             className="mr-4"
             stroke="currentColor"
