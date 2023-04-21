@@ -68,7 +68,9 @@ const ListingSchema = new Schema(
     status: {
       type: String,
       required: true,
+      default: "active",
     },
+    // status: active, expired, sold, disputed
     dimensions: {
       type: [Number],
       required: true,

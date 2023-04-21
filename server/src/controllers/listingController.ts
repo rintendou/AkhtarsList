@@ -65,6 +65,7 @@ export const createListing = async (req: Request, res: Response) => {
       category: category,
       weight: weight,
       dimensions: dimensions,
+      status: "active",
       views: 0,
     })
 
@@ -140,14 +141,16 @@ export const fetchListings = async (req: Request, res: Response) => {
       })
     }
 
+    await ListingModel.updateMany(
+      { expireAt: { $lt: new Date() } },
+      { $set: { status: "expired" } }
+    )
+
     const expiredListings = listings.filter(
       (listing) => new Date(listing.expireAt) < new Date()
     )
 
     for (const expiredListing of expiredListings) {
-      if (expiredListing.bestBidder!.equals(expiredListing.lister)) {
-        continue
-      }
       await UserModel.findByIdAndUpdate(
         expiredListing.bestBidder,
         {
@@ -486,7 +489,7 @@ export const bidOnListing = async (req: Request, res: Response) => {
     try {
       // Updating the balance and the biddings of the new best bidder
       bidder.balance -= req.body.finalPrice
-      if (listing.bestBidder && bidder._id.equals(listing.bestBidder!._id)) {
+      if (bidder._id.equals(listing.bestBidder!._id)) {
         bidder.balance += +listing.finalPrice
       }
 
@@ -500,7 +503,6 @@ export const bidOnListing = async (req: Request, res: Response) => {
 
       await bidder.save()
     } catch (error) {
-      console.log(error)
       return res.status(400).json({
         message: "ERROR: Failed to update balance of current bidder",
         data: error,
