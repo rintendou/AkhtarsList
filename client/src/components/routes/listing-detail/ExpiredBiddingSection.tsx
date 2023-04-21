@@ -56,13 +56,12 @@ const ExpiredBiddingSection = () => {
 
       <ReportListing />
 
-      <div className="w-full flex flex-col lg:flex-row gap-5 opacity-40">
+      <div className="w-full flex gap-5 opacity-40">
         <Bidders />
         <Transactions />
       </div>
 
       {isWinner && <WinnerActions />}
-
       {isLister && bestBidder && <ListerActions />}
     </div>
   )

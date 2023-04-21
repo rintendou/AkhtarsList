@@ -58,7 +58,7 @@ const WinnerActions = () => {
 
   return (
     <div className="w-full">
-      <h1 className="text-center font-semibold text-lg">
+      <h1 className="text-center font-semibold text-lg mb-3">
         You won this listing!
       </h1>
       <div className="space-y-5">
@@ -68,15 +68,15 @@ const WinnerActions = () => {
           twClasses="text-2xl py-4 w-full hover:bg-black"
         />
         <StyledButton
-          buttonText="Dispute"
-          onClick={onDisputeClick}
-          twClasses="text-2xl py-4 w-full hover:bg-gray-200"
+          buttonText="Confirm Delivery"
+          onClick={onConfirmDelivery}
+          twClasses="text-2xl py-4 w-full hover:bg-tertiary"
           intent="secondary"
         />
         <StyledButton
-          buttonText="Confirm Delivery"
-          onClick={onConfirmDelivery}
-          twClasses="text-2xl py-4 w-full bg-tertiary"
+          buttonText="Dispute"
+          onClick={onDisputeClick}
+          twClasses="text-2xl py-4 w-full bg-transparent text-tertiary underline"
         />
         {scsMessage && <Success successMessage={scsMessage} />}
         {errorMessage && <Error errorMessage={errorMessage} />}
