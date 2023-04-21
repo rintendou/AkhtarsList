@@ -128,9 +128,9 @@ const StatusLabel = ({
     </svg>
   )
   if (isStatusSold) {
-    return <p className="bg-red-600 text-white p-1 rounded-md">Disputed</p>
-  } else if (isStatusDisputed) {
     return <p className="bg-green-600 text-white p-1 rounded-md">Sold</p>
+  } else if (isStatusDisputed) {
+    return <p className="bg-red-600 text-white p-1 rounded-md">Disputed</p>
   } else if (isLister) {
     return <p className="bg-black text-white p-1 rounded-md">Owned by you</p>
   } else if (isHighestBidder) {
