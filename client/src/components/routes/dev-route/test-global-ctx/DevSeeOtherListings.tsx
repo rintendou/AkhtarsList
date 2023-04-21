@@ -7,7 +7,7 @@ import useTimeline from "../../../../lib/hooks/context-hooks/useTimelineContext"
 import ListingType from "../../../../lib/types/ListingType"
 import SeeOthersButton from "../test-nonpolled/SeeOthersButton"
 import ListingCard from "../../../ui/ListingCard"
-import ListMore from "../../protected/profile/listings/ListMore"
+import ListMore from "../../protected/listings/ListMore"
 import useListingDetail from "./useListingDetail"
 
 const DevSeeOtherListings = () => {

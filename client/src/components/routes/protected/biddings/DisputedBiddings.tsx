@@ -1,5 +1,6 @@
 import useProfileContext from "../../../../lib/hooks/context-hooks/useProfileContext"
 import ListingCard from "../../../ui/ListingCard"
+import BidMore from "./BidMore"
 
 const DisputedBiddings = () => {
   const { disputedListings } = useProfileContext()
@@ -17,15 +18,7 @@ const DisputedBiddings = () => {
             </li>
           ))
         ) : (
-          <div className="text-center space-y-2">
-            <h1 className="text-2xl font-semibold">
-              Great! There has not any been disputed listings that you have won
-            </h1>
-
-            <h1 className="font-extralight">
-              Your disputed listings will be here
-            </h1>
-          </div>
+          <BidMore />
         )}
       </ul>
     </div>

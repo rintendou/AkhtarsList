@@ -1,6 +1,6 @@
 import useProfileContext from "../../../../lib/hooks/context-hooks/useProfileContext"
 import ListingCard from "../../../ui/ListingCard"
-import BidMore from "../profile/biddings/BidMore"
+import BidMore from "./BidMore"
 
 const CurrentBiddings = () => {
   const { disputedListings } = useProfileContext()

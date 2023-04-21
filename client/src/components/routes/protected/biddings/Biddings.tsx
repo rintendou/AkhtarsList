@@ -1,6 +1,6 @@
 import CurrentBiddings from "./CurrentBiddings"
 import DisputedBiddings from "./DisputedBiddings"
-import ExpiredBiddings from "./ExpiredBiddings"
+import AllBiddings from "./AllBiddings"
 import WonBiddings from "./WonBiddings"
 
 const Biddings = () => {
@@ -9,7 +9,7 @@ const Biddings = () => {
       <WonBiddings />
       <CurrentBiddings />
       <DisputedBiddings />
-      <ExpiredBiddings />
+      <AllBiddings />
     </div>
   )
 }

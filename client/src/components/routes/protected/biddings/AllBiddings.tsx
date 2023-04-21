@@ -2,13 +2,13 @@ import useProfileContext from "../../../../lib/hooks/context-hooks/useProfileCon
 import ListingCard from "../../../ui/ListingCard"
 import BidMore from "./BidMore"
 
-const WonBiddings = () => {
+const AllBiddings = () => {
   const { disputedListings } = useProfileContext()
 
   return (
     <div className="space-y-10">
       <h1 className="text-4xl font-bold pb-5 border-b-2 w-full">
-        Won Biddings
+        All Biddings
       </h1>
       <ul className="flex gap-8 py-8 flex-wrap">
         {disputedListings.length !== 0 ? (
@@ -25,4 +25,4 @@ const WonBiddings = () => {
   )
 }
 
-export default WonBiddings
+export default AllBiddings

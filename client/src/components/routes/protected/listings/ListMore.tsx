@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom"
-import Card from "../../../../ui/Card"
+import Card from "../../../ui/Card"
 
 const ListMore = () => {
   const navigate = useNavigate()
