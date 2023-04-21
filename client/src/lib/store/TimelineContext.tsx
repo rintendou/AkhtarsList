@@ -43,6 +43,11 @@ const fetchListings = async () => {
     }/api/listing/fetch`
   )
   const json = await response.json()
+
+  if (!json.ok) {
+    throw new Error(json.message)
+  }
+
   return json
 }
 
