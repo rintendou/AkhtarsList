@@ -3,7 +3,11 @@ import ListingCard from "../../../ui/ListingCard"
 import BidMore from "./BidMore"
 
 const CurrentBiddings = () => {
-  const { disputedListings } = useProfileContext()
+  const { biddings } = useProfileContext()
+
+  const currentActiveBiddings = biddings.filter(
+    (bidding) => new Date(bidding.expireAt) > new Date()
+  )
 
   return (
     <div className="space-y-10">
@@ -11,10 +15,10 @@ const CurrentBiddings = () => {
         Current Active Biddings
       </h1>
       <ul className="flex gap-8 py-8 flex-wrap">
-        {disputedListings.length !== 0 ? (
-          disputedListings.map((disputedListing) => (
-            <li key={disputedListing._id}>
-              <ListingCard listing={disputedListing} />
+        {currentActiveBiddings.length !== 0 ? (
+          currentActiveBiddings.map((bidding) => (
+            <li key={bidding._id}>
+              <ListingCard listing={bidding} />
             </li>
           ))
         ) : (

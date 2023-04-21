@@ -3,7 +3,7 @@ import ListingCard from "../../../ui/ListingCard"
 import BidMore from "./BidMore"
 
 const AllBiddings = () => {
-  const { disputedListings } = useProfileContext()
+  const { biddings } = useProfileContext()
 
   return (
     <div className="space-y-10">
@@ -11,10 +11,10 @@ const AllBiddings = () => {
         All Biddings
       </h1>
       <ul className="flex gap-8 py-8 flex-wrap">
-        {disputedListings.length !== 0 ? (
-          disputedListings.map((disputedListing) => (
-            <li key={disputedListing._id}>
-              <ListingCard listing={disputedListing} />
+        {biddings.length !== 0 ? (
+          biddings.map((bidding) => (
+            <li key={bidding._id}>
+              <ListingCard listing={bidding} />
             </li>
           ))
         ) : (
