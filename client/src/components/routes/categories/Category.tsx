@@ -8,7 +8,7 @@ import ListingCard from "../../ui/ListingCard"
 
 // Types
 import ListingType from "../../../lib/types/ListingType"
-import ListMore from "../protected/profile/listings/ListMore"
+import ListMore from "../protected/listings/ListMore"
 
 const Category = () => {
   useEffect(() => {

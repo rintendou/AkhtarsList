@@ -69,11 +69,13 @@ const LoginForm = ({
 
       if (!data.ok) {
         setErrorMessage(data.message)
+        setScsMessage("")
         return
       }
 
       const token = response.headers.get("authorization")
 
+      setErrorMessage("")
       setScsMessage(data.data.message)
       login(data.data.user._id, token!, data.data.user.isAdmin)
       navigate("/", { replace: true })

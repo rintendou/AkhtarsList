@@ -145,3 +145,56 @@ export const depositFunds = async (req: Request, res: Response) => {
     res.status(500).json({ message: err, data: null, ok: false })
   }
 }
+
+export const applyForAdmin = async (req: Request, res: Response) => {
+  // destructure the payload attached to the body
+  const { userId, applicationText } = req.body
+
+  // Check if appropriate payload is attached to the body
+  if (!userId || !applicationText) {
+    return res.status(400).json({
+      message: "userId params and applicationText is required!",
+      data: null,
+      ok: false,
+    })
+  }
+
+  // Check if userId is a valid ObjectId
+  if (!mongoose.Types.ObjectId.isValid(userId)) {
+    return res
+      .status(400)
+      .json({ message: "Invalid userId!", data: null, ok: false })
+  }
+
+  // Check if user exists
+  const existingUser = await UserModel.findOne({ _id: userId })
+  if (!existingUser) {
+    return res
+      .status(400)
+      .json({ message: "Bad Request!", data: null, ok: false })
+  }
+
+  // Check if user is already an admin
+  const isAlreadyAdmin = existingUser.isAdmin
+  if (isAlreadyAdmin) {
+    return res
+      .status(400)
+      .json({ message: "You are already an admin!", data: null, ok: false })
+  }
+
+  try {
+    // This is a naive application for admin
+    // If we have enough time, we will create a collection in our db to store applications then verify them manually
+    // This controller fn will naively set the applicant to be an admin when they apply
+    existingUser.isAdmin = true
+    await existingUser.save()
+
+    res.status(200).json({
+      message: "Application sent!",
+      data: null,
+      ok: true,
+    })
+  } catch (error) {
+    res.status(500).json({ message: error, data: null, ok: false })
+  }
+}

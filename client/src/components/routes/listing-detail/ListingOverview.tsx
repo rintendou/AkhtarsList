@@ -1,4 +1,5 @@
 import useListingDetailContextQuery from "../../../lib/hooks/context-hooks/useListingDetailContext"
+import getFormattedDate from "../../../lib/util/functions/getFormattedDate"
 import getNumberWithCommas from "../../../lib/util/functions/getNumberWithCommas"
 
 const ListingOverview = () => {
@@ -14,6 +15,7 @@ const ListingOverview = () => {
     desc,
     weight,
     dimensions,
+    expireAt,
   } = listing
 
   return (
@@ -77,6 +79,12 @@ const ListingOverview = () => {
               <h1>L:</h1>
               <p className="text-lg font-semibold">{dimensions[2]} cm </p>
             </div>
+          </div>{" "}
+          <div className="flex items-center gap-3">
+            <h1>Expiration Date:</h1>
+            <p className="text-lg font-semibold">
+              {getFormattedDate(expireAt)}
+            </p>
           </div>
         </div>
       </div>

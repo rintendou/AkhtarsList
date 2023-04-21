@@ -6,7 +6,7 @@ import SeeOthersButton from "./SeeOthersButton"
 
 // Types
 import ListingType from "../../../lib/types/ListingType"
-import ListMore from "../protected/profile/listings/ListMore"
+import ListMore from "../protected/listings/ListMore"
 import { useNavigate } from "react-router-dom"
 import useListingDetailContextQuery from "../../../lib/hooks/context-hooks/useListingDetailContext"
 

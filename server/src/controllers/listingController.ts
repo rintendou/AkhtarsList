@@ -59,13 +59,13 @@ export const createListing = async (req: Request, res: Response) => {
       desc: desc,
       image: image,
       bidders: [],
-      bestBidder: listerId, // Best bidder will be yourself at first.
       startPrice: startPrice,
       finalPrice: startPrice,
       expireAt: expireAt,
       category: category,
       weight: weight,
       dimensions: dimensions,
+      status: "active",
       views: 0,
     })
 
@@ -141,14 +141,16 @@ export const fetchListings = async (req: Request, res: Response) => {
       })
     }
 
+    await ListingModel.updateMany(
+      { expireAt: { $lt: new Date() }, status: { $nin: ["sold", "disputed"] } },
+      { $set: { status: "expired" } }
+    )
+
     const expiredListings = listings.filter(
       (listing) => new Date(listing.expireAt) < new Date()
     )
 
     for (const expiredListing of expiredListings) {
-      if (expiredListing.bestBidder!.equals(expiredListing.lister)) {
-        continue
-      }
       await UserModel.findByIdAndUpdate(
         expiredListing.bestBidder,
         {
@@ -487,7 +489,7 @@ export const bidOnListing = async (req: Request, res: Response) => {
     try {
       // Updating the balance and the biddings of the new best bidder
       bidder.balance -= req.body.finalPrice
-      if (bidder._id.equals(listing.bestBidder!._id)) {
+      if (listing.bestBidder && bidder._id.equals(listing.bestBidder!._id)) {
         bidder.balance += +listing.finalPrice
       }
 
@@ -501,6 +503,7 @@ export const bidOnListing = async (req: Request, res: Response) => {
 
       await bidder.save()
     } catch (error) {
+      console.log(error)
       return res.status(400).json({
         message: "ERROR: Failed to update balance of current bidder",
         data: error,
@@ -584,6 +587,92 @@ export const fetchListingsFromSearch = async (req: Request, res: Response) => {
   } catch (error) {
     return res.status(500).json({
       message: "Error fetching listings",
+      data: null,
+      ok: false,
+    })
+  }
+}
+
+export const modifyListingStatus = async (req: Request, res: Response) => {
+  // Destructure payload from body
+  const { status } = req.body
+  const { listingId } = req.params
+
+  // Check if appropriate payload is passed
+  if (!status) {
+    return res.status(400).json({
+      message: "status is a required property!",
+      data: null,
+      ok: false,
+    })
+  }
+
+  // Check if status has a valid value
+  if (
+    status !== "active" &&
+    status !== "expired" &&
+    status !== "disputed" &&
+    status !== "sold"
+  ) {
+    return res.status(400).json({
+      message: "Invalid status property!",
+      data: null,
+      ok: false,
+    })
+  }
+
+  try {
+    // Check if listing exists
+    const existingListing = await ListingModel.findById(listingId)
+    if (!existingListing) {
+      return res.status(404).json({
+        message: "Listing does not exist!",
+        data: null,
+        ok: false,
+      })
+    }
+
+    // Check if listing is not expired
+    const isExpired = new Date(existingListing.expireAt) < new Date()
+    if (!isExpired) {
+      return res.status(400).json({
+        message: "Cannot modify the status of active listing!",
+        data: null,
+        ok: false,
+      })
+    }
+
+    // Check if currStatus = sold
+    const isAlreadySold = existingListing.status === "sold"
+    if (isAlreadySold) {
+      return res.status(400).json({
+        message: `You cannot modify the status of a sold item!`,
+        data: null,
+        ok: false,
+      })
+    }
+
+    // Check if currStatus = newStatus
+    const isSameStatus = status === existingListing.status
+    if (isSameStatus) {
+      return res.status(400).json({
+        message: `Status of this listing is already ${status}!`,
+        data: null,
+        ok: false,
+      })
+    }
+
+    existingListing.status = status
+    await existingListing.save()
+
+    res.status(200).json({
+      message: `Listing status has been successfully set to ${status}!`,
+      data: status,
+      ok: true,
+    })
+  } catch (error) {
+    return res.status(500).json({
+      message: error,
       data: null,
       ok: false,
     })
