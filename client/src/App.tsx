@@ -47,6 +47,8 @@ import SearchResults from "./components/routes/search-results/SearchResults"
 import ListingDetailContextQueryProvider from "./lib/store/ListingDetailContext"
 import ListingDetailQuery from "./components/routes/listing-detail/ListingDetail"
 import Dev from "./components/routes/dev-route/ui/Dev"
+import Biddings from "./components/routes/protected/biddings/Biddings"
+import Listings from "./components/routes/protected/listings/Listings"
 
 function App() {
   return (
@@ -101,8 +103,8 @@ function App() {
               <Route path="/profile" element={<Profile />} />
               <Route path="/profile/deposit" element={<Deposit />} />
               <Route path="/profile/withdraw" element={<Withdraw />} />
-              <Route path="/profile/biddings" element={<WonListings />} />
-              <Route path="/profile/listings" element={<DisputedListings />} />
+              <Route path="/profile/biddings" element={<Biddings />} />
+              <Route path="/profile/listings" element={<Listings />} />
               <Route path="/profile/settings" element={<Settings />} />
             </Route>
 
