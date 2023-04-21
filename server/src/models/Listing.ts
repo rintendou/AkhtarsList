@@ -65,6 +65,10 @@ const ListingSchema = new Schema(
       type: Number,
       required: true,
     },
+    status: {
+      type: String,
+      required: true,
+    },
     dimensions: {
       type: [Number],
       required: true,
