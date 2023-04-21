@@ -3,6 +3,7 @@ import useAuthContext from "../../../lib/hooks/context-hooks/useAuthContext"
 import useListingDetailContextQuery from "../../../lib/hooks/context-hooks/useListingDetailContext"
 import StyledButton from "../../ui/StyledButton"
 import Bidders from "./Bidders"
+import ReportListing from "./ReportListing"
 
 import Transactions from "./Transactions"
 
@@ -50,7 +51,7 @@ const ExpiredBiddingSection = () => {
           Bidding has finished
         </h1>
       )}
-
+      <ReportListing />
       <div className="w-full flex flex-col lg:flex-row gap-5 opacity-40">
         <Bidders />
         <Transactions />
@@ -92,11 +93,6 @@ const ExpiredBiddingSection = () => {
               buttonText="Contact Winner"
               onClick={() => {}}
               twClasses="text-2xl py-4 w-full hover:bg-black"
-            />
-            <StyledButton
-              buttonText="Confirm Delivery"
-              onClick={() => {}}
-              twClasses="text-2xl py-4 w-full bg-tertiary"
             />
           </div>
         </div>

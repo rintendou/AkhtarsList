@@ -18,6 +18,7 @@ import Transactions from "./Transactions"
 import useListingDetailContextQuery from "../../../lib/hooks/context-hooks/useListingDetailContext"
 import CurrentBalance from "./CurrentBalance"
 import getNumberWithCommas from "../../../lib/util/functions/getNumberWithCommas"
+import ReportListing from "./ReportListing"
 
 const ActiveBiddingSection = () => {
   const { data } = useListingDetailContextQuery()
@@ -146,6 +147,7 @@ const ActiveBiddingSection = () => {
             </div>
             <BidButton />
           </form>
+          <ReportListing />
           <CurrentBalance />
         </>
       ) : (
