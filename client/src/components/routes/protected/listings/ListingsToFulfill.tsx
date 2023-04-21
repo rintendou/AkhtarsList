@@ -6,8 +6,7 @@ const ListingsToFulfill = () => {
   const { listings } = useProfileContext()
 
   const listingsToFullfill = listings.filter(
-    (listing) =>
-      new Date(listing.expireAt) < new Date() && listing.bestBidder.length !== 0
+    (listing) => new Date(listing.expireAt) < new Date() && listing.bestBidder
   )
 
   return (
