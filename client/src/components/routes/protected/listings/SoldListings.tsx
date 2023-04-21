@@ -3,7 +3,12 @@ import ListingCard from "../../../ui/ListingCard"
 import ListMore from "./ListMore"
 
 const SoldListings = () => {
-  const { disputedListings } = useProfileContext()
+  const { listings } = useProfileContext()
+
+  const soldListings = listings.filter(
+    (listing) =>
+      new Date(listing.expireAt) < new Date() && listing.status === "sold"
+  )
 
   return (
     <div className="space-y-10">
@@ -11,10 +16,10 @@ const SoldListings = () => {
         Sold Listings
       </h1>
       <ul className="flex gap-8 py-8 flex-wrap">
-        {disputedListings.length !== 0 ? (
-          disputedListings.map((disputedListing) => (
-            <li key={disputedListing._id}>
-              <ListingCard listing={disputedListing} />
+        {soldListings.length !== 0 ? (
+          soldListings.map((listing) => (
+            <li key={listing._id}>
+              <ListingCard listing={listing} />
             </li>
           ))
         ) : (

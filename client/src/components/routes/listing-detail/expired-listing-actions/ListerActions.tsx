@@ -3,7 +3,7 @@ import StyledButton from "../../../ui/StyledButton"
 const ListerActions = () => {
   return (
     <div className="w-full border-2 border-secondary p-4 rounded-lg">
-      <h1 className="text-center font-semibold text-lg">
+      <h1 className="text-center font-semibold text-lg mb-3">
         Somebody won the listing!
       </h1>
       <div className="space-y-5">
