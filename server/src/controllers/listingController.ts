@@ -592,3 +592,69 @@ export const fetchListingsFromSearch = async (req: Request, res: Response) => {
     })
   }
 }
+
+export const modifyListingStatus = async (req: Request, res: Response) => {
+  // Destructure payload from body
+  const { status } = req.body
+  const { listingId } = req.params
+
+  // Check if appropriate payload is passed
+  if (!status) {
+    return res.status(400).json({
+      message: "status is a required property!",
+      data: null,
+      ok: false,
+    })
+  }
+
+  // Check if status has a valid value
+  if (
+    status !== "active" ||
+    status !== "expired" ||
+    status !== "disputed" ||
+    status !== "sold"
+  ) {
+    return res.status(400).json({
+      message: "Invalid status property!",
+      data: null,
+      ok: false,
+    })
+  }
+
+  try {
+    // Check if listing exists
+    const existingListing = await ListingModel.findById(listingId)
+    if (!existingListing) {
+      return res.status(404).json({
+        message: "Listing does not exist!",
+        data: null,
+        ok: false,
+      })
+    }
+
+    // Check if listing is not expired
+    const isExpired = new Date(existingListing.expireAt) < new Date()
+    if (!isExpired) {
+      return res.status(400).json({
+        message: "Cannot modify the status of active listing!",
+        data: null,
+        ok: false,
+      })
+    }
+
+    existingListing.status = status
+    await existingListing.save()
+
+    res.status(200).json({
+      message: `Listing status has been successfully set to ${status}!}`,
+      data: status,
+      ok: true,
+    })
+  } catch (error) {
+    return res.status(500).json({
+      message: error,
+      data: null,
+      ok: false,
+    })
+  }
+}
