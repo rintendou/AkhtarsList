@@ -9,7 +9,7 @@ import Transactions from "./Transactions"
 const ExpiredBiddingSection = () => {
   const { data } = useListingDetailContextQuery()
   const { data: listing } = data
-  const { finalPrice, lister } = listing
+  const { finalPrice, lister, bestBidder } = listing
   const { auth } = useAuthContext()
 
   const isLister = lister === auth._id
@@ -61,11 +61,44 @@ const ExpiredBiddingSection = () => {
           <h1 className="text-center font-semibold text-lg">
             You won this listing!
           </h1>
-          <StyledButton
-            buttonText="Contact Lister"
-            onClick={() => {}}
-            twClasses="text-2xl py-4 w-full hover:bg-black"
-          />
+          <div className="space-y-5">
+            <StyledButton
+              buttonText="Contact Lister"
+              onClick={() => {}}
+              twClasses="text-2xl py-4 w-full hover:bg-black"
+            />
+            <StyledButton
+              buttonText="Dispute"
+              onClick={() => {}}
+              twClasses="text-2xl py-4 w-full hover:bg-gray-200"
+              intent="secondary"
+            />
+            <StyledButton
+              buttonText="Confirm Delivery"
+              onClick={() => {}}
+              twClasses="text-2xl py-4 w-full bg-tertiary"
+            />
+          </div>
+        </div>
+      )}
+
+      {isLister && bestBidder && (
+        <div className="w-full">
+          <h1 className="text-center font-semibold text-lg">
+            Somebody won the listing!
+          </h1>
+          <div className="space-y-5">
+            <StyledButton
+              buttonText="Contact Winner"
+              onClick={() => {}}
+              twClasses="text-2xl py-4 w-full hover:bg-black"
+            />
+            <StyledButton
+              buttonText="Confirm Delivery"
+              onClick={() => {}}
+              twClasses="text-2xl py-4 w-full bg-tertiary"
+            />
+          </div>
         </div>
       )}
     </div>
