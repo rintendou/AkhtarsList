@@ -642,6 +642,16 @@ export const modifyListingStatus = async (req: Request, res: Response) => {
       })
     }
 
+    // Check if currStatus = newStatus
+    const isSameStatus = status === existingListing.status
+    if (isSameStatus) {
+      return res.status(400).json({
+        message: `Status of this listing is already ${status}}!`,
+        data: null,
+        ok: false,
+      })
+    }
+
     existingListing.status = status
     await existingListing.save()
 
