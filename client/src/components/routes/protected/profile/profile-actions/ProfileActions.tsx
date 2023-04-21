@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom"
 import ProfileButton from "./ProfileButton"
 import ProfileRouterLink from "./ProfileRouterLink"
 import useAuthContext from "../../../../../lib/hooks/context-hooks/useAuthContext"
-import AdminActions from "../../admin/admin-actions/AdminActions"
+import AdminButton from "./AdminButton"
 
 type Props = {
   logout: () => void
@@ -114,7 +114,7 @@ const ProfileActions = ({ logout }: Props) => {
             <p className="text-gray-500">Your listings are here</p>
           </div>
         </ProfileRouterLink>
-        {auth.isAdmin === "true" && <AdminActions />}
+        {auth.isAdmin === "true" && <AdminButton />}
       </div>
 
       <div>
