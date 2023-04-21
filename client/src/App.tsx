@@ -101,11 +101,8 @@ function App() {
               <Route path="/profile" element={<Profile />} />
               <Route path="/profile/deposit" element={<Deposit />} />
               <Route path="/profile/withdraw" element={<Withdraw />} />
-              <Route path="/profile/won-listings" element={<WonListings />} />
-              <Route
-                path="/profile/disputed-listings"
-                element={<DisputedListings />}
-              />
+              <Route path="/profile/biddings" element={<WonListings />} />
+              <Route path="/profile/listings" element={<DisputedListings />} />
               <Route path="/profile/settings" element={<Settings />} />
             </Route>
 
