@@ -25,6 +25,7 @@ const ListingCard = ({ listing }: { listing: ListingType }) => {
     views,
     category,
     bestBidder,
+    status,
   } = listing
 
   const handleClick = () => {
@@ -55,8 +56,13 @@ const ListingCard = ({ listing }: { listing: ListingType }) => {
     </svg>
   )
 
+  const soldStatusStyles = status === "sold" ? "bg-green-200" : ""
+  const disputedStatusStyles = status === "disputed" ? "bg-red-200" : ""
+
   return (
-    <Card twClasses="p-2 w-56 text-sm h-76 justify-between cursor-pointer hover:shadow-xl duration-100 ease-in-out">
+    <Card
+      twClasses={`p-2 w-56 text-sm h-76 justify-between cursor-pointer hover:shadow-xl duration-100 ease-in-out ${soldStatusStyles} ${disputedStatusStyles}`}
+    >
       <div
         className={`flex flex-col gap-1 ${isExpired && "opacity-30"}`}
         onClick={handleClick}
