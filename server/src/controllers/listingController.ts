@@ -642,6 +642,16 @@ export const modifyListingStatus = async (req: Request, res: Response) => {
       })
     }
 
+    // Check if currStatus = sold
+    const isAlreadySold = existingListing.status === "sold"
+    if (isAlreadySold) {
+      return res.status(400).json({
+        message: `You cannot modify the status of a sold item!`,
+        data: null,
+        ok: false,
+      })
+    }
+
     // Check if currStatus = newStatus
     const isSameStatus = status === existingListing.status
     if (isSameStatus) {
