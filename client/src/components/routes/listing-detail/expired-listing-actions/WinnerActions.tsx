@@ -57,7 +57,7 @@ const WinnerActions = () => {
   }
 
   return (
-    <div className="w-full">
+    <div className="w-full border-2 border-secondary p-4 rounded-lg">
       <h1 className="text-center font-semibold text-lg mb-3">
         You won this listing!
       </h1>

@@ -31,6 +31,9 @@ const ExpiredBiddingSection = () => {
         Biddings
       </h1>
 
+      {isWinner && <WinnerActions />}
+      {isLister && bestBidder && <ListerActions />}
+
       <div className="flex justify-between w-full opacity-40">
         <div className="flex items-center gap-3">
           <h1>Final Price:</h1>
@@ -60,9 +63,6 @@ const ExpiredBiddingSection = () => {
         <Bidders />
         <Transactions />
       </div>
-
-      {isWinner && <WinnerActions />}
-      {isLister && bestBidder && <ListerActions />}
     </div>
   )
 }
