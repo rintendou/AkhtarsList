@@ -2,6 +2,7 @@ import { useEffect } from "react"
 import ChangePassword from "./ChangePassword"
 import ChangeSecurityQuestions from "./ChangeSecurityQuestions"
 import EditUserDetails from "./ChangeUserDetails"
+import ApplyForAdmin from "./ApplyForAdmin"
 
 const Settings = () => {
   useEffect(() => {
@@ -20,6 +21,8 @@ const Settings = () => {
         <ChangePassword />
         <div className="border-b border-b-gray-500"></div>
         <ChangeSecurityQuestions />
+        <div className="border-b border-b-gray-500"></div>
+        <ApplyForAdmin />
       </div>
     </div>
   )
