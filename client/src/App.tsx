@@ -29,7 +29,7 @@ import RequireAuth from "./components/routes/protected/RequireAuth"
 // Layouts
 import ProfileLayout from "./components/routes/protected/ProfileLayout"
 import DevListingDetail from "./components/routes/dev-route/test-custom-hook/DevListingDetail"
-import WonListings from "./components/routes/protected/listings/WonListings"
+import WonListings from "./components/routes/protected/listings/Listings"
 import DisputedListings from "./components/routes/protected/biddings/Biddings"
 import Unauthorized from "./components/routes/unauthorized/Unauthorized"
 import ManageListings from "./components/routes/protected/admin/ManageListings"

@@ -7,7 +7,7 @@ const Listings = () => {
   const { wonListings } = useProfileContext()
 
   return (
-    <div className="w-full flex flex-col justify-center items-center">
+    <div className="flex flex-col w-full p-5 gap-10 text-xl">
       <ul className="flex gap-8 py-8 flex-wrap">
         {wonListings.length !== 0 ? (
           wonListings.map((wonListing) => (
