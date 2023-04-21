@@ -59,7 +59,6 @@ export const createListing = async (req: Request, res: Response) => {
       desc: desc,
       image: image,
       bidders: [],
-      bestBidder: "",
       startPrice: startPrice,
       finalPrice: startPrice,
       expireAt: expireAt,
