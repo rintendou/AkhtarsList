@@ -10,11 +10,34 @@ const WinnerActions = () => {
   const [errorMessage, setErrorMessage] = useState("")
   const [scsMessage, setScsMessage] = useState("")
 
+  const onConfirmDelivery = async () => {
+    const response = await fetch(
+      `http://localhost:${
+        import.meta.env.VITE_BACKEND_SERVER_PORT
+      }/api/listing/status/${listingId}`,
+      {
+        method: "PUT",
+        body: JSON.stringify({ status: "sold" }),
+        headers: { "Content-Type": "application/json" },
+      }
+    )
+    const json = await response.json()
+
+    if (!json.ok) {
+      setScsMessage("")
+      setErrorMessage(json.message)
+      return
+    }
+
+    setErrorMessage("")
+    setScsMessage(json.message)
+  }
+
   const onDisputeClick = async () => {
     const response = await fetch(
       `http://localhost:${
         import.meta.env.VITE_BACKEND_SERVER_PORT
-      }/api/listing/update/${listingId}`,
+      }/api/listing/status/${listingId}`,
       {
         method: "PUT",
         body: JSON.stringify({ status: "disputed" }),
@@ -52,7 +75,7 @@ const WinnerActions = () => {
         />
         <StyledButton
           buttonText="Confirm Delivery"
-          onClick={() => {}}
+          onClick={onConfirmDelivery}
           twClasses="text-2xl py-4 w-full bg-tertiary"
         />
         {scsMessage && <Success successMessage={scsMessage} />}

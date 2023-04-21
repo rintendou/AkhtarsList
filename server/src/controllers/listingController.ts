@@ -609,9 +609,9 @@ export const modifyListingStatus = async (req: Request, res: Response) => {
 
   // Check if status has a valid value
   if (
-    status !== "active" ||
-    status !== "expired" ||
-    status !== "disputed" ||
+    status !== "active" &&
+    status !== "expired" &&
+    status !== "disputed" &&
     status !== "sold"
   ) {
     return res.status(400).json({
@@ -646,7 +646,7 @@ export const modifyListingStatus = async (req: Request, res: Response) => {
     const isSameStatus = status === existingListing.status
     if (isSameStatus) {
       return res.status(400).json({
-        message: `Status of this listing is already ${status}}!`,
+        message: `Status of this listing is already ${status}!`,
         data: null,
         ok: false,
       })
@@ -656,7 +656,7 @@ export const modifyListingStatus = async (req: Request, res: Response) => {
     await existingListing.save()
 
     res.status(200).json({
-      message: `Listing status has been successfully set to ${status}!}`,
+      message: `Listing status has been successfully set to ${status}!`,
       data: status,
       ok: true,
     })
