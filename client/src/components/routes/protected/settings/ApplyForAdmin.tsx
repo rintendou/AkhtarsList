@@ -26,6 +26,7 @@ const ApplyForAdmin = () => {
 
     if (!stringInputIsValid(applicationText)) {
       applicationInputRef.current!.focus()
+      setErrorMessage("Application cannot be empty!")
     }
 
     const payload = {
@@ -51,6 +52,7 @@ const ApplyForAdmin = () => {
 
       if (!json.ok) {
         setErrorMessage(json.message)
+        setSuccessMessage("")
         return
       }
 
@@ -63,14 +65,16 @@ const ApplyForAdmin = () => {
 
   return (
     <div className="space-y-5">
-      <h1 className="text-xl font-semibold">Change User Details</h1>
+      <h1 className="text-xl font-semibold">
+        Interested being an AkhtarsList Admin?
+      </h1>
       <form className="flex flex-col gap-5" onSubmit={editUserDetailsHandler}>
         <StyledInputAreaRef
           name="Apply here"
           placeholder="Apply here"
           ref={applicationInputRef}
         />
-        <EditProfileButton />
+        <SendApplicationButton />
       </form>
       {!errorMessage && successMessage && (
         <Success successMessage={successMessage} />
@@ -80,13 +84,13 @@ const ApplyForAdmin = () => {
   )
 }
 
-const EditProfileButton = () => {
+const SendApplicationButton = () => {
   return (
     <button
       className={`p-4 rounded-lg duration-200 hover:bg-black ease-in-out bg-secondary text-primary font-bold text-lg`}
       type="submit"
     >
-      Change User Details
+      Send Application
     </button>
   )
 }
