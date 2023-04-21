@@ -1,6 +1,7 @@
 // Components
 import useAuthContext from "../../../lib/hooks/context-hooks/useAuthContext"
 import useListingDetailContextQuery from "../../../lib/hooks/context-hooks/useListingDetailContext"
+import Status from "../../ui/Status"
 import StyledButton from "../../ui/StyledButton"
 import Bidders from "./Bidders"
 import ReportListing from "./ReportListing"
@@ -12,11 +13,10 @@ import WinnerActions from "./expired-listing-actions/WinnerActions"
 const ExpiredBiddingSection = () => {
   const { data } = useListingDetailContextQuery()
   const { data: listing } = data
-  const { finalPrice, lister, bestBidder } = listing
+  const { finalPrice, lister, bestBidder, status } = listing
   const { auth } = useAuthContext()
 
   const isLister = lister === auth._id
-
   const isWinner = listing.bestBidder === auth._id
 
   return (
@@ -27,12 +27,13 @@ const ExpiredBiddingSection = () => {
         Listing Expired
       </h1>
 
+      {isWinner && <WinnerActions />}
+      {isLister && bestBidder && <ListerActions />}
+      <Status status={status} />
+
       <h1 className="text-5xl text-center font-semibold backdrop-opacity-30 opacity-40">
         Biddings
       </h1>
-
-      {isWinner && <WinnerActions />}
-      {isLister && bestBidder && <ListerActions />}
 
       <div className="flex justify-between w-full opacity-40">
         <div className="flex items-center gap-3">
