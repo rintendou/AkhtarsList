@@ -142,7 +142,7 @@ export const fetchListings = async (req: Request, res: Response) => {
     }
 
     await ListingModel.updateMany(
-      { expireAt: { $lt: new Date() } },
+      { expireAt: { $lt: new Date() }, status: { $nin: ["sold", "disputed"] } },
       { $set: { status: "expired" } }
     )
 
