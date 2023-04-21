@@ -3,7 +3,11 @@ import ListingCard from "../../../ui/ListingCard"
 import ListMore from "./ListMore"
 
 const UnsoldListings = () => {
-  const { disputedListings } = useProfileContext()
+  const { listings } = useProfileContext()
+
+  const unsoldListings = listings.filter(
+    (listing) => new Date(listing.expireAt) < new Date() && !listing.bestBidder
+  )
 
   return (
     <div className="space-y-10">
@@ -11,10 +15,10 @@ const UnsoldListings = () => {
         Unsold Listings
       </h1>
       <ul className="flex gap-8 py-8 flex-wrap">
-        {disputedListings.length !== 0 ? (
-          disputedListings.map((disputedListing) => (
-            <li key={disputedListing._id}>
-              <ListingCard listing={disputedListing} />
+        {unsoldListings.length !== 0 ? (
+          unsoldListings.map((unsoldListing) => (
+            <li key={unsoldListing._id}>
+              <ListingCard listing={unsoldListing} />
             </li>
           ))
         ) : (
