@@ -2,7 +2,7 @@ import useProfileContext from "../../../../lib/hooks/context-hooks/useProfileCon
 import Card from "../../../ui/Card"
 import ListingCard from "../../../ui/ListingCard"
 
-const DisputedListings = () => {
+const Biddings = () => {
   const { disputedListings } = useProfileContext()
 
   return (
@@ -33,4 +33,4 @@ const DisputedListings = () => {
   )
 }
 
-export default DisputedListings
+export default Biddings

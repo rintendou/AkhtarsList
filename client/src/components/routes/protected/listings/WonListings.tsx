@@ -3,7 +3,7 @@ import Card from "../../../ui/Card"
 import ListingCard from "../../../ui/ListingCard"
 import RouterLink from "../../../ui/RouterLink"
 
-const WonListings = () => {
+const Listings = () => {
   const { wonListings } = useProfileContext()
 
   return (
@@ -33,4 +33,4 @@ const WonListings = () => {
   )
 }
 
-export default WonListings
+export default Listings
