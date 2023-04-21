@@ -174,6 +174,14 @@ export const applyForAdmin = async (req: Request, res: Response) => {
       .json({ message: "Bad Request!", data: null, ok: false })
   }
 
+  // Check if user is already an admin
+  const isAlreadyAdmin = existingUser.isAdmin
+  if (isAlreadyAdmin) {
+    return res
+      .status(400)
+      .json({ message: "You are already an admin!", data: null, ok: false })
+  }
+
   try {
     // This is a naive application for admin
     // If we have enough time, we will create a collection in our db to store applications then verify them manually

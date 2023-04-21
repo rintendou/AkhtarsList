@@ -38,7 +38,7 @@ const ApplyForAdmin = () => {
       const response = await fetch(
         `http://localhost:${
           import.meta.env.VITE_BACKEND_SERVER_PORT
-        }/api/auth/apply`,
+        }/api/user/apply`,
         {
           method: "POST",
           body: JSON.stringify(payload),
