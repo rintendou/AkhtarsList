@@ -5,6 +5,7 @@ import {
   getUser,
   depositFunds,
   withdrawFunds,
+  applyForAdmin,
 } from "../controllers/userController"
 
 // Types
@@ -27,5 +28,8 @@ UserRoute.post("/deposit", depositFunds)
 
 // WITHDRAW FUNDS
 UserRoute.post("/withdraw", withdrawFunds)
+
+// APPLY FOR ADMIN
+UserRoute.post("/apply", applyForAdmin)
 
 export default UserRoute
