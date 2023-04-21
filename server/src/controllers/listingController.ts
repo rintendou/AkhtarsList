@@ -59,7 +59,7 @@ export const createListing = async (req: Request, res: Response) => {
       desc: desc,
       image: image,
       bidders: [],
-      bestBidder: listerId, // Best bidder will be yourself at first.
+      bestBidder: "",
       startPrice: startPrice,
       finalPrice: startPrice,
       expireAt: expireAt,
