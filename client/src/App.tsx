@@ -48,6 +48,7 @@ import Dev from "./components/routes/dev-route/ui/Dev"
 import AdminLayout from "./components/routes/protected/layout-containers/AdminLayout"
 import Transactions from "./components/routes/protected/admin/transactions/Transactions"
 import DisputesToManage from "./components/routes/protected/admin/disputes-to-manage/DisputesToManage"
+import AnalyticsDashboard from "./components/routes/protected/admin/analytics/AnalyticsDashboard"
 
 function App() {
   return (
@@ -113,6 +114,7 @@ function App() {
             <Route element={<AdminLayout />}>
               <Route path="/admin" element={<AdminDashboard />} />
               <Route path="/admin/transactions" element={<Transactions />} />
+              <Route path="/admin/analytics" element={<AnalyticsDashboard />} />
               <Route path="/admin/disputes" element={<DisputesToManage />} />
             </Route>
           </Route>
