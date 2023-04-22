@@ -731,7 +731,7 @@ export const reportListing = async (req: Request, res: Response) => {
 
     res.status(400).json({
       message: "Listing successfully reported!",
-      data: updatedReportedListings,
+      data: null,
       ok: true,
     })
   } catch (error) {
