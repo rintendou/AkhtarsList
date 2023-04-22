@@ -48,7 +48,7 @@ app.use('/api/user', UserRoute)
 
 
 // Mongoose will be used for the database (reading and writing documents for users)
-await mongoose.connect(MONGODB_URL!).then(() => {
+mongoose.connect(MONGODB_URL!).then(() => {
     console.log('Connected to MongoDB')
     app.listen(PORT, () => {
         console.log(`Listening on port ${PORT}`)
