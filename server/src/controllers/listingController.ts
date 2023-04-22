@@ -678,3 +678,39 @@ export const modifyListingStatus = async (req: Request, res: Response) => {
     })
   }
 }
+
+export const reportListing = async (req: Request, res: Response) => {
+  // Extract payload from params
+  const listingId = req.params.listingId
+
+  // Check if appropriate payload is attached
+  if (!listingId) {
+    return res
+      .status(400)
+      .json({ message: "listingId params is required!", data: null, ok: false })
+  }
+
+  try {
+    // Check if listing exists
+    const existingListing = await ListingModel.findOne({ _id: listingId })
+    if (!existingListing) {
+      return res.status(400).json({
+        message: "Listing does not exist required!",
+        data: null,
+        ok: false,
+      })
+    }
+
+    res.status(400).json({
+      message: "You cannot update a listing that is not yours",
+      data: null,
+      ok: false,
+    })
+  } catch (error) {
+    res.status(500).json({
+      message: error,
+      data: error,
+      ok: false,
+    })
+  }
+}
