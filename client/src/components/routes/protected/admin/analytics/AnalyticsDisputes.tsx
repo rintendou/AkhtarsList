@@ -1,7 +1,9 @@
 import useTimelineContext from "../../../../../lib/hooks/context-hooks/useTimelineContext"
+import Card from "../../../../ui/Card"
 import ListingCard from "../../../../ui/ListingCard"
+import SeeAll from "../../../application/timeline/SeeAll"
 
-const DisputesToManage = () => {
+const AnalyticsDisputes = () => {
   const { expiredListings } = useTimelineContext()
 
   const disputes = expiredListings.filter(
@@ -9,21 +11,24 @@ const DisputesToManage = () => {
   )
 
   return (
-    <div className="flex flex-col w-full p-5 gap-10">
-      <h1 className="text-4xl font-bold pb-5 border-b-2 w-full">Analytics</h1>
+    <Card twClasses="w-full p-4 shadow-lg border-4 border-secondary space-y-4">
+      <div className="flex justify-between align-middle">
+        <h1 className="text-2xl font-semibold">Disputes</h1>
+        <SeeAll to="/admin/disputes" />
+      </div>
       <ul className="flex gap-8 py-8 overflow-x-auto px-8">
         {disputes.length !== 0 ? (
           disputes.map((dispute) => (
             <li key={dispute._id}>
-              <ListingCard listing={dispute} />
+              <ListingCard listing={dispute}></ListingCard>
             </li>
           ))
         ) : (
           <h1>No Disputes Found!</h1>
         )}
       </ul>
-    </div>
+    </Card>
   )
 }
 
-export default DisputesToManage
+export default AnalyticsDisputes
