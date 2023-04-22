@@ -681,8 +681,8 @@ export const modifyListingStatus = async (req: Request, res: Response) => {
 
 export const reportListing = async (req: Request, res: Response) => {
   // Extract payload from params and body
-  const listingId = req.params.listingId
-  const userId = req.body
+  const { listingId } = req.params
+  const { userId } = req.body
 
   // Check if appropriate payload is attached
   if (!listingId || !userId) {
@@ -707,7 +707,7 @@ export const reportListing = async (req: Request, res: Response) => {
     }
 
     // Check if user exists
-    const existingUser = await UserModel.findOne({ id: userId })
+    const existingUser = await UserModel.findById(userId)
     if (!existingUser) {
       return res.status(404).json({
         message: "Invalid credentials!",
@@ -732,7 +732,7 @@ export const reportListing = async (req: Request, res: Response) => {
     res.status(400).json({
       message: "Listing successfully reported!",
       data: updatedReportedListings,
-      ok: false,
+      ok: true,
     })
   } catch (error) {
     res.status(500).json({
