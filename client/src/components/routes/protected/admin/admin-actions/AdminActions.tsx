@@ -68,6 +68,24 @@ const AdminActions = () => {
           <p>Oversee Lister and Bidder Dispute</p>
         </div>
       </AdminRouterLink>
+      <AdminRouterLink to="/admin/reported" twClasses="text-secondary">
+        <svg
+          stroke="currentColor"
+          fill="currentColor"
+          stroke-width="0"
+          viewBox="0 0 24 24"
+          className="mr-4"
+          height="2.2em"
+          width="2.2em"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"></path>
+        </svg>
+        <div className="text-xs">
+          <h1 className="text-lg font-semibold">Reported Listings</h1>
+          <p>Manage Reported Listings</p>
+        </div>
+      </AdminRouterLink>
     </div>
   )
 }
