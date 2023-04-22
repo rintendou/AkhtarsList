@@ -21,7 +21,7 @@ import Settings from "./components/routes/protected/settings/Settings"
 import Biddings from "./components/routes/protected/biddings/Biddings"
 import Listings from "./components/routes/protected/listings/Listings"
 import ListingDetailQuery from "./components/routes/listing-detail/ListingDetail"
-import Dashboard from "./components/routes/protected/admin/Dashboard"
+import AdminDashboard from "./components/routes/protected/admin/AdminDashboard"
 import SearchResults from "./components/routes/search-results/SearchResults"
 
 // Components
@@ -46,6 +46,8 @@ import DevListingDetailGlobal from "./components/routes/dev-route/test-global-ct
 import DevListingDetail from "./components/routes/dev-route/test-custom-hook/DevListingDetail"
 import Dev from "./components/routes/dev-route/ui/Dev"
 import AdminLayout from "./components/routes/protected/layout-containers/AdminLayout"
+import Transactions from "./components/routes/protected/admin/transactions/Transactions"
+import DisputesToManage from "./components/routes/protected/admin/disputes-to-manage/DisputesToManage"
 
 function App() {
   return (
@@ -109,7 +111,9 @@ function App() {
           {/* Admin Routes */}
           <Route element={<RequireAdmin />}>
             <Route element={<AdminLayout />}>
-              <Route path="/admin" element={<Dashboard />} />
+              <Route path="/admin" element={<AdminDashboard />} />
+              <Route path="/admin/transactions" element={<Transactions />} />
+              <Route path="/admin/disputes" element={<DisputesToManage />} />
             </Route>
           </Route>
 
