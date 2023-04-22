@@ -2,6 +2,7 @@ import DisputedListings from "./DisputedListings"
 import UnsoldListings from "./UnsoldListings"
 import ListingsToFulfill from "./ListingsToFulfill"
 import SoldListings from "./SoldListings"
+import AllListings from "./AllListings"
 
 const Listings = () => {
   return (
@@ -10,6 +11,7 @@ const Listings = () => {
       <DisputedListings />
       <SoldListings />
       <UnsoldListings />
+      <AllListings />
     </div>
   )
 }
