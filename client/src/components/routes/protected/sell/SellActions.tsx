@@ -199,11 +199,11 @@ const SellActions = () => {
 
   // Focus on component mount
   useEffect(() => {
+    titleRef.current!.focus()
     window.scrollTo({
       top: 0,
       behavior: "smooth",
     })
-    titleRef.current!.focus()
   }, [])
 
   return (
