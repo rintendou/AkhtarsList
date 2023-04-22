@@ -5,9 +5,16 @@ const AnalyticsReport = () => {
   const { allListings, expiredListings, unexpiredListings } =
     useTimelineContext()
 
-  const pendingListings = expiredListings.filter(
-    (listing) => listing.status === "expired"
+  const transactions = expiredListings.filter(
+    (listing) => listing.status === "expired" || "sold"
   )
+  const successfulTransactions = expiredListings.filter(
+    (listing) => listing.status === "sold"
+  )
+  const pendingTransactions = expiredListings.filter(
+    (listing) => listing.bestBidder && listing.status !== "sold"
+  )
+
   const disputedListings = expiredListings.filter(
     (listing) => listing.status === "disputed"
   )
@@ -25,8 +32,17 @@ const AnalyticsReport = () => {
             - Expired Listings: {expiredListings.length}
           </p>
         </div>
-        <p>Pending Listings: {pendingListings.length}</p>
-        <p>Pending Disputes: {disputedListings.length}</p>
+        <div className="space-y-2">
+          <p>Total Transactions: {transactions.length}</p>
+          <p className="text-xs text-gray-600">
+            - Successful Transactions: {successfulTransactions.length}
+          </p>
+          <p className="text-xs text-gray-600">
+            - Pending Transactions: {pendingTransactions.length}
+          </p>
+        </div>
+
+        <p>Total Disputes: {disputedListings.length}</p>
       </div>
     </Card>
   )

@@ -24,7 +24,7 @@ const AnalyticsDisputes = () => {
             </li>
           ))
         ) : (
-          <h1>No Transactions Found!</h1>
+          <h1>No Disputes Found!</h1>
         )}
       </ul>
     </Card>

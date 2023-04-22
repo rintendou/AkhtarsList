@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom"
 import useTimelineContext from "../../../../../lib/hooks/context-hooks/useTimelineContext"
 import Card from "../../../../ui/Card"
 import ListingCard from "../../../../ui/ListingCard"
