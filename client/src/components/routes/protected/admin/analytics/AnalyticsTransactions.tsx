@@ -20,7 +20,9 @@ const AnalyticsTransactions = () => {
       <ul className="flex gap-8 py-8 overflow-x-auto px-8">
         {transactions.length !== 0 ? (
           transactions.map((transaction) => (
-            <ListingCard listing={transaction}></ListingCard>
+            <li key={transaction._id}>
+              <ListingCard listing={transaction}></ListingCard>
+            </li>
           ))
         ) : (
           <h1>No Transactions Found!</h1>

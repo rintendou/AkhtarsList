@@ -1,16 +1,20 @@
 import { useEffect, useState } from "react"
 import Card from "../../../../ui/Card"
+import useAuthContext from "../../../../../lib/hooks/context-hooks/useAuthContext"
 
 const AnalyticsUsers = () => {
   const [users, setUsers] = useState<string[]>([])
+  const { auth } = useAuthContext()
 
   useEffect(() => {
     const fetchUsers = async () => {
       const response = await fetch(
-        `http://localhost:${import.meta.env.BACKEND_SERVER_PORT}/api/user`
+        `http://localhost:${import.meta.env.VITE_BACKEND_SERVER_PORT}/api/user`,
+        {
+          headers: { Authorization: auth.token },
+        }
       )
       const json = await response.json()
-
       if (!json.ok) {
         return
       }

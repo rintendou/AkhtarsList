@@ -19,7 +19,9 @@ const AnalyticsDisputes = () => {
       <ul className="flex gap-8 py-8 overflow-x-auto px-8">
         {disputes.length !== 0 ? (
           disputes.map((dispute) => (
-            <ListingCard listing={dispute}></ListingCard>
+            <li key={dispute._id}>
+              <ListingCard listing={dispute}></ListingCard>
+            </li>
           ))
         ) : (
           <h1>No Transactions Found!</h1>

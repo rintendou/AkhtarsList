@@ -19,11 +19,9 @@ const AnalyticsReport = () => {
         <div className="space-y-2">
           <p>Total Listings: {allListings.length}</p>
           <p className="text-xs text-gray-600">
-            {" "}
             - Active Listings: {unexpiredListings.length}
           </p>
           <p className="text-xs text-gray-600">
-            {" "}
             - Expired Listings: {expiredListings.length}
           </p>
         </div>
