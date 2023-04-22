@@ -1,6 +1,6 @@
-import AdminRouterLink from "./AdminRouterLink"
+import AdminRouterLink from "../../admin/admin-actions/AdminRouterLink"
 
-const AdminActions = () => {
+const AdminButton = () => {
   return (
     <div>
       <AdminRouterLink to="/admin">
@@ -30,4 +30,4 @@ const AdminActions = () => {
   )
 }
 
-export default AdminActions
+export default AdminButton

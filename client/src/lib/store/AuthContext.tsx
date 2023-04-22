@@ -1,13 +1,13 @@
 import { createContext, useState, ReactNode, useEffect } from "react"
 
-type User = {
+type AuthType = {
   _id: string
   token: string
   isAdmin: string
 }
 
 type initialContextType = {
-  auth: User
+  auth: AuthType
   login: (_id: string, token: string, isAdmin: string) => void
   logout: () => void
   isLoggedIn: boolean
@@ -25,7 +25,7 @@ const initialContext = {
 const AuthContext = createContext<initialContextType>(initialContext)
 
 const AuthContextProvider = ({ children }: { children: ReactNode }) => {
-  const [auth, setAuth] = useState<User>(initialUserState)
+  const [auth, setAuth] = useState<AuthType>(initialUserState)
   const [isLoggedIn, setIsLoggedIn] = useState(false)
 
   useEffect(() => {

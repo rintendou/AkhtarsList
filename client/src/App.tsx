@@ -21,7 +21,7 @@ import Settings from "./components/routes/protected/settings/Settings"
 import Biddings from "./components/routes/protected/biddings/Biddings"
 import Listings from "./components/routes/protected/listings/Listings"
 import ListingDetailQuery from "./components/routes/listing-detail/ListingDetail"
-import Dashboard from "./components/routes/protected/admin/Dashboard"
+import AdminDashboard from "./components/routes/protected/admin/AdminDashboard"
 import SearchResults from "./components/routes/search-results/SearchResults"
 
 // Components
@@ -30,11 +30,11 @@ import Footer from "./components/layout/footer/Footer"
 import Header from "./components/layout/header/Header"
 
 // Navguards
-import RequireAuth from "./components/routes/protected/RequireAuth"
-import RequireAdmin from "./components/routes/protected/RequireAdmin"
+import RequireAuth from "./components/routes/protected/navigation-guards/RequireAuth"
+import RequireAdmin from "./components/routes/protected/navigation-guards/RequireAdmin"
 
 // Layouts
-import ProfileLayout from "./components/routes/protected/ProfileLayout"
+import ProfileLayout from "./components/routes/protected/layout-containers/ProfileLayout"
 
 // Providers
 import ListingDetailContextQueryProvider from "./lib/store/ListingDetailContext"
@@ -45,6 +45,9 @@ import DevListingDetailContextProvider from "./components/routes/dev-route/test-
 import DevListingDetailGlobal from "./components/routes/dev-route/test-global-ctx/DevListingDetailGlobal"
 import DevListingDetail from "./components/routes/dev-route/test-custom-hook/DevListingDetail"
 import Dev from "./components/routes/dev-route/ui/Dev"
+import AdminLayout from "./components/routes/protected/layout-containers/AdminLayout"
+import Transactions from "./components/routes/protected/admin/transactions/Transactions"
+import DisputesToManage from "./components/routes/protected/admin/disputes-to-manage/DisputesToManage"
 
 function App() {
   return (
@@ -107,7 +110,11 @@ function App() {
 
           {/* Admin Routes */}
           <Route element={<RequireAdmin />}>
-            <Route path="/admin" element={<Dashboard />} />
+            <Route element={<AdminLayout />}>
+              <Route path="/admin" element={<AdminDashboard />} />
+              <Route path="/admin/transactions" element={<Transactions />} />
+              <Route path="/admin/disputes" element={<DisputesToManage />} />
+            </Route>
           </Route>
 
           {/* Catch-All Routes */}
