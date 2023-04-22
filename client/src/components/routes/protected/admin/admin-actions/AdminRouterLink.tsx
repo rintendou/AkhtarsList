@@ -11,8 +11,8 @@ const AdminRouterLink = ({ children, to, twClasses }: Props) => {
   return (
     <Link
       to={to}
-      className={`px-10 py-5 flex items-center bg-secondary text-primary hover:bg-tertiary duration-100 ease-in-out hover:shadow-sm ${
-        location.pathname === to && "bg-tertiary"
+      className={`px-10 py-5 flex items-center text-secondary hover:bg-tertiary duration-100 ease-in-out hover:shadow-sm ${
+        location.pathname === to && "bg-tertiary text-black"
       } ${twClasses}`}
     >
       {children}

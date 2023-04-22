@@ -23,7 +23,7 @@ const AdminButton = () => {
         </svg>
         <div className="text-xs">
           <h1 className="text-lg font-semibold">Admin Dashboard</h1>
-          <p className="text-primary">Manage and Regulate Listings</p>
+          <p>Manage and Regulate Listings</p>
         </div>
       </AdminRouterLink>
     </div>
