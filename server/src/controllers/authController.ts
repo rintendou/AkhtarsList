@@ -5,6 +5,7 @@ import jwt from "jsonwebtoken"
 import UserModel from "../models/User"
 import mongoose from "mongoose"
 import JWTRequest from "../lib/types/JWTRequest"
+import verifyPasswordStrength from "../lib/util/verifyPasswordStrength"
 
 export const registerUser = async (req: Request, res: Response) => {
   // destructure the payload attached to the body
@@ -40,6 +41,16 @@ export const registerUser = async (req: Request, res: Response) => {
   if (password !== confirmPassword) {
     return res.status(400).json({
       message: "Password does not match!",
+      data: null,
+      ok: false,
+    })
+  }
+
+  // Check if password strength is sufficient
+  if (!verifyPasswordStrength(password)) {
+    return res.status(400).json({
+      message:
+        "Password must have at least 8 characters long, one uppercase, one lowercase, one number, and one special character!",
       data: null,
       ok: false,
     })
@@ -254,6 +265,16 @@ export const resetPassword = async (req: Request, res: Response) => {
     })
   }
 
+  // Check if password strength is sufficient
+  if (!verifyPasswordStrength(password)) {
+    return res.status(400).json({
+      message:
+        "Password must have at least 8 characters long, one uppercase, one lowercase, one number, and one special character!",
+      data: null,
+      ok: false,
+    })
+  }
+
   try {
     // Hashing new password
     const salt = await bcrypt.genSalt(10)
@@ -384,6 +405,16 @@ export const changePassword = async (req: JWTRequest, res: Response) => {
   if (newPassword !== newConfirmPassword) {
     return res.status(400).json({
       message: "New Password does not match!",
+      data: null,
+      ok: false,
+    })
+  }
+
+  // Check if new password strength is sufficient
+  if (!verifyPasswordStrength(newPassword)) {
+    return res.status(400).json({
+      message:
+        "New password must have at least 8 characters long, one uppercase, one lowercase, one number, and one special character!",
       data: null,
       ok: false,
     })
