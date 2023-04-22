@@ -49,6 +49,7 @@ import AdminLayout from "./components/routes/protected/layout-containers/AdminLa
 import Transactions from "./components/routes/protected/admin/transactions/Transactions"
 import DisputesToManage from "./components/routes/protected/admin/disputes-to-manage/DisputesToManage"
 import AnalyticsDashboard from "./components/routes/protected/admin/analytics/AnalyticsDashboard"
+import ReportedListings from "./components/routes/protected/admin/reported-listings/ReportedListings"
 
 function App() {
   return (
@@ -116,6 +117,7 @@ function App() {
               <Route path="/admin/transactions" element={<Transactions />} />
               <Route path="/admin/analytics" element={<AnalyticsDashboard />} />
               <Route path="/admin/disputes" element={<DisputesToManage />} />
+              <Route path="/admin/reported" element={<ReportedListings />} />
             </Route>
           </Route>
 
