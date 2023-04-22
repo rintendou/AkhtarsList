@@ -6,13 +6,17 @@ const AnalyticsReport = () => {
     useTimelineContext()
 
   const transactions = expiredListings.filter(
-    (listing) => listing.status === "expired" || "sold"
+    (listing) =>
+      (listing.status === "expired" && listing.bestBidder) ||
+      listing.status === "sold"
   )
+
   const successfulTransactions = expiredListings.filter(
     (listing) => listing.status === "sold"
   )
+
   const pendingTransactions = expiredListings.filter(
-    (listing) => listing.bestBidder && listing.status !== "sold"
+    (listing) => listing.bestBidder && listing.status === "expired"
   )
 
   const disputedListings = expiredListings.filter(
