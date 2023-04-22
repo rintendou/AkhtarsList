@@ -10,7 +10,6 @@ import Success from "../../ui/Success"
 import RouterLink from "../../ui/RouterLink"
 
 // Port number
-import { settings } from "../../../settings"
 import PasswordInputRef from "../../ui/PasswordInputRef"
 
 type Props = {
@@ -53,7 +52,9 @@ const LoginForm = ({
 
     const loginUser = async () => {
       const response = await fetch(
-        `http://localhost:${settings.BACKEND_SERVER_PORT}/api/auth/login`,
+        `http://localhost:${
+          import.meta.env.VITE_BACKEND_SERVER_PORT
+        }/api/auth/login`,
         {
           method: "POST",
           body: JSON.stringify({
@@ -68,11 +69,13 @@ const LoginForm = ({
 
       if (!data.ok) {
         setErrorMessage(data.message)
+        setScsMessage("")
         return
       }
 
       const token = response.headers.get("authorization")
 
+      setErrorMessage("")
       setScsMessage(data.data.message)
       login(data.data.user._id, token!, data.data.user.isAdmin)
       navigate("/", { replace: true })

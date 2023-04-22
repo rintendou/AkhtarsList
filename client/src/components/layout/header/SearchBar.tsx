@@ -1,5 +1,4 @@
 import { useState } from "react"
-import { settings } from "../../../settings"
 import { useNavigate } from "react-router-dom"
 
 const SearchBar = () => {
@@ -20,7 +19,9 @@ const SearchBar = () => {
 
     const fetchListings = async () => {
       const response = await fetch(
-        `http://localhost:${settings.BACKEND_SERVER_PORT}/api/listing/search?q=${query}`
+        `http://localhost:${
+          import.meta.env.VITE_BACKEND_SERVER_PORT
+        }/api/listing/search?q=${query}`
       )
       const json = await response.json()
       navigate("/search-results", {

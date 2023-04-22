@@ -2,7 +2,6 @@ import { Routes, Route } from "react-router-dom"
 
 // Routes
 import Application from "./components/routes/application/Application"
-
 import PageNotFound from "./components/routes/page-not-found/PageNotFound"
 import Login from "./components/routes/login/Login"
 import Register from "./components/routes/register/Register"
@@ -17,36 +16,39 @@ import Preview from "./components/routes/protected/preview/Preview"
 import ListingDetail from "./components/routes/dev-route/test-nonpolled/ListingDetail"
 import ListingNotFound from "./components/routes/page-not-found/ListingNotFound"
 import Edit from "./components/routes/protected/edit/Edit"
+import Unauthorized from "./components/routes/unauthorized/Unauthorized"
+import Settings from "./components/routes/protected/settings/Settings"
+import Biddings from "./components/routes/protected/biddings/Biddings"
+import Listings from "./components/routes/protected/listings/Listings"
+import ListingDetailQuery from "./components/routes/listing-detail/ListingDetail"
+import AdminDashboard from "./components/routes/protected/admin/AdminDashboard"
+import SearchResults from "./components/routes/search-results/SearchResults"
 
 // Components
 import Body from "./components/layout/body/Body"
 import Footer from "./components/layout/footer/Footer"
 import Header from "./components/layout/header/Header"
 
-// Navguard
-import RequireAuth from "./components/routes/protected/RequireAuth"
+// Navguards
+import RequireAuth from "./components/routes/protected/navigation-guards/RequireAuth"
+import RequireAdmin from "./components/routes/protected/navigation-guards/RequireAdmin"
 
 // Layouts
-import ProfileLayout from "./components/routes/protected/ProfileLayout"
-import DevListingDetail from "./components/routes/dev-route/test-custom-hook/DevListingDetail"
-import WonListings from "./components/routes/protected/won-listings/WonListings"
-import DisputedListings from "./components/routes/protected/disputed-listings/DisputedListings"
-import Unauthorized from "./components/routes/unauthorized/Unauthorized"
-import ManageListings from "./components/routes/protected/admin/ManageListings"
-import ManageDisputes from "./components/routes/protected/admin/ManageDisputes"
-import RequireAdmin from "./components/routes/protected/admin/RequireAdmin"
-import Settings from "./components/routes/protected/settings/Settings"
+import ProfileLayout from "./components/routes/protected/layout-containers/ProfileLayout"
 
 // Providers
-import ListingDetailContextProvider from "./components/routes/dev-route/test-nonpolled/ListingDetailContext"
+import ListingDetailContextQueryProvider from "./lib/store/ListingDetailContext"
 
 // DEV
+import DevUnpolledListingDetailContextProvider from "./components/routes/dev-route/test-nonpolled/ListingDetailContext"
 import DevListingDetailContextProvider from "./components/routes/dev-route/test-global-ctx/DevListingDetailContext"
 import DevListingDetailGlobal from "./components/routes/dev-route/test-global-ctx/DevListingDetailGlobal"
-import SearchResults from "./components/routes/search-results/SearchResults"
-import ListingDetailContextQueryProvider from "./lib/store/ListingDetailContext"
-import ListingDetailQuery from "./components/routes/listing-detail/ListingDetail"
+import DevListingDetail from "./components/routes/dev-route/test-custom-hook/DevListingDetail"
 import Dev from "./components/routes/dev-route/ui/Dev"
+import AdminLayout from "./components/routes/protected/layout-containers/AdminLayout"
+import Transactions from "./components/routes/protected/admin/transactions/Transactions"
+import DisputesToManage from "./components/routes/protected/admin/disputes-to-manage/DisputesToManage"
+import AnalyticsDashboard from "./components/routes/protected/admin/analytics/AnalyticsDashboard"
 
 function App() {
   return (
@@ -85,13 +87,13 @@ function App() {
           <Route
             path="/listings-nonpolled/:listingId"
             element={
-              <ListingDetailContextProvider>
+              <DevUnpolledListingDetailContextProvider>
                 <ListingDetail />
-              </ListingDetailContextProvider>
+              </DevUnpolledListingDetailContextProvider>
             }
           />
 
-          {/* Authorized Routes */}
+          {/* Protected Routes */}
           <Route element={<RequireAuth />}>
             <Route path="/sell" element={<Sell />} />
             <Route path="/preview" element={<Preview />} />
@@ -99,25 +101,21 @@ function App() {
 
             <Route element={<ProfileLayout />}>
               <Route path="/profile" element={<Profile />} />
-              <Route path="/deposit" element={<Deposit />} />
-              <Route path="/withdraw" element={<Withdraw />} />
-              <Route path="/won-listings" element={<WonListings />} />
-              <Route path="/disputed-listings" element={<DisputedListings />} />
-              <Route path="/settings" element={<Settings />} />
+              <Route path="/profile/deposit" element={<Deposit />} />
+              <Route path="/profile/withdraw" element={<Withdraw />} />
+              <Route path="/profile/biddings" element={<Biddings />} />
+              <Route path="/profile/listings" element={<Listings />} />
+              <Route path="/profile/settings" element={<Settings />} />
             </Route>
+          </Route>
 
-            {/* Admin Routes */}
-            <Route element={<RequireAdmin />}>
-              <Route element={<ProfileLayout />}>
-                <Route
-                  path="/admin/manage-listings"
-                  element={<ManageListings />}
-                />
-                <Route
-                  path="/admin/manage-disputes"
-                  element={<ManageDisputes />}
-                />
-              </Route>
+          {/* Admin Routes */}
+          <Route element={<RequireAdmin />}>
+            <Route element={<AdminLayout />}>
+              <Route path="/admin" element={<AdminDashboard />} />
+              <Route path="/admin/transactions" element={<Transactions />} />
+              <Route path="/admin/analytics" element={<AnalyticsDashboard />} />
+              <Route path="/admin/disputes" element={<DisputesToManage />} />
             </Route>
           </Route>
 

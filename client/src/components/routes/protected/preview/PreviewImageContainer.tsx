@@ -10,9 +10,9 @@ const PreviewImageContainer = ({ img, title }: Props) => {
     <div className="flex-auto p-10 text-center capitalize text-2xl font-semibold cursor-pointer flex flex-col justify-center">
       <h1 className="capitalize">{title}</h1>
       <img
-        src={RandomListingImage}
+        src={img.length !== 0 ? img : RandomListingImage}
         alt={title}
-        className="h-full w-auto p-5 ml-60"
+        className="h-full min-h-[50rem] w-auto p-5"
       />
     </div>
   )

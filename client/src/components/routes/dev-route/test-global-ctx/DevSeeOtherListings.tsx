@@ -7,7 +7,7 @@ import useTimeline from "../../../../lib/hooks/context-hooks/useTimelineContext"
 import ListingType from "../../../../lib/types/ListingType"
 import SeeOthersButton from "../test-nonpolled/SeeOthersButton"
 import ListingCard from "../../../ui/ListingCard"
-import ListMore from "../../protected/profile/listings/ListMore"
+import ListMore from "../../protected/listings/ListMore"
 import useListingDetail from "./useListingDetail"
 
 const DevSeeOtherListings = () => {
@@ -19,7 +19,6 @@ const DevSeeOtherListings = () => {
     techListings,
     accessoriesListings,
     collectiblesListings,
-    fetchListingsByCategory,
   } = useTimeline()
 
   const { listing } = useListingDetail()
@@ -58,7 +57,6 @@ const DevSeeOtherListings = () => {
   const navigate = useNavigate()
 
   const onListingClick = (listing: ListingType) => {
-    fetchListingsByCategory(category)
     navigate(`/listings/${listing._id}`, {
       state: {
         id: listing._id,

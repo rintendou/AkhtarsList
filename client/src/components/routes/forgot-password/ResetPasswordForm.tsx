@@ -5,8 +5,6 @@ import Card from "../../ui/Card"
 import Error from "../../ui/Error"
 import StyledInputRef from "../../ui/StyledInputRef"
 
-import { settings } from "../../../settings"
-
 const ResetPasswordForm = () => {
   // I opted to use the useRef hook instead of useState to prevent
   // unnecessary re-renders of this component per each character typed
@@ -39,7 +37,9 @@ const ResetPasswordForm = () => {
       const confirmPassword = confirmPasswordRef.current!.value
 
       const response = await fetch(
-        `http://localhost:${settings.BACKEND_SERVER_PORT}/api/auth/reset-password`,
+        `http://localhost:${
+          import.meta.env.VITE_BACKEND_SERVER_PORT
+        }/api/auth/reset-password`,
         {
           method: "POST",
           body: JSON.stringify({

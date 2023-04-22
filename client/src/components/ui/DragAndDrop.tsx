@@ -4,10 +4,11 @@ import ImageUpload from "../../../public/image-upload-undraw.svg"
 
 type Props = {
   imageUrl: string
+  onFileSelection: (f: File | null) => void
   setImageUrl: React.Dispatch<React.SetStateAction<string>>
 }
 
-const DragAndDrop = ({ imageUrl, setImageUrl }: Props) => {
+const DragAndDrop = ({ imageUrl, onFileSelection, setImageUrl }: Props) => {
   const handleDrop = (event: React.DragEvent<HTMLDivElement>): void => {
     event.preventDefault()
     const file = event.dataTransfer.files[0]
@@ -16,6 +17,7 @@ const DragAndDrop = ({ imageUrl, setImageUrl }: Props) => {
       setImageUrl(reader.result as string)
     }
     reader.readAsDataURL(file)
+    onFileSelection(file)
   }
 
   const handleRemove = (event: React.MouseEvent<HTMLButtonElement>): void => {
@@ -32,6 +34,7 @@ const DragAndDrop = ({ imageUrl, setImageUrl }: Props) => {
     input.accept = "image/*"
     input.onchange = (e: Event) => {
       const file = (e.target as HTMLInputElement).files![0]
+      onFileSelection(file)
       const reader = new FileReader()
       reader.onload = () => {
         setImageUrl(reader.result as string)
@@ -89,6 +92,7 @@ const DragAndDrop = ({ imageUrl, setImageUrl }: Props) => {
 }
 
 export default DragAndDrop
+
 // import React, { useState } from "react"
 
 // import ImageUpload from "../../../public/image-upload-undraw.svg"

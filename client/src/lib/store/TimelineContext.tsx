@@ -4,7 +4,6 @@ import { createContext, ReactNode } from "react"
 import ListingType from "../types/ListingType"
 
 // Port Number
-import { settings } from "../../settings"
 import { useQuery } from "@tanstack/react-query"
 import ListingSkeletons from "../../components/ui/ListingSkeletons"
 import { useLocation } from "react-router-dom"
@@ -39,9 +38,16 @@ const initialContext = {
 
 const fetchListings = async () => {
   const response = await fetch(
-    `http://localhost:${settings.BACKEND_SERVER_PORT}/api/listing/fetch`
+    `http://localhost:${
+      import.meta.env.VITE_BACKEND_SERVER_PORT
+    }/api/listing/fetch`
   )
   const json = await response.json()
+
+  if (!json.ok) {
+    throw new Error(json.message)
+  }
+
   return json
 }
 

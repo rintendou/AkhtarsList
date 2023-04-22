@@ -2,7 +2,6 @@ import { createContext, useEffect, useState } from "react"
 import ListingType from "../../../../lib/types/ListingType"
 import TimeRemainingType from "../../../../lib/types/TimeRemainingType"
 import calculateTimeRemaining from "../../../../lib/util/functions/calculateTimeRemaining"
-import { settings } from "../../../../settings"
 import { useNavigate, useParams } from "react-router-dom"
 
 const initialListingState = {
@@ -77,7 +76,9 @@ const ListingDetailContextProvider = ({
     setIsLoading(true)
     const fetchListing = async () => {
       const response = await fetch(
-        `http://localhost:${settings.BACKEND_SERVER_PORT}/api/listing/fetch/${listingId}`
+        `http://localhost:${
+          import.meta.env.VITE_BACKEND_SERVER_PORT
+        }/api/listing/fetch/${listingId}`
       )
       const json = await response.json()
 
@@ -105,7 +106,9 @@ const ListingDetailContextProvider = ({
 
     const getLister = async () => {
       const response = await fetch(
-        `http://localhost:${settings.BACKEND_SERVER_PORT}/api/user/${listerId}`
+        `http://localhost:${
+          import.meta.env.VITE_BACKEND_SERVER_PORT
+        }/api/user/${listerId}`
       )
       const json = await response.json()
 
@@ -131,7 +134,9 @@ const ListingDetailContextProvider = ({
     setIsLoading(true)
     const refetchListing = async () => {
       const response = await fetch(
-        `http://localhost:${settings.BACKEND_SERVER_PORT}/api/listing/fetch/${listingId}`
+        `http://localhost:${
+          import.meta.env.VITE_BACKEND_SERVER_PORT
+        }/api/listing/fetch/${listingId}`
       )
       const json = await response.json()
 

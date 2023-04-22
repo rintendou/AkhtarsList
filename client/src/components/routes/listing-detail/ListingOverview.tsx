@@ -1,5 +1,5 @@
-import DUMMYIMAGE from "../../../../public/random-listing-image-undraw.svg"
 import useListingDetailContextQuery from "../../../lib/hooks/context-hooks/useListingDetailContext"
+import getFormattedDate from "../../../lib/util/functions/getFormattedDate"
 import getNumberWithCommas from "../../../lib/util/functions/getNumberWithCommas"
 
 const ListingOverview = () => {
@@ -8,19 +8,25 @@ const ListingOverview = () => {
   const {
     title,
     listerUsername,
+    image,
     startPrice,
     category,
     views,
     desc,
     weight,
     dimensions,
+    expireAt,
   } = listing
 
   return (
     <div className="flex-auto p-10 py-24 max-w-none md:max-w-[50%] max-h-[50%] md:max-h-none space-y-10 flex flex-col items-center justify-between">
       <div className="space-y-10">
         <h1 className="text-5xl text-center font-semibold">{title}</h1>
-        <img src={DUMMYIMAGE} alt={title} />
+        <img
+          src={image.length !== 0 ? image : "https://picsum.photos/200/300"}
+          alt={title}
+          className="w-screen h-max object-cover"
+        />
       </div>
       <div className="space-y-10 w-full">
         <div className="space-y-5 w-full pb-10 border-b border-gray-300">
@@ -73,6 +79,12 @@ const ListingOverview = () => {
               <h1>L:</h1>
               <p className="text-lg font-semibold">{dimensions[2]} cm </p>
             </div>
+          </div>{" "}
+          <div className="flex items-center gap-3">
+            <h1>Expiration Date:</h1>
+            <p className="text-lg font-semibold">
+              {getFormattedDate(expireAt)}
+            </p>
           </div>
         </div>
       </div>

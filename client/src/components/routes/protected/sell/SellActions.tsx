@@ -1,9 +1,24 @@
 import { useEffect, useRef, useState } from "react"
+import { useNavigate } from "react-router-dom"
 import useAuthContext from "../../../../lib/hooks/context-hooks/useAuthContext"
+import useProfile from "../../../../lib/hooks/context-hooks/useProfileContext"
+import useTimeline from "../../../../lib/hooks/context-hooks/useTimelineContext"
 
+// Components
+import StyledInputRef from "../../../ui/StyledInputRef"
+import StyledInputAreaRef from "../../../ui/StyledInputAreaRef"
+import StyledDropdownRef from "../../../ui/StyledDropdown"
+import StyledDateTimePicker from "../../../ui/StyledDateTimePicker"
+import Error from "../../../ui/Error"
+import DragAndDrop from "../../../ui/DragAndDrop"
+
+// Utility Functions
 import numberInputIsValid from "../../../../lib/util/functions/numberInputValidator"
 import stringInputIsValid from "../../../../lib/util/functions/stringInputValidator"
 
+// Backend Server Port
+
+// Constant Variables
 const CATEGORIES = [
   "Sneakers",
   "Antiques",
@@ -13,18 +28,6 @@ const CATEGORIES = [
   "Trending",
   "General",
 ]
-
-// Components
-import StyledInputRef from "../../../ui/StyledInputRef"
-import StyledInputAreaRef from "../../../ui/StyledInputAreaRef"
-import StyledDropdownRef from "../../../ui/StyledDropdown"
-import StyledDateTimePicker from "../../../ui/StyledDateTimePicker"
-import Error from "../../../ui/Error"
-import { useNavigate } from "react-router-dom"
-import { settings } from "../../../../settings"
-import useProfile from "../../../../lib/hooks/context-hooks/useProfileContext"
-import useTimeline from "../../../../lib/hooks/context-hooks/useTimelineContext"
-import DragAndDrop from "../../../ui/DragAndDrop"
 
 const SellActions = () => {
   const titleRef = useRef<HTMLInputElement>(null)
@@ -39,13 +42,22 @@ const SellActions = () => {
   const [expireAt, setExpireAt] = useState<Date | null>(null)
   const [error, setError] = useState(false)
   const [errorMessage, setErrorMessage] = useState("")
-  const [image, setImageUrl] = useState("")
+
+  const [imageUrl, setImageUrl] = useState("")
+  const [fileData, setFileData] = useState<File | null>(null)
 
   const { auth } = useAuthContext()
   const { refetchUserDetails } = useProfile()
   const { refetchTimeline } = useTimeline()
-
   const navigate = useNavigate()
+
+  const onFileSelection = (f: File | null) => {
+    setFileData(f)
+    const reader = new FileReader()
+    reader.onload = () => {
+      setImageUrl(reader.result as string)
+    }
+  }
 
   const createListingHandler = (e: React.FormEvent<HTMLFormElement>) => {
     // Prevent default behavior of reloading page on form submission
@@ -65,18 +77,6 @@ const SellActions = () => {
       tomorrow.setHours(23)
       tomorrow.setMinutes(59)
       return tomorrow
-    }
-
-    const payload = {
-      title,
-      listerId: auth._id,
-      desc,
-      image: image.length !== 0 ? image : "someRandomArmpit.jpg",
-      startPrice,
-      expireAt: expireAt || backupDate(),
-      category,
-      weight,
-      dimensions: [height, width, length],
     }
 
     if (!stringInputIsValid(title)) {
@@ -136,8 +136,34 @@ const SellActions = () => {
     }
 
     const createListing = async () => {
+      const formData = new FormData()
+      formData.append("file", fileData!)
+      formData.append("upload_preset", "ugjfytls")
+
+      const CLOUDINARY_URL = import.meta.env.VITE_CLOUDINARY_URL
+
+      const cloudinaryResponse = await fetch(CLOUDINARY_URL!, {
+        method: "POST",
+        body: formData,
+      })
+      const cloudinaryJson = await cloudinaryResponse.json()
+
+      const payload = {
+        title,
+        listerId: auth._id,
+        desc,
+        image: cloudinaryJson.secure_url || "",
+        startPrice,
+        expireAt: expireAt || backupDate(),
+        category,
+        weight,
+        dimensions: [height, width, length],
+      }
+
       const response = await fetch(
-        `http://localhost:${settings.BACKEND_SERVER_PORT}/api/listing/post`,
+        `http://localhost:${
+          import.meta.env.VITE_BACKEND_SERVER_PORT
+        }/api/listing/post`,
         {
           method: "POST",
           body: JSON.stringify(payload),
@@ -182,7 +208,12 @@ const SellActions = () => {
 
   return (
     <>
-      <DragAndDrop setImageUrl={setImageUrl} imageUrl={image} />
+      <DragAndDrop
+        setImageUrl={setImageUrl}
+        onFileSelection={onFileSelection}
+        imageUrl={imageUrl}
+      />
+
       <div className="flex-auto bg-purple-100 bg-opacity-50 p-10 max-w-none md:max-w-[50%] max-h-[50%] md:max-h-none space-y-10">
         <form className="space-y-10" onSubmit={createListingHandler}>
           <div className="flex flex-col gap-5 pb-10 border-b border-b-gray-500">

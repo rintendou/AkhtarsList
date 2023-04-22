@@ -2,8 +2,12 @@ import { useEffect } from "react"
 import ChangePassword from "./ChangePassword"
 import ChangeSecurityQuestions from "./ChangeSecurityQuestions"
 import EditUserDetails from "./ChangeUserDetails"
+import ApplyForAdmin from "./ApplyForAdmin"
+import useAuthContext from "../../../../lib/hooks/context-hooks/useAuthContext"
 
 const Settings = () => {
+  const { auth } = useAuthContext()
+
   useEffect(() => {
     window.scrollTo({
       top: 0,
@@ -20,6 +24,13 @@ const Settings = () => {
         <ChangePassword />
         <div className="border-b border-b-gray-500"></div>
         <ChangeSecurityQuestions />
+
+        {!auth.isAdmin && (
+          <>
+            <div className="border-b border-b-gray-500"></div>
+            <ApplyForAdmin />
+          </>
+        )}
       </div>
     </div>
   )
