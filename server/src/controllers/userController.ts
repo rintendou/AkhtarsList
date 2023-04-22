@@ -53,6 +53,39 @@ export const getUser = async (req: JWTRequest, res: Response) => {
   }
 }
 
+export const getUsers = async (req: JWTRequest, res: Response) => {
+  // Extract decoded token from verifyToken middleware
+  const { _idFromToken } = req.user
+
+  try {
+    // Check if user requesting this data exists
+    const existingUser = await UserModel.findOne({ _id: _idFromToken })
+    if (!existingUser) {
+      return res
+        .status(404)
+        .json({ message: "Bad Request!", data: null, ok: false })
+    }
+
+    // Check if user is an admin
+    const isAdmin = existingUser.isAdmin
+    if (!isAdmin) {
+      return res
+        .status(404)
+        .json({ message: "Invalid Credentials!", data: null, ok: false })
+    }
+
+    const allUsers = await UserModel.find({})
+
+    res.status(200).json({
+      message: "User successfully fetched!",
+      data: allUsers,
+      ok: true,
+    })
+  } catch (err) {
+    res.status(500).json({ message: err, data: null, ok: false })
+  }
+}
+
 export const withdrawFunds = async (req: Request, res: Response) => {
   // Extract userId and withdrawAmount from body
   const { userId, withdrawAmount } = req.body
