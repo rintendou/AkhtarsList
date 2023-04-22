@@ -9,7 +9,9 @@ const ReportedListings = () => {
   return (
     <div className="flex flex-col w-full p-5 gap-10">
       <ScrollToTop />
-      <h1 className="text-4xl font-bold pb-5 border-b-2 w-full">Disputes</h1>
+      <h1 className="text-4xl font-bold pb-5 border-b-2 w-full">
+        Reported Listings
+      </h1>
       <ReportedListingsReport />
       <ul className="flex gap-8 py-8 overflow-x-auto px-8">
         {reportedListings.length !== 0 ? (
@@ -19,7 +21,7 @@ const ReportedListings = () => {
             </li>
           ))
         ) : (
-          <h1>No Disputes Found!</h1>
+          <h1>No Reported Listings Found!</h1>
         )}
       </ul>
     </div>
