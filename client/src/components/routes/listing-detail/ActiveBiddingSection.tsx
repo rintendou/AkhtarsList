@@ -147,12 +147,20 @@ const ActiveBiddingSection = () => {
             </div>
             <BidButton />
           </form>
+          {auth.isAdmin && (
+            <div>
+              <h1 className="text-xl font-semibold w-full text-center">
+                You are an admin
+              </h1>
+              <EditListing />
+            </div>
+          )}
           <ReportListing />
           <CurrentBalance />
         </>
       ) : (
         <div>
-          <h1 className="text-3xl font-semibold w-full text-center">
+          <h1 className="text-xl font-semibold w-full text-center">
             You own this listing
           </h1>
           <EditListing />

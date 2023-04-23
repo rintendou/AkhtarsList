@@ -1,4 +1,5 @@
 import useAuth from "../../../lib/hooks/context-hooks/useAuthContext"
+import Logo from "../../ui/Logo"
 import RouterLink from "../../ui/RouterLink"
 
 const Footer = () => {
@@ -40,11 +41,7 @@ const Footer = () => {
           </>
         )}
       </nav>
-      <RouterLink
-        twClasses="text-2xl font-bold select-none"
-        routerLinkText="AkhtarsList"
-        to="/"
-      />
+      <Logo />
     </footer>
   )
 }
