@@ -17,7 +17,7 @@ const UserDetails = () => {
         </div>
       ) : (
         <div className="flex justify-between items-center pb-5 border-b-2 w-full">
-          <h1 className="text-4xl font-bold pb-5 border-b-2 w-full">Profile</h1>
+          <h1 className="text-4xl font-bold pb-5 w-full">Profile</h1>
           {ThemeSwitcher}
         </div>
       )}
