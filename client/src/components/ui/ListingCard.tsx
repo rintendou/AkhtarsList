@@ -11,6 +11,9 @@ import getTimeRemaining from "../../lib/util/functions/getTimeRemaining"
 import ListingType from "../../lib/types/ListingType"
 import getNumberWithCommas from "../../lib/util/functions/getNumberWithCommas"
 
+// Assets
+import noImageFound from "/no-image-found-undraw.svg"
+
 const ListingCard = ({ listing }: { listing: ListingType }) => {
   const navigate = useNavigate()
   const { auth } = useAuth()
@@ -53,7 +56,7 @@ const ListingCard = ({ listing }: { listing: ListingType }) => {
         onClick={handleClick}
       >
         <img
-          src={image.length !== 0 ? image : "https://picsum.photos/200/300"}
+          src={image.length !== 0 ? image : noImageFound}
           alt={title}
           className="h-36 w-auto rounded-md"
         />
