@@ -136,7 +136,7 @@ const ActiveBiddingSection = () => {
               <input
                 id="Bid Amount ($)"
                 ref={bidAmountRef}
-                className="pt-3 pl-3 p-2 block px-0 mt-0 bg-transparent border-2 focus:outline-none focus:ring-0 border-secondary rounded-md w-full dark:bg-black dark:text-primary"
+                className="pt-3 pl-3 p-2 block px-0 mt-0 bg-transparent border-2 focus:outline-none focus:ring-0 border-secondary rounded-md w-full dark:bg-black dark:text-primary dark:border-tertiary dark:border-4"
               />
               <label
                 htmlFor="Bid Amount ($)"
