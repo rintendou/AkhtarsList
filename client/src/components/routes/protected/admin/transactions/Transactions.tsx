@@ -16,7 +16,7 @@ const Transactions = () => {
         Transactions
       </h1>
       <TransactionsReport />
-      <ul className="flex gap-8 py-8 overflow-x-auto px-8">
+      <ul className="flex gap-8 py-8 flex-wrap px-8">
         {transactions.length !== 0 ? (
           transactions.map((transaction) => (
             <li key={transaction._id}>

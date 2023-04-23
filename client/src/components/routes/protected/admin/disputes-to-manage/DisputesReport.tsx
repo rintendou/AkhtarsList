@@ -15,7 +15,7 @@ const DisputesReport = () => {
   )
 
   return (
-    <Card twClasses="w-full p-4 h-64 shadow-lg border-4 border-secondary space-y-4">
+    <Card twClasses="w-full p-4 h-64 shadow-lg border-4 border-secondary space-y-4 dark:bg-black dark:border-4 dark:border-tertiary">
       <ScrollToTop />
       <h1 className="text-2xl font-semibold">Disputes Report</h1>
       <div className="flex flex-col gap-4">

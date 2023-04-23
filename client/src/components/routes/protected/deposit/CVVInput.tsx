@@ -18,7 +18,7 @@ const CVVInput = React.forwardRef<HTMLInputElement, Props>(
           type={type}
           placeholder=""
           maxLength={3}
-          className={`${twClasses} pt-5 pl-5 p-2 block w-full px-0 mt-0 bg-transparent border-2 appearance-none focus:outline-none focus:ring-0 focus:border-secondary border-gray-200 rounded-md dark:bg-black dark:text-primary`}
+          className={`${twClasses} pt-5 pl-5 p-2 block w-full px-0 mt-0 bg-transparent border-2 appearance-none focus:outline-none focus:ring-0 focus:border-secondary border-gray-200 rounded-md dark:bg-black dark:text-primary dark:focus:border-tertiary`}
           ref={ref}
         />
         <label

@@ -92,14 +92,14 @@ const Category = () => {
 
   return (
     <div className="min-h-screen flex flex-col container mx-auto py-5">
-      <div className="px-10 py-10 bg-purple-100 rounded-md shadow-md">
+      <div className="px-10 py-10 bg-purple-100 rounded-md shadow-md dark:bg-black">
         <h1 className="text-3xl capitalize font-bold">{categoryName}</h1>
       </div>
       <div className="flex space-x-10">
         <SideNavLinks />
 
         <div>
-          <div className="space-y-10 py-10 mb-10 border-b-2 border-secondary">
+          <div className="space-y-10 py-10 mb-10 border-b-2 border-secondary dark:border-black">
             <div className="flex flex-col md:flex-row gap-5 justify-between">
               <h1 className="text-2xl font-semibold capitalize">
                 Active {categoryName} listings

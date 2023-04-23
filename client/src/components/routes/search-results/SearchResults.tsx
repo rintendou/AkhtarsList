@@ -24,7 +24,7 @@ const SearchResults = () => {
     <div className="min-h-screen flex flex-col pb-20">
       <CategoryHeader />
       <div className="container mx-auto flex flex-col gap-5">
-        <div className="px-10 py-10 bg-purple-100 rounded-md shadow-md">
+        <div className="px-10 py-10 bg-purple-100 rounded-md shadow-md dark:bg-black">
           <h1 className="text-3xl capitalize font-bold">Search Results</h1>
         </div>
         <h1 className="font-light">

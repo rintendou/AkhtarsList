@@ -13,7 +13,7 @@ const ReportedListings = () => {
         Reported Listings
       </h1>
       <ReportedListingsReport />
-      <ul className="flex gap-8 py-8 overflow-x-auto px-8">
+      <ul className="flex gap-8 py-8 flex-wrap px-8">
         {reportedListings.length !== 0 ? (
           reportedListings.map((listing) => (
             <li key={listing._id}>

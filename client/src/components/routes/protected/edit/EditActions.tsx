@@ -238,7 +238,7 @@ const EditActions = () => {
         onFileSelection={onFileSelection}
         imageUrl={imageUrl}
       />
-      <div className="flex-auto bg-purple-100 bg-opacity-50 p-10 max-w-none md:max-w-[50%] max-h-[50%] md:max-h-none space-y-10">
+      <div className="flex-auto bg-purple-100 bg-opacity-50 p-10 max-w-none md:max-w-[50%] max-h-[50%] md:max-h-none space-y-10 dark:bg-secondary">
         <form className="space-y-10" onSubmit={editListingHandler}>
           <div className="flex flex-col gap-5 pb-10 border-b border-b-gray-500">
             <StyledInputRef
@@ -324,7 +324,7 @@ export default EditActions
 const SubmitListingButton = () => {
   return (
     <button
-      className={`p-4 rounded-lg duration-200 ease-in-out bg-secondary text-primary font-bold text-2xl py-6 w-full hover:scale-100 hover:bg-black hover:text-tertiary focus:outline-tertiary outline-4 focus:text-tertiary focus:bg-black`}
+      className={`p-4 rounded-lg duration-200 ease-in-out bg-secondary text-primary font-bold text-2xl py-6 w-full hover:scale-100 hover:bg-black hover:text-tertiary focus:outline-tertiary outline-4 focus:text-tertiary focus:bg-black dark:bg-tertiary dark:border-4 dark:border-black`}
       type="submit"
     >
       Update Listing

@@ -5,7 +5,7 @@ const Footer = () => {
   const { auth } = useAuth()
 
   return (
-    <footer className="p-8 flex flex-row justify-between items-center bg-secondary text-primary dark:bg-black">
+    <footer className="p-8 flex flex-row justify-between items-center bg-secondary text-primary border-t-2 border-t-tertiary dark:bg-black">
       <nav className="hidden md:flex flex-row gap-4">
         {auth._id ? (
           <>

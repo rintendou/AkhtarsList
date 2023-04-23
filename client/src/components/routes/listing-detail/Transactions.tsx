@@ -12,7 +12,7 @@ const Transactions = () => {
   return (
     <div className="w-full">
       <h1 className="text-center text-2xl font-semibold">Transactions</h1>
-      <div className="space-y-5 w-full overflow-y-auto h-96 border-2 p-4 border-secondary rounded-md">
+      <div className="space-y-5 w-full overflow-y-auto h-96 border-2 p-4 border-secondary rounded-md dark:bg-black">
         <div className="flex items-center space-x-4">
           <h1>Number of Transactions: </h1>
           <p className="text-lg font-semibold">{transactions.length}</p>

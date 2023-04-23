@@ -11,7 +11,7 @@ const AnalyticsTransactions = () => {
   )
 
   return (
-    <Card twClasses="w-full p-4 shadow-lg border-4 border-secondary space-y-4">
+    <Card twClasses="w-full p-4 shadow-lg border-4 border-secondary space-y-4 dark:bg-black dark:border-4 dark:border-tertiary">
       <div className="flex justify-between align-middle">
         <h1 className="text-2xl font-semibold">Successful Transactions</h1>
         <SeeAll to="/admin/transactions" />
