@@ -44,8 +44,10 @@ const Bidders = () => {
               <li
                 key={index}
                 className={`${
-                  index === 0 ? "text-black font-bold" : "text-gray-500"
-                } flex items-center gap-3`}
+                  index === 0
+                    ? "text-black font-bold dark:text-primary"
+                    : "text-gray-500 dark:text-gray-700"
+                } flex items-center gap-3 `}
               >
                 {index + 1}.) {bidder} {username === bidder && "(You)"}
                 {index === 0 && CrownSVG}
