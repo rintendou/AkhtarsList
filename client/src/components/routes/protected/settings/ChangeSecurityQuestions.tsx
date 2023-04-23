@@ -104,7 +104,7 @@ const ChangeSecurityQuestions = () => {
 const ChangeSecurityQAButton = () => {
   return (
     <button
-      className={`p-4 rounded-lg duration-200 hover:bg-black ease-in-out bg-secondary text-primary font-bold text-lg`}
+      className={`p-4 rounded-lg duration-200 hover:bg-black ease-in-out bg-secondary text-primary font-bold text-lg dark:bg-tertiary`}
       type="submit"
     >
       Change Security QA

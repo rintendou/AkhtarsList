@@ -50,6 +50,7 @@ const ResetPasswordForm = () => {
           headers: { "Content-Type": "application/json" },
         }
       )
+      console.log(response)
       const data = await response.json()
 
       if (!data.ok) {
@@ -68,7 +69,7 @@ const ResetPasswordForm = () => {
   }
 
   return (
-    <Card twClasses="w-[45rem] mx-auto p-20 border border-secondary space-y-16">
+    <Card twClasses="w-[45rem] mx-auto p-20 border border-secondary space-y-16 dark:bg-black">
       <h1 className="text-4xl font-bold text-center">Reset Password</h1>
       <form className="flex flex-col gap-5" onSubmit={resetPasswordHandler}>
         <StyledInputRef
@@ -95,7 +96,7 @@ export default ResetPasswordForm
 const ResetPasswordButton = () => {
   return (
     <button
-      className={`p-4 rounded-lg duration-200 hover:bg-black ease-in-out bg-secondary text-primary font-bold text-sm`}
+      className={`p-4 rounded-lg duration-200 hover:bg-black ease-in-out bg-secondary text-primary font-bold text-sm dark:bg-tertiary`}
       type="submit"
     >
       Reset Password

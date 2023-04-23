@@ -93,7 +93,7 @@ const Deposit = () => {
 
   return (
     <div className="w-full flex flex-col justify-center items-center">
-      <Card twClasses="p-10 md:p-20 m-0 md:m-10 shadow-lg space-y-5 w-[35rem]">
+      <Card twClasses="p-10 md:p-20 m-0 md:m-10 shadow-lg space-y-5 w-[35rem] dark:bg-black dark:border-4 dark:border-tertiary">
         <h1 className="text-3xl text-center font-semibold">Current Balance:</h1>
         <p className="text-center text-3xl">${getNumberWithCommas(balance)}</p>
         <form className="flex flex-col gap-5" onSubmit={depositFundsHandler}>
@@ -148,7 +148,7 @@ export default Deposit
 const DepositNowButton = () => {
   return (
     <button
-      className={`p-4 py-3 rounded-lg duration-200 hover:bg-black ease-in-out bg-secondary text-primary font-semibold text-lg shadow-lg`}
+      className={`p-4 py-3 rounded-lg duration-200 hover:bg-black ease-in-out bg-secondary text-primary font-semibold text-lg shadow-lg dark:bg-tertiary dark:hover:bg-secondary`}
       type="submit"
     >
       Deposit Now

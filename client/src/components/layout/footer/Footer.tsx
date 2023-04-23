@@ -1,11 +1,12 @@
 import useAuth from "../../../lib/hooks/context-hooks/useAuthContext"
+import Logo from "../../ui/Logo"
 import RouterLink from "../../ui/RouterLink"
 
 const Footer = () => {
   const { auth } = useAuth()
 
   return (
-    <footer className="p-8 flex flex-row justify-between items-center bg-secondary text-primary">
+    <footer className="p-8 flex flex-row justify-between items-center bg-secondary text-primary border-t-2 border-t-tertiary dark:bg-black">
       <nav className="hidden md:flex flex-row gap-4">
         {auth._id ? (
           <>
@@ -37,19 +38,10 @@ const Footer = () => {
               routerLinkText="Register"
               twClasses="p-2 w-24 text-center text-lg"
             />
-            <RouterLink
-              to="/dev"
-              routerLinkText="Dev"
-              twClasses="p-2 w-24 text-center text-lg"
-            />
           </>
         )}
       </nav>
-      <RouterLink
-        twClasses="text-2xl font-bold select-none"
-        routerLinkText="AkhtarsList"
-        to="/"
-      />
+      <Logo />
     </footer>
   )
 }

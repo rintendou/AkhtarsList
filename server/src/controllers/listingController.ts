@@ -700,3 +700,67 @@ export const modifyListingStatus = async (req: Request, res: Response) => {
     })
   }
 }
+
+export const reportListing = async (req: Request, res: Response) => {
+  // Extract payload from params and body
+  const { listingId } = req.params
+  const { userId } = req.body
+
+  // Check if appropriate payload is attached
+  if (!listingId || !userId) {
+    return res.status(400).json({
+      message: "listingId params and userId property are required!",
+      data: null,
+      ok: false,
+    })
+  }
+
+  try {
+    // Check if listing to be reported exists
+    const existingReportedListing = await ListingModel.findOne({
+      _id: listingId,
+    })
+    if (!existingReportedListing) {
+      return res.status(404).json({
+        message: "Listing does not exist!",
+        data: null,
+        ok: false,
+      })
+    }
+
+    // Check if user exists
+    const existingUser = await UserModel.findById(userId)
+    if (!existingUser) {
+      return res.status(404).json({
+        message: "Invalid credentials!",
+        data: null,
+        ok: false,
+      })
+    }
+
+    // Update all admin's reportedListings
+    const admins = await UserModel.find({ isAdmin: true })
+    const updatedReportedListings = [
+      existingReportedListing._id,
+      ...existingUser.reportedListings
+        .filter((listing) => !listing._id.equals(existingReportedListing._id))
+        .map((listing) => listing._id),
+    ]
+    for (const admin of admins) {
+      admin.reportedListings = updatedReportedListings
+      await admin.save()
+    }
+
+    res.status(400).json({
+      message: "Listing successfully reported!",
+      data: null,
+      ok: true,
+    })
+  } catch (error) {
+    res.status(500).json({
+      message: error,
+      data: error,
+      ok: false,
+    })
+  }
+}

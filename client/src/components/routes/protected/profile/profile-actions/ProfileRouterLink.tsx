@@ -10,9 +10,9 @@ const ProfileRouterLink = ({ children, to }: Props) => {
   return (
     <Link
       to={to}
-      className={`px-10 py-5 flex items-center hover:bg-blue-200 duration-100 ease-in-out hover:shadow-sm ${
-        location.pathname === to && "bg-blue-200"
-      }`}
+      className={`px-10 py-5 flex items-center hover:bg-blue-200 duration-100 ease-in-out hover:shadow-sm dark:hover:bg-tertiary ${
+        location.pathname === to && "bg-blue-200 dark:bg-tertiary"
+      } `}
     >
       {children}
     </Link>

@@ -75,6 +75,12 @@ const UserSchema = new Schema(
         ref: "ExpiredListing",
       },
     ],
+    reportedListings: [
+      {
+        type: ObjectId,
+        ref: "Listing",
+      },
+    ],
   },
   { timestamps: true }
 )

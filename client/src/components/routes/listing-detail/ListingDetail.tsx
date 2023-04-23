@@ -20,7 +20,7 @@ const ListingDetail = () => {
 
   return (
     <div>
-      <div className="flex flex-col md:flex-row min-h-screen border-b-2 border-b-tertiary">
+      <div className="flex flex-col md:flex-row min-h-screen border-b-2 border-b-tertiary dark:bg-black">
         <ListingOverview />
         {biddingSection}
       </div>

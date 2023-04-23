@@ -13,6 +13,7 @@ import {
   fetchListingsFromSearch,
   bidOnListing,
   modifyListingStatus,
+  reportListing,
 } from "../controllers/listingController"
 
 const ListingRoute = express.Router()
@@ -52,5 +53,8 @@ ListingRoute.put("/bid/:listingId", bidOnListing)
 
 // Update Listing Status
 ListingRoute.put("/status/:listingId", modifyListingStatus)
+
+// Report Listing
+ListingRoute.put("/report/:listingId", reportListing)
 
 export default ListingRoute

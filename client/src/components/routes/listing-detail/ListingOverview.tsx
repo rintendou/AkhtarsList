@@ -2,6 +2,9 @@ import useListingDetailContextQuery from "../../../lib/hooks/context-hooks/useLi
 import getFormattedDate from "../../../lib/util/functions/getFormattedDate"
 import getNumberWithCommas from "../../../lib/util/functions/getNumberWithCommas"
 
+// Assets
+import noImageFound from "/no-image-found-undraw.svg"
+
 const ListingOverview = () => {
   const { data } = useListingDetailContextQuery()
   const { data: listing } = data
@@ -23,7 +26,7 @@ const ListingOverview = () => {
       <div className="space-y-10">
         <h1 className="text-5xl text-center font-semibold">{title}</h1>
         <img
-          src={image.length !== 0 ? image : "https://picsum.photos/200/300"}
+          src={image.length !== 0 ? image : noImageFound}
           alt={title}
           className="w-screen h-max object-cover"
         />

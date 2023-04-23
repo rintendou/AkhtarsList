@@ -15,12 +15,12 @@ const Preview = () => {
   const message = location.state!.message
 
   return (
-    <div className="min-h-screen flex flex-col justify-between">
+    <div className="min-h-screen flex flex-col justify-between dark:bg-secondary">
       <h1 className="text-4xl font-bold text-center w-full tracking-wide py-10">
         {message}
       </h1>
       <PreviewImageContainer img={image} title={title} />
-      <div className="bg-purple-100 p-10 md:p-20 md:pt-10">
+      <div className="bg-purple-100 p-10 md:p-20 md:pt-10 dark:bg-black">
         <div className="flex flex-col gap-10">
           <h1 className="text-2xl font-semibold text-center w-full">
             Listing Preview

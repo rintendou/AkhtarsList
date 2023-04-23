@@ -15,6 +15,7 @@ type initialContextType = {
   biddings: ListingType[]
   wonListings: ListingType[]
   disputedListings: ListingType[]
+  reportedListings: ListingType[]
   refetchUserDetails: () => void
 }
 
@@ -29,6 +30,7 @@ const initialContext: initialContextType = {
   biddings: [],
   wonListings: [],
   disputedListings: [],
+  reportedListings: [],
   refetchUserDetails: () => {},
 }
 
@@ -51,6 +53,7 @@ const ProfileContextProvider = ({
   const [listings, setListings] = useState<ListingType[]>([])
   const [wonListings, setWonListings] = useState<ListingType[]>([])
   const [disputedListings, setDisputedListings] = useState<ListingType[]>([])
+  const [reportedListings, setReportedListings] = useState<ListingType[]>([])
 
   // Fetch user details on component mount and when _id changes on auth
   useEffect(() => {
@@ -85,6 +88,7 @@ const ProfileContextProvider = ({
       setListings(data.data.listedListings.reverse())
       setWonListings(data.data.wonListings.reverse())
       setDisputedListings(data.data.disputedListings.reverse())
+      setReportedListings(data.data.reportedListings)
     }
 
     fetchUserDetails()
@@ -121,6 +125,7 @@ const ProfileContextProvider = ({
       setListings(data.data.listedListings.reverse())
       setWonListings(data.data.wonListings.reverse())
       setDisputedListings(data.data.disputedListings.reverse())
+      setReportedListings(data.data.reportedListings)
     }
     refetchUser()
   }
@@ -196,6 +201,7 @@ const ProfileContextProvider = ({
     listings,
     wonListings,
     disputedListings,
+    reportedListings,
     refetchUserDetails,
   }
 

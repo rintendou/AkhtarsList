@@ -33,7 +33,7 @@ const CategoryListings = () => {
             <h1 className="text-lg font-semibold w-full">Sneakers</h1>
             <SeeAll to="/category/sneakers" />
           </div>
-          <ul className="flex gap-8 py-5 overflow-x-scroll">
+          <ul className="flex gap-8 py-5 overflow-x-auto">
             {sneakersListings.map((listing) => (
               <li key={listing._id}>
                 <ListingCard listing={listing} />
@@ -48,7 +48,7 @@ const CategoryListings = () => {
             <h1 className="text-lg font-semibold w-full">Antiques</h1>
             <SeeAll to="/category/antiques" />
           </div>
-          <ul className="flex gap-8 py-5 overflow-x-scroll">
+          <ul className="flex gap-8 py-5 overflow-x-auto">
             {antiquesListings.map((listing) => (
               <li key={listing._id}>
                 <ListingCard listing={listing} />
@@ -66,7 +66,7 @@ const CategoryListings = () => {
             <h1 className="text-lg font-semibold w-full">Tech</h1>
             <SeeAll to="/category/tech" />
           </div>
-          <ul className="flex gap-8 py-5 overflow-x-scroll">
+          <ul className="flex gap-8 py-5 overflow-x-auto">
             {techListings.map((listing) => (
               <li key={listing._id}>
                 <ListingCard listing={listing} />
@@ -81,7 +81,7 @@ const CategoryListings = () => {
             <h1 className="text-lg font-semibold w-full">Accessories</h1>
             <SeeAll to="/category/accessories" />
           </div>
-          <ul className="flex gap-8 py-5 overflow-x-scroll">
+          <ul className="flex gap-8 py-5 overflow-x-auto">
             {accessoriesListings.map((listing) => (
               <li key={listing._id}>
                 <ListingCard listing={listing} />
@@ -96,7 +96,7 @@ const CategoryListings = () => {
             <h1 className="text-lg font-semibold w-full">Collectibles</h1>
             <SeeAll to="/category/collectibles" />
           </div>
-          <ul className="flex gap-8 py-5 overflow-x-scroll">
+          <ul className="flex gap-8 py-5 overflow-x-auto">
             {collectiblesListings.map((listing) => (
               <li key={listing._id}>
                 <ListingCard listing={listing} />

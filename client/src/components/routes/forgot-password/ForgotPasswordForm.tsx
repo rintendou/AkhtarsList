@@ -122,7 +122,7 @@ const ForgotPasswordForm = () => {
   }
 
   return (
-    <Card twClasses="w-[45rem] mx-auto p-20 border border-secondary space-y-16">
+    <Card twClasses="w-[45rem] mx-auto p-20 border-2 border-secondary space-y-16 dark:bg-black dark:border-tertiary dark:border-4">
       <h1 className="text-4xl font-bold text-center">Reset Password</h1>
       {!didSubmit ? (
         <form className="flex flex-col" onSubmit={getSecurityQuestionsHandler}>
@@ -163,7 +163,7 @@ export default ForgotPasswordForm
 const ForgetPasswordButton = () => {
   return (
     <button
-      className={`mt-4 p-4 rounded-lg duration-200 hover:bg-black ease-in-out bg-secondary text-primary font-bold text-sm`}
+      className={`mt-4 p-4 rounded-lg duration-200 hover:bg-black ease-in-out bg-secondary text-primary font-bold text-sm dark:bg-tertiary dark:hover:bg-secondary`}
       type="submit"
     >
       Reset Password
@@ -174,7 +174,7 @@ const ForgetPasswordButton = () => {
 const SubmitButton = () => {
   return (
     <button
-      className={`mt-4 p-4 rounded-lg duration-200 hover:bg-black ease-in-out bg-secondary text-primary font-bold text-sm`}
+      className={`mt-4 p-4 rounded-lg duration-200 hover:bg-black ease-in-out bg-secondary text-primary font-bold text-sm dark:bg-tertiary dark:hover:bg-secondary`}
       type="submit"
     >
       Submit Answer

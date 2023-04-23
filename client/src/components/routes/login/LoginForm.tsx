@@ -84,7 +84,7 @@ const LoginForm = ({
   }
 
   return (
-    <Card twClasses="w-[30rem] md:w-[45rem] mx-auto p-20 border border-secondary space-y-16 flex flex-col justify-center">
+    <Card twClasses="w-[30rem] md:w-[45rem] mx-auto p-20 border border-secondary space-y-16 flex flex-col justify-center dark:bg-black dark:border-4 dark:border-tertiary">
       <h1 className="text-4xl font-bold text-center">Log In</h1>
       <form className="flex flex-col gap-5" onSubmit={loginUserHandler}>
         <StyledInputRef
@@ -118,7 +118,7 @@ export default LoginForm
 const LoginButton = () => {
   return (
     <button
-      className={`p-4 rounded-lg duration-200 hover:bg-black ease-in-out bg-secondary text-primary font-bold text-sm`}
+      className={`p-4 rounded-lg duration-200 hover:bg-black ease-in-out bg-secondary text-primary font-bold text-sm dark:bg-tertiary`}
       type="submit"
     >
       Log In

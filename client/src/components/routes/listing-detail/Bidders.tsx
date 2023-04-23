@@ -29,7 +29,7 @@ const Bidders = () => {
   return (
     <div className="w-full">
       <h1 className="text-center text-2xl font-semibold">Bidders</h1>
-      <div className="space-y-5 w-full overflow-y-auto h-96 border-2 p-4 border-secondary rounded-md">
+      <div className="space-y-5 w-full overflow-y-auto h-96 border-2 p-4 border-secondary rounded-md dark:bg-black">
         <div className="flex items-center space-x-4">
           <h1>Number of Bidders: </h1>
           <p className="text-lg font-semibold">{bidders.length}</p>
@@ -44,8 +44,10 @@ const Bidders = () => {
               <li
                 key={index}
                 className={`${
-                  index === 0 ? "text-black font-bold" : "text-gray-500"
-                } flex items-center gap-3`}
+                  index === 0
+                    ? "text-black font-bold dark:text-primary"
+                    : "text-gray-500 dark:text-gray-700"
+                } flex items-center gap-3 `}
               >
                 {index + 1}.) {bidder} {username === bidder && "(You)"}
                 {index === 0 && CrownSVG}
