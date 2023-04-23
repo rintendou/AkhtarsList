@@ -1,17 +1,14 @@
 import RouterLink from "../../ui/RouterLink"
 import useAuth from "../../../lib/hooks/context-hooks/useAuthContext"
 import SearchBar from "./SearchBar"
+import Logo from "../../ui/Logo"
 
 const Header = () => {
   const { isLoggedIn } = useAuth()
 
   return (
     <header className="p-8 flex flex-row justify-between items-center bg-secondary text-primary sticky top-0 gap-8 z-50 dark:bg-black">
-      <RouterLink
-        twClasses="text-2xl font-bold select-none"
-        routerLinkText="AkhtarsList"
-        to="/"
-      />
+      <Logo />
       <SearchBar />
       <nav className="hidden md:flex flex-row gap-4">
         {isLoggedIn ? (
