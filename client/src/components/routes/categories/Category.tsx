@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react"
-import { useParams } from "react-router-dom"
+import { useEffect } from "react"
+import { useLocation, useParams } from "react-router-dom"
 import useTimelineContext from "../../../lib/hooks/context-hooks/useTimelineContext"
 
 // Components
@@ -11,12 +11,14 @@ import ListingType from "../../../lib/types/ListingType"
 import ListMore from "../protected/listings/ListMore"
 
 const Category = () => {
+  const { pathname } = useLocation()
+
   useEffect(() => {
     window.scrollTo({
       top: 0,
       behavior: "smooth",
     })
-  }, [])
+  }, [pathname])
 
   const { categoryName } = useParams()
 
