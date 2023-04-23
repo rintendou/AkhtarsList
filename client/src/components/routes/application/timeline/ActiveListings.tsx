@@ -11,9 +11,9 @@ const ActiveListings = () => {
     <div>
       <div className="flex justify-between">
         <h1 className="text-lg font-semibold w-full">All Active Listings</h1>
-        <SeeAll to="/category/general" />
+        <SeeAll to="/category/assorted" />
       </div>
-      <ul className="flex gap-8 py-5 overflow-x-scroll">
+      <ul className="flex gap-8 py-5 overflow-x-auto">
         {unexpiredListings.length !== 0 ? (
           unexpiredListings.map((listing) => (
             <li key={listing._id}>

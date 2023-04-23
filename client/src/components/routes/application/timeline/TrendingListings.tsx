@@ -13,7 +13,7 @@ const TrendingListings = () => {
         <h1 className="text-lg font-semibold w-full">Trending</h1>
         <SeeAll to="/category/trending" />
       </div>
-      <ul className="flex gap-8 py-5 overflow-x-scroll">
+      <ul className="flex gap-8 py-5 overflow-x-auto">
         {trendingListings.length !== 0 ? (
           trendingListings.map((listing) => (
             <li key={listing._id}>
