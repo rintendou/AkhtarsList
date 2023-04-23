@@ -11,7 +11,7 @@ const ExpiredListings = () => {
     <div>
       <div className="flex justify-between">
         <h1 className="text-lg font-semibold w-full">Expired Listings</h1>
-        <SeeAll to="/category/general" />
+        <SeeAll to="/category/assorted" />
       </div>
       <ul className="flex gap-8 py-5 overflow-x-scroll">
         {expiredListings.length !== 0 ? (
