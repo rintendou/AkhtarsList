@@ -6,7 +6,7 @@ const Header = () => {
   const { isLoggedIn } = useAuth()
 
   return (
-    <header className="p-8 flex flex-row justify-between items-center bg-secondary text-primary sticky top-0 gap-8 z-50">
+    <header className="p-8 flex flex-row justify-between items-center bg-secondary text-primary sticky top-0 gap-8 z-50 dark:bg-black">
       <RouterLink
         twClasses="text-2xl font-bold select-none"
         routerLinkText="AkhtarsList"

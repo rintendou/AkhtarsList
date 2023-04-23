@@ -21,10 +21,10 @@ const useThemeSwitcher = () => {
 
   useEffect(() => {
     if (mode === "dark") {
-      document.body.classList.add("dark-mode")
+      document.body.classList.add("dark")
       localStorage.setItem("mode", "dark")
     } else {
-      document.body.classList.remove("dark-mode")
+      document.body.classList.remove("dark")
       localStorage.setItem("mode", "light")
     }
   }, [mode])
