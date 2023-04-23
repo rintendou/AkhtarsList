@@ -105,7 +105,7 @@ const ActiveBiddingSection = () => {
 
   return (
     <div
-      className={`flex-auto p-10 py-24 max-w-none md:max-w-[50%] max-h-[50%] md:max-h-none space-y-10 flex flex-col items-center bg-purple-100`}
+      className={`flex-auto p-10 py-24 max-w-none md:max-w-[50%] max-h-[50%] md:max-h-none space-y-10 flex flex-col items-center bg-purple-100 dark:bg-secondary`}
     >
       <h1 className="text-5xl text-center font-semibold backdrop-opacity-30">
         Biddings
@@ -136,11 +136,11 @@ const ActiveBiddingSection = () => {
               <input
                 id="Bid Amount ($)"
                 ref={bidAmountRef}
-                className="pt-3 pl-3 p-2 block px-0 mt-0 bg-transparent border-2 focus:outline-none focus:ring-0 border-secondary rounded-md w-full"
+                className="pt-3 pl-3 p-2 block px-0 mt-0 bg-transparent border-2 focus:outline-none focus:ring-0 border-secondary rounded-md w-full dark:bg-black dark:text-primary dark:border-tertiary dark:border-4"
               />
               <label
                 htmlFor="Bid Amount ($)"
-                className="absolute duration-200 ease-in-out top-3 left-3 -z-1 origin-0 text-secondary"
+                className="absolute duration-200 ease-in-out top-3 left-3 -z-1 origin-0 text-secondary dark:text-primary"
               >
                 Bid Amount ($)
               </label>
@@ -174,7 +174,7 @@ const ActiveBiddingSection = () => {
 const BidButton = () => {
   return (
     <button
-      className={`p-4 py-3 rounded-lg duration-200 hover:bg-black ease-in-out bg-secondary text-primary font-bold text-xl w-full max-w-[50%]`}
+      className={`p-4 py-3 rounded-lg duration-200 hover:bg-black ease-in-out bg-secondary text-primary font-bold text-xl w-full max-w-[50%] dark:bg-tertiary`}
       type="submit"
     >
       Place Bid

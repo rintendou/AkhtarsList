@@ -1,9 +1,13 @@
+import ProfileRouterLink from "../../profile/profile-actions/ProfileRouterLink"
 import AdminRouterLink from "./AdminRouterLink"
 
 const AdminActions = () => {
   return (
     <div>
-      <AdminRouterLink to="/admin/analytics" twClasses="text-secondary">
+      <AdminRouterLink
+        to="/admin/analytics"
+        twClasses="text-secondary dark:text-primary"
+      >
         <svg
           stroke="currentColor"
           fill="currentColor"
@@ -22,7 +26,10 @@ const AdminActions = () => {
           <p>Track Marketing Results </p>
         </div>
       </AdminRouterLink>
-      <AdminRouterLink to="/admin/transactions" twClasses="text-secondary">
+      <AdminRouterLink
+        to="/admin/transactions"
+        twClasses="text-secondary dark:text-primary"
+      >
         <svg
           stroke="currentColor"
           fill="currentColor"
@@ -35,7 +42,7 @@ const AdminActions = () => {
         >
           <path
             fill="none"
-            stroke="#000"
+            stroke="white"
             strokeWidth="2"
             d="M2,7 L20,7 M16,2 L21,7 L16,12 M22,17 L4,17 M8,12 L3,17 L8,22"
           ></path>
@@ -45,7 +52,10 @@ const AdminActions = () => {
           <p>See Successfully Sold Listings</p>
         </div>
       </AdminRouterLink>
-      <AdminRouterLink to="/admin/disputes" twClasses="text-secondary">
+      <AdminRouterLink
+        to="/admin/disputes"
+        twClasses="text-secondary  dark:text-primary"
+      >
         <svg
           stroke="currentColor"
           fill="currentColor"
@@ -58,7 +68,7 @@ const AdminActions = () => {
         >
           <path
             fill="none"
-            stroke="#000"
+            stroke="white"
             strokeWidth="2"
             d="M16,12 C18.3736719,13.1826446 20,15.6506255 20,19 L20,23 L4,23 L4,19 C4,15.6457258 5.6310898,13.1754259 8,12 M12,13 C15.3137085,13 18,10.3137085 18,7 C18,3.6862915 15.3137085,1 12,1 C8.6862915,1 6,3.6862915 6,7 C6,10.3137085 8.6862915,13 12,13 Z M18,7 C16.5,7 15,7.3599999 13,5 C11,7.3599999 8.5,8 6,7 M7,13 L12.0249378,18.2571942 L17,13 M12,18 L12,23"
           ></path>
@@ -68,7 +78,10 @@ const AdminActions = () => {
           <p>Oversee Lister and Bidder Dispute</p>
         </div>
       </AdminRouterLink>
-      <AdminRouterLink to="/admin/reported" twClasses="text-secondary">
+      <AdminRouterLink
+        to="/admin/reported"
+        twClasses="text-secondary  dark:text-primary"
+      >
         <svg
           stroke="currentColor"
           fill="currentColor"
@@ -86,6 +99,27 @@ const AdminActions = () => {
           <p>Manage Reported Listings</p>
         </div>
       </AdminRouterLink>
+      <ProfileRouterLink to="/profile">
+        <svg
+          className="mr-4"
+          stroke="currentColor"
+          fill="currentColor"
+          strokeWidth="0"
+          viewBox="0 0 24 24"
+          height="2.4em"
+          width="2.4em"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <g>
+            <path fill="none" d="M0 0h24v24H0z"></path>
+            <path d="M2 3.993A1 1 0 0 1 2.992 3h18.016c.548 0 .992.445.992.993v16.014a1 1 0 0 1-.992.993H2.992A.993.993 0 0 1 2 20.007V3.993zM4 5v14h16V5H4zm2 2h6v6H6V7zm2 2v2h2V9H8zm-2 6h12v2H6v-2zm8-8h4v2h-4V7zm0 4h4v2h-4v-2z"></path>
+          </g>
+        </svg>
+        <div className="text-xs">
+          <h1 className="text-lg font-semibold">Profile</h1>
+          <p className="text-gray-500 dark:text-white">See your details</p>
+        </div>
+      </ProfileRouterLink>
     </div>
   )
 }

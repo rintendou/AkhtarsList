@@ -1,6 +1,7 @@
 import TimelineContextProvider from "../../lib/store/TimelineContext"
 import AuthContextProvider from "../../lib/store/AuthContext"
 import ProfileContextProvider from "../../lib/store/ProfileContext"
+import ThemeContextProvider from "../../lib/store/ThemeContext"
 
 type Props = {
   children: React.ReactNode
@@ -8,11 +9,13 @@ type Props = {
 
 const GlobalContextProviderLayout = ({ children }: Props) => {
   return (
-    <TimelineContextProvider>
-      <AuthContextProvider>
-        <ProfileContextProvider>{children}</ProfileContextProvider>
-      </AuthContextProvider>
-    </TimelineContextProvider>
+    <ThemeContextProvider>
+      <TimelineContextProvider>
+        <AuthContextProvider>
+          <ProfileContextProvider>{children}</ProfileContextProvider>
+        </AuthContextProvider>
+      </TimelineContextProvider>
+    </ThemeContextProvider>
   )
 }
 

@@ -9,7 +9,7 @@ const usePasswordToggle = () => {
 
   const icon = !isVisible ? (
     <svg
-      className="cursor-pointer text-gray-500 opacity-40 hover:opacity-100 hover:text-black duration-200 ease-in-out"
+      className="cursor-pointer text-gray-500 opacity-40 hover:opacity-100 hover:text-black duration-200 ease-in-out dark:text-primary dark:hover:text-gray-500"
       stroke="currentColor"
       fill="currentColor"
       strokeWidth="0"
@@ -33,7 +33,7 @@ const usePasswordToggle = () => {
     </svg>
   ) : (
     <svg
-      className="cursor-pointer text-gray-500 opacity-40 hover:opacity-100 hover:text-black duration-200 ease-in-out"
+      className="cursor-pointer text-gray-500 opacity-40 hover:opacity-100 hover:text-black duration-200 ease-in-out dark:text-primary dark:hover:text-gray-500"
       stroke="currentColor"
       fill="currentColor"
       strokeWidth="0"

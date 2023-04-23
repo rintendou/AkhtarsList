@@ -64,7 +64,7 @@ const WinnerActions = () => {
   }
 
   return (
-    <div className="w-full border-2 border-secondary p-4 rounded-lg">
+    <div className="w-full border-2 border-secondary p-4 rounded-lg dark:border-tertiary dark:bg-black">
       <h1 className="text-center font-semibold text-lg mb-3">
         You won this listing!
       </h1>
@@ -72,12 +72,12 @@ const WinnerActions = () => {
         <StyledButton
           buttonText="Contact Lister"
           onClick={() => {}}
-          twClasses="text-2xl py-4 w-full hover:bg-black"
+          twClasses="text-2xl py-4 w-full hover:bg-black dark:bg-tertiary"
         />
         <StyledButton
           buttonText="Confirm Delivery"
           onClick={onConfirmDelivery}
-          twClasses={`text-2xl py-4 w-full hover:bg-tertiary ${
+          twClasses={`text-2xl py-4 w-full hover:bg-tertiary dark:bg-secondary dark:text-white dark:border-2 dark:border-tertiary ${
             isAlreadySold && "opacity-40 cursor-not-allowed"
           }`}
           intent="secondary"

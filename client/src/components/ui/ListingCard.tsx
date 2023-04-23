@@ -49,7 +49,7 @@ const ListingCard = ({ listing }: { listing: ListingType }) => {
 
   return (
     <Card
-      twClasses={`p-2 w-56 text-sm h-76 justify-between cursor-pointer hover:shadow-xl duration-100 ease-in-out`}
+      twClasses={`p-2 w-56 text-sm h-76 justify-between cursor-pointer hover:shadow-xl duration-100 ease-in-out dark:bg-black dark:hover:bg-slate-900`}
     >
       <div
         className={`flex flex-col gap-1 ${isExpired && "opacity-30"}`}
@@ -85,15 +85,15 @@ const ListingCard = ({ listing }: { listing: ListingType }) => {
           />
         </div>
         <div className="flex justify-between">
-          <p className="bg-gray-200 p-1 rounded-md whitespace-nowrap">
+          <p className="bg-gray-200 p-1 rounded-md whitespace-nowrap dark:bg-secondary">
             Views: {views}
           </p>
-          <p className="bg-gray-200 p-1 rounded-md whitespace-nowrap">
+          <p className="bg-gray-200 p-1 rounded-md whitespace-nowrap dark:bg-secondary">
             {category}
           </p>
         </div>
         <div className="flex justify-between">
-          <p className="bg-gray-200 p-1 rounded md whitespace-nowrap truncate w-full text-center">
+          <p className="bg-gray-200 p-1 rounded md whitespace-nowrap truncate w-full text-center dark:bg-secondary">
             {timeRemaining}
           </p>
         </div>
@@ -131,13 +131,29 @@ const StatusLabel = ({
     </svg>
   )
   if (isStatusSold) {
-    return <p className="bg-green-600 text-white p-1 rounded-md">Sold</p>
+    return (
+      <p className="bg-green-600 text-white p-1 rounded-md dark:bg-green-900">
+        Sold
+      </p>
+    )
   } else if (isStatusDisputed) {
-    return <p className="bg-red-600 text-white p-1 rounded-md">Disputed</p>
+    return (
+      <p className="bg-red-600 text-white p-1 rounded-md dark:bg-red-900">
+        Disputed
+      </p>
+    )
   } else if (isLister) {
-    return <p className="bg-black text-white p-1 rounded-md">Owned by you</p>
+    return (
+      <p className="bg-black text-white p-1 rounded-md dark:bg-tertiary">
+        Owned by you
+      </p>
+    )
   } else if (isHighestBidder) {
-    return <div className="bg-black text-white p-1 rounded-md">{CrownSVG}</div>
+    return (
+      <div className="bg-black text-white p-1 rounded-md dark:bg-tertiary">
+        {CrownSVG}
+      </div>
+    )
   } else {
     return null
   }

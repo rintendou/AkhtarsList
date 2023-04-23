@@ -39,7 +39,7 @@ const ProfileActions = ({ logout }: Props) => {
           </svg>
           <div className="text-xs">
             <h1 className="text-lg font-semibold">Profile</h1>
-            <p className="text-gray-500">See your details</p>
+            <p className="text-gray-500 dark:text-white">See your details</p>
           </div>
         </ProfileRouterLink>
         <ProfileRouterLink to="/profile/deposit">
@@ -57,7 +57,7 @@ const ProfileActions = ({ logout }: Props) => {
           </svg>
           <div className="text-xs">
             <h1 className="text-lg font-semibold">Deposit</h1>
-            <p className="text-gray-500">Top up your balance</p>
+            <p className="text-gray-500 dark:text-white">Top up your balance</p>
           </div>
         </ProfileRouterLink>
         <ProfileRouterLink to="/profile/withdraw">
@@ -75,7 +75,7 @@ const ProfileActions = ({ logout }: Props) => {
           </svg>
           <div className="text-xs">
             <h1 className="text-lg font-semibold">Withdraw</h1>
-            <p className="text-gray-500">Take your funds</p>
+            <p className="text-gray-500 dark:text-white">Take your funds</p>
           </div>
         </ProfileRouterLink>
         <ProfileRouterLink to="/profile/biddings">
@@ -93,7 +93,7 @@ const ProfileActions = ({ logout }: Props) => {
           </svg>
           <div className="text-xs">
             <h1 className="text-lg font-semibold">Biddings</h1>
-            <p className="text-gray-500">Your bids are here</p>
+            <p className="text-gray-500 dark:text-white">Your bids are here</p>
           </div>
         </ProfileRouterLink>
         <ProfileRouterLink to="/profile/listings">
@@ -111,7 +111,9 @@ const ProfileActions = ({ logout }: Props) => {
           </svg>
           <div className="text-xs">
             <h1 className="text-lg font-semibold">Listings</h1>
-            <p className="text-gray-500">Your listings are here</p>
+            <p className="text-gray-500 dark:text-white">
+              Your listings are here
+            </p>
           </div>
         </ProfileRouterLink>
         {auth.isAdmin === "true" && <AdminButton />}
@@ -136,7 +138,7 @@ const ProfileActions = ({ logout }: Props) => {
           </svg>
           <div className="text-xs">
             <h1 className="text-lg font-semibold">Settings</h1>
-            <p className="text-gray-500">Manage user details</p>
+            <p className="text-gray-500 dark:text-white">Manage user details</p>
           </div>
         </ProfileRouterLink>
         <ProfileButton onClick={logoutHandler}>

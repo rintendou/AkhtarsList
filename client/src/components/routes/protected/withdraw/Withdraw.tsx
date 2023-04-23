@@ -53,7 +53,7 @@ const Withdraw = () => {
 
   return (
     <div className="w-full flex flex-col justify-center items-center">
-      <Card twClasses="p-10 md:p-20 m-0 md:m-10 shadow-lg space-y-5 w-[35rem]">
+      <Card twClasses="p-10 md:p-20 m-0 md:m-10 shadow-lg space-y-5 w-[40rem] dark:bg-black dark:border-4 dark:border-tertiary">
         <h1 className="text-3xl text-center font-semibold">Current Balance:</h1>
         <p className="text-center text-3xl">${getNumberWithCommas(balance)}</p>
         <form
@@ -81,7 +81,7 @@ export default Withdraw
 const WithdrawNowButton = () => {
   return (
     <button
-      className={`p-4 py-2 rounded-lg duration-200 hover:bg-black ease-in-out bg-secondary text-primary font-bold text-lg shadow-xl w-[50%] flex-auto`}
+      className={`p-4 py-2 rounded-lg duration-200 hover:bg-black ease-in-out bg-secondary text-primary font-bold text-lg shadow-xl w-[50%] flex-auto dark:bg-tertiary dark:hover:bg-secondary`}
       type="submit"
     >
       Withdraw Now

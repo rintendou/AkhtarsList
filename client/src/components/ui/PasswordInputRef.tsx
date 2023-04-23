@@ -16,7 +16,7 @@ const PasswordInputRef = React.forwardRef<HTMLInputElement, Props>(
       : "new-password"
 
     return (
-      <div className="relative z-0">
+      <div className="relative z-0 dark:bg-black">
         <input
           id={name}
           placeholder=""
@@ -27,7 +27,7 @@ const PasswordInputRef = React.forwardRef<HTMLInputElement, Props>(
         />
         <label
           htmlFor={name}
-          className="absolute duration-200 ease-in-out top-3 left-3 -z-1 origin-0 text-secondary"
+          className="absolute duration-200 ease-in-out top-3 left-3 -z-1 origin-0 text-secondary dark:text-primary"
         >
           {name}
         </label>
