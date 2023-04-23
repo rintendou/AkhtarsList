@@ -16,8 +16,6 @@ import DragAndDrop from "../../../ui/DragAndDrop"
 import numberInputIsValid from "../../../../lib/util/functions/numberInputValidator"
 import stringInputIsValid from "../../../../lib/util/functions/stringInputValidator"
 
-// Backend Server Port
-
 // Constant Variables
 const CATEGORIES = [
   "Sneakers",
