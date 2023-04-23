@@ -37,11 +37,6 @@ const Footer = () => {
               routerLinkText="Register"
               twClasses="p-2 w-24 text-center text-lg"
             />
-            <RouterLink
-              to="/dev"
-              routerLinkText="Dev"
-              twClasses="p-2 w-24 text-center text-lg"
-            />
           </>
         )}
       </nav>
