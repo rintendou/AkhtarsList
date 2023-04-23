@@ -1,39 +1,10 @@
-import React, { useState, useEffect } from "react"
+import useThemeContext from "../../lib/hooks/context-hooks/useThemeContext"
 
-const useThemeSwitcher = () => {
-  const [mode, setMode] = useState(() => localStorage.getItem("mode"))
-
-  useEffect(() => {
-    window.addEventListener("storage", setPreferedTheme)
-    return () => {
-      window.removeEventListener("storage", setPreferedTheme)
-    }
-  }, [])
-
-  const setPreferedTheme = () => {
-    const _mode = localStorage.getItem("mode")
-    if (_mode) {
-      setMode(_mode)
-    } else {
-      setMode("light")
-    }
-  }
-
-  useEffect(() => {
-    if (mode === "dark") {
-      document.body.classList.add("dark")
-      localStorage.setItem("mode", "dark")
-    } else {
-      document.body.classList.remove("dark")
-      localStorage.setItem("mode", "light")
-    }
-  }, [mode])
+const ThemeSwitcher = () => {
+  const { mode, changeTheme } = useThemeContext()
 
   return (
-    <a
-      className="cursor-pointer"
-      onClick={() => setMode((mode) => (mode === "dark" ? "light" : "dark"))}
-    >
+    <a className="cursor-pointer" onClick={changeTheme}>
       {mode === "dark" ? (
         <svg
           stroke="currentColor"
@@ -68,4 +39,4 @@ const useThemeSwitcher = () => {
   )
 }
 
-export default useThemeSwitcher
+export default ThemeSwitcher
