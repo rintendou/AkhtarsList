@@ -662,6 +662,13 @@ export const modifyListingStatus = async (req: Request, res: Response) => {
       })
     }
 
+    // Send Lister Funds if the bestBidder updates listing status to sold
+    if (status === "sold" && existingListing.bestBidder) {
+      const lister = await UserModel.findById(existingListing.lister)
+      lister!.balance += existingListing.finalPrice
+      await lister!.save()
+    }
+
     existingListing.status = status
     await existingListing.save()
 
