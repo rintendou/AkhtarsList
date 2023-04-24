@@ -2,9 +2,6 @@ import { Request, Response } from 'express'
 import ListingModel from '../models/Listing'
 import UserModel from '../models/User'
 import mongoose from 'mongoose'
-import multer from 'multer'
-import { storage, upload, bucket } from '../server'
-import { Readable, Writable } from 'stream'
 
 export const createListing = async (req: Request, res: Response) => {
     const { title, listerId, desc, image, startPrice, expireAt, category, weight, dimensions } = req.body
@@ -25,24 +22,24 @@ export const createListing = async (req: Request, res: Response) => {
     - node-cache: This package provides an in-memory cache for storing the results of previous duplicate detection checks. By caching the results, you can avoid performing the same check multiple times and improve the performance of your system.
     - lodash: This package provides various utility functions for working with arrays, objects, and strings, which can be useful for implementing duplicate detection algorithms.
     */
-   
+
     // Create listing object
     const listing = new ListingModel({
-      _id: new mongoose.Types.ObjectId(),
-      title: title,
-      lister: listerId,
-      listerUsername: listerId.username,
-      desc: desc,
-      image: image,
-      bidders: [],
-      startPrice: startPrice,
-      finalPrice: startPrice,
-      expireAt: expireAt,
-      category: category,
-      weight: weight,
-      dimensions: dimensions,
-      status: "active",
-      views: 0,
+        _id: new mongoose.Types.ObjectId(),
+        title: title,
+        lister: listerId,
+        listerUsername: listerId.username,
+        desc: desc,
+        image: image,
+        bidders: [],
+        startPrice: startPrice,
+        finalPrice: startPrice,
+        expireAt: expireAt,
+        category: category,
+        weight: weight,
+        dimensions: dimensions,
+        status: 'active',
+        views: 0,
     })
 
     try {
@@ -63,40 +60,6 @@ export const createListing = async (req: Request, res: Response) => {
             dimensions: dimensions,
             views: 0,
         })
-
-        try {
-            upload.array('listing-image-upload', 12) // First parameter == name of the file upload input in the HTML/React component, second parameter == max # of files permitted
-
-            const readablePhotoStream = new Readable()
-            readablePhotoStream.push(req.files)
-            readablePhotoStream.push(null)
-
-            const uploadStream = bucket.openUploadStream(image)
-            const id = uploadStream.id
-            readablePhotoStream.pipe(uploadStream)
-
-            uploadStream.on('error', () => {
-                return res.status(400).json({
-                    message: 'Error uploading file.',
-                    data: image,
-                    ok: false,
-                })
-            })
-
-            uploadStream.on('finish', () => {
-                return res.status(200).json({
-                    message: 'File uploaded, stored w/ the ObjectId:' + id,
-                    data: image,
-                    ok: true,
-                })
-            })
-        } catch (error) {
-            return res.status(500).json({
-                message: 'ERROR: IDK WHAT IS GOING ON',
-                data: error,
-                ok: false,
-            })
-        }
 
         // Saving to DB
         await listing.save()
@@ -171,36 +134,34 @@ export const fetchListings = async (req: Request, res: Response) => {
         }
 
         await ListingModel.updateMany(
-            { expireAt: { $lt: new Date() }, status: { $nin: ["sold", "disputed"] } },
-            { $set: { status: "expired" } }
-          )
-      
-          const expiredListings = listings.filter(
-            (listing) => new Date(listing.expireAt) < new Date()
-          )
-      
-          for (const expiredListing of expiredListings) {
+            { expireAt: { $lt: new Date() }, status: { $nin: ['sold', 'disputed'] } },
+            { $set: { status: 'expired' } }
+        )
+
+        const expiredListings = listings.filter((listing) => new Date(listing.expireAt) < new Date())
+
+        for (const expiredListing of expiredListings) {
             await UserModel.findByIdAndUpdate(
-              expiredListing.bestBidder,
-              {
-                $addToSet: { wonListings: expiredListing._id },
-              },
-              { new: true }
+                expiredListing.bestBidder,
+                {
+                    $addToSet: { wonListings: expiredListing._id },
+                },
+                { new: true }
             )
-          }
-      
-          res.status(200).json({
-            message: "Listings successfully fetched!",
+        }
+
+        res.status(200).json({
+            message: 'Listings successfully fetched!',
             data: listings.reverse(),
             ok: true,
-          })
-        } catch (error) {
-          return res.status(500).json({
+        })
+    } catch (error) {
+        return res.status(500).json({
             message: error,
             data: null,
             ok: false,
-          })
-        }
+        })
+    }
 }
 
 export const fetchListingsByCategory = async (req: Request, res: Response) => {
@@ -423,170 +384,165 @@ export const bidOnListing = async (req: Request, res: Response) => {
     const listingId = req.params.listingId
     const listing = await ListingModel.findById(listingId)
 
-  const userId = req.body.userId
-  const bidder = await UserModel.findById(userId)
+    const userId = req.body.userId
+    const bidder = await UserModel.findById(userId)
 
-  // Edge Case: Listing does not exist
-  if (!listing) {
-    return res.status(400).json({
-      message: "Listing does not exist",
-      data: null,
-      ok: false,
-    })
-  }
-
-  // Edge Case: Bidder does not exist
-  if (!bidder) {
-    return res.status(400).json({
-      message: "Bidder does not exist",
-      data: null,
-      ok: false,
-    })
-  }
-
-  // Edge Case: Listing has expired
-  if (new Date() > new Date(listing.expireAt)) {
-    return res.status(400).json({
-      message: "Listing has expired",
-      data: null,
-      ok: false,
-    })
-  }
-
-  // Edge Case: Bid less than the current highest bid
-  if (listing.finalPrice > req.body.finalPrice) {
-    return res.status(400).json({
-      message: "You cannot bid less than the current bid.",
-      data: null,
-      ok: false,
-    })
-  }
-
-  // Edge Case: Bidder bids the same amount
-  if (listing.finalPrice === req.body.finalPrice) {
-    return res.status(400).json({
-      message: "You can not bid an equal amount.",
-      data: null,
-      ok: false,
-    })
-  }
-
-  // Edge Case: Bidder has insufficient funds
-  if (bidder.balance < req.body.finalPrice) {
-    return res.status(400).json({
-      message: "ERROR: Insufficient funds.",
-      data: null,
-      ok: false,
-    })
-  }
-
-  // Edge Case: The lister tries to bid on their own listing
-  if (listing.bestBidder == listing.lister) {
-    return res.status(400).json({
-      message: "You cannot bid on your own listing.",
-      data: null,
-      ok: false,
-    })
-  }
-
-  // Main Logic
-  try {
-    // Update the best bidder + price of the listing, then refund the balance to the previous best bidder
-
-    try {
-      // Update the balance of the previous bidder
-
-      const prevBestBidder = await UserModel.findById(listing.bestBidder)
-
-      if (prevBestBidder) {
-        prevBestBidder.balance += listing.finalPrice
-        await prevBestBidder.save()
-      }
-    } catch (error) {
-      return res.status(400).json({
-        message: "ERROR: Failed to refund previous bidder",
-        data: error,
-        ok: false,
-      })
+    // Edge Case: Listing does not exist
+    if (!listing) {
+        return res.status(400).json({
+            message: 'Listing does not exist',
+            data: null,
+            ok: false,
+        })
     }
 
-    try {
-      // Updating the balance and the biddings of the new best bidder
-      bidder.balance -= req.body.finalPrice
-      if (listing.bestBidder && bidder._id.equals(listing.bestBidder!._id)) {
-        bidder.balance += +listing.finalPrice
-      }
-
-      // Check if listing already exists on the biddings list of the bidder
-      const updatedUserBiddings = bidder.biddedListings.filter(
-        (biddedListingId) => !biddedListingId.equals(listing._id)
-      )
-      updatedUserBiddings.push(listing._id)
-
-      bidder.biddedListings = updatedUserBiddings.reverse()
-
-      await bidder.save()
-    } catch (error) {
-      console.log(error)
-      return res.status(400).json({
-        message: "ERROR: Failed to update balance of current bidder",
-        data: error,
-        ok: false,
-      })
+    // Edge Case: Bidder does not exist
+    if (!bidder) {
+        return res.status(400).json({
+            message: 'Bidder does not exist',
+            data: null,
+            ok: false,
+        })
     }
 
-    try {
-      // Update the listing
-      listing.finalPrice = req.body.finalPrice
-      listing.bestBidder = userId
-
-      await listing.save()
-    } catch (error) {
-      return res.status(400).json({
-        message: "ERROR: Failed to update listing",
-        data: error,
-        ok: false,
-      })
+    // Edge Case: Listing has expired
+    if (new Date() > new Date(listing.expireAt)) {
+        return res.status(400).json({
+            message: 'Listing has expired',
+            data: null,
+            ok: false,
+        })
     }
 
-    try {
-      // Updating the listing's list of bidders but also updating if a bidder has already bid on this listing before
-      let updatedListingBidders = listing.bidders
+    // Edge Case: Bid less than the current highest bid
+    if (listing.finalPrice > req.body.finalPrice) {
+        return res.status(400).json({
+            message: 'You cannot bid less than the current bid.',
+            data: null,
+            ok: false,
+        })
+    }
 
-      updatedListingBidders = updatedListingBidders.filter(
-        (listingBiddersId) => {
-          return listingBiddersId !== bidder.username
+    // Edge Case: Bidder bids the same amount
+    if (listing.finalPrice === req.body.finalPrice) {
+        return res.status(400).json({
+            message: 'You can not bid an equal amount.',
+            data: null,
+            ok: false,
+        })
+    }
+
+    // Edge Case: Bidder has insufficient funds
+    if (bidder.balance < req.body.finalPrice) {
+        return res.status(400).json({
+            message: 'ERROR: Insufficient funds.',
+            data: null,
+            ok: false,
+        })
+    }
+
+    // Edge Case: The lister tries to bid on their own listing
+    if (listing.bestBidder == listing.lister) {
+        return res.status(400).json({
+            message: 'You cannot bid on your own listing.',
+            data: null,
+            ok: false,
+        })
+    }
+
+    // Main Logic
+    try {
+        // Update the best bidder + price of the listing, then refund the balance to the previous best bidder
+
+        try {
+            // Update the balance of the previous bidder
+
+            const prevBestBidder = await UserModel.findById(listing.bestBidder)
+
+            if (prevBestBidder) {
+                prevBestBidder.balance += listing.finalPrice
+                await prevBestBidder.save()
+            }
+        } catch (error) {
+            return res.status(400).json({
+                message: 'ERROR: Failed to refund previous bidder',
+                data: error,
+                ok: false,
+            })
         }
-      )
 
-      listing.bidders = [bidder.username, ...updatedListingBidders]
+        try {
+            // Updating the balance and the biddings of the new best bidder
+            bidder.balance -= req.body.finalPrice
+            if (listing.bestBidder && bidder._id.equals(listing.bestBidder!._id)) {
+                bidder.balance += +listing.finalPrice
+            }
 
-      listing.transactions = [
-        `${bidder.username} $${req.body.finalPrice}`,
-        ...listing.transactions,
-      ]
+            // Check if listing already exists on the biddings list of the bidder
+            const updatedUserBiddings = bidder.biddedListings.filter(
+                (biddedListingId) => !biddedListingId.equals(listing._id)
+            )
+            updatedUserBiddings.push(listing._id)
 
-      await listing.save()
+            bidder.biddedListings = updatedUserBiddings.reverse()
+
+            await bidder.save()
+        } catch (error) {
+            console.log(error)
+            return res.status(400).json({
+                message: 'ERROR: Failed to update balance of current bidder',
+                data: error,
+                ok: false,
+            })
+        }
+
+        try {
+            // Update the listing
+            listing.finalPrice = req.body.finalPrice
+            listing.bestBidder = userId
+
+            await listing.save()
+        } catch (error) {
+            return res.status(400).json({
+                message: 'ERROR: Failed to update listing',
+                data: error,
+                ok: false,
+            })
+        }
+
+        try {
+            // Updating the listing's list of bidders but also updating if a bidder has already bid on this listing before
+            let updatedListingBidders = listing.bidders
+
+            updatedListingBidders = updatedListingBidders.filter((listingBiddersId) => {
+                return listingBiddersId !== bidder.username
+            })
+
+            listing.bidders = [bidder.username, ...updatedListingBidders]
+
+            listing.transactions = [`${bidder.username} $${req.body.finalPrice}`, ...listing.transactions]
+
+            await listing.save()
+        } catch (error) {
+            return res.status(400).json({
+                message: 'ERROR: Failed to update the bidders of this listing',
+                data: error,
+                ok: false,
+            })
+        }
+
+        return res.status(200).json({
+            message: `${bidder.username} has placed a better bid of $${req.body.finalPrice}`,
+            data: listing,
+            ok: true,
+        })
     } catch (error) {
-      return res.status(400).json({
-        message: "ERROR: Failed to update the bidders of this listing",
-        data: error,
-        ok: false,
-      })
+        return res.status(500).json({
+            message: 'ERROR: EVERYTHING IS WRONG',
+            data: error,
+            ok: false,
+        })
     }
-
-    return res.status(200).json({
-      message: `${bidder.username} has placed a better bid of $${req.body.finalPrice}`,
-      data: listing,
-      ok: true,
-    })
-  } catch (error) {
-    return res.status(500).json({
-      message: "ERROR: EVERYTHING IS WRONG",
-      data: error,
-      ok: false,
-    })
-  }
 }
 
 export const fetchListingsFromSearch = async (req: Request, res: Response) => {
@@ -616,151 +572,146 @@ export const fetchListingsFromSearch = async (req: Request, res: Response) => {
 }
 
 export const modifyListingStatus = async (req: Request, res: Response) => {
-  // Destructure payload from body
-  const { status } = req.body
-  const { listingId } = req.params
+    // Destructure payload from body
+    const { status } = req.body
+    const { listingId } = req.params
 
-  // Check if appropriate payload is passed
-  if (!status) {
-    return res.status(400).json({
-      message: "status is a required property!",
-      data: null,
-      ok: false,
-    })
-  }
-
-  // Check if status has a valid value
-  if (
-    status !== "active" &&
-    status !== "expired" &&
-    status !== "disputed" &&
-    status !== "sold"
-  ) {
-    return res.status(400).json({
-      message: "Invalid status property!",
-      data: null,
-      ok: false,
-    })
-  }
-
-  try {
-    // Check if listing exists
-    const existingListing = await ListingModel.findById(listingId)
-    if (!existingListing) {
-      return res.status(404).json({
-        message: "Listing does not exist!",
-        data: null,
-        ok: false,
-      })
+    // Check if appropriate payload is passed
+    if (!status) {
+        return res.status(400).json({
+            message: 'status is a required property!',
+            data: null,
+            ok: false,
+        })
     }
 
-    // Check if listing is not expired
-    const isExpired = new Date(existingListing.expireAt) < new Date()
-    if (!isExpired) {
-      return res.status(400).json({
-        message: "Cannot modify the status of active listing!",
-        data: null,
-        ok: false,
-      })
+    // Check if status has a valid value
+    if (status !== 'active' && status !== 'expired' && status !== 'disputed' && status !== 'sold') {
+        return res.status(400).json({
+            message: 'Invalid status property!',
+            data: null,
+            ok: false,
+        })
     }
 
-    // Check if currStatus = sold
-    const isAlreadySold = existingListing.status === "sold"
-    if (isAlreadySold) {
-      return res.status(400).json({
-        message: `You cannot modify the status of a sold item!`,
-        data: null,
-        ok: false,
-      })
+    try {
+        // Check if listing exists
+        const existingListing = await ListingModel.findById(listingId)
+        if (!existingListing) {
+            return res.status(404).json({
+                message: 'Listing does not exist!',
+                data: null,
+                ok: false,
+            })
+        }
+
+        // Check if listing is not expired
+        const isExpired = new Date(existingListing.expireAt) < new Date()
+        if (!isExpired) {
+            return res.status(400).json({
+                message: 'Cannot modify the status of active listing!',
+                data: null,
+                ok: false,
+            })
+        }
+
+        // Check if currStatus = sold
+        const isAlreadySold = existingListing.status === 'sold'
+        if (isAlreadySold) {
+            return res.status(400).json({
+                message: `You cannot modify the status of a sold item!`,
+                data: null,
+                ok: false,
+            })
+        }
+
+        // Check if currStatus = newStatus
+        const isSameStatus = status === existingListing.status
+        if (isSameStatus) {
+            return res.status(400).json({
+                message: `Status of this listing is already ${status}!`,
+                data: null,
+                ok: false,
+            })
+        }
+
+        existingListing.status = status
+        await existingListing.save()
+
+        res.status(200).json({
+            message: `Listing status has been successfully set to ${status}!`,
+            data: status,
+            ok: true,
+        })
+    } catch (error) {
+        return res.status(500).json({
+            message: error,
+            data: null,
+            ok: false,
+        })
     }
-
-    // Check if currStatus = newStatus
-    const isSameStatus = status === existingListing.status
-    if (isSameStatus) {
-      return res.status(400).json({
-        message: `Status of this listing is already ${status}!`,
-        data: null,
-        ok: false,
-      })
-    }
-
-    existingListing.status = status
-    await existingListing.save()
-
-    res.status(200).json({
-      message: `Listing status has been successfully set to ${status}!`,
-      data: status,
-      ok: true,
-    })
-  } catch (error) {
-    return res.status(500).json({
-      message: error,
-      data: null,
-      ok: false,
-    })
-  }
 }
 
 export const reportListing = async (req: Request, res: Response) => {
-  // Extract payload from params and body
-  const { listingId } = req.params
-  const { userId } = req.body
+    // Extract payload from params and body
+    const { listingId } = req.params
+    const { userId } = req.body
 
-  // Check if appropriate payload is attached
-  if (!listingId || !userId) {
-    return res.status(400).json({
-      message: "listingId params and userId property are required!",
-      data: null,
-      ok: false,
-    })
-  }
-
-  try {
-    // Check if listing to be reported exists
-    const existingReportedListing = await ListingModel.findOne({
-      _id: listingId,
-    })
-    if (!existingReportedListing) {
-      return res.status(404).json({
-        message: "Listing does not exist!",
-        data: null,
-        ok: false,
-      })
+    // Check if appropriate payload is attached
+    if (!listingId || !userId) {
+        return res.status(400).json({
+            message: 'listingId params and userId property are required!',
+            data: null,
+            ok: false,
+        })
     }
 
-    // Check if user exists
-    const existingUser = await UserModel.findById(userId)
-    if (!existingUser) {
-      return res.status(404).json({
-        message: "Invalid credentials!",
-        data: null,
-        ok: false,
-      })
-    }
+    try {
+        // Check if listing to be reported exists
+        const existingReportedListing = await ListingModel.findOne({
+            _id: listingId,
+        })
+        if (!existingReportedListing) {
+            return res.status(404).json({
+                message: 'Listing does not exist!',
+                data: null,
+                ok: false,
+            })
+        }
 
-    // Update all admin's reportedListings
-    const admins = await UserModel.find({ isAdmin: true })
-    const updatedReportedListings = [
-      existingReportedListing._id,
-      ...existingUser.reportedListings
-        .filter((listing) => !listing._id.equals(existingReportedListing._id))
-        .map((listing) => listing._id),
-    ]
-    for (const admin of admins) {
-      admin.reportedListings = updatedReportedListings
-      await admin.save()
-    }
+        // Check if user exists
+        const existingUser = await UserModel.findById(userId)
+        if (!existingUser) {
+            return res.status(404).json({
+                message: 'Invalid credentials!',
+                data: null,
+                ok: false,
+            })
+        }
 
-    res.status(400).json({
-      message: "Listing successfully reported!",
-      data: null,
-      ok: true,
-    })
-  } catch (error) {
-    res.status(500).json({
-      message: error,
-      data: error,
-      ok: false,
-    })
-  }
+        // Update all admin's reportedListings
+        const admins = await UserModel.find({ isAdmin: true })
+        const updatedReportedListings = [
+            existingReportedListing._id,
+            ...existingUser.reportedListings
+                .filter((listing) => !listing._id.equals(existingReportedListing._id))
+                .map((listing) => listing._id),
+        ]
+        for (const admin of admins) {
+            admin.reportedListings = updatedReportedListings
+            await admin.save()
+        }
+
+        res.status(400).json({
+            message: 'Listing successfully reported!',
+            data: null,
+            ok: true,
+        })
+    } catch (error) {
+        res.status(500).json({
+            message: error,
+            data: error,
+            ok: false,
+        })
+    }
 }
