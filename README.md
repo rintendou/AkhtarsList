@@ -186,18 +186,16 @@ Kennete
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 
-[contributors-shield]: https://img.shields.io/github/contributors/github_username/repo_name.svg?style=for-the-badge
+[contributors-shield]: https://img.shields.io/github/contributors/rintendou/AkhtarsList.svg?style=for-the-badge
 [contributors-url]: https://github.com/rintendou/AkhtarsList/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/github_username/repo_name.svg?style=for-the-badge
+[forks-shield]: https://img.shields.io/github/forks/rintendou/AkhtarsList.svg?style=for-the-badge
 [forks-url]: https://github.com/rintendou/AkhtarsList/network/members
-[stars-shield]: https://img.shields.io/github/stars/github_username/repo_name.svg?style=for-the-badge
+[stars-shield]: https://img.shields.io/github/stars/rintendou/AkhtarsList.svg?style=for-the-badge
 [stars-url]: https://github.com/rintendou/AkhtarsList/stargazers
-[issues-shield]: https://img.shields.io/github/issues/github_username/repo_name.svg?style=for-the-badge
+[issues-shield]: https://img.shields.io/github/issues/rintendou/AkhtarsList.svg?style=for-the-badge
 [issues-url]: https://github.com/rintendou/AkhtarsList/issues
-[license-shield]: https://img.shields.io/github/license/github_username/repo_name.svg?style=for-the-badge
-[license-url]: https://github.com/rintendou/AkhtarsList/blob/master/LICENSE.txt
-[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
-[linkedin-url]: https://linkedin.com/in/linkedin_username
+[license-shield]: https://img.shields.io/github/license/rintendou/AkhtarsList.svg?style=for-the-badge
+[license-url]: https://github.com/rintendou/AkhtarsList/LICENSE.txt
 [product-screenshot]: images/front-page.jpg
 [TypeScript]: https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white
 [TypeScript-url]: https://www.typescriptlang.org/
