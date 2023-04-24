@@ -67,8 +67,8 @@ export const registerUser = async (req: Request, res: Response) => {
       salt
     )
 
-    // Clean the username by removing whitespaces
-    const cleanedUsername = username.replace(/\s+/g, "") // '  hello world ' -> 'helloworld'
+    // Clean the username by removing whitespaces and converting to lowercase
+    const cleanedUsername = username.toLowerCase().replace(/\s+/g, "") // '  hello world ' -> 'helloworld'
 
     // Check if the username already exists in the db
     const existingUser = await UserModel.findOne({
