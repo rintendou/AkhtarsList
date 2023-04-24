@@ -88,12 +88,12 @@ export const getUsers = async (req: JWTRequest, res: Response) => {
 
 export const withdrawFunds = async (req: JWTRequest, res: Response) => {
   // Extract withdrawAmount from body
-  const { userId, withdrawAmount } = req.body
+  const { withdrawAmount } = req.body
 
   // Check if appropriate payload is attached to the body
   if (!withdrawAmount) {
     return res.status(400).json({
-      message: "userId and withdrawAmount properties are required!",
+      message: "withdrawAmount properties are required!",
       data: null,
       ok: false,
     })
@@ -111,7 +111,7 @@ export const withdrawFunds = async (req: JWTRequest, res: Response) => {
 
   try {
     // Check if user exists
-    const user = await UserModel.findById(userId)
+    const user = await UserModel.findById(_idFromToken)
     if (!user) {
       return res
         .status(404)
@@ -139,29 +139,32 @@ export const withdrawFunds = async (req: JWTRequest, res: Response) => {
   }
 }
 
-export const depositFunds = async (req: Request, res: Response) => {
-  // Extract username and depositAmount from body
-  const { userId, depositAmount } = req.body
+export const depositFunds = async (req: JWTRequest, res: Response) => {
+  // Extract payload from body
+  const { depositAmount } = req.body
 
   // Check if appropriate payload is attached to the body
-  if (!userId || !depositAmount) {
+  if (!depositAmount) {
     return res.status(400).json({
-      message: "userId and depositAmount properties are required!",
+      message: "depositAmount properties are required!",
       data: null,
       ok: false,
     })
   }
 
-  // Check if userId is a valid ObjectId
-  if (!mongoose.Types.ObjectId.isValid(userId)) {
+  // Extract decoded token from verifyToken middleware
+  const { _idFromToken } = req.user
+
+  // Check if _idFromToken is a valid ObjectId
+  if (!mongoose.Types.ObjectId.isValid(_idFromToken)) {
     return res
       .status(400)
-      .json({ message: "Invalid userId!", data: null, ok: false })
+      .json({ message: "Invalid token!", data: null, ok: false })
   }
 
   try {
     // Check if user exists
-    const user = await UserModel.findById(userId)
+    const user = await UserModel.findById(_idFromToken)
     if (!user) {
       return res
         .status(404)
