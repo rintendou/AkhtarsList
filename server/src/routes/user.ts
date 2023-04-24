@@ -33,12 +33,27 @@ UserRoute.get(
 )
 
 // DEPOSIT FUNDS
-UserRoute.post("/deposit", depositFunds)
+UserRoute.post(
+  "/deposit",
+  (req: Request, res: Response, next: NextFunction) =>
+    verifyToken(req as JWTRequest, res, next),
+  (req: Request, res: Response) => depositFunds(req as JWTRequest, res)
+)
 
 // WITHDRAW FUNDS
-UserRoute.post("/withdraw", withdrawFunds)
+UserRoute.post(
+  "/withdraw",
+  (req: Request, res: Response, next: NextFunction) =>
+    verifyToken(req as JWTRequest, res, next),
+  (req: Request, res: Response) => withdrawFunds(req as JWTRequest, res)
+)
 
 // APPLY FOR ADMIN
-UserRoute.post("/apply", applyForAdmin)
+UserRoute.post(
+  "/apply",
+  (req: Request, res: Response, next: NextFunction) =>
+    verifyToken(req as JWTRequest, res, next),
+  (req: Request, res: Response) => applyForAdmin(req as JWTRequest, res)
+)
 
 export default UserRoute
