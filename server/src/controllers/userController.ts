@@ -185,28 +185,31 @@ export const depositFunds = async (req: JWTRequest, res: Response) => {
   }
 }
 
-export const applyForAdmin = async (req: Request, res: Response) => {
+export const applyForAdmin = async (req: JWTRequest, res: Response) => {
   // destructure the payload attached to the body
-  const { userId, applicationText } = req.body
+  const { applicationText } = req.body
 
   // Check if appropriate payload is attached to the body
-  if (!userId || !applicationText) {
+  if (!applicationText) {
     return res.status(400).json({
-      message: "userId params and applicationText is required!",
+      message: "applicationText is required!",
       data: null,
       ok: false,
     })
   }
 
+  // Extract decoded token from verifyToken middleware
+  const { _idFromToken } = req.user
+
   // Check if userId is a valid ObjectId
-  if (!mongoose.Types.ObjectId.isValid(userId)) {
+  if (!mongoose.Types.ObjectId.isValid(_idFromToken)) {
     return res
       .status(400)
-      .json({ message: "Invalid userId!", data: null, ok: false })
+      .json({ message: "Invalid token!", data: null, ok: false })
   }
 
   // Check if user exists
-  const existingUser = await UserModel.findOne({ _id: userId })
+  const existingUser = await UserModel.findOne({ _id: _idFromToken })
   if (!existingUser) {
     return res
       .status(400)
