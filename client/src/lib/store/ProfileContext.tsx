@@ -169,7 +169,6 @@ const ProfileContextProvider = ({
         {
           method: "POST",
           body: JSON.stringify({
-            userId: _id,
             withdrawAmount: amount,
           }),
           headers: {

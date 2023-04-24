@@ -49,6 +49,11 @@ UserRoute.post(
 )
 
 // APPLY FOR ADMIN
-UserRoute.post("/apply", applyForAdmin)
+UserRoute.post(
+  "/apply",
+  (req: Request, res: Response, next: NextFunction) =>
+    verifyToken(req as JWTRequest, res, next),
+  (req: Request, res: Response) => applyForAdmin(req as JWTRequest, res)
+)
 
 export default UserRoute
