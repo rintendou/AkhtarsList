@@ -169,8 +169,8 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 ## Contact
 
-Danny Chen - dannychen8102@gmail.com
-Kennete
+- Danny Chen - dannychen8102@gmail.com
+- Kennette James Basco - kmaddela@nyit.edu
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
