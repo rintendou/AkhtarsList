@@ -59,15 +59,6 @@ const BiddingsOverview = () => {
     <Card twClasses="w-full p-4 shadow-lg border-4 border-secondary space-y-4 dark:bg-black dark:border-4 dark:border-tertiary">
       <h1 className="text-2xl font-semibold">Biddings Overview</h1>
       <div className="space-y-2">
-        <p>Total Bids: {biddings.length}</p>
-        <p className="text-xs text-gray-600 dark:text-white">
-          - Active Bids: {activeBiddings.length}
-        </p>
-        <p className="text-xs text-gray-600 dark:text-white">
-          - Expired Bids: {expiredBiddings.length}
-        </p>
-      </div>
-      <div className="space-y-2">
         <p>Total Expired Expenditures: ${totalWonBiddingsAmount}</p>
         <p className="text-xs text-gray-600 dark:text-white">
           - Successful Bid Amount: ${totalFulfilledBiddingsAmount}
@@ -77,6 +68,15 @@ const BiddingsOverview = () => {
         </p>
         <p className="text-xs text-gray-600 dark:text-white">
           - Disputed Bid Amount: ${totalDisputedBiddingsAmount}
+        </p>
+      </div>
+      <div className="space-y-2">
+        <p>Total Bids: {biddings.length}</p>
+        <p className="text-xs text-gray-600 dark:text-white">
+          - Active Bids: {activeBiddings.length}
+        </p>
+        <p className="text-xs text-gray-600 dark:text-white">
+          - Expired Bids: {expiredBiddings.length}
         </p>
       </div>
     </Card>

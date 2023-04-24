@@ -10,7 +10,7 @@ const ListerActions = () => {
         <StyledButton
           buttonText="Contact Winner"
           onClick={() => {}}
-          twClasses="text-2xl py-4 w-full hover:bg-black"
+          twClasses="text-2xl py-4 w-full hover:bg-black dark:bg-tertiary"
         />
       </div>
     </div>
