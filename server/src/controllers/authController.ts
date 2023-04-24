@@ -128,7 +128,7 @@ export const loginUser = async (req: Request, res: Response) => {
 
   try {
     const user = await UserModel.findOne({
-      username,
+      username: username.toLowerCase(),
     })
 
     if (!user)
