@@ -86,12 +86,12 @@ export const getUsers = async (req: JWTRequest, res: Response) => {
   }
 }
 
-export const withdrawFunds = async (req: Request, res: Response) => {
-  // Extract userId and withdrawAmount from body
+export const withdrawFunds = async (req: JWTRequest, res: Response) => {
+  // Extract withdrawAmount from body
   const { userId, withdrawAmount } = req.body
 
   // Check if appropriate payload is attached to the body
-  if (!userId || !withdrawAmount) {
+  if (!withdrawAmount) {
     return res.status(400).json({
       message: "userId and withdrawAmount properties are required!",
       data: null,
@@ -99,8 +99,11 @@ export const withdrawFunds = async (req: Request, res: Response) => {
     })
   }
 
-  // Check if userId is a valid ObjectId
-  if (!mongoose.Types.ObjectId.isValid(userId)) {
+  // Extract decoded token from verifyToken middleware
+  const { _idFromToken } = req.user
+
+  // Check if _idFromToken is a valid ObjectId
+  if (!mongoose.Types.ObjectId.isValid(_idFromToken)) {
     return res
       .status(400)
       .json({ message: "Invalid userId!", data: null, ok: false })
