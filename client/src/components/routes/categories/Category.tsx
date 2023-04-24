@@ -9,6 +9,7 @@ import ListingCard from "../../ui/ListingCard"
 // Types
 import ListingType from "../../../lib/types/ListingType"
 import ListMore from "../protected/listings/ListMore"
+import ScrollToTop from "../../../lib/util/components/ScrollToTop"
 
 const Category = () => {
   const { pathname } = useLocation()
@@ -94,6 +95,7 @@ const Category = () => {
 
   return (
     <div className="min-h-screen flex flex-col container mx-auto py-5">
+      <ScrollToTop />
       <div className="px-10 py-10 bg-purple-100 rounded-md shadow-md dark:bg-black">
         <h1 className="text-3xl capitalize font-bold">{categoryName}</h1>
       </div>
