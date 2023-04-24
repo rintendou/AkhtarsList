@@ -1,6 +1,7 @@
 import ScrollToTop from "../../../../../lib/util/components/ScrollToTop"
 import AnalyticsDisputes from "./AnalyticsDisputes"
 import AnalyticsListingsOverview from "./AnalyticsListingsOverview"
+import AnalyticsReported from "./AnalyticsReported"
 import AnalyticsTransactions from "./AnalyticsTransactions"
 import AnalyticsUsers from "./AnalyticsUsers"
 
@@ -15,6 +16,7 @@ const AnalyticsDashboard = () => {
       </div>
       <AnalyticsTransactions />
       <AnalyticsDisputes />
+      <AnalyticsReported />
     </div>
   )
 }
