@@ -74,7 +74,7 @@
 
 [![AkhtarsList Screenshot][product-screenshot]](https://github.com/rintendou/AkhtarsList)
 
-AkhtarsList is an real-time online auction platform that allows users to sell and bid on items in a swift and secure environment.
+AkhtarsList is a highly responsive online auction platform that allows users to sell and bid on items in a swift, secure, and convenient environment.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
