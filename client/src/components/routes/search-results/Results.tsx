@@ -7,9 +7,9 @@ type Props = {
 
 const Results = ({ searchResults }: Props) => {
   return (
-    <div className="min-h-[30rem] flex flex-col space-y-10">
+    <div className="min-h-[30rem] flex flex-col space-y-10 mb-16">
       {searchResults.length !== 0 ? (
-        <ul className="flex gap-5 overflow-x-scroll">
+        <ul className="flex gap-5 flex-wrap">
           {searchResults.map((listing) => (
             <li key={listing._id}>
               <ListingCard listing={listing} />

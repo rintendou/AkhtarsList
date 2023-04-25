@@ -62,33 +62,39 @@ const ListingOverview = () => {
           <h1>Description: </h1>
           <p className="font-semibold text-lg indent-10">{desc}</p>
         </div>
-        <div className="flex flex-col xl:flex-row justify-between items-center">
+        <div className="flex flex-col xl:flex-row justify-between items-center gap-5">
           <div className="flex items-center gap-3">
             <h1>Weight:</h1>
-            <p className="text-lg font-semibold">{weight} kg</p>
+            <p className="text-lg font-semibold truncate">
+              {getNumberWithCommas(weight)} kg
+            </p>
           </div>
           <div className="flex gap-3 items-center">
             <h1>Dimensions: </h1>
 
             <div className="flex items-center gap-3">
               <h1>H:</h1>
-              <p className="text-lg font-semibold">{dimensions[0]} cm </p>
+              <p className="text-lg font-semibold truncate">
+                {getNumberWithCommas(dimensions[0])} cm
+              </p>
             </div>
             <div className="flex items-center gap-3">
               <h1>W:</h1>
-              <p className="text-lg font-semibold">{dimensions[1]} cm </p>
+              <p className="text-lg font-semibold truncate">
+                {getNumberWithCommas(dimensions[1])} cm
+              </p>
             </div>
             <div className="flex items-center gap-3">
               <h1>L:</h1>
-              <p className="text-lg font-semibold">{dimensions[2]} cm </p>
+              <p className="text-lg font-semibold truncate">
+                {getNumberWithCommas(dimensions[2])} cm
+              </p>
             </div>
-          </div>{" "}
-          <div className="flex items-center gap-3">
-            <h1>Expiration Date:</h1>
-            <p className="text-lg font-semibold">
-              {getFormattedDate(expireAt)}
-            </p>
           </div>
+        </div>
+        <div className="flex items-center gap-3">
+          <h1>Expiration Date:</h1>
+          <p className="text-lg font-semibold">{getFormattedDate(expireAt)}</p>
         </div>
       </div>
     </div>
