@@ -3,23 +3,26 @@ import { useLocation, useNavigate } from "react-router-dom"
 
 import Card from "../../ui/Card"
 import Error from "../../ui/Error"
-import StyledInputRef from "../../ui/StyledInputRef"
 import PasswordInputRef from "../../ui/PasswordInputRef"
+import Success from "../../ui/Success"
 
 const ResetPasswordForm = () => {
+  const location = useLocation()
+  console.log(location.state.successMessage)
+
   // I opted to use the useRef hook instead of useState to prevent
   // unnecessary re-renders of this component per each character typed
   const passwordRef = useRef<HTMLInputElement>(null)
   const confirmPasswordRef = useRef<HTMLInputElement>(null)
 
-  const [isError, setIsError] = useState(false)
   const [errorMessage, setErrorMessage] = useState("")
+  const [successMessage, setSuccessMessage] = useState(
+    location.state.successMessage
+  )
 
   // navigate object to redirect to another page while passing props as well
   // when a successful registration happens, we redirect to the login page
   const navigate = useNavigate()
-
-  const location = useLocation()
 
   // focus on the first input on component mount
   useEffect(() => {
@@ -55,12 +58,12 @@ const ResetPasswordForm = () => {
       const data = await response.json()
 
       if (!data.ok) {
-        setIsError(true)
         setErrorMessage(data.message)
+        setSuccessMessage("")
         return
       }
 
-      setIsError(false)
+      setSuccessMessage("")
       navigate("/login", {
         state: { didRegisterSuccessfully: true, successMessage: data.message },
       })
@@ -77,7 +80,8 @@ const ResetPasswordForm = () => {
         <PasswordInputRef name="Confirm Password" ref={confirmPasswordRef} />
         <ResetPasswordButton />
       </form>
-      {isError && <Error errorMessage={errorMessage} />}
+      {errorMessage && <Error errorMessage={errorMessage} />}
+      {successMessage && <Success successMessage={successMessage} />}
     </Card>
   )
 }
