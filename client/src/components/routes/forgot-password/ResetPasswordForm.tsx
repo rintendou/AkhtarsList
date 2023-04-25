@@ -4,6 +4,7 @@ import { useLocation, useNavigate } from "react-router-dom"
 import Card from "../../ui/Card"
 import Error from "../../ui/Error"
 import StyledInputRef from "../../ui/StyledInputRef"
+import PasswordInputRef from "../../ui/PasswordInputRef"
 
 const ResetPasswordForm = () => {
   // I opted to use the useRef hook instead of useState to prevent
@@ -72,18 +73,8 @@ const ResetPasswordForm = () => {
     <Card twClasses="w-[45rem] mx-auto p-20 border border-secondary space-y-16 dark:bg-black">
       <h1 className="text-4xl font-bold text-center">Reset Password</h1>
       <form className="flex flex-col gap-5" onSubmit={resetPasswordHandler}>
-        <StyledInputRef
-          name="Password"
-          type="password"
-          placeholder="Password"
-          ref={passwordRef}
-        />
-        <StyledInputRef
-          name="Confirm Password"
-          type="password"
-          placeholder="Confirm Password"
-          ref={confirmPasswordRef}
-        />
+        <PasswordInputRef name="Password" ref={passwordRef} />
+        <PasswordInputRef name="Confirm Password" ref={confirmPasswordRef} />
         <ResetPasswordButton />
       </form>
       {isError && <Error errorMessage={errorMessage} />}
