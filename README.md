@@ -126,14 +126,12 @@ _This project relies on external services such as MongoDB, JWT, Cloudinary._
     ```
 
 2. Create two `.env` files in the `client` and `server` directory.
-   * In the `client` `.env`, fill in the values of following variables:
-&nbsp
+   * In the `client` `.env`, fill in the values of following variables:  
    ```sh
     VITE_BACKEND_SERVER_PORT={PORT_NUMBER}
     VITE_CLOUDINARY_URL={CLOUDINARY_API_URL}
    ```
-   * In the `server` `.env`, fill in the values of the following variables
-&nbsp
+   * In the `server` `.env`, fill in the values of the following variables  
    ```sh
     BACKEND_SERVER_PORT={PORT_NUMBER}
     MONGODB_URL={MONGODB_API_KEY}
