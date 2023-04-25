@@ -49,7 +49,7 @@ const ListingCard = ({ listing }: { listing: ListingType }) => {
 
   return (
     <Card
-      twClasses={`p-2 w-56 text-sm h-76 justify-between cursor-pointer hover:shadow-xl duration-100 ease-in-out dark:bg-black dark:hover:bg-slate-900 dark:border dark:border-primary dark:border-opacity-40`}
+      twClasses={`p-2 w-56 text-sm h-76 justify-between cursor-pointer hover:shadow-xl duration-100 ease-in-out dark:bg-black dark:hover:bg-slate-900 dark:border dark:border-primary dark:border-opacity-40 dark:hover:shadow-primary dark:shadow-md`}
     >
       <div
         className={`flex flex-col gap-1 ${isExpired && "opacity-30"}`}
