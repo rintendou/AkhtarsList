@@ -170,7 +170,7 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 ## Contact
 
 - Danny Chen - dannychen8102@gmail.com
-- Kennette James Basco - kmaddela@nyit.edu
+- Kennette James Basco - kenji.maddela01@gmail.com
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
