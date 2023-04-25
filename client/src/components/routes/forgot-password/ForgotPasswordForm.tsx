@@ -15,6 +15,7 @@ const ForgotPasswordForm = () => {
   const [errorMessage, setErrorMessage] = useState("")
   const [didSubmit, setDidSubmit] = useState(false)
   const [securityQuestion, setSecurityQuestion] = useState("")
+  const [username, setUsername] = useState("")
 
   const navigate = useNavigate()
 
@@ -59,15 +60,10 @@ const ForgotPasswordForm = () => {
         return
       }
 
+      setUsername(data.data.username)
       setIsError(false)
       setDidSubmit(true)
       setSecurityQuestion(data.data.securityQuestion)
-      navigate("/login", {
-        state: {
-          didRegisterSuccessfully: true,
-          successMessage: data.message,
-        },
-      })
     }
     getSecurityQuestions()
   }
@@ -80,7 +76,6 @@ const ForgotPasswordForm = () => {
     e.preventDefault()
 
     const verifySecurityQA = async () => {
-      const username = usernameRef.current!.value
       const securityQuestionAnswer = securityQuestionAnswerRef.current!.value
 
       const response = await fetch(
@@ -98,7 +93,6 @@ const ForgotPasswordForm = () => {
       )
       const data = await response.json()
 
-      console.log(data)
       if (!data.ok) {
         setIsError(true)
         setErrorMessage(data.message)
