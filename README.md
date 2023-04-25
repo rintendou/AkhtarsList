@@ -29,7 +29,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/rintendou/AkhtarsList">
-    <img src="images/logo.jpg" alt="Logo" width="80" height="80">
+    <img src="images/logo.jpg" alt="Logo" width="200" height="200">
   </a>
 
 <h3 align="center">AkhtarsList</h3>
