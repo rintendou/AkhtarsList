@@ -35,7 +35,7 @@ const ForgotPasswordForm = () => {
 
       const response = await fetch(
         `http://localhost:${
-          import.meta.env.VITE_BACKEND_SERVER_PORT.BACKEND_SERVER_PORT
+          import.meta.env.VITE_BACKEND_SERVER_PORT
         }/api/auth/get-security-question`,
         {
           method: "POST",
