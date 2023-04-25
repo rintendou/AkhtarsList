@@ -58,7 +58,7 @@ const ListingCard = ({ listing }: { listing: ListingType }) => {
         <img
           src={image.length !== 0 ? image : noImageFound}
           alt={title}
-          className="h-36 w-auto rounded-md"
+          className="h-36 w-auto rounded-md object-cover"
         />
         <div className="flex justify-between">
           <h1 className="text-xl font-bold whitespace-nowrap truncate">
