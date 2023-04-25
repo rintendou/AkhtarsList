@@ -62,7 +62,7 @@ const ListingOverview = () => {
           <h1>Description: </h1>
           <p className="font-semibold text-lg indent-10">{desc}</p>
         </div>
-        <div className="flex flex-col xl:flex-row justify-between items-center">
+        <div className="flex flex-col xl:flex-row justify-between items-center gap-5">
           <div className="flex items-center gap-3">
             <h1>Weight:</h1>
             <p className="text-lg font-semibold truncate">{weight} kg</p>
@@ -88,13 +88,11 @@ const ListingOverview = () => {
                 {dimensions[2]} cm
               </p>
             </div>
-          </div>{" "}
-          <div className="flex items-center gap-3">
-            <h1>Expiration Date:</h1>
-            <p className="text-lg font-semibold">
-              {getFormattedDate(expireAt)}
-            </p>
           </div>
+        </div>
+        <div className="flex items-center gap-3">
+          <h1>Expiration Date:</h1>
+          <p className="text-lg font-semibold">{getFormattedDate(expireAt)}</p>
         </div>
       </div>
     </div>
