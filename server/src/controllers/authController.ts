@@ -285,6 +285,16 @@ export const resetPassword = async (req: Request, res: Response) => {
     user!.password = newHashedPassword
     await user!.save()
 
+    // Check if new password matches old password
+    const doesOldPasswordMatch = await bcrypt.compare(password, user!.password)
+    if (doesOldPasswordMatch) {
+      return res.status(400).json({
+        message: "New password cannot be the same as the old password!",
+        data: null,
+        ok: false,
+      })
+    }
+
     res.status(200).json({
       message: "Password Reset Successful!",
       data: { username: user!.username, _id: user!._id },
