@@ -49,7 +49,7 @@ const ListingCard = ({ listing }: { listing: ListingType }) => {
 
   return (
     <Card
-      twClasses={`p-2 w-56 text-sm h-76 justify-between cursor-pointer hover:shadow-xl duration-100 ease-in-out dark:bg-black dark:hover:bg-slate-900`}
+      twClasses={`p-2 w-56 text-sm h-76 justify-between cursor-pointer hover:shadow-xl duration-100 ease-in-out dark:bg-black dark:hover:bg-slate-900 dark:border dark:border-primary dark:border-opacity-40 dark:hover:shadow-primary dark:shadow-md`}
     >
       <div
         className={`flex flex-col gap-1 ${isExpired && "opacity-30"}`}
@@ -64,19 +64,12 @@ const ListingCard = ({ listing }: { listing: ListingType }) => {
           <h1 className="text-xl font-bold whitespace-nowrap truncate">
             {title}
           </h1>
-          {/* {isHighestBidder && (
-            <div className="bg-black text-white p-1 rounded-md">{CrownSVG}</div>
-          )} */}
         </div>
         <p className="text-gray-500">Current Price:</p>
         <div className="flex justify-between">
           <p className="font-semibold text-xl max-w-[50%] truncate">
             ${getNumberWithCommas(finalPrice)}
           </p>
-
-          {/* {isLister && (
-            <p className="bg-black text-white p-1 rounded-md">Owned by you</p>
-          )} */}
           <StatusLabel
             isLister={isLister}
             isHighestBidder={isHighestBidder}
