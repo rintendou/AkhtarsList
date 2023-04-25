@@ -8,7 +8,6 @@ import Success from "../../ui/Success"
 
 const ResetPasswordForm = () => {
   const location = useLocation()
-  console.log(location.state.successMessage)
 
   // I opted to use the useRef hook instead of useState to prevent
   // unnecessary re-renders of this component per each character typed
