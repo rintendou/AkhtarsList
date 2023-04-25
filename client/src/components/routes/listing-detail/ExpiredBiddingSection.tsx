@@ -57,7 +57,7 @@ const ExpiredBiddingSection = () => {
         </h1>
       )}
 
-      <ReportListing />
+      {!isLister && <ReportListing />}
 
       <div className="w-full flex gap-5 opacity-40">
         <Bidders />
