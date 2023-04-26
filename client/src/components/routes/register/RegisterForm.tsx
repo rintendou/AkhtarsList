@@ -12,12 +12,17 @@ const RegisterForm = () => {
 	// I opted to use the useRef hook instead of useState to prevent
 	// unnecessary re-renders of this component per each character typed
 	const fullNameRef = useRef<HTMLInputElement>(null);
+	const emailRef = useRef<HTMLInputElement>(null);
 	const usernameRef = useRef<HTMLInputElement>(null);
 	const passwordRef = useRef<HTMLInputElement>(null);
 	const confirmPasswordRef = useRef<HTMLInputElement>(null);
-	const addressRef = useRef<HTMLInputElement>(null);
 	const securityQuestionRef = useRef<HTMLInputElement>(null);
 	const securityQuestionAnswerRef = useRef<HTMLInputElement>(null);
+
+	const streetAddressRef = useRef<HTMLInputElement>(null);
+	const cityRef = useRef<HTMLInputElement>(null);
+	const stateRef = useRef<HTMLInputElement>(null);
+	const zipcodeRef = useRef<HTMLInputElement>(null);
 
 	const [isError, setIsError] = useState(false);
 	const [errorMessage, setErrorMessage] = useState("");
@@ -40,19 +45,30 @@ const RegisterForm = () => {
 
 		const registerUser = async () => {
 			const fullName = fullNameRef.current!.value;
+			const email = emailRef.current!.value;
 			const username = usernameRef.current!.value;
 			const password = passwordRef.current!.value;
 			const confirmPassword = confirmPasswordRef.current!.value;
-			const address = addressRef.current!.value;
 			const securityQuestion = securityQuestionRef.current!.value;
 			const securityQuestionAnswer = securityQuestionAnswerRef.current!.value;
 
+			const streetAddress = streetAddressRef.current!.value;
+			const city = cityRef.current!.value;
+			const state = stateRef.current!.value;
+			const zipcode = zipcodeRef.current!.value;
+
 			const payload = {
 				fullName,
+				email,
 				username,
 				password,
 				confirmPassword,
-				address,
+				address: {
+					streetAddress,
+					city,
+					state,
+					zipcode,
+				},
 				securityQuestion,
 				securityQuestionAnswer,
 			};
@@ -95,6 +111,12 @@ const RegisterForm = () => {
 					ref={fullNameRef}
 				/>
 				<StyledInputRef
+					name="Email"
+					type="text"
+					placeholder="Email"
+					ref={emailRef}
+				/>
+				<StyledInputRef
 					name="Username"
 					type="text"
 					placeholder="Username"
@@ -103,11 +125,31 @@ const RegisterForm = () => {
 				<PasswordInputRef name="Password" ref={passwordRef} />
 				<PasswordInputRef name="Confirm Password" ref={confirmPasswordRef} />
 				<StyledInputRef
-					name="Address"
+					name="Street Address"
 					type="text"
-					placeholder="Address"
-					ref={addressRef}
+					placeholder="Street Address"
+					ref={streetAddressRef}
 				/>
+				<div className="flex gap-3">
+					<StyledInputRef
+						name="State"
+						type="text"
+						placeholder="State"
+						ref={stateRef}
+					/>
+					<StyledInputRef
+						name="City"
+						type="text"
+						placeholder="City"
+						ref={cityRef}
+					/>
+					<StyledInputRef
+						name="Zipcode"
+						type="number"
+						placeholder="Zipcode"
+						ref={zipcodeRef}
+					/>
+				</div>
 				<StyledInputRef
 					name="Security Question"
 					type="text"
