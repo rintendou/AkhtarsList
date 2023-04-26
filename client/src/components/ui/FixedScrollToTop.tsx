@@ -1,6 +1,16 @@
 const FixedScrollToTop = () => {
+	const scrollToTopHandler = () => {
+		window.scrollTo({
+			top: 0,
+			behavior: "smooth",
+		});
+	};
+
 	return (
-		<div className="z-3 bg-tertiary bottom-5 right-5 fixed p-4 rounded-full cursor-pointer border-2 border-secondary hover:scale-125 duration-200 ease-in-out">
+		<div
+			className="z-3 bg-tertiary bottom-5 right-5 fixed p-4 rounded-full cursor-pointer border-2 border-secondary hover:scale-125 duration-200 ease-in-out"
+			onClick={scrollToTopHandler}
+		>
 			<svg
 				stroke="currentColor"
 				fill="currentColor"
