@@ -10,6 +10,7 @@ import numberInputIsValid from "../../../../lib/util/functions/numberInputValida
 import CreditCardInput from "./CreditCardInput"
 import CVVInput from "./CVVInput"
 import getNumberWithCommas from "../../../../lib/util/functions/getNumberWithCommas"
+import verifyCCExpirationDate from "../../../../lib/util/functions/verifyCCExpirationDate"
 
 const Deposit = () => {
   const [error, setError] = useState("")
@@ -65,7 +66,8 @@ const Deposit = () => {
     if (
       !stringInputIsValid(expiration) ||
       expirationYear < currentYear ||
-      (expirationYear === currentYear && expirationMonth < currentMonth)
+      (expirationYear === currentYear && expirationMonth < currentMonth) ||
+      !verifyCCExpirationDate
     ) {
       setError("Expiration is Invalid!")
       expirationRef.current!.focus()
