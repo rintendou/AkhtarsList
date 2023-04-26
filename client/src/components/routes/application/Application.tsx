@@ -4,6 +4,7 @@ import Carousel from "../../ui/Carousel";
 import CategoryHeader from "./CategoryHeader";
 import Timeline from "./timeline/Timeline";
 import { Link } from "react-router-dom";
+import FixedScrollToTop from "../../ui/FixedScrollToTop";
 
 const BUYSELLIMAGE = "timeline/buy-sell.jpg";
 
@@ -29,7 +30,8 @@ const Application = () => {
 	}, []);
 
 	return (
-		<div className="min-h-screen flex flex-col pb-20">
+		<div className="min-h-screen flex flex-col pb-20 relative">
+			<FixedScrollToTop />
 			<CategoryHeader />
 			<div className="container mx-auto flex flex-col gap-5">
 				<div className="mb-10">

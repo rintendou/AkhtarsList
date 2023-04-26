@@ -132,7 +132,7 @@ const ActiveBiddingSection = () => {
 						className="w-full flex flex-col md:flex-row gap-5 items-center"
 						onSubmit={onSubmitBid}
 					>
-						<div className="w-full max-w-[50%]">
+						<div className="w-full max-w-[50%] relative">
 							<input
 								id="Bid Amount ($)"
 								ref={bidAmountRef}
