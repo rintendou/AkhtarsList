@@ -30,7 +30,7 @@ const ExpiredBiddingSection = () => {
       {isLister && bestBidder && <ListerActions />}
       <Status status={status} />
 
-      <h1 className="text-5xl text-center font-semibold backdrop-opacity-30 opacity-40">
+      <h1 className="text-5xl text-center font-semibold backdrop-opacity-30 opacity-40 text-tertiary">
         Biddings
       </h1>
 
