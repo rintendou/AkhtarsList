@@ -25,7 +25,7 @@ const Header = () => {
 
 	return (
 		<header
-			className={`flex flex-row justify-between items-center bg-secondary text-primary top-0 gap-8 z-50 dark:bg-black fixed w-full duration-1000 ${
+			className={`flex flex-row justify-between items-center bg-secondary text-primary top-0 gap-8 z-50 dark:bg-black fixed w-full duration-500 ${
 				isTop ? "p-8" : "py-2" // Apply padding only when scroll is at the top
 			}`}
 		>
