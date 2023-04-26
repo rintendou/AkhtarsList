@@ -28,12 +28,12 @@ const LoginForm = ({
 
 	// I opted to use the useRef hook instead of useState to prevent
 	// unnecessary re-renders of this component per each character typed
-	const usernameOrEmailRef = useRef<HTMLInputElement>(null);
+	const usernameRef = useRef<HTMLInputElement>(null);
 	const passwordRef = useRef<HTMLInputElement>(null);
 
 	// focus on the first input on component mount
 	useEffect(() => {
-		usernameOrEmailRef.current!.focus();
+		usernameRef.current!.focus();
 	}, []);
 	// Keep track of error
 	const [errorMessage, setErrorMessage] = useState(errorMessageFromOtherRoute);
@@ -47,16 +47,13 @@ const LoginForm = ({
 	const loginUserHandler = (e: React.FormEvent<HTMLFormElement>) => {
 		// Prevent default behavior of reloading page on form submission
 		e.preventDefault();
-		const usernameOrEmail = usernameOrEmailRef.current!.value;
+		const username = usernameRef.current!.value;
 		const password = passwordRef.current!.value;
 
-		let payload: { email?: string; username?: string; password: string };
-
-		if (usernameOrEmail.includes("@")) {
-			payload = { email: usernameOrEmail, password };
-		} else {
-			payload = { username: usernameOrEmail, password };
-		}
+		const payload = {
+			username,
+			password,
+		};
 
 		const loginUser = async () => {
 			const response = await fetch(
@@ -93,10 +90,10 @@ const LoginForm = ({
 			<h1 className="text-4xl font-bold text-center">Log In</h1>
 			<form className="flex flex-col gap-5" onSubmit={loginUserHandler}>
 				<StyledInputRef
-					name="Username or Email"
+					name="Username"
 					type="text"
-					placeholder="Username or Email"
-					ref={usernameOrEmailRef}
+					placeholder="Username"
+					ref={usernameRef}
 				/>
 				<PasswordInputRef name="Password" ref={passwordRef} />
 				<RouterLink
