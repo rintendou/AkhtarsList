@@ -60,9 +60,9 @@ const ListingOverview = () => {
 						</div>
 					</div>
 				</div>
-				<div className="pb-10 border-b border-b-gray-300">
-					<h1>Description: </h1>
-					<p className="font-semibold text-lg indent-10">{desc}</p>
+				<div className="pb-5 border-b border-b-gray-300">
+					<h1 className="pb-5">Description: </h1>
+					<p className="font-extralight text-lg indent-10">{desc}</p>
 				</div>
 				<div className="flex flex-col xl:flex-row justify-between items-center gap-5">
 					<div className="flex items-center gap-3">
