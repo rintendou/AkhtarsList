@@ -1,126 +1,132 @@
-import { useEffect, useRef, useState } from "react"
-import StyledInputRef from "../../../ui/StyledInputRef"
-import PasswordInputRef from "../../../ui/PasswordInputRef"
-import useAuthContext from "../../../../lib/hooks/context-hooks/useAuthContext"
-import Error from "../../../ui/Error"
-import stringInputIsValid from "../../../../lib/util/functions/stringInputValidator"
-import Success from "../../../ui/Success"
-import useProfileContext from "../../../../lib/hooks/context-hooks/useProfileContext"
+import { useEffect, useRef, useState } from "react";
+import StyledInputRef from "../../../ui/StyledInputRef";
+import PasswordInputRef from "../../../ui/PasswordInputRef";
+import useAuthContext from "../../../../lib/hooks/context-hooks/useAuthContext";
+import Error from "../../../ui/Error";
+import stringInputIsValid from "../../../../lib/util/functions/stringInputValidator";
+import Success from "../../../ui/Success";
+import useProfileContext from "../../../../lib/hooks/context-hooks/useProfileContext";
 
 const ChangeUserDetails = () => {
-  const { auth } = useAuthContext()
-  const { fullName, address, refetchUserDetails } = useProfileContext()
+	const { auth } = useAuthContext();
+	const { fullName, address, refetchUserDetails } = useProfileContext();
+	const { streetAddress, city, state, zipcode } = address;
 
-  const fullNameRef = useRef<HTMLInputElement>(null)
-  const addressRef = useRef<HTMLInputElement>(null)
-  const passwordRef = useRef<HTMLInputElement>(null)
+	const fullNameRef = useRef<HTMLInputElement>(null);
+	const passwordRef = useRef<HTMLInputElement>(null);
 
-  useEffect(() => {
-    fullNameRef.current!.value = fullName
-    addressRef.current!.value = address
-  }, [])
+	const streetAddressRef = useRef<HTMLInputElement>(null);
+	const cityRef = useRef<HTMLInputElement>(null);
+	const stateRef = useRef<HTMLInputElement>(null);
+	const zipcodeRef = useRef<HTMLInputElement>(null);
 
-  const [errorMessage, setErrorMessage] = useState("")
-  const [successMessage, setSuccessMessage] = useState("")
+	useEffect(() => {
+		fullNameRef.current!.value = fullName;
+		streetAddressRef.current!.value = streetAddress;
+		cityRef.current!.value = city;
+		stateRef.current!.value = state;
+	}, []);
 
-  useEffect(() => {
-    fullNameRef.current!.focus()
-  }, [])
+	const [errorMessage, setErrorMessage] = useState("");
+	const [successMessage, setSuccessMessage] = useState("");
 
-  const editUserDetailsHandler = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
+	useEffect(() => {
+		fullNameRef.current!.focus();
+	}, []);
 
-    const fullName = fullNameRef.current!.value
-    const address = addressRef.current!.value
-    const password = passwordRef.current!.value
+	const editUserDetailsHandler = (e: React.FormEvent<HTMLFormElement>) => {
+		e.preventDefault();
 
-    if (!stringInputIsValid(password)) {
-      passwordRef.current!.focus()
-    }
+		const fullName = fullNameRef.current!.value;
+		const password = passwordRef.current!.value;
 
-    if (!stringInputIsValid(address)) {
-      addressRef.current!.focus()
-    }
+		if (!stringInputIsValid(password)) {
+			passwordRef.current!.focus();
+		}
 
-    if (!stringInputIsValid(fullName)) {
-      fullNameRef.current!.focus()
-    }
+		// if (!stringInputIsValid(address)) {
+		// 	addressRef.current!.focus();
+		// }
 
-    const payload = {
-      userId: auth._id,
-      password,
-      fullName,
-      address,
-    }
+		if (!stringInputIsValid(fullName)) {
+			fullNameRef.current!.focus();
+		}
 
-    const editUserDetails = async () => {
-      const response = await fetch(
-        `http://localhost:${
-          import.meta.env.VITE_BACKEND_SERVER_PORT
-        }/api/auth/change/user-details`,
-        {
-          method: "POST",
-          body: JSON.stringify(payload),
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: auth.token,
-          },
-        }
-      )
-      const json = await response.json()
+		const payload = {
+			userId: auth._id,
+			password,
+			fullName,
+			address,
+		};
 
-      if (!json.ok) {
-        setErrorMessage(json.message)
-        return
-      }
+		const editUserDetails = async () => {
+			const response = await fetch(
+				`http://localhost:${
+					import.meta.env.VITE_BACKEND_SERVER_PORT
+				}/api/auth/change/user-details`,
+				{
+					method: "POST",
+					body: JSON.stringify(payload),
+					headers: {
+						"Content-Type": "application/json",
+						Authorization: auth.token,
+					},
+				}
+			);
+			const json = await response.json();
 
-      setErrorMessage("")
-      setSuccessMessage(json.message)
-      refetchUserDetails()
-    }
-    editUserDetails()
-  }
+			if (!json.ok) {
+				setErrorMessage(json.message);
+				return;
+			}
 
-  return (
-    <div className="space-y-5">
-      <h1 className="text-xl font-semibold">Change User Details</h1>
-      <form className="flex flex-col gap-5" onSubmit={editUserDetailsHandler}>
-        <StyledInputRef
-          name="Full Name"
-          type="text"
-          placeholder="Full Name"
-          ref={fullNameRef}
-        />
-        <StyledInputRef
-          name="Address"
-          type="text"
-          placeholder="Address"
-          ref={addressRef}
-        />
-        <PasswordInputRef
-          name="Password"
-          ref={passwordRef}
-          autoCompletePassword={false}
-        />
-        <EditProfileButton />
-      </form>
-      {!errorMessage && successMessage && (
-        <Success successMessage={successMessage} />
-      )}
-      {errorMessage && <Error errorMessage={errorMessage} />}
-    </div>
-  )
-}
+			setErrorMessage("");
+			setSuccessMessage(json.message);
+			refetchUserDetails();
+		};
+		editUserDetails();
+	};
+
+	return (
+		<div className="space-y-5">
+			<h1 className="text-xl font-semibold">Change User Details</h1>
+			<form className="flex flex-col gap-5" onSubmit={editUserDetailsHandler}>
+				<StyledInputRef
+					name="Full Name"
+					type="text"
+					placeholder="Full Name"
+					ref={fullNameRef}
+				/>
+				{/* <StyledInputRef
+					name="Address"
+					type="text"
+					placeholder="Address"
+					ref={addressRef}
+				/> */}
+				<PasswordInputRef
+					name="Password"
+					ref={passwordRef}
+					autoCompletePassword={false}
+				/>
+				<EditProfileButton />
+			</form>
+			{!errorMessage && successMessage && (
+				<Success successMessage={successMessage} />
+			)}
+			{errorMessage && <Error errorMessage={errorMessage} />}
+		</div>
+	);
+};
 
 const EditProfileButton = () => {
-  return (
-    <button
-      className={`p-4 rounded-lg duration-200 hover:bg-black ease-in-out bg-secondary text-primary font-bold text-lg dark:bg-tertiary`}
-      type="submit"
-    >
-      Change User Details
-    </button>
-  )
-}
+	return (
+		<button
+			className={`p-4 rounded-lg duration-200 hover:bg-black ease-in-out bg-secondary text-primary font-bold text-lg dark:bg-tertiary`}
+			type="submit"
+		>
+			Change User Details
+		</button>
+	);
+};
 
-export default ChangeUserDetails
+export default ChangeUserDetails;
