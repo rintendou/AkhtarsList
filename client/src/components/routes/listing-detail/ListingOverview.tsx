@@ -22,7 +22,7 @@ const ListingOverview = () => {
 	} = listing;
 
 	return (
-		<div className="flex-auto p-10 py-24 max-w-none md:max-w-[50%] max-h-[50%] md:max-h-none space-y-10 flex flex-col items-center justify-between">
+		<div className="flex-auto p-10 py-12 max-w-none md:max-w-[50%] max-h-[50%] md:max-h-none space-y-10 flex flex-col items-center justify-between">
 			<div className="space-y-10">
 				<h1 className="text-5xl text-center font-semibold text-tertiary text-shadow-lg">
 					{title}
