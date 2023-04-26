@@ -6,27 +6,26 @@ import { useEffect, useState } from "react";
 
 const Header = () => {
 	const { isLoggedIn } = useAuth();
-	const [isTop, setIsTop] = useState(true); // State to keep track of scroll position
+	const [isTop, setIsTop] = useState(true);
 
 	useEffect(() => {
-		// Function to handle scroll event
 		const handleScroll = () => {
 			const scrollTop =
-				window.pageYOffset || document.documentElement.scrollTop; // Get scroll position
-			setIsTop(scrollTop === 0); // Set isTop state based on scroll position
+				window.pageYOffset || document.documentElement.scrollTop;
+			setIsTop(scrollTop === 0);
 		};
 
-		window.addEventListener("scroll", handleScroll); // Add scroll event listener
+		window.addEventListener("scroll", handleScroll);
 
 		return () => {
-			window.removeEventListener("scroll", handleScroll); // Clean up scroll event listener on unmount
+			window.removeEventListener("scroll", handleScroll);
 		};
 	}, []);
 
 	return (
 		<header
-			className={`flex flex-row justify-between items-center bg-secondary text-primary top-0 gap-8 z-50 dark:bg-black fixed w-full duration-500 ${
-				isTop ? "p-6" : "py-2" // Apply padding only when scroll is at the top
+			className={`flex flex-row justify-between items-center bg-secondary text-primary top-0 gap-8 z-50 dark:bg-black fixed w-full duration-500 ease-in-out ${
+				isTop ? "p-6" : "p-2"
 			}`}
 		>
 			<Logo />
