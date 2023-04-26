@@ -182,7 +182,7 @@ const ActiveBiddingSection = () => {
 const BidButton = () => {
 	return (
 		<button
-			className={`p-4 py-3 rounded-lg duration-200 hover:bg-black ease-in-out bg-secondary text-primary font-bold text-xl w-full max-w-[50%] dark:bg-tertiary`}
+			className={`p-4 py-3 rounded-lg duration-200 hover:bg-tertiary ease-in-out bg-secondary text-primary font-bold text-xl w-full max-w-[50%] dark:bg-tertiary dark:hover:bg-black`}
 			type="submit"
 		>
 			Place Bid
