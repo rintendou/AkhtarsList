@@ -12,6 +12,7 @@ const RegisterForm = () => {
 	// I opted to use the useRef hook instead of useState to prevent
 	// unnecessary re-renders of this component per each character typed
 	const fullNameRef = useRef<HTMLInputElement>(null);
+	const emailRef = useRef<HTMLInputElement>(null);
 	const usernameRef = useRef<HTMLInputElement>(null);
 	const passwordRef = useRef<HTMLInputElement>(null);
 	const confirmPasswordRef = useRef<HTMLInputElement>(null);
@@ -40,6 +41,7 @@ const RegisterForm = () => {
 
 		const registerUser = async () => {
 			const fullName = fullNameRef.current!.value;
+			const email = emailRef.current!.value;
 			const username = usernameRef.current!.value;
 			const password = passwordRef.current!.value;
 			const confirmPassword = confirmPasswordRef.current!.value;
@@ -49,6 +51,7 @@ const RegisterForm = () => {
 
 			const payload = {
 				fullName,
+				email,
 				username,
 				password,
 				confirmPassword,
@@ -93,6 +96,12 @@ const RegisterForm = () => {
 					type="text"
 					placeholder="Full Name"
 					ref={fullNameRef}
+				/>
+				<StyledInputRef
+					name="Email"
+					type="text"
+					placeholder="Email"
+					ref={emailRef}
 				/>
 				<StyledInputRef
 					name="Username"
