@@ -151,12 +151,11 @@ export const loginUser = async (req: Request, res: Response) => {
         .status(400)
         .json({ message: "User not found", data: null, ok: false })
 
-    const validPassword = await bcrypt.compare(
+    const doesPasswordMatch = await bcrypt.compare(
       req.body.password,
       user!.password
     )
-
-    if (!validPassword)
+    if (!doesPasswordMatch)
       return res
         .status(400)
         .json({ message: "User not found", data: null, ok: false })

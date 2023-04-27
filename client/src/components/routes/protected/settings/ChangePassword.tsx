@@ -4,6 +4,7 @@ import useAuthContext from "../../../../lib/hooks/context-hooks/useAuthContext"
 import Error from "../../../ui/Error"
 import stringInputIsValid from "../../../../lib/util/functions/stringInputValidator"
 import Success from "../../../ui/Success"
+import isPasswordStrong from "../../../../lib/util/functions/verifyPasswordStrength"
 
 const ChangePassword = () => {
   const { auth } = useAuthContext()
@@ -29,16 +30,28 @@ const ChangePassword = () => {
       newConfirmPassword,
     }
 
-    if (!stringInputIsValid(newConfirmPassword)) {
-      newConfirmPasswordRef.current!.focus()
-    }
-
-    if (!stringInputIsValid(newPassword)) {
-      newPasswordRef.current!.focus()
-    }
-
     if (!stringInputIsValid(oldPassword)) {
+      setErrorMessage("Password is a required field!")
       oldPasswordRef.current!.focus()
+      return
+    }
+
+    if (!isPasswordStrong(newPassword)) {
+      setErrorMessage("New Password is Invalid!")
+      newPasswordRef.current!.focus()
+      return
+    }
+
+    if (!isPasswordStrong(newConfirmPassword)) {
+      setErrorMessage("Confirm Password is Invalid!")
+      newConfirmPasswordRef.current!.focus()
+      return
+    }
+
+    if (newPassword !== newConfirmPassword) {
+      setErrorMessage("Password does not match!")
+      newPasswordRef.current!.focus()
+      return
     }
 
     const changePassword = async () => {
