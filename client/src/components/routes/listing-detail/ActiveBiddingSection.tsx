@@ -115,7 +115,6 @@ const ActiveBiddingSection = () => {
         <div className="flex items-center gap-3">
           <h1>Current Price:</h1>
           <p className="text-lg font-semibold">
-            {" "}
             ${getNumberWithCommas(finalPrice)}
           </p>
         </div>
@@ -136,7 +135,7 @@ const ActiveBiddingSection = () => {
               <input
                 id="Bid Amount ($)"
                 ref={bidAmountRef}
-                className="pt-3 pl-3 p-2 block px-0 mt-0 bg-transparent border-2 focus:outline-none focus:ring-0 border-secondary rounded-md w-full dark:bg-black dark:text-primary dark:border-tertiary "
+                className="py-3 pl-3 p-2 block px-0 mt-0 bg-transparent border-2 focus:outline-none focus:ring-0 border-secondary rounded-md w-full dark:bg-black dark:text-primary dark:border-tertiary "
               />
               <label
                 htmlFor="Bid Amount ($)"
@@ -182,7 +181,7 @@ const ActiveBiddingSection = () => {
 const BidButton = () => {
   return (
     <button
-      className={`p-4 py-3 rounded-lg duration-200 hover:bg-tertiary ease-in-out bg-secondary text-primary font-bold text-xl w-full max-w-[50%] dark:bg-tertiary dark:hover:bg-black`}
+      className={`p-4 py-3 rounded-lg duration-200 hover:bg-tertiary ease-in-out bg-secondary text-primary font-bold text-xl w-full max-w-[50%] dark:bg-tertiary dark:hover:bg-black focus:outline-none`}
       type="submit"
     >
       Place Bid
