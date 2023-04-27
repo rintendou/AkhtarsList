@@ -11,8 +11,8 @@ const Transactions = () => {
 
   return (
     <div className="w-full">
-      <div className="space-y-5 w-full overflow-y-auto h-96 border-2 border-secondary rounded-md dark:bg-black">
-        <div className="flex items-center space-x-4 text-primary bg-secondary p-4">
+      <div className="space-y-5 w-full overflow-y-auto h-96 border-2 border-secondary rounded-md dark:bg-black dark:border-tertiary">
+        <div className="flex items-center space-x-4 text-primary bg-secondary dark:bg-black p-4 dark:border-b-2 dark:border-tertiary">
           <h1>Transactions: </h1>
           <p className="text-lg font-semibold">{transactions.length}</p>
         </div>

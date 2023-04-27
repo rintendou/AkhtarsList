@@ -48,7 +48,7 @@ const ListingsOverview = () => {
 
   return (
     <Card twClasses="w-full shadow-lg border-4 border-secondary dark:bg-black dark:border-4 dark:border-tertiary">
-      <h1 className="text-2xl font-semibold bg-secondary text-primary p-4">
+      <h1 className="text-2xl font-semibold bg-secondary dark:bg-black text-primary p-4 dark:border-b-4 dark:border-tertiary">
         Listings Overview
       </h1>
       <div className="p-4 flex flex-col gap-4">

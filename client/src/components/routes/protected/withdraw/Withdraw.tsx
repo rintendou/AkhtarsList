@@ -54,7 +54,7 @@ const Withdraw = () => {
   return (
     <div className="flex flex-col justify-center items-center w-[45rem] mx-auto">
       <Card twClasses="shadow-lg border-4 border-secondary dark:bg-black dark:border-4 dark:border-tertiary relative">
-        <h1 className="text-2xl font-semibold bg-secondary text-primary p-4">
+        <h1 className="text-2xl font-semibold bg-secondary dark:bg-black text-primary p-4 dark:border-b-4 dark:border-tertiary">
           Withdraw
         </h1>
         <div className="p-10 md:p-20 m-0 md:m-10 space-y-5 flex flex-col justify-center items-center">

@@ -14,8 +14,8 @@ const TransactionsReport = () => {
   )
 
   return (
-    <Card twClasses="w-full h-64 shadow-lg border-4 border-secondary dark:bg-black dark:border-4 dark:border-tertiary">
-      <h1 className="text-2xl font-semibold p-4 bg-secondary text-primary">
+    <Card twClasses="w-full h-64 shadow-lg border-2 border-secondary dark:bg-black dark:border-tertiary">
+      <h1 className="text-2xl font-semibold p-4 bg-secondary dark:bg-black dark:border-b-2 dark:border-tertiary text-primary">
         Transactions Report
       </h1>
       <div className="flex flex-col gap-4 p-4">
