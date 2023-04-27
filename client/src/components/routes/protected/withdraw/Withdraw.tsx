@@ -53,7 +53,7 @@ const Withdraw = () => {
 
   return (
     <div className="w-full flex flex-col justify-center items-center">
-      <Card twClasses="p-10 md:p-20 m-0 md:m-10 shadow-lg space-y-5 w-[40rem] dark:bg-black dark:border-4 dark:border-tertiary relative">
+      <Card twClasses="p-10 md:p-20 m-0 md:m-10 shadow-lg space-y-5 w-[40rem] border-4 border-secondary dark:bg-black dark:border-4 dark:border-tertiary relative">
         <h1 className="text-3xl text-center font-semibold">Current Balance:</h1>
         <p className="text-center text-3xl">${getNumberWithCommas(balance)}</p>
         <form
