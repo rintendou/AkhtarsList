@@ -5,6 +5,16 @@ import useAuthContext from "../../../../lib/hooks/context-hooks/useAuthContext"
 import Error from "../../../ui/Error"
 import stringInputIsValid from "../../../../lib/util/functions/stringInputValidator"
 import Success from "../../../ui/Success"
+import StyledDropdownRef from "../../../ui/StyledDropdown"
+
+// Constant Variables
+const QUESTIONS = [
+  "What is your favorite food?",
+  "What is your mother's maiden name?",
+  "What is the name of your favorite teacher?",
+  "What town did you grow up in?",
+  "Ooga Booga?",
+]
 
 const ChangeSecurityQuestions = () => {
   const { auth } = useAuthContext()
@@ -13,7 +23,7 @@ const ChangeSecurityQuestions = () => {
   const [successMessage, setSuccessMessage] = useState("")
 
   const passwordRef = useRef<HTMLInputElement>(null)
-  const newSecurityQuestionRef = useRef<HTMLInputElement>(null)
+  const newSecurityQuestionRef = useRef<HTMLSelectElement>(null)
   const newSecurityQuestionAnswerRef = useRef<HTMLInputElement>(null)
 
   const changeSecurityQAHandler = (e: React.FormEvent<HTMLFormElement>) => {
@@ -74,11 +84,11 @@ const ChangeSecurityQuestions = () => {
     <div className="space-y-5">
       <h1 className="text-xl font-semibold">Change Security QA</h1>
       <form className="flex flex-col gap-5" onSubmit={changeSecurityQAHandler}>
-        <StyledInputRef
+        <StyledDropdownRef
           name="New Security Question"
-          type="text"
           placeholder="New Security Question"
           ref={newSecurityQuestionRef}
+          options={QUESTIONS}
         />
         <StyledInputRef
           name="New Security Question Answer"
