@@ -322,13 +322,12 @@ export const resetPassword = async (req: Request, res: Response) => {
 
 export const changeUserDetails = async (req: JWTRequest, res: Response) => {
   // Destructure the payload attached to the body
-  const { fullName, email, userId, password, address } = req.body
+  const { fullName, userId, password, address } = req.body
 
   // Check if appropriate payload is attached to the body
-  if (!userId || !email || !password || !fullName || !address) {
+  if (!userId || !password || !fullName || !address) {
     return res.status(400).json({
-      message:
-        "Full Name, Email, Password and Address properties are required!",
+      message: "Full Name, Password and Address properties are required!",
       data: null,
       ok: false,
     })
@@ -372,20 +371,10 @@ export const changeUserDetails = async (req: JWTRequest, res: Response) => {
     })
   }
 
-  // Check if newEmail matches current email
-  if (email == existingUser.email!) {
-    return res.status(400).json({
-      message: "You cannot change your email to the same email!",
-      data: null,
-      ok: false,
-    })
-  }
-
   try {
     // Update user details
     existingUser.address = address
     existingUser.fullName = fullName
-    existingUser.email = email
     await existingUser.save()
 
     res.status(200).json({
