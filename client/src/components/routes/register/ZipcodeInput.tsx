@@ -8,16 +8,17 @@ type Props = {
   disabled?: boolean
 }
 
-const StyledInputRef = React.forwardRef<HTMLInputElement, Props>(
+const ZipcodeInput = React.forwardRef<HTMLInputElement, Props>(
   ({ name, type = "text", placeholder, twClasses, ...rest }, ref) => {
     return (
-      <div className="relative z-0 w-full">
+      <div className="relative z-0">
         <input
           {...rest}
           id={name}
           type={type}
           placeholder=""
-          className={`${twClasses} pt-5 pl-5 p-2 block w-full px-0 mt-0 bg-transparent border-2 appearance-none focus:outline-none focus:ring-0 focus:border-tertiary border-gray-200 rounded-md dark:bg-black dark:text-primary dark:focus:border-tertiary`}
+          maxLength={5}
+          className={`${twClasses} pt-5 pl-5 p-2 block w-full px-0 mt-0 bg-transparent border-2 appearance-none focus:outline-none focus:ring-0 focus:border-secondary border-gray-200 rounded-md dark:bg-black dark:text-primary dark:focus:border-tertiary`}
           ref={ref}
         />
         <label
@@ -31,4 +32,4 @@ const StyledInputRef = React.forwardRef<HTMLInputElement, Props>(
   }
 )
 
-export default StyledInputRef
+export default ZipcodeInput

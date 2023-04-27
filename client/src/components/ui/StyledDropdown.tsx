@@ -17,7 +17,7 @@ const StyledDropdownRef = React.forwardRef<HTMLSelectElement, Props>(
     }
 
     return (
-      <div className="relative z-0">
+      <div className="relative z-0 w-full">
         <select
           {...rest}
           id={name}

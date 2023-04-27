@@ -6,18 +6,28 @@ import Error from "../../../ui/Error"
 import stringInputIsValid from "../../../../lib/util/functions/stringInputValidator"
 import Success from "../../../ui/Success"
 import useProfileContext from "../../../../lib/hooks/context-hooks/useProfileContext"
+import ZipcodeInput from "../../register/ZipcodeInput"
+import numberInputIsValid from "../../../../lib/util/functions/numberInputValidator"
 
 const ChangeUserDetails = () => {
   const { auth } = useAuthContext()
   const { fullName, address, refetchUserDetails } = useProfileContext()
+  const { streetAddress, city, state, zipcode } = address
 
   const fullNameRef = useRef<HTMLInputElement>(null)
-  const addressRef = useRef<HTMLInputElement>(null)
   const passwordRef = useRef<HTMLInputElement>(null)
+
+  const streetAddressRef = useRef<HTMLInputElement>(null)
+  const cityRef = useRef<HTMLInputElement>(null)
+  const stateRef = useRef<HTMLInputElement>(null)
+  const zipcodeRef = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
     fullNameRef.current!.value = fullName
-    addressRef.current!.value = address
+    streetAddressRef.current!.value = streetAddress
+    cityRef.current!.value = city
+    stateRef.current!.value = state
+    zipcodeRef.current!.value = String(zipcode)
   }, [])
 
   const [errorMessage, setErrorMessage] = useState("")
@@ -31,26 +41,41 @@ const ChangeUserDetails = () => {
     e.preventDefault()
 
     const fullName = fullNameRef.current!.value
-    const address = addressRef.current!.value
+    const streetAddress = streetAddressRef.current!.value
+    const city = cityRef.current!.value
+    const state = stateRef.current!.value
+    const zipcode = zipcodeRef.current!.value
     const password = passwordRef.current!.value
 
     if (!stringInputIsValid(password)) {
       passwordRef.current!.focus()
     }
 
-    if (!stringInputIsValid(address)) {
-      addressRef.current!.focus()
-    }
-
     if (!stringInputIsValid(fullName)) {
       fullNameRef.current!.focus()
     }
 
+    if (!stringInputIsValid(city)) {
+      cityRef.current!.focus()
+    }
+
+    if (!stringInputIsValid(state)) {
+      stateRef.current!.focus()
+    }
+
+    if (!stringInputIsValid(streetAddress)) {
+      streetAddressRef.current!.focus()
+    }
+
+    if (!numberInputIsValid(zipcode)) {
+      zipcodeRef.current!.focus()
+    }
+
     const payload = {
       userId: auth._id,
-      password,
       fullName,
-      address,
+      address: { streetAddress, city, state, zipcode },
+      password,
     }
 
     const editUserDetails = async () => {
@@ -92,11 +117,31 @@ const ChangeUserDetails = () => {
           ref={fullNameRef}
         />
         <StyledInputRef
-          name="Address"
+          name="Street Address"
           type="text"
-          placeholder="Address"
-          ref={addressRef}
+          placeholder="Street Address"
+          ref={streetAddressRef}
         />
+        <div className="flex gap-5">
+          <StyledInputRef
+            name="City"
+            type="text"
+            placeholder="City"
+            ref={cityRef}
+          />
+          <StyledInputRef
+            name="State"
+            type="text"
+            placeholder="State"
+            ref={stateRef}
+          />
+          <ZipcodeInput
+            name="Zipcode"
+            type="text"
+            placeholder="Zipcode"
+            ref={zipcodeRef}
+          />
+        </div>
         <PasswordInputRef
           name="Password"
           ref={passwordRef}

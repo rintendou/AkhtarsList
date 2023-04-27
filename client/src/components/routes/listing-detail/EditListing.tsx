@@ -15,7 +15,7 @@ const EditListing = () => {
 
   return (
     <div onClick={onListingEditClick}>
-      <h1 className="text-xs font-light text-gray-500 tracking-widest underline text-center cursor-pointer hover:text-black duration-200 ease-in-out hover:font-semibold uppercase dark:text-primary">
+      <h1 className="text-xs font-light text-gray-500 tracking-widest underline text-center cursor-pointer hover:text-black duration-200 ease-in-out hover:font-semibold uppercase space-y-10 dark:hover:text-gray-700 dark:text-primary">
         Edit Listing
       </h1>
     </div>

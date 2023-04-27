@@ -11,6 +11,7 @@ import RouterLink from "../../ui/RouterLink"
 
 // Port number
 import PasswordInputRef from "../../ui/PasswordInputRef"
+import stringInputIsValid from "../../../lib/util/functions/stringInputValidator"
 
 type Props = {
   didRegisterSuccessfully: boolean
@@ -50,6 +51,23 @@ const LoginForm = ({
     const username = usernameRef.current!.value
     const password = passwordRef.current!.value
 
+    const payload = {
+      username,
+      password,
+    }
+
+    if (!stringInputIsValid(username)) {
+      usernameRef.current!.focus()
+      setErrorMessage("Username is required!")
+      return
+    }
+
+    if (!stringInputIsValid(password)) {
+      passwordRef.current!.focus()
+      setErrorMessage("Password is required!")
+      return
+    }
+
     const loginUser = async () => {
       const response = await fetch(
         `http://localhost:${
@@ -57,10 +75,7 @@ const LoginForm = ({
         }/api/auth/login`,
         {
           method: "POST",
-          body: JSON.stringify({
-            username,
-            password,
-          }),
+          body: JSON.stringify(payload),
           headers: { "Content-Type": "application/json" },
         }
       )
@@ -84,31 +99,40 @@ const LoginForm = ({
   }
 
   return (
-    <Card twClasses="w-[30rem] md:w-[45rem] mx-auto p-20 border border-secondary space-y-16 flex flex-col justify-center dark:bg-black dark:border-4 dark:border-tertiary">
-      <h1 className="text-4xl font-bold text-center">Log In</h1>
-      <form className="flex flex-col gap-5" onSubmit={loginUserHandler}>
-        <StyledInputRef
-          name="Username"
-          type="text"
-          placeholder="Username"
-          ref={usernameRef}
-        />
-        <PasswordInputRef name="Password" ref={passwordRef} />
-        <RouterLink
-          routerLinkText="Forgot Password?"
-          twClasses="text-xs ml-auto"
-          to="/forgot-password"
-        />
-        <LoginButton />
-      </form>
-      <div className="text-center flex flex-col md:flex-row space-x-0 md:space-x-3 mx-auto">
-        <h1>Don't have an account yet?</h1>
-        <RouterLink routerLinkText="Register here" to="/register" />
+    <Card twClasses="w-[30rem] md:w-[45rem] mx-auto border-2 border-secondary flex flex-col justify-center dark:bg-black dark:border-4 dark:border-tertiary">
+      <h1 className="text-4xl font-bold text-center bg-secondary text-primary p-4 dark:bg-black">
+        Login
+      </h1>
+      <div className="p-10">
+        <form
+          className="flex flex-col space-y-5 gap-5"
+          onSubmit={loginUserHandler}
+        >
+          <StyledInputRef
+            name="Username"
+            type="text"
+            placeholder="Username"
+            ref={usernameRef}
+          />
+          <div className="flex flex-col">
+            <PasswordInputRef name="Password" ref={passwordRef} />
+            <RouterLink
+              routerLinkText="Forgot Password?"
+              twClasses="text-xs ml-auto"
+              to="/forgot-password"
+            />
+          </div>
+          <LoginButton />
+        </form>
+        <div className="text-center w-full flex flex-col p-2 md:flex-row space-x-0 md:space-x-3 justify-center mx-auto text-sm">
+          <h1>Don't have an account yet?</h1>
+          <RouterLink routerLinkText="Register here" to="/register" />
+        </div>
+        {!errorMessage && didRegisterSuccessfully && (
+          <Success successMessage={scsMessage} />
+        )}
+        {errorMessage && <Error errorMessage={errorMessage} />}
       </div>
-      {!errorMessage && didRegisterSuccessfully && (
-        <Success successMessage={scsMessage} />
-      )}
-      {errorMessage && <Error errorMessage={errorMessage} />}
     </Card>
   )
 }
@@ -118,7 +142,7 @@ export default LoginForm
 const LoginButton = () => {
   return (
     <button
-      className={`p-4 rounded-lg duration-200 hover:bg-black ease-in-out bg-secondary text-primary font-bold text-sm dark:bg-tertiary`}
+      className={`p-4 text-secondary bg-tertiary rounded-lg duration-200 hover:bg-black hover:text-primary ease-in-out font-semibold text-md`}
       type="submit"
     >
       Log In

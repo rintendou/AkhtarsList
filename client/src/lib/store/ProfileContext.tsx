@@ -6,7 +6,13 @@ import ListingType from "../types/ListingType"
 
 type initialContextType = {
   username: string
-  address: string
+  address: {
+    streetAddress: string
+    city: string
+    state: string
+    zipcode: number
+  }
+  email: string
   balance: number
   fullName: string
   depositFunds: (amount: number) => void
@@ -21,9 +27,15 @@ type initialContextType = {
 
 const initialContext: initialContextType = {
   username: "",
-  address: "",
+  address: {
+    streetAddress: "",
+    city: "",
+    state: "",
+    zipcode: 0,
+  },
   balance: 0,
   fullName: "",
+  email: "",
   depositFunds: () => {},
   withdrawFunds: () => {},
   listings: [],
@@ -46,8 +58,14 @@ const ProfileContextProvider = ({
 
   const [username, setUsername] = useState("")
   const [balance, setBalance] = useState(0)
-  const [address, setAddress] = useState("")
+  const [address, setAddress] = useState({
+    streetAddress: "",
+    city: "",
+    state: "",
+    zipcode: 0,
+  })
   const [fullName, setFullName] = useState("")
+  const [email, setEmail] = useState("")
 
   const [biddings, setBiddings] = useState<ListingType[]>([])
   const [listings, setListings] = useState<ListingType[]>([])
@@ -84,6 +102,7 @@ const ProfileContextProvider = ({
       setAddress(data.data.address)
       setBalance(data.data.balance)
       setFullName(data.data.fullName)
+      setEmail(data.data.email)
       setBiddings(data.data.biddedListings.reverse())
       setListings(data.data.listedListings.reverse())
       setWonListings(data.data.wonListings.reverse())
@@ -121,6 +140,7 @@ const ProfileContextProvider = ({
       setAddress(data.data.address)
       setBalance(data.data.balance)
       setFullName(data.data.fullName)
+      setEmail(data.data.email)
       setBiddings(data.data.biddedListings.reverse())
       setListings(data.data.listedListings.reverse())
       setWonListings(data.data.wonListings.reverse())
@@ -193,6 +213,7 @@ const ProfileContextProvider = ({
     address,
     balance,
     fullName,
+    email,
     depositFunds,
     withdrawFunds,
     biddings,
