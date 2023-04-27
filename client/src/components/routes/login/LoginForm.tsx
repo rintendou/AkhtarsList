@@ -99,31 +99,40 @@ const LoginForm = ({
   }
 
   return (
-    <Card twClasses="w-[30rem] md:w-[45rem] mx-auto p-20 border border-secondary space-y-16 flex flex-col justify-center dark:bg-black dark:border-4 dark:border-tertiary">
-      <h1 className="text-4xl font-bold text-center">Log In</h1>
-      <form className="flex flex-col gap-5" onSubmit={loginUserHandler}>
-        <StyledInputRef
-          name="Username"
-          type="text"
-          placeholder="Username"
-          ref={usernameRef}
-        />
-        <PasswordInputRef name="Password" ref={passwordRef} />
-        <RouterLink
-          routerLinkText="Forgot Password?"
-          twClasses="text-xs ml-auto"
-          to="/forgot-password"
-        />
-        <LoginButton />
-      </form>
-      <div className="text-center flex flex-col md:flex-row space-x-0 md:space-x-3 mx-auto">
-        <h1>Don't have an account yet?</h1>
-        <RouterLink routerLinkText="Register here" to="/register" />
+    <Card twClasses="w-[30rem] md:w-[45rem] mx-auto border-2 border-secondary flex flex-col justify-center dark:bg-black dark:border-4 dark:border-tertiary">
+      <h1 className="text-4xl font-bold text-center bg-secondary text-primary p-4 dark:bg-black">
+        Login
+      </h1>
+      <div className="p-10">
+        <form
+          className="flex flex-col space-y-5 gap-5"
+          onSubmit={loginUserHandler}
+        >
+          <StyledInputRef
+            name="Username"
+            type="text"
+            placeholder="Username"
+            ref={usernameRef}
+          />
+          <div className="flex flex-col">
+            <PasswordInputRef name="Password" ref={passwordRef} />
+            <RouterLink
+              routerLinkText="Forgot Password?"
+              twClasses="text-xs ml-auto"
+              to="/forgot-password"
+            />
+          </div>
+          <LoginButton />
+        </form>
+        <div className="text-center w-full flex flex-col p-2 md:flex-row space-x-0 md:space-x-3 justify-center mx-auto text-sm">
+          <h1>Don't have an account yet?</h1>
+          <RouterLink routerLinkText="Register here" to="/register" />
+        </div>
+        {!errorMessage && didRegisterSuccessfully && (
+          <Success successMessage={scsMessage} />
+        )}
+        {errorMessage && <Error errorMessage={errorMessage} />}
       </div>
-      {!errorMessage && didRegisterSuccessfully && (
-        <Success successMessage={scsMessage} />
-      )}
-      {errorMessage && <Error errorMessage={errorMessage} />}
     </Card>
   )
 }
