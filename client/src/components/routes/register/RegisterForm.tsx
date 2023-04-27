@@ -11,6 +11,7 @@ import ZipcodeInput from "./ZipcodeInput"
 import stringInputIsValid from "../../../lib/util/functions/stringInputValidator"
 import numberInputIsValid from "../../../lib/util/functions/numberInputValidator"
 import StyledDropdownRef from "../../ui/StyledDropdown"
+import isEmailInputValid from "../../../lib/util/functions/emailInputValidator"
 
 // Constant Variables
 const QUESTIONS = [
@@ -91,9 +92,9 @@ const RegisterForm = () => {
         return
       }
 
-      if (!stringInputIsValid(email)) {
+      if (!isEmailInputValid(email)) {
         emailRef.current!.focus()
-        setErrorMessage("Email is required!")
+        setErrorMessage("Invalid email!")
         return
       }
 
