@@ -16,12 +16,12 @@ const PasswordInputRef = React.forwardRef<HTMLInputElement, Props>(
       : "new-password"
 
     return (
-      <div className="relative z-0 dark:bg-black">
+      <div className="relative z-0 dark:bg-black w-full">
         <input
           id={name}
           placeholder=""
           type={inputType}
-          className={`${twClasses} pt-5 pl-5 p-2 block w-full px-0 mt-0 bg-transparent border-2 appearance-none focus:outline-none focus:ring-0 focus:border-secondary border-gray-200 rounded-md`}
+          className={`${twClasses} pt-5 pl-5 p-2 block w-full px-0 mt-0 bg-transparent border-2 appearance-none focus:outline-none focus:ring-0 focus:border-tertiary border-gray-200 rounded-md`}
           ref={ref}
           autoComplete={autoComplete}
         />

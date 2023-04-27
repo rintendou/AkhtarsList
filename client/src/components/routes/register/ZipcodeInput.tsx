@@ -8,7 +8,7 @@ type Props = {
   disabled?: boolean
 }
 
-const ExpirationInput = React.forwardRef<HTMLInputElement, Props>(
+const ZipcodeInput = React.forwardRef<HTMLInputElement, Props>(
   ({ name, type = "text", placeholder, twClasses, ...rest }, ref) => {
     return (
       <div className="relative z-0">
@@ -23,7 +23,7 @@ const ExpirationInput = React.forwardRef<HTMLInputElement, Props>(
         />
         <label
           htmlFor={name}
-          className="absolute duration-200 ease-in-out top-3 left-3 -z-1 origin-0 text-secondary dark:bg-black dark:text-primary"
+          className="absolute duration-200 ease-in-out top-3 left-3 -z-1 origin-0 text-secondary dark:text-primary"
         >
           {placeholder}
         </label>
@@ -32,4 +32,4 @@ const ExpirationInput = React.forwardRef<HTMLInputElement, Props>(
   }
 )
 
-export default ExpirationInput
+export default ZipcodeInput
