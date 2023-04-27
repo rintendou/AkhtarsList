@@ -8,6 +8,8 @@ import RouterLink from "../../ui/RouterLink"
 
 import PasswordInputRef from "../../ui/PasswordInputRef"
 import ZipcodeInput from "./ZipcodeInput"
+import stringInputIsValid from "../../../lib/util/functions/stringInputValidator"
+import numberInputIsValid from "../../../lib/util/functions/numberInputValidator"
 
 const RegisterForm = () => {
   // I opted to use the useRef hook instead of useState to prevent
@@ -25,7 +27,6 @@ const RegisterForm = () => {
   const stateRef = useRef<HTMLInputElement>(null)
   const zipcodeRef = useRef<HTMLInputElement>(null)
 
-  const [isError, setIsError] = useState(false)
   const [errorMessage, setErrorMessage] = useState("")
 
   // navigate object to redirect to another page while passing props as well
@@ -74,6 +75,72 @@ const RegisterForm = () => {
         securityQuestionAnswer,
       }
 
+      if (!stringInputIsValid(fullName)) {
+        fullNameRef.current!.focus()
+        setErrorMessage("Full name is required!")
+        return
+      }
+
+      if (!stringInputIsValid(email)) {
+        emailRef.current!.focus()
+        setErrorMessage("Email is required!")
+        return
+      }
+
+      if (!stringInputIsValid(username)) {
+        usernameRef.current!.focus()
+        setErrorMessage("Username is required!")
+        return
+      }
+
+      if (!stringInputIsValid(password)) {
+        passwordRef.current!.focus()
+        setErrorMessage("Password is required!")
+        return
+      }
+
+      if (!stringInputIsValid(confirmPassword)) {
+        confirmPasswordRef.current!.focus()
+        setErrorMessage("Confirm Password is required!")
+        return
+      }
+
+      if (!stringInputIsValid(securityQuestion)) {
+        securityQuestionRef.current!.focus()
+        setErrorMessage("Security Question is required!")
+        return
+      }
+
+      if (!stringInputIsValid(securityQuestionAnswer)) {
+        securityQuestionAnswerRef.current!.focus()
+        setErrorMessage("Security Question Answer is required!")
+        return
+      }
+
+      if (!stringInputIsValid(streetAddress)) {
+        streetAddressRef.current!.focus()
+        setErrorMessage("Street Address is required!")
+        return
+      }
+
+      if (!stringInputIsValid(city)) {
+        cityRef.current!.focus()
+        setErrorMessage("City is required!")
+        return
+      }
+
+      if (!stringInputIsValid(state)) {
+        stateRef.current!.focus()
+        setErrorMessage("State is required!")
+        return
+      }
+
+      if (!numberInputIsValid(zipcode)) {
+        zipcodeRef.current!.focus()
+        setErrorMessage("Zipcode is required!")
+        return
+      }
+
       const response = await fetch(
         `http://localhost:${
           import.meta.env.VITE_BACKEND_SERVER_PORT
@@ -84,19 +151,16 @@ const RegisterForm = () => {
           headers: { "Content-Type": "application/json" },
         }
       )
-      const data = await response.json()
+      const json = await response.json()
 
-      if (!data.ok) {
-        setIsError(true)
-        setErrorMessage(data.message)
+      if (!json.ok) {
+        setErrorMessage(json.message)
         return
       }
 
-      setIsError(false)
       navigate("/login", {
-        state: { didRegisterSuccessfully: true, successMessage: data.message },
+        state: { didRegisterSuccessfully: true, successMessage: json.message },
       })
-      console.log(data)
     }
     registerUser()
   }
@@ -242,7 +306,7 @@ const RegisterForm = () => {
           <h1>Already have an account?</h1>
           <RouterLink routerLinkText="Login here" to="/login" />
         </div>
-        {isError && <Error errorMessage={errorMessage} />}
+        {errorMessage && <Error errorMessage={errorMessage} />}
       </div>
     </Card>
   )
