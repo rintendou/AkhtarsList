@@ -151,10 +151,13 @@ const ActiveBiddingSection = () => {
               <h1 className="text-xl font-semibold w-full text-center">
                 You are an admin
               </h1>
-              <EditListing />
+              <div className="flex gap-5 justify-center">
+                <EditListing />
+                <ReportListing />
+              </div>
             </div>
           )}
-          <ReportListing />
+          {!auth.isAdmin && <ReportListing />}
           <CurrentBalance />
         </>
       ) : (
