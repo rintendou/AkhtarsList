@@ -52,25 +52,34 @@ const Withdraw = () => {
   }
 
   return (
-    <div className="w-full flex flex-col justify-center items-center">
-      <Card twClasses="p-10 md:p-20 m-0 md:m-10 shadow-lg space-y-5 w-[40rem] border-4 border-secondary dark:bg-black dark:border-4 dark:border-tertiary relative">
-        <h1 className="text-3xl text-center font-semibold">Current Balance:</h1>
-        <p className="text-center text-3xl">${getNumberWithCommas(balance)}</p>
-        <form
-          className="flex gap-5 justify-between"
-          onSubmit={withdrawFundsHandler}
-        >
-          <StyledInputRef
-            ref={withdrawFundsRef}
-            name="Withdraw Amount"
-            type="text"
-            placeholder="Withdraw Amount"
-            twClasses="rounded-lg shadow-lg flex-auto"
-          />
-          <WithdrawNowButton />
-        </form>{" "}
-        {!error && success && <Success successMessage={success} />}
-        {error && <Error errorMessage={error} />}
+    <div className="flex flex-col justify-center items-center w-[45rem] mx-auto">
+      <Card twClasses="shadow-lg border-4 border-secondary dark:bg-black dark:border-4 dark:border-tertiary relative">
+        <h1 className="text-2xl font-semibold bg-secondary text-primary p-4">
+          Withdraw
+        </h1>
+        <div className="p-10 md:p-20 m-0 md:m-10 space-y-5 flex flex-col justify-center items-center">
+          <h1 className="text-3xl text-center font-semibold">
+            Current Balance:
+          </h1>
+          <p className="text-center text-3xl">
+            ${getNumberWithCommas(balance)}
+          </p>
+          <form
+            className="flex gap-5 justify-between"
+            onSubmit={withdrawFundsHandler}
+          >
+            <StyledInputRef
+              ref={withdrawFundsRef}
+              name="Withdraw Amount"
+              type="text"
+              placeholder="Withdraw Amount"
+              twClasses="rounded-lg shadow-lg flex-auto"
+            />
+            <WithdrawNowButton />
+          </form>{" "}
+          {!error && success && <Success successMessage={success} />}
+          {error && <Error errorMessage={error} />}
+        </div>
       </Card>
     </div>
   )
