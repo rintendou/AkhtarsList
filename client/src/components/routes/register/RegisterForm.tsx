@@ -102,74 +102,83 @@ const RegisterForm = () => {
   }
 
   return (
-    <Card twClasses="w-[30rem] md:w-[45rem] mx-auto p-20 border border-secondary space-y-16 flex flex-col justify-center dark:bg-black dark:border-4 dark:border-tertiary">
-      <h1 className="text-4xl font-bold text-center">Register</h1>
-      <form className="flex flex-col gap-5" onSubmit={registerUserHandler}>
-        <StyledInputRef
-          name="Full Name"
-          type="text"
-          placeholder="Full Name"
-          ref={fullNameRef}
-        />
-        <StyledInputRef
-          name="Email"
-          type="text"
-          placeholder="Email"
-          ref={emailRef}
-        />
-        <StyledInputRef
-          name="Username"
-          type="text"
-          placeholder="Username"
-          ref={usernameRef}
-        />
-        <PasswordInputRef name="Password" ref={passwordRef} />
-        <PasswordInputRef name="Confirm Password" ref={confirmPasswordRef} />
-        <StyledInputRef
-          name="Street Address"
-          type="text"
-          placeholder="Street Address"
-          ref={streetAddressRef}
-        />
-        <div className="flex gap-3">
+    <Card twClasses="w-[30rem] md:w-[45rem] mx-auto border-2 border-secondary flex flex-col justify-center dark:bg-black dark:border-4 dark:border-tertiary">
+      <h1 className="text-4xl font-bold text-center bg-secondary text-primary p-4 dark:bg-black">
+        Register
+      </h1>
+      <div className="p-10">
+        <form className="flex flex-col gap-5" onSubmit={registerUserHandler}>
           <StyledInputRef
-            name="State"
+            name="Full Name"
             type="text"
-            placeholder="State"
-            ref={stateRef}
+            placeholder="Full Name"
+            ref={fullNameRef}
           />
           <StyledInputRef
-            name="City"
+            name="Email"
             type="text"
-            placeholder="City"
-            ref={cityRef}
+            placeholder="Email"
+            ref={emailRef}
           />
-          <ZipcodeInput
-            name="Zipcode"
+          <StyledInputRef
+            name="Username"
             type="text"
-            placeholder="Zipcode"
-            ref={zipcodeRef}
+            placeholder="Username"
+            ref={usernameRef}
           />
+          <div className="flex justify-between gap-5">
+            <PasswordInputRef name="Password" ref={passwordRef} />
+            <PasswordInputRef
+              name="Confirm Password"
+              ref={confirmPasswordRef}
+            />
+          </div>
+          <StyledInputRef
+            name="Street Address"
+            type="text"
+            placeholder="Street Address"
+            ref={streetAddressRef}
+          />
+          <div className="flex gap-3">
+            <StyledInputRef
+              name="State"
+              type="text"
+              placeholder="State"
+              ref={stateRef}
+            />
+            <StyledInputRef
+              name="City"
+              type="text"
+              placeholder="City"
+              ref={cityRef}
+            />
+            <ZipcodeInput
+              name="Zipcode"
+              type="text"
+              placeholder="Zipcode"
+              ref={zipcodeRef}
+            />
+          </div>
+          <StyledInputRef
+            name="Security Question"
+            type="text"
+            placeholder="Security Question"
+            ref={securityQuestionRef}
+          />
+          <StyledInputRef
+            name="Security Question Answer"
+            type="text"
+            placeholder="Security Question Answer"
+            ref={securityQuestionAnswerRef}
+          />
+          <RegisterButton />
+        </form>
+        <div className="text-center w-full flex flex-col p-2 md:flex-row space-x-0 md:space-x-3 justify-center mx-auto text-sm">
+          <h1>Already have an account?</h1>
+          <RouterLink routerLinkText="Login here" to="/login" />
         </div>
-        <StyledInputRef
-          name="Security Question"
-          type="text"
-          placeholder="Security Question"
-          ref={securityQuestionRef}
-        />
-        <StyledInputRef
-          name="Security Question Answer"
-          type="text"
-          placeholder="Security Question Answer"
-          ref={securityQuestionAnswerRef}
-        />
-        <RegisterButton />
-      </form>
-      <div className="text-center w-full flex flex-col md:flex-row space-x-0 md:space-x-3 justify-center mx-auto">
-        <h1>Already have an account?</h1>
-        <RouterLink routerLinkText="Login here" to="/login" />
+        {isError && <Error errorMessage={errorMessage} />}
       </div>
-      {isError && <Error errorMessage={errorMessage} />}
     </Card>
   )
 }
@@ -179,7 +188,7 @@ export default RegisterForm
 const RegisterButton = () => {
   return (
     <button
-      className={`p-4 rounded-lg duration-200 hover:bg-black ease-in-out bg-secondary text-primary font-bold text-sm dark:bg-tertiary`}
+      className={`p-4 text-secondary bg-tertiary rounded-lg duration-200 hover:bg-black hover:text-primary ease-in-out  font-bold text-sm`}
       type="submit"
     >
       Register
