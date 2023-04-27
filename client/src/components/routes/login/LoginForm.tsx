@@ -11,6 +11,7 @@ import RouterLink from "../../ui/RouterLink"
 
 // Port number
 import PasswordInputRef from "../../ui/PasswordInputRef"
+import stringInputIsValid from "../../../lib/util/functions/stringInputValidator"
 
 type Props = {
   didRegisterSuccessfully: boolean
@@ -53,6 +54,18 @@ const LoginForm = ({
     const payload = {
       username,
       password,
+    }
+
+    if (!stringInputIsValid(username)) {
+      usernameRef.current!.focus()
+      setErrorMessage("Username is required!")
+      return
+    }
+
+    if (!stringInputIsValid(password)) {
+      passwordRef.current!.focus()
+      setErrorMessage("Password is required!")
+      return
     }
 
     const loginUser = async () => {
@@ -120,7 +133,7 @@ export default LoginForm
 const LoginButton = () => {
   return (
     <button
-      className={`p-4 rounded-lg duration-200 hover:bg-black ease-in-out bg-secondary text-primary font-semibold text-md dark:bg-tertiary`}
+      className={`p-4 text-secondary bg-tertiary rounded-lg duration-200 hover:bg-black hover:text-primary ease-in-out font-semibold text-md`}
       type="submit"
     >
       Log In
