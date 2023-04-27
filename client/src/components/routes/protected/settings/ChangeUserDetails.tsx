@@ -7,6 +7,7 @@ import stringInputIsValid from "../../../../lib/util/functions/stringInputValida
 import Success from "../../../ui/Success"
 import useProfileContext from "../../../../lib/hooks/context-hooks/useProfileContext"
 import ZipcodeInput from "../../register/ZipcodeInput"
+import numberInputIsValid from "../../../../lib/util/functions/numberInputValidator"
 
 const ChangeUserDetails = () => {
   const { auth } = useAuthContext()
@@ -54,6 +55,22 @@ const ChangeUserDetails = () => {
       fullNameRef.current!.focus()
     }
 
+    if (!stringInputIsValid(city)) {
+      cityRef.current!.focus()
+    }
+
+    if (!stringInputIsValid(state)) {
+      stateRef.current!.focus()
+    }
+
+    if (!stringInputIsValid(streetAddress)) {
+      streetAddressRef.current!.focus()
+    }
+
+    if (!numberInputIsValid(zipcode)) {
+      zipcodeRef.current!.focus()
+    }
+
     const payload = {
       userId: auth._id,
       fullName,
@@ -76,8 +93,6 @@ const ChangeUserDetails = () => {
         }
       )
       const json = await response.json()
-
-      console.log(json)
 
       if (!json.ok) {
         setErrorMessage(json.message)
