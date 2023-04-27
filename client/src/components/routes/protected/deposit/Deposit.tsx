@@ -158,7 +158,7 @@ export default Deposit
 const DepositNowButton = () => {
   return (
     <button
-      className={`p-4 py-3 rounded-lg duration-200 hover:bg-black ease-in-out bg-secondary text-primary font-semibold text-lg shadow-lg dark:bg-tertiary dark:hover:bg-secondary`}
+      className={`p-4 py-3 rounded-lg duration-200  ease-in-out text-secondary font-bold text-lg shadow-xl  flex-auto bg-tertiary hover:bg-secondary hover:text-primary`}
       type="submit"
     >
       Deposit Now

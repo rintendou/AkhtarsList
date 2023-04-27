@@ -90,7 +90,7 @@ export default Withdraw
 const WithdrawNowButton = () => {
   return (
     <button
-      className={`p-4 py-2 rounded-lg duration-200 hover:bg-black ease-in-out bg-secondary text-primary font-bold text-lg shadow-xl w-[50%] flex-auto dark:bg-tertiary dark:hover:bg-secondary`}
+      className={`p-4 py-2 rounded-lg duration-200  ease-in-out text-secondary font-bold text-lg shadow-xl w-[50%] flex-auto bg-tertiary hover:bg-secondary hover:text-primary`}
       type="submit"
     >
       Withdraw Now
