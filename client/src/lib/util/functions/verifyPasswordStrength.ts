@@ -1,4 +1,4 @@
-const verifyPasswordStrength = (password: string): boolean => {
+const isPasswordStrong = (password: string): boolean => {
   const regexUpperCase = /[A-Z]/
   const regexLowerCase = /[a-z]/
   const regexNumeric = /[0-9]/
@@ -17,4 +17,4 @@ const verifyPasswordStrength = (password: string): boolean => {
   }
 }
 
-export default verifyPasswordStrength
+export default isPasswordStrong

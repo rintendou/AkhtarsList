@@ -12,6 +12,7 @@ import stringInputIsValid from "../../../lib/util/functions/stringInputValidator
 import numberInputIsValid from "../../../lib/util/functions/numberInputValidator"
 import StyledDropdownRef from "../../ui/StyledDropdown"
 import isEmailInputValid from "../../../lib/util/functions/emailInputValidator"
+import isPasswordStrong from "../../../lib/util/functions/verifyPasswordStrength"
 
 // Constant Variables
 const QUESTIONS = [
@@ -104,15 +105,21 @@ const RegisterForm = () => {
         return
       }
 
-      if (!stringInputIsValid(password)) {
+      if (!isPasswordStrong(password)) {
         passwordRef.current!.focus()
         setErrorMessage("Password is required!")
         return
       }
 
-      if (!stringInputIsValid(confirmPassword)) {
+      if (!isPasswordStrong(confirmPassword)) {
         confirmPasswordRef.current!.focus()
         setErrorMessage("Confirm Password is required!")
+        return
+      }
+
+      if (password !== confirmPassword) {
+        passwordRef.current!.focus()
+        setErrorMessage("Password does not match!")
         return
       }
 
