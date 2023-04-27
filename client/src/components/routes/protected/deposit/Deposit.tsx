@@ -93,52 +93,61 @@ const Deposit = () => {
   }
 
   return (
-    <div className="w-full flex flex-col justify-center items-center">
-      <Card twClasses="p-10 md:p-20 m-0 md:m-10 shadow-lg space-y-5 w-[35rem] border-4 border-secondary dark:bg-black dark:border-4 dark:border-tertiary">
-        <h1 className="text-3xl text-center font-semibold">Current Balance:</h1>
-        <p className="text-center text-3xl">${getNumberWithCommas(balance)}</p>
-        <form className="flex flex-col gap-5" onSubmit={depositFundsHandler}>
-          <StyledInputRef
-            ref={cardHolderRef}
-            name="Card Holder"
-            type="text"
-            placeholder="Card Holder"
-            twClasses="rounded-lg shadow-lg"
-          />
-          <CreditCardInput
-            ref={cardNumberRef}
-            name="Card Number"
-            type="text"
-            placeholder="Card Number"
-            twClasses="rounded-lg shadow-lg"
-          />
-          <div className="flex flex-col md:flex-row gap-5">
-            <ExpirationInput
-              ref={expirationRef}
-              name="Expiration MM/YY"
+    <div className="flex flex-col justify-center items-center w-[45rem] mx-auto">
+      <Card twClasses="shadow-lg border-4 border-secondary dark:bg-black dark:border-4 dark:border-tertiary relative">
+        <h1 className="text-2xl font-semibold bg-secondary text-primary p-4">
+          Deposit
+        </h1>
+        <div className="p-10 md:p-20 m-0 md:m-10 space-y-5 flex flex-col justify-center items-center">
+          <h1 className="text-3xl text-center font-semibold">
+            Current Balance:
+          </h1>
+          <p className="text-center text-3xl">
+            ${getNumberWithCommas(balance)}
+          </p>
+          <form className="flex flex-col gap-5" onSubmit={depositFundsHandler}>
+            <StyledInputRef
+              ref={cardHolderRef}
+              name="Card Holder"
               type="text"
-              placeholder="Expiration MM/YY"
+              placeholder="Card Holder"
               twClasses="rounded-lg shadow-lg"
             />
-            <CVVInput
-              ref={cvvRef}
-              name="CVV"
+            <CreditCardInput
+              ref={cardNumberRef}
+              name="Card Number"
               type="text"
-              placeholder="CVV"
+              placeholder="Card Number"
               twClasses="rounded-lg shadow-lg"
             />
-          </div>
-          <StyledInputRef
-            ref={depositAmountRef}
-            name="Deposit Amount"
-            type="text"
-            placeholder="Deposit Amount"
-            twClasses="rounded-lg shadow-lg"
-          />
-          <DepositNowButton />
-        </form>
-        {!error && success && <Success successMessage={success} />}
-        {error && <Error errorMessage={error} />}
+            <div className="flex flex-col md:flex-row gap-5">
+              <ExpirationInput
+                ref={expirationRef}
+                name="Expiration MM/YY"
+                type="text"
+                placeholder="Expiration MM/YY"
+                twClasses="rounded-lg shadow-lg"
+              />
+              <CVVInput
+                ref={cvvRef}
+                name="CVV"
+                type="text"
+                placeholder="CVV"
+                twClasses="rounded-lg shadow-lg"
+              />
+            </div>
+            <StyledInputRef
+              ref={depositAmountRef}
+              name="Deposit Amount"
+              type="text"
+              placeholder="Deposit Amount"
+              twClasses="rounded-lg shadow-lg"
+            />
+            <DepositNowButton />
+          </form>
+          {!error && success && <Success successMessage={success} />}
+          {error && <Error errorMessage={error} />}
+        </div>
       </Card>
     </div>
   )
