@@ -10,6 +10,16 @@ import PasswordInputRef from "../../ui/PasswordInputRef"
 import ZipcodeInput from "./ZipcodeInput"
 import stringInputIsValid from "../../../lib/util/functions/stringInputValidator"
 import numberInputIsValid from "../../../lib/util/functions/numberInputValidator"
+import StyledDropdownRef from "../../ui/StyledDropdown"
+
+// Constant Variables
+const QUESTIONS = [
+  "What is your favorite food?",
+  "What is your mother's maiden name?",
+  "What is the name of your favorite teacher?",
+  "What town did you grow up in?",
+  "Ooga Booga?",
+]
 
 const RegisterForm = () => {
   // I opted to use the useRef hook instead of useState to prevent
@@ -19,7 +29,7 @@ const RegisterForm = () => {
   const usernameRef = useRef<HTMLInputElement>(null)
   const passwordRef = useRef<HTMLInputElement>(null)
   const confirmPasswordRef = useRef<HTMLInputElement>(null)
-  const securityQuestionRef = useRef<HTMLInputElement>(null)
+  const securityQuestionRef = useRef<HTMLSelectElement>(null)
   const securityQuestionAnswerRef = useRef<HTMLInputElement>(null)
 
   const streetAddressRef = useRef<HTMLInputElement>(null)
@@ -242,11 +252,11 @@ const RegisterForm = () => {
               />
             </div>
             <div className="flex gap-5">
-              <StyledInputRef
-                name="Security Question"
-                type="text"
-                placeholder="Security Question"
+              <StyledDropdownRef
                 ref={securityQuestionRef}
+                name="Security Question"
+                placeholder="Security Question"
+                options={QUESTIONS}
               />
               <StyledInputRef
                 name="Security Question Answer"
