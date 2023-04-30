@@ -44,13 +44,6 @@ import ProfileLayout from "./components/routes/protected/layout-containers/Profi
 // Providers
 import ListingDetailContextQueryProvider from "./lib/store/ListingDetailContext"
 
-// DEV
-import DevUnpolledListingDetailContextProvider from "./components/routes/dev-route/test-nonpolled/ListingDetailContext"
-import DevListingDetailContextProvider from "./components/routes/dev-route/test-global-ctx/DevListingDetailContext"
-import DevListingDetailGlobal from "./components/routes/dev-route/test-global-ctx/DevListingDetailGlobal"
-import DevListingDetail from "./components/routes/dev-route/test-custom-hook/DevListingDetail"
-import Dev from "./components/routes/dev-route/ui/Dev"
-
 function App() {
   return (
     <div className="bg-blue-50 text-black tracking-tight overflow-x-hidden dark:bg-black dark:text-primary duration-700 ease-in-out">
@@ -71,26 +64,6 @@ function App() {
               <ListingDetailContextQueryProvider>
                 <ListingDetailQuery />
               </ListingDetailContextQueryProvider>
-            }
-          />
-
-          {/*  Dev Routes */}
-          <Route path="/dev" element={<Dev />} />
-          <Route path="/dev-listing-detail" element={<DevListingDetail />} />
-          <Route
-            path="/dev-listing-detail-global"
-            element={
-              <DevListingDetailContextProvider>
-                <DevListingDetailGlobal />
-              </DevListingDetailContextProvider>
-            }
-          />
-          <Route
-            path="/listings-nonpolled/:listingId"
-            element={
-              <DevUnpolledListingDetailContextProvider>
-                <ListingDetail />
-              </DevUnpolledListingDetailContextProvider>
             }
           />
 
