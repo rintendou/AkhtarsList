@@ -1,5 +1,3 @@
-import { Routes, Route } from "react-router-dom"
-
 // Routes
 import Application from "./components/routes/application/Application"
 import PageNotFound from "./components/routes/page-not-found/PageNotFound"
@@ -29,11 +27,12 @@ import AnalyticsDashboard from "./components/routes/protected/admin/analytics/An
 import ReportedListings from "./components/routes/protected/admin/reported-listings/ReportedListings"
 
 // Components
+import { Routes, Route } from "react-router-dom"
 import Body from "./components/layout/body/Body"
 import Footer from "./components/layout/footer/Footer"
 import Header from "./components/layout/header/Header"
 
-// Navguards
+// Navigation Guards
 import RequireAuth from "./components/routes/protected/navigation-guards/RequireAuth"
 import RequireAdmin from "./components/routes/protected/navigation-guards/RequireAdmin"
 
