@@ -1,4 +1,7 @@
+// Hooks
 import useProfileContext from "../../../../../lib/hooks/context-hooks/useProfileContext"
+
+// Components
 import ScrollToTop from "../../../../../lib/util/components/ScrollToTop"
 import ListingCard from "../../../../ui/ListingCard"
 import ReportedListingsReport from "./ReportedListingsReport"

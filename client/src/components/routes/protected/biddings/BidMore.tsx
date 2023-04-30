@@ -1,4 +1,7 @@
+// Hooks
 import { useNavigate } from "react-router-dom"
+
+// Components
 import Card from "../../../ui/Card"
 
 const BidMore = () => {

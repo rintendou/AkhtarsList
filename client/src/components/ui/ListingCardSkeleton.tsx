@@ -1,3 +1,4 @@
+// Components
 import Card from "./Card"
 
 const ListingCardSkeleton = () => {

@@ -1,3 +1,4 @@
+// Components
 import ResetPasswordForm from "./ResetPasswordForm"
 
 const ResetPassword = () => {

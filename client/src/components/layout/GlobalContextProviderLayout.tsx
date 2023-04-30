@@ -1,3 +1,4 @@
+// Global Contexts
 import TimelineContextProvider from "../../lib/store/TimelineContext"
 import AuthContextProvider from "../../lib/store/AuthContext"
 import ProfileContextProvider from "../../lib/store/ProfileContext"

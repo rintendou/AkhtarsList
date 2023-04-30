@@ -1,6 +1,9 @@
+// Hooks
 import { useEffect, useState } from "react"
-import Card from "../../../../ui/Card"
 import useAuthContext from "../../../../../lib/hooks/context-hooks/useAuthContext"
+
+// Components
+import Card from "../../../../ui/Card"
 
 const AnalyticsUsers = () => {
   const [users, setUsers] = useState<string[]>([])

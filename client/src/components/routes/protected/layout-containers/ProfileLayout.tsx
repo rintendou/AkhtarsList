@@ -1,6 +1,9 @@
+// Hooks
+import useAuthContext from "../../../../lib/hooks/context-hooks/useAuthContext"
+
+// Components
 import { Outlet } from "react-router-dom"
 import ProfileActions from "../profile/profile-actions/ProfileActions"
-import useAuthContext from "../../../../lib/hooks/context-hooks/useAuthContext"
 import ScrollToTop from "../../../../lib/util/components/ScrollToTop"
 
 const ProfileLayout = () => {

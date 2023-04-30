@@ -1,9 +1,12 @@
+// Hooks
 import { useParams } from "react-router-dom"
-import StyledButton from "../../../ui/StyledButton"
 import { useState } from "react"
+import useListingDetailContextQuery from "../../../../lib/hooks/context-hooks/useListingDetailContext"
+
+// Components
+import StyledButton from "../../../ui/StyledButton"
 import Success from "../../../ui/Success"
 import Error from "../../../ui/Error"
-import useListingDetailContextQuery from "../../../../lib/hooks/context-hooks/useListingDetailContext"
 
 const WinnerActions = () => {
   const { listingId } = useParams()

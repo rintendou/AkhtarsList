@@ -1,10 +1,15 @@
+// Hooks
 import { useEffect, useRef, useState } from "react"
 import useAuthContext from "../../../../lib/hooks/context-hooks/useAuthContext"
-import Error from "../../../ui/Error"
-import stringInputIsValid from "../../../../lib/util/functions/stringInputValidator"
-import Success from "../../../ui/Success"
 import useProfileContext from "../../../../lib/hooks/context-hooks/useProfileContext"
+
+// Components
+import Error from "../../../ui/Error"
+import Success from "../../../ui/Success"
 import StyledInputAreaRef from "../../../ui/StyledInputAreaRef"
+
+// Utility Functions
+import stringInputIsValid from "../../../../lib/util/functions/stringInputValidator"
 
 const ApplyForAdmin = () => {
   const { auth } = useAuthContext()

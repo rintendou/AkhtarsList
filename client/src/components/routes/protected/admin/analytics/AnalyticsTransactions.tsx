@@ -1,4 +1,7 @@
+// Hooks
 import useTimelineContext from "../../../../../lib/hooks/context-hooks/useTimelineContext"
+
+// Components
 import Card from "../../../../ui/Card"
 import ListingCard from "../../../../ui/ListingCard"
 import SeeAll from "../../../application/timeline/SeeAll"

@@ -1,3 +1,4 @@
+// Components
 import { Outlet } from "react-router-dom"
 import AdminActions from "../admin/admin-actions/AdminActions"
 import ScrollToTop from "../../../../lib/util/components/ScrollToTop"

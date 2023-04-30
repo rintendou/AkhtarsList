@@ -1,6 +1,8 @@
+// Hooks
 import { useEffect, useRef, useState } from "react"
 import { useLocation, useNavigate } from "react-router-dom"
 
+// Components
 import Card from "../../ui/Card"
 import Error from "../../ui/Error"
 import PasswordInputRef from "../../ui/PasswordInputRef"

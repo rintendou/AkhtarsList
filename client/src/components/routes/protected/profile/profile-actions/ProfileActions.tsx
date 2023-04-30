@@ -1,8 +1,10 @@
+// Hooks
 import { useNavigate } from "react-router-dom"
+import useAuthContext from "../../../../../lib/hooks/context-hooks/useAuthContext"
 
+// Components
 import ProfileButton from "./ProfileButton"
 import ProfileRouterLink from "./ProfileRouterLink"
-import useAuthContext from "../../../../../lib/hooks/context-hooks/useAuthContext"
 import AdminButton from "./AdminButton"
 
 type Props = {

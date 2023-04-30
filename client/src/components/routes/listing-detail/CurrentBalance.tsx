@@ -1,5 +1,8 @@
+// Hooks
 import useAuthContext from "../../../lib/hooks/context-hooks/useAuthContext"
 import useProfileContext from "../../../lib/hooks/context-hooks/useProfileContext"
+
+// Utility Functions
 import getNumberWithCommas from "../../../lib/util/functions/getNumberWithCommas"
 
 const CurrentBalance = () => {

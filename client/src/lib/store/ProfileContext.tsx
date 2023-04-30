@@ -1,5 +1,6 @@
-import { createContext, useEffect, useState } from "react"
+// Hooks
 import useAuthContext from "../hooks/context-hooks/useAuthContext"
+import { createContext, useEffect, useState } from "react"
 
 // Types
 import ListingType from "../types/ListingType"
@@ -25,6 +26,7 @@ type initialContextType = {
   refetchUserDetails: () => void
 }
 
+// Initial Values
 const initialContext: initialContextType = {
   username: "",
   address: {

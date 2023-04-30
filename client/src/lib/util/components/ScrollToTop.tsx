@@ -1,3 +1,4 @@
+// Hooks
 import { useEffect } from "react"
 
 const ScrollToTop = () => {

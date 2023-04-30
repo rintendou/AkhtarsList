@@ -1,5 +1,7 @@
+// Hooks
 import { useState, useEffect } from "react"
 
+// Types
 type Props = {
   type: "success" | "warning" | "error"
   message: string

@@ -1,5 +1,7 @@
+// Components
 import React from "react"
 
+// Types
 type Props = {
   name: string
   type: "text" | "email" | "password" | "number"

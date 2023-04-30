@@ -1,6 +1,8 @@
-import ListingType from "../../../lib/types/ListingType"
+// Components
 import ListingCard from "../../ui/ListingCard"
 
+// Types
+import ListingType from "../../../lib/types/ListingType"
 type Props = {
   searchResults: ListingType[]
 }

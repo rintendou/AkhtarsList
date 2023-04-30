@@ -1,4 +1,7 @@
+// Hooks
 import useAuth from "../../../lib/hooks/context-hooks/useAuthContext"
+
+// Components
 import Logo from "../../ui/Logo"
 import RouterLink from "../../ui/RouterLink"
 

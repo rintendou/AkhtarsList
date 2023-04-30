@@ -1,10 +1,20 @@
+// Hooks
 import { createContext, useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import { useQuery } from "@tanstack/react-query"
-import ListingDetailSkeleton from "../../components/routes/listing-detail/ListingDetailSkeleton"
-import TimeRemainingType from "../types/TimeRemainingType"
-import calculateTimeRemaining from "../util/functions/calculateTimeRemaining"
 import useProfileContext from "../hooks/context-hooks/useProfileContext"
+
+// Components
+import ListingDetailSkeleton from "../../components/routes/listing-detail/ListingDetailSkeleton"
+
+// Services
+import fetchListingDetail from "../api-services/fetchListingDetail"
+
+// Types
+import TimeRemainingType from "../types/TimeRemainingType"
+
+// Utility Functions
+import calculateTimeRemaining from "../util/functions/calculateTimeRemaining"
 
 type initialContextType = {
   data: any | null
@@ -26,21 +36,6 @@ const initialContext: initialContextType = {
 }
 
 const ListingDetailContext = createContext<initialContextType>(initialContext)
-
-const fetchListingDetail = async (listingId: string) => {
-  const response = await fetch(
-    `http://localhost:${
-      import.meta.env.VITE_BACKEND_SERVER_PORT
-    }/api/listing/fetch/${listingId}`
-  )
-  const json = await response.json()
-
-  if (!json.ok) {
-    throw new Error("Failed to fetch listing detail")
-  }
-
-  return json
-}
 
 const ListingDetailContextQueryProvider = ({
   children,

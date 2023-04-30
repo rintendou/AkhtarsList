@@ -1,3 +1,4 @@
+// Hooks
 import { useEffect, useRef, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import useAuthContext from "../../../lib/hooks/context-hooks/useAuthContext"
@@ -8,11 +9,12 @@ import Error from "../../ui/Error"
 import StyledInputRef from "../../ui/StyledInputRef"
 import Success from "../../ui/Success"
 import RouterLink from "../../ui/RouterLink"
-
-// Port number
 import PasswordInputRef from "../../ui/PasswordInputRef"
+
+// Utility Functions
 import stringInputIsValid from "../../../lib/util/functions/stringInputValidator"
 
+// Types
 type Props = {
   didRegisterSuccessfully: boolean
   successMessage: string

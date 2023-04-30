@@ -1,4 +1,7 @@
+// Hooks
 import useProfileContext from "../../../../../lib/hooks/context-hooks/useProfileContext"
+
+// Components
 import Card from "../../../../ui/Card"
 
 const ReportedListingsReport = () => {

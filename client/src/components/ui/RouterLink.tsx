@@ -1,5 +1,7 @@
+// Hooks
 import { Link, useLocation } from "react-router-dom"
 
+// Types
 type Props = {
   to: string
   routerLinkText: string

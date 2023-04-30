@@ -1,3 +1,4 @@
+// Components
 import EditActions from "./EditActions"
 
 const Edit = () => {

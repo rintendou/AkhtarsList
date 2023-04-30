@@ -1,18 +1,21 @@
+// Hooks
 import { useEffect, useRef, useState } from "react"
 import useProfileContext from "../../../../lib/hooks/context-hooks/useProfileContext"
 
+// Components
 import Card from "../../../ui/Card"
 import StyledInputRef from "../../../ui/StyledInputRef"
 import Error from "../../../ui/Error"
 import Success from "../../../ui/Success"
-import stringInputIsValid from "../../../../lib/util/functions/stringInputValidator"
-import numberInputIsValid from "../../../../lib/util/functions/numberInputValidator"
 import CreditCardInput from "./CreditCardInput"
 import CVVInput from "./CVVInput"
-import getNumberWithCommas from "../../../../lib/util/functions/getNumberWithCommas"
-import verifyCCExpirationDate from "../../../../lib/util/functions/verifyCCExpirationDate"
 import ExpirationInput from "./ExpirationInput"
 
+// Utility Functions
+import stringInputIsValid from "../../../../lib/util/functions/stringInputValidator"
+import verifyCCExpirationDate from "../../../../lib/util/functions/verifyCCExpirationDate"
+import getNumberWithCommas from "../../../../lib/util/functions/getNumberWithCommas"
+import numberInputIsValid from "../../../../lib/util/functions/numberInputValidator"
 
 const Deposit = () => {
   const [error, setError] = useState("")

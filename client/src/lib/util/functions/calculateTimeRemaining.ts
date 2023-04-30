@@ -1,6 +1,7 @@
+// Utility Functions
 import TimeRemainingType from "../../types/TimeRemainingType"
 
-function calculateTimeRemaining(expireAt: Date): TimeRemainingType {
+const calculateTimeRemaining = (expireAt: Date): TimeRemainingType => {
   const difference = +new Date(expireAt) - +new Date()
   let timeRemaining: TimeRemainingType = {
     days: 0,

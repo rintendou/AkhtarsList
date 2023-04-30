@@ -1,3 +1,4 @@
+// Hooks
 import useThemeContext from "../../lib/hooks/context-hooks/useThemeContext"
 
 const ThemeSwitcher = () => {

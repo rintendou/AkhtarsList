@@ -1,3 +1,4 @@
+// Components
 import SellActions from "./SellActions"
 
 const Sell = () => {

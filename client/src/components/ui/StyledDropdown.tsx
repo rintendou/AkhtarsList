@@ -1,5 +1,7 @@
+// Hooks
 import React, { useState } from "react"
 
+// Types
 type Props = {
   name: string
   options: string[]

@@ -1,10 +1,13 @@
+// Hooks
 import useTimelineContext from "../../../../lib/hooks/context-hooks/useTimelineContext"
 
+// Components
 import Carousel from "../../../ui/Carousel"
 import ListingCard from "../../../ui/ListingCard"
 import ListingSkeletons from "../../../ui/ListingSkeletons"
 import SeeAll from "./SeeAll"
 
+// Constant Variables
 const IMAGESET2 = [
   "sneakers2.jpg",
   "antiques2.jpg",

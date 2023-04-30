@@ -1,5 +1,7 @@
+// Assets
 import RandomListingImage from "../../../../../public/random-listing-image-undraw.svg"
 
+// Types
 type Props = {
   img: string
   title: string

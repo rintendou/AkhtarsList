@@ -1,5 +1,7 @@
+// Packages
 import React from "react"
 
+// Types
 type Props = {
   name: string
   placeholder: string
