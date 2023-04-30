@@ -1,3 +1,4 @@
+// Components
 import SortBy from "../../ui/SortBy"
 
 type Props = {
