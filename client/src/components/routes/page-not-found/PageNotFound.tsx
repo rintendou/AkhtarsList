@@ -1,5 +1,7 @@
+// Components
 import Overview from "../../ui/Overview"
 
+// Assets
 import PageNotFoundImage from "../../../../public/page-not-found-undraw.svg"
 
 const PageNotFound = () => {
