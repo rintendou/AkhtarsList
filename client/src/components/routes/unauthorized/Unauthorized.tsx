@@ -5,7 +5,7 @@ import RouterLink from "../../ui/RouterLink"
 
 const Unauthorized = () => {
   return (
-    <div className="min-h-screen flex justify-center items-cente p-20 py-40">
+    <div className="min-h-screen flex justify-center items-center p-20 py-40">
       <Overview twClasses="space-y-20 flex flex-col">
         <img
           src={UnauthorizedAccessImage}
