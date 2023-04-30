@@ -1,24 +1,23 @@
+// Hooks
 import { useEffect, useRef, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import useAuthContext from "../../../lib/hooks/context-hooks/useAuthContext"
+import useListingDetailContextQuery from "../../../lib/hooks/context-hooks/useListingDetailContext"
+import useProfileContext from "../../../lib/hooks/context-hooks/useProfileContext"
 
 // Components
 import Bidders from "./Bidders"
 import Error from "../../ui/Error"
 import Countdown from "../../ui/Countdown"
 import EditListing from "./EditListing"
+import Success from "../../ui/Success"
+import Transactions from "./Transactions"
+import CurrentBalance from "./CurrentBalance"
+import ReportListing from "./ReportListing"
 
 // Utility functions
 import numberInputIsValid from "../../../lib/util/functions/numberInputValidator"
-
-// Backend port number
-import Success from "../../ui/Success"
-import useProfileContext from "../../../lib/hooks/context-hooks/useProfileContext"
-import Transactions from "./Transactions"
-import useListingDetailContextQuery from "../../../lib/hooks/context-hooks/useListingDetailContext"
-import CurrentBalance from "./CurrentBalance"
 import getNumberWithCommas from "../../../lib/util/functions/getNumberWithCommas"
-import ReportListing from "./ReportListing"
 
 const ActiveBiddingSection = () => {
   const { data } = useListingDetailContextQuery()

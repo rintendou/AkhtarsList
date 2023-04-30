@@ -1,4 +1,7 @@
+// Hooks
 import useListingDetailContextQuery from "../../../lib/hooks/context-hooks/useListingDetailContext"
+
+// Utility Functions
 import getFormattedDate from "../../../lib/util/functions/getFormattedDate"
 import getNumberWithCommas from "../../../lib/util/functions/getNumberWithCommas"
 
