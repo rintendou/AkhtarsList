@@ -3,14 +3,13 @@ import { useEffect } from "react"
 import useTimelineContext from "../../../lib/hooks/context-hooks/useTimelineContext"
 
 // Components
+import { Link } from "react-router-dom"
 import Carousel from "../../ui/Carousel"
 import CategoryHeader from "./CategoryHeader"
 import Timeline from "./timeline/Timeline"
-import { Link } from "react-router-dom"
 import FixedScrollToTop from "../../ui/FixedScrollToTop"
 
-const BUYSELLIMAGE = "timeline/buy-sell.jpg"
-
+// Consant Variables
 const IMAGESET1 = [
   "sneakers1.jpg",
   "antiques1.jpg",
@@ -19,6 +18,9 @@ const IMAGESET1 = [
   "collectibles1.jpg",
   "assorted1.jpg",
 ]
+
+// Assets
+const BUYSELLIMAGE = "timeline/buy-sell.jpg"
 
 const Application = () => {
   const { refetchTimeline } = useTimelineContext()
