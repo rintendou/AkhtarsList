@@ -1,5 +1,8 @@
+// Hooks
 import { useEffect } from "react"
 import useProfileContext from "../../../../lib/hooks/context-hooks/useProfileContext"
+
+// Components
 import UserDetails from "./UserDetails"
 
 const Profile = () => {

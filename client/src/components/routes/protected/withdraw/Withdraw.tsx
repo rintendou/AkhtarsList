@@ -1,10 +1,14 @@
+// Hooks
 import { useEffect, useRef, useState } from "react"
 import useProfileContext from "../../../../lib/hooks/context-hooks/useProfileContext"
 
+// Components
 import Card from "../../../ui/Card"
 import StyledInputRef from "../../../ui/StyledInputRef"
 import Error from "../../../ui/Error"
 import Success from "../../../ui/Success"
+
+// Utility Functions
 import getNumberWithCommas from "../../../../lib/util/functions/getNumberWithCommas"
 
 const Withdraw = () => {

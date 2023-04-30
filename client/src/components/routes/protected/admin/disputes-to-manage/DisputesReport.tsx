@@ -1,4 +1,7 @@
+// Hooks
 import useTimelineContext from "../../../../../lib/hooks/context-hooks/useTimelineContext"
+
+// Components
 import ScrollToTop from "../../../../../lib/util/components/ScrollToTop"
 import Card from "../../../../ui/Card"
 

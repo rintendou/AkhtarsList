@@ -1,16 +1,19 @@
+// Hooks
 import { useEffect, useRef, useState } from "react"
 import { useNavigate } from "react-router-dom"
 
+// Components
 import Card from "../../ui/Card"
 import Error from "../../ui/Error"
 import StyledInputRef from "../../ui/StyledInputRef"
 import RouterLink from "../../ui/RouterLink"
-
 import PasswordInputRef from "../../ui/PasswordInputRef"
 import ZipcodeInput from "./ZipcodeInput"
+import StyledDropdownRef from "../../ui/StyledDropdown"
+
+// Utility Functions
 import stringInputIsValid from "../../../lib/util/functions/stringInputValidator"
 import numberInputIsValid from "../../../lib/util/functions/numberInputValidator"
-import StyledDropdownRef from "../../ui/StyledDropdown"
 import isEmailInputValid from "../../../lib/util/functions/emailInputValidator"
 import isPasswordStrong from "../../../lib/util/functions/verifyPasswordStrength"
 

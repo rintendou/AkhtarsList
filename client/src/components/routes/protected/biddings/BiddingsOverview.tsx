@@ -1,5 +1,8 @@
+// Hooks
 import useAuthContext from "../../../../lib/hooks/context-hooks/useAuthContext"
 import useProfileContext from "../../../../lib/hooks/context-hooks/useProfileContext"
+
+// Components
 import Card from "../../../ui/Card"
 
 const BiddingsOverview = () => {

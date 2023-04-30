@@ -1,3 +1,4 @@
+// Components
 import CurrentBiddings from "./CurrentBiddings"
 import DisputedBiddings from "./DisputedBiddings"
 import AllBiddings from "./AllBiddings"

@@ -1,9 +1,12 @@
+// Hooks
 import { useEffect } from "react"
+import useAuthContext from "../../../../lib/hooks/context-hooks/useAuthContext"
+
+// Components
 import ChangePassword from "./ChangePassword"
 import ChangeSecurityQuestions from "./ChangeSecurityQuestions"
 import EditUserDetails from "./ChangeUserDetails"
 import ApplyForAdmin from "./ApplyForAdmin"
-import useAuthContext from "../../../../lib/hooks/context-hooks/useAuthContext"
 
 const Settings = () => {
   const { auth } = useAuthContext()

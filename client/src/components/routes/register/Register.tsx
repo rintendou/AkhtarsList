@@ -1,3 +1,4 @@
+// Components
 import ScrollToTop from "../../../lib/util/components/ScrollToTop"
 import RegisterForm from "./RegisterForm"
 

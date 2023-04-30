@@ -1,4 +1,7 @@
+// Hooks
 import { useLocation } from "react-router-dom"
+
+// Components
 import PreviewImageContainer from "./PreviewImageContainer"
 
 const Preview = () => {

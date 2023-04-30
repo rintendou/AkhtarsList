@@ -1,5 +1,7 @@
-import useAuthContext from "../../../../lib/hooks/context-hooks/useAuthContext"
+// Hooks
 import useProfileContext from "../../../../lib/hooks/context-hooks/useProfileContext"
+
+// Components
 import Card from "../../../ui/Card"
 
 const ListingsOverview = () => {

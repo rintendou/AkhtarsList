@@ -1,12 +1,17 @@
+// Hooks
 import { useEffect, useRef, useState } from "react"
+import useAuthContext from "../../../../lib/hooks/context-hooks/useAuthContext"
+import useProfileContext from "../../../../lib/hooks/context-hooks/useProfileContext"
+
+// Components
 import StyledInputRef from "../../../ui/StyledInputRef"
 import PasswordInputRef from "../../../ui/PasswordInputRef"
-import useAuthContext from "../../../../lib/hooks/context-hooks/useAuthContext"
 import Error from "../../../ui/Error"
-import stringInputIsValid from "../../../../lib/util/functions/stringInputValidator"
 import Success from "../../../ui/Success"
-import useProfileContext from "../../../../lib/hooks/context-hooks/useProfileContext"
 import ZipcodeInput from "../../register/ZipcodeInput"
+
+// Utility Functions
+import stringInputIsValid from "../../../../lib/util/functions/stringInputValidator"
 import numberInputIsValid from "../../../../lib/util/functions/numberInputValidator"
 
 const ChangeUserDetails = () => {

@@ -1,11 +1,16 @@
+// Hooks
 import { useRef, useState } from "react"
+import useAuthContext from "../../../../lib/hooks/context-hooks/useAuthContext"
+
+// Components
 import StyledInputRef from "../../../ui/StyledInputRef"
 import PasswordInputRef from "../../../ui/PasswordInputRef"
-import useAuthContext from "../../../../lib/hooks/context-hooks/useAuthContext"
 import Error from "../../../ui/Error"
-import stringInputIsValid from "../../../../lib/util/functions/stringInputValidator"
 import Success from "../../../ui/Success"
 import StyledDropdownRef from "../../../ui/StyledDropdown"
+
+// Utility Functions
+import stringInputIsValid from "../../../../lib/util/functions/stringInputValidator"
 
 // Constant Variables
 const QUESTIONS = [

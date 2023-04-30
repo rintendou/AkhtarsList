@@ -1,8 +1,8 @@
 // Hooks
 import { useEffect, useRef, useState } from "react"
+import { useLocation, useNavigate } from "react-router-dom"
 import useAuthContext from "../../../../lib/hooks/context-hooks/useAuthContext"
 import useProfileContext from "../../../../lib/hooks/context-hooks/useProfileContext"
-import { useLocation, useNavigate } from "react-router-dom"
 import useTimelineContext from "../../../../lib/hooks/context-hooks/useTimelineContext"
 
 // Components
@@ -11,13 +11,11 @@ import StyledInputAreaRef from "../../../ui/StyledInputAreaRef"
 import StyledDropdownRef from "../../../ui/StyledDropdown"
 import StyledDateTimePicker from "../../../ui/StyledDateTimePicker"
 import Error from "../../../ui/Error"
+import DragAndDrop from "../../../ui/DragAndDrop"
 
 // Utility Functions
 import numberInputIsValid from "../../../../lib/util/functions/numberInputValidator"
 import stringInputIsValid from "../../../../lib/util/functions/stringInputValidator"
-
-// Backend Server Port
-import DragAndDrop from "../../../ui/DragAndDrop"
 
 // Constant Variables
 const CATEGORIES = [
