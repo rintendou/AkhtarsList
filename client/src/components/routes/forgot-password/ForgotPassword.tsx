@@ -1,3 +1,4 @@
+// Components
 import ScrollToTop from "../../../lib/util/components/ScrollToTop"
 import ForgotPasswordForm from "./ForgotPasswordForm"
 
