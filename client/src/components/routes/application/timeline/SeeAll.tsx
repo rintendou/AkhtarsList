@@ -1,5 +1,7 @@
+// Components
 import RouterLink from "../../../ui/RouterLink"
 
+// Types
 type Props = {
   to: string
 }
