@@ -1,12 +1,15 @@
+// Packages
 import React from "react"
 
-import ImageUpload from "../../../public/image-upload-undraw.svg"
-
+// Types
 type Props = {
   imageUrl: string
   onFileSelection: (f: File | null) => void
   setImageUrl: React.Dispatch<React.SetStateAction<string>>
 }
+
+// Assets
+import ImageUpload from "../../../public/image-upload-undraw.svg"
 
 const DragAndDrop = ({ imageUrl, onFileSelection, setImageUrl }: Props) => {
   const handleDrop = (event: React.DragEvent<HTMLDivElement>): void => {

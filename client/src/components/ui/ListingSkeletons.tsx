@@ -1,3 +1,4 @@
+// Components
 import ListingCardSkeleton from "./ListingCardSkeleton"
 
 const ListingSkeletons = () => {

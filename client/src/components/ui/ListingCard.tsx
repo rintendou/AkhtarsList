@@ -1,15 +1,16 @@
+// Hooks
 import { useNavigate } from "react-router-dom"
 import useAuth from "../../lib/hooks/context-hooks/useAuthContext"
 
 // Components
 import Card from "./Card"
 
-// Util functions
-import getTimeRemaining from "../../lib/util/functions/getTimeRemaining"
-
 // Types
 import ListingType from "../../lib/types/ListingType"
+
+// Utility Functions
 import getNumberWithCommas from "../../lib/util/functions/getNumberWithCommas"
+import getTimeRemaining from "../../lib/util/functions/getTimeRemaining"
 
 // Assets
 import noImageFound from "/no-image-found-undraw.svg"

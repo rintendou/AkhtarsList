@@ -1,3 +1,4 @@
+// Types
 type Props = {
   status: string
 }

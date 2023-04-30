@@ -1,3 +1,4 @@
+// Types
 type Props = {
   name: string
   type: "text" | "email" | "password" | "number"

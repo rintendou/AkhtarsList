@@ -1,6 +1,10 @@
+// Hooks
 import { useState } from "react"
+
+// Components
 import ReactDatePicker from "react-datepicker"
 
+// Styles
 import "react-datepicker/dist/react-datepicker.css"
 
 type Props = {

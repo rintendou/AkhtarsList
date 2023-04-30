@@ -1,6 +1,10 @@
+// Packages
 import React from "react"
+
+// Hooks
 import usePasswordToggle from "../../lib/hooks/regular-hooks/usePasswordToggle"
 
+// Types
 type Props = {
   name: string
   twClasses?: string

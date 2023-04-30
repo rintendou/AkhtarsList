@@ -1,9 +1,10 @@
+// Hooks
 import { useState, useEffect } from "react"
 
+// Types
 type Props = {
   targetDate: string
 }
-
 type TimeRemaining = {
   days: number
   hours: number

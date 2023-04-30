@@ -1,10 +1,11 @@
+// Hooks
 import { useEffect, useRef, useState } from "react"
 
+// Types
 type Option = {
   label: string
   value: string
 }
-
 type Props = {
   options: Option[]
   onSort: (value: string, isAscending: boolean) => void
