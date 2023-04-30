@@ -1,5 +1,3 @@
-import { Routes, Route } from "react-router-dom"
-
 // Routes
 import Application from "./components/routes/application/Application"
 import PageNotFound from "./components/routes/page-not-found/PageNotFound"
@@ -13,7 +11,6 @@ import ChangePassword from "./components/routes/forgot-password/ResetPassword"
 import Category from "./components/routes/categories/Category"
 import Sell from "./components/routes/protected/sell/Sell"
 import Preview from "./components/routes/protected/preview/Preview"
-import ListingDetail from "./components/routes/dev-route/test-nonpolled/ListingDetail"
 import ListingNotFound from "./components/routes/page-not-found/ListingNotFound"
 import Edit from "./components/routes/protected/edit/Edit"
 import Unauthorized from "./components/routes/unauthorized/Unauthorized"
@@ -30,11 +27,12 @@ import AnalyticsDashboard from "./components/routes/protected/admin/analytics/An
 import ReportedListings from "./components/routes/protected/admin/reported-listings/ReportedListings"
 
 // Components
+import { Routes, Route } from "react-router-dom"
 import Body from "./components/layout/body/Body"
 import Footer from "./components/layout/footer/Footer"
 import Header from "./components/layout/header/Header"
 
-// Navguards
+// Navigation Guards
 import RequireAuth from "./components/routes/protected/navigation-guards/RequireAuth"
 import RequireAdmin from "./components/routes/protected/navigation-guards/RequireAdmin"
 
@@ -43,13 +41,6 @@ import ProfileLayout from "./components/routes/protected/layout-containers/Profi
 
 // Providers
 import ListingDetailContextQueryProvider from "./lib/store/ListingDetailContext"
-
-// DEV
-import DevUnpolledListingDetailContextProvider from "./components/routes/dev-route/test-nonpolled/ListingDetailContext"
-import DevListingDetailContextProvider from "./components/routes/dev-route/test-global-ctx/DevListingDetailContext"
-import DevListingDetailGlobal from "./components/routes/dev-route/test-global-ctx/DevListingDetailGlobal"
-import DevListingDetail from "./components/routes/dev-route/test-custom-hook/DevListingDetail"
-import Dev from "./components/routes/dev-route/ui/Dev"
 
 function App() {
   return (
@@ -74,27 +65,7 @@ function App() {
             }
           />
 
-          {/*  Dev Routes */}
-          <Route path="/dev" element={<Dev />} />
-          <Route path="/dev-listing-detail" element={<DevListingDetail />} />
-          <Route
-            path="/dev-listing-detail-global"
-            element={
-              <DevListingDetailContextProvider>
-                <DevListingDetailGlobal />
-              </DevListingDetailContextProvider>
-            }
-          />
-          <Route
-            path="/listings-nonpolled/:listingId"
-            element={
-              <DevUnpolledListingDetailContextProvider>
-                <ListingDetail />
-              </DevUnpolledListingDetailContextProvider>
-            }
-          />
-
-          {/* Protected Routes */}
+          {/* Authenticated Routes */}
           <Route element={<RequireAuth />}>
             <Route path="/sell" element={<Sell />} />
             <Route path="/preview" element={<Preview />} />
