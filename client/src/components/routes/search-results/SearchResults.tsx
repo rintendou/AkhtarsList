@@ -1,8 +1,12 @@
+// Hooks
 import { Link, useLocation } from "react-router-dom"
+
+// Components
 import Carousel from "../../ui/Carousel"
 import CategoryHeader from "../application/CategoryHeader"
 import Results from "./Results"
 
+// Constant Variables
 const IMAGESET2 = [
   "sneakers2.jpg",
   "antiques2.jpg",
@@ -12,6 +16,7 @@ const IMAGESET2 = [
   "assorted2.jpg",
 ]
 
+// Assets
 const BUYSELLIMAGE = "timeline/buy-sell.jpg"
 
 const SearchResults = () => {
