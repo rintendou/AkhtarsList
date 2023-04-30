@@ -1,3 +1,4 @@
+// Utility Functions
 import TimeRemainingType from "../../types/TimeRemainingType"
 
 function calculateTimeRemaining(expireAt: Date): TimeRemainingType {

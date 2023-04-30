@@ -1,12 +1,15 @@
+// Packages
 import { createContext, ReactNode } from "react"
+
+// Hooks
+import { useQuery } from "@tanstack/react-query"
+import { useLocation } from "react-router-dom"
+
+// Components
+import ListingSkeletons from "../../components/ui/ListingSkeletons"
 
 // Types
 import ListingType from "../types/ListingType"
-
-// Port Number
-import { useQuery } from "@tanstack/react-query"
-import ListingSkeletons from "../../components/ui/ListingSkeletons"
-import { useLocation } from "react-router-dom"
 
 type initialContextType = {
   allListings: ListingType[]
@@ -22,6 +25,7 @@ type initialContextType = {
   refetchTimeline: () => void
 }
 
+// Initial Values
 const initialContext = {
   allListings: [],
   trendingListings: [],

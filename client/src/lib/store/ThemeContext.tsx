@@ -1,10 +1,13 @@
+// Hooks
 import { createContext, useState, ReactNode, useEffect } from "react"
 
+// Types
 type initialContextType = {
   mode: string
   changeTheme: () => void
 }
 
+// Initial Values
 const initialContext = { mode: "light", changeTheme: () => {} }
 
 const ThemeContext = createContext<initialContextType>(initialContext)

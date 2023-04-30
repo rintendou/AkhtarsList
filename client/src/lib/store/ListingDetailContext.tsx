@@ -1,10 +1,17 @@
+// Hooks
 import { createContext, useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import { useQuery } from "@tanstack/react-query"
-import ListingDetailSkeleton from "../../components/routes/listing-detail/ListingDetailSkeleton"
-import TimeRemainingType from "../types/TimeRemainingType"
-import calculateTimeRemaining from "../util/functions/calculateTimeRemaining"
 import useProfileContext from "../hooks/context-hooks/useProfileContext"
+
+// Components
+import ListingDetailSkeleton from "../../components/routes/listing-detail/ListingDetailSkeleton"
+
+// Types
+import TimeRemainingType from "../types/TimeRemainingType"
+
+// Utility Functions
+import calculateTimeRemaining from "../util/functions/calculateTimeRemaining"
 
 type initialContextType = {
   data: any | null

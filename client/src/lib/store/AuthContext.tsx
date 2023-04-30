@@ -1,5 +1,7 @@
+// Hooks
 import { createContext, useState, ReactNode, useEffect } from "react"
 
+// Types
 type AuthType = {
   _id: string
   token: string
@@ -13,6 +15,7 @@ type initialContextType = {
   isLoggedIn: boolean
 }
 
+// Initial Values
 const initialUserState = { _id: "", token: "", isAdmin: "" }
 
 const initialContext = {
