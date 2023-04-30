@@ -13,7 +13,6 @@ import ChangePassword from "./components/routes/forgot-password/ResetPassword"
 import Category from "./components/routes/categories/Category"
 import Sell from "./components/routes/protected/sell/Sell"
 import Preview from "./components/routes/protected/preview/Preview"
-import ListingDetail from "./components/routes/dev-route/test-nonpolled/ListingDetail"
 import ListingNotFound from "./components/routes/page-not-found/ListingNotFound"
 import Edit from "./components/routes/protected/edit/Edit"
 import Unauthorized from "./components/routes/unauthorized/Unauthorized"
@@ -67,7 +66,7 @@ function App() {
             }
           />
 
-          {/* Protected Routes */}
+          {/* Authenticated Routes */}
           <Route element={<RequireAuth />}>
             <Route path="/sell" element={<Sell />} />
             <Route path="/preview" element={<Preview />} />
