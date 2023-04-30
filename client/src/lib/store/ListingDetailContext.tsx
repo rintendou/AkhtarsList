@@ -7,6 +7,9 @@ import useProfileContext from "../hooks/context-hooks/useProfileContext"
 // Components
 import ListingDetailSkeleton from "../../components/routes/listing-detail/ListingDetailSkeleton"
 
+// Services
+import fetchListingDetail from "../api-services/fetchListingDetail"
+
 // Types
 import TimeRemainingType from "../types/TimeRemainingType"
 
@@ -33,21 +36,6 @@ const initialContext: initialContextType = {
 }
 
 const ListingDetailContext = createContext<initialContextType>(initialContext)
-
-const fetchListingDetail = async (listingId: string) => {
-  const response = await fetch(
-    `http://localhost:${
-      import.meta.env.VITE_BACKEND_SERVER_PORT
-    }/api/listing/fetch/${listingId}`
-  )
-  const json = await response.json()
-
-  if (!json.ok) {
-    throw new Error("Failed to fetch listing detail")
-  }
-
-  return json
-}
 
 const ListingDetailContextQueryProvider = ({
   children,
