@@ -322,7 +322,7 @@ export default EditActions
 const SubmitListingButton = () => {
   return (
     <button
-      className={`p-4 rounded-lg duration-200 ease-in-out bg-secondary text-primary font-bold text-2xl py-6 w-full hover:scale-100 hover:bg-black hover:text-tertiary focus:outline-tertiary outline-4 focus:text-tertiary focus:bg-black dark:bg-tertiary dark:border-4 dark:border-black`}
+      className={`p-4 rounded-lg duration-200 ease-in-out text-black font-bold text-2xl py-6 w-full hover:scale-100 focus:outline-tertiary outline-4 focus:text-tertiary bg-tertiary hover:bg-black hover:text-primary`}
       type="submit"
     >
       Update Listing

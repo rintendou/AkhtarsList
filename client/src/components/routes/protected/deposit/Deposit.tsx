@@ -167,7 +167,7 @@ const DepositNowButton = () => {
       className={`p-4 py-3 rounded-lg duration-200  ease-in-out text-secondary font-bold text-lg shadow-xl  flex-auto bg-tertiary hover:bg-secondary hover:text-primary`}
       type="submit"
     >
-      Deposit Now
+      Deposit
     </button>
   )
 }
