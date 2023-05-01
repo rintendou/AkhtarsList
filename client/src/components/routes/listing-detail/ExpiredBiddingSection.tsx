@@ -23,7 +23,7 @@ const ExpiredBiddingSection = () => {
     <div
       className={`flex-auto p-10 py-12 max-w-none md:max-w-[50%] max-h-[50%] md:max-h-none space-y-10 flex flex-col items-center bg-purple-100 bg-opacity-40 select-none dark:bg-secondary`}
     >
-      <h1 className="text-5xl text-center font-semibold  opacity-40">
+      <h1 className="text-5xl text-center font-semibold opacity-40 text-tertiary">
         Listing Expired
       </h1>
 
