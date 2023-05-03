@@ -125,7 +125,7 @@ _This project relies on external services such as MongoDB, JWT, Cloudinary._
     git clone https://github.com/rintendou/AkhtarsList.git
     ```
 
-2. Create two `.env` files in the `client` and `server` directory.
+2. Create two `.env` files in the `client` and `server` directory. Env file examples are placed within the client and server directories for reference.
    * In the `client` `.env`, fill in the values of following variables:  
    ```sh
     VITE_BACKEND_SERVER_PORT={PORT_NUMBER}
