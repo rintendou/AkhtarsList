@@ -140,6 +140,15 @@ _This project relies on external services such as MongoDB, JWT, Cloudinary._
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+## Backlogs
+
+### High Priority
+1.) Validation Libraries and ReactHookForm (Zod  & RHF)
+2.) Communication Feature
+
+### Low Priority
+1.) Fix bug where the profile route doesn't initially render the admin link. I.e. it requires a refresh to show the admin link when the authenticated user is an admin
+
 <!-- CONTRIBUTING -->
 
 ## Contributing
