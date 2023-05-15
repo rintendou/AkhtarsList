@@ -23,7 +23,7 @@ const RHFInputField = ({ id, type = "text", register, error }: Props) => {
       >
         {id}
       </label>
-      <p>{error}</p>
+      {error && <p className="text-red-600 text-xs font-semibold">{error}</p>}
     </div>
   )
 }

@@ -6,14 +6,12 @@ import useAuthContext from "../../../lib/hooks/context-hooks/useAuthContext"
 // Components
 import Card from "../../ui/Card"
 import Error from "../../ui/Error"
-import StyledInputRef from "../../ui/StyledInputRef"
 import Success from "../../ui/Success"
 import RouterLink from "../../ui/RouterLink"
-import PasswordInputRef from "../../ui/PasswordInputRef"
-
-// Utility Functions
-import stringInputIsValid from "../../../lib/util/functions/stringInputValidator"
 import RHFPasswordField from "../../ui/RHFPasswordField"
+
+// Validators
+import { zodResolver } from "@hookform/resolvers/zod"
 
 // Types
 type Props = {
@@ -21,6 +19,12 @@ type Props = {
   successMessage: string
   errorMessageFromOtherRoute: string
 }
+import {
+  loginFormSchema,
+  loginFormType,
+} from "../../../../../common/validations/loginFormValidator"
+import { useForm } from "react-hook-form"
+import RHFInputField from "../../ui/RHFInputField"
 
 const LoginForm = ({
   didRegisterSuccessfully,
@@ -34,28 +38,15 @@ const LoginForm = ({
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<FormValues>({
-    resolver: zodResolver(ZodLoginFormSchema),
+  } = useForm<loginFormType>({
+    resolver: zodResolver(loginFormSchema),
   })
-
-  // focus on the first input on component mount
-  const usernameRef = useRef<HTMLInputElement>(null)
-  useEffect(() => {
-    usernameRef.current!.focus()
-  }, [])
 
   const [errorMessage, setErrorMessage] = useState(errorMessageFromOtherRoute)
   const [scsMessage, setScsMessage] = useState(successMessage)
 
-  const loginUserHandler = (e: React.FormEvent<HTMLFormElement>) => {
-    // Prevent default behavior of reloading page on form submission
-    e.preventDefault()
-    const username = usernameRef.current!.value
-
-    const payload = {
-      username,
-      password,
-    }
+  const loginUserHandler = (data: loginFormType) => {
+    const payload = data
 
     const loginUser = async () => {
       const response = await fetch(
@@ -95,17 +86,20 @@ const LoginForm = ({
       <div className="p-10">
         <form
           className="flex flex-col space-y-5 gap-5"
-          onSubmit={loginUserHandler}
+          onSubmit={handleSubmit(loginUserHandler)}
         >
-          <StyledInputRef
-            name="Username"
-            type="text"
-            placeholder="Username"
-            ref={usernameRef}
+          <RHFInputField
+            id="username"
+            register={register("username")}
+            error={errors.username?.message}
           />
           <div className="flex flex-col">
-            <PasswordInputRef name="Password" ref={passwordRef} />
-            <RHFPasswordField id="password" name="Password" register={} />
+            <RHFPasswordField
+              id="password"
+              name="Password"
+              register={register("password")}
+              error={errors.password?.message}
+            />
             <RouterLink
               routerLinkText="Forgot Password?"
               twClasses="text-xs ml-auto"
@@ -114,10 +108,7 @@ const LoginForm = ({
           </div>
           <LoginButton />
         </form>
-        <div className="text-center w-full flex flex-col p-2 md:flex-row space-x-0 md:space-x-3 justify-center mx-auto text-sm">
-          <h1>Don't have an account yet?</h1>
-          <RouterLink routerLinkText="Register here" to="/register" />
-        </div>
+        <RegisterLink />
         {!errorMessage && didRegisterSuccessfully && (
           <Success successMessage={scsMessage} />
         )}
@@ -137,5 +128,14 @@ const LoginButton = () => {
     >
       Log In
     </button>
+  )
+}
+
+const RegisterLink = () => {
+  return (
+    <div className="text-center w-full flex flex-col p-2 md:flex-row space-x-0 md:space-x-3 justify-center mx-auto text-sm">
+      <h1>Don't have an account yet?</h1>
+      <RouterLink routerLinkText="Register here" to="/register" />
+    </div>
   )
 }
