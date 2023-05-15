@@ -30,6 +30,14 @@ const LoginForm = ({
   const { login } = useAuthContext()
   const navigate = useNavigate()
 
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormValues>({
+    resolver: zodResolver(ZodLoginFormSchema),
+  })
+
   // focus on the first input on component mount
   const usernameRef = useRef<HTMLInputElement>(null)
   useEffect(() => {
@@ -97,7 +105,7 @@ const LoginForm = ({
           />
           <div className="flex flex-col">
             <PasswordInputRef name="Password" ref={passwordRef} />
-            <RHFPasswordField id="password" name="Password" />
+            <RHFPasswordField id="password" name="Password" register={} />
             <RouterLink
               routerLinkText="Forgot Password?"
               twClasses="text-xs ml-auto"
