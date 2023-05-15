@@ -40,3 +40,5 @@ export const registerFormSchema = z.object({
     required_error: "Street Address is required!",
   }),
 })
+
+export type registerFormType = z.infer<typeof registerFormSchema>

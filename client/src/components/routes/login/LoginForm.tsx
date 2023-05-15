@@ -13,6 +13,7 @@ import PasswordInputRef from "../../ui/PasswordInputRef"
 
 // Utility Functions
 import stringInputIsValid from "../../../lib/util/functions/stringInputValidator"
+import RHFPasswordField from "../../ui/RHFPasswordField"
 
 // Types
 type Props = {
@@ -29,45 +30,23 @@ const LoginForm = ({
   const { login } = useAuthContext()
   const navigate = useNavigate()
 
-  // I opted to use the useRef hook instead of useState to prevent
-  // unnecessary re-renders of this component per each character typed
-  const usernameRef = useRef<HTMLInputElement>(null)
-  const passwordRef = useRef<HTMLInputElement>(null)
-
   // focus on the first input on component mount
+  const usernameRef = useRef<HTMLInputElement>(null)
   useEffect(() => {
     usernameRef.current!.focus()
   }, [])
-  // Keep track of error
-  const [errorMessage, setErrorMessage] = useState(errorMessageFromOtherRoute)
 
-  // Keep track of login success
+  const [errorMessage, setErrorMessage] = useState(errorMessageFromOtherRoute)
   const [scsMessage, setScsMessage] = useState(successMessage)
 
-  // send post request to api endpoint /api/auth/login by calling the
-  // the endpoint and backend_server_port number: 5178. Payload is passed
-  // by attaching data to the body object.
   const loginUserHandler = (e: React.FormEvent<HTMLFormElement>) => {
     // Prevent default behavior of reloading page on form submission
     e.preventDefault()
     const username = usernameRef.current!.value
-    const password = passwordRef.current!.value
 
     const payload = {
       username,
       password,
-    }
-
-    if (!stringInputIsValid(username)) {
-      usernameRef.current!.focus()
-      setErrorMessage("Username is required!")
-      return
-    }
-
-    if (!stringInputIsValid(password)) {
-      passwordRef.current!.focus()
-      setErrorMessage("Password is required!")
-      return
     }
 
     const loginUser = async () => {
@@ -118,6 +97,7 @@ const LoginForm = ({
           />
           <div className="flex flex-col">
             <PasswordInputRef name="Password" ref={passwordRef} />
+            <RHFPasswordField id="password" name="Password" />
             <RouterLink
               routerLinkText="Forgot Password?"
               twClasses="text-xs ml-auto"
