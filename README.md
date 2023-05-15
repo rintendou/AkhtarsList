@@ -144,7 +144,7 @@ _This project relies on external services such as MongoDB, JWT, Cloudinary._
 
 ### High Priority
 
-1.) Validation Libraries and ReactHookForm (Zod  & RHF) [currently being implemented by KJB] 
+1.) Validation Libraries and ReactHookForm (Zod  & RHF) [currently being implemented by KJB]   
 2.) Communication Feature  
 
 ### Low Priority
