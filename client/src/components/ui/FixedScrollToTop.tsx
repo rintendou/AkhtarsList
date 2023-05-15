@@ -8,7 +8,7 @@ const FixedScrollToTop = () => {
 
   return (
     <div
-      className="z-20 bg-tertiary bottom-5 right-5 fixed p-4 rounded-full cursor-pointer border-2 border-secondary hover:scale-110 duration-200 ease-in-out"
+      className="z-20 bg-tertiary bottom-5 right-5 fixed p-4 rounded-full cursor-pointer border-2 border-secondary hover:scale-110 duration-200 ease-in-out opacity-50 hover:opacity-100"
       onClick={scrollToTopHandler}
     >
       <svg
