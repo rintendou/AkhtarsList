@@ -133,7 +133,7 @@ _This project relies on external services such as MongoDB, JWT, Cloudinary._
    ```
    * In the `server` `.env`, fill in the values of the following variables  
    ```sh
-    BACKEND_SERVER_PORT={PORT_NUMBER}
+    PORT={PORT_NUMBER}
     MONGODB_URL={MONGODB_API_KEY}
     JWT_KEY={JWT_KEY}
     ```
