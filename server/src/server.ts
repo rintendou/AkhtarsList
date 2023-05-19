@@ -17,7 +17,7 @@ mongoose.set("strictQuery", false)
 const app = express()
 
 // Environment Variables
-const PORT = process.env.BACKEND_SERVER_PORT
+const PORT = process.env.PORT
 const MONGODB_URL = process.env.MONGODB_URL
 
 // Middleware
