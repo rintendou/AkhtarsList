@@ -6,13 +6,10 @@ const strongPasswordRegex =
 export const loginFormSchema = z.object({
   username: z
     .string()
-    .min(3, { message: "Username must contain at least 3 characters" })
+    .min(1, { message: "Username is required" })
     .trim()
     .toLowerCase(),
-  password: z.string().min(8).regex(strongPasswordRegex, {
-    message:
-      "Passwords must contain at least one uppercase letter, one lowercase letter, one digit, one special character, and be a minimum of 8 characters long.",
-  }),
+  password: z.string().min(1, { message: "Password is required" }),
 })
 
 export type loginFormType = z.infer<typeof loginFormSchema>
