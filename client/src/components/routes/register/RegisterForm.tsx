@@ -1,31 +1,22 @@
 // Hooks
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 
 // Components
 import Card from "../../ui/Card"
 import Error from "../../ui/Error"
-import StyledInputRef from "../../ui/StyledInputRef"
 import RouterLink from "../../ui/RouterLink"
-import PasswordInputRef from "../../ui/PasswordInputRef"
-import ZipcodeInput from "./ZipcodeInput"
-import StyledDropdownRef from "../../ui/StyledDropdown"
+import RHFInputField from "../../ui/RHFInputField"
+import RHFPasswordField from "../../ui/RHFPasswordField"
+import RHFDropdownField from "../../ui/RHFDropdownField"
 
 // Utility Functions
-import stringInputIsValid from "../../../lib/util/functions/stringInputValidator"
-import numberInputIsValid from "../../../lib/util/functions/numberInputValidator"
-import isEmailInputValid from "../../../lib/util/functions/emailInputValidator"
-import isPasswordStrong from "../../../lib/util/functions/verifyPasswordStrength"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
-
 import {
   registerFormSchema,
   registerFormType,
 } from "../../../../../common/validations/registerFormValidator"
-import RHFInputField from "../../ui/RHFInputField"
-import RHFPasswordField from "../../ui/RHFPasswordField"
-import RHFDropdownField from "../../ui/RHFDropdownField"
 
 // Constant Variables
 const QUESTIONS = [
@@ -152,12 +143,14 @@ const RegisterForm = () => {
                 id="password"
                 register={register("password")}
                 error={errors.password?.message}
+                autoCompletePassword={false}
               />
               <RHFPasswordField
                 name="confirmPassword"
                 id="confirmPassword"
                 register={register("confirmPassword")}
                 error={errors.confirmPassword?.message}
+                autoCompletePassword={false}
               />
             </div>
             <div className="flex gap-5">
@@ -194,24 +187,24 @@ const RegisterForm = () => {
             </div>
             <RHFInputField
               id="streetAddress"
-              register={register("streetAddress")}
-              error={errors.streetAddress?.message}
+              register={register("address.streetAddress")}
+              error={errors.address?.streetAddress?.message}
             />
             <div className="flex gap-3">
               <RHFInputField
                 id="state"
-                register={register("state")}
-                error={errors.state?.message}
+                register={register("address.state")}
+                error={errors.address?.state?.message}
               />
               <RHFInputField
                 id="city"
-                register={register("city")}
-                error={errors.city?.message}
+                register={register("address.city")}
+                error={errors.address?.city?.message}
               />
               <RHFInputField
                 id="zipcode"
-                register={register("zipcode")}
-                error={errors.zipcode?.message}
+                register={register("address.zipcode")}
+                error={errors.address?.zipcode?.message}
               />
             </div>
           </div>

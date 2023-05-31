@@ -25,13 +25,17 @@ export const registerFormSchema = z.object({
   securityAnswer: z
     .string()
     .min(1, { message: "Security Question Answer is required!" }),
-  streetAddress: z.string().min(1, { message: "Street address is required!" }),
-  state: z.string().min(1, { message: "State is required!" }),
-  city: z.string().min(1, { message: "City is required!" }),
-  zipcode: z
-    .number()
-    .min(5, { message: "Invalid zip code" })
-    .max(5, { message: "Invalid zip code" }),
+  address: z.object({
+    streetAddress: z
+      .string()
+      .min(1, { message: "Street address is required!" }),
+    state: z.string().min(1, { message: "State is required!" }),
+    city: z.string().min(1, { message: "City is required!" }),
+    zipcode: z
+      .number()
+      .min(5, { message: "Invalid zip code" })
+      .max(5, { message: "Invalid zip code" }),
+  }),
 })
 
 export type registerFormType = z.infer<typeof registerFormSchema>
