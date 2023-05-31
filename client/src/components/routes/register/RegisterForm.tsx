@@ -16,6 +16,16 @@ import stringInputIsValid from "../../../lib/util/functions/stringInputValidator
 import numberInputIsValid from "../../../lib/util/functions/numberInputValidator"
 import isEmailInputValid from "../../../lib/util/functions/emailInputValidator"
 import isPasswordStrong from "../../../lib/util/functions/verifyPasswordStrength"
+import { useForm } from "react-hook-form"
+import { zodResolver } from "@hookform/resolvers/zod"
+
+import {
+  registerFormSchema,
+  registerFormType,
+} from "../../../../../common/validations/registerFormValidator"
+import RHFInputField from "../../ui/RHFInputField"
+import RHFPasswordField from "../../ui/RHFPasswordField"
+import RHFDropdownField from "../../ui/RHFDropdownField"
 
 // Constant Variables
 const QUESTIONS = [
@@ -29,18 +39,14 @@ const QUESTIONS = [
 const RegisterForm = () => {
   // I opted to use the useRef hook instead of useState to prevent
   // unnecessary re-renders of this component per each character typed
-  const fullNameRef = useRef<HTMLInputElement>(null)
-  const emailRef = useRef<HTMLInputElement>(null)
-  const usernameRef = useRef<HTMLInputElement>(null)
-  const passwordRef = useRef<HTMLInputElement>(null)
-  const confirmPasswordRef = useRef<HTMLInputElement>(null)
-  const securityQuestionRef = useRef<HTMLSelectElement>(null)
-  const securityQuestionAnswerRef = useRef<HTMLInputElement>(null)
-
-  const streetAddressRef = useRef<HTMLInputElement>(null)
-  const cityRef = useRef<HTMLInputElement>(null)
-  const stateRef = useRef<HTMLInputElement>(null)
-  const zipcodeRef = useRef<HTMLInputElement>(null)
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    setFocus,
+  } = useForm<registerFormType>({
+    resolver: zodResolver(registerFormSchema),
+  })
 
   const [errorMessage, setErrorMessage] = useState("")
 
@@ -50,7 +56,7 @@ const RegisterForm = () => {
 
   // focus on the first input on component mount
   useEffect(() => {
-    fullNameRef.current!.focus()
+    setFocus("fullName")
   }, [])
 
   // send post request to api endpoint /api/auth/register by calling the
@@ -61,107 +67,6 @@ const RegisterForm = () => {
     e.preventDefault()
 
     const registerUser = async () => {
-      const fullName = fullNameRef.current!.value
-      const email = emailRef.current!.value
-      const username = usernameRef.current!.value
-      const password = passwordRef.current!.value
-      const confirmPassword = confirmPasswordRef.current!.value
-      const securityQuestion = securityQuestionRef.current!.value
-      const securityQuestionAnswer = securityQuestionAnswerRef.current!.value
-
-      const streetAddress = streetAddressRef.current!.value
-      const city = cityRef.current!.value
-      const state = stateRef.current!.value
-      const zipcode = zipcodeRef.current!.value
-
-      const payload = {
-        fullName,
-        email,
-        username,
-        password,
-        confirmPassword,
-        address: {
-          streetAddress,
-          city,
-          state,
-          zipcode,
-        },
-        securityQuestion,
-        securityQuestionAnswer,
-      }
-
-      if (!stringInputIsValid(fullName)) {
-        fullNameRef.current!.focus()
-        setErrorMessage("Full name is required!")
-        return
-      }
-
-      if (!isEmailInputValid(email)) {
-        emailRef.current!.focus()
-        setErrorMessage("Invalid email!")
-        return
-      }
-
-      if (!stringInputIsValid(username)) {
-        usernameRef.current!.focus()
-        setErrorMessage("Username is required!")
-        return
-      }
-
-      if (!isPasswordStrong(password)) {
-        passwordRef.current!.focus()
-        setErrorMessage("Password is required!")
-        return
-      }
-
-      if (!isPasswordStrong(confirmPassword)) {
-        confirmPasswordRef.current!.focus()
-        setErrorMessage("Confirm Password is required!")
-        return
-      }
-
-      if (password !== confirmPassword) {
-        passwordRef.current!.focus()
-        setErrorMessage("Password does not match!")
-        return
-      }
-
-      if (!stringInputIsValid(securityQuestion)) {
-        securityQuestionRef.current!.focus()
-        setErrorMessage("Security Question is required!")
-        return
-      }
-
-      if (!stringInputIsValid(securityQuestionAnswer)) {
-        securityQuestionAnswerRef.current!.focus()
-        setErrorMessage("Security Question Answer is required!")
-        return
-      }
-
-      if (!stringInputIsValid(streetAddress)) {
-        streetAddressRef.current!.focus()
-        setErrorMessage("Street Address is required!")
-        return
-      }
-
-      if (!stringInputIsValid(city)) {
-        cityRef.current!.focus()
-        setErrorMessage("City is required!")
-        return
-      }
-
-      if (!stringInputIsValid(state)) {
-        stateRef.current!.focus()
-        setErrorMessage("State is required!")
-        return
-      }
-
-      if (!numberInputIsValid(zipcode)) {
-        zipcodeRef.current!.focus()
-        setErrorMessage("Zipcode is required!")
-        return
-      }
-
       const response = await fetch(
         `http://localhost:${
           import.meta.env.VITE_BACKEND_SERVER_PORT
@@ -219,17 +124,15 @@ const RegisterForm = () => {
               </h1>
             </div>
             <div className="flex gap-5 justify-between">
-              <StyledInputRef
-                name="Full Name"
-                type="text"
-                placeholder="Full Name"
-                ref={fullNameRef}
+              <RHFInputField
+                id="fullname"
+                register={register("fullName")}
+                error={errors.username?.message}
               />
-              <StyledInputRef
-                name="Email"
-                type="text"
-                placeholder="Email"
-                ref={emailRef}
+              <RHFInputField
+                id="email"
+                register={register("email")}
+                error={errors.username?.message}
               />
             </div>
           </div>
@@ -249,31 +152,37 @@ const RegisterForm = () => {
               </svg>
               <h1 className="font-semibold text-lg">Protect Your Account</h1>
             </div>
-            <StyledInputRef
-              name="Username"
-              type="text"
-              placeholder="Username"
-              ref={usernameRef}
+            <RHFInputField
+              id="username"
+              register={register("username")}
+              error={errors.username?.message}
             />
             <div className="flex justify-between gap-5">
-              <PasswordInputRef name="Password" ref={passwordRef} />
-              <PasswordInputRef
-                name="Confirm Password"
-                ref={confirmPasswordRef}
+              <RHFPasswordField
+                name="password"
+                id="password"
+                register={register("password")}
+                error={errors.password?.message}
+              />
+              <RHFPasswordField
+                name="confirmPassword"
+                id="confirmPassword"
+                register={register("confirmPassword")}
+                error={errors.confirmPassword?.message}
               />
             </div>
             <div className="flex gap-5">
-              <StyledDropdownRef
-                ref={securityQuestionRef}
+              <RHFDropdownField
                 name="Security Question"
+                id="Security Question"
                 placeholder="Security Question"
                 options={QUESTIONS}
+                register={register("securityQuestion")}
               />
-              <StyledInputRef
-                name="Security Question Answer"
-                type="text"
-                placeholder="Security Question Answer"
-                ref={securityQuestionAnswerRef}
+              <RHFInputField
+                id="securityAnswer"
+                register={register("securityAnswer")}
+                error={errors.securityAnswer?.message}
               />
             </div>
           </div>
@@ -293,30 +202,26 @@ const RegisterForm = () => {
               </svg>
               <h1 className="font-semibold text-lg">For Listing Deliveries</h1>
             </div>
-            <StyledInputRef
-              name="Street Address"
-              type="text"
-              placeholder="Street Address"
-              ref={streetAddressRef}
+            <RHFInputField
+              id="streetAddress"
+              register={register("streetAddress")}
+              error={errors.streetAddress?.message}
             />
             <div className="flex gap-3">
-              <StyledInputRef
-                name="State"
-                type="text"
-                placeholder="State"
-                ref={stateRef}
+              <RHFInputField
+                id="state"
+                register={register("state")}
+                error={errors.state?.message}
               />
-              <StyledInputRef
-                name="City"
-                type="text"
-                placeholder="City"
-                ref={cityRef}
+              <RHFInputField
+                id="city"
+                register={register("city")}
+                error={errors.city?.message}
               />
-              <ZipcodeInput
-                name="Zipcode"
-                type="text"
-                placeholder="Zipcode"
-                ref={zipcodeRef}
+              <RHFInputField
+                id="zipcode"
+                register={register("zipcode")}
+                error={errors.zipcode?.message}
               />
             </div>
           </div>
