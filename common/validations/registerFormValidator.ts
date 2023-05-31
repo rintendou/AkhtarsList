@@ -25,9 +25,7 @@ export const registerFormSchema = z.object({
   securityAnswer: z
     .string()
     .min(1, { message: "Security Question Answer is required!" }),
-  streetAddress: z.string({
-    required_error: "Street Address is required!",
-  }),
+  streetAddress: z.string().min(1, { message: "Street address is required!" }),
   state: z.string().min(1, { message: "State is required!" }),
   city: z.string().min(1, { message: "City is required!" }),
   zipcode: z

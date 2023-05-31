@@ -59,13 +59,7 @@ const RegisterForm = () => {
     setFocus("fullName")
   }, [])
 
-  // send post request to api endpoint /api/auth/register by calling the
-  // the endpoint and backend_server_port number: 5178. Payload is passed
-  // by attaching data to the body object.
-  const registerUserHandler = (e: React.FormEvent<HTMLFormElement>) => {
-    // Prevent default behavior of reloading page on form submission
-    e.preventDefault()
-
+  const registerUserHandler = (data: registerFormType) => {
     const registerUser = async () => {
       const response = await fetch(
         `http://localhost:${
@@ -73,7 +67,7 @@ const RegisterForm = () => {
         }/api/auth/register`,
         {
           method: "POST",
-          body: JSON.stringify(payload),
+          body: JSON.stringify(data),
           headers: { "Content-Type": "application/json" },
         }
       )
@@ -99,7 +93,7 @@ const RegisterForm = () => {
       <div className="p-10">
         <form
           className="flex flex-col gap-5 space-y-5"
-          onSubmit={registerUserHandler}
+          onSubmit={handleSubmit(registerUserHandler)}
         >
           <div className="flex flex-col gap-5 pb-10 border-b-2 border-b-secondary">
             <div className="flex items-center gap-5">
@@ -178,6 +172,7 @@ const RegisterForm = () => {
                 placeholder="Security Question"
                 options={QUESTIONS}
                 register={register("securityQuestion")}
+                error={errors.securityQuestion?.message}
               />
               <RHFInputField
                 id="securityAnswer"
