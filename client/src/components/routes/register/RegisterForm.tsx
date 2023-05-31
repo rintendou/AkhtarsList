@@ -37,8 +37,6 @@ const QUESTIONS = [
 ]
 
 const RegisterForm = () => {
-  // I opted to use the useRef hook instead of useState to prevent
-  // unnecessary re-renders of this component per each character typed
   const {
     register,
     handleSubmit,
@@ -50,14 +48,11 @@ const RegisterForm = () => {
 
   const [errorMessage, setErrorMessage] = useState("")
 
-  // navigate object to redirect to another page while passing props as well
-  // when a successful registration happens, we redirect to the login page
-  const navigate = useNavigate()
-
-  // focus on the first input on component mount
   useEffect(() => {
     setFocus("fullName")
   }, [])
+
+  const navigate = useNavigate()
 
   const registerUserHandler = (data: registerFormType) => {
     const registerUser = async () => {
