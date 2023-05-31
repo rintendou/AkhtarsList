@@ -1,5 +1,5 @@
 // Hooks
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import useAuthContext from "../../../lib/hooks/context-hooks/useAuthContext"
 
@@ -38,9 +38,14 @@ const LoginForm = ({
     register,
     handleSubmit,
     formState: { errors },
+    setFocus,
   } = useForm<loginFormType>({
     resolver: zodResolver(loginFormSchema),
   })
+
+  useEffect(() => {
+    setFocus("username")
+  }, [])
 
   const [errorMessage, setErrorMessage] = useState(errorMessageFromOtherRoute)
   const [scsMessage, setScsMessage] = useState(successMessage)

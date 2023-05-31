@@ -8,64 +8,32 @@ import JWTRequest from "../lib/types/JWTRequest"
 import verifyPasswordStrength from "../lib/util/verifyPasswordStrength"
 import verifyEmail from "../lib/util/verifyEmail"
 
+// Validators
+import { registerFormSchema } from "../../../common/validations/registerFormValidator"
+
 export const registerUser = async (req: Request, res: Response) => {
+  // Validate body using the register form schema
+  try {
+    registerFormSchema.parse(req.body)
+  } catch (err) {
+    console.log(err)
+    return res.status(400).json({
+      message: "Invalid register form data!",
+      data: null,
+      ok: false,
+    })
+  }
+
   // destructure the payload attached to the body
   const {
     fullName,
     email,
     username,
     password,
-    confirmPassword,
     address,
     securityQuestion,
-    securityQuestionAnswer,
+    securityAnswer,
   } = req.body
-
-  // Check if appropriate payload is attached to the body
-  if (
-    !fullName ||
-    !email ||
-    !username ||
-    !password ||
-    !confirmPassword ||
-    !address ||
-    !securityQuestion ||
-    !securityQuestionAnswer
-  ) {
-    return res.status(400).json({
-      message:
-        "fullName, email, username, password, confirmPassword, address, securityQuestion, and securityQuestionAnswer properties are required!",
-      data: null,
-      ok: false,
-    })
-  }
-
-  if (!verifyEmail(email)) {
-    return res.status(400).json({
-      message: "Invalid email.",
-      data: null,
-      ok: false,
-    })
-  }
-
-  // Check if password and confirmPassword matches
-  if (password !== confirmPassword) {
-    return res.status(400).json({
-      message: "Password does not match!",
-      data: null,
-      ok: false,
-    })
-  }
-
-  // Check if password strength is sufficient
-  if (!verifyPasswordStrength(password)) {
-    return res.status(400).json({
-      message:
-        "Password must have at least 8 characters long, one uppercase, one lowercase, one number, and one special character!",
-      data: null,
-      ok: false,
-    })
-  }
 
   try {
     // Hashing password
@@ -73,10 +41,7 @@ export const registerUser = async (req: Request, res: Response) => {
     const hashedPassword = await bcrypt.hash(password, salt)
 
     // Hashing securityQuestionAnswer
-    const hashedSecurityQuestionAnswer = await bcrypt.hash(
-      securityQuestionAnswer,
-      salt
-    )
+    const hashedSecurityQuestionAnswer = await bcrypt.hash(securityAnswer, salt)
 
     // Clean the username by removing whitespaces and converting to lowercase
     const cleanedUsername = username.toLowerCase().replace(/\s+/g, "") // '  hello world ' -> 'helloworld'
