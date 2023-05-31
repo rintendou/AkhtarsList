@@ -45,7 +45,7 @@ const RHFPasswordField = ({
       <div className="absolute top-0 right-0 pr-3 h-full flex items-center">
         {icon}
       </div>
-      <p>{error}</p>
+      <p className="text-red-600 text-xs font-semibold">{error}</p>
     </div>
   )
 }
