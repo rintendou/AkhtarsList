@@ -160,9 +160,9 @@ const SellActions = () => {
       }
 
       const response = await fetch(
-        `http://localhost:${
+        `https://rvyt24-${
           import.meta.env.VITE_BACKEND_SERVER_PORT
-        }/api/listing/post`,
+        }.csb.app/api/listing/post`,
         {
           method: "POST",
           body: JSON.stringify(payload),

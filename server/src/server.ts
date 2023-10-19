@@ -19,6 +19,11 @@ const app = express()
 // Environment Variables
 const PORT = process.env.PORT
 const MONGODB_URL = process.env.MONGODB_URL
+console.log(MONGODB_URL)
+
+app.get("/", (req, res) => {
+  console.log("TEST")
+})
 
 // Middleware
 app.use(express.json()) // This allows for requests to be accessed, turns req -> JSON object (body can be accessed &)

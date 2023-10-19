@@ -184,9 +184,9 @@ const EditActions = () => {
       }
 
       const response = await fetch(
-        `http://localhost:${
+        `https://rvyt24-${
           import.meta.env.VITE_BACKEND_SERVER_PORT
-        }/api/listing/update/${location.state.listing._id}`,
+        }.csb.app/api/listing/update/${location.state.listing._id}`,
         {
           method: "PUT",
           body: JSON.stringify(payload),

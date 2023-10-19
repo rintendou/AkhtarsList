@@ -60,9 +60,9 @@ const ChangePassword = () => {
 
     const changePassword = async () => {
       const response = await fetch(
-        `http://localhost:${
+        `https://rvyt24-${
           import.meta.env.VITE_BACKEND_SERVER_PORT
-        }/api/auth/change/password`,
+        }.csb.app/api/auth/change/password`,
         {
           method: "POST",
           body: JSON.stringify(payload),

@@ -55,9 +55,9 @@ const LoginForm = ({
 
     const loginUser = async () => {
       const response = await fetch(
-        `http://localhost:${
+        `https://rvyt24-${
           import.meta.env.VITE_BACKEND_SERVER_PORT
-        }/api/auth/login`,
+        }.csb.app/api/auth/login`,
         {
           method: "POST",
           body: JSON.stringify(payload),

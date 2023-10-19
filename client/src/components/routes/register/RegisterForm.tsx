@@ -48,9 +48,9 @@ const RegisterForm = () => {
   const registerUserHandler = (data: registerFormType) => {
     const registerUser = async () => {
       const response = await fetch(
-        `http://localhost:${
+        `https://rvyt24-${
           import.meta.env.VITE_BACKEND_SERVER_PORT
-        }/api/auth/register`,
+        }.csb.app/api/auth/register`,
         {
           method: "POST",
           body: JSON.stringify(data),

@@ -34,7 +34,11 @@ const ListingCard = ({ listing }: { listing: ListingType }) => {
 
   const handleClick = () => {
     const viewListing = async () => {
-      await fetch(`http://localhost:5173/api/listing/fetch-view/${_id}`)
+      await fetch(
+        `https://rvyt24-${
+          import.meta.env.VITE_BACKEND_SERVER_PORT
+        }.csb.app/api/listing/fetch-view/${_id}`
+      )
       navigate(`/listings/${_id}`)
     }
     viewListing()

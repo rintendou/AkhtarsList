@@ -42,9 +42,9 @@ const ResetPasswordForm = () => {
       const confirmPassword = confirmPasswordRef.current!.value
 
       const response = await fetch(
-        `http://localhost:${
+        `https://rvyt24-${
           import.meta.env.VITE_BACKEND_SERVER_PORT
-        }/api/auth/reset-password`,
+        }.csb.app/api/auth/reset-password`,
         {
           method: "POST",
           body: JSON.stringify({

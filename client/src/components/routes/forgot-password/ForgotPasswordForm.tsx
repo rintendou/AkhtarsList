@@ -37,9 +37,9 @@ const ForgotPasswordForm = () => {
       const username = usernameRef.current!.value
 
       const response = await fetch(
-        `http://localhost:${
+        `https://rvyt24-${
           import.meta.env.VITE_BACKEND_SERVER_PORT
-        }/api/auth/get-security-question`,
+        }.csb.app/api/auth/get-security-question`,
         {
           method: "POST",
           body: JSON.stringify({

@@ -42,9 +42,9 @@ const initialContext = {
 
 const fetchListings = async () => {
   const response = await fetch(
-    `http://localhost:${
+    `https://rvyt24-${
       import.meta.env.VITE_BACKEND_SERVER_PORT
-    }/api/listing/fetch`
+    }.csb.app/api/listing/fetch`
   )
   const json = await response.json()
 

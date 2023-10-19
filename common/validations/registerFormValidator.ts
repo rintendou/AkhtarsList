@@ -31,10 +31,7 @@ export const registerFormSchema = z.object({
       .min(1, { message: "Street address is required!" }),
     state: z.string().min(1, { message: "State is required!" }),
     city: z.string().min(1, { message: "City is required!" }),
-    zipcode: z
-      .number()
-      .min(5, { message: "Invalid zip code" })
-      .max(5, { message: "Invalid zip code" }),
+    zipcode: z.string().min(1).max(10),
   }),
 })
 

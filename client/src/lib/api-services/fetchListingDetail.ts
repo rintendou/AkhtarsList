@@ -1,8 +1,8 @@
 const fetchListingDetail = async (listingId: string) => {
   const response = await fetch(
-    `http://localhost:${
+    `https://rvyt24-${
       import.meta.env.VITE_BACKEND_SERVER_PORT
-    }/api/listing/fetch/${listingId}`
+    }.csb.app/api/listing/fetch/${listingId}`
   )
   const json = await response.json()
 

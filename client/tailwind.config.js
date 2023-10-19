@@ -11,7 +11,7 @@ export default {
       colors: {
         primary: "#FFFFFF",
         secondary: "#121212",
-        tertiary: "#FF6347",
+        tertiary: "#DC143C",
       },
       fontFamily: { sans: "'Inter', sans" },
       animation: {

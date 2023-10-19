@@ -22,9 +22,9 @@ const WinnerActions = () => {
 
   const onConfirmDelivery = async () => {
     const response = await fetch(
-      `http://localhost:${
+      `https://rvyt24-${
         import.meta.env.VITE_BACKEND_SERVER_PORT
-      }/api/listing/status/${listingId}`,
+      }.csb.app/api/listing/status/${listingId}`,
       {
         method: "PUT",
         body: JSON.stringify({ status: "sold" }),
@@ -45,9 +45,9 @@ const WinnerActions = () => {
 
   const onDisputeClick = async () => {
     const response = await fetch(
-      `http://localhost:${
+      `https://rvyt24-${
         import.meta.env.VITE_BACKEND_SERVER_PORT
-      }/api/listing/status/${listingId}`,
+      }.csb.app/api/listing/status/${listingId}`,
       {
         method: "PUT",
         body: JSON.stringify({ status: "disputed" }),

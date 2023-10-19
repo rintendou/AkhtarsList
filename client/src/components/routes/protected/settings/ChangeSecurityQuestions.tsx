@@ -59,9 +59,9 @@ const ChangeSecurityQuestions = () => {
 
     const changeSecurityQA = async () => {
       const response = await fetch(
-        `http://localhost:${
+        `https://rvyt24-${
           import.meta.env.VITE_BACKEND_SERVER_PORT
-        }/api/auth/change/security-qa`,
+        }.csb.app/api/auth/change/security-qa`,
         {
           method: "POST",
           body: JSON.stringify(payload),

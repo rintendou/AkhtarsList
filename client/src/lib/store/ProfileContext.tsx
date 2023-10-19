@@ -83,9 +83,9 @@ const ProfileContextProvider = ({
       }
 
       const response = await fetch(
-        `http://localhost:${
+        `https://rvyt24-${
           import.meta.env.VITE_BACKEND_SERVER_PORT
-        }/api/user/${_id}`,
+        }.csb.app/api/user/${_id}`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -122,9 +122,9 @@ const ProfileContextProvider = ({
       }
 
       const response = await fetch(
-        `http://localhost:${
+        `https://rvyt24-${
           import.meta.env.VITE_BACKEND_SERVER_PORT
-        }/api/user/${_id}`,
+        }.csb.app/api/user/${_id}`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -156,9 +156,9 @@ const ProfileContextProvider = ({
   const depositFunds = (amount: number) => {
     const deposit = async () => {
       const response = await fetch(
-        `http://localhost:${
+        `https://rvyt24-${
           import.meta.env.VITE_BACKEND_SERVER_PORT
-        }/api/user/deposit`,
+        }.csb.app/api/user/deposit`,
         {
           method: "POST",
           body: JSON.stringify({
@@ -185,9 +185,9 @@ const ProfileContextProvider = ({
   const withdrawFunds = (amount: number) => {
     const withdraw = async () => {
       const response = await fetch(
-        `http://localhost:${
+        `https://rvyt24-${
           import.meta.env.VITE_BACKEND_SERVER_PORT
-        }/api/user/withdraw`,
+        }.csb.app/api/user/withdraw`,
         {
           method: "POST",
           body: JSON.stringify({

@@ -28,9 +28,9 @@ const ReportListing = () => {
     }
 
     const response = await fetch(
-      `http://localhost:${
+      `https://rvyt24-${
         import.meta.env.VITE_BACKEND_SERVER_PORT
-      }/api/listing/report/${listingId}`,
+      }.csb.app/api/listing/report/${listingId}`,
       {
         method: "PUT",
         body: JSON.stringify({

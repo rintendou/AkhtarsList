@@ -74,9 +74,9 @@ const ActiveBiddingSection = () => {
 
     const submitBid = async () => {
       const response = await fetch(
-        `http://localhost:${
+        `https://rvyt24-${
           import.meta.env.VITE_BACKEND_SERVER_PORT
-        }/api/listing/bid/${listingId}`,
+        }.csb.app/api/listing/bid/${listingId}`,
         {
           method: "PUT",
           body: JSON.stringify(payload),
