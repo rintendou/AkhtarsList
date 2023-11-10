@@ -28,20 +28,10 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://github.com/rintendou/AkhtarsList">
-    <img src="images/logo.jpg" alt="Logo" width="300" height="125">
-  </a>
 
-<h3 align="center">AkhtarsList</h3>
 
-  <p align="center">
-    <br />
-    <a href="https://github.com/rintendou/AkhtarsList">View Demo</a>
-    ·
-    <a href="https://github.com/rintendou/AkhtarsList/issues">Report Bug</a>
-    ·
-    <a href="https://github.com/rintendou/AkhtarsList/issues">Request Feature</a>
-  </p>
+<h3 align="center">ListHub</h3>
+
 </div>
 
 <!-- TABLE OF CONTENTS -->
@@ -72,9 +62,7 @@
 
 ## About The Project
 
-[![AkhtarsList Screenshot][product-screenshot]](https://github.com/rintendou/AkhtarsList)
-
-AkhtarsList is a highly responsive online auction platform that allows users to sell and bid on items in a swift, secure, and convenient environment.
+ListHub is a highly responsive online auction platform that allows users to sell and bid on items in a swift, secure, and convenient environment.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -94,92 +82,10 @@ AkhtarsList is a highly responsive online auction platform that allows users to 
 
 To begin, clone this repo onto your local machine and follow the steps accordingly.
 
-### Prerequisites
-
-This is an example of how to list things you need to use the software and how to install them.
-
--   cd
-    Open two terminals and change directories into the following directories
-
-    ```sh
-        cd ../AkhtarsList/client
-    ```
-
-    ```sh
-        cd ../AkhtarsList/server
-    ```
-
--   npm
-    Install the requires packages in both directories
-    ```sh
-        npm i
-    ```
-
-### Installation
-
-_This project relies on external services such as MongoDB, JWT, Cloudinary._
-
-1. Clone the repo
-
-    ```sh
-    git clone https://github.com/rintendou/AkhtarsList.git
-    ```
-
-2. Create two `.env` files in the `client` and `server` directory. Env file examples are placed within the client and server directories for reference.
-   * In the `client` `.env`, fill in the values of following variables:  
-   ```sh
-    VITE_BACKEND_SERVER_PORT={PORT_NUMBER}
-    VITE_CLOUDINARY_URL={CLOUDINARY_API_URL}
-   ```
-   * In the `server` `.env`, fill in the values of the following variables  
-   ```sh
-    PORT={PORT_NUMBER}
-    MONGODB_URL={MONGODB_API_KEY}
-    JWT_KEY={JWT_KEY}
-    ```
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-## Backlogs
-
-### High Priority
-
-1.) Validation Libraries and ReactHookForm (Zod  & RHF) [currently being implemented by KJB]   
-2.) Communication Feature  
-
-### Low Priority
-1.) Fix bug where the profile route doesn't initially render the admin link. I.e. it requires a refresh to show the admin link when the authenticated user is an admin
-
-<!-- CONTRIBUTING -->
-
-## Contributing
-
-Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
-
-If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
-Don't forget to give the project a star! Thanks again!
-
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-<!-- LICENSE -->
-
-## License
-
-Distributed under the MIT License. See `LICENSE.txt` for more information.
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 <!-- CONTACT -->
 
 ## Contact
 
-- Danny Chen - dannychen8102@gmail.com
 - Kennette James Basco - kenji.maddela01@gmail.com
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -195,16 +101,6 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 
-[contributors-shield]: https://img.shields.io/github/contributors/rintendou/AkhtarsList.svg?style=for-the-badge
-[contributors-url]: https://github.com/rintendou/AkhtarsList/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/rintendou/AkhtarsList.svg?style=for-the-badge
-[forks-url]: https://github.com/rintendou/AkhtarsList/network/members
-[stars-shield]: https://img.shields.io/github/stars/rintendou/AkhtarsList.svg?style=for-the-badge
-[stars-url]: https://github.com/rintendou/AkhtarsList/stargazers
-[issues-shield]: https://img.shields.io/github/issues/rintendou/AkhtarsList.svg?style=for-the-badge
-[issues-url]: https://github.com/rintendou/AkhtarsList/issues
-[license-shield]: https://img.shields.io/github/license/rintendou/AkhtarsList.svg?style=for-the-badge
-[license-url]: https://github.com/rintendou/AkhtarsList/LICENSE.txt
 [product-screenshot]: images/front-page.jpg
 [TypeScript]: https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white
 [TypeScript-url]: https://www.typescriptlang.org/
