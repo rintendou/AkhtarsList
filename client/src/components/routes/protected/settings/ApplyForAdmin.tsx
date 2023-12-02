@@ -68,7 +68,7 @@ const ApplyForAdmin = () => {
   return (
     <div className="space-y-5">
       <h1 className="text-xl font-semibold">
-        Interested being an AkhtarsList Admin?
+        Interested being an ListHub Admin?
       </h1>
       <form className="flex flex-col gap-5" onSubmit={editUserDetailsHandler}>
         <StyledInputAreaRef
