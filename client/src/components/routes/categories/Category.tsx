@@ -74,27 +74,6 @@ const Category = () => {
     )
   }
 
-  // const [sortedListings, setSortedListings] = useState<ListingType[]>(
-  //   activeCategorizedListings
-  // )
-
-  // const onSort = (key: string, isAscending: boolean) => {
-  //   activeCategorizedListings.sort((a, b) => {
-  //     const valueA = a[key]
-  //     const valueB = b[key]
-  //     let comparison = 0
-
-  //     if (valueA > valueB) {
-  //       comparison = 1
-  //     } else if (valueA < valueB) {
-  //       comparison = -1
-  //     }
-
-  //     return isAscending ? comparison : comparison * -1
-  //   })
-  //   setSortedListings(sortedListings)
-  // }
-
   return (
     <div className="min-h-screen flex flex-col container mx-auto py-5 relative">
       <FixedScrollToTop />
