@@ -41,16 +41,13 @@ const WinnerActions = () => {
   }
 
   const onDisputeClick = async () => {
-    const response = await fetch(
-      `http://localhost:${
-        import.meta.env.VITE_BACKEND_SERVER_PORT
-      }/api/listing/status/${listingId}`,
-      {
-        method: "PUT",
-        body: JSON.stringify({ status: "disputed" }),
-        headers: { "Content-Type": "application/json" },
-      }
-    )
+    const DOMAIN = import.meta.env.VITE_DOMAIN
+
+    const response = await fetch(`${DOMAIN}/api/listing/status/${listingId}`, {
+      method: "PUT",
+      body: JSON.stringify({ status: "disputed" }),
+      headers: { "Content-Type": "application/json" },
+    })
     const json = await response.json()
 
     if (!json.ok) {
