@@ -183,10 +183,10 @@ const EditActions = () => {
         dimensions: [height, width, length],
       }
 
+      const DOMAIN = import.meta.env.VITE_DOMAIN
+
       const response = await fetch(
-        `http://localhost:${
-          import.meta.env.VITE_BACKEND_SERVER_PORT
-        }/api/listing/update/${location.state.listing._id}`,
+        `${DOMAIN}/api/listing/update/${location.state.listing._id}`,
         {
           method: "PUT",
           body: JSON.stringify(payload),

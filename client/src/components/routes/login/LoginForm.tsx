@@ -54,16 +54,13 @@ const LoginForm = ({
     const payload = data
 
     const loginUser = async () => {
-      const response = await fetch(
-        `http://localhost:${
-          import.meta.env.VITE_BACKEND_SERVER_PORT
-        }/api/auth/login`,
-        {
-          method: "POST",
-          body: JSON.stringify(payload),
-          headers: { "Content-Type": "application/json" },
-        }
-      )
+      const DOMAIN = import.meta.env.VITE_DOMAIN
+
+      const response = await fetch(`${DOMAIN}/api/auth/login`, {
+        method: "POST",
+        body: JSON.stringify(payload),
+        headers: { "Content-Type": "application/json" },
+      })
 
       const data = await response.json()
 

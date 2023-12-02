@@ -27,18 +27,15 @@ const ReportListing = () => {
       })
     }
 
-    const response = await fetch(
-      `http://localhost:${
-        import.meta.env.VITE_BACKEND_SERVER_PORT
-      }/api/listing/report/${listingId}`,
-      {
-        method: "PUT",
-        body: JSON.stringify({
-          userId: auth._id,
-        }),
-        headers: { "Content-Type": "application/json" },
-      }
-    )
+    const DOMAIN = import.meta.env.VITE_DOMAIN
+
+    const response = await fetch(`${DOMAIN}/api/listing/report/${listingId}`, {
+      method: "PUT",
+      body: JSON.stringify({
+        userId: auth._id,
+      }),
+      headers: { "Content-Type": "application/json" },
+    })
 
     const json = await response.json()
 
