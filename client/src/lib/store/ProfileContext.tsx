@@ -82,17 +82,14 @@ const ProfileContextProvider = ({
         return
       }
 
-      const response = await fetch(
-        `http://localhost:${
-          import.meta.env.VITE_BACKEND_SERVER_PORT
-        }/api/user/${_id}`,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: auth.token,
-          },
-        }
-      )
+      const DOMAIN = import.meta.env.VITE_DOMAIN
+
+      const response = await fetch(`${DOMAIN}/api/user/${_id}`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: auth.token,
+        },
+      })
 
       const data = await response.json()
 
@@ -121,17 +118,14 @@ const ProfileContextProvider = ({
         return
       }
 
-      const response = await fetch(
-        `http://localhost:${
-          import.meta.env.VITE_BACKEND_SERVER_PORT
-        }/api/user/${_id}`,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: auth.token,
-          },
-        }
-      )
+      const DOMAIN = import.meta.env.VITE_DOMAIN
+
+      const response = await fetch(`${DOMAIN}/api/user/${_id}`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: auth.token,
+        },
+      })
 
       const data = await response.json()
 
