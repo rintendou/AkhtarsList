@@ -33,8 +33,10 @@ const ListingCard = ({ listing }: { listing: ListingType }) => {
   } = listing
 
   const handleClick = () => {
+    const DOMAIN = import.meta.env.VITE_DOMAIN
+
     const viewListing = async () => {
-      await fetch(`http://localhost:5173/api/listing/fetch-view/${_id}`)
+      await fetch(`${DOMAIN}/api/listing/fetch-view/${_id}`)
       navigate(`/listings/${_id}`)
     }
     viewListing()

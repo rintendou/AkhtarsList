@@ -47,16 +47,13 @@ const RegisterForm = () => {
 
   const registerUserHandler = (data: registerFormType) => {
     const registerUser = async () => {
-      const response = await fetch(
-        `http://localhost:${
-          import.meta.env.VITE_BACKEND_SERVER_PORT
-        }/api/auth/register`,
-        {
-          method: "POST",
-          body: JSON.stringify(data),
-          headers: { "Content-Type": "application/json" },
-        }
-      )
+      const DOMAIN = import.meta.env.VITE_DOMAIN
+
+      const response = await fetch(`${DOMAIN}/api/auth/register`, {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: { "Content-Type": "application/json" },
+      })
       const json = await response.json()
 
       if (!json.ok) {
