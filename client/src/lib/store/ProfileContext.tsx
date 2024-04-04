@@ -82,17 +82,14 @@ const ProfileContextProvider = ({
         return
       }
 
-      const response = await fetch(
-        `http://localhost:${
-          import.meta.env.VITE_BACKEND_SERVER_PORT
-        }/api/user/${_id}`,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: auth.token,
-          },
-        }
-      )
+      const DOMAIN = import.meta.env.VITE_DOMAIN
+
+      const response = await fetch(`${DOMAIN}/api/user/${_id}`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: auth.token,
+        },
+      })
 
       const data = await response.json()
 
@@ -121,17 +118,14 @@ const ProfileContextProvider = ({
         return
       }
 
-      const response = await fetch(
-        `http://localhost:${
-          import.meta.env.VITE_BACKEND_SERVER_PORT
-        }/api/user/${_id}`,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: auth.token,
-          },
-        }
-      )
+      const DOMAIN = import.meta.env.VITE_DOMAIN
+
+      const response = await fetch(`${DOMAIN}/api/user/${_id}`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: auth.token,
+        },
+      })
 
       const data = await response.json()
 
@@ -155,21 +149,18 @@ const ProfileContextProvider = ({
   // Deposit funds
   const depositFunds = (amount: number) => {
     const deposit = async () => {
-      const response = await fetch(
-        `http://localhost:${
-          import.meta.env.VITE_BACKEND_SERVER_PORT
-        }/api/user/deposit`,
-        {
-          method: "POST",
-          body: JSON.stringify({
-            depositAmount: amount,
-          }),
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: auth.token,
-          },
-        }
-      )
+      const DOMAIN = import.meta.env.VITE_DOMAIN
+
+      const response = await fetch(`${DOMAIN}/api/user/deposit`, {
+        method: "POST",
+        body: JSON.stringify({
+          depositAmount: amount,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: auth.token,
+        },
+      })
       const data = await response.json()
 
       if (!data.ok) {
@@ -184,21 +175,18 @@ const ProfileContextProvider = ({
   // Withdraw funds
   const withdrawFunds = (amount: number) => {
     const withdraw = async () => {
-      const response = await fetch(
-        `http://localhost:${
-          import.meta.env.VITE_BACKEND_SERVER_PORT
-        }/api/user/withdraw`,
-        {
-          method: "POST",
-          body: JSON.stringify({
-            withdrawAmount: amount,
-          }),
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: auth.token,
-          },
-        }
-      )
+      const DOMAIN = import.meta.env.VITE_DOMAIN
+
+      const response = await fetch(`${DOMAIN}/api/user/withdraw`, {
+        method: "POST",
+        body: JSON.stringify({
+          withdrawAmount: amount,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: auth.token,
+        },
+      })
       const data = await response.json()
 
       if (!data.ok) {

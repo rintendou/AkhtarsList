@@ -11,12 +11,11 @@ const AnalyticsUsers = () => {
 
   useEffect(() => {
     const fetchUsers = async () => {
-      const response = await fetch(
-        `http://localhost:${import.meta.env.VITE_BACKEND_SERVER_PORT}/api/user`,
-        {
-          headers: { Authorization: auth.token },
-        }
-      )
+      const DOMAIN = import.meta.env.VITE_DOMAIN
+
+      const response = await fetch(`${DOMAIN}/api/user`, {
+        headers: { Authorization: auth.token },
+      })
       const json = await response.json()
       if (!json.ok) {
         return

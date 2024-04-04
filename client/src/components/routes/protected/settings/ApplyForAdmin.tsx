@@ -40,19 +40,16 @@ const ApplyForAdmin = () => {
     }
 
     const editUserDetails = async () => {
-      const response = await fetch(
-        `http://localhost:${
-          import.meta.env.VITE_BACKEND_SERVER_PORT
-        }/api/user/apply`,
-        {
-          method: "POST",
-          body: JSON.stringify(payload),
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: auth.token,
-          },
-        }
-      )
+      const DOMAIN = import.meta.env.VITE_DOMAIN
+
+      const response = await fetch(`${DOMAIN}/api/user/apply`, {
+        method: "POST",
+        body: JSON.stringify(payload),
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: auth.token,
+        },
+      })
       const json = await response.json()
 
       if (!json.ok) {
@@ -71,7 +68,7 @@ const ApplyForAdmin = () => {
   return (
     <div className="space-y-5">
       <h1 className="text-xl font-semibold">
-        Interested being an AkhtarsList Admin?
+        Interested being an ListHub Admin?
       </h1>
       <form className="flex flex-col gap-5" onSubmit={editUserDetailsHandler}>
         <StyledInputAreaRef

@@ -36,18 +36,15 @@ const ForgotPasswordForm = () => {
     const getSecurityQuestions = async () => {
       const username = usernameRef.current!.value
 
-      const response = await fetch(
-        `http://localhost:${
-          import.meta.env.VITE_BACKEND_SERVER_PORT
-        }/api/auth/get-security-question`,
-        {
-          method: "POST",
-          body: JSON.stringify({
-            username,
-          }),
-          headers: { "Content-Type": "application/json" },
-        }
-      )
+      const DOMAIN = import.meta.env.VITE_DOMAIN
+
+      const response = await fetch(`${DOMAIN}/api/auth/get-security-question`, {
+        method: "POST",
+        body: JSON.stringify({
+          username,
+        }),
+        headers: { "Content-Type": "application/json" },
+      })
       const data = await response.json()
 
       if (!data.ok) {
@@ -80,19 +77,16 @@ const ForgotPasswordForm = () => {
     const verifySecurityQA = async () => {
       const securityQuestionAnswer = securityQuestionAnswerRef.current!.value
 
-      const response = await fetch(
-        `http://localhost:${
-          import.meta.env.VITE_BACKEND_SERVER_PORT
-        }/api/auth/verify-security-qa`,
-        {
-          method: "POST",
-          body: JSON.stringify({
-            username,
-            securityQuestionAnswer,
-          }),
-          headers: { "Content-Type": "application/json" },
-        }
-      )
+      const DOMAIN = import.meta.env.VITE_DOMAIN
+
+      const response = await fetch(`${DOMAIN}/api/auth/verify-security-qa`, {
+        method: "POST",
+        body: JSON.stringify({
+          username,
+          securityQuestionAnswer,
+        }),
+        headers: { "Content-Type": "application/json" },
+      })
       const data = await response.json()
 
       if (!data.ok) {

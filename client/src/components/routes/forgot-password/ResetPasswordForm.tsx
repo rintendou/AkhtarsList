@@ -41,20 +41,16 @@ const ResetPasswordForm = () => {
       const password = passwordRef.current!.value
       const confirmPassword = confirmPasswordRef.current!.value
 
-      const response = await fetch(
-        `http://localhost:${
-          import.meta.env.VITE_BACKEND_SERVER_PORT
-        }/api/auth/reset-password`,
-        {
-          method: "POST",
-          body: JSON.stringify({
-            username: location.state?.username,
-            password,
-            confirmPassword,
-          }),
-          headers: { "Content-Type": "application/json" },
-        }
-      )
+      const DOMAIN = import.meta.env.VITE_DOMAIN
+      const response = await fetch(`${DOMAIN}/api/auth/reset-password`, {
+        method: "POST",
+        body: JSON.stringify({
+          username: location.state?.username,
+          password,
+          confirmPassword,
+        }),
+        headers: { "Content-Type": "application/json" },
+      })
       console.log(response)
       const data = await response.json()
 

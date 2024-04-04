@@ -18,12 +18,10 @@ const SearchBar = () => {
       return
     }
 
+    const DOMAIN = import.meta.env.VITE_DOMAIN
+
     const fetchListings = async () => {
-      const response = await fetch(
-        `http://localhost:${
-          import.meta.env.VITE_BACKEND_SERVER_PORT
-        }/api/listing/search?q=${query}`
-      )
+      const response = await fetch(`${DOMAIN}/api/listing/search?q=${query}`)
       const json = await response.json()
       navigate("/search-results", {
         state: { searchResults: json.data, query: query },
