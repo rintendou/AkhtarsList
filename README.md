@@ -29,15 +29,15 @@
 <br />
 <div align="center">
 
-<h3 align="center">Realist</h3>
+<h3 align="center"></h3>
 
   <p align="center">
     <br />
-    <a href="https://github.com/rintendou/AkhtarsList">View Demo</a>
+    <a href="https://github.com/rintendou/Realist">View Demo</a>
     ·
-    <a href="https://github.com/rintendou/AkhtarsList/issues">Report Bug</a>
+    <a href="https://github.com/rintendou/Realist/issues">Report Bug</a>
     ·
-    <a href="https://github.com/rintendou/AkhtarsList/issues">Request Feature</a>
+    <a href="https://github.com/rintendou/Realist/issues">Request Feature</a>
   </p>
 </div>
 
@@ -69,9 +69,9 @@
 
 ## About The Project
 
-[![AkhtarsList Screenshot][product-screenshot]](https://github.com/rintendou/AkhtarsList)
+[![Realist Screenshot][product-screenshot]](https://github.com/rintendou/Realist)
 
-AkhtarsList is a highly responsive online auction platform that allows users to sell and bid on items in a swift, secure, and convenient environment.
+Realist is a highly responsive online auction platform that allows users to sell and bid on items in a swift, secure, and convenient environment.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -192,16 +192,16 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 
-[contributors-shield]: https://img.shields.io/github/contributors/rintendou/AkhtarsList.svg?style=for-the-badge
-[contributors-url]: https://github.com/rintendou/AkhtarsList/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/rintendou/AkhtarsList.svg?style=for-the-badge
-[forks-url]: https://github.com/rintendou/AkhtarsList/network/members
-[stars-shield]: https://img.shields.io/github/stars/rintendou/AkhtarsList.svg?style=for-the-badge
-[stars-url]: https://github.com/rintendou/AkhtarsList/stargazers
-[issues-shield]: https://img.shields.io/github/issues/rintendou/AkhtarsList.svg?style=for-the-badge
-[issues-url]: https://github.com/rintendou/AkhtarsList/issues
-[license-shield]: https://img.shields.io/github/license/rintendou/AkhtarsList.svg?style=for-the-badge
-[license-url]: https://github.com/rintendou/AkhtarsList/LICENSE.txt
+[contributors-shield]: https://img.shields.io/github/contributors/rintendou/Realist.svg?style=for-the-badge
+[contributors-url]: https://github.com/rintendou/Realist/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/rintendou/Realist.svg?style=for-the-badge
+[forks-url]: https://github.com/rintendou/Realist/network/members
+[stars-shield]: https://img.shields.io/github/stars/rintendou/Realist.svg?style=for-the-badge
+[stars-url]: https://github.com/rintendou/Realist/stargazers
+[issues-shield]: https://img.shields.io/github/issues/rintendou/Realist.svg?style=for-the-badge
+[issues-url]: https://github.com/rintendou/Realist/issues
+[license-shield]: https://img.shields.io/github/license/rintendou/Realist.svg?style=for-the-badge
+[license-url]: https://github.com/rintendou/Realist/LICENSE.txt
 [product-screenshot]: images/front-page.jpg
 [TypeScript]: https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white
 [TypeScript-url]: https://www.typescriptlang.org/
